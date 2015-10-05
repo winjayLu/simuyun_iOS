@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import "YTTabBarController.h"
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+#import "YTLoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -15,31 +19,118 @@
 @implementation AppDelegate
 
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    // 创建窗口
+    self.window = [[UIWindow alloc] init];
+    self.window.frame = DeviceBounds;
+    
+    //    // 设置根控制器
+    //    if ([YTAccountTool account]) { // 登录过
+    //        // 判断应用显示新特性还是欢迎界面
+    //        [self.window chooseRootviewController:YES];
+    //
+    //    } else {
+    //        // 显示登录界面
+//            self.window.rootViewController = [[YTLoginViewController alloc] init];
+    //    }
+    
+#warning 测试界面
+    self.window.rootViewController = [[YTTabBarController alloc] init];
+    
+    
+    /** 友盟分享及微信登录   */
+    [self setupUmeng];
+    
+    /** 集成极光推送 */
+    //    [self setupJpush:launchOptions];
+    
+    /** 检测版本跟新 */
+//    [self newVersions];
+    
+    
+    
+    // 显示窗口
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+/**
+ *  检测新版本
+ */
+//- (void)newVersions
+//{
+//    //  http://www.site.com/interface/api?method=方法名&param={};
+//    
+//    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+//    dict[@"method"] = @"checkVersion";
+//    dict[@"requesttype"] = @"";
+//    dict[@"insver"] = @"3.000";
+//    
+//    [YTHttpTool get:YTServer params:[NSDictionary httpWithDictionary:dict] success:^(NSDictionary *responseObject) {
+//        YTLog(@"%@",responseObject);
+//        YTLog(@"ss");
+//    } failure:^(NSError *error) {
+//        NSLog(@"qq");
+//        YTLog(@"%@",error);
+//        YTLog(@"sserror");
+//    }];
+//    //https://intime.simuyun.com/api/interface/?method=checkVersion&param[insver]=0001&param[os]=ios-appstore
+//    //result	__NSCFString *	@"https://182.92.217.186:6060/api/interface/api"	0x00007f9b862101d0
+//}
+
+///**
+// *  接受到内存警告
+// *
+// */
+//- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+//{
+//    // 1.取消下载图片
+//    [[SDWebImageManager sharedManager] cancelAll];
+//    
+//    // 2.清除图片缓存(内存缓存)
+//    [[SDWebImageManager sharedManager].imageCache clearMemory];
+//}
+//
+//- (void)applicationDidEnterBackground:(UIApplication *)application
+//{
+//    [application beginBackgroundTaskWithExpirationHandler:nil];
+//}
+
+
+/**
+ *  友盟推送,统计相关
+ *  微信登录
+ */
+- (void)setupUmeng
+{
+    //设置友盟社会化组件appkey
+    [UMSocialData setAppKey:UmengAppKey];
+    //设置微信AppId，设置分享url，默认使用友盟的网址
+    [UMSocialWechatHandler setWXAppId:WXAppID appSecret:WXAppSecret url:@"http://www.umeng.com/social"];
+    
+    /** 使用友盟统计  */
+//    [MobClick startWithAppkey:UmengAppKey reportPolicy:BATCH  channelId:nil];
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+//    [MobClick setAppVersion:version];
+    
+    
+    
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return  [UMSocialSnsService handleOpenURL:url];
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation
+{
+    return  [UMSocialSnsService handleOpenURL:url];
 }
 
 @end
