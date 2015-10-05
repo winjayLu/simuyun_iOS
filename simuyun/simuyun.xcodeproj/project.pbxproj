@@ -1,0 +1,486 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		97B08A8A1BC2472B007EBD24 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08A891BC2472B007EBD24 /* main.m */; };
+		97B08A8D1BC2472B007EBD24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08A8C1BC2472B007EBD24 /* AppDelegate.m */; };
+		97B08A951BC2472B007EBD24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97B08A941BC2472B007EBD24 /* Assets.xcassets */; };
+		97B08AA31BC2472B007EBD24 /* simuyunTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08AA21BC2472B007EBD24 /* simuyunTests.m */; };
+		97B08AAE1BC2472B007EBD24 /* simuyunUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08AAD1BC2472B007EBD24 /* simuyunUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		97B08A9F1BC2472B007EBD24 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97B08A7D1BC2472B007EBD24 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 97B08A841BC2472B007EBD24;
+			remoteInfo = simuyun;
+		};
+		97B08AAA1BC2472B007EBD24 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 97B08A7D1BC2472B007EBD24 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 97B08A841BC2472B007EBD24;
+			remoteInfo = simuyun;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		97B08A851BC2472B007EBD24 /* simuyun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simuyun.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		97B08A891BC2472B007EBD24 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		97B08A8B1BC2472B007EBD24 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		97B08A8C1BC2472B007EBD24 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		97B08A941BC2472B007EBD24 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		97B08A991BC2472B007EBD24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97B08A9E1BC2472B007EBD24 /* simuyunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = simuyunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		97B08AA21BC2472B007EBD24 /* simuyunTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = simuyunTests.m; sourceTree = "<group>"; };
+		97B08AA41BC2472B007EBD24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97B08AA91BC2472B007EBD24 /* simuyunUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = simuyunUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		97B08AAD1BC2472B007EBD24 /* simuyunUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = simuyunUITests.m; sourceTree = "<group>"; };
+		97B08AAF1BC2472B007EBD24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		97B08A821BC2472B007EBD24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97B08A9B1BC2472B007EBD24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97B08AA61BC2472B007EBD24 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		97B08A7C1BC2472B007EBD24 = {
+			isa = PBXGroup;
+			children = (
+				97B08A871BC2472B007EBD24 /* simuyun */,
+				97B08AA11BC2472B007EBD24 /* simuyunTests */,
+				97B08AAC1BC2472B007EBD24 /* simuyunUITests */,
+				97B08A861BC2472B007EBD24 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		97B08A861BC2472B007EBD24 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				97B08A851BC2472B007EBD24 /* simuyun.app */,
+				97B08A9E1BC2472B007EBD24 /* simuyunTests.xctest */,
+				97B08AA91BC2472B007EBD24 /* simuyunUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		97B08A871BC2472B007EBD24 /* simuyun */ = {
+			isa = PBXGroup;
+			children = (
+				97B08A8B1BC2472B007EBD24 /* AppDelegate.h */,
+				97B08A8C1BC2472B007EBD24 /* AppDelegate.m */,
+				97B08A881BC2472B007EBD24 /* Supporting Files */,
+			);
+			path = simuyun;
+			sourceTree = "<group>";
+		};
+		97B08A881BC2472B007EBD24 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				97B08A941BC2472B007EBD24 /* Assets.xcassets */,
+				97B08A991BC2472B007EBD24 /* Info.plist */,
+				97B08A891BC2472B007EBD24 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		97B08AA11BC2472B007EBD24 /* simuyunTests */ = {
+			isa = PBXGroup;
+			children = (
+				97B08AA21BC2472B007EBD24 /* simuyunTests.m */,
+				97B08AA41BC2472B007EBD24 /* Info.plist */,
+			);
+			path = simuyunTests;
+			sourceTree = "<group>";
+		};
+		97B08AAC1BC2472B007EBD24 /* simuyunUITests */ = {
+			isa = PBXGroup;
+			children = (
+				97B08AAD1BC2472B007EBD24 /* simuyunUITests.m */,
+				97B08AAF1BC2472B007EBD24 /* Info.plist */,
+			);
+			path = simuyunUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		97B08A841BC2472B007EBD24 /* simuyun */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97B08AB21BC2472B007EBD24 /* Build configuration list for PBXNativeTarget "simuyun" */;
+			buildPhases = (
+				97B08A811BC2472B007EBD24 /* Sources */,
+				97B08A821BC2472B007EBD24 /* Frameworks */,
+				97B08A831BC2472B007EBD24 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = simuyun;
+			productName = simuyun;
+			productReference = 97B08A851BC2472B007EBD24 /* simuyun.app */;
+			productType = "com.apple.product-type.application";
+		};
+		97B08A9D1BC2472B007EBD24 /* simuyunTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97B08AB51BC2472B007EBD24 /* Build configuration list for PBXNativeTarget "simuyunTests" */;
+			buildPhases = (
+				97B08A9A1BC2472B007EBD24 /* Sources */,
+				97B08A9B1BC2472B007EBD24 /* Frameworks */,
+				97B08A9C1BC2472B007EBD24 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				97B08AA01BC2472B007EBD24 /* PBXTargetDependency */,
+			);
+			name = simuyunTests;
+			productName = simuyunTests;
+			productReference = 97B08A9E1BC2472B007EBD24 /* simuyunTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		97B08AA81BC2472B007EBD24 /* simuyunUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97B08AB81BC2472B007EBD24 /* Build configuration list for PBXNativeTarget "simuyunUITests" */;
+			buildPhases = (
+				97B08AA51BC2472B007EBD24 /* Sources */,
+				97B08AA61BC2472B007EBD24 /* Frameworks */,
+				97B08AA71BC2472B007EBD24 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				97B08AAB1BC2472B007EBD24 /* PBXTargetDependency */,
+			);
+			name = simuyunUITests;
+			productName = simuyunUITests;
+			productReference = 97B08AA91BC2472B007EBD24 /* simuyunUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		97B08A7D1BC2472B007EBD24 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = YTWealth;
+				TargetAttributes = {
+					97B08A841BC2472B007EBD24 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					97B08A9D1BC2472B007EBD24 = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 97B08A841BC2472B007EBD24;
+					};
+					97B08AA81BC2472B007EBD24 = {
+						CreatedOnToolsVersion = 7.0;
+						TestTargetID = 97B08A841BC2472B007EBD24;
+					};
+				};
+			};
+			buildConfigurationList = 97B08A801BC2472B007EBD24 /* Build configuration list for PBXProject "simuyun" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 97B08A7C1BC2472B007EBD24;
+			productRefGroup = 97B08A861BC2472B007EBD24 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				97B08A841BC2472B007EBD24 /* simuyun */,
+				97B08A9D1BC2472B007EBD24 /* simuyunTests */,
+				97B08AA81BC2472B007EBD24 /* simuyunUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		97B08A831BC2472B007EBD24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97B08A951BC2472B007EBD24 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97B08A9C1BC2472B007EBD24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97B08AA71BC2472B007EBD24 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		97B08A811BC2472B007EBD24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97B08A8D1BC2472B007EBD24 /* AppDelegate.m in Sources */,
+				97B08A8A1BC2472B007EBD24 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97B08A9A1BC2472B007EBD24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97B08AA31BC2472B007EBD24 /* simuyunTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97B08AA51BC2472B007EBD24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97B08AAE1BC2472B007EBD24 /* simuyunUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		97B08AA01BC2472B007EBD24 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 97B08A841BC2472B007EBD24 /* simuyun */;
+			targetProxy = 97B08A9F1BC2472B007EBD24 /* PBXContainerItemProxy */;
+		};
+		97B08AAB1BC2472B007EBD24 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 97B08A841BC2472B007EBD24 /* simuyun */;
+			targetProxy = 97B08AAA1BC2472B007EBD24 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		97B08AB01BC2472B007EBD24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		97B08AB11BC2472B007EBD24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		97B08AB31BC2472B007EBD24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = simuyun/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		97B08AB41BC2472B007EBD24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = simuyun/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		97B08AB61BC2472B007EBD24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = simuyunTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyunTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/simuyun.app/simuyun";
+			};
+			name = Debug;
+		};
+		97B08AB71BC2472B007EBD24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = simuyunTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyunTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/simuyun.app/simuyun";
+			};
+			name = Release;
+		};
+		97B08AB91BC2472B007EBD24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = simuyunUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyunUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = simuyun;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		97B08ABA1BC2472B007EBD24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = simuyunUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyunUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = simuyun;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		97B08A801BC2472B007EBD24 /* Build configuration list for PBXProject "simuyun" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97B08AB01BC2472B007EBD24 /* Debug */,
+				97B08AB11BC2472B007EBD24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		97B08AB21BC2472B007EBD24 /* Build configuration list for PBXNativeTarget "simuyun" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97B08AB31BC2472B007EBD24 /* Debug */,
+				97B08AB41BC2472B007EBD24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		97B08AB51BC2472B007EBD24 /* Build configuration list for PBXNativeTarget "simuyunTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97B08AB61BC2472B007EBD24 /* Debug */,
+				97B08AB71BC2472B007EBD24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		97B08AB81BC2472B007EBD24 /* Build configuration list for PBXNativeTarget "simuyunUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97B08AB91BC2472B007EBD24 /* Debug */,
+				97B08ABA1BC2472B007EBD24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 97B08A7D1BC2472B007EBD24 /* Project object */;
+}
