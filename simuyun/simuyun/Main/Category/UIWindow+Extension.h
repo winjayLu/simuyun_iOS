@@ -13,6 +13,6 @@
 /**
  *  选择根控制器
  */
-- (void)chooseRootviewController:(BOOL)isWelcome;
+- (void)chooseRootviewController;
 
 @end

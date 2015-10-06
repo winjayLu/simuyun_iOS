@@ -46,7 +46,6 @@
     NSArray *imgArr = [NSArray arrayWithObjects:@"ShareButtonTypeWxShare",@"ShareButtonTypeWxPyq",@"ShareButtonTypeEmail",@"ShareButtonTypeSms",@"ShareButtonTypeCopy", nil];
     //  创建自定义分享视图
     ShareCustomView *customView = [[ShareCustomView alloc] initWithTitleArray:titleArr imageArray:imgArr];
-    customView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.01];
     customView.frame = self.view.bounds;
     
     //  设置代理

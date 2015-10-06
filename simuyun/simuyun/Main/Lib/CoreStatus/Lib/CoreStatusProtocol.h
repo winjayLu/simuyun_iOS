@@ -1,9 +1,9 @@
 //
-//  CoreStatusProtocol.h
-//  CoreStatus
+//  CoreCoreNetWorkStatus.m
+//  simuyun
 //
-//  Created by 成林 on 15/7/6.
-//  Copyright (c) 2015年 muxi. All rights reserved.
+//  Created by Luwinjay on 15/10/6.
+//  Copyright (c) 2015年 YTWealth. All rights reserved.
 //
 
 #ifndef CoreStatus_CoreStatusProtocol_h

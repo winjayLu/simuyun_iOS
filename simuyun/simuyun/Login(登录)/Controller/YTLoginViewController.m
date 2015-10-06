@@ -56,7 +56,7 @@
     
     [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToWechatSession  completion:^(UMSocialResponseEntity *response){
         // 进入到微信
-//        YTLog(@"SnsInformation is %@",response.data);
+        YTLog(@"SnsInformation is %@",response.data);
         NSLog(@"%@",response);
     }];
 

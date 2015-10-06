@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		97973CDB1BC3916F00B7B4CB /* libPushSDK-1.8.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97973CDA1BC3916F00B7B4CB /* libPushSDK-1.8.5.a */; settings = {ASSET_TAGS = (); }; };
+		97973CDD1BC391BA00B7B4CB /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97973CDC1BC391BA00B7B4CB /* PushConfig.plist */; settings = {ASSET_TAGS = (); }; };
+		97973CE01BC3A75700B7B4CB /* YTBadgeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97973CDF1BC3A75700B7B4CB /* YTBadgeTool.m */; settings = {ASSET_TAGS = (); }; };
 		97B08A8A1BC2472B007EBD24 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08A891BC2472B007EBD24 /* main.m */; };
 		97B08A8D1BC2472B007EBD24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08A8C1BC2472B007EBD24 /* AppDelegate.m */; };
 		97B08A951BC2472B007EBD24 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97B08A941BC2472B007EBD24 /* Assets.xcassets */; };
@@ -110,6 +113,11 @@
 /* Begin PBXFileReference section */
 		13F661A7FA831186EC92CFB7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		1695905209A227AB6ABE80C8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		97973CD91BC3916F00B7B4CB /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
+		97973CDA1BC3916F00B7B4CB /* libPushSDK-1.8.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.5.a"; sourceTree = "<group>"; };
+		97973CDC1BC391BA00B7B4CB /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
+		97973CDE1BC3A75700B7B4CB /* YTBadgeTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTBadgeTool.h; sourceTree = "<group>"; };
+		97973CDF1BC3A75700B7B4CB /* YTBadgeTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTBadgeTool.m; sourceTree = "<group>"; };
 		97B08A851BC2472B007EBD24 /* simuyun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simuyun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97B08A891BC2472B007EBD24 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		97B08A8B1BC2472B007EBD24 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../../AppDelegate.h; sourceTree = "<group>"; };
@@ -285,6 +293,7 @@
 				97C606BA1BC29B9100E555E8 /* libSocialWechat.a in Frameworks */,
 				97C606A81BC2985700E555E8 /* libUMSocial_Sdk_4.2.5.a in Frameworks */,
 				97C606BB1BC29B9200E555E8 /* libWeChatSDK.a in Frameworks */,
+				97973CDB1BC3916F00B7B4CB /* libPushSDK-1.8.5.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +337,16 @@
 				1695905209A227AB6ABE80C8 /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		97973CD81BC3916F00B7B4CB /* JPush */ = {
+			isa = PBXGroup;
+			children = (
+				97973CD91BC3916F00B7B4CB /* APService.h */,
+				97973CDA1BC3916F00B7B4CB /* libPushSDK-1.8.5.a */,
+				97973CDC1BC391BA00B7B4CB /* PushConfig.plist */,
+			);
+			path = JPush;
 			sourceTree = "<group>";
 		};
 		97B08A7C1BC2472B007EBD24 = {
@@ -471,6 +490,7 @@
 		97C6059B1BC260A400E555E8 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				97973CD81BC3916F00B7B4CB /* JPush */,
 				97C3CE6E1BC2C17D00B7185D /* MBProgressHUD */,
 				97C3CE621BC2BAEF00B7185D /* SVProgressHUD */,
 				97C6068B1BC2985700E555E8 /* Umeng */,
@@ -496,6 +516,8 @@
 				97C605A11BC260A400E555E8 /* YTHttpTool.m */,
 				97C605A21BC260A400E555E8 /* YTProductTool.h */,
 				97C605A31BC260A400E555E8 /* YTProductTool.m */,
+				97973CDE1BC3A75700B7B4CB /* YTBadgeTool.h */,
+				97973CDF1BC3A75700B7B4CB /* YTBadgeTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1019,6 +1041,11 @@
 					97B08A841BC2472B007EBD24 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = H38DYSL82Z;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					97B08A9D1BC2472B007EBD24 = {
 						CreatedOnToolsVersion = 7.0;
@@ -1060,6 +1087,7 @@
 				97C606AC1BC2985700E555E8 /* UMShareEditViewController.xib in Resources */,
 				97C605DC1BC2621F00E555E8 /* YTOtherViewController.xib in Resources */,
 				97C606A71BC2985700E555E8 /* UMSocialLocalizable.strings in Resources */,
+				97973CDD1BC391BA00B7B4CB /* PushConfig.plist in Resources */,
 				97B08A951BC2472B007EBD24 /* Assets.xcassets in Resources */,
 				97C606AD1BC2985700E555E8 /* UMShareEditViewControlleriPad.xib in Resources */,
 				97C606A91BC2985700E555E8 /* UMSCommentDetailController.xib in Resources */,
@@ -1159,6 +1187,7 @@
 				97C606481BC269CC00E555E8 /* UIImage+Extend.m in Sources */,
 				97C605AD1BC260A400E555E8 /* YTTabBarController.m in Sources */,
 				97C6068A1BC27BD600E555E8 /* NSDate+Extension.m in Sources */,
+				97973CE01BC3A75700B7B4CB /* YTBadgeTool.m in Sources */,
 				97C605B01BC260A400E555E8 /* YTProductTool.m in Sources */,
 				97C605AC1BC260A400E555E8 /* YTNavigationController.m in Sources */,
 				97C606871BC2799400E555E8 /* UIBarButtonItem+Extension.m in Sources */,
@@ -1244,6 +1273,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1266,6 +1296,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "5e3bd153-03e1-472a-be01-dafb2a298d29";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1287,6 +1318,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1302,6 +1334,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "5e3bd153-03e1-472a-be01-dafb2a298d29";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1313,7 +1346,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
 				INFOPLIST_FILE = simuyun/Info.plist;
@@ -1322,9 +1355,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/simuyun/Main/Lib/Umeng/UMSocial_Sdk_4.2.5",
 					"$(PROJECT_DIR)/simuyun/Main/Lib/Umeng/Wechat",
+					"$(PROJECT_DIR)/simuyun/Main/Lib/JPush",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5e3bd153-03e1-472a-be01-dafb2a298d29";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1335,7 +1370,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = BrandAsset;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
 				INFOPLIST_FILE = simuyun/Info.plist;
@@ -1344,9 +1379,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/simuyun/Main/Lib/Umeng/UMSocial_Sdk_4.2.5",
 					"$(PROJECT_DIR)/simuyun/Main/Lib/Umeng/Wechat",
+					"$(PROJECT_DIR)/simuyun/Main/Lib/JPush",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5e3bd153-03e1-472a-be01-dafb2a298d29";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

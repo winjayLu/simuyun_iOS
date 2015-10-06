@@ -13,10 +13,14 @@
 
 @implementation UIWindow (Extension)
 
-- (void)chooseRootviewController:(BOOL)isWelcome
+/**
+ *  选择根控制器
+ */
+- (void)chooseRootviewController
 {
+    
+    
     // 判断应用显示新特性还是欢迎界面
-#warning 发送请求到服务器获取最新的版本号
     NSString *sandboxVersion = nil;
     
     // 2.获取软件当前的版本号
@@ -31,10 +35,11 @@
     }else
     {
         // 显示欢迎界面
-        if(isWelcome)
+//        if(isWelcome)
         {
             self.rootViewController = [[YTWelcomeViewController alloc] init];
-        }else
+        }
+//        else
         {
             self.rootViewController = [[YTTabBarController alloc] init];
         }
