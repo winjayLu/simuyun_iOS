@@ -16,11 +16,4 @@
  */
 @property (nonatomic,strong,readonly) NSDate *date;
 
-
-
-
-
-
-
-
 @end

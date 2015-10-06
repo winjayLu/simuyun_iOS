@@ -58,7 +58,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     // 设置menu的view
     YTMenuViewController *menuVc = [[YTMenuViewController alloc] init];
     menuVc.delegate = self;
-    menuVc.view.frame = [[UIScreen mainScreen] bounds];
+    menuVc.view.frame = self.view.frame;
     menuVc.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, menuStartNarrowRatio, menuStartNarrowRatio);
     menuVc.view.center = CGPointMake(self.menuCenterXStart, menuVc.view.center.y);
     [self addChildViewController:menuVc];

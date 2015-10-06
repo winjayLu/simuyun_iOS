@@ -25,13 +25,12 @@
 /**
  *  获得上次存储的帐号
  *
- *  @return 帐号过期, 返回nil
  */
 + (YTAccount *)account
 {
 #warning 测试阶段
 //    YTAccount *account = [NSKeyedUnarchiver unarchiveObjectWithFile:YTAccountPath];
     YTAccount *account = [[YTAccount alloc] init];
-    return account;
+    return nil;
 }
 @end

@@ -7,9 +7,12 @@
 //
 
 #import "UIWindow+Extension.h"
-#import "YTNewfeatureViewController.h"
 #import "YTWelcomeViewController.h"
 #import "YTTabBarController.h"
+#import "YTLoginViewController.h"
+#import "CoreNewFeatureVC.h"
+#import "CALayer+Transition.h"
+#import "UIImage+Extend.h"
 
 @implementation UIWindow (Extension)
 
@@ -18,31 +21,32 @@
  */
 - (void)chooseRootviewController
 {
-    
-    
-    // 判断应用显示新特性还是欢迎界面
-    NSString *sandboxVersion = nil;
-    
-    // 2.获取软件当前的版本号
-    NSDictionary *dict = [NSBundle mainBundle].infoDictionary;
-    NSString *currentVersion = dict[@"CFBundleShortVersionString"];
-    
-    // 3.服务器的版本号和软件当前的版本号
-    if([currentVersion compare:sandboxVersion] == NSOrderedDescending )
+    // 判断显示新特性还是欢迎界面
+    if ([CoreNewFeatureVC canShowNewFeature])
     {
-        // 显示新特性
-        self.rootViewController = [[YTNewfeatureViewController alloc] init];
-    }else
-    {
-        // 显示欢迎界面
-//        if(isWelcome)
-        {
-            self.rootViewController = [[YTWelcomeViewController alloc] init];
-        }
-//        else
-        {
-            self.rootViewController = [[YTTabBarController alloc] init];
-        }
+        // 创建性特性模型
+        NewFeatureModel *m1 = [NewFeatureModel model:[UIImage imageWithColor:YTRandomColor]];
+        NewFeatureModel *m2 = [NewFeatureModel model:[UIImage imageWithColor:YTRandomColor]];
+        NewFeatureModel *m3 = [NewFeatureModel model:[UIImage imageWithColor:YTRandomColor]];
+        
+        // 新特性控制器
+        self.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m1,m2,m3] enterBlock:^{
+            self.rootViewController = [[YTLoginViewController alloc] init];
+            [self transitionVc];
+        }];
+    } else {
+        // 欢迎控制器
+        self.rootViewController = [[YTWelcomeViewController alloc] init];
+        [self transitionVc];
     }
 }
+
+/**
+ *  转场
+ */
+-(void)transitionVc{
+    [self.layer transitionWithAnimType:TransitionAnimTypeCube subType:TransitionSubtypesFromRight curve:TransitionCurveEaseOut duration:1.5f];
+}
+
+
 @end

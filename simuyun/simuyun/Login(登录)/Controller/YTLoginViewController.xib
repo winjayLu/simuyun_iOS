@@ -29,11 +29,32 @@
                         <action selector="weChatClick:" destination="-1" eventType="touchUpInside" id="hb5-dY-OTf"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pII-Vp-BPt">
+                    <rect key="frame" x="251" y="362" width="98" height="48"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <state key="normal" title="登     录"/>
+                    <connections>
+                        <action selector="loginClick:" destination="-1" eventType="touchUpInside" id="K3X-lx-ZUq"/>
+                    </connections>
+                </button>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LJg-iq-CEa">
+                    <rect key="frame" x="204.5" y="209" width="191" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="191" id="25W-fn-H8f"/>
+                        <constraint firstAttribute="height" constant="30" id="TEh-KO-Sdm"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="MkM-ih-Mqs" firstAttribute="top" secondItem="LJg-iq-CEa" secondAttribute="bottom" constant="30" id="JKg-3M-93X"/>
                 <constraint firstAttribute="centerY" secondItem="MkM-ih-Mqs" secondAttribute="centerY" id="eVB-IT-6VH"/>
                 <constraint firstAttribute="centerX" secondItem="MkM-ih-Mqs" secondAttribute="centerX" id="gcf-ab-c8n"/>
+                <constraint firstItem="LJg-iq-CEa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h3d-14-LkK"/>
+                <constraint firstItem="pII-Vp-BPt" firstAttribute="top" secondItem="MkM-ih-Mqs" secondAttribute="bottom" constant="31" id="q3e-e5-Toi"/>
+                <constraint firstItem="pII-Vp-BPt" firstAttribute="centerX" secondItem="MkM-ih-Mqs" secondAttribute="centerX" id="zZJ-Lm-blM"/>
             </constraints>
             <point key="canvasLocation" x="374" y="171"/>
         </view>
