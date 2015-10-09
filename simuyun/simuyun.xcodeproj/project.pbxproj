@@ -8,6 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		9714A6D01BC7B9BB0018A14E /* HHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6CF1BC7B9BB0018A14E /* HHAlertView.m */; settings = {ASSET_TAGS = (); }; };
+		9714A6EE1BC7E0610018A14E /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9714A6D81BC7E0610018A14E /* FontAwesome.ttf */; settings = {ASSET_TAGS = (); }; };
+		9714A6EF1BC7E0610018A14E /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6DA1BC7E0610018A14E /* NSString+FontAwesome.m */; settings = {ASSET_TAGS = (); }; };
+		9714A6F01BC7E0610018A14E /* UIButton+Bootstrap.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6DC1BC7E0610018A14E /* UIButton+Bootstrap.m */; settings = {ASSET_TAGS = (); }; };
+		9714A6F11BC7E0610018A14E /* YUDIVView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6DF1BC7E0610018A14E /* YUDIVView.m */; settings = {ASSET_TAGS = (); }; };
+		9714A6F21BC7E0610018A14E /* UIColor+YUColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6E11BC7E0610018A14E /* UIColor+YUColor.m */; settings = {ASSET_TAGS = (); }; };
+		9714A6F31BC7E0610018A14E /* UIView+YUStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6E31BC7E0610018A14E /* UIView+YUStyle.m */; settings = {ASSET_TAGS = (); }; };
+		9714A6F41BC7E0610018A14E /* UIWindow+YUBottomPoper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6E51BC7E0610018A14E /* UIWindow+YUBottomPoper.m */; settings = {ASSET_TAGS = (); }; };
+		9714A6F51BC7E0610018A14E /* yConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6E71BC7E0610018A14E /* yConst.m */; settings = {ASSET_TAGS = (); }; };
+		9714A6F61BC7E0610018A14E /* YUBottomPopSelctModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6E91BC7E0610018A14E /* YUBottomPopSelctModel.m */; settings = {ASSET_TAGS = (); }; };
+		9714A6F71BC7E0610018A14E /* YUBottomPopSelctView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6EB1BC7E0610018A14E /* YUBottomPopSelctView.m */; settings = {ASSET_TAGS = (); }; };
+		9714A6F81BC7E0610018A14E /* YUDarkGlassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6ED1BC7E0610018A14E /* YUDarkGlassView.m */; settings = {ASSET_TAGS = (); }; };
+		9714A6FC1BC7E5FF0018A14E /* YTProfileTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6FA1BC7E5FF0018A14E /* YTProfileTopView.m */; settings = {ASSET_TAGS = (); }; };
+		9714A6FD1BC7E5FF0018A14E /* YTProfileTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9714A6FB1BC7E5FF0018A14E /* YTProfileTopView.xib */; settings = {ASSET_TAGS = (); }; };
 		971503A81BC75E78007E27D0 /* PPTConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 971503991BC75E78007E27D0 /* PPTConst.m */; settings = {ASSET_TAGS = (); }; };
 		971503A91BC75E78007E27D0 /* PPTLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9715039C1BC75E78007E27D0 /* PPTLayout.m */; settings = {ASSET_TAGS = (); }; };
 		971503AA1BC75E78007E27D0 /* PPTModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9715039F1BC75E78007E27D0 /* PPTModel.m */; settings = {ASSET_TAGS = (); }; };
@@ -141,6 +154,30 @@
 		1695905209A227AB6ABE80C8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9714A6CE1BC7B9BB0018A14E /* HHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHAlertView.h; sourceTree = "<group>"; };
 		9714A6CF1BC7B9BB0018A14E /* HHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHAlertView.m; sourceTree = "<group>"; };
+		9714A6D81BC7E0610018A14E /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		9714A6D91BC7E0610018A14E /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		9714A6DA1BC7E0610018A14E /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		9714A6DB1BC7E0610018A14E /* UIButton+Bootstrap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Bootstrap.h"; sourceTree = "<group>"; };
+		9714A6DC1BC7E0610018A14E /* UIButton+Bootstrap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Bootstrap.m"; sourceTree = "<group>"; };
+		9714A6DE1BC7E0610018A14E /* YUDIVView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YUDIVView.h; sourceTree = "<group>"; };
+		9714A6DF1BC7E0610018A14E /* YUDIVView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YUDIVView.m; sourceTree = "<group>"; };
+		9714A6E01BC7E0610018A14E /* UIColor+YUColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+YUColor.h"; sourceTree = "<group>"; };
+		9714A6E11BC7E0610018A14E /* UIColor+YUColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+YUColor.m"; sourceTree = "<group>"; };
+		9714A6E21BC7E0610018A14E /* UIView+YUStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+YUStyle.h"; sourceTree = "<group>"; };
+		9714A6E31BC7E0610018A14E /* UIView+YUStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+YUStyle.m"; sourceTree = "<group>"; };
+		9714A6E41BC7E0610018A14E /* UIWindow+YUBottomPoper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+YUBottomPoper.h"; sourceTree = "<group>"; };
+		9714A6E51BC7E0610018A14E /* UIWindow+YUBottomPoper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+YUBottomPoper.m"; sourceTree = "<group>"; };
+		9714A6E61BC7E0610018A14E /* yConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = yConst.h; sourceTree = "<group>"; };
+		9714A6E71BC7E0610018A14E /* yConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = yConst.m; sourceTree = "<group>"; };
+		9714A6E81BC7E0610018A14E /* YUBottomPopSelctModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YUBottomPopSelctModel.h; sourceTree = "<group>"; };
+		9714A6E91BC7E0610018A14E /* YUBottomPopSelctModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YUBottomPopSelctModel.m; sourceTree = "<group>"; };
+		9714A6EA1BC7E0610018A14E /* YUBottomPopSelctView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YUBottomPopSelctView.h; sourceTree = "<group>"; };
+		9714A6EB1BC7E0610018A14E /* YUBottomPopSelctView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YUBottomPopSelctView.m; sourceTree = "<group>"; };
+		9714A6EC1BC7E0610018A14E /* YUDarkGlassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YUDarkGlassView.h; sourceTree = "<group>"; };
+		9714A6ED1BC7E0610018A14E /* YUDarkGlassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YUDarkGlassView.m; sourceTree = "<group>"; };
+		9714A6F91BC7E5FF0018A14E /* YTProfileTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTProfileTopView.h; sourceTree = "<group>"; };
+		9714A6FA1BC7E5FF0018A14E /* YTProfileTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTProfileTopView.m; sourceTree = "<group>"; };
+		9714A6FB1BC7E5FF0018A14E /* YTProfileTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTProfileTopView.xib; sourceTree = "<group>"; };
 		971503981BC75E78007E27D0 /* PPTConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPTConst.h; sourceTree = "<group>"; };
 		971503991BC75E78007E27D0 /* PPTConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPTConst.m; sourceTree = "<group>"; };
 		9715039B1BC75E78007E27D0 /* PPTLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPTLayout.h; sourceTree = "<group>"; };
@@ -430,6 +467,50 @@
 			path = AlertView;
 			sourceTree = "<group>";
 		};
+		9714A6D61BC7E0610018A14E /* YUScreentPoper */ = {
+			isa = PBXGroup;
+			children = (
+				9714A6D71BC7E0610018A14E /* Button */,
+				9714A6DD1BC7E0610018A14E /* DIVVIEW */,
+				9714A6E01BC7E0610018A14E /* UIColor+YUColor.h */,
+				9714A6E11BC7E0610018A14E /* UIColor+YUColor.m */,
+				9714A6E21BC7E0610018A14E /* UIView+YUStyle.h */,
+				9714A6E31BC7E0610018A14E /* UIView+YUStyle.m */,
+				9714A6E41BC7E0610018A14E /* UIWindow+YUBottomPoper.h */,
+				9714A6E51BC7E0610018A14E /* UIWindow+YUBottomPoper.m */,
+				9714A6E61BC7E0610018A14E /* yConst.h */,
+				9714A6E71BC7E0610018A14E /* yConst.m */,
+				9714A6E81BC7E0610018A14E /* YUBottomPopSelctModel.h */,
+				9714A6E91BC7E0610018A14E /* YUBottomPopSelctModel.m */,
+				9714A6EA1BC7E0610018A14E /* YUBottomPopSelctView.h */,
+				9714A6EB1BC7E0610018A14E /* YUBottomPopSelctView.m */,
+				9714A6EC1BC7E0610018A14E /* YUDarkGlassView.h */,
+				9714A6ED1BC7E0610018A14E /* YUDarkGlassView.m */,
+			);
+			path = YUScreentPoper;
+			sourceTree = "<group>";
+		};
+		9714A6D71BC7E0610018A14E /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				9714A6D81BC7E0610018A14E /* FontAwesome.ttf */,
+				9714A6D91BC7E0610018A14E /* NSString+FontAwesome.h */,
+				9714A6DA1BC7E0610018A14E /* NSString+FontAwesome.m */,
+				9714A6DB1BC7E0610018A14E /* UIButton+Bootstrap.h */,
+				9714A6DC1BC7E0610018A14E /* UIButton+Bootstrap.m */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		9714A6DD1BC7E0610018A14E /* DIVVIEW */ = {
+			isa = PBXGroup;
+			children = (
+				9714A6DE1BC7E0610018A14E /* YUDIVView.h */,
+				9714A6DF1BC7E0610018A14E /* YUDIVView.m */,
+			);
+			path = DIVVIEW;
+			sourceTree = "<group>";
+		};
 		971503921BC75E78007E27D0 /* CorePPTVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -717,6 +798,7 @@
 		97C6059B1BC260A400E555E8 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				9714A6D61BC7E0610018A14E /* YUScreentPoper */,
 				971503921BC75E78007E27D0 /* CorePPTVC */,
 				97A61D721BC6893B000A5B17 /* WebProgressView */,
 				97973CEC1BC3C11500B7B4CB /* CoreNewFeatureVC */,
@@ -814,6 +896,9 @@
 		97C605D31BC2621F00E555E8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9714A6F91BC7E5FF0018A14E /* YTProfileTopView.h */,
+				9714A6FA1BC7E5FF0018A14E /* YTProfileTopView.m */,
+				9714A6FB1BC7E5FF0018A14E /* YTProfileTopView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1295,8 +1380,10 @@
 				97973CDD1BC391BA00B7B4CB /* PushConfig.plist in Resources */,
 				97B08A951BC2472B007EBD24 /* Assets.xcassets in Resources */,
 				971503B81BC76961007E27D0 /* CorePPTVC.xib in Resources */,
+				9714A6FD1BC7E5FF0018A14E /* YTProfileTopView.xib in Resources */,
 				97C606AD1BC2985700E555E8 /* UMShareEditViewControlleriPad.xib in Resources */,
 				97973D011BC3C5E500B7B4CB /* YTWelcomeViewController.xib in Resources */,
+				9714A6EE1BC7E0610018A14E /* FontAwesome.ttf in Resources */,
 				97C606A91BC2985700E555E8 /* UMSCommentDetailController.xib in Resources */,
 				97C606AE1BC2985700E555E8 /* UMSLoginViewController.xib in Resources */,
 				97C3CE6B1BC2BAEF00B7185D /* SVProgressHUD.bundle in Resources */,
@@ -1365,6 +1452,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9714A6EF1BC7E0610018A14E /* NSString+FontAwesome.m in Sources */,
 				97C6067E1BC271DE00E555E8 /* CoreStatus.m in Sources */,
 				97C3CE221BC29E2D00B7185D /* ShareManage.m in Sources */,
 				97C605F61BC2622E00E555E8 /* YTAccount.m in Sources */,
@@ -1373,23 +1461,28 @@
 				971503B31BC768FF007E27D0 /* CorePageControl.m in Sources */,
 				97C606471BC269CC00E555E8 /* UIImage+Cut.m in Sources */,
 				97C605D81BC2621F00E555E8 /* YTProductViewController.m in Sources */,
+				9714A6F81BC7E0610018A14E /* YUDarkGlassView.m in Sources */,
 				97C6061A1BC266A900E555E8 /* CALayer+Anim.m in Sources */,
 				97C606261BC2679F00E555E8 /* NSString+Password.m in Sources */,
 				97C6061F1BC2670E00E555E8 /* NSArray+Extend.m in Sources */,
 				97C606031BC2628200E555E8 /* TempViewController.m in Sources */,
 				97187A8E1BC666E200C64609 /* YTWebViewController.m in Sources */,
+				9714A6F31BC7E0610018A14E /* UIView+YUStyle.m in Sources */,
 				97C606251BC2679F00E555E8 /* NSString+Extend.m in Sources */,
 				97C605AB1BC260A400E555E8 /* UIWindow+Extension.m in Sources */,
 				97C605AF1BC260A400E555E8 /* YTHttpTool.m in Sources */,
 				97973CE71BC3BE7000B7B4CB /* NSString+File.m in Sources */,
 				97973CF71BC3C11500B7B4CB /* CoreNewFeatureVC.m in Sources */,
 				97C606321BC2692B00E555E8 /* UIFont+Extend.m in Sources */,
+				9714A6F21BC7E0610018A14E /* UIColor+YUColor.m in Sources */,
 				97C605F41BC2622E00E555E8 /* YTLoginViewController.m in Sources */,
 				97C3CE6D1BC2BAEF00B7185D /* SVRadialGradientLayer.m in Sources */,
 				971503AA1BC75E78007E27D0 /* PPTModel.m in Sources */,
 				97C605F71BC2622E00E555E8 /* YTAccountTool.m in Sources */,
+				9714A6F41BC7E0610018A14E /* UIWindow+YUBottomPoper.m in Sources */,
 				97C606551BC26F0A00E555E8 /* UIView+Extension.m in Sources */,
 				971503AB1BC75E78007E27D0 /* PPTCell.m in Sources */,
+				9714A6F01BC7E0610018A14E /* UIButton+Bootstrap.m in Sources */,
 				97B08A8D1BC2472B007EBD24 /* AppDelegate.m in Sources */,
 				97973CFA1BC3C11500B7B4CB /* NewFeatureScrollView.m in Sources */,
 				97C605DD1BC2621F00E555E8 /* YTProfileViewController.m in Sources */,
@@ -1403,8 +1496,11 @@
 				97A61D781BC6893B000A5B17 /* YHWebViewProgress.m in Sources */,
 				97C605B01BC260A400E555E8 /* YTProductTool.m in Sources */,
 				97C605AC1BC260A400E555E8 /* YTNavigationController.m in Sources */,
+				9714A6F51BC7E0610018A14E /* yConst.m in Sources */,
 				97C606871BC2799400E555E8 /* UIBarButtonItem+Extension.m in Sources */,
+				9714A6F71BC7E0610018A14E /* YUBottomPopSelctView.m in Sources */,
 				97C3CE741BC2C17D00B7185D /* MBProgressHUD+WJ.m in Sources */,
+				9714A6F11BC7E0610018A14E /* YUDIVView.m in Sources */,
 				97C3CE761BC2C17D00B7185D /* MBProgressHUD.m in Sources */,
 				97A61D791BC6893C000A5B17 /* YHWebViewProgressView.m in Sources */,
 				97C605DA1BC2621F00E555E8 /* YTMenuViewController.m in Sources */,
@@ -1417,6 +1513,7 @@
 				97C605DF1BC2621F00E555E8 /* YTSchoolViewController.m in Sources */,
 				97C6067F1BC271DE00E555E8 /* Reachability.m in Sources */,
 				97C605DB1BC2621F00E555E8 /* YTOtherViewController.m in Sources */,
+				9714A6FC1BC7E5FF0018A14E /* YTProfileTopView.m in Sources */,
 				97C6066A1BC2700600E555E8 /* UIButton+SD.m in Sources */,
 				97C605F81BC2622E00E555E8 /* YTMessageViewController.m in Sources */,
 				97C3CE251BC29FE800B7185D /* ShareCustomView.m in Sources */,
@@ -1428,6 +1525,7 @@
 				97973D081BC3D8AB00B7B4CB /* YTLogoView.m in Sources */,
 				97973CF91BC3C11500B7B4CB /* NewFeatureModel.m in Sources */,
 				97C3CE6A1BC2BAEF00B7185D /* SVIndefiniteAnimatedView.m in Sources */,
+				9714A6F61BC7E0610018A14E /* YUBottomPopSelctModel.m in Sources */,
 				97C6066B1BC2700600E555E8 /* UIImageView+SD.m in Sources */,
 				97C605D91BC2621F00E555E8 /* YTHomeViewController.m in Sources */,
 				97C6062A1BC2682F00E555E8 /* UIButton+ImageBtn.m in Sources */,

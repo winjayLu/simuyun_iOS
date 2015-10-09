@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="YTProfileTopView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="270"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-picture" translatesAutoresizingMaskIntoConstraints="NO" id="TR6-ku-oa3" userLabel="bj">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="270"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="quan" translatesAutoresizingMaskIntoConstraints="NO" id="CrT-a4-ocu" userLabel="头像bj">
+                    <rect key="frame" x="125" y="37" width="126" height="126"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="126" id="Urm-ql-Kil"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="110" id="fZf-T8-GgW"/>
+                        <constraint firstAttribute="height" constant="126" id="irJ-dm-Z5T"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="110" id="vJt-pw-QIa"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="huangguang" translatesAutoresizingMaskIntoConstraints="NO" id="Z40-Md-MMW">
+                    <rect key="frame" x="159" y="15" width="58" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="58" id="NyK-ah-0ck"/>
+                        <constraint firstAttribute="height" constant="30" id="RZf-GB-8u3"/>
+                    </constraints>
+                </imageView>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="27e-HL-mxV" userLabel="头像">
+                    <rect key="frame" x="133" y="45" width="110" height="110"/>
+                    <color key="backgroundColor" red="1" green="0.47567063637854201" blue="0.83449008786534584" alpha="1" colorSpace="calibratedRGB"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="BYn-nK-vf3"/>
+                        <constraint firstAttribute="height" constant="120" id="EUc-mC-2lJ"/>
+                        <constraint firstAttribute="width" constant="110" id="TzY-nF-2rf"/>
+                        <constraint firstAttribute="width" constant="120" id="Wgb-xj-Pdx"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="EUc-mC-2lJ"/>
+                            <exclude reference="Wgb-xj-Pdx"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="HSJ-4S-tfC" appends="YES" id="0gR-g8-gsN"/>
+                    </connections>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="27e-HL-mxV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="1k9-kE-PPM"/>
+                <constraint firstItem="27e-HL-mxV" firstAttribute="centerY" secondItem="CrT-a4-ocu" secondAttribute="centerY" id="7x9-jr-haX"/>
+                <constraint firstItem="CrT-a4-ocu" firstAttribute="top" secondItem="Z40-Md-MMW" secondAttribute="bottom" constant="-8" id="932-ES-bGe"/>
+                <constraint firstItem="CrT-a4-ocu" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ImU-H2-Kta"/>
+                <constraint firstItem="27e-HL-mxV" firstAttribute="centerX" secondItem="CrT-a4-ocu" secondAttribute="centerX" id="KIa-79-rG2"/>
+                <constraint firstItem="27e-HL-mxV" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="LAV-nw-aoR"/>
+                <constraint firstAttribute="trailing" secondItem="TR6-ku-oa3" secondAttribute="trailing" id="NVR-PB-TOB"/>
+                <constraint firstAttribute="bottom" secondItem="TR6-ku-oa3" secondAttribute="bottom" id="Z7V-8p-Zuu"/>
+                <constraint firstItem="TR6-ku-oa3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ctf-em-eZL"/>
+                <constraint firstItem="Z40-Md-MMW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="uAJ-7u-k2q"/>
+                <constraint firstItem="TR6-ku-oa3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="uUT-eV-dzy"/>
+                <constraint firstItem="Z40-Md-MMW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="wAh-3t-Kqe"/>
+                <constraint firstItem="27e-HL-mxV" firstAttribute="top" secondItem="Z40-Md-MMW" secondAttribute="bottom" constant="-5" id="zwV-nD-n8O"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="1k9-kE-PPM"/>
+                    <exclude reference="LAV-nw-aoR"/>
+                    <exclude reference="zwV-nD-n8O"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="iconImage" destination="27e-HL-mxV" id="Oac-y8-Xky"/>
+            </connections>
+            <point key="canvasLocation" x="211.5" y="335"/>
+        </view>
+        <tapGestureRecognizer id="HSJ-4S-tfC">
+            <connections>
+                <action selector="iconClick:" destination="iN0-l3-epB" id="HNF-3a-Siy"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="background-picture" width="375" height="270"/>
+        <image name="huangguang" width="58" height="30"/>
+        <image name="quan" width="126" height="126"/>
+    </resources>
+</document>

@@ -15,12 +15,12 @@
 #define txtColor [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1]
 
 
-NSInteger  HHAlertview_SIZE_WIDTH = 375 - 61;
-NSInteger const HHAlertview_SIZE_HEIGHT = 250;
+#define  HHAlertview_SIZE_WIDTH  (DeviceWidth - 61)
+#define HHAlertview_SIZE_HEIGHT  250
 NSInteger const Simble_SIZE = 30;
 NSInteger const Simble_TOP = 0;
 
-NSInteger Button_SIZE_WIDTH = 157;
+#define Button_SIZE_WIDTH  (HHAlertview_SIZE_WIDTH * 0.5)
 NSInteger const Buutton_SIZE_HEIGHT      = 44;
 
 
@@ -72,7 +72,7 @@ NSInteger const HHAlertview_SIZE_DETAIL_FONT = 14;
 
 - (void)uiStyle
 {
-    [self setFrame:CGRectMake(([self getMainScreenSize].width-HHAlertview_SIZE_WIDTH)/2, ([self getMainScreenSize].height-HHAlertview_SIZE_HEIGHT)/2, HHAlertview_SIZE_WIDTH, HHAlertview_SIZE_HEIGHT)];
+    [self setFrame:CGRectMake((DeviceWidth - HHAlertview_SIZE_WIDTH)/2, (DeviceHight- HHAlertview_SIZE_HEIGHT)/2, HHAlertview_SIZE_WIDTH, HHAlertview_SIZE_HEIGHT)];
     self.alpha = 0;
     [self setBackgroundColor:[UIColor whiteColor]];
 }
@@ -99,12 +99,23 @@ NSInteger const HHAlertview_SIZE_DETAIL_FONT = 14;
     
     [self configButton:cancel Okbutton:ok];
     
-    [view addSubview:self];
+
     [self show];
 }
 
 
+- (UIViewController *)appRootViewController
+{
+    UIViewController *appRootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    UIViewController *topVC = appRootVC;
+    while (topVC.presentedViewController) {
+        topVC = topVC.presentedViewController;
+    }
+    return topVC;
+}
 
+
+static UIWindow *_window;
 - (void)showAlertWithStyle:(HHAlertStyle)HHAlertStyle inView:(UIView *)view Title:(NSString *)title detail:(NSString *)detail cancelButton:(NSString *)cancel Okbutton:(NSString *)ok block:(selectButton)block
 {
  
@@ -123,7 +134,15 @@ NSInteger const HHAlertview_SIZE_DETAIL_FONT = 14;
     
     [self configButton:cancel Okbutton:ok];
     
-    [view addSubview:self];
+    _window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+    _window.backgroundColor = YTRGBA(0, 0, 0, 0.2);
+    _window.alpha = 1;
+    _window.windowLevel = UIWindowLevelAlert ;
+    _window.hidden = NO;
+    [_window makeKeyAndVisible];
+    
+    
+    [_window addSubview:self];
     [self show];
     
 }
@@ -193,14 +212,13 @@ NSInteger const HHAlertview_SIZE_DETAIL_FONT = 14;
         [_OkButton setBackgroundColor:OKBUTTON_BACKGROUND_COLOR];
         [_OkButton addTarget:self action:@selector(dismissWithOk) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_OkButton];
-//        self.frame = CGRectMake(0, 0, 375 - 61, CGRectGetMaxY(_cancelButton.frame));
+
         CGFloat oldx = self.frame.origin.x;
         CGFloat oldw = self.frame.size.width;
         CGFloat viewH = CGRectGetMaxY(_cancelButton.frame);
-        CGFloat viewY = (667 - viewH) * 0.5;
-        self.frame = CGRectMake(oldx, viewY - 44, oldw, viewH);
-//        self.frame = (CGRect){{iconX, iconY}, {iconWidth, iconHeight}};
-//        self.frame.size = (CGSize){375 - 61, CGRectGetMaxY(_cancelButton.frame)};
+        CGFloat viewY = (DeviceHight - viewH) * 0.5;
+        self.frame = CGRectMake(oldx, viewY, oldw, viewH);
+
     }
     
     if (cancel==nil) {
@@ -253,7 +271,6 @@ NSInteger const HHAlertview_SIZE_DETAIL_FONT = 14;
     [UIView animateWithDuration:0.5 animations:^{
         self.alpha=0;
         self.layer.cornerRadius = 10;
-        self.layer.shadowColor = [UIColor blackColor].CGColor;
         self.layer.shadowOffset = CGSizeMake(0, 5);
         self.layer.shadowOpacity = 0.3f;
         self.layer.shadowRadius = 10.0f;
@@ -264,6 +281,8 @@ NSInteger const HHAlertview_SIZE_DETAIL_FONT = 14;
         _cancelButton = nil;
         _secletBlock=nil;
         [self removeFromSuperview];
+        _window.hidden = YES;
+        _window = nil;
     }];
 }
 
@@ -275,7 +294,6 @@ NSInteger const HHAlertview_SIZE_DETAIL_FONT = 14;
     [UIView animateWithDuration:0.5 animations:^{
         self.alpha=1;
         self.layer.cornerRadius = 10;
-        self.layer.shadowColor = [UIColor blackColor].CGColor;
         self.layer.shadowOffset = CGSizeMake(0, 5);
         self.layer.shadowOpacity = 0.3f;
         self.layer.shadowRadius = 10.0f;
@@ -287,11 +305,6 @@ NSInteger const HHAlertview_SIZE_DETAIL_FONT = 14;
 
 
 #pragma helper mehtod
-
-- (CGSize)getMainScreenSize
-{
-    return [[UIScreen mainScreen] bounds].size;
-}
 
 - (CGSize)getSelfSize
 {

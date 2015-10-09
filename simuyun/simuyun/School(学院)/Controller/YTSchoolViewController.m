@@ -9,8 +9,9 @@
 #import "YTSchoolViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "HHAlertView.h"
+#import "YTProfileTopView.h"
 
-@interface YTSchoolViewController ()
+@interface YTSchoolViewController () <iconPhotoDelegate>
 
 @property (nonatomic, strong) AVAudioPlayer *avPlay;
 
@@ -26,7 +27,24 @@
     button.center = self.view.center;
     [self.view addSubview:button];
     
+    YTProfileTopView *topView = [YTProfileTopView profileTopView];
+    topView.frame = CGRectMake(0, 0, self.view.frame.size.width, 200);
+    topView.delegate = self;
+    [topView setIconImageWithImage:nil];
+    [self.view addSubview:topView];
+    
+    
 }
+
+//实现代理方法
+-(void)addPicker:(UIImagePickerController *)picker{
+    
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+
+
+
 
 
 
@@ -39,7 +57,7 @@
 - (void)btnClick
 {
     HHAlertView *alert = [HHAlertView shared];
-    [alert showAlertWithStyle:HHAlertStyleDefault inView:self.view Title:@"温馨提示" detail:@"圣诞节撒了放假啦十几分考虑时间啊圣诞节撒了放假啦十几分考虑时间啊圣诞节撒了放假啦十几分考虑时间啊圣诞节撒了放撒了放圣诞节撒了放假啦十几分考虑时间啊圣诞节时间啊圣诞节撒了放假啦十几分考虑时间啊圣诞节撒了放撒了放圣诞节撒了放假啦十几分考虑时间啊圣诞节时间啊圣诞节撒了放假啦十几分考虑时间啊圣诞节撒了放撒了放圣诞节撒了放假啦十几分考虑时间啊圣诞节" cancelButton:@"取消" Okbutton:@"去看看" block:^(HHAlertButton buttonindex) {
+    [alert showAlertWithStyle:HHAlertStyleDefault inView:self.view Title:@"温馨提示" detail:@"圣诞节撒了放假啦十几分考虑时间啊圣诞节撒了放假啦十几分考虑时间啊圣诞节撒了放假啦十几分考虑时间啊圣诞节撒了放撒了放圣诞节撒了放假啦十几分考虑时间啊圣" cancelButton:@"取消" Okbutton:@"去看看" block:^(HHAlertButton buttonindex) {
         
         NSLog(@"%zd",buttonindex);
     }];

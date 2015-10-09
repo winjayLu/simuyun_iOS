@@ -11,7 +11,6 @@
 #import "YTMenuViewController.h"
 #import "YTOtherViewController.h"
 #import "UIView+Extension.h"
-#import "YTNavigationController.h"
 
 
 typedef enum state {
@@ -34,7 +33,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 @property (nonatomic, weak) YTHomeViewController *homeVc;   // 首页控制器
 @property (nonatomic, weak) YTMenuViewController *menuVc;   // 菜单控制器
 @property (strong, nonatomic) UIView *cover;    // 左侧遮盖
-@property (nonatomic, weak) YTNavigationController *nav;    // 导航控制器
+@property (nonatomic, weak) UINavigationController *nav;    // 导航控制器
 
 @end
 
@@ -75,7 +74,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     homeVc.view.frame = [[UIScreen mainScreen] bounds];
     homeVc.delegate = self;
     
-    YTNavigationController *nav = [[YTNavigationController alloc] initWithRootViewController:homeVc];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeVc];
     [self addChildViewController:nav];
     self.nav = nav;
     
