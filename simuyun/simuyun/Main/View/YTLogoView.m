@@ -216,10 +216,7 @@
         }
     }
 }
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    YTLog(@"began");
-}
+
 
 /*
  //UIControlEventTouchDragOutside

@@ -28,9 +28,8 @@
  */
 + (YTAccount *)account
 {
-#warning 测试阶段
 //    YTAccount *account = [NSKeyedUnarchiver unarchiveObjectWithFile:YTAccountPath];
-    YTAccount *account = [[YTAccount alloc] init];
+//    YTAccount *account = [[YTAccount alloc] init];
     return nil;
 }
 @end

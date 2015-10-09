@@ -21,6 +21,10 @@
  */
 - (void)chooseRootviewController
 {
+    
+    if (iPhone6) {
+        YTLog(@"加载iphoe6对应的图片");
+    }
     // 判断显示新特性还是欢迎界面
     if ([CoreNewFeatureVC canShowNewFeature])
     {
@@ -45,7 +49,7 @@
  *  转场
  */
 -(void)transitionVc{
-    [self.layer transitionWithAnimType:TransitionAnimTypeCube subType:TransitionSubtypesFromRight curve:TransitionCurveEaseOut duration:1.5f];
+    [self.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveLinear duration:0.75f];
 }
 
 

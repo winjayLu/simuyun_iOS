@@ -7,6 +7,7 @@
 //
 
 #import "YTProductViewController.h"
+#import "YTWebViewController.h"
 
 @interface YTProductViewController ()
 
@@ -17,11 +18,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = YTRandomColor;
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeContactAdd];
+    btn.frame = CGRectMake(200, 200, 200, 200);
+    [btn addTarget:self action:@selector(btnClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 
+}
+
+- (void)btnClick
+{
+    YTWebViewController *web = [[YTWebViewController alloc] init];
+    web.url = @"http://www.baidu.com";
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 

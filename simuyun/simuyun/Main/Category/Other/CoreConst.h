@@ -1,5 +1,5 @@
 
-//ios系统版本
+// ios系统版本
 #define ios8x [[[UIDevice currentDevice] systemVersion] floatValue] >=8.0f
 #define ios7x ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0f) && ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0f)
 #define ios6x [[[UIDevice currentDevice] systemVersion] floatValue] < 7.0f
@@ -14,11 +14,11 @@
 
 #define iphone6Plus_5_5 ([UIScreen mainScreen].bounds.size.height==736.0f || [UIScreen mainScreen].bounds.size.height==414.0f)
 
-//屏幕宽高
+// 屏幕宽高
 #define kScreenW [[UIScreen mainScreen] bounds].size.width
 #define kScreenH [[UIScreen mainScreen] bounds].size.height
 
-//屏幕frame,bounds,size
+// 屏幕frame,bounds,size
 #define kScreenFrame [UIScreen mainScreen].bounds
 #define kScreenBounds [UIScreen mainScreen].bounds
 #define kScreenSize [UIScreen mainScreen].bounds.size

@@ -45,7 +45,7 @@
         } else {
             mainWindow.rootViewController = [[YTLoginViewController alloc] init];
         }
-        [mainWindow.layer transitionWithAnimType:TransitionAnimTypeCube subType:TransitionSubtypesFromRight curve:TransitionCurveEaseOut duration:1.5f];
+        [mainWindow.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveLinear duration:0.75f];
     });
 }
 @end

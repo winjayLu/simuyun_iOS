@@ -7,6 +7,7 @@
 //
 
 #import "YTNavigationController.h"
+#import "UIImage+Extend.h"
 
 @interface YTNavigationController ()
 
@@ -16,7 +17,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    UINavigationBar *navBar = [UINavigationBar appearance];
+    // 设置导航栏背景
+    [navBar setBackgroundImage:[UIImage imageWithColor:[UIColor yellowColor]] forBarMetrics:UIBarMetricsDefault];
+    
+    // 反回按钮的颜色
+    [navBar setTintColor:[UIColor blackColor]];
+    // 设置状态栏背景
+//    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackOpaque;
+    // 设置导航栏的文字
+    [navBar setTitleTextAttributes:@{
+                                     
+                                     NSForegroundColorAttributeName : [UIColor redColor]
+                                     }];
+    
+    // 导航栏上面的item
+    UIBarButtonItem *barItem =[UIBarButtonItem appearance];
+    // 设置背景
+    [barItem setBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+    [barItem setBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background_pushed.png"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+    [barItem setBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background_disable.png"] forState:UIControlStateDisabled barMetrics:UIBarMetricsDefault];
+    // 设置item的文字属性
+    NSDictionary *barItemTextAttr = @{
+                                      NSForegroundColorAttributeName : [UIColor purpleColor]
+                                      };
+    [barItem setTitleTextAttributes:barItemTextAttr forState:UIControlStateNormal];  
+    [barItem setTitleTextAttributes:barItemTextAttr forState:UIControlStateHighlighted];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +51,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
 
 @end
