@@ -105,6 +105,31 @@
     
     return image;
 }
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size
+{
+    CGRect rect=(CGRect){{0.0f,0.0f},size};
+    
+    //开启一个图形上下文
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0f);
+    
+    //获取图形上下文
+    CGContextRef context=UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, color.CGColor);
+    
+    CGContextFillRect(context, rect);
+    
+    //获取图像
+    UIImage *image=UIGraphicsGetImageFromCurrentImageContext();
+    
+    //关闭上下文
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+
+
 
 /**
  *  返回圆形图像, 若图像不为正方形，则截取中央正方形

@@ -45,9 +45,9 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     // 初始化抽屉状态
     self.sta = kStateHome;
     self.distance = 0;
-    self.menuCenterXStart = [UIView deviceWidth] * menuStartNarrowRatio / 2.0;
+    self.menuCenterXStart = DeviceWidth * menuStartNarrowRatio / 2.0;
     self.menuCenterXEnd = self.view.center.x;
-    self.leftDistance = [UIView deviceWidth] * viewSlideHorizonRatio;
+    self.leftDistance = DeviceWidth * viewSlideHorizonRatio;
     
     // 设置背景
     UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"back"]];
@@ -110,7 +110,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     CGFloat dis = self.distance + x;
     // 当手势停止时执行操作
     if (recognizer.state == UIGestureRecognizerStateEnded) {
-        if (dis >= [UIView deviceWidth] * viewSlideHorizonRatio / 2.0) {
+        if (dis >= DeviceWidth * viewSlideHorizonRatio / 2.0) {
             [self showMenu];
         } else {
             [self showHome];

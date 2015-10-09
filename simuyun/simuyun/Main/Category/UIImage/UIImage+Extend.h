@@ -31,6 +31,7 @@
  *  生成纯色的图片
  */
 + (UIImage *)imageWithColor:(UIColor *)color;
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
 
 /**
  *  返回圆形图像, 若图像不为正方形，则截取中央正方形
