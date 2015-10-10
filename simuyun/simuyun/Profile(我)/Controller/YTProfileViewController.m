@@ -18,9 +18,8 @@ typedef enum state {
     kStateMenu
 }state;
 
-static const CGFloat viewSlideHorizonRatio = 0.5;
-static const CGFloat viewHeightNarrowRatio = 0.80;
-static const CGFloat menuStartNarrowRatio  = 0.70;
+static const CGFloat viewSlideHorizonRatio = 0.642;
+//static const CGFloat viewHeightNarrowRatio = 0.6;
 
 @interface YTProfileViewController () <YTHomeViewControllerDelegate, YTMenuViewControllerDelegate>
 @property (assign, nonatomic) state   sta;              // 状态(Home or Menu)
@@ -42,7 +41,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     // 初始化抽屉状态
     self.sta = kStateHome;
     self.distance = 0;
-    self.menuCenterXStart = DeviceWidth * menuStartNarrowRatio / 2.0;
+    self.menuCenterXStart = 241 * 0.5;
     self.menuCenterXEnd = self.view.center.x;
     self.leftDistance = DeviceWidth * viewSlideHorizonRatio;
     
@@ -56,8 +55,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     YTMenuViewController *menuVc = [[YTMenuViewController alloc] init];
     menuVc.delegate = self;
     menuVc.view.frame = self.view.frame;
-    menuVc.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, menuStartNarrowRatio, menuStartNarrowRatio);
-    menuVc.view.center = CGPointMake(self.menuCenterXStart, menuVc.view.center.y);
+    menuVc.view.center = CGPointMake(0, menuVc.view.center.y);
     [self addChildViewController:menuVc];
     [self.view addSubview:menuVc.view];
     self.menuVc = menuVc;
@@ -110,18 +108,9 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
         return;
     }
     
-    CGFloat proportion = (viewHeightNarrowRatio - 1) * dis / self.leftDistance + 1;
-    if (proportion < viewHeightNarrowRatio || proportion > 1) {
-        return;
-    }
     self.nav.view.center = CGPointMake(self.view.center.x + dis, self.view.center.y);
-
-    
-    
-    CGFloat menuProportion = dis * (1 - menuStartNarrowRatio) / self.leftDistance + menuStartNarrowRatio;
     CGFloat menuCenterMove = dis * (self.menuCenterXEnd - self.menuCenterXStart) / self.leftDistance;
     self.menuVc.view.center = CGPointMake(self.menuCenterXStart + menuCenterMove, self.view.center.y);
-    self.menuVc.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, menuProportion, menuProportion);
 }
 
 /**
@@ -130,7 +119,7 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 - (void)showMenu {
     self.distance = self.leftDistance;
     self.sta = kStateMenu;
-    [self doSlide:viewHeightNarrowRatio];
+    [self doSlide:viewSlideHorizonRatio];
 }
 
 /**
@@ -149,19 +138,17 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
  */
 - (void)doSlide:(CGFloat)proportion {
     [UIView animateWithDuration:0.3 animations:^{
-        self.nav.view.center = CGPointMake(self.view.center.x + self.distance, self.view.center.y);
         CGFloat menuCenterX;
-        CGFloat menuProportion;
+        CGFloat navCenterX;
         if (proportion == 1) {
-            menuCenterX = self.menuCenterXStart;
-            menuProportion = menuStartNarrowRatio;
-
+            menuCenterX = 0;
+            navCenterX = DeviceWidth * 0.5;
         } else {
-            menuCenterX = self.menuCenterXEnd;
-            menuProportion = 1;
+            menuCenterX = DeviceWidth * 0.5;
+            navCenterX = menuCenterX + 241;
         }
+        self.nav.view.center = CGPointMake(navCenterX, DeviceHight * 0.5);
         self.menuVc.view.center = CGPointMake(menuCenterX, self.view.center.y);
-        self.menuVc.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, menuProportion, menuProportion);
     } completion:^(BOOL finished) {
         if (proportion != 1) {
             // 设置遮盖

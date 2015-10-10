@@ -7,6 +7,7 @@
 //
 
 #import "YTMenuViewController.h"
+#import "YTLeftMenu.h"
 
 @interface YTMenuViewController ()
 
@@ -14,10 +15,13 @@
 
 @implementation YTMenuViewController
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    // 创建Xib会崩掉
+    
+    YTLeftMenu *leftMenu = [YTLeftMenu leftMenu];
+    leftMenu.frame = CGRectMake(0, 0, 241, DeviceHight);
+    [self.view addSubview:leftMenu];
 }
 
 - (void)didReceiveMemoryWarning {
