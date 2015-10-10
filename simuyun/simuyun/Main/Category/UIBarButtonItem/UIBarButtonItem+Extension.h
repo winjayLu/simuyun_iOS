@@ -19,4 +19,6 @@
  *  @param action 点击按钮会调用的方法
  */
 + (instancetype)itemWithBg:(NSString *)bg highBg:(NSString *)highBg target:(id)target action:(SEL)action;
+
++ (instancetype)itemWithBg:(NSString *)bg target:(id)target action:(SEL)action;
 @end

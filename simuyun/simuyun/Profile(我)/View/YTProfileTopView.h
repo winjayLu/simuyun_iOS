@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol iconPhotoDelegate <NSObject>
+@protocol TopViewDelegate <NSObject>
 
 @optional
 
@@ -20,7 +20,7 @@
 
 + (instancetype)profileTopView;
 
-@property (nonatomic, assign) id <iconPhotoDelegate> delegate;
+@property (nonatomic, assign) id <TopViewDelegate> delegate;
 
 - (void)setIconImageWithImage:(UIImage *)image;
 

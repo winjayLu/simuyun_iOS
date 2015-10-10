@@ -29,10 +29,8 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 @property (assign, nonatomic) CGFloat menuCenterXStart; // menu起始中点的X
 @property (assign, nonatomic) CGFloat menuCenterXEnd;   // menu缩放结束中点的X
 @property (assign, nonatomic) CGFloat panStartX;        // 拖动开始的x值
-
 @property (nonatomic, weak) YTHomeViewController *homeVc;   // 首页控制器
 @property (nonatomic, weak) YTMenuViewController *menuVc;   // 菜单控制器
-@property (strong, nonatomic) UIView *cover;    // 左侧遮盖
 @property (nonatomic, weak) UINavigationController *nav;    // 导航控制器
 
 @end
@@ -64,24 +62,19 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     [self.view addSubview:menuVc.view];
     self.menuVc = menuVc;
     
-    // 设置遮盖
-    self.cover = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.cover.backgroundColor = [UIColor blackColor];
-    [self.view addSubview:self.cover];
-    
+
     // 设置首页控制器,添加手势操作
     YTHomeViewController *homeVc = [[YTHomeViewController alloc] init];
     homeVc.view.frame = [[UIScreen mainScreen] bounds];
     homeVc.delegate = self;
-    
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeVc];
     [self addChildViewController:nav];
     self.nav = nav;
-    
     [self addChildViewController:nav];
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     [self.nav.view addGestureRecognizer:pan];
     [self.view addSubview:self.nav.view];
+    
 
 }
 
@@ -124,7 +117,6 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
     self.nav.view.center = CGPointMake(self.view.center.x + dis, self.view.center.y);
 
     
-//    self.homeVc.leftBtn.alpha = self.cover.alpha = 1 - dis / self.leftDistance;
     
     CGFloat menuProportion = dis * (1 - menuStartNarrowRatio) / self.leftDistance + menuStartNarrowRatio;
     CGFloat menuCenterMove = dis * (self.menuCenterXEnd - self.menuCenterXStart) / self.leftDistance;
@@ -158,11 +150,6 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 - (void)doSlide:(CGFloat)proportion {
     [UIView animateWithDuration:0.3 animations:^{
         self.nav.view.center = CGPointMake(self.view.center.x + self.distance, self.view.center.y);
-        
-        
-        
-//        self.homeVc.leftBtn.alpha = self.cover.alpha = proportion == 1 ? 1 : 0;
-        
         CGFloat menuCenterX;
         CGFloat menuProportion;
         if (proportion == 1) {
@@ -172,11 +159,28 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
         } else {
             menuCenterX = self.menuCenterXEnd;
             menuProportion = 1;
-            
         }
         self.menuVc.view.center = CGPointMake(menuCenterX, self.view.center.y);
         self.menuVc.view.transform = CGAffineTransformScale(CGAffineTransformIdentity, menuProportion, menuProportion);
-    } completion:nil];
+    } completion:^(BOOL finished) {
+        if (proportion != 1) {
+            // 设置遮盖
+            UIButton *cover = [[UIButton alloc] init];
+            cover.frame = self.nav.view.frame;
+            cover.backgroundColor = [UIColor clearColor];
+            [cover addTarget:self action:@selector(coverClick:) forControlEvents:UIControlEventTouchDown];
+            [self.view addSubview:cover];
+
+        }
+    }];
+}
+/**
+ *  遮盖点击事件
+ */
+- (void)coverClick:(UIButton *)cover
+{
+    [cover removeFromSuperview];
+    [self showHome];
 }
 
 #pragma mark - WMHomeViewController代理方法
@@ -191,6 +195,12 @@ static const CGFloat menuStartNarrowRatio  = 0.70;
 //    other.hidesBottomBarWhenPushed = YES;
     //    [self.messageNav pushViewController:other animated:NO];
     [self showHome];
+}
+
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 

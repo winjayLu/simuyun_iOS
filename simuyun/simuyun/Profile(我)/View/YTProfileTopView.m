@@ -20,6 +20,78 @@
  */
 - (IBAction)iconClick:(UITapGestureRecognizer *)sender;
 
+/**
+ *  认证按钮
+ */
+@property (weak, nonatomic) IBOutlet UIButton *renZhenBtn;
+/**
+ *  认证按钮单击事件
+ *
+ */
+- (IBAction)renZhenClick:(UIButton *)sender;
+
+/**
+ *  签到按钮
+ */
+@property (weak, nonatomic) IBOutlet UIButton *qiaoDaoBtn;
+
+/**
+ *  签到按钮点击事件
+ *
+ */
+- (IBAction)qiaoDaoClick:(UIButton *)sender;
+
+/**
+ *  云豆按钮
+ */
+@property (weak, nonatomic) IBOutlet UIButton *yunDouBtn;
+
+/**
+ *  云豆按钮单击事件
+ *
+ */
+- (IBAction)yunDouClick:(UIButton *)sender;
+/**
+ *  用户昵称
+ */
+@property (weak, nonatomic) IBOutlet UILabel *nameLable;
+
+/**
+ *  我的客户单击事件
+ *
+ */
+- (IBAction)keHuBtn:(id)sender;
+
+/**
+ *  我的客户数量
+ */
+@property (weak, nonatomic) IBOutlet UILabel *keHuLable;
+
+/**
+ *  我的订单点击事件
+ */
+- (IBAction)orderClick:(UIButton *)sender;
+/**
+ *  我的订单数量
+ */
+@property (weak, nonatomic) IBOutlet UILabel *orderLable;
+
+/**
+ *  我的业绩单击事件
+ *
+ */
+- (IBAction)yeJiBtn:(UIButton *)sender;
+
+/**
+ *  我的业绩数量
+ */
+@property (weak, nonatomic) IBOutlet UILabel *yeJiLable;
+
+/**
+ *  我的业绩单位
+ */
+@property (weak, nonatomic) IBOutlet UILabel *wanLable;
+
 
 @end
 
@@ -47,7 +119,6 @@
                 break;
         }
     }];
-    
 }
 
 
@@ -101,21 +172,44 @@
     }
     
     self.iconImage.image = image;
-//    [UIView animateWithDuration:2 animations:^{
-//        self.iconImage.layer.transform = CATransform3DMakeRotation(M_PI_2, 0, 1, 0);
-//    } completion:^(BOOL finished) {
-//        [UIView animateWithDuration:1.25 animations:^{
-//            self.iconImage.layer.transform = CATransform3DMakeRotation(M_PI, 0, 1, 0);
-//        }];
-//    }];
-
 }
 
 
+#pragma mark - 按钮点击
+/**
+ *  认证按钮点击事件
+ */
+- (IBAction)renZhenClick:(UIButton *)sender {
+    YTLog(@"SDSAF");
+}
+/**
+ *  签到按钮点击事件
+ */
+- (IBAction)qiaoDaoClick:(UIButton *)sender {
+}
+/**
+ *  云豆按钮点击事件
+ */
+- (IBAction)yunDouClick:(UIButton *)sender {
+}
+/**
+ *  我的客户点击事件
+ */
+- (IBAction)keHuBtn:(id)sender {
+}
+/**
+ *  我的订单点击事件
+ */
+- (IBAction)orderClick:(UIButton *)sender {
+}
+/**
+ *  我的业绩点击事件
+ */
+- (IBAction)yeJiBtn:(UIButton *)sender {
+}
 
 + (instancetype)profileTopView
 {
     return [[[NSBundle mainBundle] loadNibNamed:@"YTProfileTopView" owner:nil options:nil] firstObject];
 }
-
 @end

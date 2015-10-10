@@ -11,7 +11,7 @@
 #import "HHAlertView.h"
 #import "YTProfileTopView.h"
 
-@interface YTSchoolViewController () <iconPhotoDelegate>
+@interface YTSchoolViewController ()
 
 @property (nonatomic, strong) AVAudioPlayer *avPlay;
 
@@ -27,20 +27,12 @@
     button.center = self.view.center;
     [self.view addSubview:button];
     
-    YTProfileTopView *topView = [YTProfileTopView profileTopView];
-    topView.frame = CGRectMake(0, 0, self.view.frame.size.width, 200);
-    topView.delegate = self;
-    [topView setIconImageWithImage:nil];
-    [self.view addSubview:topView];
+
     
     
 }
 
-//实现代理方法
--(void)addPicker:(UIImagePickerController *)picker{
-    
-    [self presentViewController:picker animated:YES completion:nil];
-}
+
 
 
 

@@ -14,7 +14,6 @@
 
 @end
 
-
 @interface YTHomeViewController : UIViewController
 @property (weak, nonatomic) id<YTHomeViewControllerDelegate> delegate;
 @end

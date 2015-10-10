@@ -48,6 +48,13 @@
 		97973D011BC3C5E500B7B4CB /* YTWelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97973CFF1BC3C5E500B7B4CB /* YTWelcomeViewController.xib */; };
 		97973D081BC3D8AB00B7B4CB /* YTLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97973D071BC3D8AB00B7B4CB /* YTLogoView.m */; };
 		97973D0A1BC3E84900B7B4CB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97973D091BC3E84900B7B4CB /* AVFoundation.framework */; };
+		97A24D3B1BC89CC4004F479D /* UINavigationBar+BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D3A1BC89CC4004F479D /* UINavigationBar+BackgroundColor.m */; settings = {ASSET_TAGS = (); }; };
+		97A24D501BC8FE5F004F479D /* YTContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D4F1BC8FE5F004F479D /* YTContentView.m */; settings = {ASSET_TAGS = (); }; };
+		97A24D571BC90685004F479D /* YTGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D551BC90685004F479D /* YTGroupCell.m */; settings = {ASSET_TAGS = (); }; };
+		97A24D581BC90685004F479D /* YTGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97A24D561BC90685004F479D /* YTGroupCell.xib */; settings = {ASSET_TAGS = (); }; };
+		97A24D5F1BC90E14004F479D /* YTContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D5D1BC90E14004F479D /* YTContentCell.m */; settings = {ASSET_TAGS = (); }; };
+		97A24D601BC90E14004F479D /* YTContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97A24D5E1BC90E14004F479D /* YTContentCell.xib */; settings = {ASSET_TAGS = (); }; };
+		97A24D631BC9147B004F479D /* YTBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D621BC9147B004F479D /* YTBottomView.m */; settings = {ASSET_TAGS = (); }; };
 		97A61D781BC6893B000A5B17 /* YHWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A61D741BC6893B000A5B17 /* YHWebViewProgress.m */; settings = {ASSET_TAGS = (); }; };
 		97A61D791BC6893C000A5B17 /* YHWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A61D761BC6893B000A5B17 /* YHWebViewProgressView.m */; settings = {ASSET_TAGS = (); }; };
 		97B08A8A1BC2472B007EBD24 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08A891BC2472B007EBD24 /* main.m */; };
@@ -226,6 +233,18 @@
 		97973D061BC3D8AB00B7B4CB /* YTLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTLogoView.h; sourceTree = "<group>"; };
 		97973D071BC3D8AB00B7B4CB /* YTLogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTLogoView.m; sourceTree = "<group>"; };
 		97973D091BC3E84900B7B4CB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		97A24D391BC89CC4004F479D /* UINavigationBar+BackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+BackgroundColor.h"; sourceTree = "<group>"; };
+		97A24D3A1BC89CC4004F479D /* UINavigationBar+BackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+BackgroundColor.m"; sourceTree = "<group>"; };
+		97A24D4E1BC8FE5F004F479D /* YTContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTContentView.h; sourceTree = "<group>"; };
+		97A24D4F1BC8FE5F004F479D /* YTContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTContentView.m; sourceTree = "<group>"; };
+		97A24D541BC90685004F479D /* YTGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTGroupCell.h; sourceTree = "<group>"; };
+		97A24D551BC90685004F479D /* YTGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTGroupCell.m; sourceTree = "<group>"; };
+		97A24D561BC90685004F479D /* YTGroupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTGroupCell.xib; sourceTree = "<group>"; };
+		97A24D5C1BC90E14004F479D /* YTContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTContentCell.h; sourceTree = "<group>"; };
+		97A24D5D1BC90E14004F479D /* YTContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTContentCell.m; sourceTree = "<group>"; };
+		97A24D5E1BC90E14004F479D /* YTContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTContentCell.xib; sourceTree = "<group>"; };
+		97A24D611BC9147B004F479D /* YTBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTBottomView.h; sourceTree = "<group>"; };
+		97A24D621BC9147B004F479D /* YTBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTBottomView.m; sourceTree = "<group>"; };
 		97A61D731BC6893B000A5B17 /* YHWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHWebViewProgress.h; sourceTree = "<group>"; };
 		97A61D741BC6893B000A5B17 /* YHWebViewProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YHWebViewProgress.m; sourceTree = "<group>"; };
 		97A61D751BC6893B000A5B17 /* YHWebViewProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHWebViewProgressView.h; sourceTree = "<group>"; };
@@ -641,6 +660,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		97A24D371BC89C9E004F479D /* UINavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				97A24D391BC89CC4004F479D /* UINavigationBar+BackgroundColor.h */,
+				97A24D3A1BC89CC4004F479D /* UINavigationBar+BackgroundColor.m */,
+			);
+			path = UINavigationBar;
+			sourceTree = "<group>";
+		};
 		97A61D721BC6893B000A5B17 /* WebProgressView */ = {
 			isa = PBXGroup;
 			children = (
@@ -764,6 +792,7 @@
 		97C6058C1BC260A400E555E8 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				97A24D371BC89C9E004F479D /* UINavigationBar */,
 				97973CE11BC3BE7000B7B4CB /* Archive */,
 				97C606841BC2799400E555E8 /* UIBarButtonItem */,
 				97C606561BC26F1100E555E8 /* Other */,
@@ -899,6 +928,16 @@
 				9714A6F91BC7E5FF0018A14E /* YTProfileTopView.h */,
 				9714A6FA1BC7E5FF0018A14E /* YTProfileTopView.m */,
 				9714A6FB1BC7E5FF0018A14E /* YTProfileTopView.xib */,
+				97A24D4E1BC8FE5F004F479D /* YTContentView.h */,
+				97A24D4F1BC8FE5F004F479D /* YTContentView.m */,
+				97A24D611BC9147B004F479D /* YTBottomView.h */,
+				97A24D621BC9147B004F479D /* YTBottomView.m */,
+				97A24D541BC90685004F479D /* YTGroupCell.h */,
+				97A24D551BC90685004F479D /* YTGroupCell.m */,
+				97A24D561BC90685004F479D /* YTGroupCell.xib */,
+				97A24D5C1BC90E14004F479D /* YTContentCell.h */,
+				97A24D5D1BC90E14004F479D /* YTContentCell.m */,
+				97A24D5E1BC90E14004F479D /* YTContentCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1379,11 +1418,13 @@
 				97C606A71BC2985700E555E8 /* UMSocialLocalizable.strings in Resources */,
 				97973CDD1BC391BA00B7B4CB /* PushConfig.plist in Resources */,
 				97B08A951BC2472B007EBD24 /* Assets.xcassets in Resources */,
+				97A24D581BC90685004F479D /* YTGroupCell.xib in Resources */,
 				971503B81BC76961007E27D0 /* CorePPTVC.xib in Resources */,
 				9714A6FD1BC7E5FF0018A14E /* YTProfileTopView.xib in Resources */,
 				97C606AD1BC2985700E555E8 /* UMShareEditViewControlleriPad.xib in Resources */,
 				97973D011BC3C5E500B7B4CB /* YTWelcomeViewController.xib in Resources */,
 				9714A6EE1BC7E0610018A14E /* FontAwesome.ttf in Resources */,
+				97A24D601BC90E14004F479D /* YTContentCell.xib in Resources */,
 				97C606A91BC2985700E555E8 /* UMSCommentDetailController.xib in Resources */,
 				97C606AE1BC2985700E555E8 /* UMSLoginViewController.xib in Resources */,
 				97C3CE6B1BC2BAEF00B7185D /* SVProgressHUD.bundle in Resources */,
@@ -1495,14 +1536,18 @@
 				97973CE01BC3A75700B7B4CB /* YTBadgeTool.m in Sources */,
 				97A61D781BC6893B000A5B17 /* YHWebViewProgress.m in Sources */,
 				97C605B01BC260A400E555E8 /* YTProductTool.m in Sources */,
+				97A24D3B1BC89CC4004F479D /* UINavigationBar+BackgroundColor.m in Sources */,
 				97C605AC1BC260A400E555E8 /* YTNavigationController.m in Sources */,
 				9714A6F51BC7E0610018A14E /* yConst.m in Sources */,
 				97C606871BC2799400E555E8 /* UIBarButtonItem+Extension.m in Sources */,
 				9714A6F71BC7E0610018A14E /* YUBottomPopSelctView.m in Sources */,
 				97C3CE741BC2C17D00B7185D /* MBProgressHUD+WJ.m in Sources */,
+				97A24D501BC8FE5F004F479D /* YTContentView.m in Sources */,
 				9714A6F11BC7E0610018A14E /* YUDIVView.m in Sources */,
+				97A24D571BC90685004F479D /* YTGroupCell.m in Sources */,
 				97C3CE761BC2C17D00B7185D /* MBProgressHUD.m in Sources */,
 				97A61D791BC6893C000A5B17 /* YHWebViewProgressView.m in Sources */,
+				97A24D631BC9147B004F479D /* YTBottomView.m in Sources */,
 				97C605DA1BC2621F00E555E8 /* YTMenuViewController.m in Sources */,
 				971503B01BC761B1007E27D0 /* SMPageControl.m in Sources */,
 				97C606711BC270CC00E555E8 /* UIImage+ReMake.m in Sources */,
@@ -1515,6 +1560,7 @@
 				97C605DB1BC2621F00E555E8 /* YTOtherViewController.m in Sources */,
 				9714A6FC1BC7E5FF0018A14E /* YTProfileTopView.m in Sources */,
 				97C6066A1BC2700600E555E8 /* UIButton+SD.m in Sources */,
+				97A24D5F1BC90E14004F479D /* YTContentCell.m in Sources */,
 				97C605F81BC2622E00E555E8 /* YTMessageViewController.m in Sources */,
 				97C3CE251BC29FE800B7185D /* ShareCustomView.m in Sources */,
 				97B08A8A1BC2472B007EBD24 /* main.m in Sources */,

@@ -91,6 +91,10 @@
     self.tabBar.backgroundColor = [UIColor grayColor];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 
 
 /**

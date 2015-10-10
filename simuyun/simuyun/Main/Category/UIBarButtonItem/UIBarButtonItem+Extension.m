@@ -26,4 +26,21 @@
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     return [[self alloc] initWithCustomView:button];
 }
+
+
+/**
+ *  通过一个按钮创建一个UIBarButtonItem
+ *
+ *  @param bg     背景图片
+ *  @param target 谁来监听按钮点击
+ *  @param action 点击按钮会调用的方法
+ */
++ (instancetype)itemWithBg:(NSString *)bg target:(id)target action:(SEL)action
+{
+    UIButton *button = [[UIButton alloc] init];
+    [button setBackgroundImage:[UIImage imageNamed:bg] forState:UIControlStateNormal];
+    button.size = button.currentBackgroundImage.size;
+    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    return [[self alloc] initWithCustomView:button];
+}
 @end

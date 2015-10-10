@@ -9,8 +9,18 @@
 #import "YTHomeViewController.h"
 #import "YTProfileTopView.h"
 #import "UIImage+Extend.h"
+#import "UINavigationBar+BackgroundColor.h"
+#import "UIBarButtonItem+Extension.h"
+#import "YTContentView.h"
+#import "YTBottomView.h"
 
-@interface YTHomeViewController () <iconPhotoDelegate, UINavigationControllerDelegate>
+@interface YTHomeViewController () <TopViewDelegate>
+
+@property (nonatomic, weak) YTProfileTopView *topView;
+
+@property (nonatomic, weak) YTContentView *todoView;
+
+@property (nonatomic, strong) NSArray *todos;
 
 
 @end
@@ -21,52 +31,106 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = YTColor(255, 255, 255);
-//    self.title = @"我";
+    UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:DeviceBounds];
+    mainView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
+    mainView.bounces = NO;
+    mainView.showsVerticalScrollIndicator = NO;
+    self.view = mainView;
+    self.view.backgroundColor = [UIColor blackColor];
     
-    self.automaticallyAdjustsScrollViewInsets = NO;
+#warning todo 获取数据
     
-    /*
-     UIBarMetricsDefault,
-     UIBarMetricsCompact,
-     UIBarMetricsDefaultPrompt = 101, // Applicable only in bars with the prompt property, such as UINavigationBar and UISearchBar
-     UIBarMetricsCompactPrompt,
-     
-     UIBarMetricsLandscapePhone NS_ENUM_DEPRECATED_IOS(5_0, 8_0, "Use UIBarMetricsCompact instead") = UIBarMetricsCompact,
-     UIBarMetricsLandscapePhonePrompt NS_ENUM_DEPRECATED_IOS(7_0, 8_0, "Use UIBarMetricsCompactPrompt") = UIBarMetricsCompactPrompt,
-     
-     */
-//    UINavigationBar *bar = self.navigationController.navigationBar;
-//    [bar setBackgroundImage:[UIImage imageWithColor:YTColor(255, 255, 255)] forBarMetrics:UIBarMetricsDefault];
-//    self.extendedLayoutIncludesOpaqueBars = NO;
-//    self.edgesForExtendedLayout = UIRectEdgeNone;
-//    
-//    if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
-//        　　self.edgesForExtendedLayout = UIRectEdgeNone;
-//        　}
+    // 初始化顶部视图
+    [self setupTopView];
     
-//    UINavigationBar *bar = self.navigationController.navigationBar;
-//    
-//    [bar setValue:@(0) forKeyPath:@"backgroundView.alpha"];
-    UINavigationBar *navBar = self.navigationController.navigationBar;
-    // 设置导航栏背景
-    [navBar setBackgroundImage:[UIImage imageWithColor:YTColor(255, 255, 255)]forBarMetrics:UIBarMetricsDefault];
-    [navBar setValue:@(0) forKeyPath:@"backgroundView.alpha"];
+    // 初始化待办事项
+    [self setupTodoView];
     
+    // 初始化底部菜单
+    [self setupBottom];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     
-    
-    
+    [super viewWillAppear:animated];
+    // 设置导航栏透明
+    UIColor *color = YTColor(255, 255, 255);
+    [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:0.000]];
+}
+
+/**
+ *  初始化顶部视图
+ */
+- (void)setupTopView
+{
+    // 顶部视图
     YTProfileTopView *topView = [YTProfileTopView profileTopView];
     topView.frame = CGRectMake(0, -44, self.view.frame.size.width, 270);
     topView.delegate = self;
     [topView setIconImageWithImage:nil];
+    topView.layer.masksToBounds = YES;
+    topView.layer.cornerRadius = self.topView.frame.size.width * 0.5;
+    topView.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    topView.layer.shouldRasterize = YES;
+    topView.clipsToBounds = YES;
     [self.view addSubview:topView];
+    self.topView = topView;
+    // 左边的item
+    UIBarButtonItem *left = [UIBarButtonItem itemWithBg:@"chouti" target:self action:@selector(leftClick)];
+    self.navigationItem.leftBarButtonItem = left;
+}
+/**
+ *  初始化待办事项
+ */
+- (void)setupTodoView
+{
+    // 计算todoView的高度
     
+    CGFloat groupCellHeight = 42;
+    CGFloat conetentCellHeight = 56;
+    CGFloat todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
+    CGFloat magin = 3;
     
+    YTContentView *content = [[YTContentView alloc] init];
+    content.frame = CGRectMake(magin, CGRectGetMaxY(self.topView.frame), self.view.width - magin * 2, todoHeight);
+    content.layer.cornerRadius = 5;
+    content.layer.masksToBounds = YES;
+    content.todos = self.todos;
+    [self.view addSubview:content];
+    self.todoView = content;
+}
+/**
+ *  初始化底部菜单
+ */
+- (void)setupBottom
+{
+    CGFloat magin = 3;
+    YTBottomView *bottom = [[YTBottomView alloc] init];
+    bottom.layer.cornerRadius = 5;
+    bottom.layer.masksToBounds = YES;
+    bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42 * 3);
+    [self.view addSubview:bottom];
+    // 设置滚动范围
+    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame) + 8)];
 }
 
-//实现代理方法
+/**
+ *  左侧按钮的点击事件
+ */
+- (void)leftClick
+{
+    [self.delegate leftBtnClicked];
+}
+
+
+
+#pragma mark - topViewDelegate
+/**
+ *  切换头像
+ *
+ */
 -(void)addPicker:(UIImagePickerController *)picker{
     
     [self presentViewController:picker animated:YES completion:nil];
@@ -74,32 +138,15 @@
     [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
 }
 
-//- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-//{
-//
-//    self.navigationController.navigationBar.hidden = YES;
-//    self.navigationController.navigationBar.tintColor = YTColor(0, 0, 0);
-//    self.navigationController.navigationBar. translucent = YES ;
-//    self.navigationController.navigationBar. alpha = 0.300;
-//    
-//}
-- (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    // 如果进入的是当前视图控制器
-    if (viewController == self) {
-        // 背景设置为黑色
-        self.navigationController.navigationBar. tintColor = [UIColor colorWithRed:0.000 green:0.000 blue:0.000 alpha:1.000];
-        // 透明度设置为0.3
-        self.navigationController.navigationBar. alpha = 0.300;
-        // 设置为半透明
-        self.navigationController.navigationBar. translucent = YES ;
-    } else {
-        // 进入其他视图控制器
-        self.navigationController.navigationBar.alpha = 1;
-        // 背景颜色设置为系统 默认颜色
-        self.navigationController.navigationBar.tintColor = nil;
-        self.navigationController.navigationBar.translucent = NO; 
-    } 
+
+- (NSArray *)todos
+{
+    if (!_todos) {
+        _todos = @[@"诗酒风流撒娇斐林试剂氨分解",@"孙菲菲撒娇雷锋精神拉法基开了撒家乐福", @"sf氨分解撒浪费精力撒街坊邻居爱上街坊邻居街坊邻居爱上街坊邻居街坊邻居爱上街坊邻居街坊邻居爱上街坊邻居"];
+    }
+    return _todos;
 }
+
 
 
 
