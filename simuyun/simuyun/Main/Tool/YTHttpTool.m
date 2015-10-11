@@ -34,8 +34,6 @@
 {
     // 1.创建一个请求管理者
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    NSDictionary *di = params;
-    YTLog(@"%@",params);
     // 2.发送一个GET请求
     [mgr GET:url parameters:params
       success:^(AFHTTPRequestOperation *operation, id responseObject) {

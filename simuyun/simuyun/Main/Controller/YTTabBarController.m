@@ -59,6 +59,9 @@
     // 设置tabBar的样式
     [self setupTabBarStyle];
     
+    // 选中个人中心控制器
+    [self logoViewDidSelectProfileItem];
+    
 }
 
 /**
@@ -88,7 +91,7 @@
     [self.tabBar setBackgroundImage:img];
     [self.tabBar setShadowImage:img];
 #warning 设置tabBar的背景颜色,或图片
-    self.tabBar.backgroundColor = [UIColor grayColor];
+    self.tabBar.backgroundColor = [UIColor blackColor];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle
@@ -139,10 +142,10 @@
     UIViewController *vc = [[vcClass alloc] init];
 
     [[UITabBarItem appearance] setTitleTextAttributes:@{
-                                            NSForegroundColorAttributeName : [UIColor whiteColor]
+                                            NSForegroundColorAttributeName : [UIColor yellowColor]
                                             } forState:UIControlStateSelected];
     [[UITabBarItem appearance] setTitleTextAttributes:@{
-                                            NSForegroundColorAttributeName : [UIColor redColor]
+                                            NSForegroundColorAttributeName : [UIColor whiteColor]
                                             } forState:UIControlStateNormal];
     
     // 同时设置tabbar每个标签的文字和图片

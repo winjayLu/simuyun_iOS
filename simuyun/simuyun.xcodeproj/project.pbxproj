@@ -41,6 +41,7 @@
 		9769F9FC1BC9676B001B1F02 /* YTProfileTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9769F9F41BC9676B001B1F02 /* YTProfileTopView.xib */; settings = {ASSET_TAGS = (); }; };
 		9769FA051BC968F2001B1F02 /* YTLeftMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9769FA031BC968F2001B1F02 /* YTLeftMenu.m */; settings = {ASSET_TAGS = (); }; };
 		9769FA061BC968F2001B1F02 /* YTLeftMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9769FA041BC968F2001B1F02 /* YTLeftMenu.xib */; settings = {ASSET_TAGS = (); }; };
+		9777E97D1BCA3A220016D071 /* YTNotificationConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 9777E97C1BCA3A220016D071 /* YTNotificationConst.m */; settings = {ASSET_TAGS = (); }; };
 		97973CDB1BC3916F00B7B4CB /* libPushSDK-1.8.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97973CDA1BC3916F00B7B4CB /* libPushSDK-1.8.5.a */; };
 		97973CDD1BC391BA00B7B4CB /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97973CDC1BC391BA00B7B4CB /* PushConfig.plist */; };
 		97973CE01BC3A75700B7B4CB /* YTBadgeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97973CDF1BC3A75700B7B4CB /* YTBadgeTool.m */; };
@@ -221,6 +222,8 @@
 		9769FA021BC968F2001B1F02 /* YTLeftMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTLeftMenu.h; sourceTree = "<group>"; };
 		9769FA031BC968F2001B1F02 /* YTLeftMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTLeftMenu.m; sourceTree = "<group>"; };
 		9769FA041BC968F2001B1F02 /* YTLeftMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTLeftMenu.xib; sourceTree = "<group>"; };
+		9777E97B1BCA3A220016D071 /* YTNotificationConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTNotificationConst.h; sourceTree = "<group>"; };
+		9777E97C1BCA3A220016D071 /* YTNotificationConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTNotificationConst.m; sourceTree = "<group>"; };
 		97973CD91BC3916F00B7B4CB /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		97973CDA1BC3916F00B7B4CB /* libPushSDK-1.8.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.5.a"; sourceTree = "<group>"; };
 		97973CDC1BC391BA00B7B4CB /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
@@ -885,6 +888,8 @@
 				97C605A31BC260A400E555E8 /* YTProductTool.m */,
 				97973CDE1BC3A75700B7B4CB /* YTBadgeTool.h */,
 				97973CDF1BC3A75700B7B4CB /* YTBadgeTool.m */,
+				9777E97B1BCA3A220016D071 /* YTNotificationConst.h */,
+				9777E97C1BCA3A220016D071 /* YTNotificationConst.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1565,6 +1570,7 @@
 				97C606871BC2799400E555E8 /* UIBarButtonItem+Extension.m in Sources */,
 				9714A6F71BC7E0610018A14E /* YUBottomPopSelctView.m in Sources */,
 				97C3CE741BC2C17D00B7185D /* MBProgressHUD+WJ.m in Sources */,
+				9777E97D1BCA3A220016D071 /* YTNotificationConst.m in Sources */,
 				9714A6F11BC7E0610018A14E /* YUDIVView.m in Sources */,
 				97C3CE761BC2C17D00B7185D /* MBProgressHUD.m in Sources */,
 				97A61D791BC6893C000A5B17 /* YHWebViewProgressView.m in Sources */,

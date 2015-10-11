@@ -8,11 +8,35 @@
 
 #import <UIKit/UIKit.h>
 
+/**
+ *   按钮类型
+ */
+typedef enum {
+    TopButtonTypeRenzhen,   //  未认证
+    TopButtonTypeQiandao,   //  签到
+    TopButtonTypeYundou,    //  云豆
+    TopButtonTypeKehu,      //  我的客户
+    TopButtonTypeDindan,    //  完成订单
+    TopButtonTypeYeji       //  我的业绩
+    
+} TopButtonType;
+
+
+
 @protocol TopViewDelegate <NSObject>
 
 @optional
 
+/**
+ *  打开系统相机
+ */
 -(void)addPicker:(UIViewController *)picker;
+
+/**
+ *  按钮点击
+ *
+ */
+- (void)topBtnClicked:(TopButtonType)type;
 
 @end
 
@@ -20,7 +44,7 @@
 
 + (instancetype)profileTopView;
 
-@property (nonatomic, assign) id <TopViewDelegate> delegate;
+@property (nonatomic, weak) id <TopViewDelegate> delegate;
 
 - (void)setIconImageWithImage:(UIImage *)image;
 

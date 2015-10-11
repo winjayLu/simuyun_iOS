@@ -8,12 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol YTMenuViewControllerDelegate <NSObject>
-@optional
-- (void)didSelectItem:(NSString *)title;
-
-@end
-
 @interface YTMenuViewController : UIViewController
-@property (weak, nonatomic) id<YTMenuViewControllerDelegate> delegate;
+
 @end

@@ -10,6 +10,7 @@
 
 @interface YTOtherViewController ()
 
+- (IBAction)btnClick:(UIButton *)sender;
 @end
 
 @implementation YTOtherViewController
@@ -25,4 +26,8 @@
 }
 
 
+- (IBAction)btnClick:(UIButton *)sender {
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 @end

@@ -90,7 +90,8 @@
 {
     UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
     mainWindow.rootViewController = [[YTTabBarController alloc] init];
-    [mainWindow.layer transitionWithAnimType:TransitionAnimTypeCube subType:TransitionSubtypesFromRight curve:TransitionCurveEaseOut duration:1.5f];
+    [mainWindow.layer transitionWithAnimType:TransitionAnimTypeCube subType:TransitionSubtypesFromRight curve:TransitionCurveEaseOut duration:0.75f];
+//    [mainWindow.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.75f];
 }
 
 

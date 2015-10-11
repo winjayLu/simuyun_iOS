@@ -98,7 +98,7 @@
 @implementation YTProfileTopView
 
 
-
+#pragma mark - 头像处理
 /**
  *  头像单击事件
  */
@@ -154,7 +154,61 @@
 }
 
 
+#pragma mark - 按钮点击
+/**
+ *  认证按钮点击事件
+ */
+- (IBAction)renZhenClick:(UIButton *)sender {
+    // 调用代理方法
+    [self sendDelegate:TopButtonTypeRenzhen];
+}
+/**
+ *  签到按钮点击事件
+ */
+- (IBAction)qiaoDaoClick:(UIButton *)sender {
+    // 调用代理方法
+    [self sendDelegate:TopButtonTypeQiandao];
+}
+/**
+ *  云豆按钮点击事件
+ */
+- (IBAction)yunDouClick:(UIButton *)sender {
+    // 调用代理方法
+    [self sendDelegate:TopButtonTypeYundou];
+}
+/**
+ *  我的客户点击事件
+ */
+- (IBAction)keHuBtn:(id)sender {
+    // 调用代理方法
+    [self sendDelegate:TopButtonTypeKehu];
+}
+/**
+ *  我的订单点击事件
+ */
+- (IBAction)orderClick:(UIButton *)sender {
+    // 调用代理方法
+    [self sendDelegate:TopButtonTypeDindan];
+}
+/**
+ *  我的业绩点击事件
+ */
+- (IBAction)yeJiBtn:(UIButton *)sender {
+    // 调用代理方法
+    [self sendDelegate:TopButtonTypeYeji];
+}
+/**
+ *  调用代理方法
+ *
+ */
+- (void)sendDelegate:(TopButtonType)type
+{
+    if ([self.delegate respondsToSelector:@selector(topBtnClicked:)]) {
+        [self.delegate topBtnClicked:type];
+    }
+}
 
+#pragma mark - 设置数据
 /**
  *  给iconView设置图片
  */
@@ -172,40 +226,6 @@
     }
     
     self.iconImage.image = image;
-}
-
-
-#pragma mark - 按钮点击
-/**
- *  认证按钮点击事件
- */
-- (IBAction)renZhenClick:(UIButton *)sender {
-    YTLog(@"SDSAF");
-}
-/**
- *  签到按钮点击事件
- */
-- (IBAction)qiaoDaoClick:(UIButton *)sender {
-}
-/**
- *  云豆按钮点击事件
- */
-- (IBAction)yunDouClick:(UIButton *)sender {
-}
-/**
- *  我的客户点击事件
- */
-- (IBAction)keHuBtn:(id)sender {
-}
-/**
- *  我的订单点击事件
- */
-- (IBAction)orderClick:(UIButton *)sender {
-}
-/**
- *  我的业绩点击事件
- */
-- (IBAction)yeJiBtn:(UIButton *)sender {
 }
 
 + (instancetype)profileTopView

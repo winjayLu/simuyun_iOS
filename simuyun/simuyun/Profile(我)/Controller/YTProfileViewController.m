@@ -11,6 +11,8 @@
 #import "YTMenuViewController.h"
 #import "YTOtherViewController.h"
 #import "UIView+Extension.h"
+#import "UINavigationBar+BackgroundColor.h"
+#import "UIImage+Extend.h"
 
 
 typedef enum state {
@@ -19,9 +21,8 @@ typedef enum state {
 }state;
 
 static const CGFloat viewSlideHorizonRatio = 0.642;
-//static const CGFloat viewHeightNarrowRatio = 0.6;
 
-@interface YTProfileViewController () <YTHomeViewControllerDelegate, YTMenuViewControllerDelegate>
+@interface YTProfileViewController () <YTHomeViewControllerDelegate, UINavigationControllerDelegate>
 @property (assign, nonatomic) state   sta;              // 状态(Home or Menu)
 @property (assign, nonatomic) CGFloat distance;         // 距离左边的边距
 @property (assign, nonatomic) CGFloat leftDistance;
@@ -31,6 +32,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
 @property (nonatomic, weak) YTHomeViewController *homeVc;   // 首页控制器
 @property (nonatomic, weak) YTMenuViewController *menuVc;   // 菜单控制器
 @property (nonatomic, weak) UINavigationController *nav;    // 导航控制器
+@property (nonatomic, strong) UIPanGestureRecognizer *panRecongnizer; // 侧滑手势
 
 @end
 
@@ -45,15 +47,8 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
     self.menuCenterXEnd = self.view.center.x;
     self.leftDistance = DeviceWidth * viewSlideHorizonRatio;
     
-    // 设置背景
-    UIImageView *bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"back"]];
-    bg.frame = [[UIScreen mainScreen] bounds];
-    [self.view addSubview:bg];
-    
-    
     // 设置menu的view
     YTMenuViewController *menuVc = [[YTMenuViewController alloc] init];
-    menuVc.delegate = self;
     menuVc.view.frame = self.view.frame;
     menuVc.view.center = CGPointMake(0, menuVc.view.center.y);
     [self addChildViewController:menuVc];
@@ -69,11 +64,12 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
     [self addChildViewController:nav];
     self.nav = nav;
     [self addChildViewController:nav];
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    [self.nav.view addGestureRecognizer:pan];
     [self.view addSubview:self.nav.view];
+    self.nav.delegate = self;
+    self.nav.interactivePopGestureRecognizer.enabled = NO;
     
-
+    // 初始化手势
+    self.panRecongnizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
 }
 
 
@@ -170,25 +166,86 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
     [self showHome];
 }
 
-#pragma mark - WMHomeViewController代理方法
+- (void)leftMenuClicked
+{
+    [self coverClick:nil];
+}
+
+#pragma mark - HomeViewController代理方法
 - (void)leftBtnClicked {
     [self showMenu];
 }
-
-#pragma mark - WMMenuViewController代理方法
-- (void)didSelectItem:(NSString *)title {
-//    WMOtherViewController *other = [[WMOtherViewController alloc] init];
-//    other.navTitle = title;
+//
+//#pragma mark - WMMenuViewController代理方法
+//- (void)didSelectItem:(NSString *)btnTitle {
+//    
+//    
+//    if ([btnTitle isEqualToString:@"用户资料"]) {
+//        
+//    } else if([btnTitle isEqualToString:@"关联微信"]){
+//        
+//    } else if([btnTitle isEqualToString:@"邮寄地址"]){
+//        
+//    } else if([btnTitle isEqualToString:@"推荐私募云给好友"]){
+//        
+//    } else if([btnTitle isEqualToString:@"帮助"]){
+//        
+//    } else if([btnTitle isEqualToString:@"关于私募云"]){
+//        
+//    } else {
+//    }
+//    
+////    WMOtherViewController *other = [[WMOtherViewController alloc] init];
+////    other.navTitle = title;
+////        [self.messageNav pushViewController:other animated:NO];
+//    YTOtherViewController *other = [[YTOtherViewController alloc] init];
 //    other.hidesBottomBarWhenPushed = YES;
-    //    [self.messageNav pushViewController:other animated:NO];
-    [self showHome];
-}
+//    [self.nav pushViewController:other animated:NO];
+//    [self coverClick:nil];
+//}
 
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
 }
+
+- (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    // 如果进入的是首页视图控制器
+    if ([viewController isKindOfClass:[YTHomeViewController class]]) {
+
+        // 设置为半透明
+        [self.nav.navigationBar lt_setBackgroundColor:[YTColor(255, 255, 255) colorWithAlphaComponent:0.0]];
+        // 隐藏子控件
+        [self navigationBarWithHidden:YES];
+        // 添加手势
+        [self.nav.view addGestureRecognizer:self.panRecongnizer];
+    } else {
+        // 进入其他视图控制器
+        [self.nav.navigationBar lt_setBackgroundColor:[YTColor(0, 0, 0) colorWithAlphaComponent:1.0]];
+        // 显示子控件
+        [self navigationBarWithHidden:NO];
+        // 删除手势
+        [self.nav.view removeGestureRecognizer:self.panRecongnizer];
+
+    }
+}
+
+/**
+ *  隐藏/显示navgatinonBar的子控件
+ */
+- (void)navigationBarWithHidden:(BOOL)hidden
+{
+    NSArray *list=self.nav.navigationBar.subviews;
+    for (id obj in list) {
+        if ([obj isKindOfClass:[UIImageView class]]) {
+            UIImageView *imageView=(UIImageView *)obj;
+            imageView.hidden=hidden;
+        }
+    }
+}
+
+
 
 
 @end

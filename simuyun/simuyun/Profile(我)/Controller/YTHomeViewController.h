@@ -10,8 +10,10 @@
 
 @protocol YTHomeViewControllerDelegate <NSObject>
 @optional
+// 导航栏按钮点击事件
 - (void)leftBtnClicked;
-
+// 左侧菜单点击事件
+- (void)leftMenuClicked;
 @end
 
 @interface YTHomeViewController : UIViewController

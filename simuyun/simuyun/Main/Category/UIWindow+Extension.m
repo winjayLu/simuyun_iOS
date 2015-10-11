@@ -41,15 +41,17 @@
     } else {
         // 欢迎控制器
         self.rootViewController = [[YTWelcomeViewController alloc] init];
-        [self transitionVc];
     }
+    
+#warning 开发阶段
+    self.rootViewController = [[YTTabBarController alloc] init];
 }
 
 /**
  *  转场
  */
 -(void)transitionVc{
-    [self.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveLinear duration:0.75f];
+    [self.layer transitionWithAnimType:TransitionAnimTypePageCurl subType:TransitionSubtypesFromBotoom curve:TransitionCurveEaseIn duration:1.0f];
 }
 
 

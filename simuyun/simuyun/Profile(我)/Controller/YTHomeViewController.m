@@ -13,8 +13,9 @@
 #import "UIBarButtonItem+Extension.h"
 #import "YTContentView.h"
 #import "YTBottomView.h"
+#import "YTOtherViewController.h"
 
-@interface YTHomeViewController () <TopViewDelegate>
+@interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate>
 
 @property (nonatomic, weak) YTProfileTopView *topView;
 
@@ -38,6 +39,7 @@
     self.view = mainView;
     self.view.backgroundColor = [UIColor blackColor];
     
+    
 #warning todo 获取数据
     
     // 初始化顶部视图
@@ -49,17 +51,12 @@
     // 初始化底部菜单
     [self setupBottom];
     
+    // 监听左侧菜单通知
+    [self leftMenuNotification];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    
-    [super viewWillAppear:animated];
-    // 设置导航栏透明
-    UIColor *color = YTColor(255, 255, 255);
-    [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:0.000]];
-}
 
+#pragma mark - 初始化
 /**
  *  初始化顶部视图
  */
@@ -80,6 +77,7 @@
     // 左边的item
     UIBarButtonItem *left = [UIBarButtonItem itemWithBg:@"chouti" target:self action:@selector(leftClick)];
     self.navigationItem.leftBarButtonItem = left;
+    
 }
 /**
  *  初始化待办事项
@@ -98,6 +96,7 @@
     content.layer.cornerRadius = 5;
     content.layer.masksToBounds = YES;
     content.todos = self.todos;
+    content.daili = self;
     [self.view addSubview:content];
     self.todoView = content;
 }
@@ -116,8 +115,70 @@
     [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame) + 8)];
 }
 
+#pragma makr - 监听通知
 /**
- *  左侧按钮的点击事件
+ *  监听左侧菜单通知
+ */
+- (void)leftMenuNotification
+{
+    [YTCenter addObserver:self selector:@selector(leftMenuClick:) name:YTLeftMenuNotification object:nil];
+
+}
+
+
+#pragma mark - 响应事件
+/**
+ *  左侧菜单选中事件
+ *
+ */
+- (void)leftMenuClick:(NSNotification *)note
+{
+    NSString *btnTitle = note.userInfo[YTLeftMenuSelectBtn];
+    YTLog(@"%@",btnTitle);
+    // 判断点击了哪个按钮
+    if ([btnTitle isEqualToString:@"用户资料"]) {
+        
+    } else if([btnTitle isEqualToString:@"关联微信"]){
+        
+    } else if([btnTitle isEqualToString:@"邮寄地址"]){
+        
+    } else if([btnTitle isEqualToString:@"推荐私募云给好友"]){
+        
+    } else if([btnTitle isEqualToString:@"帮助"]){
+        
+    } else if([btnTitle isEqualToString:@"关于私募云"]){
+        
+    } else {
+        
+    }
+    // 调用代理方法
+    if ([self.delegate respondsToSelector:@selector(leftMenuClicked)]) {
+        [self.delegate leftMenuClicked];
+    }
+    // 跳转对应控制器
+    YTOtherViewController *other = [[YTOtherViewController alloc] init];
+    other.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:other animated:NO];
+    
+
+}
+/**
+ *  待办事项选中事件
+ *
+ */
+- (void)selectedTodo:(NSUInteger)row
+{
+    YTLog(@"%zd", row);
+    // 跳转对应控制器
+    YTOtherViewController *other = [[YTOtherViewController alloc] init];
+    other.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:other animated:YES];
+
+}
+
+
+/**
+ *  导航栏左侧按钮的点击事件
  */
 - (void)leftClick
 {
@@ -126,7 +187,7 @@
 
 
 
-#pragma mark - topViewDelegate
+#pragma mark - 顶部视图代理方法
 /**
  *  切换头像
  *
@@ -137,8 +198,44 @@
     
     [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
 }
+/**
+ *  按钮点击事件
+ *
+ *  @param type 按钮类型
+ */
+- (void)topBtnClicked:(TopButtonType)type
+{
+    NSLog(@"%zd", type);
+    switch (type) {
+        case TopButtonTypeRenzhen:  // 认证
+            
+            break;
+        case TopButtonTypeQiandao:  // 签到
+            
+            break;
+        case TopButtonTypeYundou:   // 云豆
+            
+            break;
+        case TopButtonTypeKehu:     // 客户
+            
+            break;
+        case TopButtonTypeDindan:   // 订单
+            
+            break;
+        case TopButtonTypeYeji:     // 业绩
+            
+            break;
+    }
+    // 跳转对应控制器
+    YTOtherViewController *other = [[YTOtherViewController alloc] init];
+    other.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:other animated:YES];
+}
 
 
+#pragma mark - 获取数据
+
+#pragma mark - 懒加载
 - (NSArray *)todos
 {
     if (!_todos) {
@@ -146,6 +243,13 @@
     }
     return _todos;
 }
+
+
+- (void)dealloc
+{
+    [YTCenter removeObserver:self];
+}
+
 
 
 

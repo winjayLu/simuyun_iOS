@@ -13,6 +13,18 @@
 #import "YTHttpTool.h"
 #import "NSDictionary+Extension.h"
 
+// 通知
+#import "YTNotificationConst.h"
+
+// UIView扩展
+#import "UIView+Extension.h"
+
+// 颜色配置文件
+#import "YTColorConfig.h"
+
+// 提示消息配置文件
+#import "YTMessageConfig.h"
+
 
 /** 屏幕尺寸 */
 #define DeviceBounds [UIScreen mainScreen].bounds
@@ -23,22 +35,6 @@
 #define DeviceHight DeviceBounds.size.height
 /** iphone6 */
 #define iPhone6 (DeviceWidth == 375.0f && DeviceHight == 667.0f)
-
-
-
-// 通知
-#define YTCenter [NSNotificationCenter defaultCenter]
-
-// 尺寸相关
-#import "UIView+Extension.h"
-
-// 颜色配置文件
-#import "YTColorConfig.h"
-
-// 提示消息配置文件
-#import "YTMessageConfig.h"
-
-
 
 #ifdef DEBUG
 #define YTLog(...) NSLog(__VA_ARGS__)

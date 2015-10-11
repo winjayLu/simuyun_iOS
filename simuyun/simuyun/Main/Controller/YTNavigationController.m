@@ -20,16 +20,16 @@
 
     UINavigationBar *navBar = [UINavigationBar appearance];
     // 设置导航栏背景
-    [navBar setBackgroundImage:[UIImage imageWithColor:[UIColor yellowColor]] forBarMetrics:UIBarMetricsDefault];
+    [navBar setBackgroundImage:[UIImage imageWithColor:[UIColor blackColor]] forBarMetrics:UIBarMetricsDefault];
     
     // 反回按钮的颜色
-    [navBar setTintColor:[UIColor blackColor]];
+    [navBar setTintColor:[UIColor whiteColor]];
     // 设置状态栏背景
 //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackOpaque;
     // 设置导航栏的文字
     [navBar setTitleTextAttributes:@{
                                      
-                                     NSForegroundColorAttributeName : [UIColor redColor]
+                                     NSForegroundColorAttributeName : [UIColor whiteColor]
                                      }];
     
     // 导航栏上面的item
@@ -40,10 +40,12 @@
     [barItem setBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background_disable.png"] forState:UIControlStateDisabled barMetrics:UIBarMetricsDefault];
     // 设置item的文字属性
     NSDictionary *barItemTextAttr = @{
-                                      NSForegroundColorAttributeName : [UIColor purpleColor]
+                                      NSForegroundColorAttributeName : [UIColor whiteColor]
                                       };
     [barItem setTitleTextAttributes:barItemTextAttr forState:UIControlStateNormal];  
     [barItem setTitleTextAttributes:barItemTextAttr forState:UIControlStateHighlighted];
+    // 去掉 backButton 的文字
+    [barItem setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)didReceiveMemoryWarning {
