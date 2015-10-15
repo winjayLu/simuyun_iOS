@@ -22,7 +22,8 @@
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
 
     // 2.发送一个POST请求
-    [mgr POST:url parameters:[NSDictionary httpWithDictionary:params]
+    NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, url];
+    [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           if (success) {
               success(responseObject);
@@ -43,7 +44,8 @@
     // 1.创建一个请求管理者
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     // 2.发送一个GET请求
-    [mgr GET:url parameters:[NSDictionary httpWithDictionary:params]
+    NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, url];
+    [mgr GET:newUrl parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           NSLog(@"ss");
           NSLog(@"%@",operation);

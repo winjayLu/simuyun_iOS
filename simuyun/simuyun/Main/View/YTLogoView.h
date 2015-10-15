@@ -21,4 +21,9 @@
 
 @property (nonatomic, weak) id<YTLogoViewDelegate> delegate;
 
+/**
+ *  云荐按钮图片
+ */
+@property (nonatomic, strong) UIImage *logoImage;
+
 @end

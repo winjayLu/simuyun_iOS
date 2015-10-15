@@ -20,10 +20,20 @@
                         <color key="textColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="btw-zI-MTr">
+                        <rect key="frame" x="14" y="54" width="306" height="1"/>
+                        <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="KMP-df-csV"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Y3P-o7-16Q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="AA4-9e-Tki"/>
+                    <constraint firstAttribute="trailing" secondItem="btw-zI-MTr" secondAttribute="trailing" id="FEz-Lj-SDS"/>
                     <constraint firstAttribute="bottom" secondItem="Y3P-o7-16Q" secondAttribute="bottom" constant="8" id="Oe6-o7-xEl"/>
+                    <constraint firstItem="btw-zI-MTr" firstAttribute="leading" secondItem="Y3P-o7-16Q" secondAttribute="leading" id="Pca-h7-4J4"/>
+                    <constraint firstAttribute="bottom" secondItem="btw-zI-MTr" secondAttribute="bottom" id="Rvy-2s-g6M"/>
                     <constraint firstItem="Y3P-o7-16Q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="reC-JN-wrI"/>
                     <constraint firstAttribute="trailing" secondItem="Y3P-o7-16Q" secondAttribute="trailing" constant="14" id="ws0-t5-Ut7"/>
                 </constraints>

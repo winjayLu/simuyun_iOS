@@ -179,14 +179,14 @@
 - (void)setupLogoBtn
 {
     UIButton *logoButton = [[UIButton alloc] init];
-    //    self.logoButton.size = self.logoButton.currentBackgroundImage.size;
-    logoButton.size = CGSizeMake(100, 100);
-    [logoButton setBackgroundImage:[UIImage imageNamed:@"11"] forState:UIControlStateNormal];
-    [logoButton setBackgroundImage:[UIImage imageNamed:@"11"] forState:UIControlStateHighlighted];
+    [logoButton setBackgroundImage:self.logoImage forState:UIControlStateNormal];
+    [logoButton setBackgroundImage:self.logoImage forState:UIControlStateHighlighted];
     // 按钮单击事件
     [logoButton addTarget:self action:@selector(logoClick) forControlEvents:UIControlEventTouchUpInside];
+    logoButton.size = self.logoImage.size;
     // 移出按钮范围事件
 //    [logoButton addTarget:self action:@selector(logoExit) forControlEvents:UIControlEventTouchDragExit];
+    
     [self addSubview:logoButton];
     self.logoButton = logoButton;
     // 添加logo按钮的长按事件
@@ -307,6 +307,15 @@
     self.recorder = [[AVAudioRecorder alloc]initWithURL:url settings:recordSetting error:nil];
     //开启音量检测
     self.recorder.meteringEnabled = YES;
+}
+
+#pragma mark - lazy
+- (UIImage *)logoImage
+{
+    if (!_logoImage) {
+        _logoImage = [UIImage imageNamed:@"yunjian"];
+    }
+    return _logoImage;
 }
 
 @end

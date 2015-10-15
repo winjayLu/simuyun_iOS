@@ -16,14 +16,19 @@
 @implementation YTMenuViewController
 
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
+- (void)loadView
+{
     // 将控制器的View替换为ScrollView
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:DeviceBounds];
     mainView.bounces = NO;
     mainView.showsVerticalScrollIndicator = NO;
     self.view = mainView;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+
     
     // 初始化左侧菜单
     YTLeftMenu *leftMenu = [YTLeftMenu leftMenu];

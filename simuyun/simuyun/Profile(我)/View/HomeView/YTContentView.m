@@ -27,6 +27,8 @@
         self.dataSource = self;
         self.delegate = self;
         self.showsVerticalScrollIndicator = NO;
+        // 去掉下划线
+        self.separatorStyle = UITableViewCellSeparatorStyleNone;
         // 禁用tableView滚动
         self.scrollEnabled =NO;
     }

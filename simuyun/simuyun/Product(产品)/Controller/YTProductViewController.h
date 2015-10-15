@@ -1,13 +1,13 @@
 //
 //  YTProductViewController.h
-//  YTWealth
+//  simuyun
 //
-//  Created by WJ-China on 15/9/6.
-//  Copyright (c) 2015年 winjay. All rights reserved.
+//  Created by Luwinjay on 15/10/15.
+//  Copyright © 2015年 YTWealth. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface YTProductViewController : UIViewController
+@interface YTProductViewController : UITableViewController
 
 @end

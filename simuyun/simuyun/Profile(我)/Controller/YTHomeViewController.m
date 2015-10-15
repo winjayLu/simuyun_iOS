@@ -28,16 +28,22 @@
 
 @implementation YTHomeViewController
 
-- (void)viewDidLoad
+
+- (void)loadView
 {
-    [super viewDidLoad];
     // 将控制器的View替换为ScrollView
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:DeviceBounds];
     mainView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
     mainView.bounces = NO;
     mainView.showsVerticalScrollIndicator = NO;
     self.view = mainView;
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = YTViewBackground;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
     
     
 #warning todo 获取数据

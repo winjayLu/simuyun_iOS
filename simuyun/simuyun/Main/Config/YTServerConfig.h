@@ -19,21 +19,26 @@
 //#define UmengAppKey @"5514ed3cfd98c5bca4000872"  // 生产环境
 
 //  开发环境
-//#define YTServer @"http://192.168.17.213:8080/api/interface/api"
+#define YTServer @"http://192.168.17.213:8080/api/app/"
 
 //  测试环境
 //#define YTServer @"http://192.168.17.212:8080/api/interface/api"
 
 //  生产环境
-#define YTServer @"https://intime.simuyun.com/api/interface/api"
+//#define YTServer @"https://intime.simuyun.com/api/interface/api"
+
+
+
+/** 接口名 */
+// 登录
+#define YTSession @"session"
+// 加载产品列表
+#define YTProductList @"products"
 
 
 
 
 
-//  http://192.168.17.213:8080/api/interface/?method=checkVersion&param={"os" : "ios","insver" : "3.007"}
-
-//  https://intime.simuyun.com/api/interface/?method=checkVersion&param={"os" : "ios","insver" : "3.007"}
 
 
 #endif /* YTServerConfig_h */

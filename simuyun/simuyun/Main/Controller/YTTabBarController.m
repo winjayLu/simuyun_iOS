@@ -114,9 +114,8 @@
 - (void)setupLogoView
 {
     YTLogoView *logo = [[YTLogoView alloc] init];
-    logo.backgroundColor = [UIColor redColor];
-    logo.size = CGSizeMake(100, 100);
-    logo.center = CGPointMake(self.tabBar.width * 0.5, self.tabBar.height * 0.5);
+    logo.size = logo.logoImage.size;
+    logo.center = CGPointMake(self.tabBar.width * 0.5, self.tabBar.height * 0.5 - 12);
     logo.userInteractionEnabled = YES;
     logo.delegate = self;
     [self.tabBar addSubview:logo];

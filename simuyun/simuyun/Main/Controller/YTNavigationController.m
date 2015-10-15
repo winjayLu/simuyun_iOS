@@ -20,27 +20,27 @@
 
     UINavigationBar *navBar = [UINavigationBar appearance];
     // 设置导航栏背景
-    [navBar setBackgroundImage:[UIImage imageWithColor:[UIColor blackColor]] forBarMetrics:UIBarMetricsDefault];
+    [navBar setBackgroundImage:[UIImage imageWithColor:YTNavBackground] forBarMetrics:UIBarMetricsDefault];
     
     // 反回按钮的颜色
-    [navBar setTintColor:[UIColor whiteColor]];
+    [navBar setTintColor:YTNavBackColor];
     // 设置状态栏背景
 //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackOpaque;
     // 设置导航栏的文字
     [navBar setTitleTextAttributes:@{
                                      
-                                     NSForegroundColorAttributeName : [UIColor whiteColor]
+                                     NSForegroundColorAttributeName : YTNavTextColor
                                      }];
     
     // 导航栏上面的item
     UIBarButtonItem *barItem =[UIBarButtonItem appearance];
     // 设置背景
-    [barItem setBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-    [barItem setBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background_pushed.png"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
-    [barItem setBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background_disable.png"] forState:UIControlStateDisabled barMetrics:UIBarMetricsDefault];
+//    [barItem setBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+//    [barItem setBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background_pushed.png"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
+//    [barItem setBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background_disable.png"] forState:UIControlStateDisabled barMetrics:UIBarMetricsDefault];
     // 设置item的文字属性
     NSDictionary *barItemTextAttr = @{
-                                      NSForegroundColorAttributeName : [UIColor whiteColor]
+                                      NSForegroundColorAttributeName : YTNavTextColor
                                       };
     [barItem setTitleTextAttributes:barItemTextAttr forState:UIControlStateNormal];  
     [barItem setTitleTextAttributes:barItemTextAttr forState:UIControlStateHighlighted];

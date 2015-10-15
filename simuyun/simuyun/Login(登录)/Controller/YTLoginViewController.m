@@ -95,16 +95,12 @@
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"username"] = self.userName.text;
     dict[@"password"] = [NSString md5:self.passWord.text];
-    [YTHttpTool post:@"http://192.168.17.213:8080/api/app/session" params:dict success:^(id responseObject) {
+    [YTHttpTool post:YTSession params:dict success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         [self transitionTabBarVC];
     } failure:^(NSError *error) {
-        NSError *er = error;
-        NSLog(@"%@",error);
         [SVProgressHUD showErrorWithStatus:@"用户名或密码不正确"];
     }];
-    
-//     self.userName.text
 }
 /**
  *  转场到主界面

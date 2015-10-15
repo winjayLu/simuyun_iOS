@@ -34,12 +34,22 @@
                         <color key="textColor" red="0.27843137254901962" green="0.27843137254901962" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MC6-hL-LRb">
+                        <rect key="frame" x="0.0" y="40" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="h2n-OX-3ef"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="MC6-hL-LRb" secondAttribute="bottom" id="0hf-5o-N5r"/>
                     <constraint firstItem="2TY-09-CvL" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3BM-vp-iNy"/>
                     <constraint firstItem="ObL-Di-lMR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="6Ss-FL-9KI"/>
                     <constraint firstItem="QN3-0Q-k01" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="KZ9-wU-Pa8"/>
                     <constraint firstAttribute="trailing" secondItem="2TY-09-CvL" secondAttribute="trailing" constant="14" id="MDq-aX-cdw"/>
+                    <constraint firstAttribute="trailing" secondItem="MC6-hL-LRb" secondAttribute="trailing" id="XP8-lr-72O"/>
+                    <constraint firstItem="MC6-hL-LRb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="e59-Dt-xnp"/>
                     <constraint firstItem="ObL-Di-lMR" firstAttribute="leading" secondItem="QN3-0Q-k01" secondAttribute="trailing" constant="14" id="ltJ-G5-sha"/>
                     <constraint firstItem="QN3-0Q-k01" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="lzU-2h-CeE"/>
                 </constraints>

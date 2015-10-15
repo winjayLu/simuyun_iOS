@@ -222,7 +222,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
         [self.nav.view addGestureRecognizer:self.panRecongnizer];
     } else {
         // 进入其他视图控制器
-        [self.nav.navigationBar lt_setBackgroundColor:[YTColor(0, 0, 0) colorWithAlphaComponent:1.0]];
+        [self.nav.navigationBar lt_setBackgroundColor:[YTNavBackground colorWithAlphaComponent:1.0]];
         // 显示子控件
         [self navigationBarWithHidden:NO];
         // 删除手势
