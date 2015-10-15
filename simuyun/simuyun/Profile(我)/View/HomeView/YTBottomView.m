@@ -61,7 +61,7 @@
 - (NSArray *)titles
 {
     if (!_titles) {
-        _titles = @[@"全部订单", @"我的课程", @"云豆银行"];
+        _titles = @[@"全部订单", @"我的奖品", @"云豆银行"];
     }
     return _titles;
 }

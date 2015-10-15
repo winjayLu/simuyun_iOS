@@ -209,7 +209,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
 {
     return UIStatusBarStyleLightContent;
 }
-
+//
 - (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
     // 如果进入的是首页视图控制器
     if ([viewController isKindOfClass:[YTHomeViewController class]]) {

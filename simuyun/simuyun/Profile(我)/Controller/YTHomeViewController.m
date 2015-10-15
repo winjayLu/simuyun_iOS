@@ -31,7 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    // 将控制器的View替换为ScrollView
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:DeviceBounds];
     mainView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
     mainView.bounces = NO;
@@ -112,7 +112,7 @@
     bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42 * 3);
     [self.view addSubview:bottom];
     // 设置滚动范围
-    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame) + 8)];
+    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame))];
 }
 
 #pragma makr - 监听通知

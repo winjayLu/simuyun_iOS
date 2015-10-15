@@ -19,9 +19,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 将控制器的View替换为ScrollView
+    UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:DeviceBounds];
+    mainView.bounces = NO;
+    mainView.showsVerticalScrollIndicator = NO;
+    self.view = mainView;
+    
+    // 初始化左侧菜单
     YTLeftMenu *leftMenu = [YTLeftMenu leftMenu];
-    leftMenu.frame = CGRectMake(0, 0, 241, DeviceHight);
     [self.view addSubview:leftMenu];
+    
+    // 设置ScrollView的滚动范围
+    [(UIScrollView *)self.view setContentSize:CGSizeMake(leftMenu.width, leftMenu.height)];
 }
 
 - (void)didReceiveMemoryWarning {

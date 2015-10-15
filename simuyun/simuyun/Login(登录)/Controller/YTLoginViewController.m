@@ -12,6 +12,8 @@
 #import "UMSocialWechatHandler.h"
 #import "YTTabBarController.h"
 #import "CALayer+Transition.h"
+#import "NSString+Password.h"
+#import "SVProgressHUD.h"
 
 @interface YTLoginViewController ()
 
@@ -30,6 +32,8 @@
  *
  */
 - (IBAction)loginClick:(UIButton *)sender;
+@property (weak, nonatomic) IBOutlet UITextField *userName;
+@property (weak, nonatomic) IBOutlet UITextField *passWord;
 
 @end
 
@@ -76,12 +80,31 @@
 
 }
 
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    
+}
+
 /**
  *  登录按钮单击事件
  *
  */
 - (IBAction)loginClick:(UIButton *)sender {
-    [self transitionTabBarVC];
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"username"] = self.userName.text;
+    dict[@"password"] = [NSString md5:self.passWord.text];
+    [YTHttpTool post:@"http://192.168.17.213:8080/api/app/session" params:dict success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        [self transitionTabBarVC];
+    } failure:^(NSError *error) {
+        NSError *er = error;
+        NSLog(@"%@",error);
+        [SVProgressHUD showErrorWithStatus:@"用户名或密码不正确"];
+    }];
+    
+//     self.userName.text
 }
 /**
  *  转场到主界面

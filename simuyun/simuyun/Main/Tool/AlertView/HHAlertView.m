@@ -270,10 +270,10 @@ static UIWindow *_window;
     
     [UIView animateWithDuration:0.5 animations:^{
         self.alpha=0;
-        self.layer.cornerRadius = 10;
+        self.layer.cornerRadius = 5;
         self.layer.shadowOffset = CGSizeMake(0, 5);
         self.layer.shadowOpacity = 0.3f;
-        self.layer.shadowRadius = 10.0f;
+        self.layer.shadowRadius = 5.0f;
     } completion:^(BOOL finished) {
         [_OkButton removeFromSuperview];
         [_cancelButton removeFromSuperview];
@@ -293,10 +293,10 @@ static UIWindow *_window;
     
     [UIView animateWithDuration:0.5 animations:^{
         self.alpha=1;
-        self.layer.cornerRadius = 10;
+        self.layer.cornerRadius = 5;
         self.layer.shadowOffset = CGSizeMake(0, 5);
         self.layer.shadowOpacity = 0.3f;
-        self.layer.shadowRadius = 10.0f;
+        self.layer.shadowRadius = 5.0f;
     } completion:^(BOOL finished) {
         
     }];

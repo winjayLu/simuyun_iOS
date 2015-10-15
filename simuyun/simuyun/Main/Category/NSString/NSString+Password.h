@@ -13,13 +13,10 @@
 
 
 
-
 /**
- *  32位MD5加密
+ *  8位MD5加密
  */
-@property (nonatomic,copy,readonly) NSString *md5;
-
-
++(NSString *)md5:(NSString *)password;
 
 
 
@@ -27,9 +24,6 @@
  *  SHA1加密
  */
 @property (nonatomic,copy,readonly) NSString *sha1;
-
-
-
 
 
 @end

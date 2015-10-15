@@ -8,16 +8,21 @@
 
 #import "YTHttpTool.h"
 #import "AFNetworking.h"
+#import "NSDictionary+Extension.h"
 
 @implementation YTHttpTool
 
+/**
+ *  post请求
+ *
+ */
 + (void)post:(NSString *)url params:(id)params success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     // 1.创建一个请求管理者
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
 
     // 2.发送一个POST请求
-    [mgr POST:url parameters:params
+    [mgr POST:url parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           if (success) {
               success(responseObject);
@@ -29,13 +34,16 @@
     }];
 
 }
-
+/**
+ *  get请求
+ *
+ */
 + (void)get:(NSString *)url params:(id)params success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     // 1.创建一个请求管理者
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     // 2.发送一个GET请求
-    [mgr GET:url parameters:params
+    [mgr GET:url parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           NSLog(@"ss");
           NSLog(@"%@",operation);
@@ -50,7 +58,10 @@
 }
 
 
-
+/**
+ *  文件上传
+ *
+ */
 + (void)post:(NSString *)url params:(id)params files:(NSArray *)files success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     // 1.创建一个请求管理者

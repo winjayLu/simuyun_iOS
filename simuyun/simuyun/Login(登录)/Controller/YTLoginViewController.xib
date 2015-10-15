@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YTLoginViewController">
             <connections>
+                <outlet property="passWord" destination="LJg-iq-CEa" id="hwh-4e-Ktb"/>
+                <outlet property="userName" destination="oqZ-Gn-iiy" id="FYZ-uQ-Ow3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="weChatButton" destination="MkM-ih-Mqs" id="nSr-93-QAQ"/>
             </connections>
@@ -38,7 +41,7 @@
                     </connections>
                 </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LJg-iq-CEa">
-                    <rect key="frame" x="204.5" y="209" width="191" height="30"/>
+                    <rect key="frame" x="205" y="209" width="191" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="191" id="25W-fn-H8f"/>
                         <constraint firstAttribute="height" constant="30" id="TEh-KO-Sdm"/>
@@ -46,14 +49,23 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oqZ-Gn-iiy">
+                    <rect key="frame" x="205" y="129" width="191" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="MkM-ih-Mqs" firstAttribute="top" secondItem="LJg-iq-CEa" secondAttribute="bottom" constant="30" id="JKg-3M-93X"/>
+                <constraint firstItem="LJg-iq-CEa" firstAttribute="width" secondItem="oqZ-Gn-iiy" secondAttribute="width" id="Lju-wG-hdW"/>
                 <constraint firstAttribute="centerY" secondItem="MkM-ih-Mqs" secondAttribute="centerY" id="eVB-IT-6VH"/>
                 <constraint firstAttribute="centerX" secondItem="MkM-ih-Mqs" secondAttribute="centerX" id="gcf-ab-c8n"/>
+                <constraint firstItem="oqZ-Gn-iiy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ghY-Uf-amD"/>
                 <constraint firstItem="LJg-iq-CEa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="h3d-14-LkK"/>
+                <constraint firstItem="LJg-iq-CEa" firstAttribute="height" secondItem="oqZ-Gn-iiy" secondAttribute="height" id="lOy-lT-ebH"/>
                 <constraint firstItem="pII-Vp-BPt" firstAttribute="top" secondItem="MkM-ih-Mqs" secondAttribute="bottom" constant="31" id="q3e-e5-Toi"/>
+                <constraint firstItem="LJg-iq-CEa" firstAttribute="top" secondItem="oqZ-Gn-iiy" secondAttribute="bottom" constant="50" id="v4Y-3o-dQj"/>
                 <constraint firstItem="pII-Vp-BPt" firstAttribute="centerX" secondItem="MkM-ih-Mqs" secondAttribute="centerX" id="zZJ-Lm-blM"/>
             </constraints>
             <point key="canvasLocation" x="374" y="171"/>

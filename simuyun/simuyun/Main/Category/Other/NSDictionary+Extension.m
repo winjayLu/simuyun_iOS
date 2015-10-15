@@ -25,15 +25,10 @@
     // 转化后的http字典
     NSMutableDictionary *httpDict = [NSMutableDictionary dictionary];
     for (NSString *key in allKey) {
-        if ([key isEqualToString:@"method"]) {
-            httpDict[key] = dict[key];
+        if (param.length == 0) {
+            [param appendFormat:@"{\"%@\" : \"%@\"",key , dict[key]];
         } else {
-            if (param.length == 0) {
-                
-                [param appendFormat:@"{\"%@\" : \"%@\"",key , dict[key]];
-            } else {
-                [param appendFormat:@",\"%@\" : \"%@\"",key , dict[key]];
-            }
+            [param appendFormat:@",\"%@\" : \"%@\"",key , dict[key]];
         }
     }
     if (param)
