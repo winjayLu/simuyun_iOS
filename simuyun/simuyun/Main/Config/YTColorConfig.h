@@ -25,16 +25,24 @@
 
 // 导航栏背景    215,58,46
 #define YTNavBackground YTColor(215, 58, 46)
-
 // 导航栏文字颜色
 #define YTNavTextColor [UIColor whiteColor]
-
 // 导航返回按钮颜色
 #define YTNavBackColor [UIColor whiteColor]
 
 
+// TabBar背景颜色
+#define YTTabBarBackground YTColor(232, 233, 232)
+// TabBar选中时的文字颜色
+#define YTTabBarSelectedColor YTColor(215, 58, 46)
+// TabBar普通时候的文字颜色
+#define YTTabBarNormalColor [UIColor blackColor]
+
+
 // 界面黑色背景
 #define YTViewBackground YTColor(51, 51, 51)
+
+
 
 
 #endif /* YTColorConfig_h */

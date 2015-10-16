@@ -6,8 +6,7 @@
 //  Copyright (c) 2015年 冯成林. All rights reserved.
 //
 
-#import "CorePageControl.h"
 
-@interface PPTPageControl : CorePageControl
+@interface PPTPageControl : UIPageControl
 
 @end

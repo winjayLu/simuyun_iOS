@@ -13,6 +13,7 @@
 #import "UIView+Extension.h"
 #import "UINavigationBar+BackgroundColor.h"
 #import "UIImage+Extend.h"
+#import "YTTabBarController.h"
 
 
 typedef enum state {
@@ -211,6 +212,8 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
 }
 //
 - (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    // 获取根控制器
+    YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     // 如果进入的是首页视图控制器
     if ([viewController isKindOfClass:[YTHomeViewController class]]) {
 
@@ -220,6 +223,8 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
         [self navigationBarWithHidden:YES];
         // 添加手势
         [self.nav.view addGestureRecognizer:self.panRecongnizer];
+        // 显示tabbar
+        appRootVC.tabBar.hidden =  NO;
     } else {
         // 进入其他视图控制器
         [self.nav.navigationBar lt_setBackgroundColor:[YTNavBackground colorWithAlphaComponent:1.0]];
@@ -227,7 +232,8 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
         [self navigationBarWithHidden:NO];
         // 删除手势
         [self.nav.view removeGestureRecognizer:self.panRecongnizer];
-
+        // 隐藏tabbar
+        appRootVC.tabBar.hidden = YES;
     }
 }
 

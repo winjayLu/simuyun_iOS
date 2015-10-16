@@ -24,8 +24,6 @@
 		971503AA1BC75E78007E27D0 /* PPTModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9715039F1BC75E78007E27D0 /* PPTModel.m */; settings = {ASSET_TAGS = (); }; };
 		971503AB1BC75E78007E27D0 /* PPTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 971503A21BC75E78007E27D0 /* PPTCell.m */; settings = {ASSET_TAGS = (); }; };
 		971503AC1BC75E78007E27D0 /* PPTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 971503A31BC75E78007E27D0 /* PPTCell.xib */; settings = {ASSET_TAGS = (); }; };
-		971503B01BC761B1007E27D0 /* SMPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 971503AF1BC761B1007E27D0 /* SMPageControl.m */; settings = {ASSET_TAGS = (); }; };
-		971503B31BC768FF007E27D0 /* CorePageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 971503B21BC768FF007E27D0 /* CorePageControl.m */; settings = {ASSET_TAGS = (); }; };
 		971503B71BC76961007E27D0 /* CorePPTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971503B51BC76961007E27D0 /* CorePPTVC.m */; settings = {ASSET_TAGS = (); }; };
 		971503B81BC76961007E27D0 /* CorePPTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 971503B61BC76961007E27D0 /* CorePPTVC.xib */; settings = {ASSET_TAGS = (); }; };
 		971503BB1BC769FB007E27D0 /* PPTPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 971503BA1BC769FB007E27D0 /* PPTPageControl.m */; settings = {ASSET_TAGS = (); }; };
@@ -43,6 +41,11 @@
 		9769FA051BC968F2001B1F02 /* YTLeftMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 9769FA031BC968F2001B1F02 /* YTLeftMenu.m */; settings = {ASSET_TAGS = (); }; };
 		9769FA061BC968F2001B1F02 /* YTLeftMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9769FA041BC968F2001B1F02 /* YTLeftMenu.xib */; settings = {ASSET_TAGS = (); }; };
 		9777E97D1BCA3A220016D071 /* YTNotificationConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 9777E97C1BCA3A220016D071 /* YTNotificationConst.m */; settings = {ASSET_TAGS = (); }; };
+		9782181F1BD0CA28000159E8 /* YTRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9782181D1BD0CA28000159E8 /* YTRegisterViewController.m */; settings = {ASSET_TAGS = (); }; };
+		978218201BD0CA28000159E8 /* YTRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9782181E1BD0CA28000159E8 /* YTRegisterViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		978218231BD0DF72000159E8 /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 978218221BD0DF72000159E8 /* JKCountDownButton.m */; settings = {ASSET_TAGS = (); }; };
+		978218271BD0E40C000159E8 /* YTResultPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 978218251BD0E40C000159E8 /* YTResultPasswordViewController.m */; settings = {ASSET_TAGS = (); }; };
+		978218281BD0E40C000159E8 /* YTResultPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 978218261BD0E40C000159E8 /* YTResultPasswordViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		978C6FE11BCF8193003D183E /* YTProductViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 978C6FE01BCF8193003D183E /* YTProductViewController.m */; settings = {ASSET_TAGS = (); }; };
 		978C6FE71BCF8564003D183E /* YTProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 978C6FE51BCF8564003D183E /* YTProductCell.m */; settings = {ASSET_TAGS = (); }; };
 		978C6FE81BCF8564003D183E /* YTProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 978C6FE61BCF8564003D183E /* YTProductCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -142,6 +145,15 @@
 		97DD72C31BC421E60082C69F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C21BC421E60082C69F /* libz.dylib */; };
 		97DD72C51BC421F40082C69F /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C41BC421F40082C69F /* libstdc++.dylib */; };
 		97DD72C71BC421FE0082C69F /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C61BC421FE0082C69F /* libiconv.dylib */; };
+		97DE830B1BD0FB5300E3C5CA /* CoreTFManagerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97DE83041BD0FB5300E3C5CA /* CoreTFManagerVC.m */; settings = {ASSET_TAGS = (); }; };
+		97DE830C1BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97DE83071BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.m */; settings = {ASSET_TAGS = (); }; };
+		97DE830D1BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DE83081BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.xib */; settings = {ASSET_TAGS = (); }; };
+		97DE830E1BD0FB5300E3C5CA /* TFModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97DE830A1BD0FB5300E3C5CA /* TFModel.m */; settings = {ASSET_TAGS = (); }; };
+		97DE83131BD1042900E3C5CA /* YTResuNextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97DE83111BD1042900E3C5CA /* YTResuNextViewController.m */; settings = {ASSET_TAGS = (); }; };
+		97DE83141BD1042900E3C5CA /* YTResuNextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97DE83121BD1042900E3C5CA /* YTResuNextViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		97DE831C1BD11EBA00E3C5CA /* YTStockView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97DE831B1BD11EBA00E3C5CA /* YTStockView.m */; settings = {ASSET_TAGS = (); }; };
+		97DE831F1BD11EEF00E3C5CA /* YTStockItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 97DE831E1BD11EEF00E3C5CA /* YTStockItem.m */; settings = {ASSET_TAGS = (); }; };
+		97DE83231BD11F2700E3C5CA /* YTStockModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97DE83221BD11F2700E3C5CA /* YTStockModel.m */; settings = {ASSET_TAGS = (); }; };
 		C7C7A3BFF6245A07C6961ED3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1695905209A227AB6ABE80C8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -197,10 +209,6 @@
 		971503A11BC75E78007E27D0 /* PPTCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPTCell.h; sourceTree = "<group>"; };
 		971503A21BC75E78007E27D0 /* PPTCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPTCell.m; sourceTree = "<group>"; };
 		971503A31BC75E78007E27D0 /* PPTCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PPTCell.xib; sourceTree = "<group>"; };
-		971503AE1BC761B1007E27D0 /* SMPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPageControl.h; sourceTree = "<group>"; };
-		971503AF1BC761B1007E27D0 /* SMPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMPageControl.m; sourceTree = "<group>"; };
-		971503B11BC768FF007E27D0 /* CorePageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CorePageControl.h; sourceTree = "<group>"; };
-		971503B21BC768FF007E27D0 /* CorePageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CorePageControl.m; sourceTree = "<group>"; };
 		971503B41BC76961007E27D0 /* CorePPTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CorePPTVC.h; sourceTree = "<group>"; };
 		971503B51BC76961007E27D0 /* CorePPTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CorePPTVC.m; sourceTree = "<group>"; };
 		971503B61BC76961007E27D0 /* CorePPTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CorePPTVC.xib; sourceTree = "<group>"; };
@@ -228,6 +236,14 @@
 		9769FA041BC968F2001B1F02 /* YTLeftMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTLeftMenu.xib; sourceTree = "<group>"; };
 		9777E97B1BCA3A220016D071 /* YTNotificationConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTNotificationConst.h; sourceTree = "<group>"; };
 		9777E97C1BCA3A220016D071 /* YTNotificationConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTNotificationConst.m; sourceTree = "<group>"; };
+		9782181C1BD0CA28000159E8 /* YTRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTRegisterViewController.h; sourceTree = "<group>"; };
+		9782181D1BD0CA28000159E8 /* YTRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTRegisterViewController.m; sourceTree = "<group>"; };
+		9782181E1BD0CA28000159E8 /* YTRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTRegisterViewController.xib; sourceTree = "<group>"; };
+		978218211BD0DF72000159E8 /* JKCountDownButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCountDownButton.h; sourceTree = "<group>"; };
+		978218221BD0DF72000159E8 /* JKCountDownButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCountDownButton.m; sourceTree = "<group>"; };
+		978218241BD0E40C000159E8 /* YTResultPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTResultPasswordViewController.h; sourceTree = "<group>"; };
+		978218251BD0E40C000159E8 /* YTResultPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTResultPasswordViewController.m; sourceTree = "<group>"; };
+		978218261BD0E40C000159E8 /* YTResultPasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTResultPasswordViewController.xib; sourceTree = "<group>"; };
 		978C6FDF1BCF8193003D183E /* YTProductViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTProductViewController.h; sourceTree = "<group>"; };
 		978C6FE01BCF8193003D183E /* YTProductViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTProductViewController.m; sourceTree = "<group>"; };
 		978C6FE41BCF8564003D183E /* YTProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTProductCell.h; sourceTree = "<group>"; };
@@ -417,6 +433,22 @@
 		97DD72C21BC421E60082C69F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		97DD72C41BC421F40082C69F /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		97DD72C61BC421FE0082C69F /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		97DE83031BD0FB5300E3C5CA /* CoreTFManagerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTFManagerVC.h; sourceTree = "<group>"; };
+		97DE83041BD0FB5300E3C5CA /* CoreTFManagerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTFManagerVC.m; sourceTree = "<group>"; };
+		97DE83061BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreTFKeyBoardToolBarView.h; sourceTree = "<group>"; };
+		97DE83071BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreTFKeyBoardToolBarView.m; sourceTree = "<group>"; };
+		97DE83081BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CoreTFKeyBoardToolBarView.xib; sourceTree = "<group>"; };
+		97DE83091BD0FB5300E3C5CA /* TFModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFModel.h; sourceTree = "<group>"; };
+		97DE830A1BD0FB5300E3C5CA /* TFModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFModel.m; sourceTree = "<group>"; };
+		97DE83101BD1042900E3C5CA /* YTResuNextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTResuNextViewController.h; sourceTree = "<group>"; };
+		97DE83111BD1042900E3C5CA /* YTResuNextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTResuNextViewController.m; sourceTree = "<group>"; };
+		97DE83121BD1042900E3C5CA /* YTResuNextViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTResuNextViewController.xib; sourceTree = "<group>"; };
+		97DE831A1BD11EBA00E3C5CA /* YTStockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTStockView.h; sourceTree = "<group>"; };
+		97DE831B1BD11EBA00E3C5CA /* YTStockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTStockView.m; sourceTree = "<group>"; };
+		97DE831D1BD11EEF00E3C5CA /* YTStockItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTStockItem.h; sourceTree = "<group>"; };
+		97DE831E1BD11EEF00E3C5CA /* YTStockItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTStockItem.m; sourceTree = "<group>"; };
+		97DE83211BD11F2700E3C5CA /* YTStockModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTStockModel.h; sourceTree = "<group>"; };
+		97DE83221BD11F2700E3C5CA /* YTStockModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTStockModel.m; sourceTree = "<group>"; };
 		EE4C2D6D5E8167BC60D82A90 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -549,10 +581,6 @@
 		971503921BC75E78007E27D0 /* CorePPTVC */ = {
 			isa = PBXGroup;
 			children = (
-				971503B11BC768FF007E27D0 /* CorePageControl.h */,
-				971503B21BC768FF007E27D0 /* CorePageControl.m */,
-				971503AE1BC761B1007E27D0 /* SMPageControl.h */,
-				971503AF1BC761B1007E27D0 /* SMPageControl.m */,
 				971503B41BC76961007E27D0 /* CorePPTVC.h */,
 				971503B51BC76961007E27D0 /* CorePPTVC.m */,
 				971503B61BC76961007E27D0 /* CorePPTVC.xib */,
@@ -882,6 +910,7 @@
 		97C6059B1BC260A400E555E8 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				97DE83021BD0FB5300E3C5CA /* CoreTFManagerVC */,
 				9714A6D61BC7E0610018A14E /* YUScreentPoper */,
 				971503921BC75E78007E27D0 /* CorePPTVC */,
 				97A61D721BC6893B000A5B17 /* WebProgressView */,
@@ -1012,6 +1041,8 @@
 		97C605E01BC2622E00E555E8 /* Discover(发现) */ = {
 			isa = PBXGroup;
 			children = (
+				97DE83151BD11E1D00E3C5CA /* Model */,
+				97DE83161BD11E1D00E3C5CA /* View */,
 				97C605E11BC2622E00E555E8 /* Controller */,
 			);
 			path = "Discover(发现)";
@@ -1042,6 +1073,15 @@
 				97C605E61BC2622E00E555E8 /* YTLoginViewController.h */,
 				97C605E71BC2622E00E555E8 /* YTLoginViewController.m */,
 				97C605E81BC2622E00E555E8 /* YTLoginViewController.xib */,
+				9782181C1BD0CA28000159E8 /* YTRegisterViewController.h */,
+				9782181D1BD0CA28000159E8 /* YTRegisterViewController.m */,
+				9782181E1BD0CA28000159E8 /* YTRegisterViewController.xib */,
+				978218241BD0E40C000159E8 /* YTResultPasswordViewController.h */,
+				978218251BD0E40C000159E8 /* YTResultPasswordViewController.m */,
+				978218261BD0E40C000159E8 /* YTResultPasswordViewController.xib */,
+				97DE83101BD1042900E3C5CA /* YTResuNextViewController.h */,
+				97DE83111BD1042900E3C5CA /* YTResuNextViewController.m */,
+				97DE83121BD1042900E3C5CA /* YTResuNextViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1058,6 +1098,8 @@
 		97C605EC1BC2622E00E555E8 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				978218211BD0DF72000159E8 /* JKCountDownButton.h */,
+				978218221BD0DF72000159E8 /* JKCountDownButton.m */,
 				97C605ED1BC2622E00E555E8 /* YTAccountTool.h */,
 				97C605EE1BC2622E00E555E8 /* YTAccountTool.m */,
 			);
@@ -1347,6 +1389,48 @@
 			path = Wechat;
 			sourceTree = "<group>";
 		};
+		97DE83021BD0FB5300E3C5CA /* CoreTFManagerVC */ = {
+			isa = PBXGroup;
+			children = (
+				97DE83031BD0FB5300E3C5CA /* CoreTFManagerVC.h */,
+				97DE83041BD0FB5300E3C5CA /* CoreTFManagerVC.m */,
+				97DE83051BD0FB5300E3C5CA /* Lib */,
+			);
+			path = CoreTFManagerVC;
+			sourceTree = "<group>";
+		};
+		97DE83051BD0FB5300E3C5CA /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				97DE83061BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.h */,
+				97DE83071BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.m */,
+				97DE83081BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.xib */,
+				97DE83091BD0FB5300E3C5CA /* TFModel.h */,
+				97DE830A1BD0FB5300E3C5CA /* TFModel.m */,
+			);
+			path = Lib;
+			sourceTree = "<group>";
+		};
+		97DE83151BD11E1D00E3C5CA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				97DE83211BD11F2700E3C5CA /* YTStockModel.h */,
+				97DE83221BD11F2700E3C5CA /* YTStockModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		97DE83161BD11E1D00E3C5CA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				97DE831A1BD11EBA00E3C5CA /* YTStockView.h */,
+				97DE831B1BD11EBA00E3C5CA /* YTStockView.m */,
+				97DE831D1BD11EEF00E3C5CA /* YTStockItem.h */,
+				97DE831E1BD11EEF00E3C5CA /* YTStockItem.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1479,14 +1563,18 @@
 				97C3CE6B1BC2BAEF00B7185D /* SVProgressHUD.bundle in Resources */,
 				97C606AA1BC2985700E555E8 /* UMSCommentInputController.xib in Resources */,
 				975F78041BCFCD3D00589D22 /* Assets.xcassets in Resources */,
+				978218281BD0E40C000159E8 /* YTResultPasswordViewController.xib in Resources */,
 				9769FA061BC968F2001B1F02 /* YTLeftMenu.xib in Resources */,
 				978C6FE81BCF8564003D183E /* YTProductCell.xib in Resources */,
 				97C3CE751BC2C17D00B7185D /* MBProgressHUD.bundle in Resources */,
+				97DE83141BD1042900E3C5CA /* YTResuNextViewController.xib in Resources */,
+				97DE830D1BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.xib in Resources */,
 				97C605F51BC2622E00E555E8 /* YTLoginViewController.xib in Resources */,
 				97C606041BC2628200E555E8 /* TempViewController.xib in Resources */,
 				97C606B11BC2985700E555E8 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				97C606721BC270CC00E555E8 /* CoreSDWebImage.bundle in Resources */,
 				97C606AB1BC2985700E555E8 /* UMSCommentInputControlleriPad.xib in Resources */,
+				978218201BD0CA28000159E8 /* YTRegisterViewController.xib in Resources */,
 				97C606B01BC2985700E555E8 /* UMSShareListController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1547,13 +1635,15 @@
 			files = (
 				9714A6EF1BC7E0610018A14E /* NSString+FontAwesome.m in Sources */,
 				97C6067E1BC271DE00E555E8 /* CoreStatus.m in Sources */,
+				9782181F1BD0CA28000159E8 /* YTRegisterViewController.m in Sources */,
+				97DE830E1BD0FB5300E3C5CA /* TFModel.m in Sources */,
 				9769F9F91BC9676B001B1F02 /* YTGroupCell.m in Sources */,
 				97C3CE221BC29E2D00B7185D /* ShareManage.m in Sources */,
 				97C605F61BC2622E00E555E8 /* YTAccount.m in Sources */,
 				97C3CE6C1BC2BAEF00B7185D /* SVProgressHUD.m in Sources */,
+				97DE831F1BD11EEF00E3C5CA /* YTStockItem.m in Sources */,
 				97C6061B1BC266A900E555E8 /* CALayer+Transition.m in Sources */,
 				9769F9FB1BC9676B001B1F02 /* YTProfileTopView.m in Sources */,
-				971503B31BC768FF007E27D0 /* CorePageControl.m in Sources */,
 				97C606471BC269CC00E555E8 /* UIImage+Cut.m in Sources */,
 				9769F9F61BC9676B001B1F02 /* YTContentCell.m in Sources */,
 				9714A6F81BC7E0610018A14E /* YUDarkGlassView.m in Sources */,
@@ -1564,8 +1654,12 @@
 				97C606031BC2628200E555E8 /* TempViewController.m in Sources */,
 				97187A8E1BC666E200C64609 /* YTWebViewController.m in Sources */,
 				9714A6F31BC7E0610018A14E /* UIView+YUStyle.m in Sources */,
+				978218271BD0E40C000159E8 /* YTResultPasswordViewController.m in Sources */,
+				97DE83231BD11F2700E3C5CA /* YTStockModel.m in Sources */,
 				97C606251BC2679F00E555E8 /* NSString+Extend.m in Sources */,
 				9769F9F81BC9676B001B1F02 /* YTContentView.m in Sources */,
+				978218231BD0DF72000159E8 /* JKCountDownButton.m in Sources */,
+				97DE83131BD1042900E3C5CA /* YTResuNextViewController.m in Sources */,
 				97C605AB1BC260A400E555E8 /* UIWindow+Extension.m in Sources */,
 				97C605AF1BC260A400E555E8 /* YTHttpTool.m in Sources */,
 				97973CE71BC3BE7000B7B4CB /* NSString+File.m in Sources */,
@@ -1573,6 +1667,7 @@
 				97C606321BC2692B00E555E8 /* UIFont+Extend.m in Sources */,
 				9714A6F21BC7E0610018A14E /* UIColor+YUColor.m in Sources */,
 				97C605F41BC2622E00E555E8 /* YTLoginViewController.m in Sources */,
+				97DE830C1BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.m in Sources */,
 				97C3CE6D1BC2BAEF00B7185D /* SVRadialGradientLayer.m in Sources */,
 				971503AA1BC75E78007E27D0 /* PPTModel.m in Sources */,
 				97C605F71BC2622E00E555E8 /* YTAccountTool.m in Sources */,
@@ -1585,11 +1680,13 @@
 				97B08A8D1BC2472B007EBD24 /* AppDelegate.m in Sources */,
 				97973CFA1BC3C11500B7B4CB /* NewFeatureScrollView.m in Sources */,
 				97C605DD1BC2621F00E555E8 /* YTProfileViewController.m in Sources */,
+				97DE830B1BD0FB5300E3C5CA /* CoreTFManagerVC.m in Sources */,
 				97973CE81BC3BE7000B7B4CB /* CoreArchive.m in Sources */,
 				97C606481BC269CC00E555E8 /* UIImage+Extend.m in Sources */,
 				971503A91BC75E78007E27D0 /* PPTLayout.m in Sources */,
 				97C605AD1BC260A400E555E8 /* YTTabBarController.m in Sources */,
 				97973D001BC3C5E500B7B4CB /* YTWelcomeViewController.m in Sources */,
+				97DE831C1BD11EBA00E3C5CA /* YTStockView.m in Sources */,
 				97C6068A1BC27BD600E555E8 /* NSDate+Extension.m in Sources */,
 				97973CE01BC3A75700B7B4CB /* YTBadgeTool.m in Sources */,
 				97A61D781BC6893B000A5B17 /* YHWebViewProgress.m in Sources */,
@@ -1605,7 +1702,6 @@
 				97C3CE761BC2C17D00B7185D /* MBProgressHUD.m in Sources */,
 				97A61D791BC6893C000A5B17 /* YHWebViewProgressView.m in Sources */,
 				97C605DA1BC2621F00E555E8 /* YTMenuViewController.m in Sources */,
-				971503B01BC761B1007E27D0 /* SMPageControl.m in Sources */,
 				97C606711BC270CC00E555E8 /* UIImage+ReMake.m in Sources */,
 				97973CFB1BC3C11500B7B4CB /* UIApplication+Extend.m in Sources */,
 				971503A81BC75E78007E27D0 /* PPTConst.m in Sources */,

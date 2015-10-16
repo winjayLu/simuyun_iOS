@@ -12,6 +12,8 @@
 #import "YTTabBarController.h"
 #import "YTAccountTool.h"
 #import "CALayer+Transition.h"
+#import "YTNavigationController.h"
+
 
 #define delay 3.0f
 
@@ -23,8 +25,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = YTRandomColor;
+    
+    
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -43,10 +47,15 @@
         if ([YTAccountTool account]) {
             mainWindow.rootViewController = [[YTTabBarController alloc] init];
         } else {
-            mainWindow.rootViewController = [[YTLoginViewController alloc] init];
+            mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
         }
         [mainWindow.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.75f];
 
     });
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 @end

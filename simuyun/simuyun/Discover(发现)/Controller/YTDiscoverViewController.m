@@ -10,19 +10,110 @@
 #import "CorePPTVC.h"
 #import "CoreStatus.h"
 #import "YTWebViewController.h"
+#import "YTStockView.h"
+
+
+// 左右间距
+#define maginWidth 7
+// 滚动视图的高度偏移量
+#define pptvcY 64
 
 
 @interface YTDiscoverViewController ()
+
+/**
+ *  轮播滚动控制器
+ */
+@property (nonatomic, weak) CorePPTVC *pptVC;
+
 @end
 
 @implementation YTDiscoverViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = YTRandomColor;
+    self.view.backgroundColor = YTViewBackground;
+    // 初始化轮播图片
+    [self setupPPTVC];
+    // 初始化股指视图
+    [self setupStock];
     
-    
+    // 获取轮播图片
     [self getAdvertise];
+    
+   
+    
+}
+/**
+ *  初始化轮播图片
+ */
+- (void)setupPPTVC
+{
+    CorePPTVC *pptvc = [[CorePPTVC alloc] init];
+    pptvc.view.frame = CGRectMake(maginWidth, maginWidth, DeviceWidth - 2 * maginWidth, 134 + pptvcY);
+    pptvc.view.layer.cornerRadius = 5;
+    pptvc.view.layer.masksToBounds = YES;
+    pptvc.view.backgroundColor = [UIColor blueColor];
+    [self addChildViewController:pptvc];
+    [self.view addSubview:pptvc.view];
+    self.pptVC = pptvc;
+    pptvc.pptItemClickBlock = ^(PPTModel *pptModel){
+        [self pptVcClick:pptModel.extension_url];
+    };
+    
+}
+/**
+ *  初始化股指视图
+ */
+- (void)setupStock
+{
+    YTStockView *stock = [[YTStockView alloc] init];
+    stock.frame = CGRectMake(maginWidth, CGRectGetMaxY(self.pptVC.view.frame) + maginWidth - pptvcY, self.pptVC.view.width, 88);
+    stock.layer.cornerRadius = 5;
+    stock.layer.masksToBounds = YES;
+    [self.view addSubview:stock];
+
+}
+
+/**
+ *  轮播图片的点击事件
+ *
+ *  @param toUrl 跳转的地址
+ */
+- (void)pptVcClick:(NSString *)toUrl
+{
+    YTWebViewController *webView = [[YTWebViewController alloc] init];
+    webView.url = toUrl;
+    webView.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:webView animated:YES];
+}
+
+
+
+
+
+/**
+ *  获取广告位
+ */
+- (void)getAdvertise
+{
+    
+//    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+//    dict[@"method"] = @"getAdvertise";
+//    dict[@"os"] = @"ios";
+//    dict[@"advisers_id"] = @"00a8f3d0792646c6935b6dd86dd6ef7f";
+//    
+//    [YTHttpTool post:YTServer params:[NSDictionary httpWithDictionary:dict] success:^(NSDictionary *responseObject) {
+//        
+//        YTLog(@"%@",responseObject);
+//        YTLog(@"ss");
+//    } failure:^(NSError *error) {
+//        NSLog(@"qq");
+//        YTLog(@"%@",error);
+//        YTLog(@"sserror");
+//    }];
+//    //https://intime.simuyun.com/api/interface/?method=checkVersion&param[insver]=0001&param[os]=ios-appstore
+//    //result	__NSCFString *	@"https://182.92.217.186:6060/api/interface/api"	0x00007f9b862101d0
     
     PPTModel *pptModel1 = [[PPTModel alloc] init];
     pptModel1.image = [UIImage imageNamed:@"1"];
@@ -46,84 +137,7 @@
     PPTModel *pptModel6 = [[PPTModel alloc] init];
     pptModel6.image = [UIImage imageNamed:@"2"];
     
-    
-    
-    
-//    NSArray *pptModels = @[pptModel1,pptModel2,pptModel3,pptModel4,pptModel5,pptModel6];
-//    
-//    
-//    CorePPTVC *pptvc = [[CorePPTVC alloc] init];
-//    pptvc.pptModels = pptModels;
-    //传递数据
-    //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(8.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    //        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    //            pptvc.pptModels = @[pptModel1,pptModel2,pptModel5];
-    //        });
-    //    });
-    //
-    //
-    //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(16.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    //        pptvc.pptModels = pptModels;
-    //    });
-    
-    
-   
-    
-}
-/**
- *  初始化轮播图片
- */
-- (void)setupPPTVC
-{
-    CorePPTVC *pptvc = [[CorePPTVC alloc] init];
-    pptvc.view.frame = CGRectMake(0, 0, DeviceWidth, 260);
-
-    [self addChildViewController:pptvc];
-    [self.view addSubview:pptvc.view];
-    pptvc.pptItemClickBlock = ^(PPTModel *pptModel){
-        [self pptVcClick:pptModel.extension_url];
-    };
-}
-
-/**
- *  轮播图片的点击事件
- *
- *  @param toUrl 跳转的地址
- */
-- (void)pptVcClick:(NSString *)toUrl
-{
-    YTWebViewController *webView = [[YTWebViewController alloc] init];
-    webView.url = toUrl;
-    
-    [self.navigationController pushViewController:webView animated:YES];
-}
-
-
-
-
-
-/**
- *  获取广告位
- */
-- (void)getAdvertise
-{
-    
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"method"] = @"getAdvertise";
-    dict[@"os"] = @"ios";
-    dict[@"advisers_id"] = @"00a8f3d0792646c6935b6dd86dd6ef7f";
-    
-    [YTHttpTool post:YTServer params:[NSDictionary httpWithDictionary:dict] success:^(NSDictionary *responseObject) {
-        
-        YTLog(@"%@",responseObject);
-        YTLog(@"ss");
-    } failure:^(NSError *error) {
-        NSLog(@"qq");
-        YTLog(@"%@",error);
-        YTLog(@"sserror");
-    }];
-    //https://intime.simuyun.com/api/interface/?method=checkVersion&param[insver]=0001&param[os]=ios-appstore
-    //result	__NSCFString *	@"https://182.92.217.186:6060/api/interface/api"	0x00007f9b862101d0
+    self.pptVC.pptModels = @[pptModel1, pptModel2, pptModel3, pptModel4, pptModel5];
 }
 
 
@@ -131,7 +145,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-
 }
 
 

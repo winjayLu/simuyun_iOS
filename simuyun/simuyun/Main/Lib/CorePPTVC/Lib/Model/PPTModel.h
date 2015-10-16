@@ -28,7 +28,6 @@
 @property (nonatomic, copy) NSString *extension_url;
 
 
-
 /** 图片点击事件block：主要用于处理图片点击事件 */
 @property (nonatomic,copy) void(^PPTClickBlock)(PPTModel *pptModel);
 

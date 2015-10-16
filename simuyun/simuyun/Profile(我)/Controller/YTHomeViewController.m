@@ -177,7 +177,7 @@
     YTLog(@"%zd", row);
     // 跳转对应控制器
     YTOtherViewController *other = [[YTOtherViewController alloc] init];
-    other.hidesBottomBarWhenPushed = YES;
+
     [self.navigationController pushViewController:other animated:YES];
 
 }

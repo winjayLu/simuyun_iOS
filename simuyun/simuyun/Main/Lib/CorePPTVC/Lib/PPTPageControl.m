@@ -23,15 +23,9 @@
 
     //禁用交互
     self.userInteractionEnabled = NO;
+    
+    self.tintColor = [UIColor whiteColor];
 
-    //普通图片
-    self.pageIndicatorImage = [UIImage imageWithColor:PPTPagecontrolNormalColor size:PPTPagecontrolSize];
-    
-    //当前图片
-    self.currentPageIndicatorImage = [UIImage imageWithColor:PPTPagecontrolCurrentColor size:PPTPagecontrolSize];
-    
-    //居中
-    self.alignment = SMPageControlAlignmentCenter;
 }
 
 
