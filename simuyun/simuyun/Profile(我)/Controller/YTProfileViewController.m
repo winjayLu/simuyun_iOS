@@ -140,12 +140,14 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
         if (proportion == 1) {
             menuCenterX = 0;
             navCenterX = DeviceWidth * 0.5;
+            self.nav.view.center = CGPointMake(DeviceWidth * 0.5, DeviceHight * 0.5);
+            self.menuVc.view.center = CGPointMake(menuCenterX, self.view.center.y);
         } else {
             menuCenterX = DeviceWidth * 0.5;
             navCenterX = menuCenterX + 241;
+            self.nav.view.center = CGPointMake(navCenterX, DeviceHight * 0.5);
+            self.menuVc.view.center = CGPointMake(menuCenterX, self.view.center.y);
         }
-        self.nav.view.center = CGPointMake(navCenterX, DeviceHight * 0.5);
-        self.menuVc.view.center = CGPointMake(menuCenterX, self.view.center.y);
     } completion:^(BOOL finished) {
         if (proportion != 1) {
             // 设置遮盖
@@ -176,34 +178,6 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
 - (void)leftBtnClicked {
     [self showMenu];
 }
-//
-//#pragma mark - WMMenuViewController代理方法
-//- (void)didSelectItem:(NSString *)btnTitle {
-//    
-//    
-//    if ([btnTitle isEqualToString:@"用户资料"]) {
-//        
-//    } else if([btnTitle isEqualToString:@"关联微信"]){
-//        
-//    } else if([btnTitle isEqualToString:@"邮寄地址"]){
-//        
-//    } else if([btnTitle isEqualToString:@"推荐私募云给好友"]){
-//        
-//    } else if([btnTitle isEqualToString:@"帮助"]){
-//        
-//    } else if([btnTitle isEqualToString:@"关于私募云"]){
-//        
-//    } else {
-//    }
-//    
-////    WMOtherViewController *other = [[WMOtherViewController alloc] init];
-////    other.navTitle = title;
-////        [self.messageNav pushViewController:other animated:NO];
-//    YTOtherViewController *other = [[YTOtherViewController alloc] init];
-//    other.hidesBottomBarWhenPushed = YES;
-//    [self.nav pushViewController:other animated:NO];
-//    [self coverClick:nil];
-//}
 
 
 - (UIStatusBarStyle)preferredStatusBarStyle

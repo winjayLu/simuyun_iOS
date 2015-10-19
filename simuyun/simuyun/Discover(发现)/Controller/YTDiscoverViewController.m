@@ -11,6 +11,7 @@
 #import "CoreStatus.h"
 #import "YTWebViewController.h"
 #import "YTStockView.h"
+#import "YTConsultView.h"
 
 
 // 左右间距
@@ -26,24 +27,54 @@
  */
 @property (nonatomic, weak) CorePPTVC *pptVC;
 
+/**
+ *  股指视图
+ */
+@property (nonatomic, weak) YTStockView *stock;
+
+/**
+ *  滚动视图数据
+ */
+@property (nonatomic, strong) NSArray *ppts;
+
+/**
+ *  股指数据
+ */
+@property (nonatomic, strong) NSArray *stocks;
+
 @end
 
 @implementation YTDiscoverViewController
 
+- (void)loadView
+{
+    UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:DeviceBounds];
+//    mainView.bounces = NO;
+    mainView.showsVerticalScrollIndicator = NO;
+    self.view = mainView;
+    self.view.backgroundColor = YTViewBackground;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = YTViewBackground;
     // 初始化轮播图片
     [self setupPPTVC];
     // 初始化股指视图
     [self setupStock];
+    // 初始化咨讯
+    [self setupConsult];
     
     // 获取轮播图片
     [self getAdvertise];
     
-   
+    // 获取股指数据
+    [self loadStock];
     
 }
+
+
+#pragma mark - 初始化方法
 /**
  *  初始化轮播图片
  */
@@ -68,52 +99,39 @@
 - (void)setupStock
 {
     YTStockView *stock = [[YTStockView alloc] init];
-    stock.frame = CGRectMake(maginWidth, CGRectGetMaxY(self.pptVC.view.frame) + maginWidth - pptvcY, self.pptVC.view.width, 88);
+    stock.frame = CGRectMake(maginWidth, CGRectGetMaxY(self.pptVC.view.frame) + maginWidth - pptvcY, self.pptVC.view.width, 89);
     stock.layer.cornerRadius = 5;
     stock.layer.masksToBounds = YES;
     [self.view addSubview:stock];
-
+    self.stock = stock;
 }
-
 /**
- *  轮播图片的点击事件
+ *  初始化资讯视图
  *
- *  @param toUrl 跳转的地址
  */
-- (void)pptVcClick:(NSString *)toUrl
+- (void)setupConsult
 {
-    YTWebViewController *webView = [[YTWebViewController alloc] init];
-    webView.url = toUrl;
-    webView.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:webView animated:YES];
+    // 标题高度
+    CGFloat headerH = 30;
+    // cell高度
+    CGFloat cellH = 93;
+    CGFloat consultY = CGRectGetMaxY(self.stock.frame) + maginWidth;
+    CGFloat consultH = headerH + cellH * 5;
+    YTConsultView *consult = [[YTConsultView alloc] initWithFrame:CGRectMake(maginWidth, consultY, self.stock.width, consultH)];
+    consult.layer.cornerRadius = 5;
+    consult.layer.masksToBounds = YES;
+    [self.view addSubview:consult];
+    
+    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(consult.frame) + maginWidth)];
 }
 
 
-
-
-
+#pragma mark - getServer
 /**
- *  获取广告位
+ *  获取轮播图片地址
  */
 - (void)getAdvertise
 {
-    
-//    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-//    dict[@"method"] = @"getAdvertise";
-//    dict[@"os"] = @"ios";
-//    dict[@"advisers_id"] = @"00a8f3d0792646c6935b6dd86dd6ef7f";
-//    
-//    [YTHttpTool post:YTServer params:[NSDictionary httpWithDictionary:dict] success:^(NSDictionary *responseObject) {
-//        
-//        YTLog(@"%@",responseObject);
-//        YTLog(@"ss");
-//    } failure:^(NSError *error) {
-//        NSLog(@"qq");
-//        YTLog(@"%@",error);
-//        YTLog(@"sserror");
-//    }];
-//    //https://intime.simuyun.com/api/interface/?method=checkVersion&param[insver]=0001&param[os]=ios-appstore
-//    //result	__NSCFString *	@"https://182.92.217.186:6060/api/interface/api"	0x00007f9b862101d0
     
     PPTModel *pptModel1 = [[PPTModel alloc] init];
     pptModel1.image = [UIImage imageNamed:@"1"];
@@ -140,7 +158,50 @@
     self.pptVC.pptModels = @[pptModel1, pptModel2, pptModel3, pptModel4, pptModel5];
 }
 
+/**
+ *  获取股指数据
+ *
+ */
+- (void)loadStock
+{
+    self.stocks = [NSArray arrayWithObjects:@"1", @"2", @"3",@"2", @"3",@"2", @"3", nil];
+    self.stock.stocks = self.stocks;
 
+}
+
+
+
+/**
+ *  轮播图片的点击事件
+ *
+ *  @param toUrl 跳转的地址
+ */
+- (void)pptVcClick:(NSString *)toUrl
+{
+    YTWebViewController *webView = [[YTWebViewController alloc] init];
+    webView.url = toUrl;
+    webView.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:webView animated:YES];
+}
+
+
+#pragma mark - 懒加载
+
+- (NSArray *)ppts
+{
+    if (!_ppts) {
+        _ppts = [[NSArray alloc] init];
+    }
+    return _ppts;
+}
+
+- (NSArray *)stocks
+{
+    if (!_stocks) {
+        _stocks = [[NSArray alloc] init];
+    }
+    return _stocks;
+}
 
 
 - (void)didReceiveMemoryWarning {

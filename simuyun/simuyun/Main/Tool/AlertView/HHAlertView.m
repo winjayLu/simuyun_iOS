@@ -137,7 +137,7 @@ static UIWindow *_window;
     _window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     _window.backgroundColor = YTRGBA(0, 0, 0, 0.2);
     _window.alpha = 1;
-    _window.windowLevel = UIWindowLevelAlert ;
+    _window.windowLevel = UIWindowLevelStatusBar ;
     _window.hidden = NO;
     [_window makeKeyAndVisible];
     
@@ -273,7 +273,7 @@ static UIWindow *_window;
         self.layer.cornerRadius = 5;
         self.layer.shadowOffset = CGSizeMake(0, 5);
         self.layer.shadowOpacity = 0.3f;
-        self.layer.shadowRadius = 5.0f;
+        self.layer.shadowRadius = 20.0f;
     } completion:^(BOOL finished) {
         [_OkButton removeFromSuperview];
         [_cancelButton removeFromSuperview];
@@ -288,6 +288,8 @@ static UIWindow *_window;
 
 
 
+
+
 - (void)show
 {
     
@@ -296,7 +298,7 @@ static UIWindow *_window;
         self.layer.cornerRadius = 5;
         self.layer.shadowOffset = CGSizeMake(0, 5);
         self.layer.shadowOpacity = 0.3f;
-        self.layer.shadowRadius = 5.0f;
+        self.layer.shadowRadius = 20.0f;
     } completion:^(BOOL finished) {
         
     }];

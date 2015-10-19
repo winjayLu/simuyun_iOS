@@ -42,6 +42,8 @@
     self.window.frame = DeviceBounds;
     // 设置窗口根控制器
     [self.window chooseRootviewController];
+    // 设置状态栏
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [self.window makeKeyAndVisible];
     
     return YES;
@@ -111,10 +113,8 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-#warning 保存 deviceToken 用来做唯一标识符
     [APService registerDeviceToken:deviceToken];
-#warning 或者使用 registrationID 用来做唯一标识符
-    [APService registrationID];
+
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo

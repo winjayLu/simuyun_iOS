@@ -45,7 +45,7 @@
     }
     
 #warning 开发阶段
-    self.rootViewController = [[YTTabBarController alloc] init];
+//    self.rootViewController = [[YTTabBarController alloc] init];
 }
 
 /**

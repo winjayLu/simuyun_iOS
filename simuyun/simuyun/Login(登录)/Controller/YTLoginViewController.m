@@ -12,11 +12,14 @@
 #import "UMSocialWechatHandler.h"
 #import "YTTabBarController.h"
 #import "CALayer+Transition.h"
-#import "NSString+Password.h"
 #import "SVProgressHUD.h"
 #import "UINavigationBar+BackgroundColor.h"
 #import "YTRegisterViewController.h"
 #import "YTResultPasswordViewController.h"
+#import "YTAccountTool.h"
+
+
+// 登录
 
 @interface YTLoginViewController ()
 
@@ -108,7 +111,7 @@
         YTLog(@"SnsInformation is %@",response.data);
         NSLog(@"%@",response);
     }];
-
+    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -128,17 +131,19 @@
 
     // 本地验证
     if ([self checkText]) return;
-    [SVProgressHUD showErrorWithStatus:@"error"];
     
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"username"] = self.userName.text;
-    dict[@"password"] = [NSString md5:self.passWord.text];
-    [YTHttpTool post:YTSession params:dict success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
-        [self transitionTabBarVC];
-    } failure:^(NSError *error) {
-        YTLog(@"%@",error);
-        [SVProgressHUD showErrorWithStatus:@"密码不正确"];
+    YTAccount *account = [[YTAccount alloc] init];
+    account.userName = self.userName.text;
+    account.password = self.passWord.text;
+    // 发起登录
+    [SVProgressHUD showWithStatus:@"正在登录" maskType:SVProgressHUDMaskTypeClear];
+    [YTAccountTool loginAccount:account result:^(BOOL result) {
+        if (result) {   // 登录成功
+            [SVProgressHUD dismiss];
+            [self transitionTabBarVC];
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"密码不正确"];
+        }
     }];
 }
 /**
@@ -149,7 +154,6 @@
     UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
     mainWindow.rootViewController = [[YTTabBarController alloc] init];
     [mainWindow.layer transitionWithAnimType:TransitionAnimTypeCube subType:TransitionSubtypesFromRight curve:TransitionCurveEaseOut duration:0.75f];
-//    [mainWindow.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.75f];
 }
 
 

@@ -6,7 +6,10 @@
 //  Copyright (c) 2015年 winjay. All rights reserved.
 //
 
+// 帐号工具类
+
 #import <Foundation/Foundation.h>
+#import "YTAccount.h"
 
 @class YTAccount;
 
@@ -22,4 +25,9 @@
  */
 + (YTAccount *)account;
 
+/**
+ *  向服务器发起登录,获取token
+ *  成功返回YES
+ */
++ (void)loginAccount:(YTAccount *)account result:(void (^)(BOOL result))result;
 @end

@@ -12,6 +12,12 @@
 #import "SVProgressHUD.h"
 #import "JKCountDownButton.h"
 #import "CoreTFManagerVC.h"
+#import "YTAccountTool.h"
+#import "YTTabBarController.h"
+#import "CALayer+Anim.h"
+#import "CALayer+Transition.h"
+
+// 注册
 
 
 @interface YTRegisterViewController ()
@@ -45,6 +51,12 @@
  *  注册按钮单击
  */
 - (IBAction)registerClick:(UIButton *)sender;
+
+/**
+ *  验证码
+ */
+@property (nonatomic, copy) NSString *captcha;
+
 
 
 @end
@@ -95,6 +107,40 @@
  */
 - (IBAction)registerClick:(UIButton *)sender {
     if ([self checkTextWith:YES]) return;
+    
+    // 帐号模型
+    YTAccount *account = [[YTAccount alloc] init];
+    account.userName = self.userName.text;
+    account.password = self.password.text;
+    
+    // 请求参数
+    NSDictionary *params = @{@"username" : account.userName, @"password" : account.password};
+    [SVProgressHUD showWithStatus:@"正在注册" maskType:SVProgressHUDMaskTypeClear];
+    [YTHttpTool post:YTRegister params:params success:^(id responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        // 发起登录
+        [YTAccountTool loginAccount:account result:^(BOOL result) {
+            [SVProgressHUD dismiss];
+            if (result) {   // 登录成功
+                [self transitionTabBarVC];
+            } else {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }];
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+         [SVProgressHUD showErrorWithStatus:@"注册失败"];
+    }];
+}
+/**
+ *  转场到主界面
+ */
+- (void)transitionTabBarVC
+{
+    UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
+    mainWindow.rootViewController = [[YTTabBarController alloc] init];
+    [mainWindow.layer transitionWithAnimType:TransitionAnimTypeCube subType:TransitionSubtypesFromRight curve:TransitionCurveEaseOut duration:0.75f];
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -109,8 +155,16 @@
  */
 - (void)sendRegisterNumber
 {
-    NSString *phone = self.userName.text;
-    
+    NSDictionary *dict = @{@"phone" : self.userName.text};
+    [YTHttpTool get:YTCaptcha params:dict success:^(id responseObject) {
+        self.captcha = responseObject[@"captcha"];
+        if (responseObject[@"msg"]) {
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+            [self.sendBtn stop];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 
@@ -169,7 +223,7 @@
     {
         [SVProgressHUD showErrorWithStatus:@"请输入密码"];
         return YES;
-    } else if(self.userName.text.length > 11)
+    } else if(self.userName.text.length < 11)
     {
         [SVProgressHUD showErrorWithStatus:@"手机号码不正确"];
         return YES;

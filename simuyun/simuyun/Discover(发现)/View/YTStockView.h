@@ -10,4 +10,9 @@
 
 @interface YTStockView : UIScrollView
 
+/**
+ *  股指数据
+ */
+@property (nonatomic, strong) NSArray *stocks;
+
 @end

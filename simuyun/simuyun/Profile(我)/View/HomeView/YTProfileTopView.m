@@ -228,6 +228,16 @@
     self.iconImage.image = image;
 }
 
+/**
+ *  设置用资料
+ *
+ */
+- (void)setUserInfo:(YTUserInfo *)userInfo
+{
+    _userInfo = userInfo;
+}
+
+
 + (instancetype)profileTopView
 {
     return [[[NSBundle mainBundle] loadNibNamed:@"YTProfileTopView" owner:nil options:nil] firstObject];

@@ -32,6 +32,7 @@
     
     // 初始化左侧菜单
     YTLeftMenu *leftMenu = [YTLeftMenu leftMenu];
+    leftMenu.frame = CGRectMake(0, 0, 241, DeviceHight);
     [self.view addSubview:leftMenu];
     
     // 设置ScrollView的滚动范围

@@ -7,6 +7,12 @@
 //
 
 #import "YTStockView.h"
+#import "YTStockItem.h"
+
+
+#define topMagin 6.0f
+#define leftMagin 7.5f
+
 
 @implementation YTStockView
 
@@ -14,9 +20,34 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor redColor];
+        self.backgroundColor = YTColor(246, 246, 246);
+        self.showsHorizontalScrollIndicator = NO;
     }
     return self;
+}
+
+/**
+ *  设置数据
+ *
+ */
+- (void)setStocks:(NSArray *)stocks
+{
+    _stocks = stocks;
+    CGFloat itemW = 84;
+    CGFloat itemH = 77;
+    
+    CGFloat maxW = 0.0;
+    for (int i = 0; i < _stocks.count; i ++) {
+        YTStockItem *item = [YTStockItem stockItem];
+        //        item.stockModel = _stocks[i];
+        item.backgroundColor = [UIColor whiteColor];
+        item.layer.cornerRadius = 5;
+        item.layer.masksToBounds = YES;
+        maxW = leftMagin + i * (itemW + leftMagin);
+        item.frame = CGRectMake(maxW, topMagin, itemW, itemH);
+        [self addSubview:item];
+    }
+    self.contentSize = CGSizeMake(maxW + itemW + leftMagin, self.height);
 }
 
 @end

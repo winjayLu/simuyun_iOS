@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YTUserInfo.h"
 
 /**
  *   按钮类型
@@ -42,10 +43,22 @@ typedef enum {
 
 @interface YTProfileTopView : UIView
 
-+ (instancetype)profileTopView;
+/**
+ *  用户信息
+ */
+@property (nonatomic, strong) YTUserInfo *userInfo;
 
+
+/**
+ *  代理
+ */
 @property (nonatomic, weak) id <TopViewDelegate> delegate;
 
+/**
+ *  设置头像
+ *
+ */
 - (void)setIconImageWithImage:(UIImage *)image;
 
++ (instancetype)profileTopView;
 @end

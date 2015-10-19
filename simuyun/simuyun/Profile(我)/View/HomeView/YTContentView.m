@@ -76,17 +76,6 @@
 
 #pragma mark - tableView Delegate
 
-//- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    YTLog(@"%zd", indexPath.row);
-//    if (indexPath.row != 0) {
-//        if ([self.daili respondsToSelector:@selector(selectedTodo:)]) {
-//            [self.daili selectedTodo:indexPath.row];
-//        }
-//    }
-//    
-//}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     YTLog(@"%zd", indexPath.row);

@@ -13,6 +13,7 @@
 #import "YTAccountTool.h"
 #import "CALayer+Transition.h"
 #import "YTNavigationController.h"
+#import "YTUserInfoTool.h"
 
 
 #define delay 3.0f
@@ -26,18 +27,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 下载banner图片
+    
+    
+    
+    // 获取用户信息
+    if ([YTAccountTool account]) {
+        [YTUserInfoTool loadUserInfo];
+    }
+    
+    // 转场
+    [self transitionMainVC];
     
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-
-}
-
-- (void)viewDidAppear:(BOOL)animated
+- (void)transitionMainVC
 {
-    [super viewDidAppear:YES];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         // 获取程序主窗口
@@ -49,13 +54,24 @@
         } else {
             mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
         }
-        [mainWindow.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.75f];
-
+        [mainWindow.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];
+        
     });
+    
 }
+
+#pragma mark - 准备数据
+
+
 
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    
 }
 @end

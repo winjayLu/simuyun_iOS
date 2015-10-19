@@ -20,6 +20,7 @@
 
 //  开发环境
 #define YTServer @"http://192.168.17.213:8080/api/app/"
+//#define YTServer @"http://172.168.1.177:8080/api/app/"
 
 //  测试环境
 //#define YTServer @"http://192.168.17.212:8080/api/interface/api"
@@ -34,6 +35,11 @@
 #define YTSession @"session"
 // 加载产品列表
 #define YTProductList @"products"
+// 发送验证码
+#define YTCaptcha @"captcha"
+// 注册
+#define YTRegister @"register"
+
 
 
 

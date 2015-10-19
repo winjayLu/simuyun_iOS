@@ -8,7 +8,18 @@
 //  账号模型
 
 #import "YTAccount.h"
+#import "NSString+Password.h"
 
 @implementation YTAccount
 
+/**
+ *  密码加密
+ *
+ */
+- (void)setPassword:(NSString *)password
+{
+    _password = [NSString md5:password];
+}
+
+MJCodingImplementation
 @end

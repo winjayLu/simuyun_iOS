@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YTStockModel.h"
 
 @interface YTStockItem : UIView
 
+/**
+ *  数据模型
+ */
+@property (nonatomic, strong) YTStockModel *stockModel;
+
++ (instancetype)stockItem;
 @end

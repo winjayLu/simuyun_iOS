@@ -15,7 +15,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="270"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="万" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tma-5d-N7b" userLabel="万">
-                    <rect key="frame" x="349" y="233" width="12" height="15"/>
+                    <rect key="frame" x="349" y="233" width="12" height="14.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <color key="textColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -125,7 +125,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- - -丨- - -" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0EK-Rx-hhm" userLabel="昵称">
-                    <rect key="frame" x="46" y="190" width="230" height="22"/>
+                    <rect key="frame" x="46" y="190" width="230" height="21.5"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="230" id="rqk-gM-95D"/>
                     </constraints>
@@ -139,7 +139,7 @@
                         <constraint firstAttribute="width" constant="200" id="TXs-5N-BK6"/>
                     </constraints>
                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="200" image="yundou"/>
+                    <state key="normal" title="0" image="yundou"/>
                     <connections>
                         <action selector="yunDouClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="4iV-ol-5Nt"/>
                     </connections>

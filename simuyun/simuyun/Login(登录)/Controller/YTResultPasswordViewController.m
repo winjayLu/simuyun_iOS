@@ -6,6 +6,8 @@
 //  Copyright © 2015年 YTWealth. All rights reserved.
 //
 
+// 找回密码
+
 #import "YTResultPasswordViewController.h"
 #import "JKCountDownButton.h"
 #import "UINavigationBar+BackgroundColor.h"

@@ -14,13 +14,23 @@
 #import "YTContentView.h"
 #import "YTBottomView.h"
 #import "YTOtherViewController.h"
+#import "YTUserInfoTool.h"
 
 @interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate>
 
+/**
+ *  顶部视图
+ */
 @property (nonatomic, weak) YTProfileTopView *topView;
 
+/**
+ *  待办事项
+ */
 @property (nonatomic, weak) YTContentView *todoView;
 
+/**
+ *  待办事项数据
+ */
 @property (nonatomic, strong) NSArray *todos;
 
 
@@ -43,10 +53,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    
-    
-#warning todo 获取数据
     
     // 初始化顶部视图
     [self setupTopView];
@@ -59,6 +65,9 @@
     
     // 监听左侧菜单通知
     [self leftMenuNotification];
+    
+    // 获取用户信息, 并传递给顶部视图
+    self.topView.userInfo = [YTUserInfoTool loadUserInfo];
 }
 
 
@@ -245,7 +254,7 @@
 - (NSArray *)todos
 {
     if (!_todos) {
-        _todos = @[@"诗酒风流撒娇斐林试剂氨分解",@"孙菲菲撒娇雷锋精神拉法基开了撒家乐福", @"sf氨分解撒浪费精力撒街坊邻居爱上街坊邻居街坊邻居爱上街坊邻居街坊邻居爱上街坊邻居街坊邻居爱上街坊邻居"];
+        _todos = @[@"诗酒风流撒娇斐林试剂氨分解",@"孙菲菲撒娇雷锋精神拉法基开了撒家乐福法基开了撒家乐福法基开了撒家乐福法基开了撒家乐福法基开了撒家乐福法基开了撒家乐福法基开了撒家乐福", @"sf氨分解撒浪费精力撒街坊邻居爱上街坊邻居街坊邻居爱上街坊邻居街坊邻居爱上街坊邻居街坊邻居爱上街坊邻居"];
     }
     return _todos;
 }
@@ -255,9 +264,5 @@
 {
     [YTCenter removeObserver:self];
 }
-
-
-
-
 
 @end
