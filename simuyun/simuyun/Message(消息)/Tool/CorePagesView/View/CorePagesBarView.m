@@ -9,6 +9,7 @@
 #import "CorePagesBarView.h"
 #import "CorePageModel.h"
 #import "CAAnimation+PagesViewBarShake.h"
+#import "UIImage+Extend.h"
 
 #define rgba(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
 
@@ -63,7 +64,8 @@
     //隐藏水平滚动条
     self.showsHorizontalScrollIndicator=NO;
     
-    self.backgroundColor = YTColor(246, 246, 246);
+//    self.backgroundColor = YTColor(246, 246, 246);
+    self.backgroundColor = [UIColor clearColor];
     
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screenRotate) name:UIDeviceOrientationDidChangeNotification object:nil];
@@ -128,6 +130,8 @@
         CGSize size=CGSizeMake(btnW, _config.barViewH);
         
         btn.bounds=(CGRect){CGPointZero,size};
+        
+
         
         [self addSubview:btn];
         
@@ -352,7 +356,7 @@
         _lineView=[[UIView alloc] init];
         
         //设置颜色
-        _lineView.backgroundColor=[UIColor redColor];
+        _lineView.backgroundColor= YTNavBackground;
 
         [self addSubview:_lineView];
     }

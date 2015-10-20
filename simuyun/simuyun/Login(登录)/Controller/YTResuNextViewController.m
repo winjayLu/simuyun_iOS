@@ -11,6 +11,10 @@
 #import "YTResuNextViewController.h"
 #import "UINavigationBar+BackgroundColor.h"
 #import "UIBarButtonItem+Extension.h"
+#import "SVProgressHUD.h"
+#import "YTAccountTool.h"
+#import "CALayer+Transition.h"
+#import "YTTabBarController.h"
 
 @interface YTResuNextViewController ()
 
@@ -23,6 +27,13 @@
  *  确认密码
  */
 @property (weak, nonatomic) IBOutlet UITextField *nextPassword;
+
+/**
+ *  点击确认按钮
+ *
+ */
+- (IBAction)confirmClick:(id)sender;
+
 
 @end
 
@@ -42,6 +53,63 @@
 {
     // 退出键盘
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+}
+/**
+ *  点击确认按钮
+ *
+ */
+
+- (IBAction)confirmClick:(id)sender {
+    
+    if(self.password.text.length == 0)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请输入密码"];
+        return;
+    } else if(self.nextPassword.text.length == 0)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请输入确认密码"];
+        return;
+    } else if (![self.password.text isEqualToString:self.nextPassword.text])
+    {
+        [SVProgressHUD showErrorWithStatus:@"两次密码输入不一致"];
+        return;
+    }
+    // YTresetPassword
+    
+    // 帐号模型
+    YTAccount *account = [[YTAccount alloc] init];
+    account.userName = self.username;
+    account.password = self.password.text;
+    
+    // 请求参数
+    NSDictionary *params = @{@"username" : account.userName, @"password" : account.password};
+    [SVProgressHUD showWithStatus:@"正在修改" maskType:SVProgressHUDMaskTypeClear];
+    [YTHttpTool post:YTresetPassword params:params success:^(id responseObject) {
+        
+        NSLog(@"%@",responseObject);
+        // 发起登录
+        [YTAccountTool loginAccount:account result:^(BOOL result) {
+            [SVProgressHUD dismiss];
+            if (result) {   // 登录成功
+                [self transitionTabBarVC];
+            } else {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }];
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+        [SVProgressHUD showErrorWithStatus:@"修改失败"];
+    }];
+}
+
+/**
+ *  转场到主界面
+ */
+- (void)transitionTabBarVC
+{
+    UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
+    mainWindow.rootViewController = [[YTTabBarController alloc] init];
+    [mainWindow.layer transitionWithAnimType:TransitionAnimTypeCube subType:TransitionSubtypesFromRight curve:TransitionCurveEaseOut duration:0.75f];
 }
 
 #pragma mark - NavigationController
@@ -64,6 +132,7 @@
  */
 - (void)backView
 {
+    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -88,6 +157,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 
 @end

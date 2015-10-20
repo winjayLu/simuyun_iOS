@@ -106,6 +106,7 @@
  *  注册按钮单击
  */
 - (IBAction)registerClick:(UIButton *)sender {
+    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
     if ([self checkTextWith:YES]) return;
     
     // 帐号模型
@@ -188,6 +189,7 @@
  */
 - (void)backView
 {
+    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -231,6 +233,10 @@
     if(zhuCe) {
         if (self.registerNumber.text.length == 0) {
             [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
+            return YES;
+        } else if(![self.registerNumber.text isEqualToString:self.captcha])
+        {
+            [SVProgressHUD showErrorWithStatus:@"验证码不正确"];
             return YES;
         }
     }

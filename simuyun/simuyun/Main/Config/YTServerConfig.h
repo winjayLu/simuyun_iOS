@@ -39,9 +39,8 @@
 #define YTCaptcha @"captcha"
 // 注册
 #define YTRegister @"register"
-
-
-
+// 找回密码
+#define YTresetPassword @"resetPassword"
 
 
 

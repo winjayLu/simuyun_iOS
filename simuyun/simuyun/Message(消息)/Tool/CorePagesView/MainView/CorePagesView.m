@@ -8,6 +8,7 @@
 
 #import "CorePagesView.h"
 #import "CorePagesBarView.h"
+#import "UIImage+Extend.h"
 
 
 @interface CorePagesView ()<UIScrollViewDelegate>{
@@ -269,6 +270,9 @@
 -(void)layoutSubviews{
     
     [super layoutSubviews];
+    
+    [self.pagesBarView setBackgroundColor:[UIColor clearColor]];
+    self.pagesBarView.alpha = 1.0;
     
     self.originalFrame=self.bounds;
     

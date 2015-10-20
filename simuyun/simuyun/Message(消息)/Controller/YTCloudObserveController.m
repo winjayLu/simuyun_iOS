@@ -26,7 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.backgroundColor = YTColor(246, 246, 246);
+    self.tableView.backgroundColor = YTViewBackground;
     self.tableView.contentInset = UIEdgeInsetsMake(-34, 0, 0, 0);
     
 //    self.showsVerticalScrollIndicator = NO;

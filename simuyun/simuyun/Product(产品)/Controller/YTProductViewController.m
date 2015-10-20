@@ -11,6 +11,7 @@
 #import "MJRefresh.h"
 #import "YTProductModel.h"
 #import "MJExtension.h"
+#import "YTBuyProductController.h"
 
 @interface YTProductViewController ()
 
@@ -34,7 +35,6 @@
     // 马上进入刷新状态
     [self.tableView.header beginRefreshing];
     
-
 }
 
 
@@ -77,6 +77,15 @@
     UIView *headerView = [[UIView alloc] init];
     headerView.backgroundColor = [UIColor clearColor];
     return headerView;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    YTBuyProductController *buy = [[YTBuyProductController alloc] init];
+    buy.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:buy animated:YES];
+
 }
 
 

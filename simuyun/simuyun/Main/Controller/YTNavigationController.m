@@ -22,6 +22,7 @@
     // 设置导航栏背景
     [navBar setBackgroundImage:[UIImage imageWithColor:YTNavBackground] forBarMetrics:UIBarMetricsDefault];
     
+    [navBar setShadowImage:[[UIImage alloc] init]];
     // 反回按钮的颜色
     [navBar setTintColor:YTNavBackColor];
     // 设置状态栏背景

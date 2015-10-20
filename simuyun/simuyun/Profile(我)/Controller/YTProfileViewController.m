@@ -194,7 +194,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
         // 设置为半透明
         [self.nav.navigationBar lt_setBackgroundColor:[YTColor(255, 255, 255) colorWithAlphaComponent:0.0]];
         // 隐藏子控件
-        [self navigationBarWithHidden:YES];
+//        [self navigationBarWithHidden:YES];
         // 添加手势
         [self.nav.view addGestureRecognizer:self.panRecongnizer];
         // 显示tabbar
@@ -203,7 +203,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
         // 进入其他视图控制器
         [self.nav.navigationBar lt_setBackgroundColor:[YTNavBackground colorWithAlphaComponent:1.0]];
         // 显示子控件
-        [self navigationBarWithHidden:NO];
+//        [self navigationBarWithHidden:NO];
         // 删除手势
         [self.nav.view removeGestureRecognizer:self.panRecongnizer];
         // 隐藏tabbar
@@ -214,16 +214,16 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
 /**
  *  隐藏/显示navgatinonBar的子控件
  */
-- (void)navigationBarWithHidden:(BOOL)hidden
-{
-    NSArray *list=self.nav.navigationBar.subviews;
-    for (id obj in list) {
-        if ([obj isKindOfClass:[UIImageView class]]) {
-            UIImageView *imageView=(UIImageView *)obj;
-            imageView.hidden=hidden;
-        }
-    }
-}
+//- (void)navigationBarWithHidden:(BOOL)hidden
+//{
+//    NSArray *list=self.nav.navigationBar.subviews;
+//    for (id obj in list) {
+//        if ([obj isKindOfClass:[UIImageView class]]) {
+//            UIImageView *imageView=(UIImageView *)obj;
+//            imageView.hidden=hidden;
+//        }
+//    }
+//}
 
 
 

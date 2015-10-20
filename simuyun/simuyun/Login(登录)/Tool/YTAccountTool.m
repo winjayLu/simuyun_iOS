@@ -31,7 +31,7 @@
 {
     YTAccount *account = [NSKeyedUnarchiver unarchiveObjectWithFile:YTAccountPath];
 
-    return account;
+    return nil;
 }
 
 

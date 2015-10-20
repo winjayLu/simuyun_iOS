@@ -12,4 +12,10 @@
 
 @interface YTResuNextViewController : UIViewController
 
+/**
+ *  帐号
+ */
+@property (nonatomic, copy) NSString *username;
+
+
 @end

@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		970020B11BD6162B00231F52 /* YTBuyProductController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970020AF1BD6162B00231F52 /* YTBuyProductController.m */; settings = {ASSET_TAGS = (); }; };
+		970020B21BD6162B00231F52 /* YTBuyProductController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970020B01BD6162B00231F52 /* YTBuyProductController.xib */; settings = {ASSET_TAGS = (); }; };
+		970020C61BD64B9F00231F52 /* YTBuySuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970020C41BD64B9F00231F52 /* YTBuySuccessController.m */; settings = {ASSET_TAGS = (); }; };
+		970020C71BD64B9F00231F52 /* YTBuySuccessController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 970020C51BD64B9F00231F52 /* YTBuySuccessController.xib */; settings = {ASSET_TAGS = (); }; };
+		970020CA1BD6507F00231F52 /* YTContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 970020C91BD6507F00231F52 /* YTContentViewController.m */; settings = {ASSET_TAGS = (); }; };
 		9714A6D01BC7B9BB0018A14E /* HHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6CF1BC7B9BB0018A14E /* HHAlertView.m */; settings = {ASSET_TAGS = (); }; };
 		9714A6EE1BC7E0610018A14E /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9714A6D81BC7E0610018A14E /* FontAwesome.ttf */; settings = {ASSET_TAGS = (); }; };
 		9714A6EF1BC7E0610018A14E /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6DA1BC7E0610018A14E /* NSString+FontAwesome.m */; settings = {ASSET_TAGS = (); }; };
@@ -191,6 +196,14 @@
 /* Begin PBXFileReference section */
 		13F661A7FA831186EC92CFB7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		1695905209A227AB6ABE80C8 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		970020AE1BD6162B00231F52 /* YTBuyProductController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTBuyProductController.h; sourceTree = "<group>"; };
+		970020AF1BD6162B00231F52 /* YTBuyProductController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTBuyProductController.m; sourceTree = "<group>"; };
+		970020B01BD6162B00231F52 /* YTBuyProductController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTBuyProductController.xib; sourceTree = "<group>"; };
+		970020C31BD64B9F00231F52 /* YTBuySuccessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTBuySuccessController.h; sourceTree = "<group>"; };
+		970020C41BD64B9F00231F52 /* YTBuySuccessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTBuySuccessController.m; sourceTree = "<group>"; };
+		970020C51BD64B9F00231F52 /* YTBuySuccessController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTBuySuccessController.xib; sourceTree = "<group>"; };
+		970020C81BD6507F00231F52 /* YTContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTContentViewController.h; sourceTree = "<group>"; };
+		970020C91BD6507F00231F52 /* YTContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTContentViewController.m; sourceTree = "<group>"; };
 		9714A6CE1BC7B9BB0018A14E /* HHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHAlertView.h; sourceTree = "<group>"; };
 		9714A6CF1BC7B9BB0018A14E /* HHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHAlertView.m; sourceTree = "<group>"; };
 		9714A6D81BC7E0610018A14E /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
@@ -1072,6 +1085,14 @@
 			children = (
 				978C6FDF1BCF8193003D183E /* YTProductViewController.h */,
 				978C6FE01BCF8193003D183E /* YTProductViewController.m */,
+				970020AE1BD6162B00231F52 /* YTBuyProductController.h */,
+				970020AF1BD6162B00231F52 /* YTBuyProductController.m */,
+				970020B01BD6162B00231F52 /* YTBuyProductController.xib */,
+				970020C81BD6507F00231F52 /* YTContentViewController.h */,
+				970020C91BD6507F00231F52 /* YTContentViewController.m */,
+				970020C31BD64B9F00231F52 /* YTBuySuccessController.h */,
+				970020C41BD64B9F00231F52 /* YTBuySuccessController.m */,
+				970020C51BD64B9F00231F52 /* YTBuySuccessController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1665,8 +1686,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				97C606AF1BC2985700E555E8 /* UMSnsAccountViewController.xib in Resources */,
+				970020B21BD6162B00231F52 /* YTBuyProductController.xib in Resources */,
 				97C606AC1BC2985700E555E8 /* UMShareEditViewController.xib in Resources */,
 				97187A8F1BC666E200C64609 /* YTWebViewController.xib in Resources */,
+				970020C71BD64B9F00231F52 /* YTBuySuccessController.xib in Resources */,
 				97C605DC1BC2621F00E555E8 /* YTOtherViewController.xib in Resources */,
 				971503AC1BC75E78007E27D0 /* PPTCell.xib in Resources */,
 				97C606A71BC2985700E555E8 /* UMSocialLocalizable.strings in Resources */,
@@ -1768,6 +1791,7 @@
 				97BC99781BD4DB610090BDE8 /* CorePageModel.m in Sources */,
 				97C6061B1BC266A900E555E8 /* CALayer+Transition.m in Sources */,
 				9769F9FB1BC9676B001B1F02 /* YTProfileTopView.m in Sources */,
+				970020C61BD64B9F00231F52 /* YTBuySuccessController.m in Sources */,
 				97E44B6E1BD32CB600952B11 /* YTStockModel.m in Sources */,
 				97C606471BC269CC00E555E8 /* UIImage+Cut.m in Sources */,
 				9769F9F61BC9676B001B1F02 /* YTContentCell.m in Sources */,
@@ -1800,7 +1824,9 @@
 				9714A6F41BC7E0610018A14E /* UIWindow+YUBottomPoper.m in Sources */,
 				9769FA051BC968F2001B1F02 /* YTLeftMenu.m in Sources */,
 				97C606551BC26F0A00E555E8 /* UIView+Extension.m in Sources */,
+				970020CA1BD6507F00231F52 /* YTContentViewController.m in Sources */,
 				97E44B711BD344E300952B11 /* YTStockItem.m in Sources */,
+				970020B11BD6162B00231F52 /* YTBuyProductController.m in Sources */,
 				978C6FEB1BCFA280003D183E /* YTProductModel.m in Sources */,
 				971503AB1BC75E78007E27D0 /* PPTCell.m in Sources */,
 				9714A6F01BC7E0610018A14E /* UIButton+Bootstrap.m in Sources */,

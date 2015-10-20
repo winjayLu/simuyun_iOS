@@ -40,6 +40,11 @@
  */
 - (IBAction)nextBtnClick:(UIButton *)sender;
 
+/**
+ *  验证码
+ */
+@property (nonatomic, copy) NSString *captcha;
+
 @end
 
 @implementation YTResultPasswordViewController
@@ -90,6 +95,7 @@
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
     if ([self checkTextWith:YES]) return;
     YTResuNextViewController *next = [[YTResuNextViewController alloc] init];
+    next.username = self.userName.text;
     [self.navigationController pushViewController:next animated:YES];
 }
 
@@ -100,8 +106,16 @@
  */
 - (void)sendRegisterNumber
 {
-    NSString *phone = self.userName.text;
-    
+    NSDictionary *dict = @{@"phone" : self.userName.text};
+    [YTHttpTool get:YTCaptcha params:dict success:^(id responseObject) {
+        self.captcha = responseObject[@"captcha"];
+        if (responseObject[@"msg"]) {
+            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
+            [self.sendBtn stop];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 
@@ -125,6 +139,7 @@
  */
 - (void)backView
 {
+    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -165,6 +180,10 @@
     if (next) {
         if (self.password.text.length == 0) {
             [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
+            return YES;
+        } else if(![self.password.text isEqualToString:self.captcha])
+        {
+            [SVProgressHUD showErrorWithStatus:@"验证码不正确"];
             return YES;
         }
     }
