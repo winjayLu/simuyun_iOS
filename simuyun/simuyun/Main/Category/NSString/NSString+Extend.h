@@ -16,4 +16,10 @@
  */
 @property (nonatomic,strong,readonly) NSDate *date;
 
+
+/**
+ *  获取银行名称
+ */
++(NSString *)getBankFromCardNumber:(NSString *)bank;
+
 @end

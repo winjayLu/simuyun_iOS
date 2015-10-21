@@ -133,8 +133,8 @@
                     </state>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="d5T-53-WIp"/>
                             <exclude reference="3g0-JW-C92"/>
+                            <exclude reference="d5T-53-WIp"/>
                             <exclude reference="yhb-8O-blq"/>
                         </mask>
                     </variation>
@@ -160,9 +160,9 @@
                     </state>
                     <variation key="default">
                         <mask key="constraints">
+                            <exclude reference="AhX-8f-nbU"/>
                             <exclude reference="jFw-bu-XWZ"/>
                             <exclude reference="ob8-Tu-3wt"/>
-                            <exclude reference="AhX-8f-nbU"/>
                         </mask>
                     </variation>
                     <connections>
@@ -188,8 +188,8 @@
                     </state>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="Vj6-KN-gcC"/>
                             <exclude reference="T0l-7P-nGI"/>
+                            <exclude reference="Vj6-KN-gcC"/>
                             <exclude reference="leo-3z-3iY"/>
                         </mask>
                     </variation>
@@ -215,9 +215,9 @@
                     </state>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="WYZ-qw-Y8v"/>
                             <exclude reference="079-NC-oTe"/>
                             <exclude reference="IHj-sL-UGb"/>
+                            <exclude reference="WYZ-qw-Y8v"/>
                         </mask>
                     </variation>
                     <connections>

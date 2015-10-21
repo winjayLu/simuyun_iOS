@@ -15,4 +15,44 @@
  */
 @property (nonatomic, copy) NSString *nickName;
 
+// 理财师认证状态
+@property (nonatomic, assign) int adviserStatus;
+
+// 机构ID
+@property (nonatomic, copy) NSString *organizationId;
+
+// 机构名称
+@property (nonatomic, copy) NSString *organizationName;
+
+// 微信昵称
+@property (nonatomic, copy) NSString *weChatNickName;
+
+// 头像地址
+@property (nonatomic, copy) NSString *headImgUrl;
+
+// 云豆数量
+@property (nonatomic, assign) int myPoint;
+
+// 签到状态   0 未签到
+@property (nonatomic, assign) int isSingIn;
+
+// 我的客户数
+@property (nonatomic, assign) int myCustomersCount;
+
+// 我的已完成订单数
+@property (nonatomic, assign) int completedOrderCount;
+
+// 我的业绩总数
+@property (nonatomic, assign) int completedOrderAmountCount;
+
+// 电子邮件
+@property (nonatomic, copy) NSString *email;
+
+// 理财师等级
+@property (nonatomic, assign) int adviserLevel;
+
+// 电话号码
+@property (nonatomic, copy) NSString *phoneNumer;
+
+
 @end

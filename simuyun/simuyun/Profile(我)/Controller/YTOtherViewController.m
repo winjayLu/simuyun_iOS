@@ -18,7 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.title = @"测试";
 }
 
 - (void)didReceiveMemoryWarning {

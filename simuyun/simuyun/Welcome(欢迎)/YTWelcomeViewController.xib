@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YTWelcomeViewController">
             <connections>
+                <outlet property="bannerImage" destination="DqC-eO-MqQ" id="NFV-Y2-1vo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -15,17 +16,16 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎界面" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yFe-pb-l1g">
-                    <rect key="frame" x="220" y="276" width="160" height="48"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DqC-eO-MqQ">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="centerY" secondItem="yFe-pb-l1g" secondAttribute="centerY" id="CtF-xZ-yb0"/>
-                <constraint firstAttribute="centerX" secondItem="yFe-pb-l1g" secondAttribute="centerX" id="XhI-5j-Hrm"/>
+                <constraint firstItem="DqC-eO-MqQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XMr-CT-al8"/>
+                <constraint firstItem="DqC-eO-MqQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="XWz-Fq-BSb"/>
+                <constraint firstAttribute="trailing" secondItem="DqC-eO-MqQ" secondAttribute="trailing" id="d2H-oa-n78"/>
+                <constraint firstAttribute="bottom" secondItem="DqC-eO-MqQ" secondAttribute="bottom" id="ytN-u5-8Km"/>
             </constraints>
         </view>
     </objects>

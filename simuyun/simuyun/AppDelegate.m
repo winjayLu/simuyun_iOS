@@ -16,6 +16,7 @@
 #import "APService.h"
 #import "YTWelcomeViewController.h"
 #import "UIWindow+Extension.h"
+#import "YTResourcesTool.h"
 
 @interface AppDelegate ()
 
@@ -25,8 +26,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // 获取版本号
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     // 友盟分享及微信登录
-    [self setupUmeng];
+    [self setupUmeng:version];
     
     // 集成极光推送
     [self setupJpush:launchOptions];
@@ -34,8 +37,8 @@
     // 检测是否有推送消息
     [self checkNotification:launchOptions];
     
-    // 检测版本跟新
-    [self checkVersion];
+    // 获取程序启动信息
+    [self resources:version];
     
     // 创建窗口
     self.window = [[UIWindow alloc] init];
@@ -54,7 +57,7 @@
  *  初始化友盟推送-微信登录
  *
  */
-- (void)setupUmeng
+- (void)setupUmeng:(NSString *)version
 {
     // 设置友盟社会化组件appkey
     [UMSocialData setAppKey:UmengAppKey];
@@ -63,7 +66,6 @@
     
     // 友盟统计
     [MobClick startWithAppkey:UmengAppKey reportPolicy:BATCH  channelId:nil];
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
 }
 
@@ -149,27 +151,21 @@
 }
 
 /**
- *  检测新版本
+ *  获取程序启动信息
  */
-- (void)checkVersion
+- (void)resources:(NSString *)version
 {
-    //  http://www.site.com/interface/api?method=方法名&param={};
 
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"method"] = @"checkVersion";
-    dict[@"requesttype"] = @"";
-    dict[@"insver"] = @"3.000";
+    dict[@"os"] = @"ios-appstore";
+    dict[@"version"] = version;
 
-    [YTHttpTool get:YTServer params:[NSDictionary httpWithDictionary:dict] success:^(NSDictionary *responseObject) {
-        YTLog(@"%@",responseObject);
-        YTLog(@"ss");
+    [YTHttpTool get:YTGetResources params:dict success:^(NSDictionary *responseObject)
+    {
+        [YTResourcesTool saveResources:[YTResources objectWithKeyValues:responseObject]];
     } failure:^(NSError *error) {
-        NSLog(@"qq");
-        YTLog(@"%@",error);
-        YTLog(@"sserror");
     }];
-    //https://intime.simuyun.com/api/interface/?method=checkVersion&param[insver]=0001&param[os]=ios-appstore
-    //result	__NSCFString *	@"https://182.92.217.186:6060/api/interface/api"	0x00007f9b862101d0
+
 }
 
 /**

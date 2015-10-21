@@ -42,13 +42,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"填写认购信息";
-    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -94,13 +90,50 @@
         return;
     }
     // 判断剩余额度
-//    else if([self.buyMoney.text ])
+//    if([self.buyMoney.text intValue] > self.product.remaining_amt)
 //    {
-//        
+//        [SVProgressHUD showErrorWithStatus:@"额度不足,请重新选择额度"];
+//        return;
 //    }
-//    [SVProgressHUD showSuccessWithStatus:@"成功"];
+    
+    [self buyNow];
+}
+
+/**
+ *  认购
+ */
+- (void)buyNow
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"product_id"] = self.product.pro_id;
+#warning 用户id
+    dict[@"advisers_id"] = @"f787e670f5ef4d24943242fa03420be1";
+    dict[@"cust_name"] = self.nameLable.text;
+    dict[@"order_amt"] = self.buyMoney.text;
+    /*
+     "product_id": "",
+     "advisers_id": "",
+     "cust_id": "",
+     "cust_name": "",
+     "order_amt": ""
+     */
+    
+//    [YTHttpTool post:YTOrder params:dict success:^(id responseObject) {
+//        NSLog(@"%@",responseObject);
+//    } failure:^(NSError *error) {
+//        NSLog(@"%@",error);
+//    }];
     YTContentViewController *content = [[YTContentViewController alloc] init];
     [self.navigationController pushViewController:content animated:YES];
-    
 }
+
+
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
 @end

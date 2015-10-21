@@ -106,7 +106,7 @@
  */
 - (void)sendRegisterNumber
 {
-    NSDictionary *dict = @{@"phone" : self.userName.text};
+    NSDictionary *dict = @{@"phone" : self.userName.text, @"checkPhoneDuplicate" : @0};
     [YTHttpTool get:YTCaptcha params:dict success:^(id responseObject) {
         self.captcha = responseObject[@"captcha"];
         if (responseObject[@"msg"]) {

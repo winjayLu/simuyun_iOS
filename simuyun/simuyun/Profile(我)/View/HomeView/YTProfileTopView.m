@@ -8,6 +8,8 @@
 
 #import "YTProfileTopView.h"
 #import "UIWindow+YUBottomPoper.h"
+#import "UIImageView+SD.h"
+#import "YTUserInfoTool.h"
 
 @interface YTProfileTopView() <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 /**
@@ -235,6 +237,50 @@
 - (void)setUserInfo:(YTUserInfo *)userInfo
 {
     _userInfo = userInfo;
+    if (_userInfo == nil) return;
+    
+    // 设置头像
+    [self.iconImage imageWithUrlStr:userInfo.headImgUrl phImage:nil];
+    
+    // 签到按钮
+    if (userInfo.isSingIn) { // 已经签到
+        [self.qiaoDaoBtn setBackgroundImage:[UIImage imageNamed:@"yiqiandao"] forState:UIControlStateNormal];
+        self.qiaoDaoBtn.enabled = NO;
+    } else {    // 未签到
+        [self.qiaoDaoBtn setBackgroundImage:[UIImage imageNamed:@"weiqiandao"] forState:UIControlStateNormal];
+        self.qiaoDaoBtn.enabled = YES;
+    }
+    
+    // 云豆
+    [self.yunDouBtn setTitle:[NSString stringWithFormat:@"%d", userInfo.myPoint] forState:UIControlStateNormal];
+    
+    
+    // 认证状态
+    if (userInfo.adviserStatus) {
+        self.renZhenBtn.hidden = NO;
+        // 设置昵称
+        self.nameLable.text = userInfo.nickName;
+    } else {
+        self.renZhenBtn.hidden = YES;
+        // 设置昵称
+        self.nameLable.text = [NSString stringWithFormat:@"%@|%@",userInfo.organizationName, userInfo.nickName];
+    }
+    
+    // 客户数量
+    self.keHuLable.text = [NSString stringWithFormat:@"%d", userInfo.myCustomersCount];
+    
+    // 我的订单数量
+    self.orderLable.text = [NSString stringWithFormat:@"%d", userInfo.completedOrderCount];
+    
+    // 我的业绩数量
+    if (userInfo.completedOrderAmountCount > 10000) {
+        self.wanLable.text = @"亿";
+        self.yeJiLable.text = [NSString stringWithFormat:@"%.2f", (double)userInfo.completedOrderCount / 10000];
+    } else {
+        self.wanLable.text = @"万";
+        self.yeJiLable.text = [NSString stringWithFormat:@"%d", userInfo.completedOrderCount];
+    }
+    
 }
 
 

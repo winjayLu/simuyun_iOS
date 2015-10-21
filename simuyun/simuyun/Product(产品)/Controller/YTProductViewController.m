@@ -84,9 +84,11 @@
 {
     YTBuyProductController *buy = [[YTBuyProductController alloc] init];
     buy.hidesBottomBarWhenPushed = YES;
+    buy.product = self.products[indexPath.section];
     [self.navigationController pushViewController:buy animated:YES];
-
 }
+
+
 
 
 #pragma mark - 获取数据
@@ -106,7 +108,6 @@
         // 结束刷新状态
         [self.tableView.header endRefreshing];
     }];
-    
 }
 
 #pragma mark - 懒加载

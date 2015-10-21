@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YTProductModel.h"
 
 @interface YTBuyProductController : UIViewController
+
+// 产品
+@property (nonatomic, strong) YTProductModel *product;
 
 @end

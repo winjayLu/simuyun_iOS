@@ -15,6 +15,7 @@
 #import "YTBottomView.h"
 #import "YTOtherViewController.h"
 #import "YTUserInfoTool.h"
+#import "SVProgressHUD.h"
 
 @interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate>
 
@@ -66,8 +67,18 @@
     // 监听左侧菜单通知
     [self leftMenuNotification];
     
-    // 获取用户信息, 并传递给顶部视图
-    self.topView.userInfo = [YTUserInfoTool loadUserInfo];
+    // 获取用户信息
+    if ([YTUserInfoTool userInfo] == nil) {
+        [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
+        [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
+            if (result) {
+                [SVProgressHUD dismiss];
+                self.topView.userInfo = [YTUserInfoTool userInfo];
+            } else {
+                [SVProgressHUD showErrorWithStatus:@"请检查您的网络链接"];
+            }
+        }];
+    }
 }
 
 

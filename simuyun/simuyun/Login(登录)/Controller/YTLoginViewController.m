@@ -93,6 +93,8 @@
  */
 - (IBAction)weChatClick:(id)sender {
     
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    
     //  友盟微信登录
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
@@ -100,16 +102,22 @@
         if (response.responseCode == UMSResponseCodeSuccess) {
             
             UMSocialAccountEntity *account = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
-            // 授权成功
-            YTLog(@"snsAccount is %@",account);
-            [self transitionTabBarVC];
+            param[@"nickname"] = account.userName;
+            param[@"unionid"] = account.unionId;
+            param[@"openid"] = account.openId;
+            param[@"headimgurl"] = account.iconURL;
+            [YTHttpTool post:YTWeChatLogin params:param success:^(id responseObject) {
+                [self transitionTabBarVC];
+            } failure:^(NSError *error) {
+
+            }];
         }
     });
     
     [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToWechatSession  completion:^(UMSocialResponseEntity *response){
         // 进入到微信
-        YTLog(@"SnsInformation is %@",response.data);
-        NSLog(@"%@",response);
+        param[@"sex"] = response.data[@"gender"];
+        param[@"address"] = response.data[@"location"];
     }];
     
 }

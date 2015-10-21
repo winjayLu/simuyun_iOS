@@ -14,11 +14,14 @@
 #import "CALayer+Transition.h"
 #import "YTNavigationController.h"
 #import "YTUserInfoTool.h"
-
+#import "YTResourcesTool.h"
+#import "UIImageView+SD.h"
 
 #define delay 3.0f
 
 @interface YTWelcomeViewController ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *bannerImage;
 
 @end
 
@@ -28,12 +31,13 @@
     [super viewDidLoad];
     
     // 下载banner图片
-    
+    NSLog(@"%@",[YTResourcesTool resources]);
+    [self.bannerImage imageWithUrlStr:[YTResourcesTool resources].appWelcomeImg phImage:nil];
     
     
     // 获取用户信息
     if ([YTAccountTool account]) {
-        [YTUserInfoTool loadUserInfo];
+        [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {}];
     }
     
     // 转场

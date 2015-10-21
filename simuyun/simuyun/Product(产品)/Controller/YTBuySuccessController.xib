@@ -199,6 +199,9 @@
                         <constraint firstAttribute="height" constant="44" id="09H-dq-SU1"/>
                     </constraints>
                     <state key="normal" backgroundImage="xzqbb"/>
+                    <connections>
+                        <action selector="reportClick:" destination="-1" eventType="touchUpInside" id="JGL-xC-kgd"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHK-3I-Mvy">
                     <rect key="frame" x="10" y="566" width="355" height="44"/>

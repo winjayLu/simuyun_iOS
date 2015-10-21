@@ -31,6 +31,8 @@
 
 
 /** 接口名 */
+// 程序启动信息
+#define YTGetResources @"resources"
 // 登录
 #define YTSession @"session"
 // 加载产品列表
@@ -41,6 +43,12 @@
 #define YTRegister @"register"
 // 找回密码
 #define YTresetPassword @"resetPassword"
+// 微信登录
+#define YTWeChatLogin @"weChatLogin"
+// 获取用户信息
+#define YTUser @"userInfo"
+// 认购产品
+#define YTOrder @"order"
 
 
 

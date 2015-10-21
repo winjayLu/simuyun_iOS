@@ -7,8 +7,15 @@
 //
 
 #import "YTBuySuccessController.h"
+#import "YTReportContentController.h"
 
 @interface YTBuySuccessController ()
+
+/**
+ *  报备
+ */
+
+- (IBAction)reportClick:(UIButton *)sender;
 
 @end
 
@@ -36,4 +43,9 @@
 
 
 
+- (IBAction)reportClick:(UIButton *)sender {
+    YTReportContentController *report = [[YTReportContentController alloc] init];
+    [self.navigationController pushViewController:report animated:YES];
+    
+}
 @end

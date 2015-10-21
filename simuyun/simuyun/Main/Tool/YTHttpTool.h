@@ -7,6 +7,8 @@
 //  网络请求工具类
 
 #import <Foundation/Foundation.h>
+#import "MJExtension.h"
+
 
 @interface YTHttpTool : NSObject
 

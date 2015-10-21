@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 YTWealth. All rights reserved.
 
 #import "NSString+Extend.h"
+#import "AGNumberForBank.h"
 
 @implementation NSString (Extend)
 
@@ -18,6 +19,27 @@
     NSTimeInterval timeInterval=self.floatValue;
     
     return [NSDate dateWithTimeIntervalSince1970:timeInterval];
+}
+
+/**
+ *  获取银行名称
+ */
+
++(NSString *)getBankFromCardNumber:(NSString *)bank
+{
+    if ([bank length] < 6) {
+        return @"";
+    }
+    const char *bankChar = [bank UTF8String];
+    char *retChar = getNameOfBank(bankChar, 0);
+    NSString *bankName = [NSString stringWithCString:retChar encoding:NSUTF8StringEncoding];
+    
+    // 去掉卡类型
+    NSArray *bankArr = [bankName componentsSeparatedByString:@"."];
+    if (bankArr && bankArr.count>0) {
+        return bankArr[0];
+    }
+    return bankName;
 }
 
 @end

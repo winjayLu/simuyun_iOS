@@ -13,7 +13,7 @@
 /**
  *  产品id
  */
-@property (nonatomic, copy) NSString *product_id;
+@property (nonatomic, copy) NSString *pro_id;
 
 /**
  *  icon标签
@@ -47,6 +47,13 @@
  *  分享子标题
  */
 @property (nonatomic, copy) NSString *share_summary;
+
+/**
+ *  剩余额度
+ *
+ */
+@property (nonatomic, assign) int remaining_amt;
+
 
 
 

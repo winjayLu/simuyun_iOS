@@ -80,31 +80,35 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
  *  @param recognizer
  */
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
-    // 当滑动水平X大于75时禁止滑动
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
-        self.panStartX = [recognizer locationInView:self.view].x;
-    }
-    if (self.sta == kStateHome && self.panStartX >= 200) {
-        return;
-    }
-    
+
     CGFloat x = [recognizer translationInView:self.view].x;
     // 禁止在主界面的时候向左滑动
-    if (self.sta == kStateHome && x < 0) {
+    if ( x < 0) {
+        [self showHome];
+        return;
+    }
+    // 最大滑动范围241
+    if (x > 240) {
+        [self showMenu];
         return;
     }
     
     CGFloat dis = self.distance + x;
+    
+    if (recognizer.state == UIGestureRecognizerStateCancelled) {
+        [self showHome];
+        return;
+    }
+    
     // 当手势停止时执行操作
     if (recognizer.state == UIGestureRecognizerStateEnded) {
-        if (dis >= DeviceWidth * viewSlideHorizonRatio / 2.0) {
+        if (dis >= 241 * 0.5) {
             [self showMenu];
         } else {
             [self showHome];
         }
         return;
     }
-    
     self.nav.view.center = CGPointMake(self.view.center.x + dis, self.view.center.y);
     CGFloat menuCenterMove = dis * (self.menuCenterXEnd - self.menuCenterXStart) / self.leftDistance;
     self.menuVc.view.center = CGPointMake(self.menuCenterXStart + menuCenterMove, self.view.center.y);
@@ -116,7 +120,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
 - (void)showMenu {
     self.distance = self.leftDistance;
     self.sta = kStateMenu;
-    [self doSlide:viewSlideHorizonRatio];
+    [self doSlide:0];
 }
 
 /**
@@ -140,7 +144,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
         if (proportion == 1) {
             menuCenterX = 0;
             navCenterX = DeviceWidth * 0.5;
-            self.nav.view.center = CGPointMake(DeviceWidth * 0.5, DeviceHight * 0.5);
+            self.nav.view.center = self.view.center;
             self.menuVc.view.center = CGPointMake(menuCenterX, self.view.center.y);
         } else {
             menuCenterX = DeviceWidth * 0.5;
@@ -156,7 +160,6 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
             cover.backgroundColor = [UIColor clearColor];
             [cover addTarget:self action:@selector(coverClick:) forControlEvents:UIControlEventTouchDown];
             [self.view addSubview:cover];
-
         }
     }];
 }
@@ -193,8 +196,6 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
 
         // 设置为半透明
         [self.nav.navigationBar lt_setBackgroundColor:[YTColor(255, 255, 255) colorWithAlphaComponent:0.0]];
-        // 隐藏子控件
-//        [self navigationBarWithHidden:YES];
         // 添加手势
         [self.nav.view addGestureRecognizer:self.panRecongnizer];
         // 显示tabbar
@@ -202,28 +203,12 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
     } else {
         // 进入其他视图控制器
         [self.nav.navigationBar lt_setBackgroundColor:[YTNavBackground colorWithAlphaComponent:1.0]];
-        // 显示子控件
-//        [self navigationBarWithHidden:NO];
         // 删除手势
         [self.nav.view removeGestureRecognizer:self.panRecongnizer];
         // 隐藏tabbar
         appRootVC.tabBar.hidden = YES;
     }
 }
-
-/**
- *  隐藏/显示navgatinonBar的子控件
- */
-//- (void)navigationBarWithHidden:(BOOL)hidden
-//{
-//    NSArray *list=self.nav.navigationBar.subviews;
-//    for (id obj in list) {
-//        if ([obj isKindOfClass:[UIImageView class]]) {
-//            UIImageView *imageView=(UIImageView *)obj;
-//            imageView.hidden=hidden;
-//        }
-//    }
-//}
 
 
 
