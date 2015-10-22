@@ -13,6 +13,12 @@
 
 
 /**
+ *  加载程序启动信息
+ */
++ (void)loadResourcesWithresult:(void (^)(BOOL result))result;
+
+
+/**
  *  获取上次存储的启动信息
  */
 + (YTResources *)resources;

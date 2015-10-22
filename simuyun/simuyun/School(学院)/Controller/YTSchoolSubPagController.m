@@ -1,21 +1,18 @@
 //
-//  YTWebViewController.m
+//  YTSchoolSubPagController.m
 //  simuyun
 //
-//  Created by Luwinjay on 15/10/8.
+//  Created by Luwinjay on 15/10/22.
 //  Copyright © 2015年 YTWealth. All rights reserved.
 //
 
-#import "YTWebViewController.h"
+#import "YTSchoolSubPagController.h"
 #import "YHWebViewProgress.h"
 #import "YHWebViewProgressView.h"
 
 
-@interface YTWebViewController () <UIWebViewDelegate>
-/**
- *  webView
- */
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
+@interface YTSchoolSubPagController () <UIWebViewDelegate>
 
 
 
@@ -24,32 +21,34 @@
  */
 @property (nonatomic, strong) YHWebViewProgress *progressProxy;
 
+@property (nonatomic, weak) UIWebView *webView;
+
+
 @end
 
-@implementation YTWebViewController
+@implementation YTSchoolSubPagController
 
+- (void)loadView
+{
+    UIWebView *webView = [[UIWebView alloc] init];
+    webView.frame = DeviceBounds;
+    webView.delegate = self;
+    webView.scalesPageToFit = YES;
+    self.view = webView;
+    self.webView = webView;
+}
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.webView.backgroundColor = YTRandomColor;
+    self.title = @"正在加载";
     
-    // 设置标题
-    if(self.toTitle == nil)
-    {
-        self.title = @"正在加载";
-    } else {
-        self.title = self.toTitle;
-    }
-    
-    
-    // 初始化进度条
-    [self setupProgress];
-    
+//    [self setupProgress];
     // 加载网页
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
+    [(UIWebView *)self.view loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
 }
+
 
 /**
  *  初始化进度条
@@ -59,19 +58,17 @@
     // 创建进度条
     YHWebViewProgressView *progressView = [[YHWebViewProgressView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 2)];
     progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
-    
+    progressView.barAnimationDuration = 0.25;
+    progressView.progressBarColor = YTViewBackground;
     // 设置进度条
     self.progressProxy.progressView = progressView;
-    // 将UIWebView代理指向YHWebViewProgress
+    // 将UIWebView代理指向YHWebViq   ewProgress
     self.webView.delegate = self.progressProxy;
-    // 设置webview代理转发到self（可选）
+    // 设置webview代理转发到self
     self.progressProxy.webViewProxy = self;
     // 添加到视图
     [self.view addSubview:progressView];
 }
-
-
-#pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
 {
@@ -82,24 +79,33 @@
     //
     if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"objc"])
     {
-        // urlString=objc://turn/topic-lister.html:/黄埔专区
+        //urlString=objc://turn/topic-lister.html:/黄埔专区
         NSArray *arrFucnameAndParameter = [(NSString*)[urlComps objectAtIndex:1] componentsSeparatedByString:@":/"];
         
         // 跳转的地址和标题
         if (arrFucnameAndParameter.count) {
             NSString *url = [arrFucnameAndParameter[0] substringFromIndex:4];
-            // 标题
             NSString *title = [arrFucnameAndParameter[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            YTLog(@"%@",title);
-            YTWebViewController *vc = [[YTWebViewController alloc] init];
-            vc.url = [self appendingUrl:url];
-
-            [self.navigationController pushViewController:vc animated:YES];
+            YTSchoolSubPagController *school = [[YTSchoolSubPagController alloc] init];
+            school.url = [self appendingUrl:url];
+            school.titleData = title;
+            school.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:school animated:YES];
         }
+        
     }
     return YES;
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    self.title = self.titleData;
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    self.title = @"请检查网络连接";
+}
 
 /**
  *  拼接地址
@@ -115,8 +121,16 @@
     return str;
 }
 
+/**
+ *  清理webView缓存
+ */
+- (void)dealloc
+{
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+}
 
 #pragma mark - lazy
+
 - (YHWebViewProgress *)progressProxy
 {
     if (!_progressProxy) {
@@ -124,15 +138,6 @@
     }
     return _progressProxy;
 }
-
-/**
- *  清理webView缓存
- */
-- (void)dealloc
-{
-      [[NSURLCache sharedURLCache] removeAllCachedResponses];
-}
-
 
 
 

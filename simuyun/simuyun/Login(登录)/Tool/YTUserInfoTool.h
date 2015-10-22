@@ -20,6 +20,11 @@
 + (YTUserInfo *)userInfo;
 
 /**
+ *  清除用户信息
+ */
++ (void)clearUserInfo;
+
+/**
  *  加载用户信息
  *  成功返回YES
  */

@@ -26,19 +26,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // 获取版本号
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    
+    // 获取程序启动信息
+    [YTResourcesTool loadResourcesWithresult:^(BOOL result) {}];
+    
     // 友盟分享及微信登录
-    [self setupUmeng:version];
+    [self setupUmeng];
     
     // 集成极光推送
     [self setupJpush:launchOptions];
     
     // 检测是否有推送消息
     [self checkNotification:launchOptions];
-    
-    // 获取程序启动信息
-    [self resources:version];
     
     // 创建窗口
     self.window = [[UIWindow alloc] init];
@@ -57,7 +56,7 @@
  *  初始化友盟推送-微信登录
  *
  */
-- (void)setupUmeng:(NSString *)version
+- (void)setupUmeng
 {
     // 设置友盟社会化组件appkey
     [UMSocialData setAppKey:UmengAppKey];
@@ -66,6 +65,8 @@
     
     // 友盟统计
     [MobClick startWithAppkey:UmengAppKey reportPolicy:BATCH  channelId:nil];
+    // 获取版本号
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
 }
 
@@ -150,23 +151,6 @@
     NSDictionary *remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
 }
 
-/**
- *  获取程序启动信息
- */
-- (void)resources:(NSString *)version
-{
-
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"os"] = @"ios-appstore";
-    dict[@"version"] = version;
-
-    [YTHttpTool get:YTGetResources params:dict success:^(NSDictionary *responseObject)
-    {
-        [YTResourcesTool saveResources:[YTResources objectWithKeyValues:responseObject]];
-    } failure:^(NSError *error) {
-    }];
-
-}
 
 /**
  *  接受到内存警告

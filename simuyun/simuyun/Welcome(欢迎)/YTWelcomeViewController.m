@@ -31,10 +31,19 @@
     [super viewDidLoad];
     
     // 下载banner图片
-    NSLog(@"%@",[YTResourcesTool resources]);
-    [self.bannerImage imageWithUrlStr:[YTResourcesTool resources].appWelcomeImg phImage:nil];
-    
-    
+    YTResources *resources = [YTResourcesTool resources];
+    if (resources) {  // 已经获取到了
+        [self.bannerImage imageWithUrlStr:resources.appWelcomeImg phImage:nil];
+    } else
+    {
+        // 重新获取
+        [YTResourcesTool loadResourcesWithresult:^(BOOL result) {
+            if (result) {
+                [self.bannerImage imageWithUrlStr:[YTResourcesTool resources].appWelcomeImg phImage:nil];
+            }
+        }];
+    }
+
     // 获取用户信息
     if ([YTAccountTool account]) {
         [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {}];
@@ -42,7 +51,6 @@
     
     // 转场
     [self transitionMainVC];
-    
 }
 
 - (void)transitionMainVC
@@ -59,7 +67,6 @@
             mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
         }
         [mainWindow.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];
-        
     });
     
 }

@@ -7,7 +7,10 @@
 //
 
 #import "YTLeftMenu.h"
-
+#import "UIImageView+SD.h"
+#import "YTLoginViewController.h"
+#import "YTAccountTool.h"
+#import "YTUserInfoTool.h"
 
 @interface YTLeftMenu()
 
@@ -15,6 +18,11 @@
  *  用户头像
  */
 @property (weak, nonatomic) IBOutlet UIImageView *iconImage;
+
+/**
+ *  用户昵称
+ */
+@property (weak, nonatomic) IBOutlet UILabel *nameLable;
 
 /**
  *  用户资料单击事件
@@ -37,7 +45,7 @@
  *  邮寄地址单击事件
  *
  */
-- (IBAction)youJiClick:(UIButton *)sender;
+//- (IBAction)youJiClick:(UIButton *)sender;
 
 /**
  *  推荐私募云单击事件
@@ -93,9 +101,9 @@
  *  邮寄地址单击事件
  *
  */
-- (IBAction)youJiClick:(UIButton *)sender {
-    [self senderNotification:sender];
-}
+//- (IBAction)youJiClick:(UIButton *)sender {
+//    [self senderNotification:sender];
+//}
 /**
  *  推荐私募云单击事件
  *
@@ -122,7 +130,14 @@
  *
  */
 - (IBAction)tuiChuClick:(UIButton *)sender {
-    [self senderNotification:sender];
+    
+    // 获取程序主窗口
+    UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
+    mainWindow.rootViewController = [[YTLoginViewController alloc] init];
+    // 清除保存的账户信息
+    [YTAccountTool save:nil];
+    // 清除用户信息
+    [YTUserInfoTool clearUserInfo];
 }
 /**
  *  发送通知
@@ -132,4 +147,46 @@
     NSDictionary *userInfo = @{YTLeftMenuSelectBtn : btn.titleLabel.text};
     [YTCenter postNotificationName:YTLeftMenuNotification object:nil userInfo:userInfo];
 }
+
+- (void)setUserInfo:(YTUserInfo *)userInfo
+{
+    _userInfo = userInfo;
+    if (_userInfo == nil) return;
+    // 设置头像
+    [self setIconImageWithImageUrl:userInfo.headImgUrl];
+    // 认证状态
+    if (userInfo.adviserStatus) {
+        // 设置昵称
+        self.nameLable.text = userInfo.nickName;
+    } else {
+        // 设置昵称
+        self.nameLable.text = [NSString stringWithFormat:@"%@ | %@",userInfo.organizationName, userInfo.nickName];
+    }
+    if (userInfo.weChatNickName.length > 0)
+    {
+        [self.guanLianBtn setTitle:userInfo.weChatNickName forState:UIControlStateNormal];
+        self.guanLianBtn.enabled = NO;
+    }
+}
+
+/**
+ *  给iconView设置图片
+ */
+- (void)setIconImageWithImageUrl:(NSString *)imageUrl
+{
+    self.iconImage.layer.masksToBounds = YES;
+    self.iconImage.layer.cornerRadius = self.iconImage.frame.size.width * 0.5;
+    self.iconImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    self.iconImage.layer.shouldRasterize = YES;
+    self.iconImage.clipsToBounds = YES;
+    
+    UIImage *placeholder = [UIImage imageNamed:@"avatar_default_big"];
+    // 判断是否是更换图片
+    if(imageUrl == nil) {
+        self.iconImage.image = placeholder;
+        return;
+    }
+    [self.iconImage imageWithUrlStr:imageUrl phImage:placeholder];
+}
+
 @end

@@ -32,7 +32,7 @@
     success.view.frame = CGRectMake(0, 0, DeviceWidth, success.view.size.height);
     [self addChildViewController:success];
     [self.view addSubview:success.view];
-    [(UIScrollView *)self.view setContentSize:success.view.size];
+    [(UIScrollView *)self.view setContentSize:CGSizeMake(success.view.width, success.view.height)];
 }
 
 - (void)didReceiveMemoryWarning {

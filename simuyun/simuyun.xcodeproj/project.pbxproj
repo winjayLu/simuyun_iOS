@@ -35,6 +35,7 @@
 		97187A8E1BC666E200C64609 /* YTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97187A8C1BC666E200C64609 /* YTWebViewController.m */; settings = {ASSET_TAGS = (); }; };
 		97187A8F1BC666E200C64609 /* YTWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97187A8D1BC666E200C64609 /* YTWebViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		975F78041BCFCD3D00589D22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 975F78031BCFCD3D00589D22 /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
+		976084241BD8F89E0037A4F7 /* YTSchoolSubPagController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976084231BD8F89E0037A4F7 /* YTSchoolSubPagController.m */; settings = {ASSET_TAGS = (); }; };
 		9769F9F51BC9676B001B1F02 /* YTBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9769F9E91BC9676B001B1F02 /* YTBottomView.m */; settings = {ASSET_TAGS = (); }; };
 		9769F9F61BC9676B001B1F02 /* YTContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9769F9EB1BC9676B001B1F02 /* YTContentCell.m */; settings = {ASSET_TAGS = (); }; };
 		9769F9F71BC9676B001B1F02 /* YTContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9769F9EC1BC9676B001B1F02 /* YTContentCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -261,6 +262,8 @@
 		97187A8C1BC666E200C64609 /* YTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTWebViewController.m; sourceTree = "<group>"; };
 		97187A8D1BC666E200C64609 /* YTWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTWebViewController.xib; sourceTree = "<group>"; };
 		975F78031BCFCD3D00589D22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		976084221BD8F89E0037A4F7 /* YTSchoolSubPagController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSchoolSubPagController.h; sourceTree = "<group>"; };
+		976084231BD8F89E0037A4F7 /* YTSchoolSubPagController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSchoolSubPagController.m; sourceTree = "<group>"; };
 		9769F9E81BC9676B001B1F02 /* YTBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTBottomView.h; sourceTree = "<group>"; };
 		9769F9E91BC9676B001B1F02 /* YTBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTBottomView.m; sourceTree = "<group>"; };
 		9769F9EA1BC9676B001B1F02 /* YTContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTContentCell.h; sourceTree = "<group>"; };
@@ -1264,6 +1267,8 @@
 			children = (
 				97C605D61BC2621F00E555E8 /* YTSchoolViewController.h */,
 				97C605D71BC2621F00E555E8 /* YTSchoolViewController.m */,
+				976084221BD8F89E0037A4F7 /* YTSchoolSubPagController.h */,
+				976084231BD8F89E0037A4F7 /* YTSchoolSubPagController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1910,6 +1915,7 @@
 				97C606031BC2628200E555E8 /* TempViewController.m in Sources */,
 				97187A8E1BC666E200C64609 /* YTWebViewController.m in Sources */,
 				9714A6F31BC7E0610018A14E /* UIView+YUStyle.m in Sources */,
+				976084241BD8F89E0037A4F7 /* YTSchoolSubPagController.m in Sources */,
 				978218271BD0E40C000159E8 /* YTResultPasswordViewController.m in Sources */,
 				97C606251BC2679F00E555E8 /* NSString+Extend.m in Sources */,
 				97BC997D1BD4DC8B0090BDE8 /* YTCloudObserveController.m in Sources */,

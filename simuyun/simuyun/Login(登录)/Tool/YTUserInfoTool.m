@@ -23,6 +23,15 @@ static YTUserInfo *_userInfo;
 {
     return _userInfo;
 }
+/**
+ *  清除用户信息
+ */
++ (void)clearUserInfo
+{
+    _userInfo = nil;
+}
+
+
 
 
 /**
@@ -34,6 +43,7 @@ static YTUserInfo *_userInfo;
     // 已经有用户信息,直接返回
     if (_userInfo) {
         result(YES);
+        return;
     }
     
     // 去服务器获取

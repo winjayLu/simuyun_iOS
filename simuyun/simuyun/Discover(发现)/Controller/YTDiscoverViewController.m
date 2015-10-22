@@ -138,7 +138,7 @@
     
     
     PPTModel *pptModel2 = [[PPTModel alloc] init];
-    pptModel2.image = [UIImage imageNamed:@"2"];
+    pptModel2.image = [UIImage imageNamed:@"1"];
     
     
     PPTModel *pptModel3 = [[PPTModel alloc] init];
@@ -146,14 +146,14 @@
     
     
     PPTModel *pptModel4 = [[PPTModel alloc] init];
-    pptModel4.image = [UIImage imageNamed:@"2"];
+    pptModel4.image = [UIImage imageNamed:@"1"];
     
     
     PPTModel *pptModel5 = [[PPTModel alloc] init];
     pptModel5.image = [UIImage imageNamed:@"1"];
     
     PPTModel *pptModel6 = [[PPTModel alloc] init];
-    pptModel6.image = [UIImage imageNamed:@"2"];
+    pptModel6.image = [UIImage imageNamed:@"1"];
     
     self.pptVC.pptModels = @[pptModel1, pptModel2, pptModel3, pptModel4, pptModel5];
 }

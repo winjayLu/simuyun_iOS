@@ -78,31 +78,6 @@ NSInteger const HHAlertview_SIZE_DETAIL_FONT = 14;
 }
 
 
-- (void)showAlertWithStyle:(HHAlertStyle )HHAlertStyle inView:(UIView *)view Title:(NSString *)title detail:(NSString *)detail cancelButton:(NSString *)cancel Okbutton:(NSString *)ok
-{
-    
-    [self uiStyle];
-    switch (HHAlertStyle) {
-        case HHAlertStyleDefault:
-        {
-            [[HHAlertView shared] drawTick];
-        }
-            break;
-            
-        default:
-            break;
-    }
-    
-    
-    [self configtext:title detail:detail];
-    
-    
-    [self configButton:cancel Okbutton:ok];
-    
-
-    [self show];
-}
-
 
 - (UIViewController *)appRootViewController
 {
@@ -116,7 +91,7 @@ NSInteger const HHAlertview_SIZE_DETAIL_FONT = 14;
 
 
 static UIWindow *_window;
-- (void)showAlertWithStyle:(HHAlertStyle)HHAlertStyle inView:(UIView *)view Title:(NSString *)title detail:(NSString *)detail cancelButton:(NSString *)cancel Okbutton:(NSString *)ok block:(selectButton)block
+- (void)showAlertWithStyle:(HHAlertStyle)HHAlertStyle imageName:(NSString *)imagename Title:(NSString *)title detail:(NSString *)detail cancelButton:(NSString *)cancel Okbutton:(NSString *)ok block:(selectButton)block
 {
  
     [self uiStyle];
@@ -124,7 +99,7 @@ static UIWindow *_window;
     switch (HHAlertStyle) {
         case HHAlertStyleDefault:
         {
-            [self drawTick];
+            [self drawTick:imagename];
         }
             break;
     }
@@ -135,7 +110,7 @@ static UIWindow *_window;
     [self configButton:cancel Okbutton:ok];
     
     _window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
-    _window.backgroundColor = YTRGBA(0, 0, 0, 0.2);
+    _window.backgroundColor = YTRGBA(0, 0, 0, 0.1);
     _window.alpha = 1;
     _window.windowLevel = UIWindowLevelStatusBar ;
     _window.hidden = NO;
@@ -146,6 +121,7 @@ static UIWindow *_window;
     [self show];
     
 }
+
 
 - (void)hide
 {
@@ -184,7 +160,6 @@ static UIWindow *_window;
     [_detailLabel sizeToFit];
     [_detailLabel setFrame:CGRectMake(15, CGRectGetMaxY(_titleLabel.frame) + 10, [self getSelfSize].width - 30, _detailLabel.frame.size.height)];
     [_detailLabel setTextColor:txtColor];
-//    [_detailLabel setBackgroundColor:[UIColor redColor]];
     [self addSubview:_detailLabel];
     
 }
@@ -193,61 +168,47 @@ static UIWindow *_window;
 - (void)configButton:(NSString *)cancel Okbutton:(NSString *)ok
 {
 
-    
-    if (cancel!=nil && ok!=nil) {
-        if (_cancelButton == nil) {
-            _cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_detailLabel.frame) + 15, Button_SIZE_WIDTH, Buutton_SIZE_HEIGHT)];
-        }
+    if(cancel != nil)
+    {
+        _cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_detailLabel.frame) + 15, Button_SIZE_WIDTH, Buutton_SIZE_HEIGHT)];
         [_cancelButton setBackgroundColor:CANCELBUTTON_BACKGROUND_COLOR];
         [_cancelButton setTitle:cancel forState:UIControlStateNormal];
         [_cancelButton addTarget:self action:@selector(dismissWithCancel) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_cancelButton];
         
-        if (_OkButton==nil) {
-            _OkButton = [[UIButton alloc] initWithFrame:CGRectMake(_cancelButton.frame.size.width, CGRectGetMaxY(_detailLabel.frame) + 15, Button_SIZE_WIDTH, Buutton_SIZE_HEIGHT)];
-        }
-
-        
+        _OkButton = [[UIButton alloc] initWithFrame:CGRectMake(_cancelButton.frame.size.width, CGRectGetMaxY(_detailLabel.frame) + 15, Button_SIZE_WIDTH, Buutton_SIZE_HEIGHT)];
         [_OkButton setTitle:ok forState:UIControlStateNormal];
         [_OkButton setBackgroundColor:OKBUTTON_BACKGROUND_COLOR];
         [_OkButton addTarget:self action:@selector(dismissWithOk) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_OkButton];
-
+        
         CGFloat oldx = self.frame.origin.x;
         CGFloat oldw = self.frame.size.width;
         CGFloat viewH = CGRectGetMaxY(_cancelButton.frame);
         CGFloat viewY = (DeviceHight - viewH) * 0.5;
         self.frame = CGRectMake(oldx, viewY, oldw, viewH);
-
-    }
-    
-    if (cancel==nil) {
-        if (_OkButton==nil) {
-            _OkButton = [[UIButton alloc] initWithFrame:CGRectMake(([self getSelfSize].width-Button_SIZE_WIDTH)/2, [self getSelfSize].height-Buutton_SIZE_HEIGHT-10, Button_SIZE_WIDTH, Buutton_SIZE_HEIGHT)];
-        }
-        else
-        {
-            [_OkButton setFrame:CGRectMake(([self getSelfSize].width-Button_SIZE_WIDTH)/2, [self getSelfSize].height-Buutton_SIZE_HEIGHT-10, Button_SIZE_WIDTH, Buutton_SIZE_HEIGHT)];
-        }
         
+    } else {
+        _OkButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_detailLabel.frame) + 15, Button_SIZE_WIDTH * 2, Buutton_SIZE_HEIGHT)];
         [_OkButton setTitle:ok forState:UIControlStateNormal];
         [_OkButton setBackgroundColor:OKBUTTON_BACKGROUND_COLOR];
-        [[_OkButton layer] setCornerRadius:5];
-        
         [_OkButton addTarget:self action:@selector(dismissWithOk) forControlEvents:UIControlEventTouchUpInside];
-        
         [self addSubview:_OkButton];
+        
+        CGFloat oldx = self.frame.origin.x;
+        CGFloat oldw = self.frame.size.width;
+        CGFloat viewH = CGRectGetMaxY(_OkButton.frame);
+        CGFloat viewY = (DeviceHight - viewH) * 0.5;
+        self.frame = CGRectMake(oldx, viewY, oldw, viewH);
+        
     }
+    
 }
 
 - (void)dismissWithCancel
 {
     if (_secletBlock!=nil) {
         _secletBlock(HHAlertButtonCancel);
-    }
-    else
-    {
-        [_delegate didClickButtonAnIndex:HHAlertButtonCancel];
     }
     [self hide];
 }
@@ -257,10 +218,7 @@ static UIWindow *_window;
     if (_secletBlock!=nil) {
         _secletBlock(HHAlertButtonOk);
     }
-    else
-    {
-        [_delegate didClickButtonAnIndex:HHAlertButtonOk];
-    }
+
     [self hide];
 }
 
@@ -318,11 +276,11 @@ static UIWindow *_window;
 
 
 
-- (void)drawTick
+- (void)drawTick:(NSString *)imagename
 {
     [_logoView removeFromSuperview];
     
-    UIImage *image = [UIImage imageNamed:@"xin"];
+    UIImage *image = [UIImage imageNamed:imagename];
     
     
     _logoView = [[UIImageView alloc] initWithImage:image];

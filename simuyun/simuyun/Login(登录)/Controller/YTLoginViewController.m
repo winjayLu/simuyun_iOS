@@ -107,7 +107,18 @@
             param[@"openid"] = account.openId;
             param[@"headimgurl"] = account.iconURL;
             [YTHttpTool post:YTWeChatLogin params:param success:^(id responseObject) {
-                [self transitionTabBarVC];
+                NSLog(@"%@",response);
+                YTAccount *account = [[YTAccount alloc] init];
+                account.userName = self.userName.text;
+                account.password = self.passWord.text;
+                // 发起登录
+                [YTAccountTool loginAccount:account result:^(BOOL result) {
+                    if (result) {   // 登录成功
+                        
+                        [self transitionTabBarVC];
+                    } else {
+                    }
+                }];
             } failure:^(NSError *error) {
 
             }];

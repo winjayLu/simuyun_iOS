@@ -263,7 +263,7 @@
     } else {
         self.renZhenBtn.hidden = YES;
         // 设置昵称
-        self.nameLable.text = [NSString stringWithFormat:@"%@|%@",userInfo.organizationName, userInfo.nickName];
+        self.nameLable.text = [NSString stringWithFormat:@"%@ | %@",userInfo.organizationName, userInfo.nickName];
     }
     
     // 客户数量

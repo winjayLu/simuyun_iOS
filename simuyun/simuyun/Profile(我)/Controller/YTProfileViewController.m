@@ -48,6 +48,13 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
     self.menuCenterXEnd = self.view.center.x;
     self.leftDistance = DeviceWidth * viewSlideHorizonRatio;
     
+
+    // 设置首页控制器,添加手势操作
+    YTHomeViewController *homeVc = [[YTHomeViewController alloc] init];
+    homeVc.view.frame = [[UIScreen mainScreen] bounds];
+    homeVc.delegate = self;
+
+    
     // 设置menu的view
     YTMenuViewController *menuVc = [[YTMenuViewController alloc] init];
     menuVc.view.frame = self.view.frame;
@@ -56,11 +63,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
     [self.view addSubview:menuVc.view];
     self.menuVc = menuVc;
     
-
-    // 设置首页控制器,添加手势操作
-    YTHomeViewController *homeVc = [[YTHomeViewController alloc] init];
-    homeVc.view.frame = [[UIScreen mainScreen] bounds];
-    homeVc.delegate = self;
+    // 将首页控制器包装成导航控制器
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeVc];
     [self addChildViewController:nav];
     self.nav = nav;

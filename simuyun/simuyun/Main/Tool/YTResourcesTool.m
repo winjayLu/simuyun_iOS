@@ -10,11 +10,34 @@
 
 @implementation YTResourcesTool
 
-
-
-
 // 用户信息
 static YTResources *_resources;
+
+/**
+ *  加载程序启动信息
+ */
++ (void)loadResourcesWithresult:(void (^)(BOOL result))result
+{
+    // 已经有用户信息,直接返回
+    if (_resources) {
+        result(YES);
+        return;
+    }
+    
+    // 去服务器获取
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"os"] = @"ios-appstore";
+    dict[@"version"] = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    
+    [YTHttpTool get:YTGetResources params:dict success:^(NSDictionary *responseObject)
+     {
+         [self saveResources:[YTResources objectWithKeyValues:responseObject]];
+         YTResources *resources = [self resources];
+         result(YES);
+     } failure:^(NSError *error) {
+         result(NO);
+     }];
+}
 
 
 /**

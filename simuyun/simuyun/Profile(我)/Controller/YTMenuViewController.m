@@ -8,6 +8,7 @@
 
 #import "YTMenuViewController.h"
 #import "YTLeftMenu.h"
+#import "YTUserInfoTool.h"
 
 @interface YTMenuViewController ()
 
@@ -28,11 +29,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
-    
     // 初始化左侧菜单
     YTLeftMenu *leftMenu = [YTLeftMenu leftMenu];
     leftMenu.frame = CGRectMake(0, 0, 241, DeviceHight);
+    
+    // // 获取用户信息
+    if ([YTUserInfoTool userInfo] == nil) {
+        [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
+            if (result) {
+                leftMenu.userInfo = [YTUserInfoTool userInfo];
+            } else {
+            }
+        }];
+    } else
+    {
+        leftMenu.userInfo = [YTUserInfoTool userInfo];
+    }
     [self.view addSubview:leftMenu];
     
     // 设置ScrollView的滚动范围

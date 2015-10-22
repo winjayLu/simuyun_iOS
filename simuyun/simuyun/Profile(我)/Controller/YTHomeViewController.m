@@ -45,7 +45,7 @@
     // 将控制器的View替换为ScrollView
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:DeviceBounds];
     mainView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
-    mainView.bounces = NO;
+//    mainView.bounces = NO;
     mainView.showsVerticalScrollIndicator = NO;
     self.view = mainView;
     self.view.backgroundColor = YTViewBackground;
@@ -78,6 +78,9 @@
                 [SVProgressHUD showErrorWithStatus:@"请检查您的网络链接"];
             }
         }];
+    } else
+    {
+        self.topView.userInfo = [YTUserInfoTool userInfo];
     }
 }
 
