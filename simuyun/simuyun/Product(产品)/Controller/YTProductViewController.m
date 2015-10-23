@@ -53,6 +53,8 @@
     }
     cell.layer.cornerRadius = 5;
     cell.layer.masksToBounds = YES;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     cell.product = self.products[indexPath.section];
     return cell;
 }
@@ -98,7 +100,7 @@
     param[@"uid"] = @"cc0cc61140504258ab474b8f0a26bb56";
     [YTHttpTool get:YTProductList params:param
     success:^(NSDictionary *responseObject) {
-        self.products = [YTProductModel objectArrayWithKeyValuesArray:responseObject[@"items"]];
+        self.products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
         // 刷新表格
         [self.tableView reloadData];
         // 结束刷新状态

@@ -49,6 +49,10 @@
 #define YTUser @"userInfo"
 // 认购产品
 #define YTOrder @"order"
+// 轮播图片
+#define YTBanner @"banner"
+// 订单列表
+#define YTOrders @"orders"
 
 
 

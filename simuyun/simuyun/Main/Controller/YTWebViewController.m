@@ -33,8 +33,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.webView.backgroundColor = YTRandomColor;
-    
+    self.webView.backgroundColor = [UIColor whiteColor];
+    self.webView.scalesPageToFit = YES;
     // 设置标题
     if(self.toTitle == nil)
     {
@@ -59,12 +59,13 @@
     // 创建进度条
     YHWebViewProgressView *progressView = [[YHWebViewProgressView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 2)];
     progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
-    
+    progressView.barAnimationDuration = 0.5;
+    progressView.progressBarColor = YTViewBackground;
     // 设置进度条
     self.progressProxy.progressView = progressView;
-    // 将UIWebView代理指向YHWebViewProgress
+    // 将UIWebView代理指向YHWebViq   ewProgress
     self.webView.delegate = self.progressProxy;
-    // 设置webview代理转发到self（可选）
+    // 设置webview代理转发到self
     self.progressProxy.webViewProxy = self;
     // 添加到视图
     [self.view addSubview:progressView];
@@ -82,7 +83,6 @@
     //
     if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"objc"])
     {
-        // urlString=objc://turn/topic-lister.html:/黄埔专区
         NSArray *arrFucnameAndParameter = [(NSString*)[urlComps objectAtIndex:1] componentsSeparatedByString:@":/"];
         
         // 跳转的地址和标题
@@ -98,6 +98,11 @@
         }
     }
     return YES;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    self.title = self.toTitle;
 }
 
 

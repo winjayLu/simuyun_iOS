@@ -42,4 +42,18 @@
     return bankName;
 }
 
+
+/**
+ *  将时间转换为NSDate
+ */
+
+- (NSDate *)stringWithDate:(NSString *)format
+{
+    //设置转换格式
+    NSDateFormatter*formatter=[[NSDateFormatter alloc]init];
+    [formatter setDateFormat:format];
+    //NSString转NSDate
+    return [formatter dateFromString:self];
+}
+
 @end

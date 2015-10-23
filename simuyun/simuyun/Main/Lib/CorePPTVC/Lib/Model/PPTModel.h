@@ -14,7 +14,7 @@
 
 @interface PPTModel : NSObject
 
-/** 图片 */
+///** 图片 */
 @property (nonatomic,strong) UIImage *image;
 
 /** 远程服务器地址 */
@@ -30,6 +30,14 @@
 
 /** 图片点击事件block：主要用于处理图片点击事件 */
 @property (nonatomic,copy) void(^PPTClickBlock)(PPTModel *pptModel);
+
+/**
+ *  跳转类型
+ *  1网页，
+ *  2产品页
+ */
+@property (nonatomic, assign) int type;
+
 
 
 

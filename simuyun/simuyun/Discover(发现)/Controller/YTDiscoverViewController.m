@@ -42,6 +42,11 @@
  */
 @property (nonatomic, strong) NSArray *stocks;
 
+/**
+ *  banner轮播图
+ */
+@property (nonatomic, strong) NSArray *banners;
+
 @end
 
 @implementation YTDiscoverViewController
@@ -84,12 +89,12 @@
     pptvc.view.frame = CGRectMake(maginWidth, maginWidth, DeviceWidth - 2 * maginWidth, 134 + pptvcY);
     pptvc.view.layer.cornerRadius = 5;
     pptvc.view.layer.masksToBounds = YES;
-    pptvc.view.backgroundColor = [UIColor blueColor];
+    pptvc.view.backgroundColor = [UIColor clearColor];
     [self addChildViewController:pptvc];
     [self.view addSubview:pptvc.view];
     self.pptVC = pptvc;
     pptvc.pptItemClickBlock = ^(PPTModel *pptModel){
-        [self pptVcClick:pptModel.extension_url];
+        [self pptVcClick:pptModel];
     };
     
 }
@@ -132,31 +137,16 @@
  */
 - (void)getAdvertise
 {
+    NSDictionary *params = @{@"os" : @"ios-appstore"};
+    [YTHttpTool get:YTBanner params:params success:^(id responseObject) {
+        self.banners = [PPTModel objectArrayWithKeyValuesArray:responseObject];
+        // 给banner设置图片
+        self.pptVC.pptModels = self.banners;
+    } failure:^(NSError *error) {
+    }];
     
-    PPTModel *pptModel1 = [[PPTModel alloc] init];
-    pptModel1.image = [UIImage imageNamed:@"1"];
-    
-    
-    PPTModel *pptModel2 = [[PPTModel alloc] init];
-    pptModel2.image = [UIImage imageNamed:@"1"];
-    
-    
-    PPTModel *pptModel3 = [[PPTModel alloc] init];
-    pptModel3.image = [UIImage imageNamed:@"1"];
-    
-    
-    PPTModel *pptModel4 = [[PPTModel alloc] init];
-    pptModel4.image = [UIImage imageNamed:@"1"];
-    
-    
-    PPTModel *pptModel5 = [[PPTModel alloc] init];
-    pptModel5.image = [UIImage imageNamed:@"1"];
-    
-    PPTModel *pptModel6 = [[PPTModel alloc] init];
-    pptModel6.image = [UIImage imageNamed:@"1"];
-    
-    self.pptVC.pptModels = @[pptModel1, pptModel2, pptModel3, pptModel4, pptModel5];
 }
+
 
 /**
  *  获取股指数据
@@ -176,10 +166,11 @@
  *
  *  @param toUrl 跳转的地址
  */
-- (void)pptVcClick:(NSString *)toUrl
+- (void)pptVcClick:(PPTModel *)pptModel
 {
     YTWebViewController *webView = [[YTWebViewController alloc] init];
-    webView.url = toUrl;
+    webView.url = pptModel.extension_url;
+    webView.toTitle = pptModel.title;
     webView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webView animated:YES];
 }

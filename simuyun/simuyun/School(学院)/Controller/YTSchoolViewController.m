@@ -13,6 +13,7 @@
 #import "YTAccountTool.h"
 #import "NSDate+Extension.h"
 #import "YTSchoolSubPagController.h"
+#import "MJRefresh.h"
 
 @interface YTSchoolViewController () <UIWebViewDelegate>
 
@@ -32,8 +33,12 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?uid=%@&v=4.0", [self appendingUrl:nil], [YTAccountTool account].userId]];
     [mainView loadRequest:[NSURLRequest requestWithURL:url]];
     mainView.scalesPageToFit = YES;
+    [mainView.scrollView setShowsVerticalScrollIndicator:NO];
+    mainView.scrollView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [mainView reload];
+    }];
     self.view = mainView;
-    self.view.backgroundColor = YTViewBackground;
+    self.view.backgroundColor = [UIColor whiteColor];
 
 }
 
@@ -69,8 +74,15 @@
     return YES;
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [((UIWebView *)self.view).scrollView.header endRefreshing];
+}
 
-
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [((UIWebView *)self.view).scrollView.header endRefreshing];
+}
 
 
 /**

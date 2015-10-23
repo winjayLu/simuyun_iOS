@@ -43,8 +43,10 @@
     [super viewDidLoad];
     
     self.title = @"正在加载";
+    self.view.userInteractionEnabled = NO;
+    self.view.backgroundColor = [UIColor whiteColor];
     
-//    [self setupProgress];
+    [self setupProgress];
     // 加载网页
     [(UIWebView *)self.view loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
 }
@@ -58,7 +60,7 @@
     // 创建进度条
     YHWebViewProgressView *progressView = [[YHWebViewProgressView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 2)];
     progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
-    progressView.barAnimationDuration = 0.25;
+    progressView.barAnimationDuration = 0.5;
     progressView.progressBarColor = YTViewBackground;
     // 设置进度条
     self.progressProxy.progressView = progressView;
@@ -100,12 +102,11 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     self.title = self.titleData;
+    [self.progressProxy.progressView setProgress:1.0f animated:NO];
+    self.view.userInteractionEnabled = YES;
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    self.title = @"请检查网络连接";
-}
+
 
 /**
  *  拼接地址

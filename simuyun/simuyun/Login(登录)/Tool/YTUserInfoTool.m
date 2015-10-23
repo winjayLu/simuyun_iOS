@@ -51,11 +51,9 @@ static YTUserInfo *_userInfo;
     dict[@"advisersId"] = [YTAccountTool account].userId;
     
     [YTHttpTool get:YTUser params:dict success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
         _userInfo = [YTUserInfo objectWithKeyValues:responseObject];
         result(YES);
     } failure:^(NSError *error) {
-        NSLog(@"%@",error);
         result(NO);
     }];
 

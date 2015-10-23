@@ -16,6 +16,7 @@
 #import "YTOtherViewController.h"
 #import "YTUserInfoTool.h"
 #import "SVProgressHUD.h"
+#import "YTOrderCenterController.h"
 
 @interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate>
 
@@ -235,6 +236,7 @@
 - (void)topBtnClicked:(TopButtonType)type
 {
     NSLog(@"%zd", type);
+    UIViewController *pushVc = nil;
     switch (type) {
         case TopButtonTypeRenzhen:  // 认证
             
@@ -246,7 +248,8 @@
             
             break;
         case TopButtonTypeKehu:     // 客户
-            
+            pushVc = [[YTOrderCenterController alloc] init];
+
             break;
         case TopButtonTypeDindan:   // 订单
             
@@ -256,9 +259,8 @@
             break;
     }
     // 跳转对应控制器
-    YTOtherViewController *other = [[YTOtherViewController alloc] init];
-    other.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:other animated:YES];
+    pushVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:pushVc animated:YES];
 }
 
 

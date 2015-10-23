@@ -11,6 +11,12 @@
 @interface NSString (Extend)
 
 
+/**
+ *  将时间转换为NSDate
+ */
+
+- (NSDate *)stringWithDate:(NSString *)format;
+
 /*
  *  时间戳对应的NSDate
  */
@@ -20,6 +26,6 @@
 /**
  *  获取银行名称
  */
-+(NSString *)getBankFromCardNumber:(NSString *)bank;
++ (NSString *)getBankFromCardNumber:(NSString *)bank;
 
 @end

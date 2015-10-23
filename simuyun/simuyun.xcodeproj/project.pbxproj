@@ -56,6 +56,7 @@
 		978C6FE71BCF8564003D183E /* YTProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 978C6FE51BCF8564003D183E /* YTProductCell.m */; settings = {ASSET_TAGS = (); }; };
 		978C6FE81BCF8564003D183E /* YTProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 978C6FE61BCF8564003D183E /* YTProductCell.xib */; settings = {ASSET_TAGS = (); }; };
 		978C6FEB1BCFA280003D183E /* YTProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 978C6FEA1BCFA280003D183E /* YTProductModel.m */; settings = {ASSET_TAGS = (); }; };
+		978FA78A1BDA236100E53DA4 /* BFNavigationBarDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 978FA7891BDA236100E53DA4 /* BFNavigationBarDrawer.m */; settings = {ASSET_TAGS = (); }; };
 		97973CDB1BC3916F00B7B4CB /* libPushSDK-1.8.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97973CDA1BC3916F00B7B4CB /* libPushSDK-1.8.5.a */; };
 		97973CDD1BC391BA00B7B4CB /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97973CDC1BC391BA00B7B4CB /* PushConfig.plist */; };
 		97973CE01BC3A75700B7B4CB /* YTBadgeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97973CDF1BC3A75700B7B4CB /* YTBadgeTool.m */; };
@@ -71,6 +72,12 @@
 		97973D011BC3C5E500B7B4CB /* YTWelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97973CFF1BC3C5E500B7B4CB /* YTWelcomeViewController.xib */; };
 		97973D081BC3D8AB00B7B4CB /* YTLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97973D071BC3D8AB00B7B4CB /* YTLogoView.m */; };
 		97973D0A1BC3E84900B7B4CB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97973D091BC3E84900B7B4CB /* AVFoundation.framework */; };
+		9798E2041BD9E0E700B235AE /* YTOrderCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9798E2031BD9E0E700B235AE /* YTOrderCenterController.m */; settings = {ASSET_TAGS = (); }; };
+		9798E2081BD9E13700B235AE /* YTOrderCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9798E2071BD9E13700B235AE /* YTOrderCenterModel.m */; settings = {ASSET_TAGS = (); }; };
+		9798E20C1BD9E15100B235AE /* YTOrderCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9798E20A1BD9E15100B235AE /* YTOrderCenterCell.m */; settings = {ASSET_TAGS = (); }; };
+		9798E20D1BD9E15100B235AE /* YTOrderCenterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9798E20B1BD9E15100B235AE /* YTOrderCenterCell.xib */; settings = {ASSET_TAGS = (); }; };
+		9798E2111BD9EF9300B235AE /* YTOrderNetValueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9798E20F1BD9EF9300B235AE /* YTOrderNetValueCell.m */; settings = {ASSET_TAGS = (); }; };
+		9798E2121BD9EF9300B235AE /* YTOrderNetValueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9798E2101BD9EF9300B235AE /* YTOrderNetValueCell.xib */; settings = {ASSET_TAGS = (); }; };
 		97A24D3B1BC89CC4004F479D /* UINavigationBar+BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D3A1BC89CC4004F479D /* UINavigationBar+BackgroundColor.m */; settings = {ASSET_TAGS = (); }; };
 		97A61D781BC6893B000A5B17 /* YHWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A61D741BC6893B000A5B17 /* YHWebViewProgress.m */; settings = {ASSET_TAGS = (); }; };
 		97A61D791BC6893C000A5B17 /* YHWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A61D761BC6893B000A5B17 /* YHWebViewProgressView.m */; settings = {ASSET_TAGS = (); }; };
@@ -297,6 +304,8 @@
 		978C6FE61BCF8564003D183E /* YTProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTProductCell.xib; sourceTree = "<group>"; };
 		978C6FE91BCFA280003D183E /* YTProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTProductModel.h; sourceTree = "<group>"; };
 		978C6FEA1BCFA280003D183E /* YTProductModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTProductModel.m; sourceTree = "<group>"; };
+		978FA7881BDA236100E53DA4 /* BFNavigationBarDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFNavigationBarDrawer.h; sourceTree = "<group>"; };
+		978FA7891BDA236100E53DA4 /* BFNavigationBarDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFNavigationBarDrawer.m; sourceTree = "<group>"; };
 		97973CD91BC3916F00B7B4CB /* APService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APService.h; sourceTree = "<group>"; };
 		97973CDA1BC3916F00B7B4CB /* libPushSDK-1.8.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libPushSDK-1.8.5.a"; sourceTree = "<group>"; };
 		97973CDC1BC391BA00B7B4CB /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
@@ -324,6 +333,16 @@
 		97973D061BC3D8AB00B7B4CB /* YTLogoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTLogoView.h; sourceTree = "<group>"; };
 		97973D071BC3D8AB00B7B4CB /* YTLogoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTLogoView.m; sourceTree = "<group>"; };
 		97973D091BC3E84900B7B4CB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9798E2021BD9E0E700B235AE /* YTOrderCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTOrderCenterController.h; sourceTree = "<group>"; };
+		9798E2031BD9E0E700B235AE /* YTOrderCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTOrderCenterController.m; sourceTree = "<group>"; };
+		9798E2061BD9E13700B235AE /* YTOrderCenterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTOrderCenterModel.h; sourceTree = "<group>"; };
+		9798E2071BD9E13700B235AE /* YTOrderCenterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTOrderCenterModel.m; sourceTree = "<group>"; };
+		9798E2091BD9E15100B235AE /* YTOrderCenterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTOrderCenterCell.h; sourceTree = "<group>"; };
+		9798E20A1BD9E15100B235AE /* YTOrderCenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTOrderCenterCell.m; sourceTree = "<group>"; };
+		9798E20B1BD9E15100B235AE /* YTOrderCenterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTOrderCenterCell.xib; sourceTree = "<group>"; };
+		9798E20E1BD9EF9300B235AE /* YTOrderNetValueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTOrderNetValueCell.h; sourceTree = "<group>"; };
+		9798E20F1BD9EF9300B235AE /* YTOrderNetValueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTOrderNetValueCell.m; sourceTree = "<group>"; };
+		9798E2101BD9EF9300B235AE /* YTOrderNetValueCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTOrderNetValueCell.xib; sourceTree = "<group>"; };
 		97A24D391BC89CC4004F479D /* UINavigationBar+BackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+BackgroundColor.h"; sourceTree = "<group>"; };
 		97A24D3A1BC89CC4004F479D /* UINavigationBar+BackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+BackgroundColor.m"; sourceTree = "<group>"; };
 		97A61D731BC6893B000A5B17 /* YHWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHWebViewProgress.h; sourceTree = "<group>"; };
@@ -847,6 +866,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		9798E2011BD9E0C000B235AE /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				9798E2021BD9E0E700B235AE /* YTOrderCenterController.h */,
+				9798E2031BD9E0E700B235AE /* YTOrderCenterController.m */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
 		97A24D371BC89C9E004F479D /* UINavigationBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -1225,6 +1253,7 @@
 				97C605CB1BC2621F00E555E8 /* YTOtherViewController.xib */,
 				97C605CC1BC2621F00E555E8 /* YTProfileViewController.h */,
 				97C605CD1BC2621F00E555E8 /* YTProfileViewController.m */,
+				9798E2011BD9E0C000B235AE /* Order */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1232,6 +1261,8 @@
 		97C605CE1BC2621F00E555E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9798E2061BD9E13700B235AE /* YTOrderCenterModel.h */,
+				9798E2071BD9E13700B235AE /* YTOrderCenterModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1239,6 +1270,8 @@
 		97C605CF1BC2621F00E555E8 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				978FA7881BDA236100E53DA4 /* BFNavigationBarDrawer.h */,
+				978FA7891BDA236100E53DA4 /* BFNavigationBarDrawer.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -1250,6 +1283,12 @@
 				9769FA031BC968F2001B1F02 /* YTLeftMenu.m */,
 				9769FA041BC968F2001B1F02 /* YTLeftMenu.xib */,
 				9769F9E71BC9676B001B1F02 /* HomeView */,
+				9798E2091BD9E15100B235AE /* YTOrderCenterCell.h */,
+				9798E20A1BD9E15100B235AE /* YTOrderCenterCell.m */,
+				9798E20B1BD9E15100B235AE /* YTOrderCenterCell.xib */,
+				9798E20E1BD9EF9300B235AE /* YTOrderNetValueCell.h */,
+				9798E20F1BD9EF9300B235AE /* YTOrderNetValueCell.m */,
+				9798E2101BD9EF9300B235AE /* YTOrderNetValueCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1813,6 +1852,7 @@
 				97C606A91BC2985700E555E8 /* UMSCommentDetailController.xib in Resources */,
 				97C606AE1BC2985700E555E8 /* UMSLoginViewController.xib in Resources */,
 				9769F9F71BC9676B001B1F02 /* YTContentCell.xib in Resources */,
+				9798E20D1BD9E15100B235AE /* YTOrderCenterCell.xib in Resources */,
 				97C3CE6B1BC2BAEF00B7185D /* SVProgressHUD.bundle in Resources */,
 				97C606AA1BC2985700E555E8 /* UMSCommentInputController.xib in Resources */,
 				975F78041BCFCD3D00589D22 /* Assets.xcassets in Resources */,
@@ -1820,6 +1860,7 @@
 				9769FA061BC968F2001B1F02 /* YTLeftMenu.xib in Resources */,
 				97E44B731BD344FE00952B11 /* YTStockItem.xib in Resources */,
 				978C6FE81BCF8564003D183E /* YTProductCell.xib in Resources */,
+				9798E2121BD9EF9300B235AE /* YTOrderNetValueCell.xib in Resources */,
 				97C3CE751BC2C17D00B7185D /* MBProgressHUD.bundle in Resources */,
 				97DE83141BD1042900E3C5CA /* YTResuNextViewController.xib in Resources */,
 				97DE830D1BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.xib in Resources */,
@@ -1904,6 +1945,7 @@
 				970020C61BD64B9F00231F52 /* YTBuySuccessController.m in Sources */,
 				97E44B6E1BD32CB600952B11 /* YTStockModel.m in Sources */,
 				97C606471BC269CC00E555E8 /* UIImage+Cut.m in Sources */,
+				9798E2111BD9EF9300B235AE /* YTOrderNetValueCell.m in Sources */,
 				9769F9F61BC9676B001B1F02 /* YTContentCell.m in Sources */,
 				9714A6F81BC7E0610018A14E /* YUDarkGlassView.m in Sources */,
 				97C6061A1BC266A900E555E8 /* CALayer+Anim.m in Sources */,
@@ -1929,6 +1971,7 @@
 				97973CF71BC3C11500B7B4CB /* CoreNewFeatureVC.m in Sources */,
 				97C606321BC2692B00E555E8 /* UIFont+Extend.m in Sources */,
 				9714A6F21BC7E0610018A14E /* UIColor+YUColor.m in Sources */,
+				9798E2081BD9E13700B235AE /* YTOrderCenterModel.m in Sources */,
 				97BF5BF51BD7902700053BD0 /* JFPhotoView.m in Sources */,
 				97C605F41BC2622E00E555E8 /* YTLoginViewController.m in Sources */,
 				97DE830C1BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.m in Sources */,
@@ -1942,11 +1985,13 @@
 				970020CA1BD6507F00231F52 /* YTContentViewController.m in Sources */,
 				97E44B711BD344E300952B11 /* YTStockItem.m in Sources */,
 				970020B11BD6162B00231F52 /* YTBuyProductController.m in Sources */,
+				978FA78A1BDA236100E53DA4 /* BFNavigationBarDrawer.m in Sources */,
 				978C6FEB1BCFA280003D183E /* YTProductModel.m in Sources */,
 				971503AB1BC75E78007E27D0 /* PPTCell.m in Sources */,
 				9714A6F01BC7E0610018A14E /* UIButton+Bootstrap.m in Sources */,
 				97BF5BFE1BD7BF0B00053BD0 /* YTResources.m in Sources */,
 				97B08A8D1BC2472B007EBD24 /* AppDelegate.m in Sources */,
+				9798E20C1BD9E15100B235AE /* YTOrderCenterCell.m in Sources */,
 				97973CFA1BC3C11500B7B4CB /* NewFeatureScrollView.m in Sources */,
 				97BF5BEE1BD7902700053BD0 /* JFAssetHelper.m in Sources */,
 				97C605DD1BC2621F00E555E8 /* YTProfileViewController.m in Sources */,
@@ -1998,6 +2043,7 @@
 				97C3CE251BC29FE800B7185D /* ShareCustomView.m in Sources */,
 				97B08A8A1BC2472B007EBD24 /* main.m in Sources */,
 				971503BB1BC769FB007E27D0 /* PPTPageControl.m in Sources */,
+				9798E2041BD9E0E700B235AE /* YTOrderCenterController.m in Sources */,
 				97973CEB1BC3BFD100B7B4CB /* UIView+Masony.m in Sources */,
 				971503B71BC76961007E27D0 /* CorePPTVC.m in Sources */,
 				97C6065C1BC26F1100E555E8 /* NSDictionary+Extension.m in Sources */,

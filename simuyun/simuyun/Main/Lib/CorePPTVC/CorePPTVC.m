@@ -318,65 +318,6 @@
     
     if(!isUseTransitionAnim) return;
     
-    /*
-     //水波
-     TransitionAnimTypeRippleEffect=0,
-     
-     //吸走
-     TransitionAnimTypeSuckEffect,
-     
-     //翻开书本
-     TransitionAnimTypePageCurl,
-     
-     //正反翻转
-     TransitionAnimTypeOglFlip,
-     
-     //正方体
-     TransitionAnimTypeCube,
-     
-     //push推开
-     TransitionAnimTypeReveal,
-     
-     //合上书本
-     TransitionAnimTypePageUnCurl,
-     
-
-     */
-    
-    /*
-     
-     //从上
-     TransitionSubtypesFromTop=0,
-     
-     //从左
-     TransitionSubtypesFromLeft,
-     
-     //从下
-     TransitionSubtypesFromBotoom,
-     
-     //从右
-     TransitionSubtypesFromRight,
-     
-     */
-    
-    /*
-     //默认
-     TransitionCurveDefault,
-     
-     //缓进
-     TransitionCurveEaseIn,
-     
-     //缓出
-     TransitionCurveEaseOut,
-     
-     //缓进缓出
-     TransitionCurveEaseInEaseOut,
-     
-     //线性
-     TransitionCurveLinear,
-     
-     */
-    
     
     [self.clv.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveLinear duration:PPTAnimTime];
 }
