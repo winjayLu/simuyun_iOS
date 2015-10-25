@@ -17,6 +17,7 @@
 #import "YTUserInfoTool.h"
 #import "SVProgressHUD.h"
 #import "YTOrderCenterController.h"
+#import "YTBlackAlertView.h"
 
 @interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate>
 
@@ -36,6 +37,7 @@
 @property (nonatomic, strong) NSArray *todos;
 
 
+
 @end
 
 @implementation YTHomeViewController
@@ -46,7 +48,7 @@
     // 将控制器的View替换为ScrollView
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:DeviceBounds];
     mainView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
-//    mainView.bounces = NO;
+    mainView.bounces = NO;
     mainView.showsVerticalScrollIndicator = NO;
     self.view = mainView;
     self.view.backgroundColor = YTViewBackground;
@@ -142,7 +144,7 @@
     bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42 * 3);
     [self.view addSubview:bottom];
     // 设置滚动范围
-    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame))];
+    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame) + 3)];
 }
 
 #pragma makr - 监听通知
@@ -237,12 +239,15 @@
 {
     NSLog(@"%zd", type);
     UIViewController *pushVc = nil;
+    YTBlackAlertView *alert = [YTBlackAlertView shared];
     switch (type) {
         case TopButtonTypeRenzhen:  // 认证
             
             break;
         case TopButtonTypeQiandao:  // 签到
-            
+            [alert showAlertSignWithTitle:@"国人消费升级" date:@"9月21日" yunDou:100 block:^{
+                NSLog(@"ss");
+            }];
             break;
         case TopButtonTypeYundou:   // 云豆
             
@@ -255,12 +260,13 @@
             
             break;
         case TopButtonTypeYeji:     // 业绩
+            [alert showAlertWithTitle:@"sjladljasdlj" detail:@"sdjlksafljaaaaaaaaaaaaaaaaaaaaaaaaaaaaakkfslkfjkdsjfljdskfdskljjfljdsljf"];
             
             break;
     }
     // 跳转对应控制器
-    pushVc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:pushVc animated:YES];
+//    pushVc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:pushVc animated:YES];
 }
 
 

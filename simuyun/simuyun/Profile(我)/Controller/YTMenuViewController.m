@@ -31,7 +31,11 @@
     
     // 初始化左侧菜单
     YTLeftMenu *leftMenu = [YTLeftMenu leftMenu];
-    leftMenu.frame = CGRectMake(0, 0, 241, DeviceHight);
+    leftMenu.frame = CGRectMake(0, 0, 241, 667);
+    // 6P 特殊处理
+    if (DeviceHight > 667) {
+        leftMenu.height = DeviceHight;
+    }
     
     // // 获取用户信息
     if ([YTUserInfoTool userInfo] == nil) {

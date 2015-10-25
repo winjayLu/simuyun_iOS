@@ -58,7 +58,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
     // 设置menu的view
     YTMenuViewController *menuVc = [[YTMenuViewController alloc] init];
     menuVc.view.frame = self.view.frame;
-    menuVc.view.center = CGPointMake(0, menuVc.view.center.y);
+//    menuVc.view.center = CGPointMake(0, menuVc.view.center.y);
     [self addChildViewController:menuVc];
     [self.view addSubview:menuVc.view];
     self.menuVc = menuVc;

@@ -34,6 +34,9 @@
 		971503BB1BC769FB007E27D0 /* PPTPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 971503BA1BC769FB007E27D0 /* PPTPageControl.m */; settings = {ASSET_TAGS = (); }; };
 		97187A8E1BC666E200C64609 /* YTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97187A8C1BC666E200C64609 /* YTWebViewController.m */; settings = {ASSET_TAGS = (); }; };
 		97187A8F1BC666E200C64609 /* YTWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97187A8D1BC666E200C64609 /* YTWebViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		975149501BDCB79B0017B6E8 /* YTCustomerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9751494E1BDCB79B0017B6E8 /* YTCustomerServiceCell.m */; settings = {ASSET_TAGS = (); }; };
+		975149511BDCB79B0017B6E8 /* YTCustomerServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9751494F1BDCB79B0017B6E8 /* YTCustomerServiceCell.xib */; settings = {ASSET_TAGS = (); }; };
+		975149541BDCB87A0017B6E8 /* YTBlackAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 975149531BDCB87A0017B6E8 /* YTBlackAlertView.m */; settings = {ASSET_TAGS = (); }; };
 		975F78041BCFCD3D00589D22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 975F78031BCFCD3D00589D22 /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		976084241BD8F89E0037A4F7 /* YTSchoolSubPagController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976084231BD8F89E0037A4F7 /* YTSchoolSubPagController.m */; settings = {ASSET_TAGS = (); }; };
 		9769F9F51BC9676B001B1F02 /* YTBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9769F9E91BC9676B001B1F02 /* YTBottomView.m */; settings = {ASSET_TAGS = (); }; };
@@ -268,6 +271,11 @@
 		97187A8B1BC666E200C64609 /* YTWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTWebViewController.h; sourceTree = "<group>"; };
 		97187A8C1BC666E200C64609 /* YTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTWebViewController.m; sourceTree = "<group>"; };
 		97187A8D1BC666E200C64609 /* YTWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTWebViewController.xib; sourceTree = "<group>"; };
+		9751494D1BDCB79B0017B6E8 /* YTCustomerServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTCustomerServiceCell.h; sourceTree = "<group>"; };
+		9751494E1BDCB79B0017B6E8 /* YTCustomerServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTCustomerServiceCell.m; sourceTree = "<group>"; };
+		9751494F1BDCB79B0017B6E8 /* YTCustomerServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTCustomerServiceCell.xib; sourceTree = "<group>"; };
+		975149521BDCB87A0017B6E8 /* YTBlackAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTBlackAlertView.h; sourceTree = "<group>"; };
+		975149531BDCB87A0017B6E8 /* YTBlackAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTBlackAlertView.m; sourceTree = "<group>"; };
 		975F78031BCFCD3D00589D22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		976084221BD8F89E0037A4F7 /* YTSchoolSubPagController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSchoolSubPagController.h; sourceTree = "<group>"; };
 		976084231BD8F89E0037A4F7 /* YTSchoolSubPagController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSchoolSubPagController.m; sourceTree = "<group>"; };
@@ -651,6 +659,8 @@
 			children = (
 				9714A6CE1BC7B9BB0018A14E /* HHAlertView.h */,
 				9714A6CF1BC7B9BB0018A14E /* HHAlertView.m */,
+				975149521BDCB87A0017B6E8 /* YTBlackAlertView.h */,
+				975149531BDCB87A0017B6E8 /* YTBlackAlertView.m */,
 			);
 			path = AlertView;
 			sourceTree = "<group>";
@@ -756,6 +766,16 @@
 				971503A11BC75E78007E27D0 /* PPTCell.h */,
 				971503A21BC75E78007E27D0 /* PPTCell.m */,
 				971503A31BC75E78007E27D0 /* PPTCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		9751494C1BDCB74D0017B6E8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9751494D1BDCB79B0017B6E8 /* YTCustomerServiceCell.h */,
+				9751494E1BDCB79B0017B6E8 /* YTCustomerServiceCell.m */,
+				9751494F1BDCB79B0017B6E8 /* YTCustomerServiceCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1387,6 +1407,7 @@
 		97C605EF1BC2622E00E555E8 /* Message(消息) */ = {
 			isa = PBXGroup;
 			children = (
+				9751494C1BDCB74D0017B6E8 /* View */,
 				97BC99601BD4DB610090BDE8 /* Tool */,
 				97C605F01BC2622E00E555E8 /* Controller */,
 			);
@@ -1869,6 +1890,7 @@
 				97C606B11BC2985700E555E8 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				97C606721BC270CC00E555E8 /* CoreSDWebImage.bundle in Resources */,
 				97C606AB1BC2985700E555E8 /* UMSCommentInputControlleriPad.xib in Resources */,
+				975149511BDCB79B0017B6E8 /* YTCustomerServiceCell.xib in Resources */,
 				978218201BD0CA28000159E8 /* YTRegisterViewController.xib in Resources */,
 				97C606B01BC2985700E555E8 /* UMSShareListController.xib in Resources */,
 			);
@@ -2018,6 +2040,7 @@
 				9714A6F71BC7E0610018A14E /* YUBottomPopSelctView.m in Sources */,
 				97C3CE741BC2C17D00B7185D /* MBProgressHUD+WJ.m in Sources */,
 				9777E97D1BCA3A220016D071 /* YTNotificationConst.m in Sources */,
+				975149501BDCB79B0017B6E8 /* YTCustomerServiceCell.m in Sources */,
 				9714A6F11BC7E0610018A14E /* YUDIVView.m in Sources */,
 				97BF5BD71BD78A6C00053BD0 /* YTReportContentController.m in Sources */,
 				97C3CE761BC2C17D00B7185D /* MBProgressHUD.m in Sources */,
@@ -2046,6 +2069,7 @@
 				9798E2041BD9E0E700B235AE /* YTOrderCenterController.m in Sources */,
 				97973CEB1BC3BFD100B7B4CB /* UIView+Masony.m in Sources */,
 				971503B71BC76961007E27D0 /* CorePPTVC.m in Sources */,
+				975149541BDCB87A0017B6E8 /* YTBlackAlertView.m in Sources */,
 				97C6065C1BC26F1100E555E8 /* NSDictionary+Extension.m in Sources */,
 				97BA6A191BD4BA1C001E291E /* YTStockCell.m in Sources */,
 				97973D081BC3D8AB00B7B4CB /* YTLogoView.m in Sources */,
