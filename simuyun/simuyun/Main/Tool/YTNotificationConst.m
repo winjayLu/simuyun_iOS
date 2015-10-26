@@ -3,3 +3,5 @@
 
 NSString *const YTLeftMenuNotification = @"MTLeftMenuNotification";
 NSString *const YTLeftMenuSelectBtn = @"MTLeftMenuSelectBtn";
+NSString *const YTJumpToTodoList = @"YTJumpToTodoList";
+NSString *const YTUpdateIconImage = @"YTUpdateIconImage";

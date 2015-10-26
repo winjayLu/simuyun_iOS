@@ -30,9 +30,14 @@ static YTUserInfo *_userInfo;
 {
     _userInfo = nil;
 }
-
-
-
+/**
+ *  存储用户信息
+ *
+ */
++ (void)saveUserInfo:(YTUserInfo *)userInfo;
+{
+    _userInfo = userInfo;
+}
 
 /**
  *  加载用户信息

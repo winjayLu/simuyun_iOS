@@ -160,6 +160,7 @@
     //设置值
     _scrollView.contentInset =UIEdgeInsetsMake(self.config.barViewH, 0, 0, 0);
     _scrollView.contentOffset = CGPointMake(0, -self.config.barViewH);
+    _scrollView.backgroundColor = YTGrayBackground;
     self.pagesBarView.config = self.config;
 
 }

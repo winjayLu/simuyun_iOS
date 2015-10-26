@@ -53,6 +53,10 @@
 #define YTBanner @"banner"
 // 订单列表
 #define YTOrders @"orders"
+// 资讯列表5条
+#define YTNewes @"informations/newest"
+// 获取资讯列表
+#define YTInformations @"informations"
 
 
 

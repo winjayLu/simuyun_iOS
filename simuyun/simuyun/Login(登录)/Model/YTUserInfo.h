@@ -54,5 +54,10 @@
 // 电话号码
 @property (nonatomic, copy) NSString *phoneNumer;
 
+/**
+ *  用户头像
+ */
+@property (nonatomic, strong) UIImage *iconImage;
+
 
 @end

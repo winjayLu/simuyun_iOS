@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YTNewest.h"
 
 @interface YTStockCell : UITableViewCell
+
+/**
+ *  资讯
+ */
+@property (nonatomic, strong) YTNewest *newes;
 
 @end

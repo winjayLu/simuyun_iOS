@@ -33,8 +33,4 @@
 +(instancetype)viewWithOwnerVC:(UIViewController *)ownerVC pageModels:(NSArray *)pageModels config:(CorePagesViewConfig *)config;
 
 
-
-
-
-
 @end

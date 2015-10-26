@@ -60,6 +60,14 @@
     return 42;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([self.BottomDelegate respondsToSelector:@selector(didSelectedRow:)]) {
+        [self.BottomDelegate didSelectedRow:(int)indexPath.row];
+    }
+}
+
+
 - (NSArray *)titles
 {
     if (!_titles) {

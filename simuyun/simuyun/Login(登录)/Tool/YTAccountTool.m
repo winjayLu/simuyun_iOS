@@ -10,6 +10,7 @@
 #import "YTAccountTool.h"
 #import "AFNetworking.h"
 #import "NSDictionary+Extension.h"
+#import "NSString+Password.h"
 
 
 #define YTAccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"account.data"]
@@ -44,8 +45,9 @@
     // 1.创建一个请求管理者
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    NSLog(@"%@",account);
     params[@"username"] = account.userName;
-    params[@"password"] = account.password;
+    params[@"password"] = [NSString md5:account.password];
     
     // 2.发送一个POST请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTSession];

@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol BottomViewDelegate <NSObject>
+
+- (void)didSelectedRow:(int)row;
+
+@end
+
+
 @interface YTBottomView : UITableView
+
+@property (nonatomic, weak) id<BottomViewDelegate> BottomDelegate;
 
 @end

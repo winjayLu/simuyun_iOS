@@ -43,12 +43,15 @@
             }
         }];
     }
-
-    // 获取用户信息
+    // 发起登录
     if ([YTAccountTool account]) {
-        [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {}];
+        [YTAccountTool loginAccount:[YTAccountTool account] result:^(BOOL result) {
+            if (result) {
+                // 获取用户信息
+                [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {}];
+            } 
+        }];
     }
-    
     // 转场
     [self transitionMainVC];
 }

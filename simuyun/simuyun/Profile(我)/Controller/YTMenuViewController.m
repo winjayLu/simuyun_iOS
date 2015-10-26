@@ -12,6 +12,8 @@
 
 @interface YTMenuViewController ()
 
+@property (nonatomic, weak) YTLeftMenu *leftMenu;
+
 @end
 
 @implementation YTMenuViewController
@@ -50,9 +52,22 @@
         leftMenu.userInfo = [YTUserInfoTool userInfo];
     }
     [self.view addSubview:leftMenu];
+    self.leftMenu = leftMenu;
     
     // 设置ScrollView的滚动范围
     [(UIScrollView *)self.view setContentSize:CGSizeMake(leftMenu.width, leftMenu.height)];
+    
+    // 监听通知
+    [YTCenter addObserver:self selector:@selector(leftUpdate) name:YTUpdateIconImage object:nil];
+}
+
+/**
+ *  更新数据
+ */
+- (void)leftUpdate
+{
+    // 更新头像
+    [self.leftMenu updateIconImage];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,6 +75,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc
+{
+    [YTCenter removeObserver:self];
+}
 
 
 @end

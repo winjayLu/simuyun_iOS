@@ -200,18 +200,18 @@ static UIWindow *_window;
 - (void)configSignWithTitle:(NSString *)title date:(NSString *)date yunDou:(int)yunDou
 {
     // 财经早知道
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.width, 224)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.width, 180)];
     button.adjustsImageWhenHighlighted = NO;
     [button setBackgroundImage:[UIImage imageNamed:@"cjzzd"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(titleClcik) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:button];
     
     // 标题
-    UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, button.height - 29,self.width, 15)];
+    UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, button.height - 30,self.width, 15)];
     titleLable.text = title;
     [titleLable setFont:[UIFont systemFontOfSize:15]];
     [titleLable setTextAlignment:NSTextAlignmentCenter];
-    [titleLable setTextColor:[UIColor blackColor]];
+    [titleLable setTextColor:[UIColor whiteColor]];
     [self addSubview:titleLable];
     
     // 签到日期
@@ -223,7 +223,7 @@ static UIWindow *_window;
     [self addSubview:dateLable];
     
     // 云豆数量
-    UILabel *yunDouLable = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(dateLable.frame), self.width, 18)];
+    UILabel *yunDouLable = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(dateLable.frame) + 10, self.width, 18)];
     yunDouLable.text = [NSString stringWithFormat:@"获得了%d个云豆", yunDou];
     yunDouLable.textColor = [UIColor whiteColor];
     [yunDouLable setFont:[UIFont systemFontOfSize:detailFont]];

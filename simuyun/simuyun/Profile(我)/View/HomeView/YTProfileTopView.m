@@ -153,6 +153,14 @@
     
     // 设置图片到iconView上
     [self setIconImageWithImage:image];
+    
+    // 将新的图片保存到用户信息中
+    YTUserInfo *userInfo = [YTUserInfoTool userInfo];
+    userInfo.iconImage = image;
+    [YTUserInfoTool saveUserInfo:userInfo];
+    
+    // 发送通知
+    [YTCenter postNotificationName:YTUpdateIconImage object:nil];
 }
 
 
@@ -263,7 +271,11 @@
     } else {
         self.renZhenBtn.hidden = YES;
         // 设置昵称
-        self.nameLable.text = [NSString stringWithFormat:@"%@ | %@",userInfo.organizationName, userInfo.nickName];
+        if (userInfo.nickName) {
+            self.nameLable.text = [NSString stringWithFormat:@"%@ | %@",userInfo.organizationName, userInfo.nickName];
+        } else {
+            self.nameLable.text = userInfo.organizationName;
+        }
     }
     
     // 客户数量

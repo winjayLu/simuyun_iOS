@@ -78,13 +78,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    YTLog(@"%zd", indexPath.row);
-    if (indexPath.row != 0) {
-        if ([self.daili respondsToSelector:@selector(selectedTodo:)]) {
-            [self.daili selectedTodo:indexPath.row];
-        }
+    if ([self.daili respondsToSelector:@selector(selectedTodo:)]) {
+        [self.daili selectedTodo:indexPath.row];
     }
-
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

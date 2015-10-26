@@ -47,8 +47,8 @@
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     // 2.发送一个GET请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, url];
-//    YTLog(@"%@",newUrl);
-//    YTLog(@"%@", [NSDictionary httpWithDictionary:params]);
+    YTLog(@"%@",newUrl);
+    YTLog(@"%@", [NSDictionary httpWithDictionary:params]);
     [mgr GET:newUrl parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           NSLog(@"ss");

@@ -177,7 +177,7 @@
         dict[@"status"] = self.status;
     }
     dict[@"pagesize"] = @20;
-    dict[@"pageno"] = @(self.pageno++);
+    dict[@"pageno"] = @(++self.pageno);
     [YTHttpTool get:YTOrders params:dict success:^(id responseObject) {
         [self.orders addObjectsFromArray:[YTOrderCenterModel objectArrayWithKeyValuesArray:responseObject]];
         [self.tableView reloadData];

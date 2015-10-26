@@ -25,7 +25,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [YTCenter addObserver:self selector:@selector(jump) name:YTJumpToTodoList object:nil];
+}
+
+- (void)jump
+{
+    [self.pagesView jumpToPage:1];
 }
 
 
@@ -76,5 +81,10 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)dealloc
+{
+    [YTCenter removeObserver:self];
 }
 @end

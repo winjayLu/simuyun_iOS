@@ -12,6 +12,8 @@
 #import "YTWebViewController.h"
 #import "YTStockView.h"
 #import "YTConsultView.h"
+#import "YTNewest.h"
+#import "YTInformationController.h"
 
 
 // 左右间距
@@ -20,7 +22,7 @@
 #define pptvcY 64
 
 
-@interface YTDiscoverViewController ()
+@interface YTDiscoverViewController () <ConsultViewDelegate>
 
 /**
  *  轮播滚动控制器
@@ -46,6 +48,16 @@
  *  banner轮播图
  */
 @property (nonatomic, strong) NSArray *banners;
+
+/**
+ *  资讯视图
+ */
+@property (nonatomic, weak) YTConsultView *consult;
+
+/**
+ *  咨询列表
+ */
+@property (nonatomic, strong) NSArray *newests;
 
 @end
 
@@ -76,6 +88,8 @@
     // 获取股指数据
     [self loadStock];
     
+    // 获取最新资讯列表
+    [self loadNewes];
 }
 
 
@@ -121,11 +135,13 @@
     // cell高度
     CGFloat cellH = 93;
     CGFloat consultY = CGRectGetMaxY(self.stock.frame) + maginWidth;
-    CGFloat consultH = headerH + cellH * 5;
+    CGFloat consultH = headerH + cellH * self.newests.count;
     YTConsultView *consult = [[YTConsultView alloc] initWithFrame:CGRectMake(maginWidth, consultY, self.stock.width, consultH)];
     consult.layer.cornerRadius = 5;
     consult.layer.masksToBounds = YES;
+    consult.consultDelegate = self;
     [self.view addSubview:consult];
+    self.consult = consult;
     
     [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(consult.frame) + maginWidth)];
 }
@@ -147,7 +163,6 @@
     
 }
 
-
 /**
  *  获取股指数据
  *
@@ -158,8 +173,26 @@
     self.stock.stocks = self.stocks;
 
 }
-
-
+/**
+ *  获取资讯列表
+ */
+- (void)loadNewes
+{
+    [YTHttpTool get:YTNewes params:nil success:^(id responseObject) {
+        NSLog(@"%@", responseObject);
+        self.newests = [YTNewest objectArrayWithKeyValuesArray:responseObject];
+        // 设置数据
+        self.consult.newests = self.newests;
+        // 调整高度
+        CGFloat headerH = 30;
+        CGFloat cellH = 93;
+        CGFloat consultH = headerH + cellH * self.newests.count;
+        self.consult.height = consultH;
+        [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.consult.frame) + maginWidth)];
+    } failure:^(NSError *error) {
+        
+    }];
+}
 
 /**
  *  轮播图片的点击事件
@@ -173,6 +206,21 @@
     webView.toTitle = pptModel.title;
     webView.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webView animated:YES];
+}
+
+/**
+ *  资讯视图代理方法
+ *
+ */
+- (void)selectedCellWithRow:(YTNewest *)newest
+{
+    UIViewController *vc = nil;
+    if(newest == nil)
+    {
+        vc = [[YTInformationController alloc] init];
+    }
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -192,6 +240,14 @@
         _stocks = [[NSArray alloc] init];
     }
     return _stocks;
+}
+
+- (NSArray *)newests
+{
+    if (!_newests) {
+        _newests = [[NSArray alloc] init];
+    }
+    return _newests;
 }
 
 

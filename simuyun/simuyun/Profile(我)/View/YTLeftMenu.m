@@ -160,7 +160,11 @@
         self.nameLable.text = userInfo.nickName;
     } else {
         // 设置昵称
-        self.nameLable.text = [NSString stringWithFormat:@"%@ | %@",userInfo.organizationName, userInfo.nickName];
+        if (userInfo.nickName) {
+            self.nameLable.text = [NSString stringWithFormat:@"%@ | %@",userInfo.organizationName, userInfo.nickName];
+        } else {
+            self.nameLable.text = userInfo.organizationName;
+        }
     }
     if (userInfo.weChatNickName.length > 0)
     {
@@ -187,6 +191,13 @@
         return;
     }
     [self.iconImage imageWithUrlStr:imageUrl phImage:placeholder];
+}
+/**
+ *  修改头像
+ */
+- (void)updateIconImage
+{
+    self.iconImage.image = [YTUserInfoTool userInfo].iconImage;
 }
 
 @end

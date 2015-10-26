@@ -8,10 +8,11 @@
 
 #import "YTConsultView.h"
 #import "YTStockCell.h"
+#import "YTNewest.h"
 
 @interface YTConsultView() <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, strong) NSArray *titles;
+
 
 @end
 
@@ -31,6 +32,13 @@
     return self;
 }
 
+- (void)setNewests:(NSArray *)newests
+{
+    _newests = newests;
+    [self reloadData];
+}
+
+
 
 #pragma mark - Table view data source
 
@@ -41,7 +49,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.titles.count;
+    return self.newests.count;
 }
 
 
@@ -54,6 +62,7 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"YTStockCell" owner:nil options:nil] lastObject];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.newes = self.newests[indexPath.section];
     return cell;
 }
 
@@ -71,43 +80,46 @@
 // 设置headerview的颜色
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.width, 30)];
+    UIButton *view = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.width, 30)];
     view.backgroundColor = [UIColor whiteColor];
+    
+    // 红点
+    UIImageView *hong1 = [[UIImageView alloc] init];
+    hong1.image = [UIImage imageNamed:@"weidu"];
+    hong1.size = CGSizeMake(6, 6);
+    hong1.center = view.center;
+    hong1.x = 15;
+    [view addSubview:hong1];
+    
     UILabel *title = [[UILabel alloc] init];
     title.text = @"资讯";
     title.font = [UIFont systemFontOfSize:17];
     title.textColor = YTColor(51, 51, 51);
     [title sizeToFit];
     title.center = view.center;
+    title.x = CGRectGetMaxX(hong1.frame) + 15;
     [view addSubview:title];
     
-    // 红点1
-    UIImageView *hong1 = [[UIImageView alloc] init];
-    hong1.image = [UIImage imageNamed:@"weidu"];
-    hong1.size = hong1.image.size;
-    hong1.center = view.center;
-    hong1.x = hong1.x - 35;
-    [view addSubview:hong1];
-    // 红点2
-    UIImageView *hong2 = [[UIImageView alloc] init];
-    hong2.image = [UIImage imageNamed:@"weidu"];
-    hong2.size = hong2.image.size;
-    hong2.center = view.center;
-    hong2.x = hong2.x + 35;
-    [view addSubview:hong2];
+    UIImageView *black = [[UIImageView alloc] init];
+    black.image = [UIImage imageNamed:@"xiangyou"];
+    black.size = black.image.size;
+    black.center = view.center;
+    black.x = self.width - black.image.size.width - 15;
+    black.y += 2;
+    [view addSubview:black];
+    
+    [view addTarget:self action:@selector(titleClcik) forControlEvents:UIControlEventTouchUpInside];
     return view;
 }
 
-
-#pragma mark - lazy
-
-- (NSArray *)titles
+- (void)titleClcik
 {
-    if (!_titles) {
-        _titles = @[@"全部订单", @"我的奖品", @"云豆银行", @"我的奖品", @"云豆银行", @"我的奖品", @"云豆银行", @"我的奖品", @"云豆银行", @"我的奖品", @"云豆银行", @"我的奖品", @"云豆银行", @"我的奖品", @"云豆银行"];
+    if ([self.consultDelegate respondsToSelector:@selector(selectedCellWithRow:)]) {
+        [self.consultDelegate selectedCellWithRow:nil];
     }
-    return _titles;
 }
+
+
 
 
 @end

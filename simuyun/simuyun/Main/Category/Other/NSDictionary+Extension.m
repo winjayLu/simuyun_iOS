@@ -18,6 +18,7 @@
  */
 + (NSDictionary *)httpWithDictionary:(NSDictionary *)dict
 {
+    if (dict == nil) return nil;
     // 获取字典中所有的key
     NSArray *allKey = [dict allKeys];
     // 保存请求参数

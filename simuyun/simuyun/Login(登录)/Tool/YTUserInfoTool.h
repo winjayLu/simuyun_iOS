@@ -20,6 +20,12 @@
 + (YTUserInfo *)userInfo;
 
 /**
+ *  存储用户信息
+ *
+ */
++ (void)saveUserInfo:(YTUserInfo *)userInfo;
+
+/**
  *  清除用户信息
  */
 + (void)clearUserInfo;

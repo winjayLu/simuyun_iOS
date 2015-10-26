@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="stockCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="Information" id="jYT-OX-Dlk" customClass="YTInformationTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jYT-OX-Dlk" id="ssd-7l-1Wk">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="92.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kuang" translatesAutoresizingMaskIntoConstraints="NO" id="dvv-rc-nsm">
+                        <rect key="frame" x="15" y="7" width="103" height="78"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="103" id="BL0-3h-7hG"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XNh-rs-mtC" userLabel="展示图片">
+                        <rect key="frame" x="15" y="12" width="98" height="73"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="私募名家谈丨" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TM8-as-Yyo">
+                        <rect key="frame" x="125" y="15" width="138" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="阿凡达,你阿凡达,你阿凡达,你阿凡达,你阿凡达,你阿凡达,你阿凡达,你阿凡达,你阿凡达,你阿凡达,你" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gts-s3-Kmz">
+                        <rect key="frame" x="125" y="42" width="188" height="36"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.41176470590000003" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRX-6r-gLD">
+                        <rect key="frame" x="15" y="92" width="290" height="1"/>
+                        <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="qEf-hs-f84"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10-25" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JJl-Ai-S1f">
+                        <rect key="frame" x="268" y="16" width="40" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="qr4-ba-uVO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.41176470590000003" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="TM8-as-Yyo" firstAttribute="top" secondItem="ssd-7l-1Wk" secondAttribute="top" constant="15" id="1Jq-Rf-7lt"/>
+                    <constraint firstItem="hRX-6r-gLD" firstAttribute="leading" secondItem="ssd-7l-1Wk" secondAttribute="leading" constant="15" id="4Yt-hx-pfo"/>
+                    <constraint firstAttribute="trailing" secondItem="JJl-Ai-S1f" secondAttribute="trailing" constant="12" id="73w-cb-nQx"/>
+                    <constraint firstItem="XNh-rs-mtC" firstAttribute="top" secondItem="dvv-rc-nsm" secondAttribute="top" constant="5" id="7IF-fZ-oTo"/>
+                    <constraint firstItem="JJl-Ai-S1f" firstAttribute="bottom" secondItem="TM8-as-Yyo" secondAttribute="bottom" id="A3j-Qt-cIQ"/>
+                    <constraint firstItem="Gts-s3-Kmz" firstAttribute="top" secondItem="TM8-as-Yyo" secondAttribute="bottom" constant="10" id="FGh-cp-SUe"/>
+                    <constraint firstAttribute="bottom" secondItem="Gts-s3-Kmz" secondAttribute="bottom" constant="15" id="G4b-XX-ZBV"/>
+                    <constraint firstItem="TM8-as-Yyo" firstAttribute="leading" secondItem="dvv-rc-nsm" secondAttribute="trailing" constant="7" id="IRV-1H-1O6"/>
+                    <constraint firstItem="Gts-s3-Kmz" firstAttribute="width" secondItem="TM8-as-Yyo" secondAttribute="width" id="JAE-vV-KbQ"/>
+                    <constraint firstItem="dvv-rc-nsm" firstAttribute="leading" secondItem="ssd-7l-1Wk" secondAttribute="leading" constant="15" id="JHe-y3-Xef"/>
+                    <constraint firstAttribute="trailing" secondItem="Gts-s3-Kmz" secondAttribute="trailing" constant="7" id="KeJ-xR-LAF"/>
+                    <constraint firstAttribute="trailing" secondItem="Gts-s3-Kmz" secondAttribute="trailing" constant="7" id="LUR-3F-UOV"/>
+                    <constraint firstAttribute="trailing" secondItem="TM8-as-Yyo" secondAttribute="trailing" constant="15" id="Lvg-FX-EO8"/>
+                    <constraint firstAttribute="bottom" secondItem="dvv-rc-nsm" secondAttribute="bottom" constant="7" id="MCt-Nh-x4D"/>
+                    <constraint firstItem="Gts-s3-Kmz" firstAttribute="leading" secondItem="TM8-as-Yyo" secondAttribute="leading" id="OAI-Q6-Q78"/>
+                    <constraint firstItem="XNh-rs-mtC" firstAttribute="width" secondItem="dvv-rc-nsm" secondAttribute="width" constant="-5" id="PVF-xe-G8g"/>
+                    <constraint firstItem="XNh-rs-mtC" firstAttribute="height" secondItem="dvv-rc-nsm" secondAttribute="height" constant="-5" id="QG8-7z-oRD"/>
+                    <constraint firstItem="dvv-rc-nsm" firstAttribute="top" secondItem="ssd-7l-1Wk" secondAttribute="top" constant="7" id="ZBe-aW-ysH"/>
+                    <constraint firstItem="JJl-Ai-S1f" firstAttribute="leading" secondItem="TM8-as-Yyo" secondAttribute="trailing" constant="7" id="gDT-kY-Lbj"/>
+                    <constraint firstAttribute="bottom" secondItem="hRX-6r-gLD" secondAttribute="bottom" id="jWf-Cd-cHk"/>
+                    <constraint firstItem="Gts-s3-Kmz" firstAttribute="top" secondItem="TM8-as-Yyo" secondAttribute="bottom" constant="10" id="kZU-bM-og0"/>
+                    <constraint firstItem="XNh-rs-mtC" firstAttribute="leading" secondItem="dvv-rc-nsm" secondAttribute="leading" id="kwp-AL-YQi"/>
+                    <constraint firstItem="JJl-Ai-S1f" firstAttribute="leading" secondItem="TM8-as-Yyo" secondAttribute="trailing" constant="5" id="rUw-au-ufm"/>
+                    <constraint firstAttribute="trailing" secondItem="hRX-6r-gLD" secondAttribute="trailing" constant="15" id="tZC-SJ-HL0"/>
+                    <constraint firstAttribute="trailing" secondItem="Gts-s3-Kmz" secondAttribute="trailing" constant="15" id="zbj-Rb-t62"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="Lvg-FX-EO8"/>
+                        <exclude reference="JAE-vV-KbQ"/>
+                        <exclude reference="KeJ-xR-LAF"/>
+                        <exclude reference="kZU-bM-og0"/>
+                        <exclude reference="zbj-Rb-t62"/>
+                        <exclude reference="gDT-kY-Lbj"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dateLable" destination="JJl-Ai-S1f" id="tF9-Ii-UJr"/>
+                <outlet property="iconImage" destination="XNh-rs-mtC" id="S0l-Ac-Fpk"/>
+                <outlet property="summary" destination="Gts-s3-Kmz" id="vqf-6C-bym"/>
+                <outlet property="title" destination="TM8-as-Yyo" id="QSN-Hg-3tu"/>
+            </connections>
+            <point key="canvasLocation" x="266" y="322.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="kuang" width="102" height="78"/>
+    </resources>
+</document>

@@ -46,7 +46,8 @@
  *  个性化
  */
 -(void)corePagesBarBtnPrePare{
-    [self setBackgroundColor:YTColor(246, 246, 246)];
+//    [self setBackgroundColor:YTColor(246, 246, 246)];
+    [self setBackgroundColor:[UIColor whiteColor]];
     UIView *view = [[UIView alloc] init];
     view.frame = CGRectMake(DeviceWidth * 0.25 - 0.5, 0, 0.5, 34);
     view.backgroundColor = YTColor(231, 231, 231);

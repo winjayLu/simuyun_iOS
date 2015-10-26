@@ -18,8 +18,10 @@
 #import "SVProgressHUD.h"
 #import "YTOrderCenterController.h"
 #import "YTBlackAlertView.h"
+#import "YTInformationController.h"
+#import "YTTabBarController.h"
 
-@interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate>
+@interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate>
 
 /**
  *  顶部视图
@@ -142,6 +144,7 @@
     bottom.layer.cornerRadius = 5;
     bottom.layer.masksToBounds = YES;
     bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42 * 3);
+    bottom.BottomDelegate = self;
     [self.view addSubview:bottom];
     // 设置滚动范围
     [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame) + 3)];
@@ -200,12 +203,26 @@
  */
 - (void)selectedTodo:(NSUInteger)row
 {
-    YTLog(@"%zd", row);
-    // 跳转对应控制器
-    YTOtherViewController *other = [[YTOtherViewController alloc] init];
-
-    [self.navigationController pushViewController:other animated:YES];
-
+    UIViewController *vc = nil;
+    if (row == 0) {
+        // 获取根控制器
+        [YTCenter postNotificationName:YTJumpToTodoList object:nil];
+        YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        [appRootVC setSelectedIndex:0];
+    } else {
+        vc = [[YTOtherViewController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+/**
+ *  底部菜单选中
+ *
+ */
+- (void)didSelectedRow:(int)row
+{
+    YTOrderCenterController *order = [[YTOrderCenterController alloc] init];
+    order.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:order animated:YES];
 }
 
 
@@ -227,8 +244,6 @@
 -(void)addPicker:(UIImagePickerController *)picker{
     
     [self presentViewController:picker animated:YES completion:nil];
-    
-    [self.navigationController.navigationBar setBarTintColor:[UIColor blackColor]];
 }
 /**
  *  按钮点击事件
@@ -247,16 +262,17 @@
         case TopButtonTypeQiandao:  // 签到
             [alert showAlertSignWithTitle:@"国人消费升级" date:@"9月21日" yunDou:100 block:^{
                 NSLog(@"ss");
+                // 早知道id  infoId
             }];
             break;
         case TopButtonTypeYundou:   // 云豆
             
             break;
         case TopButtonTypeKehu:     // 客户
-            pushVc = [[YTOrderCenterController alloc] init];
 
             break;
         case TopButtonTypeDindan:   // 订单
+            pushVc = [[YTOrderCenterController alloc] init];
             
             break;
         case TopButtonTypeYeji:     // 业绩
@@ -265,8 +281,8 @@
             break;
     }
     // 跳转对应控制器
-//    pushVc.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:pushVc animated:YES];
+    pushVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:pushVc animated:YES];
 }
 
 

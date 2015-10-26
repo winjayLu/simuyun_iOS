@@ -18,4 +18,6 @@
  */
 @property (nonatomic, strong) YTUserInfo *userInfo;
 
+- (void)updateIconImage;
+
 @end
