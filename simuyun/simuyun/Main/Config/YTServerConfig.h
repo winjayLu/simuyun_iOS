@@ -57,7 +57,12 @@
 #define YTNewes @"informations/newest"
 // 获取资讯列表
 #define YTInformations @"informations"
-
+// 获取股指数据
+#define YTStockindex @"stockindex"
+// 签到
+#define YTSignIn @"signIn"
+// 获取机构列表
+#define YTOrgnazations @"orgnazations"
 
 
 

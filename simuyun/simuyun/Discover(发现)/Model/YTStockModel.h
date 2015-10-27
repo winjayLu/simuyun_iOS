@@ -10,4 +10,31 @@
 
 @interface YTStockModel : NSObject
 
+/**
+ *  名称
+ */
+@property (nonatomic, copy) NSString *name;
+/**
+ *  当前指数
+ */
+@property (nonatomic, assign) double index;
+/**
+ *  涨跌率
+ */
+@property (nonatomic, assign) double rate;
+/**
+ *  成交量
+ */
+@property (nonatomic, assign) double volume;
+///**
+// *  成交额
+// */
+//@property (nonatomic, assign) double turnover;
+
+/**
+ *  当前涨跌
+ */
+@property (nonatomic, assign) double gain;
+
+
 @end

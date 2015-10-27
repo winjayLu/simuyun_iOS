@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YTBuySuccessController">
             <connections>
+                <outlet property="accountBankLable" destination="CKS-jK-C1H" id="5pn-FX-1wf"/>
+                <outlet property="accountLable" destination="4CN-o6-zZ6" id="R38-WH-YhB"/>
+                <outlet property="accountNameLable" destination="f0z-yp-Rr3" id="fRx-VI-bmd"/>
+                <outlet property="buyMoney" destination="61O-sz-ML7" id="GR1-gY-VJE"/>
+                <outlet property="customerNameLable" destination="glb-AG-xRo" id="iHT-JL-HE3"/>
+                <outlet property="productNameLable" destination="yJg-yG-frE" id="hli-9u-DTC"/>
+                <outlet property="tiShiLable" destination="Bye-9m-Ze5" id="flM-Ax-PFp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -121,6 +128,9 @@
                                 <constraint firstAttribute="height" constant="32" id="W4e-64-hpw"/>
                             </constraints>
                             <state key="normal" backgroundImage="youjian"/>
+                            <connections>
+                                <action selector="emailClick:" destination="-1" eventType="touchUpInside" id="sDi-0G-F10"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TDh-fg-807">
                             <rect key="frame" x="130" y="19" width="32" height="32"/>
@@ -129,6 +139,9 @@
                                 <constraint firstAttribute="width" constant="32" id="GAK-uQ-1cm"/>
                             </constraints>
                             <state key="normal" backgroundImage="weixin"/>
+                            <connections>
+                                <action selector="weiChatClick:" destination="-1" eventType="touchUpInside" id="0xP-jI-1o2"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ku6-0R-96E">
                             <rect key="frame" x="214" y="19" width="32" height="32"/>
@@ -137,6 +150,9 @@
                                 <constraint firstAttribute="height" constant="32" id="nAf-vm-9Iw"/>
                             </constraints>
                             <state key="normal" backgroundImage="duanxin"/>
+                            <connections>
+                                <action selector="smsClick:" destination="-1" eventType="touchUpInside" id="Iks-WA-gqA"/>
+                            </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zaF-bH-LMX">
                             <rect key="frame" x="10" y="35" width="95" height="1"/>
@@ -194,7 +210,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4wn-Q5-T63">
-                    <rect key="frame" x="10" y="512" width="355" height="44"/>
+                    <rect key="frame" x="10" y="497" width="355" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="09H-dq-SU1"/>
                     </constraints>
@@ -204,11 +220,14 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHK-3I-Mvy">
-                    <rect key="frame" x="10" y="566" width="355" height="44"/>
+                    <rect key="frame" x="10" y="551" width="355" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="Rvb-dQ-94r"/>
                     </constraints>
                     <state key="normal" backgroundImage="hcpzx"/>
+                    <connections>
+                        <action selector="blackProductClcik:" destination="-1" eventType="touchUpInside" id="w5Y-Ld-AQk"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
@@ -240,7 +259,7 @@
                 <constraint firstItem="4wn-Q5-T63" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="SSk-10-zUE"/>
                 <constraint firstItem="rCJ-d6-h0s" firstAttribute="top" secondItem="XsD-sm-3Jh" secondAttribute="bottom" constant="15" id="TIA-O5-FLS"/>
                 <constraint firstItem="4CN-o6-zZ6" firstAttribute="centerY" secondItem="hdZ-FS-MNs" secondAttribute="centerY" id="TVK-g0-rU3"/>
-                <constraint firstItem="4wn-Q5-T63" firstAttribute="top" secondItem="p4f-JJ-LCL" secondAttribute="bottom" constant="40" id="W4W-GO-KpQ"/>
+                <constraint firstItem="4wn-Q5-T63" firstAttribute="top" secondItem="p4f-JJ-LCL" secondAttribute="bottom" constant="25" id="W4W-GO-KpQ"/>
                 <constraint firstItem="ZFx-sl-ARh" firstAttribute="leading" secondItem="Rbd-JI-Blo" secondAttribute="leading" id="WKr-67-noj"/>
                 <constraint firstItem="xHK-3I-Mvy" firstAttribute="top" secondItem="4wn-Q5-T63" secondAttribute="bottom" constant="10" id="Wfl-5W-nip"/>
                 <constraint firstItem="CKS-jK-C1H" firstAttribute="leading" secondItem="ZFx-sl-ARh" secondAttribute="trailing" constant="9" id="Xkz-Yr-KOw"/>

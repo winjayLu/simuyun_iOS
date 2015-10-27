@@ -20,6 +20,9 @@
 #import "YTBlackAlertView.h"
 #import "YTInformationController.h"
 #import "YTTabBarController.h"
+#import "YTAccountTool.h"
+#import "YTAuthenticationViewController.h"
+#import "YTAuthenticationStatusController.h"
 
 @interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate>
 
@@ -170,32 +173,35 @@
 {
     NSString *btnTitle = note.userInfo[YTLeftMenuSelectBtn];
     YTLog(@"%@",btnTitle);
+    UIViewController *vc = nil;
     // 判断点击了哪个按钮
     if ([btnTitle isEqualToString:@"用户资料"]) {
-        
+        vc = [[YTOtherViewController alloc] init];
     } else if([btnTitle isEqualToString:@"关联微信"]){
-        
+        vc = [[YTOtherViewController alloc] init];
     } else if([btnTitle isEqualToString:@"邮寄地址"]){
-        
+        vc = [[YTOtherViewController alloc] init];
     } else if([btnTitle isEqualToString:@"推荐私募云给好友"]){
-        
+        vc = [[YTOtherViewController alloc] init];
     } else if([btnTitle isEqualToString:@"帮助"]){
-        
+        vc = [[YTOtherViewController alloc] init];
     } else if([btnTitle isEqualToString:@"关于私募云"]){
-        
-    } else {
-        
+        vc = [[YTOtherViewController alloc] init];
+    } else if([btnTitle isEqualToString:@"400-188-8488"]){
+        UIWebView*callWebview =[[UIWebView alloc] init];
+        NSURL *telURL =[NSURL URLWithString:@"tel://400-188-8488"];       [callWebview loadRequest:[NSURLRequest requestWithURL:telURL]];
+        //记得添加到view上
+        [self.view addSubview:callWebview];
     }
     // 调用代理方法
     if ([self.delegate respondsToSelector:@selector(leftMenuClicked)]) {
         [self.delegate leftMenuClicked];
     }
     // 跳转对应控制器
-    YTOtherViewController *other = [[YTOtherViewController alloc] init];
-    other.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:other animated:NO];
-    
-
+    if (vc != nil) {
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:NO];
+    }
 }
 /**
  *  待办事项选中事件
@@ -211,7 +217,8 @@
         [appRootVC setSelectedIndex:0];
     } else {
         vc = [[YTOtherViewController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:NO];
     }
 }
 /**
@@ -222,7 +229,7 @@
 {
     YTOrderCenterController *order = [[YTOrderCenterController alloc] init];
     order.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:order animated:YES];
+    [self.navigationController pushViewController:order animated:NO];
 }
 
 
@@ -257,13 +264,10 @@
     YTBlackAlertView *alert = [YTBlackAlertView shared];
     switch (type) {
         case TopButtonTypeRenzhen:  // 认证
-            
+            [self Authentication];
             break;
         case TopButtonTypeQiandao:  // 签到
-            [alert showAlertSignWithTitle:@"国人消费升级" date:@"9月21日" yunDou:100 block:^{
-                NSLog(@"ss");
-                // 早知道id  infoId
-            }];
+            [self signIn];
             break;
         case TopButtonTypeYundou:   // 云豆
             
@@ -282,7 +286,55 @@
     }
     // 跳转对应控制器
     pushVc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:pushVc animated:YES];
+    [self.navigationController pushViewController:pushVc animated:NO];
+}
+/**
+ *  签到
+ *
+ */
+- (void)signIn
+{
+    YTBlackAlertView *alert = [YTBlackAlertView shared];
+    // 发送请求
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"advisersId"] = [YTAccountTool account].userId;
+    [YTHttpTool post:YTSignIn params:params success:^(id responseObject) {
+        // 修改数据
+        YTUserInfo *userInfo = [YTUserInfoTool userInfo];
+        userInfo.isSingIn = 1;
+        userInfo.myPoint = (int)responseObject[@"totalPoint"];
+        [YTUserInfoTool saveUserInfo:userInfo];
+        self.topView.userInfo = userInfo;
+        // 资讯id
+        NSString *infoId = responseObject[@"infoId"];
+        // 弹出提醒
+        [alert showAlertSignWithTitle:responseObject[@"infoTitle"] date:responseObject[@"signInDate"] yunDou:(int)responseObject[@"todayPoint"] block:^{
+            if (infoId != nil && infoId.length > 0) {
+                YTOtherViewController *other = [[YTOtherViewController alloc] init];
+                other.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:other animated:NO];
+            }
+        }];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+/**
+ *  认证
+ *
+ */
+- (void)Authentication
+{
+#warning TODO 判断状态
+    if([YTUserInfoTool userInfo].adviserStatus == 1)
+    {
+        YTAuthenticationViewController *authen = [[YTAuthenticationViewController alloc] init];
+        authen.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:authen animated:NO];
+    } else if ([YTUserInfoTool userInfo].adviserStatus == 2)
+    {
+    
+    }
 }
 
 

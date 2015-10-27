@@ -54,9 +54,6 @@
  */
 @property (nonatomic, assign) int remaining_amt;
 
-
-
-
 /**
  *  产品类型
  *  1浮收
@@ -84,6 +81,42 @@
  *  封闭期
  */
 @property (nonatomic, copy) NSString *close_stage;
+
+// 开户名
+@property (nonatomic, copy) NSString *raise_account_name;
+// 募集账号
+@property (nonatomic, copy) NSString *raise_account;
+// 募集银行
+@property (nonatomic, copy) NSString *raise_bank;
+
+
+
+#pragma mark - 订单字段
+/**
+ *  客户名称
+ */
+@property (nonatomic, copy) NSString *customerName;
+/**
+ *  认购金额
+ */
+@property (nonatomic, assign) int buyMoney;
+/**
+ *  订单id
+ */
+@property (nonatomic, copy) NSString *order_id;
+/**
+ *  订单编号
+ */
+@property (nonatomic, copy) NSString *order_code;
+
+/**
+ *  最晚报备时间
+ */
+@property (nonatomic, copy) NSString *end_time;
+
+
+
+
 
 
 

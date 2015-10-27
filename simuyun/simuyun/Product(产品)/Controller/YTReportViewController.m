@@ -16,6 +16,23 @@
 @interface YTReportViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, PhotoViewDelegate>
 
 /**
+ *  产品名称
+ */
+@property (weak, nonatomic) IBOutlet UILabel *productNameLable;
+/**
+ *  订单编号
+ */
+@property (weak, nonatomic) IBOutlet UILabel *orderCodeLable;
+/**
+ *  客户名称
+ */
+@property (weak, nonatomic) IBOutlet UILabel *customerNameLable;
+/**
+ *  认购金额
+ */
+@property (weak, nonatomic) IBOutlet UILabel *buyMoneyLable;
+
+/**
  *  证件类型
  */
 @property (weak, nonatomic) IBOutlet UITextField *typeField;
@@ -66,9 +83,18 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLable;
 
 /**
- *  图片选择器
+ *  打款凭条图片选择器
  */
 @property (nonatomic, weak) YTPhotoView *photo;
+/**
+ *  证件资料Lable
+ */
+@property (weak, nonatomic) IBOutlet UILabel *informationLable;
+
+/**
+ *  打款凭条图片选择器
+ */
+@property (nonatomic, weak) YTPhotoView *informationPhoto;
 
 @end
 
@@ -76,14 +102,43 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     // 初始化图片选择器
+    [self setupPhotoView];
+}
+/**
+ *  初始化图片选择器
+ *
+ */
+- (void)setupPhotoView
+{
+    // 打款凭条
     CGFloat photoX = CGRectGetMaxX(self.titleLable.frame);
     YTPhotoView *photo = [[YTPhotoView alloc] initWithFrame:CGRectMake(photoX, self.titleLable.y - 20, DeviceWidth - photoX - 10, 53)];
     photo.delegate = self;
     [self.view addSubview:photo];
     self.photo = photo;
+    
+    // 证件资料
+    CGFloat informationPhotoX = CGRectGetMaxX(self.informationLable.frame);
+    YTPhotoView *informationPhoto = [[YTPhotoView alloc] initWithFrame:CGRectMake(photoX, self.informationLable.y - 20, DeviceWidth - informationPhotoX - 10, 53)];
+    informationPhoto.delegate = self;
+    [self.view addSubview:informationPhoto];
+    self.informationPhoto = informationPhoto;
+}
 
+
+/**
+ *  设置数据
+ *
+ */
+- (void)setProuctModel:(YTProductModel *)prouctModel
+{
+    _prouctModel = prouctModel;
+    self.productNameLable.text = prouctModel.pro_name;
+    
+    self.orderCodeLable.text = [NSString stringWithFormat:@"订单编号：%@",prouctModel.order_code];
+    self.customerNameLable.text = [NSString stringWithFormat:@"客户：%@", prouctModel.customerName];
+    self.buyMoneyLable.text = [NSString stringWithFormat:@"认购金额：%d", prouctModel.buyMoney];
 }
 
 /**
@@ -138,11 +193,11 @@
         UIPickerView *picker = [[UIPickerView alloc] init];
         picker.delegate = self;
         
-        TFModel *tfm1=[TFModel modelWithTextFiled:self.typeField inputView:picker name:@"tf1" insetBottom:11];
-        TFModel *tfm2=[TFModel modelWithTextFiled:self.numberField inputView:nil name:@"tf2" insetBottom:11];
-        TFModel *tfm3=[TFModel modelWithTextFiled:self.bankField inputView:nil name:@"tf3" insetBottom:11];
+        TFModel *tfm1=[TFModel modelWithTextFiled:self.typeField inputView:picker name:@"" insetBottom:11];
+        TFModel *tfm2=[TFModel modelWithTextFiled:self.numberField inputView:nil name:@"" insetBottom:11];
+        TFModel *tfm3=[TFModel modelWithTextFiled:self.bankField inputView:nil name:@"" insetBottom:65];
         TFModel *tfm4=[TFModel modelWithTextFiled:self.bankHangField inputView:nil name:@"" insetBottom:11];
-        TFModel *tfm5=[TFModel modelWithTextFiled:self.branchField inputView:nil name:@"tf5" insetBottom:11];
+        TFModel *tfm5=[TFModel modelWithTextFiled:self.branchField inputView:nil name:@"" insetBottom:11];
         
         return @[tfm1,tfm2,tfm3,tfm4,tfm5];
         

@@ -74,6 +74,7 @@ static ShareManage *shareManage;
     [[UMSocialControllerService defaultControllerService] setShareText:self.share_content shareImage:self.share_image socialUIDelegate:self];
     //  设置标题
     [UMSocialData defaultData].extConfig.wechatSessionData.title = self.share_title;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = self.share_title;
     //  设置url
     [UMSocialWechatHandler setWXAppId:WXAppID appSecret:WXAppSecret url:self.share_url];
     [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession].snsClickHandler(viewC,[UMSocialControllerService defaultControllerService],YES);

@@ -9,10 +9,14 @@
 // 订单报备
 
 #import <UIKit/UIKit.h>
+#import "YTProductModel.h"
 
 @interface YTReportViewController : UIViewController
 
 // 用于调整位置
 @property (nonatomic, weak) UIScrollView *scroll;
+
+// 产品模型
+@property (nonatomic, strong) YTProductModel *prouctModel;
 
 @end

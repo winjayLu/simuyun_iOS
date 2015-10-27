@@ -27,14 +27,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"订单报备";
     YTReportViewController *report = [[YTReportViewController alloc] init];
     report.view.frame = CGRectMake(0, 0, DeviceWidth, report.view.height);
     report.scroll = (UIScrollView *)self.view;
     [self addChildViewController:report];
     [self.view addSubview:report.view];
+    report.prouctModel = self.prouctModel;
     NSLog(@"%@", NSStringFromCGRect(self.view.frame));
-    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, report.view.height - 64)];
+    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, report.view.height)];
 }
 
 - (void)didReceiveMemoryWarning {

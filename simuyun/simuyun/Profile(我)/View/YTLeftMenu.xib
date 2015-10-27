@@ -179,6 +179,9 @@
                     <state key="normal" title="400-188-8488" image="dianhau">
                         <color key="titleColor" red="0.45098039215686275" green="0.45098039215686275" blue="0.46274509803921571" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="phoneClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="Vhc-wY-DEU"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4w-em-a0Z">
                     <rect key="frame" x="50" y="508" width="140" height="30"/>

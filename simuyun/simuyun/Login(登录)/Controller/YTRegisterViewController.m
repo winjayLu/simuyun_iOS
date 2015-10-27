@@ -16,6 +16,7 @@
 #import "YTTabBarController.h"
 #import "CALayer+Anim.h"
 #import "CALayer+Transition.h"
+#import "NSString+Password.h"
 
 // 注册
 
@@ -112,15 +113,14 @@
     // 帐号模型
     YTAccount *account = [[YTAccount alloc] init];
     account.userName = self.userName.text;
-    account.password = self.password.text;
+    account.password = [NSString md5:self.password.text];
     
     // 请求参数
     NSDictionary *params = @{@"username" : account.userName, @"password" : account.password};
     [SVProgressHUD showWithStatus:@"正在注册" maskType:SVProgressHUDMaskTypeClear];
     [YTHttpTool post:YTRegister params:params success:^(id responseObject) {
-        
-        NSLog(@"%@",responseObject);
         // 发起登录
+        account.password = self.password.text;
         [YTAccountTool loginAccount:account result:^(BOOL result) {
             [SVProgressHUD dismiss];
             if (result) {   // 登录成功
@@ -234,11 +234,13 @@
         if (self.registerNumber.text.length == 0) {
             [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
             return YES;
-        } else if(![self.registerNumber.text isEqualToString:self.captcha])
-        {
-            [SVProgressHUD showErrorWithStatus:@"验证码不正确"];
-            return YES;
         }
+#warning 修改验证码
+//        else if(![self.registerNumber.text isEqualToString:self.captcha])
+//        {
+//            [SVProgressHUD showErrorWithStatus:@"验证码不正确"];
+//            return YES;
+//        }
     }
     return NO;
 }
@@ -252,9 +254,9 @@
 
     [CoreTFManagerVC installManagerForVC:self scrollView:nil tfModels:^NSArray *{
         
-        TFModel *tfm1=[TFModel modelWithTextFiled:self.userName inputView:nil name:@"tf1" insetBottom:0];
-        TFModel *tfm2=[TFModel modelWithTextFiled:self.password inputView:nil name:@"tf2" insetBottom:0];
-        TFModel *tfm3=[TFModel modelWithTextFiled:self.registerNumber inputView:nil name:@"tf3" insetBottom:0];
+        TFModel *tfm1=[TFModel modelWithTextFiled:self.userName inputView:nil name:@"" insetBottom:0];
+        TFModel *tfm2=[TFModel modelWithTextFiled:self.password inputView:nil name:@"" insetBottom:0];
+        TFModel *tfm3=[TFModel modelWithTextFiled:self.registerNumber inputView:nil name:@"" insetBottom:0];
         return @[tfm1,tfm2,tfm3];
         
     }];

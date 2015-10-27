@@ -11,6 +11,7 @@
 #import "YTLoginViewController.h"
 #import "YTAccountTool.h"
 #import "YTUserInfoTool.h"
+#import "YTNavigationController.h"
 
 @interface YTLeftMenu()
 
@@ -70,6 +71,11 @@
  *
  */
 - (IBAction)tuiChuClick:(UIButton *)sender;
+/**
+ *  拨打电话
+ *
+ */
+- (IBAction)phoneClick:(UIButton *)sender;
 
 @end
 
@@ -133,11 +139,18 @@
     
     // 获取程序主窗口
     UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
-    mainWindow.rootViewController = [[YTLoginViewController alloc] init];
+    mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
     // 清除保存的账户信息
     [YTAccountTool save:nil];
     // 清除用户信息
     [YTUserInfoTool clearUserInfo];
+}
+/**
+ *  拨打电话
+ *
+ */
+- (IBAction)phoneClick:(UIButton *)sender {
+    [self senderNotification:sender];
 }
 /**
  *  发送通知

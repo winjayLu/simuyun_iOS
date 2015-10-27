@@ -43,6 +43,7 @@
         item.backgroundColor = [UIColor whiteColor];
         item.layer.cornerRadius = 5;
         item.layer.masksToBounds = YES;
+        item.stockModel = stocks[i];
         maxW = leftMagin + i * (itemW + leftMagin);
         item.frame = CGRectMake(maxW, topMagin, itemW, itemH);
         [self addSubview:item];

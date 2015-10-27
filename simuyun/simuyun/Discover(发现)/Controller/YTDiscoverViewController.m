@@ -14,7 +14,8 @@
 #import "YTConsultView.h"
 #import "YTNewest.h"
 #import "YTInformationController.h"
-
+#import "MJRefresh.h"
+#import "YTStockModel.h"
 
 // 左右间距
 #define maginWidth 7
@@ -68,6 +69,7 @@
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:DeviceBounds];
 //    mainView.bounces = NO;
     mainView.showsVerticalScrollIndicator = NO;
+    mainView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     self.view = mainView;
     self.view.backgroundColor = YTViewBackground;
 }
@@ -169,8 +171,15 @@
  */
 - (void)loadStock
 {
-    self.stocks = [NSArray arrayWithObjects:@"1", @"2", @"3",@"2", @"3",@"2", @"3", nil];
-    self.stock.stocks = self.stocks;
+    [YTHttpTool get:YTStockindex params:nil success:^(id responseObject) {
+        self.stocks = [YTStockModel objectArrayWithKeyValuesArray:responseObject];
+        self.stock.stocks = self.stocks;
+    } failure:^(NSError *error) {
+        
+    }];
+    
+//    self.stocks = [NSArray arrayWithObjects:@"1", @"2", @"3",@"2", @"3",@"2", @"3", nil];
+//    self.stock.stocks = self.stocks;
 
 }
 /**
@@ -191,6 +200,29 @@
         [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.consult.frame) + maginWidth)];
     } failure:^(NSError *error) {
         
+    }];
+}
+/**
+ *  刷新数据
+ */
+- (void)loadNewData
+{
+    [self getAdvertise];
+    [self loadStock];
+    [YTHttpTool get:YTNewes params:nil success:^(id responseObject) {
+        NSLog(@"%@", responseObject);
+        self.newests = [YTNewest objectArrayWithKeyValuesArray:responseObject];
+        // 设置数据
+        self.consult.newests = self.newests;
+        // 调整高度
+        CGFloat headerH = 30;
+        CGFloat cellH = 93;
+        CGFloat consultH = headerH + cellH * self.newests.count;
+        self.consult.height = consultH;
+        [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.consult.frame) + maginWidth)];
+        [((UIScrollView *)self.view).header endRefreshing];
+    } failure:^(NSError *error) {
+        [((UIScrollView *)self.view).header endRefreshing];
     }];
 }
 

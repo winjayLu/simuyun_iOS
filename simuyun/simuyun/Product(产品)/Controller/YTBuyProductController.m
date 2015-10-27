@@ -9,6 +9,7 @@
 #import "YTBuyProductController.h"
 #import "SVProgressHUD.h"
 #import "YTContentViewController.h"
+#import "YTAccountTool.h"
 
 @interface YTBuyProductController ()
 
@@ -79,10 +80,10 @@
 }
 
 - (IBAction)nextBtn:(UIButton *)sender {
-    
+    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
     // 本地校验
     if (self.nameLable.text == nil || [self.nameLable.text isEqualToString:@""]) {
-        [SVProgressHUD showErrorWithStatus:@"请输入投资人姓名"];
+        [SVProgressHUD showErrorWithStatus:@"请填写投资人姓名"];
         return;
     } else if ([self.buyMoney.text intValue] == 0)
     {
@@ -104,27 +105,25 @@
  */
 - (void)buyNow
 {
+    [SVProgressHUD showWithStatus:@"认购中" maskType:SVProgressHUDMaskTypeClear];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"product_id"] = self.product.pro_id;
-#warning 用户id
-    dict[@"advisers_id"] = @"f787e670f5ef4d24943242fa03420be1";
+    dict[@"advisers_id"] = [YTAccountTool account].userId;
     dict[@"cust_name"] = self.nameLable.text;
     dict[@"order_amt"] = self.buyMoney.text;
-    /*
-     "product_id": "",
-     "advisers_id": "",
-     "cust_id": "",
-     "cust_name": "",
-     "order_amt": ""
-     */
-    
-//    [YTHttpTool post:YTOrder params:dict success:^(id responseObject) {
-//        NSLog(@"%@",responseObject);
-//    } failure:^(NSError *error) {
-//        NSLog(@"%@",error);
-//    }];
-    YTContentViewController *content = [[YTContentViewController alloc] init];
-    [self.navigationController pushViewController:content animated:YES];
+    [YTHttpTool post:YTOrder params:dict success:^(id responseObject) {
+        [SVProgressHUD dismiss];
+        self.product.customerName = self.nameLable.text;
+        self.product.order_id = responseObject[@"order_id"];
+        self.product.end_time = responseObject[@"end_time"];
+        self.product.order_code = responseObject[@"order_code"];
+        self.product.buyMoney = [self.buyMoney.text intValue];
+        YTContentViewController *content = [[YTContentViewController alloc] init];
+        content.prouctModel = self.product;
+        [self.navigationController pushViewController:content animated:YES];
+    } failure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"认购失败"];
+    }];
 }
 
 
