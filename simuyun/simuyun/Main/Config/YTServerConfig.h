@@ -33,6 +33,8 @@
 /** 接口名 */
 // 程序启动信息
 #define YTGetResources @"resources"
+// 红包雨
+#define YTRedpacket @"redpacket"
 // 登录
 #define YTSession @"session"
 // 加载产品列表
@@ -63,7 +65,12 @@
 #define YTSignIn @"signIn"
 // 获取机构列表
 #define YTOrgnazations @"orgnazations"
-
+// 理财师认证
+#define YTAuthAdviser @"authAdviser"
+// 打款凭条，证件资料图片上传
+#define YTSlip @"upload"
+// 报备
+#define YTReport @"order/report"
 
 
 

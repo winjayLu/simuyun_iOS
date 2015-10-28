@@ -15,6 +15,7 @@
 #import "YTDiscoverViewController.h"
 #import "YTNavigationController.h"
 #import "YTLogoView.h"
+#import "YTAccountTool.h"
 
 
 @interface YTTabBarController () <YTLogoViewDelegate>
@@ -62,6 +63,27 @@
     // 选中个人中心控制器
     [self logoViewDidSelectProfileItem];
     
+    // 开启定时器时时获取红包雨
+    [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(getRedrain) userInfo:nil repeats:YES];
+    
+}
+/**
+ *  获取红包雨
+ */
+- (void)getRedrain
+{
+#warning TODO 红包雨
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"uid"] = [YTAccountTool account].userId;
+    [YTHttpTool get:YTRedpacket params:dict success:^(NSDictionary *responseObject) {
+        NSString *url = responseObject[@"redpage_url"];
+        YTLog(@"ssss");
+        if (url.length > 0) {
+            NSLog(@"%@", url);
+        }
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 /**

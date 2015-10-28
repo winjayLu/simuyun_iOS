@@ -112,6 +112,7 @@
     }
     
     [APService setupWithOption:launchOptions];
+    [APService setLogOFF];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken

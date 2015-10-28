@@ -215,9 +215,12 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="8go-t2-F5X"/>
                     </constraints>
-                    <state key="normal" backgroundImage="baobei"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="报备" backgroundImage="hongseanniu">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
-                        <action selector="ReportClick:" destination="-1" eventType="touchUpInside" id="a1p-M0-J0r"/>
+                        <action selector="ReportClick:" destination="-1" eventType="touchUpInside" id="8xB-wf-7xG"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="报名资料错误可能会导致审核失败额度被退回而影响客户的收益，请确认填写正确" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Dp-gb-RGl">
@@ -325,7 +328,7 @@
         </view>
     </objects>
     <resources>
-        <image name="baobei" width="355" height="44"/>
+        <image name="hongseanniu" width="355" height="44"/>
         <image name="lansegengduo" width="8" height="15"/>
     </resources>
 </document>

@@ -28,4 +28,9 @@
  */
 + (NSString *)getBankFromCardNumber:(NSString *)bank;
 
+/**
+ *  生成唯一的字符串
+ */
++ (NSString *)createCUID;
+
 @end

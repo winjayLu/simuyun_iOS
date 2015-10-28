@@ -56,4 +56,19 @@
     return [formatter dateFromString:self];
 }
 
+/**
+ *  生成唯一的字符串
+ */
++ (NSString *)createCUID{
+    NSString *  result;
+    CFUUIDRef   uuid;
+    CFStringRef uuidStr;
+    uuid = CFUUIDCreate(NULL);
+    uuidStr = CFUUIDCreateString(NULL, uuid);
+    result =[NSString stringWithFormat:@"%@",uuidStr];
+    CFRelease(uuidStr);
+    CFRelease(uuid);
+    return result;
+}
+
 @end

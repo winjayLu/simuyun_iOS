@@ -20,6 +20,7 @@
 }
 
 -(void)setContentImage:(UIImage *)contentImage{
+    _contentImage = contentImage;
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
 
     
@@ -29,8 +30,9 @@
     [self addSubview:imageView];
     
     UIButton *btnDelete = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnDelete.frame = CGRectMake(self.frame.size.width - 15, 0, 15, 15);
-    [btnDelete setImage:[UIImage imageNamed:@"delete-circular.png"] forState:UIControlStateNormal];
+    btnDelete.frame = self.bounds;
+//    [btnDelete setImage:[UIImage imageNamed:@"delete-circular.png"] forState:UIControlStateNormal];
+    [btnDelete setBackgroundColor:[UIColor clearColor]];
     btnDelete.tag = self.index;
     [btnDelete addTarget:self
                   action:@selector(deletePhotoItem:)

@@ -10,6 +10,8 @@
 #import "AutocompletionTableView.h"
 #import "CoreTFManagerVC.h"
 #import "YTOrgnazationModel.h"
+#import "SVProgressHUD.h"
+#import "YTAccountTool.h"
 
 
 #define maginTop 64
@@ -27,6 +29,12 @@
  *
  */
 @property (weak, nonatomic) IBOutlet UITextField *mechanismNameLable;
+
+/**
+ *  申请认证
+ *
+ */
+- (IBAction)applyClick:(UIButton *)sender;
 
 /**
  *  机构列表
@@ -72,22 +80,37 @@
     }];
 }
 
-
-#pragma mark - lazy
-
-- (AutocompletionTableView *)autoCompleter
-{
-    if (!_autoCompleter)
-    {
-        NSMutableDictionary *options = [NSMutableDictionary dictionaryWithCapacity:2];
-        [options setValue:[NSNumber numberWithBool:YES] forKey:ACOCaseSensitive];
-        [options setValue:nil forKey:ACOUseSourceFont];
-        
-        _autoCompleter = [[AutocompletionTableView alloc] initWithTextField:self.mechanismNameLable inViewController:self withOptions:options];
-        _autoCompleter.autoCompleteDelegate = self;
+- (IBAction)applyClick:(UIButton *)sender {
+    if (self.userNameLable.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入姓名"];
+        return;
     }
-    return _autoCompleter;
+    YTOrgnazationModel *selectedOrgna = nil;
+    for (YTOrgnazationModel *orgna in self.orgnazations) {
+        if ([orgna.party_name isEqualToString:self.mechanismNameLable.text]) {
+            selectedOrgna = orgna;
+        }
+    }
+    if (selectedOrgna == nil) {
+        [SVProgressHUD showErrorWithStatus:@"请选择正确的机构"];
+        return;
+    }
+    [SVProgressHUD showWithStatus:@"正在认证" maskType:SVProgressHUDMaskTypeClear];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"advisersId"] = [YTAccountTool account].userId;
+    dict[@"realName"] = self.userNameLable.text;
+    dict[@"orgId"] = selectedOrgna.party_id;
+    [YTHttpTool post:YTAuthAdviser params:dict success:^(id responseObject) {
+        [SVProgressHUD dismiss];
+        
+    } failure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"认证失败"];
+    }];
+    
 }
+
+
+
 #pragma mark - AutoCompleteTableViewDelegate
 
 - (NSArray*) autoCompletion:(AutocompletionTableView*) completer suggestionsFor:(NSString*) string{
@@ -97,8 +120,8 @@
 }
 
 - (void) autoCompletion:(AutocompletionTableView*) completer didSelectAutoCompleteSuggestionWithIndex:(NSInteger) index{
-    NSLog(@"%@", self.orgnaNames[index]);
-    NSLog(@"sss%@", self.orgnazations[index]);
+    // 退出键盘
+    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
 }
 
 #pragma mark - 键盘与文本框的处理
@@ -145,10 +168,25 @@
     return _orgnaNames;
 }
 
+- (AutocompletionTableView *)autoCompleter
+{
+    if (!_autoCompleter)
+    {
+        NSMutableDictionary *options = [NSMutableDictionary dictionaryWithCapacity:2];
+        [options setValue:[NSNumber numberWithBool:YES] forKey:ACOCaseSensitive];
+        [options setValue:nil forKey:ACOUseSourceFont];
+        
+        _autoCompleter = [[AutocompletionTableView alloc] initWithTextField:self.mechanismNameLable inViewController:self withOptions:options];
+        _autoCompleter.autoCompleteDelegate = self;
+    }
+    return _autoCompleter;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
 
 
 @end

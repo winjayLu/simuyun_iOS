@@ -70,7 +70,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
     [self addChildViewController:nav];
     [self.view addSubview:self.nav.view];
     self.nav.delegate = self;
-    self.nav.interactivePopGestureRecognizer.enabled = NO;
+//    self.nav.interactivePopGestureRecognizer.enabled = NO;
     
     // 初始化手势
     self.panRecongnizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];

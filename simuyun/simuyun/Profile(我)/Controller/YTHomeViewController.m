@@ -187,10 +187,10 @@
         vc = [[YTOtherViewController alloc] init];
     } else if([btnTitle isEqualToString:@"关于私募云"]){
         vc = [[YTOtherViewController alloc] init];
-    } else if([btnTitle isEqualToString:@"400-188-8488"]){
+    } else if([btnTitle isEqualToString:@"400-188-8848"]){
         UIWebView*callWebview =[[UIWebView alloc] init];
-        NSURL *telURL =[NSURL URLWithString:@"tel://400-188-8488"];       [callWebview loadRequest:[NSURLRequest requestWithURL:telURL]];
-        //记得添加到view上
+        NSURL *telURL =[NSURL URLWithString:@"tel://400-188-8848"];
+        [callWebview loadRequest:[NSURLRequest requestWithURL:telURL]];
         [self.view addSubview:callWebview];
     }
     // 调用代理方法
@@ -286,7 +286,13 @@
     }
     // 跳转对应控制器
     pushVc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:pushVc animated:NO];
+    [self.navigationController pushViewController:pushVc animated:YES];
+    //开启iOS7的滑动返回效果
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+    }
+#warning 修改了侧滑手势
+//    [self.navigationController pushViewController:pushVc animated:NO];
 }
 /**
  *  签到
@@ -297,11 +303,13 @@
     YTBlackAlertView *alert = [YTBlackAlertView shared];
     // 发送请求
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"advisersId"] = [YTAccountTool account].userId;
+    params[@"adviserId"] = [YTAccountTool account].userId;
     [YTHttpTool post:YTSignIn params:params success:^(id responseObject) {
         // 修改数据
+
         YTUserInfo *userInfo = [YTUserInfoTool userInfo];
         userInfo.isSingIn = 1;
+        NSLog(@"%@",responseObject);
         userInfo.myPoint = (int)responseObject[@"totalPoint"];
         [YTUserInfoTool saveUserInfo:userInfo];
         self.topView.userInfo = userInfo;

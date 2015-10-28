@@ -42,5 +42,9 @@
  */
 - (instancetype)getRoundImage;
 
+/**
+ *  等比例压缩图片
+ */
+-(UIImage *) imageCompressForWidth:(UIImage *)sourceImage targetWidth:(CGFloat)defineWidth;
 
 @end

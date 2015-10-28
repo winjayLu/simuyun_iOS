@@ -215,6 +215,7 @@
 		97E44B731BD344FE00952B11 /* YTStockItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97E44B721BD344FE00952B11 /* YTStockItem.xib */; };
 		97E44B761BD348BF00952B11 /* YTUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E44B751BD348BF00952B11 /* YTUserInfo.m */; };
 		97E44B791BD3492700952B11 /* YTUserInfoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E44B781BD3492700952B11 /* YTUserInfoTool.m */; };
+		97F17F5B1BE0CB63006E6DA8 /* YTSlipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F17F5A1BE0CB63006E6DA8 /* YTSlipModel.m */; };
 		C7C7A3BFF6245A07C6961ED3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1695905209A227AB6ABE80C8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -620,6 +621,8 @@
 		97E44B751BD348BF00952B11 /* YTUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTUserInfo.m; sourceTree = "<group>"; };
 		97E44B771BD3492700952B11 /* YTUserInfoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTUserInfoTool.h; sourceTree = "<group>"; };
 		97E44B781BD3492700952B11 /* YTUserInfoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTUserInfoTool.m; sourceTree = "<group>"; };
+		97F17F591BE0CB63006E6DA8 /* YTSlipModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSlipModel.h; sourceTree = "<group>"; };
+		97F17F5A1BE0CB63006E6DA8 /* YTSlipModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSlipModel.m; sourceTree = "<group>"; };
 		EE4C2D6D5E8167BC60D82A90 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -849,6 +852,8 @@
 				97BF5BD21BD77FF000053BD0 /* AGNumberForBank.m */,
 				978C6FE91BCFA280003D183E /* YTProductModel.h */,
 				978C6FEA1BCFA280003D183E /* YTProductModel.m */,
+				97F17F591BE0CB63006E6DA8 /* YTSlipModel.h */,
+				97F17F5A1BE0CB63006E6DA8 /* YTSlipModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2196,6 +2201,7 @@
 				975149541BDCB87A0017B6E8 /* YTBlackAlertView.m in Sources */,
 				97C6065C1BC26F1100E555E8 /* NSDictionary+Extension.m in Sources */,
 				97BA6A191BD4BA1C001E291E /* YTStockCell.m in Sources */,
+				97F17F5B1BE0CB63006E6DA8 /* YTSlipModel.m in Sources */,
 				97973D081BC3D8AB00B7B4CB /* YTLogoView.m in Sources */,
 				97973CF91BC3C11500B7B4CB /* NewFeatureModel.m in Sources */,
 				97C3CE6A1BC2BAEF00B7185D /* SVIndefiniteAnimatedView.m in Sources */,
@@ -2344,7 +2350,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
 				INFOPLIST_FILE = simuyun/Info.plist;
@@ -2358,7 +2365,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5e3bd153-03e1-472a-be01-dafb2a298d29";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2369,8 +2376,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
 				INFOPLIST_FILE = simuyun/Info.plist;
@@ -2384,7 +2391,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5e3bd153-03e1-472a-be01-dafb2a298d29";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

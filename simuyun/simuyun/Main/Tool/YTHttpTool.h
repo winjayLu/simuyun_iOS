@@ -41,7 +41,7 @@
  *  @param success 请求成功后的回调
  *  @param failure 请求失败后的回调
  */
-//+ (void)post:(NSString *)url params:(id)params files:(NSArray *)files success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
++ (void)post:(NSString *)url params:(id)params files:(NSArray *)files success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
 
 
 @end

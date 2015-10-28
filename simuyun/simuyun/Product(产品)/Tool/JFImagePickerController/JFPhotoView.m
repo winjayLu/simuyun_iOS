@@ -290,7 +290,9 @@
         CGRect partRect = CGRectFromString(splitImage[page]);
         photoView = [[UIImageView alloc] initWithFrame:CGRectMake(0, page*splitHeight, partRect.size.width, partRect.size.height)];
         photoView.tag = page+1;
-        [_imageView addSubview:photoView];
+        if (_imageView != nil) {
+            [_imageView addSubview:photoView];
+        }
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             CGImageRef subimageRef = CGImageCreateWithImageInRect(originImageRef, partRect);
             UIImage *image = [self normalizeImage:[UIImage imageWithCGImage:subimageRef]];

@@ -12,6 +12,13 @@
 #import "NSString+Extend.h"
 #import "YTPhotoView.h"
 #import "UIView+Extension.h"
+#import "SVProgressHUD.h"
+#import "UIImage+Extend.h"
+#import "NSString+Extend.h"
+#import "YTPhotoMenultem.h"
+#import "YTAccountTool.h"
+#import "YTSlipModel.h"
+
 
 @interface YTReportViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, PhotoViewDelegate>
 
@@ -96,6 +103,16 @@
  */
 @property (nonatomic, weak) YTPhotoView *informationPhoto;
 
+/**
+ *  上传成功的打款凭条
+ */
+@property (nonatomic, strong) NSArray *Slips;
+
+/**
+ *  上传成功的证件图片
+ */
+@property (nonatomic, strong) NSArray *ZhenJian;
+
 @end
 
 @implementation YTReportViewController
@@ -146,7 +163,165 @@
  *
  */
 - (IBAction)ReportClick:(UIButton *)sender {
+    // 本地验证
+    if([self checkText]) return;
+//    [SVProgressHUD showWithStatus:@"正在报备" maskType:SVProgressHUDMaskTypeClear];
+    // 上传打款凭条 和 证件资料
+    [self uploadSlip];
 }
+
+
+// 上传打款凭条
+- (void)uploadSlip
+{
+    
+    NSMutableArray *files = [NSMutableArray array];
+    for (YTPhotoMenultem *item in self.photo.itemArray) {
+        YTHttpFile *file = [[YTHttpFile alloc] init];
+        // 文件名
+        NSString *name = [NSString createCUID];
+        file.filename = [NSString stringWithFormat:@"%@.jpg",name];
+        file.name = [NSString stringWithFormat:@"%@",name];
+        file.mimeType = @"image/jpg";
+        // 文件数据
+        file.data = UIImageJPEGRepresentation(item.contentImage, 0.5);
+        [files addObject:file];
+    }
+    [YTHttpTool post:YTSlip params:nil files:files success:^(id responseObject) {
+        YTLog(@"%@", responseObject);
+        self.Slips = [YTSlipModel objectArrayWithKeyValuesArray:responseObject];
+        NSLog(@"%zd", self.informationPhoto.itemArray.count);
+        if (self.informationPhoto.itemArray.count == 0) {
+            [self startReport];
+        } else {
+            [self uploadZhenJian];
+        }
+    } failure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"报备失败"];
+    }];
+}
+// 上传证件资料
+- (void)uploadZhenJian
+{
+    
+    NSMutableArray *files = [NSMutableArray array];
+    for (YTPhotoMenultem *item in self.informationPhoto.itemArray) {
+        YTHttpFile *file = [[YTHttpFile alloc] init];
+        // 文件名
+        NSString *name = [NSString createCUID];
+        file.filename = [NSString stringWithFormat:@"%@.jpg",name];
+        file.name = [NSString stringWithFormat:@"%@",name];
+        file.mimeType = @"image/jpg";
+        // 文件数据
+        file.data = UIImageJPEGRepresentation(item.contentImage, 0.5);
+        [files addObject:file];
+    }
+    [YTHttpTool post:YTSlip params:nil files:files success:^(id responseObject) {
+        YTLog(@"%@", responseObject);
+        self.ZhenJian = [YTSlipModel objectArrayWithKeyValuesArray:responseObject];
+        [self startReport];
+    } failure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"报备失败"];
+    }];
+}
+
+// 开始报备
+- (void)startReport
+{
+
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"advisers_id"] = [YTAccountTool account].userId;
+    dict[@"order_id"] = self.prouctModel.order_id;
+    dict[@"cust_name"] = self.prouctModel.customerName;
+    dict[@"cust_bank"] = self.bankHangField.text;
+    dict[@"cust_bank_detail"] = self.branchField.text;
+    dict[@"cust_bank_acct"] = self.bankField.text;
+    dict[@"credentialsname"] = self.typeField.text;
+    dict[@"credentialsnumber"] = self.numberField.text;
+    dict[@"annex"] = [self annexWithSlps];
+    [YTHttpTool post:YTReport params:dict success:^(id responseObject) {
+        YTLog(@"%@", responseObject);
+        [SVProgressHUD showSuccessWithStatus:@"报备成功"];
+    } failure:^(NSError *error) {
+        [SVProgressHUD showSuccessWithStatus:@"报备失败"];
+    }];
+
+}
+
+// 拼接附件参数
+- (NSString *)annexWithSlps
+{
+    // 拼接附件参数
+    NSMutableString *annex = [[NSMutableString alloc] init];
+    // 打款凭条
+    for (int i = 0; i < self.Slips.count; i++) {
+        YTSlipModel *slip = self.Slips[i];
+        if (i == 0) {
+            [annex stringByAppendingString:@"[{"];
+            [annex stringByAppendingString:@"annex_type:1"];
+            [annex stringByAppendingString:[NSString stringWithFormat:@",annex_path:%@",slip.url]];
+            [annex stringByAppendingString:[NSString stringWithFormat:@",file_type:%@",slip.type]];
+            [annex stringByAppendingString:[NSString stringWithFormat:@",file_name:%@}",slip.original]];
+        } else {
+            [annex stringByAppendingString:@"{annex_type:1"];
+            [annex stringByAppendingString:[NSString stringWithFormat:@",annex_path:%@",slip.url]];
+            [annex stringByAppendingString:[NSString stringWithFormat:@",file_type:%@",slip.type]];
+            [annex stringByAppendingString:[NSString stringWithFormat:@",file_name:%@}",slip.original]];
+        }
+    }
+    if (self.ZhenJian.count == 0) {
+        [annex stringByAppendingString:@"]"];
+        YTLog(@"%@", annex);
+        return annex;
+    }
+    for (int i = 0; i < self.ZhenJian.count; i++) {
+        YTSlipModel *slip = self.ZhenJian[i];
+        [annex stringByAppendingString:@"{annex_type:2"];
+        [annex stringByAppendingString:[NSString stringWithFormat:@",annex_path:%@",slip.url]];
+        [annex stringByAppendingString:[NSString stringWithFormat:@",file_type:%@",slip.type]];
+        [annex stringByAppendingString:[NSString stringWithFormat:@",file_name:%@}",slip.original]];
+    }
+    [annex stringByAppendingString:@"]"];
+    YTLog(@"%@", annex);
+    return annex;
+}
+
+
+#pragma mark - 验证
+// 本地验证
+- (BOOL)checkText
+{
+    // 本地验证
+    if (self.numberField.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请输入证件号码"];
+        return YES;
+    } else if(self.bankField.text.length == 0)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请输入银行卡号"];
+        return YES;
+    } else if(self.bankHangField.text.length == 0)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请输入开户行"];
+        return YES;
+    } else if(self.bankField.text.length == 0)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请输入银行卡号"];
+        return YES;
+    } else if(self.branchField.text.length == 0)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请输入分行支行"];
+        return YES;
+    }
+    NSLog(@"%zd", self.photo.itemArray.count);
+     if(self.photo.itemArray.count == 0)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请上传打款凭条"];
+        return YES;
+    }
+    return NO;
+}
+
+
 
 /**
  *  结束银行卡号编辑
@@ -227,6 +402,21 @@
     return _types;
 }
 
+- (NSArray *)Slips
+{
+    if (!_Slips) {
+        _Slips = [[NSArray alloc] init];
+    }
+    return _Slips;
+}
+
+- (NSArray *)ZhenJian
+{
+    if (!_ZhenJian) {
+        _ZhenJian = [[NSArray alloc] init];
+    }
+    return _ZhenJian;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

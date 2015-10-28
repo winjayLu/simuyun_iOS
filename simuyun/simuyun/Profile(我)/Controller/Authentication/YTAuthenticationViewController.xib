@@ -116,6 +116,9 @@
                     <state key="normal" title="申请认证" backgroundImage="hongseanniu">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="applyClick:" destination="-1" eventType="touchUpInside" id="0CX-m3-QRP"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>

@@ -45,7 +45,7 @@
     
     // 初始化滚动视图
     UIScrollView *photoScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.width, self.height)];
-    photoScrollView.contentSize = CGSizeMake(1024, 54);
+    photoScrollView.contentSize = CGSizeMake(600, 54);
     [self addSubview:photoScrollView];
     self.photoScrollView = photoScrollView;
     
@@ -151,6 +151,7 @@
 -(void)initlizerScrollView{
     // 清空原有图片
     [self.photoScrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [self.itemArray removeAllObjects];
     int i = 0;
     
     CGFloat maginTop = (self.height - ItemHeight) * 0.5;
@@ -241,6 +242,14 @@
         _CameraPhotos = [[NSMutableArray alloc] init];
     }
     return _CameraPhotos;
+}
+
+- (NSMutableArray *)totalPhotos
+{
+    if (!_totalPhotos) {
+        _totalPhotos = [[NSMutableArray alloc] init];
+    }
+    return _totalPhotos;
 }
 
 

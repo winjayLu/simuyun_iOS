@@ -13,10 +13,6 @@
 
 @interface YTBuySuccessController ()
 
-
-
-
-
 /**
  *  报备
  */
@@ -138,8 +134,7 @@
 {
     if (!_shareManage) {
         ShareManage *share = [ShareManage shareManage];
-        share.share_title = @"ss";
-        share.share_content = @"ssssss";
+        share.share_content = [NSString stringWithFormat:@"募集帐号:%@\n开户行:%@\n帐号:%@", self.accountNameLable.text, self.accountBankLable.text, self.accountLable.text];
         share.share_url = nil;
         _shareManage = share;
     }

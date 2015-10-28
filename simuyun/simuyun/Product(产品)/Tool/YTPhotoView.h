@@ -22,6 +22,9 @@
 
 @interface YTPhotoView : UIView
 
+// 所有选择的图片
+@property (nonatomic, strong) NSMutableArray *totalPhotos;
+
 @property (nonatomic, strong) NSMutableArray *photos;
 
 @property(nonatomic,strong) NSMutableArray *itemArray;

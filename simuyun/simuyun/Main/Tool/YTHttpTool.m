@@ -47,12 +47,10 @@
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     // 2.发送一个GET请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, url];
-    YTLog(@"%@",newUrl);
-    YTLog(@"%@", [NSDictionary httpWithDictionary:params]);
+//    YTLog(@"%@",newUrl);
+//    YTLog(@"%@", [NSDictionary httpWithDictionary:params]);
     [mgr GET:newUrl parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
-          NSLog(@"ss");
-          NSLog(@"%@",operation);
           if (success) {
               success(responseObject);
           }
@@ -70,18 +68,24 @@
  */
 + (void)post:(NSString *)url params:(id)params files:(NSArray *)files success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-    // 1.创建一个请求管理者
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     // 2.发送请求
-    [mgr POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, url];
+
+    YTLog(@"%@", newUrl);
+    
+    [manager POST:newUrl parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        // 上传文件设置
         for (YTHttpFile *file in files) {
+            NSLog(@"%@", file);
             [formData appendPartWithFileData:file.data name:file.name fileName:file.filename mimeType:file.mimeType];
         }
-    } success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        // 成功
+        NSLog(@"Success: %@", responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
+        NSLog(@"Error: %@", error.userInfo[@"NSLocalizedDescription"]);
     }];
 }
 
