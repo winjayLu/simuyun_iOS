@@ -30,7 +30,8 @@
     // 获取当前时间
 //    [[NSDate date] stringWithFormater:@""];
     mainView.delegate = self;
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?uid=%@&v=4.0", [self appendingUrl:nil], [YTAccountTool account].userId]];
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?uid=%@&v=4.0", [self appendingUrl:nil], [YTAccountTool account].userId]];
+     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?uid=%@&v=4.0", [self appendingUrl:nil], @"6dcb3fff72f4423ca5077d0741d2e884"]];
     [mainView loadRequest:[NSURLRequest requestWithURL:url]];
     mainView.scalesPageToFit = YES;
     [mainView.scrollView setShowsVerticalScrollIndicator:NO];
@@ -91,7 +92,7 @@
 - (NSString *)appendingUrl:(NSString *)url
 {
     NSMutableString *str = [NSMutableString string];
-    [str appendString:@"http://www.simuyun.com/academy/"];
+    [str appendString:@"http://www.simuyun.com/academy"];
     //
     if (url != nil) {
         
@@ -105,13 +106,12 @@
     [super didReceiveMemoryWarning];
 
 }
-
-
-- (void)btnClick
+/**
+ *  清理webView缓存
+ */
+- (void)dealloc
 {
-    
-
-
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
 @end

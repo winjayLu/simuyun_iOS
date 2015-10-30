@@ -23,7 +23,7 @@ typedef enum state {
 
 static const CGFloat viewSlideHorizonRatio = 0.642;
 
-@interface YTProfileViewController () <YTHomeViewControllerDelegate, UINavigationControllerDelegate>
+@interface YTProfileViewController () <YTHomeViewControllerDelegate, UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 @property (assign, nonatomic) state   sta;              // 状态(Home or Menu)
 @property (assign, nonatomic) CGFloat distance;         // 距离左边的边距
 @property (assign, nonatomic) CGFloat leftDistance;
@@ -32,7 +32,6 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
 @property (assign, nonatomic) CGFloat panStartX;        // 拖动开始的x值
 @property (nonatomic, weak) YTHomeViewController *homeVc;   // 首页控制器
 @property (nonatomic, weak) YTMenuViewController *menuVc;   // 菜单控制器
-@property (nonatomic, weak) UINavigationController *nav;    // 导航控制器
 @property (nonatomic, strong) UIPanGestureRecognizer *panRecongnizer; // 侧滑手势
 
 @end
@@ -41,6 +40,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.navigationController.delegate = self;
     // 初始化抽屉状态
     self.sta = kStateHome;
     self.distance = 0;
@@ -53,6 +53,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
     YTHomeViewController *homeVc = [[YTHomeViewController alloc] init];
     homeVc.view.frame = [[UIScreen mainScreen] bounds];
     homeVc.delegate = self;
+    self.homeVc = homeVc;
 
     
     // 设置menu的view
@@ -63,19 +64,20 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
     [self.view addSubview:menuVc.view];
     self.menuVc = menuVc;
     
-    // 将首页控制器包装成导航控制器
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:homeVc];
-    [self addChildViewController:nav];
-    self.nav = nav;
-    [self addChildViewController:nav];
-    [self.view addSubview:self.nav.view];
-    self.nav.delegate = self;
+    [self addChildViewController:homeVc];
+    [self.view addSubview:homeVc.view];
 //    self.nav.interactivePopGestureRecognizer.enabled = NO;
     
     // 初始化手势
-    self.panRecongnizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    pan.delegate = self;
+    [self.homeVc.view addGestureRecognizer:pan];
 }
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 
+{
+    return YES;
+}
 
 /**
  *  处理拖动事件
@@ -83,7 +85,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
  *  @param recognizer
  */
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
-
+    
     CGFloat x = [recognizer translationInView:self.view].x;
     // 禁止在主界面的时候向左滑动
     if ( x < 0) {
@@ -112,10 +114,14 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
         }
         return;
     }
-    self.nav.view.center = CGPointMake(self.view.center.x + dis, self.view.center.y);
+    YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    CGPoint old = appRootVC.tabBar.center;
+    appRootVC.tabBar.center = CGPointMake(self.view.center.x + dis, old.y);
+    self.homeVc.view.center = CGPointMake(self.view.center.x + dis, self.view.center.y);
     CGFloat menuCenterMove = dis * (self.menuCenterXEnd - self.menuCenterXStart) / self.leftDistance;
     self.menuVc.view.center = CGPointMake(self.menuCenterXStart + menuCenterMove, self.view.center.y);
 }
+
 
 /**
  *  展示侧边栏
@@ -140,38 +146,62 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
  *
  *  @param proportion 滑动比例
  */
+static UIWindow *_window;
 - (void)doSlide:(CGFloat)proportion {
     [UIView animateWithDuration:0.3 animations:^{
         CGFloat menuCenterX;
         CGFloat navCenterX;
+        YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        CGPoint old = appRootVC.tabBar.center;
         if (proportion == 1) {
             menuCenterX = 0;
             navCenterX = DeviceWidth * 0.5;
-            self.nav.view.center = self.view.center;
+            self.homeVc.view.center = self.view.center;
             self.menuVc.view.center = CGPointMake(menuCenterX, self.view.center.y);
+            appRootVC.tabBar.center = CGPointMake(self.view.center.x, old.y);
         } else {
             menuCenterX = DeviceWidth * 0.5;
             navCenterX = menuCenterX + 241;
-            self.nav.view.center = CGPointMake(navCenterX, DeviceHight * 0.5);
+            appRootVC.tabBar.center = CGPointMake(navCenterX, old.y);
+            self.homeVc.view.center = CGPointMake(navCenterX, DeviceHight * 0.5);
             self.menuVc.view.center = CGPointMake(menuCenterX, self.view.center.y);
         }
     } completion:^(BOOL finished) {
         if (proportion != 1) {
             // 设置遮盖
+            
+            _window = [[UIWindow alloc]initWithFrame:CGRectMake(self.homeVc.view.x, 20, self.homeVc.view.width, self.homeVc.view.height)];
+            _window.backgroundColor = [UIColor clearColor];
+            _window.windowLevel = UIWindowLevelNormal;
+            _window.hidden = NO;
+
+            [_window makeKeyAndVisible];
+
+            // 设置按钮
             UIButton *cover = [[UIButton alloc] init];
-            cover.frame = self.nav.view.frame;
+            cover.frame = _window.bounds;
             cover.backgroundColor = [UIColor clearColor];
             [cover addTarget:self action:@selector(coverClick:) forControlEvents:UIControlEventTouchDown];
-            [self.view addSubview:cover];
+            [_window addSubview:cover];
         }
     }];
 }
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 /**
  *  遮盖点击事件
  */
 - (void)coverClick:(UIButton *)cover
 {
-    [cover removeFromSuperview];
+    [_window.subviews[0] removeFromSuperview];
+//    [cover removeFromSuperview];
+    _window.hidden = YES;
+    [_window removeFromSuperview];
+    _window = nil;
     [self showHome];
 }
 
@@ -186,32 +216,30 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
 }
 
 
-- (UIStatusBarStyle)preferredStatusBarStyle
-{
-    return UIStatusBarStyleLightContent;
-}
-//
 - (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    // 获取根控制器
-    YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    // 如果进入的是首页视图控制器
-    if ([viewController isKindOfClass:[YTHomeViewController class]]) {
 
-        // 设置为半透明
-        [self.nav.navigationBar lt_setBackgroundColor:[YTColor(255, 255, 255) colorWithAlphaComponent:0.0]];
-        // 添加手势
-        [self.nav.view addGestureRecognizer:self.panRecongnizer];
-        // 显示tabbar
-        appRootVC.tabBar.hidden =  NO;
+    // 如果进入的是首页视图控制器
+    if ([viewController isKindOfClass:[YTProfileViewController class]]) {
+        [self.navigationController setNavigationBarHidden:YES animated:YES];
+
     } else {
-        // 进入其他视图控制器
-        [self.nav.navigationBar lt_setBackgroundColor:[YTNavBackground colorWithAlphaComponent:1.0]];
-        // 删除手势
-        [self.nav.view removeGestureRecognizer:self.panRecongnizer];
-        // 隐藏tabbar
-        appRootVC.tabBar.hidden = YES;
+        [self.navigationController setNavigationBarHidden:NO animated:YES];
     }
 }
+//- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
+//    // 如果进入的是首页视图控制器
+//    if ([viewController isKindOfClass:[YTHomeViewController class]]) {
+//        
+//        // 添加手势
+//        [self.navigationController.view addGestureRecognizer:self.panRecongnizer];
+//
+//    } else {
+//        // 删除手势
+//        [self.navigationController.view removeGestureRecognizer:self.panRecongnizer];
+//    }
+//
+//}
+
 
 
 

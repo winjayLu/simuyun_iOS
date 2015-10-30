@@ -12,6 +12,8 @@
 #import "YTProductModel.h"
 #import "MJExtension.h"
 #import "YTBuyProductController.h"
+#import "YTAccountTool.h"
+#import "YTProductdetailController.h"
 
 @interface YTProductViewController ()
 
@@ -84,10 +86,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    YTBuyProductController *buy = [[YTBuyProductController alloc] init];
-    buy.hidesBottomBarWhenPushed = YES;
-    buy.product = self.products[indexPath.section];
-    [self.navigationController pushViewController:buy animated:YES];
+
+    YTProductModel *product = self.products[indexPath.section];
+    NSString *url = nil;
+    if (product.type_code == 1) {
+        url = [NSString stringWithFormat:@"http://www.simuyun.com/product/floating.html?id=%@",product.pro_id];
+    } else {
+        url = [NSString stringWithFormat:@"http://www.simuyun.com/product/fixed.html?id=%@",product.pro_id];
+    }
+    YTProductdetailController *web = [[YTProductdetailController alloc] init];
+    web.url = url;
+    web.hidesBottomBarWhenPushed = YES;
+    web.product = self.products[indexPath.section];
+    [self.navigationController pushViewController:web animated:YES];
 }
 
 
@@ -97,7 +108,7 @@
 - (void)loadProduct
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"uid"] = @"cc0cc61140504258ab474b8f0a26bb56";
+    param[@"uid"] = [YTAccountTool account].userId;
     [YTHttpTool get:YTProductList params:param
     success:^(NSDictionary *responseObject) {
         self.products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];

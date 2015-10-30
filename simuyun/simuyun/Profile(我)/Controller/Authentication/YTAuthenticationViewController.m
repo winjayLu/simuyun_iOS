@@ -12,6 +12,9 @@
 #import "YTOrgnazationModel.h"
 #import "SVProgressHUD.h"
 #import "YTAccountTool.h"
+#import "YTAuthenticationModel.h"
+#import "YTAuthenticationStatusController.h"
+#import "YTUserInfoTool.h"
 
 
 #define maginTop 64
@@ -102,11 +105,27 @@
     dict[@"orgId"] = selectedOrgna.party_id;
     [YTHttpTool post:YTAuthAdviser params:dict success:^(id responseObject) {
         [SVProgressHUD dismiss];
+        YTAuthenticationModel *authen = [[YTAuthenticationModel alloc] init];
+        authen.realName = self.userNameLable.text;
+        authen.orgName = self.mechanismNameLable.text;
+        authen.submitTime = responseObject[@"submitTime"];
+        YTAuthenticationStatusController *authVc = [[YTAuthenticationStatusController alloc] init];
+        authVc.authen = authen;
+        [self.navigationController pushViewController:authVc animated:YES];
         
     } failure:^(NSError *error) {
         [SVProgressHUD showErrorWithStatus:@"认证失败"];
     }];
     
+}
+
+// 修改用户信息
+- (void)updateUserInfo
+{
+    [YTCenter postNotificationName:YTUpdateUserInfo object:nil];
+    YTUserInfo *userInfo =[YTUserInfoTool userInfo];
+    userInfo.adviserStatus = 2;
+    [YTUserInfoTool saveUserInfo:userInfo];
 }
 
 

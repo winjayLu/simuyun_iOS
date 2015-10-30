@@ -141,7 +141,6 @@ typedef NS_ENUM(NSInteger, BFNavigationBarDrawerState) {
 		[self constrainBehindNavigationBar:bar];
 	}
 	[self.superview layoutIfNeeded];
-	_scrollView.contentInset = UIEdgeInsetsMake(110, 0, 0, 0);
 	[self constrainBelowNavigationBar:bar];
 	void (^animations)() = ^void() {
 		state = BFNavigationBarDrawerStateShowing;
@@ -233,26 +232,10 @@ typedef NS_ENUM(NSInteger, BFNavigationBarDrawerState) {
 		return;
 	}
 	
-	// See that big comment block above.
-//	CGFloat height = self.frame.size.height;
-    CGFloat height = 46;
-	CGFloat visible = _scrollView.bounds.size.height - _scrollView.contentInset.top - _scrollView.contentInset.bottom;
-	CGFloat fix = height;
-	if (visible <= _scrollView.contentSize.height - height) {
-		CGFloat bottom = -_scrollView.contentOffset.y + _scrollView.contentSize.height;
-		CGFloat diff = bottom - _scrollView.bounds.size.height + _scrollView.contentInset.bottom;
-		fix = MAX(0.0, MIN(height, diff));
-	}
-	CGFloat offset = height - (_scrollView.contentOffset.y + _scrollView.contentInset.top);
-	CGFloat topFix = MAX(0.0, MIN(height, offset));
-	
-	// Reverse the change to the inset of the affected scroll view.
-	UIEdgeInsets insets = _scrollView.contentInset;
-	insets.top -= height;
-	_scrollView.contentInset = insets;
-	_scrollView.scrollIndicatorInsets = insets;
-	_scrollView.contentOffset = CGPointMake(_scrollView.contentOffset.x, _scrollView.contentOffset.y - topFix);
-	
+
+
+	CGFloat fix = 46;
+
 	[self constrainBehindNavigationBar:parentBar];
     
 	

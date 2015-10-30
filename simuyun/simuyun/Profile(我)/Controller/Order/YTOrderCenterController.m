@@ -13,6 +13,8 @@
 #import "UIBarButtonItem+Extension.h"
 #import "BFNavigationBarDrawer.h"
 #import "MJRefresh.h"
+#import "YTTabBarController.h"
+#import "YTOrderdetailController.h"
 
 
 @interface YTOrderCenterController () <UITableViewDataSource, UITableViewDelegate, BarDrawerDelegate>
@@ -51,8 +53,9 @@
     // 初始化Item
     [self setupItem];
     
-    
 }
+
+
 /**
  *  初始化tableView
  */
@@ -61,11 +64,11 @@
     self.title = @"订单中心";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    
     // 设置颜色
     self.tableView.backgroundColor = YTGrayBackground;
     // 去掉下划线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewOrder)];
     // 马上进入刷新状态
@@ -86,14 +89,9 @@
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithBg:@"saixuan" highBg:@"saixuananxia" target:self action:@selector(rightClick)];
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithBg:@"fanhui" target:self action:@selector(blackVc)];
+
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    // 修正tableView的大小
-    self.tableView.size = CGSizeMake(self.tableView.width, self.tableView.height + 44);
-}
 /**
  *  返回按钮
  */
@@ -179,6 +177,7 @@
     dict[@"pagesize"] = @20;
     dict[@"pageno"] = @(++self.pageno);
     [YTHttpTool get:YTOrders params:dict success:^(id responseObject) {
+        NSLog(@"%@", responseObject);
         [self.orders addObjectsFromArray:[YTOrderCenterModel objectArrayWithKeyValuesArray:responseObject]];
         [self.tableView reloadData];
         [self.tableView.footer endRefreshing];
@@ -239,10 +238,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    YTBuyProductController *buy = [[YTBuyProductController alloc] init];
-//    buy.hidesBottomBarWhenPushed = YES;
-//    buy.product = self.products[indexPath.section];
-//    [self.navigationController pushViewController:buy animated:YES];
+    YTOrderCenterModel *order = self.orders[indexPath.section];
+    YTOrderdetailController *detail = [[YTOrderdetailController alloc] init];
+    detail.url = [NSString stringWithFormat:@"http://www.simuyun.com/order/?id=%@",order.order_id];
+    detail.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detail animated:YES];
 }
 
 #pragma mark - lazy

@@ -23,8 +23,10 @@
 #import "YTAccountTool.h"
 #import "YTAuthenticationViewController.h"
 #import "YTAuthenticationStatusController.h"
+#import "YTNormalWebController.h"
+#import "YTAuthenticationErrorController.h"
 
-@interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate>
+@interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate, UIScrollViewDelegate>
 
 /**
  *  顶部视图
@@ -41,7 +43,7 @@
  */
 @property (nonatomic, strong) NSArray *todos;
 
-
+@property (nonatomic, weak) UIScrollView *mainView;
 
 @end
 
@@ -52,10 +54,12 @@
 {
     // 将控制器的View替换为ScrollView
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:DeviceBounds];
-    mainView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
     mainView.bounces = NO;
     mainView.showsVerticalScrollIndicator = NO;
+    mainView.contentSize = CGSizeMake(100, 10000);
+    mainView.delegate = self;
     self.view = mainView;
+    self.mainView = mainView;
     self.view.backgroundColor = YTViewBackground;
 }
 
@@ -77,7 +81,7 @@
     
     // 获取用户信息
     if ([YTUserInfoTool userInfo] == nil) {
-        [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
+//        [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
         [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
             if (result) {
                 [SVProgressHUD dismiss];
@@ -101,7 +105,7 @@
 {
     // 顶部视图
     YTProfileTopView *topView = [YTProfileTopView profileTopView];
-    topView.frame = CGRectMake(0, -44, self.view.frame.size.width, 270);
+    topView.frame = CGRectMake(0, 0, self.view.frame.size.width, 270);
     topView.delegate = self;
     [topView setIconImageWithImage:nil];
     topView.layer.masksToBounds = YES;
@@ -111,9 +115,6 @@
     topView.clipsToBounds = YES;
     [self.view addSubview:topView];
     self.topView = topView;
-    // 左边的item
-    UIBarButtonItem *left = [UIBarButtonItem itemWithBg:@"chouti" target:self action:@selector(leftClick)];
-    self.navigationItem.leftBarButtonItem = left;
     
 }
 /**
@@ -150,7 +151,7 @@
     bottom.BottomDelegate = self;
     [self.view addSubview:bottom];
     // 设置滚动范围
-    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame) + 3)];
+    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame) + 52)];
 }
 
 #pragma makr - 监听通知
@@ -160,9 +161,10 @@
 - (void)leftMenuNotification
 {
     [YTCenter addObserver:self selector:@selector(leftMenuClick:) name:YTLeftMenuNotification object:nil];
-
+    
+    // 监听通知
+    [YTCenter addObserver:self selector:@selector(updateUserInfo) name:YTUpdateUserInfo object:nil];
 }
-
 
 #pragma mark - 响应事件
 /**
@@ -171,12 +173,13 @@
  */
 - (void)leftMenuClick:(NSNotification *)note
 {
+    // 调用代理方法
+    [self.delegate leftMenuClicked];
     NSString *btnTitle = note.userInfo[YTLeftMenuSelectBtn];
-    YTLog(@"%@",btnTitle);
     UIViewController *vc = nil;
     // 判断点击了哪个按钮
     if ([btnTitle isEqualToString:@"用户资料"]) {
-        vc = [[YTOtherViewController alloc] init];
+        vc = [YTNormalWebController webWithTitle:@"用户资料" url:@"http://www.simuyun.com/my/profile/"];
     } else if([btnTitle isEqualToString:@"关联微信"]){
         vc = [[YTOtherViewController alloc] init];
     } else if([btnTitle isEqualToString:@"邮寄地址"]){
@@ -184,23 +187,20 @@
     } else if([btnTitle isEqualToString:@"推荐私募云给好友"]){
         vc = [[YTOtherViewController alloc] init];
     } else if([btnTitle isEqualToString:@"帮助"]){
-        vc = [[YTOtherViewController alloc] init];
+        vc = [YTNormalWebController webWithTitle:@"帮助" url:@"http://www.simuyun.com/help/"];
     } else if([btnTitle isEqualToString:@"关于私募云"]){
-        vc = [[YTOtherViewController alloc] init];
+        vc = [YTNormalWebController webWithTitle:@"关于私募云" url:@"http://www.simuyun.com/about/"];
     } else if([btnTitle isEqualToString:@"400-188-8848"]){
-        UIWebView*callWebview =[[UIWebView alloc] init];
+        UIWebView *callWebview =[[UIWebView alloc] init];
         NSURL *telURL =[NSURL URLWithString:@"tel://400-188-8848"];
         [callWebview loadRequest:[NSURLRequest requestWithURL:telURL]];
         [self.view addSubview:callWebview];
     }
-    // 调用代理方法
-    if ([self.delegate respondsToSelector:@selector(leftMenuClicked)]) {
-        [self.delegate leftMenuClicked];
-    }
+    
     // 跳转对应控制器
     if (vc != nil) {
         vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:NO];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 /**
@@ -218,7 +218,7 @@
     } else {
         vc = [[YTOtherViewController alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:NO];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 /**
@@ -229,7 +229,7 @@
 {
     YTOrderCenterController *order = [[YTOrderCenterController alloc] init];
     order.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:order animated:NO];
+    [self.navigationController pushViewController:order animated:YES];
 }
 
 
@@ -259,7 +259,6 @@
  */
 - (void)topBtnClicked:(TopButtonType)type
 {
-    NSLog(@"%zd", type);
     UIViewController *pushVc = nil;
     YTBlackAlertView *alert = [YTBlackAlertView shared];
     switch (type) {
@@ -270,29 +269,36 @@
             [self signIn];
             break;
         case TopButtonTypeYundou:   // 云豆
-            
+            [alert showAlertWithTitle:YTYunDouGuiZe detail:YTYunDouGuiZeContent];
             break;
         case TopButtonTypeKehu:     // 客户
-
+            pushVc = [YTNormalWebController webWithTitle:@"我的客户" url:@"http://www.simuyun.com/my/clients/"];
             break;
         case TopButtonTypeDindan:   // 订单
             pushVc = [[YTOrderCenterController alloc] init];
             
             break;
         case TopButtonTypeYeji:     // 业绩
-            [alert showAlertWithTitle:@"sjladljasdlj" detail:@"sdjlksafljaaaaaaaaaaaaaaaaaaaaaaaaaaaaakkfslkfjkdsjfljdskfdskljjfljdsljf"];
-            
+            pushVc = [YTNormalWebController webWithTitle:@"我的业绩" url:@"http://www.simuyun.com/my/performance/"];
+            break;
+        case TopButtonTypeMenu:
+            [self leftClick];
             break;
     }
     // 跳转对应控制器
-    pushVc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:pushVc animated:YES];
-    //开启iOS7的滑动返回效果
+    
     if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
         self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     }
-#warning 修改了侧滑手势
-//    [self.navigationController pushViewController:pushVc animated:NO];
+    if (pushVc != nil) {
+        pushVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:pushVc animated:YES];
+    }
+}
+// 修改用户信息
+- (void)updateUserInfo
+{
+     self.topView.userInfo = [YTUserInfoTool userInfo];
 }
 /**
  *  签到
@@ -306,21 +312,20 @@
     params[@"adviserId"] = [YTAccountTool account].userId;
     [YTHttpTool post:YTSignIn params:params success:^(id responseObject) {
         // 修改数据
-
         YTUserInfo *userInfo = [YTUserInfoTool userInfo];
         userInfo.isSingIn = 1;
-        NSLog(@"%@",responseObject);
-        userInfo.myPoint = (int)responseObject[@"totalPoint"];
+        NSString *totalPoint = responseObject[@"totalPoint"];
+        userInfo.myPoint = [totalPoint intValue];
         [YTUserInfoTool saveUserInfo:userInfo];
         self.topView.userInfo = userInfo;
         // 资讯id
         NSString *infoId = responseObject[@"infoId"];
         // 弹出提醒
-        [alert showAlertSignWithTitle:responseObject[@"infoTitle"] date:responseObject[@"signInDate"] yunDou:(int)responseObject[@"todayPoint"] block:^{
+        [alert showAlertSignWithTitle:responseObject[@"infoTitle"] date:responseObject[@"signInDate"] yunDou:responseObject[@"todayPoint"] block:^{
             if (infoId != nil && infoId.length > 0) {
                 YTOtherViewController *other = [[YTOtherViewController alloc] init];
                 other.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:other animated:NO];
+                [self.navigationController pushViewController:other animated:YES];
             }
         }];
     } failure:^(NSError *error) {
@@ -333,16 +338,20 @@
  */
 - (void)Authentication
 {
-#warning TODO 判断状态
-    if([YTUserInfoTool userInfo].adviserStatus == 1)
+    UIViewController *vc = nil;
+    int status = [YTUserInfoTool userInfo].adviserStatus;
+    if(status == 1)
     {
-        YTAuthenticationViewController *authen = [[YTAuthenticationViewController alloc] init];
-        authen.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:authen animated:NO];
-    } else if ([YTUserInfoTool userInfo].adviserStatus == 2)
+        vc = [[YTAuthenticationViewController alloc] init];
+    } else if (status == 2)
     {
-    
+        vc = [[YTAuthenticationStatusController alloc] init];
+    } else if (status == 3)
+    {
+        vc = [[YTAuthenticationErrorController alloc] init];
     }
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

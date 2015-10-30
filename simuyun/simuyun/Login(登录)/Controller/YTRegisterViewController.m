@@ -236,14 +236,14 @@
             return YES;
         }
 #warning 修改验证码
-        else if(self.captcha == nil){
-            self.captcha = @"0000";
-        }
-        else if(![self.registerNumber.text isEqualToString:self.captcha])
+        self.captcha = @"0000";
+        if(![self.registerNumber.text isEqualToString:self.captcha])
         {
             [SVProgressHUD showErrorWithStatus:@"验证码不正确"];
             return YES;
         }
+        NSLog(@"%@",self.registerNumber.text);
+        NSLog(@"%@",self.captcha);
     }
     return NO;
 }

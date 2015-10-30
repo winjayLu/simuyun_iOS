@@ -10,7 +10,10 @@
 
 @interface YTInformation : NSObject
 
-
+/**
+ *  资讯id
+ */
+@property (nonatomic, copy) NSString *infoId;
 /**
  *  资讯标题
  */

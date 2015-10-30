@@ -10,8 +10,17 @@
 #import "UIWindow+YUBottomPoper.h"
 #import "UIImageView+SD.h"
 #import "YTUserInfoTool.h"
+#import "YTHttpTool.h"
+#import "YTAccountTool.h"
+#import "AFNetworking.h"
 
 @interface YTProfileTopView() <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+
+/**
+ *  菜单点击
+ */
+- (IBAction)menuClick:(UIButton *)sender;
+
 /**
  *  头像
  */
@@ -158,11 +167,33 @@
     YTUserInfo *userInfo = [YTUserInfoTool userInfo];
     userInfo.iconImage = image;
     [YTUserInfoTool saveUserInfo:userInfo];
-    
     // 发送通知
     [YTCenter postNotificationName:YTUpdateIconImage object:nil];
+    
+    // 上传图片
+    [self uploadImage:image];
 }
 
+/**
+ *  上传图片
+ */
+- (void)uploadImage:(UIImage *)image
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"advisersId"] = [YTAccountTool account].userId;
+    YTHttpFile *file = [YTHttpFile fileWithName:@"image" data:UIImageJPEGRepresentation(image, 1.0) mimeType:@"image/jpg" filename:@"image.jpg"];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    // 2.发送请求
+    NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTUploadUserImage];
+    [manager POST:newUrl parameters:[NSDictionary httpWithDictionary:params] constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        // 上传文件设置
+        [formData appendPartWithFileData:file.data name:file.name fileName:file.filename mimeType:file.mimeType];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        YTLog(@"%@",responseObject);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        YTLog(@"%@", error);
+    }];
+}
 
 #pragma mark - 按钮点击
 /**
@@ -206,6 +237,12 @@
 - (IBAction)yeJiBtn:(UIButton *)sender {
     // 调用代理方法
     [self sendDelegate:TopButtonTypeYeji];
+}
+/**
+ *  菜单点击事件
+ */
+- (IBAction)menuClick:(UIButton *)sender {
+    [self sendDelegate:TopButtonTypeMenu];
 }
 /**
  *  调用代理方法
@@ -263,11 +300,18 @@
     [self.yunDouBtn setTitle:[NSString stringWithFormat:@"%d", userInfo.myPoint] forState:UIControlStateNormal];
     
     
-    // 认证状态
-    if (userInfo.adviserStatus) {
+    if (userInfo.adviserStatus == 1 || userInfo.adviserStatus == 3) {
         self.renZhenBtn.hidden = NO;
+        [self.renZhenBtn setBackgroundImage:[UIImage imageNamed:@"weirenzheng"] forState:UIControlStateNormal];
         // 设置昵称
         self.nameLable.text = userInfo.nickName;
+    } else if (userInfo.adviserStatus == 2)
+    {
+        self.renZhenBtn.hidden = NO;
+        [self.renZhenBtn setBackgroundImage:[UIImage imageNamed:@"renzhengzhong"] forState:UIControlStateNormal];
+        // 设置昵称
+        self.nameLable.text = userInfo.nickName;
+    
     } else {
         self.renZhenBtn.hidden = YES;
         // 设置昵称
@@ -277,6 +321,7 @@
             self.nameLable.text = userInfo.organizationName;
         }
     }
+    
     
     // 客户数量
     self.keHuLable.text = [NSString stringWithFormat:@"%d", userInfo.myCustomersCount];
@@ -300,4 +345,5 @@
 {
     return [[[NSBundle mainBundle] loadNibNamed:@"YTProfileTopView" owner:nil options:nil] firstObject];
 }
+
 @end

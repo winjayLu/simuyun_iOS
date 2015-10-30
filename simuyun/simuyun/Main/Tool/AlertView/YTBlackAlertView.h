@@ -14,5 +14,5 @@ typedef void (^titleClcik)();
 
 + (instancetype)shared;
 - (void)showAlertWithTitle:(NSString *)title detail:(NSString *)detail;
-- (void)showAlertSignWithTitle:(NSString *)title date:(NSString *)date yunDou:(int)yunDou block:(titleClcik)block;
+- (void)showAlertSignWithTitle:(NSString *)title date:(NSString *)date yunDou:(NSString *)yunDou block:(titleClcik)block;
 @end

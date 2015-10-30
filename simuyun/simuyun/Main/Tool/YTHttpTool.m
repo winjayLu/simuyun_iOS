@@ -23,8 +23,8 @@
 
     // 2.发送一个POST请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, url];
-//    NSLog(@"%@", newUrl);
-//    NSLog(@"%@", [NSDictionary httpWithDictionary:params]);
+    NSLog(@"%@", newUrl);
+    NSLog(@"%@", [NSDictionary httpWithDictionary:params]);
     [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           if (success) {
@@ -82,10 +82,13 @@
             [formData appendPartWithFileData:file.data name:file.name fileName:file.filename mimeType:file.mimeType];
         }
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        // 成功
-        NSLog(@"Success: %@", responseObject);
+        if (success) {
+            success(responseObject);
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error.userInfo[@"NSLocalizedDescription"]);
+        if (failure) {
+            failure(error);
+        }
     }];
 }
 

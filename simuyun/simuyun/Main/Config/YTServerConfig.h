@@ -71,6 +71,8 @@
 #define YTSlip @"upload"
 // 报备
 #define YTReport @"order/report"
+// 上传图片
+#define YTUploadUserImage @"uploadUserImage"
 
 
 

@@ -136,7 +136,7 @@
  *
  */
 - (IBAction)tuiChuClick:(UIButton *)sender {
-    
+    [self senderNotification:sender];
     // 获取程序主窗口
     UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
     mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];

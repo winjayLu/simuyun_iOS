@@ -18,7 +18,8 @@ typedef enum {
     TopButtonTypeYundou,    //  云豆
     TopButtonTypeKehu,      //  我的客户
     TopButtonTypeDindan,    //  完成订单
-    TopButtonTypeYeji       //  我的业绩
+    TopButtonTypeYeji,       //  我的业绩
+    TopButtonTypeMenu       // 菜单
     
 } TopButtonType;
 

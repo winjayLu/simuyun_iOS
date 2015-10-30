@@ -17,6 +17,7 @@
 #import "YTRegisterViewController.h"
 #import "YTResultPasswordViewController.h"
 #import "YTAccountTool.h"
+#import "AFNetworking.h"
 
 
 // 登录
@@ -107,18 +108,27 @@
             param[@"openid"] = account.openId;
             param[@"headimgurl"] = account.iconURL;
             [YTHttpTool post:YTWeChatLogin params:param success:^(id responseObject) {
-                NSLog(@"%@",response);
-                YTAccount *account = [[YTAccount alloc] init];
-                account.userName = self.userName.text;
-                account.password = self.passWord.text;
-                // 发起登录
-                [YTAccountTool loginAccount:account result:^(BOOL result) {
-                    if (result) {   // 登录成功
-                        
-                        [self transitionTabBarVC];
-                    } else {
-                    }
-                }];
+                AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+                NSMutableDictionary *params = [NSMutableDictionary dictionary];
+                YTAccount *acc = [[YTAccount alloc] init];
+                acc.userName = responseObject[@"username"];
+                acc.password = responseObject[@"password"];
+                params[@"username"] = acc.userName;
+                params[@"password"] = acc.userName;
+                
+                // 2.发送一个POST请求
+                NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTSession];
+                
+                [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
+                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                      // 保存账户信息
+                      acc.userId = responseObject[@"userId"];
+                      acc.token = responseObject[@"token"];
+                      [YTAccountTool save:acc];
+                       [self transitionTabBarVC];
+                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                      NSLog(@"%@", error);
+                  }];
             } failure:^(NSError *error) {
 
             }];

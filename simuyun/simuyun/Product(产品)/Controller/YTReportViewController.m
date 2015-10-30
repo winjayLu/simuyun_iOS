@@ -18,6 +18,7 @@
 #import "YTPhotoMenultem.h"
 #import "YTAccountTool.h"
 #import "YTSlipModel.h"
+#import "AFNetworking.h"
 
 
 @interface YTReportViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, PhotoViewDelegate>
@@ -165,7 +166,7 @@
 - (IBAction)ReportClick:(UIButton *)sender {
     // 本地验证
     if([self checkText]) return;
-//    [SVProgressHUD showWithStatus:@"正在报备" maskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD showWithStatus:@"正在报备" maskType:SVProgressHUDMaskTypeClear];
     // 上传打款凭条 和 证件资料
     [self uploadSlip];
 }
@@ -230,58 +231,57 @@
 {
 
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"advisers_id"] = [YTAccountTool account].userId;
-    dict[@"order_id"] = self.prouctModel.order_id;
-    dict[@"cust_name"] = self.prouctModel.customerName;
-    dict[@"cust_bank"] = self.bankHangField.text;
-    dict[@"cust_bank_detail"] = self.branchField.text;
-    dict[@"cust_bank_acct"] = self.bankField.text;
-    dict[@"credentialsname"] = self.typeField.text;
-    dict[@"credentialsnumber"] = self.numberField.text;
-    dict[@"annex"] = [self annexWithSlps];
-    [YTHttpTool post:YTReport params:dict success:^(id responseObject) {
-        YTLog(@"%@", responseObject);
-        [SVProgressHUD showSuccessWithStatus:@"报备成功"];
-    } failure:^(NSError *error) {
-        [SVProgressHUD showSuccessWithStatus:@"报备失败"];
-    }];
+    dict[@"param"] = [NSString stringWithFormat:@"{\"advisers_id\" : \"%@\", \"order_id\" : \"%@\", \"cust_name\" : \"%@\", \"cust_bank\" : \"%@\", \"cust_bank_detail\" : \"%@\", \"cust_bank_acct\" : \"%@\", \"credentialsname\" : \"%@\", \"credentialsnumber\" : \"%@\", \"annex\" : %@}",[YTAccountTool account].userId, self.prouctModel.order_id, self.prouctModel.customerName, self.bankHangField.text, self.branchField.text, self.bankField.text, self.typeField.text,self.numberField.text,[self annexWithSlps]];
+    // 1.创建一个请求管理者
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    NSLog(@"%@", dict);
+    
+    // 2.发送一个POST请求
+    NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTReport];
+    [mgr POST:newUrl parameters:dict
+      success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
+          YTLog(@"%@", responseObject);
+          [SVProgressHUD showSuccessWithStatus:@"报备成功"];
+      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          [SVProgressHUD showSuccessWithStatus:@"报备失败"];
+      }];
 }
 
 // 拼接附件参数
 - (NSString *)annexWithSlps
 {
     // 拼接附件参数
-    NSMutableString *annex = [[NSMutableString alloc] init];
+    NSMutableString *annex = [NSMutableString string];
     // 打款凭条
     for (int i = 0; i < self.Slips.count; i++) {
         YTSlipModel *slip = self.Slips[i];
         if (i == 0) {
-            [annex stringByAppendingString:@"[{"];
-            [annex stringByAppendingString:@"annex_type:1"];
-            [annex stringByAppendingString:[NSString stringWithFormat:@",annex_path:%@",slip.url]];
-            [annex stringByAppendingString:[NSString stringWithFormat:@",file_type:%@",slip.type]];
-            [annex stringByAppendingString:[NSString stringWithFormat:@",file_name:%@}",slip.original]];
+            [annex appendString:@"[{"];
+            [annex appendString:@"\"annex_type\":\"1\""];
+            [annex appendString:[NSString stringWithFormat:@",\"annex_path\":\"%@\"",slip.url]];
+            [annex appendString:[NSString stringWithFormat:@",\"file_type\":\"%@\"",slip.type]];
+            [annex appendString:[NSString stringWithFormat:@",\"file_name\":\"%@\"}",slip.original]];
         } else {
-            [annex stringByAppendingString:@"{annex_type:1"];
-            [annex stringByAppendingString:[NSString stringWithFormat:@",annex_path:%@",slip.url]];
-            [annex stringByAppendingString:[NSString stringWithFormat:@",file_type:%@",slip.type]];
-            [annex stringByAppendingString:[NSString stringWithFormat:@",file_name:%@}",slip.original]];
+            [annex appendString:@",{\"annex_type\":\"1\""];
+            [annex appendString:[NSString stringWithFormat:@",\"annex_path\":\"%@\"",slip.url]];
+            [annex appendString:[NSString stringWithFormat:@",\"file_type\":\"%@\"",slip.type]];
+            [annex appendString:[NSString stringWithFormat:@",\"file_name\":\"%@\"}",slip.original]];
         }
     }
     if (self.ZhenJian.count == 0) {
-        [annex stringByAppendingString:@"]"];
+        [annex appendString:@"]"];
         YTLog(@"%@", annex);
         return annex;
     }
     for (int i = 0; i < self.ZhenJian.count; i++) {
         YTSlipModel *slip = self.ZhenJian[i];
-        [annex stringByAppendingString:@"{annex_type:2"];
-        [annex stringByAppendingString:[NSString stringWithFormat:@",annex_path:%@",slip.url]];
-        [annex stringByAppendingString:[NSString stringWithFormat:@",file_type:%@",slip.type]];
-        [annex stringByAppendingString:[NSString stringWithFormat:@",file_name:%@}",slip.original]];
+        [annex appendString:@",{\"annex_type\":\"2\""];
+        [annex appendString:[NSString stringWithFormat:@",\"annex_path\":\"%@\"",slip.url]];
+        [annex appendString:[NSString stringWithFormat:@",\"file_type\":\"%@\"",slip.type]];
+        [annex appendString:[NSString stringWithFormat:@",\"file_name\":\"%@\"}",slip.original]];
     }
-    [annex stringByAppendingString:@"]"];
+    [annex appendString:@"]"];
     YTLog(@"%@", annex);
     return annex;
 }

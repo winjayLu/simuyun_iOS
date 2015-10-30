@@ -174,14 +174,11 @@
         vc.title = title;
         vc.tabBarItem.image = [UIImage imageNamed:image];
         vc.tabBarItem.selectedImage = [UIImage imageNamed:selectedImage];
-        // 包装一个导航控制器后,再成为tabbar的子控制器
-        
-        YTNavigationController *nav = [[YTNavigationController alloc] initWithRootViewController:vc];
-        [self addChildViewController:nav];
-    } else {
-        [self addChildViewController:vc];
     }
+    // 包装一个导航控制器后,再成为tabbar的子控制器
     
+    YTNavigationController *nav = [[YTNavigationController alloc] initWithRootViewController:vc];
+    [self addChildViewController:nav];
     return vc;
 }
 

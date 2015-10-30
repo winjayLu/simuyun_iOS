@@ -68,6 +68,8 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="quan" translatesAutoresizingMaskIntoConstraints="NO" id="CrT-a4-ocu" userLabel="头像bj">
                     <rect key="frame" x="98" y="50" width="126" height="126"/>
                     <constraints>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="126" id="6jt-SA-Iru"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="126" id="P1V-fa-emp"/>
                         <constraint firstAttribute="width" constant="126" id="Urm-ql-Kil"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="110" id="fZf-T8-GgW"/>
                         <constraint firstAttribute="height" constant="126" id="irJ-dm-Z5T"/>
@@ -173,6 +175,17 @@
                         <action selector="renZhenClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="13Y-fq-QxZ"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oad-Pf-04j">
+                    <rect key="frame" x="15" y="32" width="24" height="16"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="6BV-83-ngV"/>
+                        <constraint firstAttribute="height" constant="16" id="VO7-OJ-hYT"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="chouti"/>
+                    <connections>
+                        <action selector="menuClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="BaK-Za-XZc"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -216,6 +229,7 @@
                 <constraint firstItem="TR6-ku-oa3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ctf-em-eZL"/>
                 <constraint firstAttribute="trailing" secondItem="BX1-C4-cxp" secondAttribute="trailing" constant="10" id="dC3-gh-GRU"/>
                 <constraint firstItem="98T-Fi-cUv" firstAttribute="width" secondItem="xO5-bn-mkv" secondAttribute="width" id="dpZ-bO-Yq8"/>
+                <constraint firstItem="Oad-Pf-04j" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="32" id="e7J-Dw-foq"/>
                 <constraint firstItem="0EK-Rx-hhm" firstAttribute="centerX" secondItem="27e-HL-mxV" secondAttribute="centerX" id="ebu-eT-tZy"/>
                 <constraint firstItem="ZK9-mr-7Kc" firstAttribute="leading" secondItem="PXL-kS-EuD" secondAttribute="leading" id="ejK-6d-8B0"/>
                 <constraint firstItem="ZK9-mr-7Kc" firstAttribute="top" secondItem="PXL-kS-EuD" secondAttribute="bottom" constant="2" id="enE-dN-goo"/>
@@ -228,6 +242,7 @@
                 <constraint firstItem="uQ9-IY-0yg" firstAttribute="leading" secondItem="BX1-C4-cxp" secondAttribute="leading" id="n5h-7a-1II"/>
                 <constraint firstItem="zM7-Sr-Sgp" firstAttribute="width" secondItem="BX1-C4-cxp" secondAttribute="width" id="opo-HL-cjJ"/>
                 <constraint firstItem="F28-CY-hce" firstAttribute="width" secondItem="xO5-bn-mkv" secondAttribute="width" id="qIa-5r-8kD"/>
+                <constraint firstItem="Oad-Pf-04j" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="sTk-Pd-iX6"/>
                 <constraint firstItem="psv-5Z-FRq" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="t1p-Q3-Sjv"/>
                 <constraint firstItem="xO5-bn-mkv" firstAttribute="height" secondItem="zM7-Sr-Sgp" secondAttribute="height" id="tVc-CU-qIb"/>
                 <constraint firstItem="Z40-Md-MMW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="uAJ-7u-k2q"/>
@@ -244,6 +259,7 @@
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="ImU-H2-Kta"/>
+                    <exclude reference="fUN-Oo-74n"/>
                     <exclude reference="1k9-kE-PPM"/>
                     <exclude reference="LAV-nw-aoR"/>
                     <exclude reference="zwV-nD-n8O"/>
@@ -276,6 +292,7 @@
     </objects>
     <resources>
         <image name="background-picture" width="375" height="270"/>
+        <image name="chouti" width="23" height="15"/>
         <image name="dikuang" width="89" height="53"/>
         <image name="huangguang" width="58" height="30"/>
         <image name="quan" width="126" height="126"/>

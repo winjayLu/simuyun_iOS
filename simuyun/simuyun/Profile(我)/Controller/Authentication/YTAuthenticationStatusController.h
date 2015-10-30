@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YTAuthenticationModel.h"
 
 @interface YTAuthenticationStatusController : UIViewController
+
+// 认证资料模型
+@property (nonatomic, strong) YTAuthenticationModel *authen;
+
 
 @end

@@ -1,15 +1,17 @@
 //
-//  YTAuthenticationStatusController.m
+//  YTAuthenticationErrorController.m
 //  simuyun
 //
-//  Created by Luwinjay on 15/10/27.
+//  Created by Luwinjay on 15/10/30.
 //  Copyright © 2015年 YTWealth. All rights reserved.
 //
 
-#import "YTAuthenticationStatusController.h"
+#import "YTAuthenticationErrorController.h"
+#import "YTAuthenticationModel.h"
 #import "YTAccountTool.h"
+#import "YTAuthenticationViewController.h"
 
-@interface YTAuthenticationStatusController ()
+@interface YTAuthenticationErrorController ()
 
 // 真实姓名
 @property (weak, nonatomic) IBOutlet UILabel *nameLable;
@@ -17,21 +19,19 @@
 // 机构名称
 @property (weak, nonatomic) IBOutlet UILabel *organizationNameLable;
 
-// 提示信息
-@property (weak, nonatomic) IBOutlet UILabel *detailLable;
+// 重新填写
+- (IBAction)registerAutenClick:(UIButton *)sender;
+
+
 @end
 
-@implementation YTAuthenticationStatusController
+@implementation YTAuthenticationErrorController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // 加载认证信息
-    if (self.authen == nil) {
-        [self loadAuthen];
-    }
-    
+    [self loadAuthen];
 }
+
 
 // 加载认证信息
 - (void)loadAuthen
@@ -39,26 +39,31 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"advisersId"] = [YTAccountTool account].userId;
     [YTHttpTool get:YTAuthAdviser params:params success:^(id responseObject) {
-        YTLog(@"%@", responseObject);
         YTAuthenticationModel *authen = [YTAuthenticationModel objectWithKeyValues:responseObject];
         self.authen = authen;
     } failure:^(NSError *error) {
         
     }];
-
+    
 }
 
+// 设置数据
 - (void)setAuthen:(YTAuthenticationModel *)authen
 {
-    _authen = authen;
+    
     self.nameLable.text = authen.realName;
     self.organizationNameLable.text = authen.orgName;
-    self.detailLable.text = [NSString stringWithFormat:@"您于%@提交了资料，请联系您所在机构管理员在云台系统进行审核，如7日内没有审核通过，系统会自动驳回申请，对此有其他疑问，请致电400-188-8488或者在App中与平台客服直接联系。", authen.submitTime];
 }
+
+- (IBAction)registerAutenClick:(UIButton *)sender {
+    
+    YTAuthenticationViewController *authenVc = [[YTAuthenticationViewController alloc] init];
+    [self.navigationController pushViewController:authenVc animated:YES];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 @end

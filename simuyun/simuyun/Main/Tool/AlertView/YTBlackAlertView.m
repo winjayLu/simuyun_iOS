@@ -98,10 +98,20 @@ static UIWindow *_window;
     // 内容
     UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(titleLable.frame) + 25, self.width, detailFont)];
     [detailLabel setNumberOfLines:0];
-    detailLabel.text = detail;
+//    detailLabel.text = detail;
     detailLabel.textColor = [UIColor whiteColor];
     [detailLabel setFont:[UIFont systemFontOfSize:detailFont]];
+    
+    
+    NSMutableAttributedString * attributedString1 = [[NSMutableAttributedString alloc] initWithString:detail];
+    NSMutableParagraphStyle * paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle1 setLineSpacing:8];
+    [attributedString1 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle1 range:NSMakeRange(0, [detail length])];
+    [detailLabel setAttributedText:attributedString1];
     [detailLabel setTextAlignment:NSTextAlignmentCenter];
+
+    
+    
     [detailLabel sizeToFit];
     [self addSubview:detailLabel];
     self.detailLabel = detailLabel;
@@ -163,7 +173,7 @@ static UIWindow *_window;
  *  签到
  *
  */
-- (void)showAlertSignWithTitle:(NSString *)title date:(NSString *)date yunDou:(int)yunDou block:(titleClcik)block
+- (void)showAlertSignWithTitle:(NSString *)title date:(NSString *)date yunDou:(NSString *)yunDou block:(titleClcik)block
 {
     _titleblock = block;
     // 初始化配置
@@ -197,7 +207,7 @@ static UIWindow *_window;
 /**
  *  设置签到内容
  */
-- (void)configSignWithTitle:(NSString *)title date:(NSString *)date yunDou:(int)yunDou
+- (void)configSignWithTitle:(NSString *)title date:(NSString *)date yunDou:(NSString *)yunDou
 {
     // 财经早知道
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.width, 180)];
@@ -224,7 +234,7 @@ static UIWindow *_window;
     
     // 云豆数量
     UILabel *yunDouLable = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(dateLable.frame) + 10, self.width, 18)];
-    yunDouLable.text = [NSString stringWithFormat:@"获得了%d个云豆", yunDou];
+    yunDouLable.text = [NSString stringWithFormat:@"获得了%@个云豆", yunDou];
     yunDouLable.textColor = [UIColor whiteColor];
     [yunDouLable setFont:[UIFont systemFontOfSize:detailFont]];
     [yunDouLable setTextAlignment:NSTextAlignmentCenter];

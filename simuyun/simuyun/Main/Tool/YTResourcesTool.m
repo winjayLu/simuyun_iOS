@@ -18,7 +18,7 @@ static YTResources *_resources;
  */
 + (void)loadResourcesWithresult:(void (^)(BOOL result))result
 {
-    // 已经有用户信息,直接返回
+    // 已经有启动信息,直接返回
     if (_resources) {
         result(YES);
         return;
@@ -33,6 +33,7 @@ static YTResources *_resources;
      {
          [self saveResources:[YTResources objectWithKeyValues:responseObject]];
          YTResources *resources = [self resources];
+         NSLog(@"%@", responseObject);
          result(YES);
      } failure:^(NSError *error) {
          result(NO);
