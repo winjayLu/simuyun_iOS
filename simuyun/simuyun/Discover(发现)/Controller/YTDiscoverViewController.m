@@ -145,7 +145,7 @@
     [self.view addSubview:consult];
     self.consult = consult;
     
-    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(consult.frame) + maginWidth)];
+    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(consult.frame))];
 }
 
 
@@ -197,7 +197,7 @@
         CGFloat cellH = 93;
         CGFloat consultH = headerH + cellH * self.newests.count;
         self.consult.height = consultH;
-        [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.consult.frame) + maginWidth)];
+        [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.consult.frame) + maginWidth * 2)];
     } failure:^(NSError *error) {
         
     }];

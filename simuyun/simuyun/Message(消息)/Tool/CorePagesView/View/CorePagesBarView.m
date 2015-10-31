@@ -64,8 +64,8 @@
     //隐藏水平滚动条
     self.showsHorizontalScrollIndicator=NO;
     
-//    self.backgroundColor = YTColor(246, 246, 246);
-    self.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = [UIColor whiteColor];
+//    self.backgroundColor = [UIColor clearColor];
     
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screenRotate) name:UIDeviceOrientationDidChangeNotification object:nil];
@@ -214,6 +214,7 @@
 
 -(void)btnClick:(CorePagesBarBtn *)btn{
     
+    [btn isShow:NO];
     if(self.selectedBtn == btn) return;
     
     self.selectedBtn=btn;
@@ -236,7 +237,7 @@
     if(_selectedBtn == selectedBtn) return;
     
     if(_selectedBtn != nil) _selectedBtn.selected=NO;
-    
+    [selectedBtn isShow:NO];
     selectedBtn.selected=YES;
     
     self.pageChangeMax=ABS(_selectedBtn.tag - selectedBtn.tag)>1;

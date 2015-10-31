@@ -7,7 +7,7 @@
 //
 
 #import "CorePagesView.h"
-#import "CorePagesBarView.h"
+
 #import "UIImage+Extend.h"
 
 
@@ -17,7 +17,7 @@
     CorePagesViewConfig  *_config;
 }
 
-@property (strong, nonatomic) IBOutlet CorePagesBarView *pagesBarView;
+
 
 @property (nonatomic,assign) CGFloat width;
 
@@ -113,7 +113,6 @@
 +(instancetype)viewWithOwnerVC:(UIViewController *)ownerVC pageModels:(NSArray *)pageModels config:(CorePagesViewConfig *)config{
     
     CorePagesView *pagesView=[[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
-    
     dispatch_async(dispatch_get_main_queue(), ^{
         //记录所属控制器
         pagesView.ownerVC=ownerVC;
@@ -160,7 +159,7 @@
     //设置值
     _scrollView.contentInset =UIEdgeInsetsMake(self.config.barViewH, 0, 0, 0);
     _scrollView.contentOffset = CGPointMake(0, -self.config.barViewH);
-    _scrollView.backgroundColor = YTGrayBackground;
+
     self.pagesBarView.config = self.config;
 
 }
@@ -272,7 +271,7 @@
     
     [super layoutSubviews];
     
-    [self.pagesBarView setBackgroundColor:[UIColor clearColor]];
+    [self.pagesBarView setBackgroundColor:[UIColor whiteColor]];
     self.pagesBarView.alpha = 1.0;
     
     self.originalFrame=self.bounds;

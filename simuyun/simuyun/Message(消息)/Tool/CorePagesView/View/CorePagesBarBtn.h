@@ -10,4 +10,7 @@
 
 @interface CorePagesBarBtn : UIButton
 
+// 是否显示小红点
+- (void)isShow:(BOOL)show;
+
 @end

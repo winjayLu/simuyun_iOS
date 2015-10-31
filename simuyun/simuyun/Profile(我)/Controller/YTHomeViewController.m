@@ -25,6 +25,10 @@
 #import "YTAuthenticationStatusController.h"
 #import "YTNormalWebController.h"
 #import "YTAuthenticationErrorController.h"
+#import "UMSocial.h"
+#import "UMSocialDataService.h"
+#import "UMSocialWechatHandler.h"
+#import "YTAccountTool.h"
 
 @interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate, UIScrollViewDelegate>
 
@@ -151,7 +155,7 @@
     bottom.BottomDelegate = self;
     [self.view addSubview:bottom];
     // 设置滚动范围
-    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame) + 52)];
+    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame) + 64)];
 }
 
 #pragma makr - 监听通知
@@ -181,9 +185,7 @@
     if ([btnTitle isEqualToString:@"用户资料"]) {
         vc = [YTNormalWebController webWithTitle:@"用户资料" url:@"http://www.simuyun.com/my/profile/"];
     } else if([btnTitle isEqualToString:@"关联微信"]){
-        vc = [[YTOtherViewController alloc] init];
-    } else if([btnTitle isEqualToString:@"邮寄地址"]){
-        vc = [[YTOtherViewController alloc] init];
+         [self relationWeChat];
     } else if([btnTitle isEqualToString:@"推荐私募云给好友"]){
         vc = [[YTOtherViewController alloc] init];
     } else if([btnTitle isEqualToString:@"帮助"]){
@@ -216,7 +218,9 @@
         YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
         [appRootVC setSelectedIndex:0];
     } else {
-        vc = [[YTOtherViewController alloc] init];
+        vc = [[YTNormalWebController alloc] init];
+        ((YTNormalWebController *)vc).url = @"http://www.simuyun.com/message";
+        ((YTNormalWebController *)vc).toTitle = @"待办事项";
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -352,6 +356,42 @@
     }
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+/**
+ *  关联微信
+ *
+ */
+- (void)relationWeChat
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    
+    //  友盟微信登录
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            
+            UMSocialAccountEntity *account = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
+            param[@"advisersId"] = [YTAccountTool account].userId;
+            param[@"nickname"] = account.userName;
+            param[@"unionid"] = account.unionId;
+            param[@"openid"] = account.openId;
+            param[@"headimgurl"] = account.iconURL;
+            [YTHttpTool post:YTBindWeChat params:param success:^(id responseObject) {
+                YTLog(@"%@", responseObject);
+            } failure:^(NSError *error) {
+                YTLog(@"%@", error);
+            }];
+        }
+    });
+    
+    [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToWechatSession  completion:^(UMSocialResponseEntity *response){
+        // 进入到微信
+        param[@"sex"] = response.data[@"gender"];
+        param[@"address"] = response.data[@"location"];
+    }];
+
 }
 
 

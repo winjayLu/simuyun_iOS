@@ -73,7 +73,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="关联微信" image="guanlianweixin" backgroundImage="dikuang">
+                    <state key="normal" title="关联微信" image="guanlianweixin" backgroundImage="leftanniubeijing">
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
@@ -98,7 +98,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="推荐私募云给好友" image="tuijian" backgroundImage="dikuang">
+                    <state key="normal" title="推荐私募云给好友" image="tuijian" backgroundImage="leftanniubeijing">
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
@@ -123,7 +123,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="帮助" image="bangzhu" backgroundImage="dikuang">
+                    <state key="normal" title="帮助" image="bangzhu" backgroundImage="leftanniubeijing">
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
@@ -148,7 +148,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="关于私募云" image="simuyun" backgroundImage="dikuang">
+                    <state key="normal" title="关于私募云" image="guanyu" backgroundImage="leftanniubeijing">
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
@@ -185,20 +185,13 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="退出登录" backgroundImage="dikuang">
+                    <state key="normal" title="退出登录" backgroundImage="leftanniubeijing">
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="tuiChuClick:" destination="iN0-l3-epB" eventType="touchDown" id="X2r-In-udm"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="ML9-Hm-k4Y">
-                    <rect key="frame" x="216" y="251" width="7" height="19"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="19" id="RDe-oB-Tvl"/>
-                        <constraint firstAttribute="width" constant="7" id="p6i-r5-NiS"/>
-                    </constraints>
-                </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CqF-3z-uB9">
                     <rect key="frame" x="0.0" y="246" width="241" height="30"/>
                     <constraints>
@@ -209,13 +202,20 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="用户资料" image="yonghuziliao" backgroundImage="dikuang">
+                    <state key="normal" title="用户资料" image="yonghuziliao" backgroundImage="leftanniubeijing">
                         <color key="titleColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="ziLiaoClick:" destination="iN0-l3-epB" eventType="touchDown" id="dfl-A9-Rjj"/>
                     </connections>
                 </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="ML9-Hm-k4Y">
+                    <rect key="frame" x="216" y="251" width="7" height="19"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="19" id="RDe-oB-Tvl"/>
+                        <constraint firstAttribute="width" constant="7" id="p6i-r5-NiS"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -316,14 +316,14 @@
     </objects>
     <resources>
         <image name="background-cebian" width="241" height="667"/>
-        <image name="bangzhu" width="26" height="23"/>
+        <image name="bangzhu" width="22" height="22"/>
         <image name="dianhau" width="37" height="37"/>
-        <image name="dikuang" width="89" height="53"/>
-        <image name="guanlianweixin" width="31" height="24"/>
+        <image name="guanlianweixin" width="22" height="22"/>
+        <image name="guanyu" width="22" height="22"/>
         <image name="huangguang" width="58" height="30"/>
+        <image name="leftanniubeijing" width="50" height="33"/>
         <image name="quan" width="126" height="126"/>
-        <image name="simuyun" width="27" height="21"/>
-        <image name="tuijian" width="23" height="23"/>
+        <image name="tuijian" width="22" height="22"/>
         <image name="xiangyou" width="7" height="18"/>
         <image name="yonghuziliao" width="22" height="22"/>
     </resources>

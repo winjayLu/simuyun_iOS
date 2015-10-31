@@ -7,6 +7,9 @@
 //
 
 #import "YTNormalWebController.h"
+#import "YTAccountTool.h"
+
+
 
 @interface YTNormalWebController ()
 
@@ -52,6 +55,15 @@
 - (void)dealloc
 {
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    // 判断当前加载成功的页面是哪个
+    if ([webView.request.URL.absoluteString isEqualToString:self.url]) {
+        NSString *js = [NSString stringWithFormat:@"document.getElementById('telnum').value = '%@';",[YTAccountTool account].token];
+        [webView stringByEvaluatingJavaScriptFromString:js];
+    }
 }
 
 

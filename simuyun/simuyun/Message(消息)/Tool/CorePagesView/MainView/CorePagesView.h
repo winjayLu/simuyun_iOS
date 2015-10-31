@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "CorePageModel.h"
 #import "CorePagesViewConfig.h"
+#import "CorePagesBarView.h"
+
 
 
 @interface CorePagesView : UIView
@@ -32,5 +34,8 @@
  */
 +(instancetype)viewWithOwnerVC:(UIViewController *)ownerVC pageModels:(NSArray *)pageModels config:(CorePagesViewConfig *)config;
 
+@property (strong, nonatomic) IBOutlet CorePagesBarView *pagesBarView;
+
+//@property (nonatomic,strong) CorePagesViewConfig *config;
 
 @end

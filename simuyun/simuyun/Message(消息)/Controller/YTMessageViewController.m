@@ -9,11 +9,20 @@
 #import "YTMessageViewController.h"
 #import "CorePagesView.h"
 #import "YTCloudObserveController.h"
+#import "YTHttpTool.h"
+#import "CorePagesBarBtn.h"
+#import "YTTodoListViewController.h"
+#import "YTProductNewsController.h"
+#import "YTSystemCenterController.h"
 
 
 @interface YTMessageViewController ()
 
 @property (nonatomic, weak) CorePagesView *pagesView;
+
+// 分类消息的状态
+@property (nonatomic, strong) NSArray *status;
+
 @end
 
 @implementation YTMessageViewController
@@ -26,6 +35,39 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [YTCenter addObserver:self selector:@selector(jump) name:YTJumpToTodoList object:nil];
+    
+    // 获取是否有新消息
+    [self loadNewStatus];
+}
+/**
+ *  获取是否有新消息
+ *
+ */
+- (void)loadNewStatus
+{
+    self.status = @[@(0), @(1), @(1), @(1)];
+//    __weak int i = 0;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self updateBtn];
+    });
+}
+
+
+// 修改按钮
+- (void)updateBtn
+{
+    int i = 0;
+    for (UIView *view in self.pagesView.pagesBarView.subviews) {
+        if ([view isKindOfClass:[CorePagesBarBtn class]]) {
+            BOOL isShow = NO;
+            if ([self.status[i]  isEqual: @1]) {
+                isShow = YES;
+            }
+            [(CorePagesBarBtn *)view isShow:isShow];
+            i++;
+        }
+    }
+
 }
 
 - (void)jump
@@ -45,9 +87,9 @@
     if(_pagesView==nil){
         
         YTCloudObserveController *tvc1 = [[YTCloudObserveController alloc] init];
-        YTCloudObserveController *tvc2 = [[YTCloudObserveController alloc] init];
-        YTCloudObserveController *tvc3 = [[YTCloudObserveController alloc] init];
-        YTCloudObserveController *tvc4 = [[YTCloudObserveController alloc] init];
+        YTTodoListViewController *tvc2 = [[YTTodoListViewController alloc] init];
+        YTProductNewsController *tvc3 = [[YTProductNewsController alloc] init];
+        YTSystemCenterController *tvc4 = [[YTSystemCenterController alloc] init];
         
         
         CorePageModel *model1=[CorePageModel model:tvc1 pageBarName:@"消息"];
@@ -72,7 +114,7 @@
         
         
         _pagesView=[CorePagesView viewWithOwnerVC:self pageModels:pageModels config:config];
-        
+
     }
     
     return _pagesView;

@@ -182,7 +182,6 @@
     if (userInfo.weChatNickName.length > 0)
     {
         [self.guanLianBtn setTitle:userInfo.weChatNickName forState:UIControlStateNormal];
-        self.guanLianBtn.enabled = NO;
     }
 }
 

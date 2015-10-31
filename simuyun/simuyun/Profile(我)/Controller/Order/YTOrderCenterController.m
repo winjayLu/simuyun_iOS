@@ -142,6 +142,7 @@
  */
 - (void)loadNewOrder
 {
+    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreOrder)];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"advisers_id"] = [YTAccountTool account].userId;
     if (self.status == nil) {
@@ -177,10 +178,13 @@
     dict[@"pagesize"] = @20;
     dict[@"pageno"] = @(++self.pageno);
     [YTHttpTool get:YTOrders params:dict success:^(id responseObject) {
-        NSLog(@"%@", responseObject);
+        [self.tableView.footer endRefreshing];
+        if([(NSArray *)responseObject count] == 0)
+        {
+            self.tableView.footer = nil;
+        }
         [self.orders addObjectsFromArray:[YTOrderCenterModel objectArrayWithKeyValuesArray:responseObject]];
         [self.tableView reloadData];
-        [self.tableView.footer endRefreshing];
     } failure:^(NSError *error) {
         [self.tableView.footer endRefreshing];
     }];

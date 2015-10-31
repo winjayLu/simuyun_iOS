@@ -9,6 +9,8 @@
 #import "YTProductdetailController.h"
 #import "YHWebViewProgress.h"
 #import "YHWebViewProgressView.h"
+#import "UIBarButtonItem+Extension.h"
+#import "HWPopMenu.h"
 
 @interface YTProductdetailController ()
 @property (nonatomic, weak) UIWebView *webView;
@@ -43,13 +45,44 @@
     self.webView.backgroundColor = [UIColor whiteColor];
     self.webView.scalesPageToFit = YES;
     
-    
     // 初始化进度条
     [self setupProgress];
     
     // 加载网页
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
+    
+    // 右侧菜单
+    [self setupRightMenu];
 }
+
+/**
+ *  右侧菜单
+ */
+- (void)setupRightMenu
+{
+    UIButton *button = [[UIButton alloc] init];
+    button.frame = CGRectMake(0, 0, 22, 22);
+    [button addTarget:self action:@selector(rightClick:) forControlEvents:UIControlEventTouchUpInside];
+    [button setBackgroundImage:[UIImage imageNamed:@"jiahao"] forState:UIControlStateNormal];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+/**
+ *  右侧菜单点击
+ */
+- (void)rightClick:(UIButton *)button
+{
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor redColor];
+    view.frame = CGRectMake(0, 0, 160, 100);
+//    [HWPopMenu popFromView:button content:view dismiss:^{
+//        
+//    }];
+    [HWPopMenu popFromRect:CGRectMake(-135, -150, 180, 200) inView:button content:view dismiss:^{
+        
+    }];
+}
+
 
 /**
  *  初始化进度条

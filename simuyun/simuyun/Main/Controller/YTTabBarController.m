@@ -16,6 +16,7 @@
 #import "YTNavigationController.h"
 #import "YTLogoView.h"
 #import "YTAccountTool.h"
+#import "YTRedrainViewController.h"
 
 
 @interface YTTabBarController () <YTLogoViewDelegate>
@@ -45,6 +46,9 @@
  */
 @property (nonatomic, weak) YTLogoView *logo;
 
+/** 定时器 */
+@property (nonatomic,strong) NSTimer *timer;
+
 @end
 
 
@@ -64,38 +68,79 @@
     [self logoViewDidSelectProfileItem];
     
     // 开启定时器时时获取红包雨
-    [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(getRedrain) userInfo:nil repeats:YES];
-    
+    [self timerOn];
+
 }
 /**
  *  获取红包雨
  */
+
 - (void)getRedrain
 {
 #warning TODO 红包雨
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
     dict[@"uid"] = [YTAccountTool account].userId;
     [YTHttpTool get:YTRedpacket params:dict success:^(NSDictionary *responseObject) {
-        NSString *url = responseObject[@"redpage_url"];
-        YTLog(@"ssss");
-        if (url.length > 0) {
-            NSLog(@"%@", url);
-        }
+//        NSString *url = responseObject[@"redpage_url"];
+//        if (url.length > 0) {
+//            
+//        }
+        YTRedrainViewController *redRain = [[YTRedrainViewController alloc] init];
+        
+        redRain.url = nil;
+        redRain.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+        redRain.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        [self presentViewController:redRain animated:NO completion:^{
+        }];
+        // 停止定时器
+        [self timerOff];
     } failure:^(NSError *error) {
         
     }];
 }
+
+
+/*
+ *  新开一个定时器
+ */
+-(void)timerOn{
+    
+    [self timerOff];
+    
+    if(self.timer!=nil) return;
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(getRedrain) userInfo:nil repeats:YES];
+    
+    //记录
+    self.timer = timer;
+    
+    //加入主循环
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+}
+
+/*
+ *  关闭定时器
+ */
+-(void)timerOff{
+    
+    //关闭定时器
+    [self.timer invalidate];
+    
+    //清空属性
+    self.timer = nil;
+}
+
 
 /**
  *  初始化子控制器
  */
 - (void)setupChildVc
 {
-    self.message = (YTMessageViewController *)[self addOneChildVcClass:[YTMessageViewController class] title:@"消息" image:@"" selectedImage:@""];
-    self.product = (YTProductViewController *)[self addOneChildVcClass:[YTProductViewController class] title:@"产品" image:@"" selectedImage:@""];
+    self.message = (YTMessageViewController *)[self addOneChildVcClass:[YTMessageViewController class] title:@"消息" image:@"xiaoxi" selectedImage:@"xiaoxianxia"];
+    self.product = (YTProductViewController *)[self addOneChildVcClass:[YTProductViewController class] title:@"产品" image:@"chanpin" selectedImage:@"chanpinanxia"];
     self.profile = (YTProfileViewController *)[self addOneChildVcClass:[YTProfileViewController class] title:nil image:nil selectedImage:nil];
-    self.discover = (YTDiscoverViewController *)[self addOneChildVcClass:[YTDiscoverViewController class] title:@"发现" image:@"" selectedImage:@""];
-    self.school = (YTSchoolViewController *)[self addOneChildVcClass:[YTSchoolViewController class] title:@"学院" image:@"" selectedImage:@""];
+    self.discover = (YTDiscoverViewController *)[self addOneChildVcClass:[YTDiscoverViewController class] title:@"发现" image:@"faxian" selectedImage:@"faxiananxia"];
+    self.school = (YTSchoolViewController *)[self addOneChildVcClass:[YTSchoolViewController class] title:@"学院" image:@"shangxueyuan" selectedImage:@"shangxueyuananxia"];
 }
 
 /**
@@ -113,7 +158,7 @@
     [self.tabBar setBackgroundImage:img];
     [self.tabBar setShadowImage:img];
 #warning 设置tabBar的背景颜色,或图片
-    self.tabBar.backgroundColor = YTTabBarBackground;
+    [self.tabBar setBackgroundImage:[UIImage imageNamed:@"dibubackgroud"]];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle

@@ -10,4 +10,5 @@
 
 @interface YTCustomerServiceCell : UITableViewCell
 
++ (instancetype)CustomerServiceCell;
 @end

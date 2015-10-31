@@ -42,5 +42,9 @@
 /** 动画时长 */
 @property (nonatomic,assign) CGFloat animDuration;
 
+// 是否有新消息
+@property (nonatomic, assign) BOOL isNew;
+
+
 
 @end

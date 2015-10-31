@@ -37,6 +37,8 @@
 #define YTRedpacket @"redpacket"
 // 登录
 #define YTSession @"session"
+// 关联微信
+#define YTBindWeChat @"bindWeChat"
 // 加载产品列表
 #define YTProductList @"products"
 // 发送验证码

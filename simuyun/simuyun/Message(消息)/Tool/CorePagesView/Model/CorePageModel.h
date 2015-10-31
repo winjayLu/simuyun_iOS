@@ -31,6 +31,11 @@
 @property (nonatomic,assign) CGFloat padding;
 
 
+/**
+ *  是否有新消息
+ */
+@property (nonatomic, assign) BOOL newInformation;
+
 
 
 

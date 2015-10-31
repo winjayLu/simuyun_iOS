@@ -6,3 +6,4 @@ NSString *const YTLeftMenuSelectBtn = @"MTLeftMenuSelectBtn";
 NSString *const YTJumpToTodoList = @"YTJumpToTodoList";
 NSString *const YTUpdateIconImage = @"YTUpdateIconImage";
 NSString *const YTUpdateUserInfo = @"YTUpdateUserInfo";
+NSString *const YTRedrain = @"YTRedrain";

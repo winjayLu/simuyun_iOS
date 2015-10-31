@@ -202,6 +202,7 @@ static UIWindow *_window;
     _window.hidden = YES;
     [_window removeFromSuperview];
     _window = nil;
+    
     [self showHome];
 }
 
