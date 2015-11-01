@@ -17,8 +17,8 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fenhong" translatesAutoresizingMaskIntoConstraints="NO" id="orf-so-ElO">
                         <rect key="frame" x="8" y="10" width="50" height="15"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="测试" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXY-Bf-zYb">
-                        <rect key="frame" x="66" y="10" width="166" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="测试" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eXY-Bf-zYb">
+                        <rect key="frame" x="66" y="9" width="166" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
@@ -50,7 +50,10 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="dateLable" destination="dQb-wA-k1b" id="G2P-UT-Uxd"/>
+                <outlet property="detailLable" destination="kpv-aL-dNl" id="epk-ar-ZgT"/>
                 <outlet property="iconImage" destination="orf-so-ElO" id="3oz-HJ-mlA"/>
+                <outlet property="titleLable" destination="eXY-Bf-zYb" id="pH4-OK-7GU"/>
             </connections>
             <point key="canvasLocation" x="218" y="359"/>
         </tableViewCell>

@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="84.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kefutouxiang1" translatesAutoresizingMaskIntoConstraints="NO" id="T5j-gr-pY0">
@@ -38,6 +38,18 @@
                         <color key="textColor" red="0.32549019607843138" green="0.32549019607843138" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IEJ-2c-SZN">
+                        <rect key="frame" x="67" y="4" width="15" height="10"/>
+                        <color key="backgroundColor" red="0.7725490196" green="0.047058823530000002" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="ec7-Ml-3qx"/>
+                            <constraint firstAttribute="width" constant="15" id="f2h-QQ-q1P"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <state key="normal" title="10">
+                            <color key="titleColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="T5j-gr-pY0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="1YV-tv-IGz"/>
@@ -48,11 +60,18 @@
                     <constraint firstItem="ySQ-do-uXn" firstAttribute="top" secondItem="adn-7E-Yyb" secondAttribute="bottom" constant="10" id="CNj-8z-Uct"/>
                     <constraint firstAttribute="bottom" secondItem="T5j-gr-pY0" secondAttribute="bottom" constant="9" id="Jiu-kR-xhj"/>
                     <constraint firstItem="pgx-XX-vAY" firstAttribute="trailing" secondItem="ySQ-do-uXn" secondAttribute="trailing" id="KVk-3U-oWj"/>
+                    <constraint firstItem="IEJ-2c-SZN" firstAttribute="trailing" secondItem="T5j-gr-pY0" secondAttribute="trailing" constant="7" id="MUU-ey-gn1"/>
                     <constraint firstItem="adn-7E-Yyb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="g7O-ol-Bho"/>
                     <constraint firstAttribute="trailing" secondItem="pgx-XX-vAY" secondAttribute="trailing" constant="8" id="gKT-MV-BoR"/>
                     <constraint firstItem="T5j-gr-pY0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="j68-Qr-wYt"/>
+                    <constraint firstItem="IEJ-2c-SZN" firstAttribute="top" secondItem="T5j-gr-pY0" secondAttribute="top" constant="-5" id="oMO-at-Lm5"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="contentLable" destination="ySQ-do-uXn" id="yiH-yK-idd"/>
+                <outlet property="dateLable" destination="pgx-XX-vAY" id="Dw1-pf-OHv"/>
+                <outlet property="unreadNum" destination="IEJ-2c-SZN" id="VRa-Hq-Usl"/>
+            </connections>
             <point key="canvasLocation" x="245" y="469.5"/>
         </tableViewCell>
     </objects>

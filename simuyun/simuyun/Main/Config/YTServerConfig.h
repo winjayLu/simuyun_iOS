@@ -75,6 +75,10 @@
 #define YTReport @"order/report"
 // 上传图片
 #define YTUploadUserImage @"uploadUserImage"
+// 消息列表
+#define YTChatContent @"chatContent"
+// 未读消息数量
+#define YTMessageCount @"messageCount"
 
 
 

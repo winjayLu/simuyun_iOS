@@ -14,7 +14,7 @@
 #import "YTTodoListViewController.h"
 #import "YTProductNewsController.h"
 #import "YTSystemCenterController.h"
-
+#import "YTAccountTool.h"
 
 @interface YTMessageViewController ()
 
@@ -45,6 +45,15 @@
  */
 - (void)loadNewStatus
 {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"adviserId"] = [YTAccountTool account].userId;
+//    params[@"timestamp"] = 
+    [YTHttpTool get:YTMessageCount params:params success:^(id responseObject) {
+        NSLog(@"%@", responseObject);
+    } failure:^(NSError *error) {
+        YTLog(@"%@", error);
+    }];
+    
     self.status = @[@(0), @(1), @(1), @(1)];
 //    __weak int i = 0;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

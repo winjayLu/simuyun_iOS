@@ -225,6 +225,10 @@
 		97E44B731BD344FE00952B11 /* YTStockItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97E44B721BD344FE00952B11 /* YTStockItem.xib */; };
 		97E44B761BD348BF00952B11 /* YTUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E44B751BD348BF00952B11 /* YTUserInfo.m */; };
 		97E44B791BD3492700952B11 /* YTUserInfoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E44B781BD3492700952B11 /* YTUserInfoTool.m */; };
+		97E783DF1BE5FB2500B98A9C /* YTTokenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E783DE1BE5FB2500B98A9C /* YTTokenView.m */; };
+		97E783E61BE6105500B98A9C /* YTMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E783E51BE6105500B98A9C /* YTMessageModel.m */; };
+		97E783E91BE6106600B98A9C /* YTServiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E783E81BE6106600B98A9C /* YTServiceModel.m */; };
+		97E783EC1BE61D8600B98A9C /* DXPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 97E783EB1BE61D8600B98A9C /* DXPopover.m */; };
 		97ED0CD01BE223CA00E95750 /* YTNormalWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97ED0CCF1BE223CA00E95750 /* YTNormalWebController.m */; };
 		97ED0CD31BE2460200E95750 /* YTProductdetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97ED0CD21BE2460200E95750 /* YTProductdetailController.m */; };
 		97ED0CD61BE248B300E95750 /* YTOrderdetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97ED0CD51BE248B300E95750 /* YTOrderdetailController.m */; };
@@ -652,6 +656,14 @@
 		97E44B751BD348BF00952B11 /* YTUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTUserInfo.m; sourceTree = "<group>"; };
 		97E44B771BD3492700952B11 /* YTUserInfoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTUserInfoTool.h; sourceTree = "<group>"; };
 		97E44B781BD3492700952B11 /* YTUserInfoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTUserInfoTool.m; sourceTree = "<group>"; };
+		97E783DD1BE5FB2500B98A9C /* YTTokenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTTokenView.h; sourceTree = "<group>"; };
+		97E783DE1BE5FB2500B98A9C /* YTTokenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTTokenView.m; sourceTree = "<group>"; };
+		97E783E41BE6105500B98A9C /* YTMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTMessageModel.h; sourceTree = "<group>"; };
+		97E783E51BE6105500B98A9C /* YTMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMessageModel.m; sourceTree = "<group>"; };
+		97E783E71BE6106600B98A9C /* YTServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTServiceModel.h; sourceTree = "<group>"; };
+		97E783E81BE6106600B98A9C /* YTServiceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTServiceModel.m; sourceTree = "<group>"; };
+		97E783EA1BE61D8600B98A9C /* DXPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DXPopover.h; sourceTree = "<group>"; };
+		97E783EB1BE61D8600B98A9C /* DXPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DXPopover.m; sourceTree = "<group>"; };
 		97ED0CCE1BE223CA00E95750 /* YTNormalWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTNormalWebController.h; sourceTree = "<group>"; };
 		97ED0CCF1BE223CA00E95750 /* YTNormalWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTNormalWebController.m; sourceTree = "<group>"; };
 		97ED0CD11BE2460200E95750 /* YTProductdetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTProductdetailController.h; sourceTree = "<group>"; };
@@ -987,6 +999,8 @@
 			children = (
 				97973D061BC3D8AB00B7B4CB /* YTLogoView.h */,
 				97973D071BC3D8AB00B7B4CB /* YTLogoView.m */,
+				97E783DD1BE5FB2500B98A9C /* YTTokenView.h */,
+				97E783DE1BE5FB2500B98A9C /* YTTokenView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1219,6 +1233,8 @@
 		97BF5BD81BD7902700053BD0 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				97E783EA1BE61D8600B98A9C /* DXPopover.h */,
+				97E783EB1BE61D8600B98A9C /* DXPopover.m */,
 				97BF5BD91BD7902700053BD0 /* JFImagePickerController */,
 				97BF5BEA1BD7902700053BD0 /* YTPhotoMenultem.h */,
 				97BF5BEB1BD7902700053BD0 /* YTPhotoMenultem.m */,
@@ -1582,6 +1598,7 @@
 		97C605EF1BC2622E00E555E8 /* Message(消息) */ = {
 			isa = PBXGroup;
 			children = (
+				97E783E31BE6105500B98A9C /* Model */,
 				9751494C1BDCB74D0017B6E8 /* View */,
 				97BC99601BD4DB610090BDE8 /* Tool */,
 				97C605F01BC2622E00E555E8 /* Controller */,
@@ -1922,6 +1939,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		97E783E31BE6105500B98A9C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				97E783E41BE6105500B98A9C /* YTMessageModel.h */,
+				97E783E51BE6105500B98A9C /* YTMessageModel.m */,
+				97E783E71BE6106600B98A9C /* YTServiceModel.h */,
+				97E783E81BE6106600B98A9C /* YTServiceModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2188,6 +2216,7 @@
 				9780A6EE1BDF74B000E973D9 /* AutocompletionTableView.m in Sources */,
 				97973CF71BC3C11500B7B4CB /* CoreNewFeatureVC.m in Sources */,
 				97C606321BC2692B00E555E8 /* UIFont+Extend.m in Sources */,
+				97E783EC1BE61D8600B98A9C /* DXPopover.m in Sources */,
 				9714A6F21BC7E0610018A14E /* UIColor+YUColor.m in Sources */,
 				97ABCB751BDDE48B0056C1A1 /* YTIndustryViewController.m in Sources */,
 				9798E2081BD9E13700B235AE /* YTOrderCenterModel.m in Sources */,
@@ -2260,6 +2289,7 @@
 				9714A6D01BC7B9BB0018A14E /* HHAlertView.m in Sources */,
 				97C6065B1BC26F1100E555E8 /* Foundation+Log.m in Sources */,
 				97ABCB721BDDE3E20056C1A1 /* YTInformationController.m in Sources */,
+				97E783E91BE6106600B98A9C /* YTServiceModel.m in Sources */,
 				97ABCB7B1BDDE5140056C1A1 /* YTOpinionController.m in Sources */,
 				97ABCB821BDE01660056C1A1 /* YTInformationTableViewCell.m in Sources */,
 				97BF5BF11BD7902700053BD0 /* JFImageManager.m in Sources */,
@@ -2279,8 +2309,10 @@
 				978C62701BE4ABFA00FE2C72 /* YTProductNewsController.m in Sources */,
 				9798E2041BD9E0E700B235AE /* YTOrderCenterController.m in Sources */,
 				97973CEB1BC3BFD100B7B4CB /* UIView+Masony.m in Sources */,
+				97E783E61BE6105500B98A9C /* YTMessageModel.m in Sources */,
 				971503B71BC76961007E27D0 /* CorePPTVC.m in Sources */,
 				975149541BDCB87A0017B6E8 /* YTBlackAlertView.m in Sources */,
+				97E783DF1BE5FB2500B98A9C /* YTTokenView.m in Sources */,
 				97C6065C1BC26F1100E555E8 /* NSDictionary+Extension.m in Sources */,
 				97BA6A191BD4BA1C001E291E /* YTStockCell.m in Sources */,
 				97F17F5B1BE0CB63006E6DA8 /* YTSlipModel.m in Sources */,
@@ -2359,8 +2391,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2382,7 +2414,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "c9acdc3f-1393-4076-85a5-cb7112d3c091";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2404,8 +2436,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2420,7 +2452,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "c9acdc3f-1393-4076-85a5-cb7112d3c091";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2432,8 +2464,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
 				INFOPLIST_FILE = simuyun/Info.plist;
@@ -2447,7 +2479,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c9acdc3f-1393-4076-85a5-cb7112d3c091";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2458,8 +2490,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
 				INFOPLIST_FILE = simuyun/Info.plist;
@@ -2473,7 +2505,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c9acdc3f-1393-4076-85a5-cb7112d3c091";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

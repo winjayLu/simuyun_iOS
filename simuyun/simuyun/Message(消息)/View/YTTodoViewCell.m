@@ -17,6 +17,14 @@
 // icon图片
 @property (weak, nonatomic) IBOutlet UIImageView *iconImage;
 
+// title
+@property (weak, nonatomic) IBOutlet UILabel *titleLable;
+
+// 日期
+@property (weak, nonatomic) IBOutlet UILabel *dateLable;
+
+// 摘要
+@property (weak, nonatomic) IBOutlet UILabel *detailLable;
 
 @end
 
@@ -38,12 +46,52 @@
     [super setFrame:newF];
 }
 
-
-- (void)setImageName:(NSString *)imageName
+// 设置数据
+- (void)setMessage:(YTMessageModel *)message
 {
-    self.iconImage.image = [UIImage imageNamed:imageName];
+    _message = message;
+    NSString *imageName = nil;
+    switch (message.category2Code) {    // 判断类型
+        case 11:
+            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
+            break;
+        case 12:
+            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
+            break;
+        case 21:
+            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
+            break;
+        case 22:
+            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
+            break;
+        case 23:
+            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
+            break;
+        case 24:
+            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
+            break;
+        case 31:
+            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
+            break;
+        case 32:
+            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
+            break;
+        case 33:
+            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
+            break;
+        case 34:
+            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
+            break;
+        case 35:
+            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
+            break;
+    }
+    self.imageView.image = [UIImage imageNamed:imageName];
+    
+    self.titleLable.text = _message.title;
+    self.detailLable.text = _message.summary;
+    self.dateLable.text = _message.lastTimestamp;
 }
-
 
 - (void)awakeFromNib {
     // Initialization code

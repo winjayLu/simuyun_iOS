@@ -61,12 +61,12 @@ static UIViewController *_contentVc;
     _container = container;
     
     // 添加内容到容器中
-    content.x = 0;
+    content.x = 2;
     content.y = 18;
     [container addSubview:content];
     
     // 计算容器的尺寸
-    container.width = CGRectGetMaxX(content.frame) + content.x;
+    container.width = CGRectGetMaxX(content.frame) - content.x;
     container.height = CGRectGetMaxY(content.frame) + content.x;
     container.centerX = CGRectGetMidX(rect);
     container.y = CGRectGetMaxY(rect);

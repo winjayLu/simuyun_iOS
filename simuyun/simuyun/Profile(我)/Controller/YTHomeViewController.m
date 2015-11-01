@@ -29,6 +29,7 @@
 #import "UMSocialDataService.h"
 #import "UMSocialWechatHandler.h"
 #import "YTAccountTool.h"
+#import "YTTokenView.h"
 
 @interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate, UIScrollViewDelegate>
 
@@ -48,6 +49,9 @@
 @property (nonatomic, strong) NSArray *todos;
 
 @property (nonatomic, weak) UIScrollView *mainView;
+
+
+@property (nonatomic, strong) YTTokenView *token;
 
 @end
 
@@ -98,6 +102,8 @@
     {
         self.topView.userInfo = [YTUserInfoTool userInfo];
     }
+    // 填充token
+    self.token = [[YTTokenView alloc] init];
 }
 
 
@@ -187,7 +193,7 @@
     } else if([btnTitle isEqualToString:@"关联微信"]){
          [self relationWeChat];
     } else if([btnTitle isEqualToString:@"推荐私募云给好友"]){
-        vc = [[YTOtherViewController alloc] init];
+        vc = [YTNormalWebController webWithTitle:@"测试" url:@"http://www.simuyun.com/product/floating.html"];
     } else if([btnTitle isEqualToString:@"帮助"]){
         vc = [YTNormalWebController webWithTitle:@"帮助" url:@"http://www.simuyun.com/help/"];
     } else if([btnTitle isEqualToString:@"关于私募云"]){

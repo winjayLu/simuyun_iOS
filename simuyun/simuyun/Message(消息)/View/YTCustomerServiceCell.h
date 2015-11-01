@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YTServiceModel.h"
 
 @interface YTCustomerServiceCell : UITableViewCell
 
 + (instancetype)CustomerServiceCell;
+
+@property (nonatomic, strong) YTServiceModel *service;
 @end

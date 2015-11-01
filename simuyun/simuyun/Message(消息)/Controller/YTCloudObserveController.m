@@ -11,9 +11,18 @@
 #import "YTCloudObserveController.h"
 #import "YTCustomerServiceCell.h"
 #import "MJRefresh.h"
+#import "YTAccountTool.h"
+#import "YTServiceModel.h"
 
 
 @interface YTCloudObserveController ()
+
+//// 起始页
+//@property (nonatomic, assign) int pageNo;
+
+// 客服消息
+@property (nonatomic, strong) NSMutableArray *services;
+
 
 @end
 
@@ -28,18 +37,50 @@
     // 去掉下划线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 设置下拉刷新
-    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refresh)];
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewChat)];
     // 马上进入刷新状态
     [self.tableView.header beginRefreshing];
     
 }
-
-- (void)refresh
+// 加载新数据
+- (void)loadNewChat
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    NSMutableDictionary *param =[NSMutableDictionary dictionary];
+//    param[@"adviserId"] = [YTAccountTool account].userId;
+    param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
+    param[@"category"] = @0;
+    param[@"pagesize"] = @20;
+    param[@"pageNo"] = 0;
+    [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
+        YTLog(@"%@", responseObject);
+        self.services = [YTServiceModel objectArrayWithKeyValuesArray:responseObject[@"chatContentList"]];
+        [self.tableView reloadData];
         [self.tableView.header endRefreshing];
-    });
+    } failure:^(NSError *error) {
+        YTLog(@"%@", error);
+        [self.tableView.header endRefreshing];
+    }];
 }
+
+//// 加载更多数据
+//- (void)loadMoreChat
+//{
+//    NSMutableDictionary *param =[NSMutableDictionary dictionary];
+//    param[@"adviserId"] = [YTAccountTool account].userId;
+//    param[@"category"] = @1;
+//    param[@"pagesize"] = @20;
+//    param[@"pageNo"] = @(++self.pageNo);
+//    [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
+//        YTLog(@"%@", responseObject);
+//        [self.services addObjectsFromArray:[YTServiceModel objectArrayWithKeyValuesArray:responseObject]];
+//        [self.tableView reloadData];
+//        [self.tableView.footer endRefreshing];
+//    } failure:^(NSError *error) {
+//        YTLog(@"%@", error);
+//        [self.tableView.footer endRefreshing];
+//    }];
+//}
+
 
 #pragma mark - Table view data source
 
@@ -60,8 +101,7 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.layer.masksToBounds = YES;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-//    cell.product = self.products[indexPath.section];
+    cell.service = self.services[indexPath.section];
     return cell;
 }
 
@@ -72,7 +112,7 @@
 // 设置section的数目，即是你有多少个cell
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 20;
+    return self.services.count;
 }
 // 设置cell之间headerview的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -86,6 +126,14 @@
     headerView.backgroundColor = [UIColor clearColor];
     return headerView;
 }
+#pragma mark - lazy
 
+- (NSMutableArray *)services
+{
+    if (!_services) {
+        _services = [[NSMutableArray alloc] init];
+    }
+    return _services;
+}
 
 @end

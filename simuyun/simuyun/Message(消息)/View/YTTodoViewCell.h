@@ -9,11 +9,13 @@
 // 待办事项
 
 #import <UIKit/UIKit.h>
+#import "YTMessageModel.h"
 
 @interface YTTodoViewCell : UITableViewCell
 
 + (instancetype)todoCell;
 
-@property (nonatomic, copy) NSString *imageName;
+// 消息
+@property (nonatomic, strong) YTMessageModel *message;
 
 @end

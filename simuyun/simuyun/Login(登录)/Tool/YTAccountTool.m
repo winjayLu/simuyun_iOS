@@ -13,6 +13,7 @@
 #import "NSString+Password.h"
 
 
+
 #define YTAccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"account.data"]
 
 @implementation YTAccountTool

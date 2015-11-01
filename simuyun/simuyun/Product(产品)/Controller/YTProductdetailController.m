@@ -10,7 +10,7 @@
 #import "YHWebViewProgress.h"
 #import "YHWebViewProgressView.h"
 #import "UIBarButtonItem+Extension.h"
-#import "HWPopMenu.h"
+#import "DXPopover.h"
 
 @interface YTProductdetailController ()
 @property (nonatomic, weak) UIWebView *webView;
@@ -19,6 +19,12 @@
  *  进度条代理
  */
 @property (nonatomic, strong) YHWebViewProgress *progressProxy;
+
+// 弹出菜单
+@property (nonatomic, strong) DXPopover *popover;
+
+// 菜单内容
+@property (nonatomic, strong) UIView *innerView;
 @end
 
 @implementation YTProductdetailController
@@ -72,15 +78,19 @@
  */
 - (void)rightClick:(UIButton *)button
 {
+    if (self.popover != nil) return;
+    
+    DXPopover *popover = [DXPopover popover];
+    self.popover = popover;
+    // 修正位置
     UIView *view = [[UIView alloc] init];
-    view.backgroundColor = [UIColor redColor];
-    view.frame = CGRectMake(0, 0, 160, 100);
-//    [HWPopMenu popFromView:button content:view dismiss:^{
-//        
-//    }];
-    [HWPopMenu popFromRect:CGRectMake(-135, -150, 180, 200) inView:button content:view dismiss:^{
-        
-    }];
+    view.frame = button.frame;
+    view.y = view.y - 33;
+    [popover showAtView:view withContentView:self.innerView inView:self.view];
+    popover.didDismissHandler = ^{
+        self.innerView.layer.cornerRadius = 0.0;
+        self.popover = nil;
+    };
 }
 
 
@@ -155,6 +165,49 @@
     }
     return _progressProxy;
 }
+
+- (UIView *)innerView
+{
+    if (!_innerView) {
+        UIView *view = [[UIView alloc] init];
+        view.size = CGSizeMake(200, 100);
+        // 分享
+        UIButton *share = [[UIButton alloc] init];
+        share.frame = CGRectMake(0, 0, view.width, view.height * 0.5);
+        [share setBackgroundColor:YTNavBackground];
+        [share setTitle:@"分享" forState:UIControlStateNormal];
+        share.titleLabel.textColor = [UIColor blackColor];
+        [share addTarget:self action:@selector(shareClcik) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:share];
+        
+        // 获取详细资料
+        UIButton *getDetail = [[UIButton alloc] init];
+        getDetail.frame = CGRectMake(0, share.height, share.width, share.height);
+        [getDetail setBackgroundColor:YTGrayBackground];
+        [getDetail setTitle:@"获取详细资料" forState:UIControlStateNormal];
+        [getDetail addTarget:self action:@selector(DetailClick) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:getDetail];
+        // 分割线
+        _innerView = view;
+    }
+    return _innerView;
+}
+// 分享
+- (void)shareClcik
+{
+    YTLog(@"ss");
+    [self.popover dismiss];
+    self.popover = nil;
+}
+
+// 获取详细资料
+- (void)DetailClick
+{
+    YTLog(@"ss");
+    [self.popover dismiss];
+    self.popover = nil;
+}
+
 
 /**
  *  清理webView缓存
