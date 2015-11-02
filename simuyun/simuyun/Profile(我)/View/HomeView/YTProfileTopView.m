@@ -208,6 +208,7 @@
  */
 - (IBAction)qiaoDaoClick:(UIButton *)sender {
     // 调用代理方法
+    sender.enabled = NO;
     [self sendDelegate:TopButtonTypeQiandao];
 }
 /**

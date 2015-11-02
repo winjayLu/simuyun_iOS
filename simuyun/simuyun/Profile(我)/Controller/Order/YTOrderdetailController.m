@@ -40,7 +40,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"产品详情";
+    self.title = @"订单详情";
     self.webView.backgroundColor = [UIColor whiteColor];
     self.webView.scalesPageToFit = YES;
     

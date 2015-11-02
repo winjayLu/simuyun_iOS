@@ -14,9 +14,4 @@
 @implementation YTServiceModel
 
 
-- (void)setLastTimestamp:(NSString *)lastTimestamp
-{
-    _lastTimestamp = lastTimestamp;
-    [CoreArchive setStr:_lastTimestamp key:@"lastTimestamp"];
-}
 @end

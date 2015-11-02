@@ -73,7 +73,6 @@
 
 - (void)isShow:(BOOL)show
 {
-    YTLog(@"%d",show);
     self.hongDian.hidden = !show;
 }
 

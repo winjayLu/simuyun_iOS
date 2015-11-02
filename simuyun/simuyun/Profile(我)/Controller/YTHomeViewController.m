@@ -94,8 +94,6 @@
             if (result) {
                 [SVProgressHUD dismiss];
                 self.topView.userInfo = [YTUserInfoTool userInfo];
-            } else {
-                [SVProgressHUD showErrorWithStatus:@"请检查您的网络链接"];
             }
         }];
     } else
@@ -103,7 +101,18 @@
         self.topView.userInfo = [YTUserInfoTool userInfo];
     }
     // 填充token
-    self.token = [[YTTokenView alloc] init];
+//    self.token = [[YTTokenView alloc] init];
+}
+#warning TODO  加载首页待办事项
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
+        if (result) {
+            [SVProgressHUD dismiss];
+            self.topView.userInfo = [YTUserInfoTool userInfo];
+        }
+    }];
 }
 
 
@@ -185,6 +194,7 @@
 {
     // 调用代理方法
     [self.delegate leftMenuClicked];
+    
     NSString *btnTitle = note.userInfo[YTLeftMenuSelectBtn];
     UIViewController *vc = nil;
     // 判断点击了哪个按钮
@@ -207,8 +217,10 @@
     
     // 跳转对应控制器
     if (vc != nil) {
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        });
     }
 }
 /**
@@ -296,10 +308,6 @@
             break;
     }
     // 跳转对应控制器
-    
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.delegate = nil;
-    }
     if (pushVc != nil) {
         pushVc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:pushVc animated:YES];

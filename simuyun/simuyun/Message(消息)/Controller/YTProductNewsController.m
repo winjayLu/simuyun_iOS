@@ -11,6 +11,7 @@
 #import "YTTodoViewCell.h"
 #import "YTAccountTool.h"
 #import "YTMessageModel.h"
+#import "CoreArchive.h"
 
 @interface YTProductNewsController ()
 
@@ -44,14 +45,15 @@
 - (void)loadNewChat
 {
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
-    //    param[@"adviserId"] = [YTAccountTool account].userId;
-    param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
+        param[@"adviserId"] = [YTAccountTool account].userId;
+//    param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
     param[@"category"] = @2;
     param[@"pagesize"] = @20;
-    self.pageNo = 0;
+    self.pageNo = 1;
     param[@"pageNo"] = @(self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
-        self.messages = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"chatContentList"]];
+        self.messages = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
+        [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"lastTimestamp"];
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
     } failure:^(NSError *error) {
@@ -63,14 +65,15 @@
 - (void)loadMoreChat
 {
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
-    //    param[@"adviserId"] = [YTAccountTool account].userId;
-    param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
+        param[@"adviserId"] = [YTAccountTool account].userId;
+//    param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
     param[@"category"] = @2;
     param[@"pagesize"] = @20;
     param[@"pageNo"] = @(++self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         YTLog(@"%@", responseObject);
-        [self.messages addObjectsFromArray:[YTMessageModel objectArrayWithKeyValuesArray:responseObject]];
+        [self.messages addObjectsFromArray:[YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]]];
+        [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"lastTimestamp"];
         [self.tableView reloadData];
         [self.tableView.footer endRefreshing];
     } failure:^(NSError *error) {

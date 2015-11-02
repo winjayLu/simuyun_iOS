@@ -111,6 +111,8 @@
         authen.submitTime = responseObject[@"submitTime"];
         YTAuthenticationStatusController *authVc = [[YTAuthenticationStatusController alloc] init];
         authVc.authen = authen;
+        [self updateUserInfo];
+        
         [self.navigationController pushViewController:authVc animated:YES];
         
     } failure:^(NSError *error) {

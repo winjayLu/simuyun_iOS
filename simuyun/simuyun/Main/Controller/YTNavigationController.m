@@ -24,7 +24,7 @@
     
     [navBar setShadowImage:[[UIImage alloc] init]];
     // 反回按钮的颜色
-    [navBar setTintColor:YTNavBackColor];
+//    [navBar setTintColor:YTNavBackColor];
     // 设置状态栏背景
 //    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackOpaque;
     // 设置导航栏的文字
@@ -47,6 +47,7 @@
     [barItem setTitleTextAttributes:barItemTextAttr forState:UIControlStateHighlighted];
     // 去掉 backButton 的文字
     [barItem setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)forBarMetrics:UIBarMetricsDefault];
+    [barItem setBackButtonBackgroundImage:[UIImage imageNamed:@"fanhui"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
 }
 
 - (void)didReceiveMemoryWarning {

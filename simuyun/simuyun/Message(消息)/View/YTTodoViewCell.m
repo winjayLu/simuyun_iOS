@@ -86,11 +86,11 @@
             imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
             break;
     }
-    self.imageView.image = [UIImage imageNamed:imageName];
+    self.iconImage.image = [UIImage imageNamed:imageName];
     
     self.titleLable.text = _message.title;
     self.detailLable.text = _message.summary;
-    self.dateLable.text = _message.lastTimestamp;
+    self.dateLable.text = _message.createDate;
 }
 
 - (void)awakeFromNib {

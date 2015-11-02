@@ -29,6 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+        self.title = @"认证失败";
     [self loadAuthen];
 }
 

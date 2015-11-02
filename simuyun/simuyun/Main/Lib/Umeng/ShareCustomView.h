@@ -27,8 +27,8 @@ typedef enum {
     ShareButtonTypeWxPyq,//  微信朋友圈
     ShareButtonTypeEmail,//  电子邮件
     ShareButtonTypeSms,//  短信
-    ShareButtonTypeCopy//  复制url
-    
+    ShareButtonTypeCopy,//  复制url
+    ShareButtonTypeCancel // 取消
 } ShareButtonType;
 
 /**

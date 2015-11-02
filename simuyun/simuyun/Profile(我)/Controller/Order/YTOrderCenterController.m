@@ -88,18 +88,10 @@
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithBg:@"saixuan" highBg:@"saixuananxia" target:self action:@selector(rightClick)];
     
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithBg:@"fanhui" target:self action:@selector(blackVc)];
 
 }
 
-/**
- *  返回按钮
- */
-- (void)blackVc
-{
-    [self.drawerMenu hideAnimated:NO];
-    [self.navigationController popViewControllerAnimated:YES];
-}
+
 /**
  *  右侧菜单
  */
@@ -108,6 +100,12 @@
     self.tableView.header = nil;
     [self.drawerMenu showFromNavigationBar:self.navigationController.navigationBar animated:YES];
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.drawerMenu hideAnimated:NO];
 }
 /**
  *  选中的按钮

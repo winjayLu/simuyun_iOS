@@ -86,6 +86,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
  */
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
     
+    
     CGFloat x = [recognizer translationInView:self.view].x;
     // 禁止在主界面的时候向左滑动
     if ( x < 0) {

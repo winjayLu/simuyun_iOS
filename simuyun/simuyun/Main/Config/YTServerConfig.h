@@ -29,6 +29,8 @@
 //#define YTServer @"https://intime.simuyun.com/api/interface/api"
 
 
+// H5测试地址
+#define YTH5Server @"http://192.168.17.213"
 
 /** 接口名 */
 // 程序启动信息
@@ -76,9 +78,13 @@
 // 上传图片
 #define YTUploadUserImage @"uploadUserImage"
 // 消息列表
-#define YTChatContent @"chatContent"
+#define YTChatContent @"messageList"
+// 客服列表
+#define YTCustomerService @"chatContent"
 // 未读消息数量
 #define YTMessageCount @"messageCount"
+// 邮件获取产品资料
+#define YTEmailsharing @"emailsharing"
 
 
 

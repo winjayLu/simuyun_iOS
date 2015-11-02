@@ -7,6 +7,7 @@
 //
 
 #import "YTCustomerServiceCell.h"
+#import "YTMessageNumTool.h"
 
 // 左右间距
 #define maginWidth 7
@@ -46,6 +47,7 @@
     _service = service;
     self.dateLable.text = service.create_time;
     self.contentLable.text = service.content;
+    [self.unreadNum setTitle:[NSString stringWithFormat:@"%d", [YTMessageNumTool messageNum].CHAT_CONTENT] forState:UIControlStateNormal];
 }
 
 

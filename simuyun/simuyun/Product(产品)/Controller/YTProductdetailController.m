@@ -11,8 +11,15 @@
 #import "YHWebViewProgressView.h"
 #import "UIBarButtonItem+Extension.h"
 #import "DXPopover.h"
+#import "ShareCustomView.h"
+#import "ShareManage.h"
+#import "SVProgressHUD.h"
+#import "YTSenMailView.h"
+#import "CoreTFManagerVC.h"
+#import "YTBuyProductController.h"
 
-@interface YTProductdetailController ()
+
+@interface YTProductdetailController () <shareCustomDelegate, senMailViewDelegate, UIWebViewDelegate>
 @property (nonatomic, weak) UIWebView *webView;
 
 /**
@@ -25,6 +32,14 @@
 
 // 菜单内容
 @property (nonatomic, strong) UIView *innerView;
+
+/**
+ *  分享视图
+ */
+@property (nonatomic, weak) ShareCustomView *customView;
+
+// 发送邮件视图
+@property (nonatomic, weak) YTSenMailView *sendMailView;
 @end
 
 @implementation YTProductdetailController
@@ -39,8 +54,8 @@
     [mainView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
     mainView.scalesPageToFit = YES;
     [mainView.scrollView setShowsVerticalScrollIndicator:NO];
+    mainView.delegate = self;
     self.view = mainView;
-    self.webView = mainView;
     self.view.backgroundColor = YTGrayBackground;
 }
 
@@ -78,7 +93,7 @@
  */
 - (void)rightClick:(UIButton *)button
 {
-    if (self.popover != nil) return;
+    if (self.popover != nil || self.customView != nil || self.sendMailView != nil) return;
     
     DXPopover *popover = [DXPopover popover];
     self.popover = popover;
@@ -107,7 +122,7 @@
     // 设置进度条
     self.progressProxy.progressView = progressView;
     // 将UIWebView代理指向YHWebViq   ewProgress
-    self.webView.delegate = self.progressProxy;
+//    self.webView.delegate = self.progressProxy;
     // 设置webview代理转发到self
 //    self.progressProxy.webViewProxy = self;
     // 添加到视图
@@ -122,20 +137,19 @@
     NSString *urlString = [[request URL] absoluteString];
     NSString *urls = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"%@",urls);
-    NSArray *urlComps = [urlString componentsSeparatedByString:@"://"];
-    //
-    if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"objc"])
+    NSArray *urlComps = [urlString componentsSeparatedByString:@":"];
+    
+    if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"app"])
     {
-        NSArray *arrFucnameAndParameter = [(NSString*)[urlComps objectAtIndex:1] componentsSeparatedByString:@":/"];
+        NSArray *arrFucnameAndParameter = [(NSString*)[urlComps objectAtIndex:1] componentsSeparatedByString:@":"];
         
         // 跳转的地址和标题
         if (arrFucnameAndParameter.count) {
-            NSString *url = [arrFucnameAndParameter[0] substringFromIndex:4];
-
-//            YTWebViewController *vc = [[YTWebViewController alloc] init];
-//            vc.url = [self appendingUrl:url];
-            
-//            [self.navigationController pushViewController:vc animated:YES];
+            NSString *command = arrFucnameAndParameter[0];
+            YTLog(@"%@", command);
+            YTBuyProductController *buy = [[YTBuyProductController alloc] init];
+            buy.product = self.product;
+            [self.navigationController pushViewController:buy animated:YES];
         }
     }
     return YES;
@@ -166,28 +180,53 @@
     return _progressProxy;
 }
 
+// 菜单内容
 - (UIView *)innerView
 {
     if (!_innerView) {
         UIView *view = [[UIView alloc] init];
-        view.size = CGSizeMake(200, 100);
+        view.size = CGSizeMake(137, 84);
+        // 间距
+        CGFloat magin = 1;
         // 分享
         UIButton *share = [[UIButton alloc] init];
-        share.frame = CGRectMake(0, 0, view.width, view.height * 0.5);
-        [share setBackgroundColor:YTNavBackground];
+        share.frame = CGRectMake(magin, magin, view.width - 2 * magin, view.height * 0.5 - 2 * magin);
+        [share setBackgroundImage:[UIImage imageNamed:@"fenxianghongkuang"] forState:UIControlStateHighlighted];
+        [share setImage:[UIImage imageNamed:@"fenxiangzc"] forState:UIControlStateNormal];
+        [share setImage:[UIImage imageNamed:@"fenxianganxia"] forState:UIControlStateHighlighted];
         [share setTitle:@"分享" forState:UIControlStateNormal];
         share.titleLabel.textColor = [UIColor blackColor];
+        share.titleLabel.font = [UIFont systemFontOfSize:14];
+        [share setTitleColor:YTColor(51, 51, 51) forState:UIControlStateNormal];
+        [share setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+        share.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        share.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+        share.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
         [share addTarget:self action:@selector(shareClcik) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:share];
         
+        // 分割线
+        UIView *line = [[UIView alloc] init];
+        line.frame = CGRectMake(0, view.height * 0.5, view.width, 1);
+        line.backgroundColor = YTColor(203, 203, 203);
+        [view addSubview:line];
+        
         // 获取详细资料
         UIButton *getDetail = [[UIButton alloc] init];
-        getDetail.frame = CGRectMake(0, share.height, share.width, share.height);
-        [getDetail setBackgroundColor:YTGrayBackground];
+        getDetail.frame = CGRectMake(magin, CGRectGetMaxY(line.frame) + magin, share.width, share.height - magin);
+        [getDetail setBackgroundImage:[UIImage imageNamed:@"fenxianghongkuang"] forState:UIControlStateHighlighted];
+        [getDetail setImage:[UIImage imageNamed:@"xiazai"] forState:UIControlStateNormal];
+        [getDetail setImage:[UIImage imageNamed:@"xiazaianxia"] forState:UIControlStateHighlighted];
         [getDetail setTitle:@"获取详细资料" forState:UIControlStateNormal];
+        [getDetail setTitleColor:YTColor(51, 51, 51) forState:UIControlStateNormal];
+        [getDetail setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+        getDetail.titleLabel.font = [UIFont systemFontOfSize:14];
+        getDetail.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        getDetail.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+        getDetail.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
         [getDetail addTarget:self action:@selector(DetailClick) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:getDetail];
-        // 分割线
+        
         _innerView = view;
     }
     return _innerView;
@@ -195,18 +234,109 @@
 // 分享
 - (void)shareClcik
 {
-    YTLog(@"ss");
     [self.popover dismiss];
     self.popover = nil;
+    
+    if (self.customView != nil) return;
+    
+    //  设置分享视图平台数据
+    NSArray *titleArr = [NSArray arrayWithObjects:@"微信好友",@"朋友圈",@"邮件",@"短信",@"复制链接", nil];
+    NSArray *imgArr = [NSArray arrayWithObjects:@"ShareButtonTypeWxShare",@"ShareButtonTypeWxPyq",@"ShareButtonTypeEmail",@"ShareButtonTypeSms",@"ShareButtonTypeCopy", nil];
+    //  创建自定义分享视图
+    ShareCustomView *customView = [[ShareCustomView alloc] initWithTitleArray:titleArr imageArray:imgArr];
+    customView.frame = self.view.bounds;
+    
+    //  设置代理
+    customView.shareDelegate = self;
+    [self.view addSubview:customView];
+    self.customView = customView;
+}
+/**
+ *  自定义分享视图代理方法
+ *
+ */
+- (void)shareBtnClickWithIndex:(NSUInteger)tag
+{
+    self.customView = nil;
+    if (tag == ShareButtonTypeCancel) return;
+    // 移除分享菜单
+    [self.customView cancelMenu];
+    //  分享工具类
+    ShareManage *share = [ShareManage shareManage];
+    //  设置分享内容
+    [share shareConfig];
+    share.share_title = @"杰哥正在帮你分享";
+    share.share_content = @"盈泰财富云旗下主要互联网产品有自主研发的私募云App和InTime系统，通过产品、运营、营销和结算等相关服务，致力成为中国第三方财富管理行业最佳运营服务商。";
+    share.share_image = [UIImage imageNamed:@"home_logo"];
+    share.share_url = @"http://www.caifuyun.cn/";
+    switch (tag) {
+        case ShareButtonTypeWxShare:
+            //  微信分享
+            [share wxShareWithViewControll:self];
+            break;
+        case ShareButtonTypeWxPyq:
+            //  朋友圈分享
+            [share wxpyqShareWithViewControll:self];
+            break;
+        case ShareButtonTypeEmail:
+            [share displayEmailComposerSheet:self];
+            break;
+        case ShareButtonTypeSms:
+            //  短信分享
+            [share smsShareWithViewControll:self];
+            break;
+        case ShareButtonTypeCopy:
+        {
+            UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+            pasteboard.string = share.share_url;
+            [SVProgressHUD showSuccessWithStatus:@"复制成功"];
+            [self.customView cancelMenu];
+        }
+            break;
+    }
 }
 
 // 获取详细资料
 - (void)DetailClick
 {
-    YTLog(@"ss");
+
     [self.popover dismiss];
     self.popover = nil;
+    
+    if (self.sendMailView != nil) return;
+    
+    YTSenMailView *sendMail = [[YTSenMailView alloc] initWithViewController:self];
+    sendMail.frame = self.view.bounds;
+    
+    //  设置代理
+    sendMail.sendDelegate = self;
+    [self.view addSubview:sendMail];
+    self.sendMailView = sendMail;
 }
+
+- (void)sendMail:(NSString *)mail
+{
+    self.sendMailView = nil;
+    // 发送请求
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"email"] = mail;
+    params[@"proId"] = self.product.pro_id;
+    [YTHttpTool get:YTEmailsharing params:params success:^(id responseObject) {
+        YTLog(@"%@", responseObject);
+    } failure:^(NSError *error) {
+        YTLog(@"%@", error);
+    }];
+    
+    
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:animated];
+    
+    [CoreTFManagerVC uninstallManagerForVC:self];
+}
+
 
 
 /**

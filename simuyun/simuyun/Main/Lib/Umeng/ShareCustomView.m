@@ -63,16 +63,22 @@
     
     
     mainGrayBg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, DeviceHight)];
-    [mainGrayBg setImage:[UIImage imageWithColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.05]]];
+    [mainGrayBg setImage:[UIImage imageWithColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.5]]];
 
     [mainGrayBg  setUserInteractionEnabled:YES];
     mainGrayBg.alpha = 0.0;
     [self addSubview:mainGrayBg];
     
     UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cancelBtnClick:)];
+
+    mainGrayBg.tag = ShareButtonTypeCancel;
     [mainGrayBg  addGestureRecognizer:tapGR];
+
+    CGFloat shareMenuViewH = 130;
+    if (self.titleArr.count > 4) {
+        shareMenuViewH = shareMenuViewH *2;
+    }
     
-    CGFloat shareMenuViewH = 200;
     shareMenuView = [[UIView alloc]initWithFrame:CGRectMake(0, DeviceHight, DeviceWidth, shareMenuViewH)];
     [self addSubview:shareMenuView];
 
@@ -147,6 +153,7 @@
             menuBtn.tag = buttonType;
         }
     }
+
 }
 
 #pragma mark 选择分享按钮点击
@@ -155,16 +162,18 @@
     if (_shareDelegate  &&[_shareDelegate   respondsToSelector:@selector(shareBtnClickWithIndex:)]) {
         [_shareDelegate  shareBtnClickWithIndex:sender.tag];
     }
-    
 }
 
 #pragma mark 取消分享
-- (void)cancelBtnClick:(UIButton *)sender
+- (void)cancelBtnClick:(UIImageView *)sender
 {
     [UIView animateWithDuration:0.4 animations:^{
         shareMenuView.frame =CGRectMake(0, DeviceHight - 20, DeviceHight, 150);
         mainGrayBg.alpha = 0.0;
     } completion:^(BOOL finished) {
+        if (_shareDelegate  &&[_shareDelegate   respondsToSelector:@selector(shareBtnClickWithIndex:)]) {
+            [_shareDelegate  shareBtnClickWithIndex:ShareButtonTypeCancel];
+        }
         [self removeFromSuperview];
     }];
 }

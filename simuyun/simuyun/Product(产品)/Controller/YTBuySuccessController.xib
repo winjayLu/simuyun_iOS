@@ -22,7 +22,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="660"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="beijingtu" translatesAutoresizingMaskIntoConstraints="NO" id="wPo-5M-LmE">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="edqzcgbannner" translatesAutoresizingMaskIntoConstraints="NO" id="wPo-5M-LmE">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="120" id="iSG-vG-QAX"/>
@@ -296,8 +296,8 @@
         </view>
     </objects>
     <resources>
-        <image name="beijingtu" width="375" height="120"/>
         <image name="duanxin" width="32" height="32"/>
+        <image name="edqzcgbannner" width="375" height="120"/>
         <image name="hcpzx" width="355" height="44"/>
         <image name="weixin" width="32" height="32"/>
         <image name="xzqbb" width="355" height="44"/>

@@ -30,6 +30,10 @@
     self.title = @"订单报备";
     YTReportViewController *report = [[YTReportViewController alloc] init];
     report.view.frame = CGRectMake(0, 0, DeviceWidth, 720);
+    if (DeviceHight > 720) {
+        report.view.frame = CGRectMake(0, 0, DeviceWidth, DeviceHight);
+    }
+    
     report.scroll = (UIScrollView *)self.view;
     report.view.backgroundColor = [UIColor whiteColor];
     [self addChildViewController:report];

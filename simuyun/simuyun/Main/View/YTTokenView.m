@@ -34,7 +34,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     //setData('xlkcjsdljfsdlkf');
-    NSString *js = [NSString stringWithFormat:@"setData('%@');",[YTAccountTool account].token];
+    NSString *js = [NSString stringWithFormat:@"setData('%@', '%@');",[YTAccountTool account].token, [YTAccountTool account].userId];
     [webView stringByEvaluatingJavaScriptFromString:js];
 
 }
@@ -53,13 +53,7 @@
         // 跳转的地址和标题
         if (arrFucnameAndParameter.count) {
             NSString *command = arrFucnameAndParameter[0];
-            YTLog(@"ss");
-            
-//            YTLog(@"%@",title);
-//            YTWebViewController *vc = [[YTWebViewController alloc] init];
-//            vc.url = [self appendingUrl:url];
-//            
-//            [self.navigationController pushViewController:vc animated:YES];
+            YTLog(@"%@", command);
         }
     }
     return YES;

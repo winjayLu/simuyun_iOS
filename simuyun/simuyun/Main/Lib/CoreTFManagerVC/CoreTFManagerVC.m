@@ -284,7 +284,7 @@
         if(tfm.inputView!=nil) textField.inputView=tfm.inputView;
         
         //设置键盘工具条
-        textField.inputAccessoryView=self.keyBoardToolBarView;
+//        textField.inputAccessoryView=self.keyBoardToolBarView;
         
         //返回键样式
         textField.returnKeyType=UIReturnKeyDefault;

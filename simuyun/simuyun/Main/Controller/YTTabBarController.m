@@ -17,6 +17,8 @@
 #import "YTLogoView.h"
 #import "YTAccountTool.h"
 #import "YTRedrainViewController.h"
+#import "YTMessageNumTool.h"
+#import "CoreArchive.h"
 
 
 @interface YTTabBarController () <YTLogoViewDelegate>
@@ -68,8 +70,10 @@
     [self logoViewDidSelectProfileItem];
     
     // 开启定时器时时获取红包雨
-    [self timerOn];
+//    [self timerOn];
 
+    // 获取是否有新消息
+    [self loadMessageCount];
 }
 /**
  *  获取红包雨
@@ -99,6 +103,30 @@
     }];
 }
 
+/**
+ *  获取是否有新消息
+ *
+ */
+- (void)loadMessageCount
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        params[@"adviserId"] = [YTAccountTool account].userId;
+//    params[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
+    NSString *lastTimestamp = [CoreArchive strForKey:@"lastTimestamp"];
+    if (lastTimestamp == nil || lastTimestamp.length == 0) {
+        lastTimestamp = @"2013-01-01 00:00:00";
+
+    }
+    params[@"timestamp"] = lastTimestamp;
+    [YTHttpTool get:YTMessageCount params:params success:^(id responseObject) {
+        [YTMessageNumTool save:[YTMessageNum objectWithKeyValues:responseObject]];
+        YTMessageNum *messageNum = [YTMessageNumTool messageNum];
+        if (messageNum.CHAT_CONTENT > 0) {
+            self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", messageNum.CHAT_CONTENT];
+        }
+    } failure:^(NSError *error) {
+    }];
+}
 
 /*
  *  新开一个定时器

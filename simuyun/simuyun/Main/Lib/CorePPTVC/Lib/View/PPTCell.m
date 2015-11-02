@@ -83,7 +83,7 @@ static NSString *const rid= @"PPTCell";
         _imageV.image = _pptModel.image;
     }else{
         
-        [_imageV imageWithUrlStr:_pptModel.imageURLString phImage:nil];
+        [_imageV imageWithUrlStr:_pptModel.imageURLString phImage:[UIImage imageNamed:@"tuxiangzhanwei"]];
     }
     
 }

@@ -15,6 +15,7 @@
 #import "YTProductNewsController.h"
 #import "YTSystemCenterController.h"
 #import "YTAccountTool.h"
+#import "YTMessageNumTool.h"
 
 @interface YTMessageViewController ()
 
@@ -45,18 +46,13 @@
  */
 - (void)loadNewStatus
 {
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"adviserId"] = [YTAccountTool account].userId;
-//    params[@"timestamp"] = 
-    [YTHttpTool get:YTMessageCount params:params success:^(id responseObject) {
-        NSLog(@"%@", responseObject);
-    } failure:^(NSError *error) {
-        YTLog(@"%@", error);
-    }];
+    // 消息数量
+    YTMessageNum *messageNum = [YTMessageNumTool messageNum];
     
-    self.status = @[@(0), @(1), @(1), @(1)];
-//    __weak int i = 0;
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    self.status = @[@(messageNum.CHAT_CONTENT), @(messageNum.TODO_LIST), @(messageNum.PRODUCT_NEWS), @(messageNum.SYSTEM_NOTICE)];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
         [self updateBtn];
     });
 }
@@ -68,9 +64,9 @@
     int i = 0;
     for (UIView *view in self.pagesView.pagesBarView.subviews) {
         if ([view isKindOfClass:[CorePagesBarBtn class]]) {
-            BOOL isShow = NO;
-            if ([self.status[i]  isEqual: @1]) {
-                isShow = YES;
+            BOOL isShow = YES;
+            if ([self.status[i]  isEqual: @0] || i == 0) {
+                isShow = NO;
             }
             [(CorePagesBarBtn *)view isShow:isShow];
             i++;

@@ -18,7 +18,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vNU-BJ-ScL">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lcsrzbanner" translatesAutoresizingMaskIntoConstraints="NO" id="vNU-BJ-ScL">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="120" id="Rj4-Tw-kN5"/>
@@ -106,4 +106,7 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>
     </objects>
+    <resources>
+        <image name="lcsrzbanner" width="375" height="120"/>
+    </resources>
 </document>

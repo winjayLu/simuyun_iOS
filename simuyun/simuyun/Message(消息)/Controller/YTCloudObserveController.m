@@ -17,8 +17,6 @@
 
 @interface YTCloudObserveController ()
 
-//// 起始页
-//@property (nonatomic, assign) int pageNo;
 
 // 客服消息
 @property (nonatomic, strong) NSMutableArray *services;
@@ -49,10 +47,7 @@
 //    param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
     param[@"category"] = @0;
-    param[@"pagesize"] = @20;
-    param[@"pageNo"] = 0;
-    [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
-        YTLog(@"%@", responseObject);
+    [YTHttpTool get:YTCustomerService params:param success:^(id responseObject) {
         self.services = [YTServiceModel objectArrayWithKeyValuesArray:responseObject[@"chatContentList"]];
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
@@ -62,24 +57,6 @@
     }];
 }
 
-//// 加载更多数据
-//- (void)loadMoreChat
-//{
-//    NSMutableDictionary *param =[NSMutableDictionary dictionary];
-//    param[@"adviserId"] = [YTAccountTool account].userId;
-//    param[@"category"] = @1;
-//    param[@"pagesize"] = @20;
-//    param[@"pageNo"] = @(++self.pageNo);
-//    [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
-//        YTLog(@"%@", responseObject);
-//        [self.services addObjectsFromArray:[YTServiceModel objectArrayWithKeyValuesArray:responseObject]];
-//        [self.tableView reloadData];
-//        [self.tableView.footer endRefreshing];
-//    } failure:^(NSError *error) {
-//        YTLog(@"%@", error);
-//        [self.tableView.footer endRefreshing];
-//    }];
-//}
 
 
 #pragma mark - Table view data source
@@ -126,6 +103,13 @@
     headerView.backgroundColor = [UIColor clearColor];
     return headerView;
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.tabBarItem.badgeValue = nil;
+}
+
+
+
 #pragma mark - lazy
 
 - (NSMutableArray *)services

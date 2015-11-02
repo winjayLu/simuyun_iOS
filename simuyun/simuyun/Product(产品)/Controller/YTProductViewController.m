@@ -90,9 +90,9 @@
     YTProductModel *product = self.products[indexPath.section];
     NSString *url = nil;
     if (product.type_code == 1) {
-        url = [NSString stringWithFormat:@"http://www.simuyun.com/product/floating.html?id=%@",product.pro_id];
+        url = [NSString stringWithFormat:@"%@/product/floating.html?id=%@", YTH5Server ,product.pro_id];
     } else {
-        url = [NSString stringWithFormat:@"http://www.simuyun.com/product/fixed.html?id=%@",product.pro_id];
+        url = [NSString stringWithFormat:@"%@/product/fixed.html?id=%@", YTH5Server ,product.pro_id];
     }
     YTProductdetailController *web = [[YTProductdetailController alloc] init];
     web.url = url;

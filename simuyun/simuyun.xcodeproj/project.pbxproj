@@ -209,6 +209,9 @@
 		97C606C51BC29D8E00E555E8 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C606C41BC29D8E00E555E8 /* CoreTelephony.framework */; };
 		97C606C71BC29D9B00E555E8 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C606C61BC29D9B00E555E8 /* libstdc++.tbd */; };
 		97C606C91BC29DA500E555E8 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C606C81BC29DA500E555E8 /* libz.tbd */; };
+		97C981C01BE72DE5005FDE2F /* YTSenMailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C981BF1BE72DE5005FDE2F /* YTSenMailView.m */; };
+		97C981C81BE79655005FDE2F /* YTMessageNum.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C981C71BE79655005FDE2F /* YTMessageNum.m */; };
+		97C981CB1BE796C0005FDE2F /* YTMessageNumTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C981CA1BE796C0005FDE2F /* YTMessageNumTool.m */; };
 		97DD72C11BC421D90082C69F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C01BC421D90082C69F /* libsqlite3.dylib */; };
 		97DD72C31BC421E60082C69F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C21BC421E60082C69F /* libz.dylib */; };
 		97DD72C51BC421F40082C69F /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C41BC421F40082C69F /* libstdc++.dylib */; };
@@ -631,6 +634,12 @@
 		97C606C41BC29D8E00E555E8 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		97C606C61BC29D9B00E555E8 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		97C606C81BC29DA500E555E8 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		97C981BE1BE72DE5005FDE2F /* YTSenMailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSenMailView.h; sourceTree = "<group>"; };
+		97C981BF1BE72DE5005FDE2F /* YTSenMailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSenMailView.m; sourceTree = "<group>"; };
+		97C981C61BE79655005FDE2F /* YTMessageNum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTMessageNum.h; sourceTree = "<group>"; };
+		97C981C71BE79655005FDE2F /* YTMessageNum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMessageNum.m; sourceTree = "<group>"; };
+		97C981C91BE796C0005FDE2F /* YTMessageNumTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTMessageNumTool.h; sourceTree = "<group>"; };
+		97C981CA1BE796C0005FDE2F /* YTMessageNumTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMessageNumTool.m; sourceTree = "<group>"; };
 		97DD72C01BC421D90082C69F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		97DD72C21BC421E60082C69F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		97DD72C41BC421F40082C69F /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
@@ -918,6 +927,8 @@
 				978C6FE41BCF8564003D183E /* YTProductCell.h */,
 				978C6FE51BCF8564003D183E /* YTProductCell.m */,
 				978C6FE61BCF8564003D183E /* YTProductCell.xib */,
+				97C981BE1BE72DE5005FDE2F /* YTSenMailView.h */,
+				97C981BF1BE72DE5005FDE2F /* YTSenMailView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1272,6 +1283,10 @@
 			children = (
 				97BF5BFC1BD7BF0B00053BD0 /* YTResources.h */,
 				97BF5BFD1BD7BF0B00053BD0 /* YTResources.m */,
+				97C981C61BE79655005FDE2F /* YTMessageNum.h */,
+				97C981C71BE79655005FDE2F /* YTMessageNum.m */,
+				97C981C91BE796C0005FDE2F /* YTMessageNumTool.h */,
+				97C981CA1BE796C0005FDE2F /* YTMessageNumTool.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2170,6 +2185,7 @@
 				9714A6EF1BC7E0610018A14E /* NSString+FontAwesome.m in Sources */,
 				97C6067E1BC271DE00E555E8 /* CoreStatus.m in Sources */,
 				97BC99751BD4DB610090BDE8 /* CorePagesViewConfig.m in Sources */,
+				97C981C81BE79655005FDE2F /* YTMessageNum.m in Sources */,
 				9782181F1BD0CA28000159E8 /* YTRegisterViewController.m in Sources */,
 				97ABCB861BDE128D0056C1A1 /* YTInformation.m in Sources */,
 				97DE830E1BD0FB5300E3C5CA /* TFModel.m in Sources */,
@@ -2182,6 +2198,7 @@
 				97BF5BF31BD7902700053BD0 /* JFImagePickerViewCell.m in Sources */,
 				97BC99781BD4DB610090BDE8 /* CorePageModel.m in Sources */,
 				97C6061B1BC266A900E555E8 /* CALayer+Transition.m in Sources */,
+				97C981CB1BE796C0005FDE2F /* YTMessageNumTool.m in Sources */,
 				97ED0CD31BE2460200E95750 /* YTProductdetailController.m in Sources */,
 				9769F9FB1BC9676B001B1F02 /* YTProfileTopView.m in Sources */,
 				970020C61BD64B9F00231F52 /* YTBuySuccessController.m in Sources */,
@@ -2203,6 +2220,7 @@
 				9714A6F31BC7E0610018A14E /* UIView+YUStyle.m in Sources */,
 				976084241BD8F89E0037A4F7 /* YTSchoolSubPagController.m in Sources */,
 				978218271BD0E40C000159E8 /* YTResultPasswordViewController.m in Sources */,
+				97C981C01BE72DE5005FDE2F /* YTSenMailView.m in Sources */,
 				97C606251BC2679F00E555E8 /* NSString+Extend.m in Sources */,
 				97BC997D1BD4DC8B0090BDE8 /* YTCloudObserveController.m in Sources */,
 				9769F9F81BC9676B001B1F02 /* YTContentView.m in Sources */,
@@ -2391,8 +2409,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2436,8 +2454,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2464,8 +2482,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
 				INFOPLIST_FILE = simuyun/Info.plist;
@@ -2490,8 +2508,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
 				INFOPLIST_FILE = simuyun/Info.plist;
