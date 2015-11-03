@@ -342,5 +342,8 @@
 {
     return _assetGroups[nIndex];
 }
+- (void)deleteSelectedPhoto:(NSArray *)arr
+{
+}
 
 @end

@@ -83,7 +83,7 @@
 			photoBrowser.delegate = self.navigationController;
 			[self.navigationController pushViewController:photoBrowser animated:YES];
         }
-        NSArray * ar = ASSETHELPER.selectdPhotos;
+//        NSArray * ar = ASSETHELPER.selectdPhotos;
         
         for (NSDictionary *dict in ASSETHELPER.selectdPhotos) {
             NSArray *temp = [[[dict allKeys] firstObject] componentsSeparatedByString:@"-"];

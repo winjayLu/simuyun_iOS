@@ -32,8 +32,6 @@ static YTResources *_resources;
     [YTHttpTool get:YTGetResources params:dict success:^(NSDictionary *responseObject)
      {
          [self saveResources:[YTResources objectWithKeyValues:responseObject]];
-         YTResources *resources = [self resources];
-         NSLog(@"%@", responseObject);
          result(YES);
      } failure:^(NSError *error) {
          result(NO);

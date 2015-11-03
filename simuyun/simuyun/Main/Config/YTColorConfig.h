@@ -40,7 +40,7 @@
 
 
 // 界面黑色背景
-#define YTViewBackground YTColor(51, 51, 51)
+#define YTViewBackground YTColor(33, 33, 33)
 
 // 界面灰色背景
 #define YTGrayBackground YTColor(246, 246, 246)

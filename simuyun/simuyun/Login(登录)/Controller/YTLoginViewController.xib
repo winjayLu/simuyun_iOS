@@ -38,7 +38,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
                 </textField>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dengluming" translatesAutoresizingMaskIntoConstraints="NO" id="QaI-5I-Z9A">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yonghuming" translatesAutoresizingMaskIntoConstraints="NO" id="QaI-5I-Z9A">
                     <rect key="frame" x="22" y="210" width="21" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="NY6-zZ-jAS"/>
@@ -236,10 +236,10 @@
     <resources>
         <image name="backgrounddl" width="375" height="667"/>
         <image name="dengluanxia" width="330" height="44"/>
-        <image name="dengluming" width="21" height="21"/>
         <image name="dengluzhengchang" width="330" height="44"/>
         <image name="mima" width="22" height="22"/>
         <image name="weixin" width="32" height="32"/>
         <image name="weixinlogin_down" width="62" height="62"/>
+        <image name="yonghuming" width="22" height="22"/>
     </resources>
 </document>

@@ -164,8 +164,8 @@
         <image name="backgrounddl" width="375" height="667"/>
         <image name="dengluming" width="21" height="21"/>
         <image name="fansongyanzhnegmazc" width="115" height="33"/>
-        <image name="mima" width="21" height="21"/>
-        <image name="yanzhengma" width="21" height="21"/>
+        <image name="mima" width="22" height="22"/>
+        <image name="yanzhengma" width="22" height="22"/>
         <image name="yanzhengmakuang" width="115" height="33"/>
         <image name="zhuceanxia" width="330" height="44"/>
         <image name="zhucezhengchang" width="330" height="44"/>

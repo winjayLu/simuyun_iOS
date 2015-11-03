@@ -30,6 +30,11 @@
 #import "UMSocialWechatHandler.h"
 #import "YTAccountTool.h"
 #import "YTTokenView.h"
+#import "YTMessageModel.h"
+#import "YTResourcesTool.h"
+#import "HHAlertView.h"
+
+#define magin 3
 
 @interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate, UIScrollViewDelegate>
 
@@ -42,6 +47,10 @@
  *  待办事项
  */
 @property (nonatomic, weak) YTContentView *todoView;
+/**
+ *  底部视图
+ */
+@property (nonatomic, weak) YTBottomView *bottom;
 
 /**
  *  待办事项数据
@@ -50,8 +59,12 @@
 
 @property (nonatomic, weak) UIScrollView *mainView;
 
-
+// h5页面填充token
 @property (nonatomic, strong) YTTokenView *token;
+
+// 是否加载用户信息
+@property (nonatomic, assign) BOOL isLoad;
+
 
 @end
 
@@ -87,32 +100,84 @@
     // 监听左侧菜单通知
     [self leftMenuNotification];
     
+    // 加载待办事项
+    [self loadTodos];
+    
     // 获取用户信息
-    if ([YTUserInfoTool userInfo] == nil) {
-//        [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
-        [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
-            if (result) {
-                [SVProgressHUD dismiss];
-                self.topView.userInfo = [YTUserInfoTool userInfo];
-            }
-        }];
-    } else
-    {
-        self.topView.userInfo = [YTUserInfoTool userInfo];
-    }
+    [self loadUserInfo];
+   
     // 填充token
-//    self.token = [[YTTokenView alloc] init];
+    self.token = [[YTTokenView alloc] init];
+    
+    // 检查更新
+    [self updateData];
 }
-#warning TODO  加载首页待办事项
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    // 判断标志位
+    if (self.isLoad) {
+        self.isLoad = NO;
+        return;
+    }
+    // 重新加载用户信息
     [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
         if (result) {
             [SVProgressHUD dismiss];
             self.topView.userInfo = [YTUserInfoTool userInfo];
         }
     }];
+    // 加载待办事项
+    [self loadTodos];
+}
+
+// 检查更新
+- (void)updateData
+{
+    YTResources *resources = [YTResourcesTool resources];
+
+    NSURL *updateUrl = [NSURL URLWithString:@"https://itunes.apple.com/us/app/si-mu-yun-san-fang-li-cai/id933795157?mt=8&uo=4"];
+    if (resources.version != nil && resources.version.length > 0) { // 有新版本
+        if ([resources.isMustUpdate isEqualToString:@"y"]) {
+            HHAlertView *alert = [HHAlertView shared];
+            [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"gantan" Title:@"发现新版本" detail:resources.adverts cancelButton:nil Okbutton:@"去更新" block:^(HHAlertButton buttonindex) {
+                 [[UIApplication sharedApplication] openURL:updateUrl];
+            }];
+        } else {
+            HHAlertView *alert = [HHAlertView shared];
+            [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"gantan" Title:@"发现新版本" detail:resources.adverts cancelButton:@"取消" Okbutton:@"去更新" block:^(HHAlertButton buttonindex) {
+                if (buttonindex == HHAlertButtonOk) {
+                    
+                    [[UIApplication sharedApplication] openURL:updateUrl];
+                } else {
+                    [alert hide];
+                }
+            }];
+        }
+    }
+}
+
+
+
+/**
+ *  加载用户信息
+ */
+- (void)loadUserInfo
+{
+    // 第一次加载
+
+    if ([YTUserInfoTool userInfo] == nil) {
+        [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
+            if (result) {
+                [SVProgressHUD dismiss];
+                self.topView.userInfo = [YTUserInfoTool userInfo];
+            }
+        }];
+    } else {
+        self.topView.userInfo = [YTUserInfoTool userInfo];
+    }
+    self.isLoad = YES;
 }
 
 
@@ -144,15 +209,13 @@
     // 计算todoView的高度
     
     CGFloat groupCellHeight = 42;
-    CGFloat conetentCellHeight = 56;
+    CGFloat conetentCellHeight = 52;
     CGFloat todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
-    CGFloat magin = 3;
     
     YTContentView *content = [[YTContentView alloc] init];
     content.frame = CGRectMake(magin, CGRectGetMaxY(self.topView.frame), self.view.width - magin * 2, todoHeight);
     content.layer.cornerRadius = 5;
     content.layer.masksToBounds = YES;
-    content.todos = self.todos;
     content.daili = self;
     [self.view addSubview:content];
     self.todoView = content;
@@ -162,13 +225,13 @@
  */
 - (void)setupBottom
 {
-    CGFloat magin = 3;
     YTBottomView *bottom = [[YTBottomView alloc] init];
     bottom.layer.cornerRadius = 5;
     bottom.layer.masksToBounds = YES;
     bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42 * 3);
     bottom.BottomDelegate = self;
     [self.view addSubview:bottom];
+    self.bottom = bottom;
     // 设置滚动范围
     [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame) + 64)];
 }
@@ -185,6 +248,43 @@
     [YTCenter addObserver:self selector:@selector(updateUserInfo) name:YTUpdateUserInfo object:nil];
 }
 
+
+#pragma mark - 加载数据
+// 加载新数据
+- (void)loadTodos
+{
+    NSMutableDictionary *param =[NSMutableDictionary dictionary];
+//    param[@"adviserId"] = [YTAccountTool account].userId;
+            param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
+    param[@"category"] = @1;
+    param[@"pagesize"] = @3;
+    param[@"pageNo"] = @(1);
+    [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
+        self.todos = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
+        [self updateTodos];
+    } failure:^(NSError *error) {
+    }];
+}
+
+// 给todoView设置数据
+- (void)updateTodos
+{
+    // 设置数据
+    self.todoView.todos = self.todos;
+    
+    // 修改todo的frame
+    CGFloat groupCellHeight = 42;
+    CGFloat conetentCellHeight = 52;
+    CGFloat todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
+    self.todoView.frame = CGRectMake(magin, CGRectGetMaxY(self.topView.frame), self.view.width - magin * 2, todoHeight);
+
+    // 修改底部菜单frame
+    self.bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42 * 3);
+    
+    // 设置滚动范围
+    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.bottom.frame) + 64)];
+}
+
 #pragma mark - 响应事件
 /**
  *  左侧菜单选中事件
@@ -199,7 +299,7 @@
     UIViewController *vc = nil;
     // 判断点击了哪个按钮
     if ([btnTitle isEqualToString:@"用户资料"]) {
-        vc = [YTNormalWebController webWithTitle:@"用户资料" url:@"http://www.simuyun.com/my/profile/"];
+        vc = [YTNormalWebController webWithTitle:@"用户资料" url:[NSString stringWithFormat:@"%@/my/profile/", YTH5Server]];
     } else if([btnTitle isEqualToString:@"关联微信"]){
          [self relationWeChat];
     } else if([btnTitle isEqualToString:@"推荐私募云给好友"]){
@@ -356,6 +456,10 @@
  */
 - (void)Authentication
 {
+    if ([YTUserInfoTool userInfo].phoneNumer != nil && [YTUserInfoTool userInfo].phoneNumer.length > 0) {
+        
+    }
+    
     UIViewController *vc = nil;
     int status = [YTUserInfoTool userInfo].adviserStatus;
     if(status == 1)
@@ -378,6 +482,7 @@
  */
 - (void)relationWeChat
 {
+#warning TODO重新加载用户信息
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     
     //  友盟微信登录
@@ -415,7 +520,7 @@
 - (NSArray *)todos
 {
     if (!_todos) {
-        _todos = @[@"诗酒风流撒娇斐林试剂氨分解",@"孙菲菲撒娇雷锋精神拉法基开了撒家乐福法基开了撒家乐福法基开了撒家乐福法基开了撒家乐福法基开了撒家乐福法基开了撒家乐福法基开了撒家乐福", @"sf氨分解撒浪费精力撒街坊邻居爱上街坊邻居街坊邻居爱上街坊邻居街坊邻居爱上街坊邻居街坊邻居爱上街坊邻居"];
+        _todos = [[NSArray alloc] init];
     }
     return _todos;
 }

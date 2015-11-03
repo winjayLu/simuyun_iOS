@@ -35,6 +35,8 @@
 #define DeviceHight DeviceBounds.size.height
 /** iphone6 */
 #define iPhone6 (DeviceWidth == 375.0f && DeviceHight == 667.0f)
+/** iphone5 */
+#define iPhone5 (DeviceWidth == 320.0f && DeviceHight == 568.0f)
 
 #ifdef DEBUG
 #define YTLog(...) NSLog(__VA_ARGS__)

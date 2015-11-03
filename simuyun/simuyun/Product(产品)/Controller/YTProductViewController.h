@@ -10,4 +10,8 @@
 
 @interface YTProductViewController : UITableViewController
 
+// 系列
+@property (nonatomic, assign) int series;
+
+
 @end

@@ -104,8 +104,7 @@ static ShareManage *shareManage;
     //设置主题
     [mailPicker setSubject:self.share_title];
     // 添加一张图片
-#warning 图片待添加
-    UIImage *addPic = [UIImage imageNamed: @"home_logo"];
+    UIImage *addPic = [UIImage imageNamed: @"maillogo"];
     NSData *imageData = UIImagePNGRepresentation(addPic);
     [mailPicker addAttachmentData: imageData mimeType: @"image/png" fileName: @"Icon.png"];
     // 设置正文

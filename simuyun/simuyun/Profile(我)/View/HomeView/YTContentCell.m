@@ -26,11 +26,10 @@
     // Configure the view for the selected state
 }
 
-- (void)setTodoTitle:(NSString *)todoTitle
+- (void)setSummary:(NSString *)summary
 {
-
-    _todoTitle = todoTitle;
-    self.titleLble.text = _todoTitle;
+    _summary = summary;
+    self.titleLble.text = summary;
 }
 
 @end

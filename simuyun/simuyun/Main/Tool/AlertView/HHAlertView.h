@@ -52,14 +52,8 @@ typedef void (^selectButton)(HHAlertButton buttonindex);
  */
 - (void)hide;
 
-/*
- HHAlertView *alert = [HHAlertView shared];
- [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"xin" Title:@"温馨提示" detail:@"圣诞节撒了放假啦十几分考虑时间啊圣诞节撒了放假啦十几分考虑时间啊圣诞节撒了放假啦十几分考虑时间啊圣诞节撒了放撒了放圣诞节撒了放假啦十几分考虑时间啊圣" cancelButton:nil Okbutton:@"去看看" block:^(HHAlertButton buttonindex) {
- 
- NSLog(@"%zd",buttonindex);
- }];
- 
- */
+
+
 /**
  *  show the alertview and use Block to know which button is clicked
  *

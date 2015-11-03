@@ -27,13 +27,14 @@
 // 填充token
 - (void)setToken
 {
-    [self loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.simuyun.com/app/setData.html"]]];
+    
+    [self loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/app/setData.html", YTH5Server]]]];
     self.delegate = self;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    //setData('xlkcjsdljfsdlkf');
+    // 执行js代码
     NSString *js = [NSString stringWithFormat:@"setData('%@', '%@');",[YTAccountTool account].token, [YTAccountTool account].userId];
     [webView stringByEvaluatingJavaScriptFromString:js];
 
@@ -49,7 +50,6 @@
     if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"app"])
     {
         NSArray *arrFucnameAndParameter = [(NSString*)[urlComps objectAtIndex:1] componentsSeparatedByString:@":"];
-        
         // 跳转的地址和标题
         if (arrFucnameAndParameter.count) {
             NSString *command = arrFucnameAndParameter[0];

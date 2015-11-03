@@ -66,7 +66,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="quan" translatesAutoresizingMaskIntoConstraints="NO" id="CrT-a4-ocu" userLabel="头像bj">
-                    <rect key="frame" x="98" y="50" width="126" height="126"/>
+                    <rect key="frame" x="98" y="53" width="126" height="126"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="126" id="6jt-SA-Iru"/>
                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="126" id="P1V-fa-emp"/>
@@ -76,7 +76,7 @@
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="110" id="vJt-pw-QIa"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="huangguang" translatesAutoresizingMaskIntoConstraints="NO" id="Z40-Md-MMW">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Z40-Md-MMW">
                     <rect key="frame" x="132" y="28" width="58" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="58" id="NyK-ah-0ck"/>
@@ -84,7 +84,7 @@
                     </constraints>
                 </imageView>
                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="27e-HL-mxV" userLabel="头像">
-                    <rect key="frame" x="106" y="58" width="110" height="110"/>
+                    <rect key="frame" x="106" y="61" width="110" height="110"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <gestureRecognizers/>
                     <constraints>
@@ -127,7 +127,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- - -丨- - -" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0EK-Rx-hhm" userLabel="昵称">
-                    <rect key="frame" x="51" y="190" width="220" height="22"/>
+                    <rect key="frame" x="51" y="193" width="220" height="22"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="230" id="rqk-gM-95D"/>
                     </constraints>
@@ -199,7 +199,7 @@
                 <constraint firstItem="F28-CY-hce" firstAttribute="height" secondItem="xO5-bn-mkv" secondAttribute="height" id="7Xa-22-Ifm"/>
                 <constraint firstItem="27e-HL-mxV" firstAttribute="centerY" secondItem="CrT-a4-ocu" secondAttribute="centerY" id="7x9-jr-haX"/>
                 <constraint firstItem="0EK-Rx-hhm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="51" id="8xt-br-ADe"/>
-                <constraint firstItem="CrT-a4-ocu" firstAttribute="top" secondItem="Z40-Md-MMW" secondAttribute="bottom" constant="-8" id="932-ES-bGe"/>
+                <constraint firstItem="CrT-a4-ocu" firstAttribute="top" secondItem="Z40-Md-MMW" secondAttribute="bottom" constant="-5" id="932-ES-bGe"/>
                 <constraint firstAttribute="trailing" secondItem="xO5-bn-mkv" secondAttribute="trailing" constant="10" id="BzJ-yQ-k84"/>
                 <constraint firstItem="ZK9-mr-7Kc" firstAttribute="top" secondItem="PXL-kS-EuD" secondAttribute="bottom" constant="2" id="CHV-4u-dQg"/>
                 <constraint firstAttribute="trailing" secondItem="zM7-Sr-Sgp" secondAttribute="trailing" constant="10" id="EDS-rW-yEN"/>
@@ -272,6 +272,7 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="huangGuanImage" destination="Z40-Md-MMW" id="gls-gG-hgf"/>
                 <outlet property="iconImage" destination="27e-HL-mxV" id="Oac-y8-Xky"/>
                 <outlet property="keHuLable" destination="uQ9-IY-0yg" id="Bfg-f1-VNw"/>
                 <outlet property="nameLable" destination="0EK-Rx-hhm" id="CFa-aF-53t"/>
@@ -294,7 +295,6 @@
         <image name="background-picture" width="375" height="270"/>
         <image name="chouti" width="23" height="15"/>
         <image name="dikuang" width="89" height="53"/>
-        <image name="huangguang" width="58" height="30"/>
         <image name="quan" width="126" height="126"/>
         <image name="weiqiandao" width="37" height="37"/>
         <image name="weirenzheng" width="37" height="37"/>

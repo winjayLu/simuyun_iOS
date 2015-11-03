@@ -22,19 +22,27 @@
 - (void)chooseRootviewController
 {
     
-    if (iPhone6) {
-        YTLog(@"加载iphoe6对应的图片");
-    }
+    
     // 判断显示新特性还是欢迎界面
     if ([CoreNewFeatureVC canShowNewFeature])
     {
+        NSString *imageName = @"newFeature";
+        if (iPhone6) {
+            imageName = @"newFeatureiphone6";
+        } else if(iPhone5)
+        {
+            imageName = @"newFeatureiphone5";
+        }
+        
         // 创建性特性模型
-        NewFeatureModel *m1 = [NewFeatureModel model:[UIImage imageWithColor:YTRandomColor]];
-        NewFeatureModel *m2 = [NewFeatureModel model:[UIImage imageWithColor:YTRandomColor]];
-        NewFeatureModel *m3 = [NewFeatureModel model:[UIImage imageWithColor:YTRandomColor]];
+        NewFeatureModel *m1 = [NewFeatureModel model:[UIImage imageNamed:[NSString stringWithFormat:@"%@1",imageName]]];
+        NewFeatureModel *m2 = [NewFeatureModel model:[UIImage imageNamed:[NSString stringWithFormat:@"%@2",imageName]]];
+        NewFeatureModel *m3 = [NewFeatureModel model:[UIImage imageNamed:[NSString stringWithFormat:@"%@3",imageName]]];
+        NewFeatureModel *m4 = [NewFeatureModel model:[UIImage imageNamed:[NSString stringWithFormat:@"%@4",imageName]]];
+        NewFeatureModel *m5 = [NewFeatureModel model:[UIImage imageNamed:[NSString stringWithFormat:@"%@5",imageName]]];
         
         // 新特性控制器
-        self.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m1,m2,m3] enterBlock:^{
+        self.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m1,m2,m3,m4,m5] enterBlock:^{
             // 登录控制器
             self.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
             [self transitionVc];
@@ -43,9 +51,6 @@
         // 欢迎控制器
         self.rootViewController = [[YTWelcomeViewController alloc] init];
     }
-    
-#warning 开发阶段
-//    self.rootViewController = [[YTTabBarController alloc] init];
 }
 
 /**

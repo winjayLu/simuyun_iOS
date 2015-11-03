@@ -107,10 +107,7 @@
 
 - (void)thumbWithAsset:(ALAsset *)asset
          resultHandler:(void (^)(UIImage *result))resultHandler{
-    NSLog(@"sss");
    
-    ALAsset *a = asset;
-     NSLog(@"%@",asset);
     if (!resultHandler) {
         return;
     }

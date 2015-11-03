@@ -9,7 +9,7 @@
 
 #import "YTTabBarController.h"
 #import "YTMessageViewController.h"
-#import "YTProductViewController.h"
+#import "YTProductGroupController.h"
 #import "YTProfileViewController.h"
 #import "YTSchoolViewController.h"
 #import "YTDiscoverViewController.h"
@@ -29,7 +29,7 @@
 /**
  *  产品 控制器
  */
-@property (nonatomic, strong) YTProductViewController *product;
+@property (nonatomic, strong) YTProductGroupController *product;
 /**
  *  我 控制器
  */
@@ -165,7 +165,7 @@
 - (void)setupChildVc
 {
     self.message = (YTMessageViewController *)[self addOneChildVcClass:[YTMessageViewController class] title:@"消息" image:@"xiaoxi" selectedImage:@"xiaoxianxia"];
-    self.product = (YTProductViewController *)[self addOneChildVcClass:[YTProductViewController class] title:@"产品" image:@"chanpin" selectedImage:@"chanpinanxia"];
+    self.product = (YTProductGroupController *)[self addOneChildVcClass:[YTProductGroupController class] title:@"产品" image:@"chanpin" selectedImage:@"chanpinanxia"];
     self.profile = (YTProfileViewController *)[self addOneChildVcClass:[YTProfileViewController class] title:nil image:nil selectedImage:nil];
     self.discover = (YTDiscoverViewController *)[self addOneChildVcClass:[YTDiscoverViewController class] title:@"发现" image:@"faxian" selectedImage:@"faxiananxia"];
     self.school = (YTSchoolViewController *)[self addOneChildVcClass:[YTSchoolViewController class] title:@"学院" image:@"shangxueyuan" selectedImage:@"shangxueyuananxia"];
@@ -185,7 +185,7 @@
     UIGraphicsEndImageContext();
     [self.tabBar setBackgroundImage:img];
     [self.tabBar setShadowImage:img];
-#warning 设置tabBar的背景颜色,或图片
+
     [self.tabBar setBackgroundImage:[UIImage imageNamed:@"dibubackgroud"]];
 }
 

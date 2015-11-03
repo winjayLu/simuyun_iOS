@@ -94,7 +94,7 @@
 - (void)rightClick:(UIButton *)button
 {
     if (self.popover != nil || self.customView != nil || self.sendMailView != nil) return;
-    
+    [button setBackgroundImage:[UIImage imageNamed:@"jihaoguanbi"] forState:UIControlStateNormal];
     DXPopover *popover = [DXPopover popover];
     self.popover = popover;
     // 修正位置
@@ -103,6 +103,7 @@
     view.y = view.y - 33;
     [popover showAtView:view withContentView:self.innerView inView:self.view];
     popover.didDismissHandler = ^{
+        [button setBackgroundImage:[UIImage imageNamed:@"jiahao"] forState:UIControlStateNormal];
         self.innerView.layer.cornerRadius = 0.0;
         self.popover = nil;
     };

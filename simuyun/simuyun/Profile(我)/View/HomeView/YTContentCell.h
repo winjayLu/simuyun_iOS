@@ -13,6 +13,6 @@
 /**
  *  待办事项标题
  */
-@property (nonatomic, copy) NSString *todoTitle;
+@property (nonatomic, copy) NSString *summary;
 
 @end

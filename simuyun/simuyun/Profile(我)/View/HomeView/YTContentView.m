@@ -11,6 +11,7 @@
 #import "YTContentView.h"
 #import "YTGroupCell.h"
 #import "YTContentCell.h"
+#import "YTMessageModel.h"
 
 
 @interface YTContentView() <UITableViewDataSource, UITableViewDelegate>
@@ -68,7 +69,8 @@
 
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.todoTitle = self.todos[indexPath.row - 1];
+    YTMessageModel *message =  self.todos[indexPath.row - 1];
+    cell.summary = message.summary;
     
     return cell;
 }
@@ -89,6 +91,6 @@
         return 42;
     }
     
-    return 56;
+    return 52;
 }
 @end

@@ -182,8 +182,7 @@
             [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
             return YES;
         }
-#warning 修改验证码
-        self.captcha = @"0000";
+
         if(![self.password.text isEqualToString:self.captcha])
         {
             [SVProgressHUD showErrorWithStatus:@"验证码不正确"];

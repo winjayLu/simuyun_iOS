@@ -156,67 +156,67 @@
 		}
 	}
 }
-
+#warning 修改图片选择
 - (void)selectPhoto{
-    return;
-    CGFloat pageWidth = photosView.frame.size.width;
-    NSInteger page = floor((photosView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-	if (!isPreview) {
-		if ([placeholder.backgroundColor isEqual:[[UIColor blackColor] colorWithAlphaComponent:.1]]) {
-			if (ASSETHELPER.selectdPhotos.count>=6) {
-				return;
-			}
-			[ASSETHELPER.selectdPhotos addObject:@{[NSString stringWithFormat:@"%ld-%ld",(long)page, (long)ASSETHELPER.currentGroupIndex]: @(ASSETHELPER.selectdPhotos.count+1)}];
-
-			[ASSETHELPER.selectdAssets addObject:[ASSETHELPER getAssetAtIndex:page]];
-
-			placeholder.transform = CGAffineTransformMakeScale(.5, .5);
-			[UIView animateWithDuration:.3 delay:0 usingSpringWithDamping:.5 initialSpringVelocity:.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-				placeholder.transform = CGAffineTransformIdentity;
-			} completion:nil];
-			placeholder.backgroundColor = [APP_COLOR colorWithAlphaComponent:.9];
-			[placeholder setTitle:@(ASSETHELPER.selectdPhotos.count).stringValue forState:UIControlStateNormal];
-			[[_delegate cellForRow:page] selectOfNum:ASSETHELPER.selectdPhotos.count];
-		} else {
-			NSInteger index = 0;
-			NSInteger num = 0;
-			for (NSDictionary *dict in ASSETHELPER.selectdPhotos) {
-				if ([[[dict allKeys] firstObject] isEqualToString:[NSString stringWithFormat:@"%ld-%ld",(long)page, (long)ASSETHELPER.currentGroupIndex]]) {
-					index = [ASSETHELPER.selectdPhotos indexOfObject:dict];
-					num = [[[dict allValues] firstObject] intValue];
-				}
-			}
-			for (NSDictionary *dict in [ASSETHELPER.selectdPhotos copy]) {
-				if ([[[dict allValues] firstObject] intValue]>num) {
-					NSInteger index = [ASSETHELPER.selectdPhotos indexOfObject:dict];
-					[ASSETHELPER.selectdPhotos removeObject:dict];
-					[ASSETHELPER.selectdPhotos insertObject:@{[[dict allKeys] firstObject]: @([[[dict allValues] firstObject] intValue]-1)} atIndex:index];
-				}
-			}
-
-			placeholder.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.1];
-			[placeholder setTitle:@"" forState:UIControlStateNormal];
-			[ASSETHELPER.selectdAssets removeObjectAtIndex:index];
-			[ASSETHELPER.selectdPhotos removeObjectAtIndex:index];
-			[[_delegate cellForRow:page] selectOfNum:-1];
-			[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadNum" object:nil];
-		}
-	} else {
-		if ([placeholder.backgroundColor isEqual:[[UIColor blackColor] colorWithAlphaComponent:.1]]) {
-			placeholder.transform = CGAffineTransformMakeScale(.5, .5);
-			[UIView animateWithDuration:.3 delay:0 usingSpringWithDamping:.5 initialSpringVelocity:.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-				placeholder.transform = CGAffineTransformIdentity;
-			} completion:nil];
-			[disabledIndexs removeObject:@(page)];
-			placeholder.backgroundColor = [APP_COLOR colorWithAlphaComponent:.9];
-			[placeholder setTitle:@(page+1).stringValue forState:UIControlStateNormal];
-		} else {
-			[disabledIndexs addObject:@(page)];
-			placeholder.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.1];
-			[placeholder setTitle:@"" forState:UIControlStateNormal];
-		}
-	}
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"selectdPhotos" object:nil];
+//    return;
+//    CGFloat pageWidth = photosView.frame.size.width;
+//    NSInteger page = floor((photosView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+//	if (!isPreview) {
+//		if ([placeholder.backgroundColor isEqual:[[UIColor blackColor] colorWithAlphaComponent:.1]]) {
+//			if (ASSETHELPER.selectdPhotos.count>=6) {
+//				return;
+//			}
+//			[ASSETHELPER.selectdPhotos addObject:@{[NSString stringWithFormat:@"%ld-%ld",(long)page, (long)ASSETHELPER.currentGroupIndex]: @(ASSETHELPER.selectdPhotos.count+1)}];
+//
+//			[ASSETHELPER.selectdAssets addObject:[ASSETHELPER getAssetAtIndex:page]];
+//
+//			placeholder.transform = CGAffineTransformMakeScale(.5, .5);
+//			[UIView animateWithDuration:.3 delay:0 usingSpringWithDamping:.5 initialSpringVelocity:.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//				placeholder.transform = CGAffineTransformIdentity;
+//			} completion:nil];
+//			placeholder.backgroundColor = [APP_COLOR colorWithAlphaComponent:.9];
+//			[placeholder setTitle:@(ASSETHELPER.selectdPhotos.count).stringValue forState:UIControlStateNormal];
+//			[[_delegate cellForRow:page] selectOfNum:ASSETHELPER.selectdPhotos.count];
+//		} else {
+//			NSInteger index = 0;
+//			NSInteger num = 0;
+//			for (NSDictionary *dict in ASSETHELPER.selectdPhotos) {
+//				if ([[[dict allKeys] firstObject] isEqualToString:[NSString stringWithFormat:@"%ld-%ld",(long)page, (long)ASSETHELPER.currentGroupIndex]]) {
+//					index = [ASSETHELPER.selectdPhotos indexOfObject:dict];
+//					num = [[[dict allValues] firstObject] intValue];
+//				}
+//			}
+//			for (NSDictionary *dict in [ASSETHELPER.selectdPhotos copy]) {
+//				if ([[[dict allValues] firstObject] intValue]>num) {
+//					NSInteger index = [ASSETHELPER.selectdPhotos indexOfObject:dict];
+//					[ASSETHELPER.selectdPhotos removeObject:dict];
+//					[ASSETHELPER.selectdPhotos insertObject:@{[[dict allKeys] firstObject]: @([[[dict allValues] firstObject] intValue]-1)} atIndex:index];
+//				}
+//			}
+//
+//			placeholder.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.1];
+//			[placeholder setTitle:@"" forState:UIControlStateNormal];
+//			[ASSETHELPER.selectdAssets removeObjectAtIndex:index];
+//			[ASSETHELPER.selectdPhotos removeObjectAtIndex:index];
+//			[[_delegate cellForRow:page] selectOfNum:-1];
+//			[[NSNotificationCenter defaultCenter] postNotificationName:@"reloadNum" object:nil];
+//		}
+//	} else {
+//		if ([placeholder.backgroundColor isEqual:[[UIColor blackColor] colorWithAlphaComponent:.1]]) {
+//			placeholder.transform = CGAffineTransformMakeScale(.5, .5);
+//			[UIView animateWithDuration:.3 delay:0 usingSpringWithDamping:.5 initialSpringVelocity:.5 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//				placeholder.transform = CGAffineTransformIdentity;
+//			} completion:nil];
+//			[disabledIndexs removeObject:@(page)];
+//			placeholder.backgroundColor = [APP_COLOR colorWithAlphaComponent:.9];
+//			[placeholder setTitle:@(page+1).stringValue forState:UIControlStateNormal];
+//		} else {
+//			[disabledIndexs addObject:@(page)];
+//			placeholder.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.1];
+//			[placeholder setTitle:@"" forState:UIControlStateNormal];
+//		}
+//	}
+//	[[NSNotificationCenter defaultCenter] postNotificationName:@"selectdPhotos" object:nil];
 }
 
 - (void)setDelegate:(id)delegate{

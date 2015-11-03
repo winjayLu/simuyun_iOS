@@ -130,7 +130,6 @@
             }
         }];
     } failure:^(NSError *error) {
-        NSLog(@"%@",error);
          [SVProgressHUD showErrorWithStatus:@"注册失败"];
     }];
 }
@@ -164,7 +163,6 @@
             [self.sendBtn stop];
         }
     } failure:^(NSError *error) {
-        NSLog(@"%@", error);
     }];
 }
 
@@ -235,15 +233,11 @@
             [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
             return YES;
         }
-#warning 修改验证码
-        self.captcha = @"0000";
         if(![self.registerNumber.text isEqualToString:self.captcha])
         {
             [SVProgressHUD showErrorWithStatus:@"验证码不正确"];
             return YES;
         }
-        NSLog(@"%@",self.registerNumber.text);
-        NSLog(@"%@",self.captcha);
     }
     return NO;
 }

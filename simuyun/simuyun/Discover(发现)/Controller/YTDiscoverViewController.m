@@ -71,7 +71,7 @@
     mainView.showsVerticalScrollIndicator = NO;
     mainView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     self.view = mainView;
-    self.view.backgroundColor = YTViewBackground;
+    self.view.backgroundColor = YTGrayBackground;
 }
 
 
@@ -178,8 +178,6 @@
         
     }];
     
-//    self.stocks = [NSArray arrayWithObjects:@"1", @"2", @"3",@"2", @"3",@"2", @"3", nil];
-//    self.stock.stocks = self.stocks;
 
 }
 /**
@@ -195,9 +193,9 @@
         // 调整高度
         CGFloat headerH = 30;
         CGFloat cellH = 93;
-        CGFloat consultH = headerH + cellH * self.newests.count;
+        CGFloat consultH = headerH + cellH * self.newests.count - 1;
         self.consult.height = consultH;
-        [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.consult.frame) + maginWidth * 2)];
+        [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.consult.frame) + maginWidth )];
     } failure:^(NSError *error) {
         
     }];

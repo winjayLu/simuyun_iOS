@@ -77,6 +77,8 @@
  */
 - (IBAction)phoneClick:(UIButton *)sender;
 
+// 皇冠
+@property (weak, nonatomic) IBOutlet UIImageView *huangGuanImage;
 @end
 
 
@@ -181,8 +183,11 @@
     }
     if (userInfo.weChatNickName.length > 0)
     {
-        [self.guanLianBtn setTitle:userInfo.weChatNickName forState:UIControlStateNormal];
+        [self.guanLianBtn setTitle:@"已关联微信" forState:UIControlStateNormal];
+        self.guanLianBtn.enabled = NO;
     }
+    // 理财师等级
+    self.huangGuanImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"lv%d",userInfo.adviserLevel]];
 }
 
 /**

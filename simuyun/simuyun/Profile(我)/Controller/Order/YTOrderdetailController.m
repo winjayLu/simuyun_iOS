@@ -88,7 +88,7 @@
         
         // 跳转的地址和标题
         if (arrFucnameAndParameter.count) {
-            NSString *url = [arrFucnameAndParameter[0] substringFromIndex:4];
+//            NSString *url = [arrFucnameAndParameter[0] substringFromIndex:4];
             
             //            YTWebViewController *vc = [[YTWebViewController alloc] init];
             //            vc.url = [self appendingUrl:url];

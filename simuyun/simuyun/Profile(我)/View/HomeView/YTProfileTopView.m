@@ -103,6 +103,10 @@
  */
 @property (weak, nonatomic) IBOutlet UILabel *wanLable;
 
+/**
+ *  皇冠
+ */
+@property (weak, nonatomic) IBOutlet UIImageView *huangGuanImage;
 
 @end
 
@@ -338,6 +342,11 @@
         self.wanLable.text = @"万";
         self.yeJiLable.text = [NSString stringWithFormat:@"%d", userInfo.completedOrderCount];
     }
+    
+    // 理财师等级
+    self.huangGuanImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"lv%d",userInfo.adviserLevel]];
+
+
     
 }
 
