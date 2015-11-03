@@ -130,7 +130,6 @@
             }
         }];
     } failure:^(NSError *error) {
-         [SVProgressHUD showErrorWithStatus:@"注册失败"];
     }];
 }
 /**

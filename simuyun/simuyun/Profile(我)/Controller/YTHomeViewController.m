@@ -33,6 +33,8 @@
 #import "YTMessageModel.h"
 #import "YTResourcesTool.h"
 #import "HHAlertView.h"
+#import "YTBindingPhoneController.h"
+#import "NSDate+Extension.h"
 
 #define magin 3
 
@@ -254,8 +256,8 @@
 - (void)loadTodos
 {
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
-//    param[@"adviserId"] = [YTAccountTool account].userId;
-            param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
+    param[@"adviserId"] = [YTAccountTool account].userId;
+//            param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
     param[@"category"] = @1;
     param[@"pagesize"] = @3;
     param[@"pageNo"] = @(1);
@@ -297,17 +299,21 @@
     
     NSString *btnTitle = note.userInfo[YTLeftMenuSelectBtn];
     UIViewController *vc = nil;
+    
+    
     // 判断点击了哪个按钮
     if ([btnTitle isEqualToString:@"用户资料"]) {
         vc = [YTNormalWebController webWithTitle:@"用户资料" url:[NSString stringWithFormat:@"%@/my/profile/", YTH5Server]];
     } else if([btnTitle isEqualToString:@"关联微信"]){
          [self relationWeChat];
     } else if([btnTitle isEqualToString:@"推荐私募云给好友"]){
+        
         vc = [YTNormalWebController webWithTitle:@"测试" url:@"http://www.simuyun.com/product/floating.html"];
     } else if([btnTitle isEqualToString:@"帮助"]){
-        vc = [YTNormalWebController webWithTitle:@"帮助" url:@"http://www.simuyun.com/help/"];
+        //
+        vc = [YTNormalWebController webWithTitle:@"帮助" url:[NSString stringWithFormat:@"%@/help/", YTH5Server]];
     } else if([btnTitle isEqualToString:@"关于私募云"]){
-        vc = [YTNormalWebController webWithTitle:@"关于私募云" url:@"http://www.simuyun.com/about/"];
+        vc = [YTNormalWebController webWithTitle:@"关于私募云" url:[NSString stringWithFormat:@"%@/about/", YTH5Server]];
     } else if([btnTitle isEqualToString:@"400-188-8848"]){
         UIWebView *callWebview =[[UIWebView alloc] init];
         NSURL *telURL =[NSURL URLWithString:@"tel://400-188-8848"];
@@ -336,9 +342,13 @@
         YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
         [appRootVC setSelectedIndex:0];
     } else {
+        YTMessageModel *message = self.todos[row - 1];
         vc = [[YTNormalWebController alloc] init];
-        ((YTNormalWebController *)vc).url = @"http://www.simuyun.com/message";
+#warning TODO 修改地址
+        
+        ((YTNormalWebController *)vc).url = [NSString stringWithFormat:@"%@/information/%@&id=%@", YTH5Server, [NSDate stringDate], message.messageId];
         ((YTNormalWebController *)vc).toTitle = @"待办事项";
+        ((YTNormalWebController *)vc).isDate = YES;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -394,14 +404,13 @@
             [alert showAlertWithTitle:YTYunDouGuiZe detail:YTYunDouGuiZeContent];
             break;
         case TopButtonTypeKehu:     // 客户
-            pushVc = [YTNormalWebController webWithTitle:@"我的客户" url:@"http://www.simuyun.com/my/clients/"];
+            pushVc = [YTNormalWebController webWithTitle:@"我的客户" url:[NSString stringWithFormat:@"%@/my/clients/",YTH5Server]];
             break;
         case TopButtonTypeDindan:   // 订单
             pushVc = [[YTOrderCenterController alloc] init];
-            
             break;
         case TopButtonTypeYeji:     // 业绩
-            pushVc = [YTNormalWebController webWithTitle:@"我的业绩" url:@"http://www.simuyun.com/my/performance/"];
+            pushVc = [YTNormalWebController webWithTitle:@"我的业绩" url:[NSString stringWithFormat:@"%@/my/performance/",YTH5Server]];
             break;
         case TopButtonTypeMenu:
             [self leftClick];
@@ -456,8 +465,11 @@
  */
 - (void)Authentication
 {
-    if ([YTUserInfoTool userInfo].phoneNumer != nil && [YTUserInfoTool userInfo].phoneNumer.length > 0) {
-        
+    if ([YTUserInfoTool userInfo].phoneNumer == nil && [YTUserInfoTool userInfo].phoneNumer.length == 0) {
+        YTBindingPhoneController *bing = [[YTBindingPhoneController alloc] init];
+        bing.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:bing animated:YES];
+        return;
     }
     
     UIViewController *vc = nil;

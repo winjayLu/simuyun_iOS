@@ -18,7 +18,9 @@
 /**
  *  icon标签
  */
-@property (nonatomic, assign) int label;
+//@property (nonatomic, assign) int label;
+@property (nonatomic, assign) int series;
+
 
 /**
  *  产品名称

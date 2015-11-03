@@ -15,6 +15,7 @@
 #import "MJRefresh.h"
 #import "YTTabBarController.h"
 #import "YTOrderdetailController.h"
+#import "NSDate+Extension.h"
 
 
 @interface YTOrderCenterController () <UITableViewDataSource, UITableViewDelegate, BarDrawerDelegate>
@@ -242,7 +243,7 @@
 {
     YTOrderCenterModel *order = self.orders[indexPath.section];
     YTOrderdetailController *detail = [[YTOrderdetailController alloc] init];
-    detail.url = [NSString stringWithFormat:@"http://www.simuyun.com/order/?id=%@",order.order_id];
+    detail.url = [NSString stringWithFormat:@"%@/order%@&id=%@", YTH5Server, [NSDate stringDate], order.order_id];
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }

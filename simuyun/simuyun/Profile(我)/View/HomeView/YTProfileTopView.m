@@ -13,6 +13,7 @@
 #import "YTHttpTool.h"
 #import "YTAccountTool.h"
 #import "AFNetworking.h"
+#import "SVProgressHUD.h"
 
 @interface YTProfileTopView() <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -195,7 +196,7 @@
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         YTLog(@"%@",responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        YTLog(@"%@", error);
+        [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
     }];
 }
 

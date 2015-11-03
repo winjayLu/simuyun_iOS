@@ -198,7 +198,7 @@
             [self uploadZhenJian];
         }
     } failure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"报备失败"];
+//        [SVProgressHUD showErrorWithStatus:@"报备失败"];
     }];
 }
 // 上传证件资料
@@ -218,11 +218,11 @@
         [files addObject:file];
     }
     [YTHttpTool post:YTSlip params:nil files:files success:^(id responseObject) {
-        YTLog(@"%@", responseObject);
+//        YTLog(@"%@", responseObject);
         self.ZhenJian = [YTSlipModel objectArrayWithKeyValuesArray:responseObject];
         [self startReport];
     } failure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"报备失败"];
+//        [SVProgressHUD showErrorWithStatus:@"报备失败"];
     }];
 }
 
@@ -244,7 +244,7 @@
           YTLog(@"%@", responseObject);
           [SVProgressHUD showSuccessWithStatus:@"报备成功"];
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-          [SVProgressHUD showSuccessWithStatus:@"报备失败"];
+         [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
       }];
 }
 

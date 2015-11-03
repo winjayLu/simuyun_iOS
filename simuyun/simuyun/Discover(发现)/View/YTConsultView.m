@@ -119,6 +119,14 @@
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    YTNewest *newe = self.newests[indexPath.row];
+    if ([self.consultDelegate respondsToSelector:@selector(selectedCellWithRow:)]) {
+        [self.consultDelegate selectedCellWithRow:newe];
+    }
+}
+
 
 
 

@@ -88,4 +88,10 @@
     return [formatter stringFromDate:self];
 }
 
++ (NSString *)stringDate
+{
+    NSDate *date = [[NSDate alloc] init];
+    return [NSString stringWithFormat:@"?t=%@",[date stringWithFormater:@"yyyyMMddHHmmss"]];
+}
+
 @end

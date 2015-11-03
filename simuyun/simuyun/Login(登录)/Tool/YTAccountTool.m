@@ -11,6 +11,7 @@
 #import "AFNetworking.h"
 #import "NSDictionary+Extension.h"
 #import "NSString+Password.h"
+#import "SVProgressHUD.h"
 
 
 
@@ -46,7 +47,6 @@
     // 1.创建一个请求管理者
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    NSLog(@"%@",account);
     params[@"username"] = account.userName;
     params[@"password"] = [NSString md5:account.password];
     
@@ -61,7 +61,7 @@
           [self save:account];
           result(YES);
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-          NSLog(@"%@", error);
+          [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
           result(NO);
       }];
 }

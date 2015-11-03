@@ -85,6 +85,8 @@
 #define YTMessageCount @"messageCount"
 // 邮件获取产品资料
 #define YTEmailsharing @"emailsharing"
+// 绑定手机号
+#define YTBindPhone @"bindPhone"
 
 
 

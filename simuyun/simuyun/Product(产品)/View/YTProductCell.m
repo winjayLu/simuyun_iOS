@@ -101,7 +101,7 @@
     
 
     // 设置icon图片
-    self.iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"productIcon%d",_product.label]];
+    self.iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"productIcon%d",_product.series]];
     
     // 设置标题
     self.titleLable.text = _product.pro_name;

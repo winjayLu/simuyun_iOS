@@ -35,6 +35,9 @@
  */
 @property (nonatomic, copy) NSString *newlabel;
 
+// 图片地址
+@property (nonatomic, copy) NSString *url;
+
 
 
 @end

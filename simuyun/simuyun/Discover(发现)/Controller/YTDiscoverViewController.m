@@ -16,6 +16,8 @@
 #import "YTInformationController.h"
 #import "MJRefresh.h"
 #import "YTStockModel.h"
+#import "YTNormalWebController.h"
+#import "NSDate+Extension.h"
 
 // 左右间距
 #define maginWidth 7
@@ -195,7 +197,7 @@
         CGFloat cellH = 93;
         CGFloat consultH = headerH + cellH * self.newests.count - 1;
         self.consult.height = consultH;
-        [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.consult.frame) + maginWidth )];
+        [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.consult.frame) + maginWidth * 2 )];
     } failure:^(NSError *error) {
         
     }];
@@ -217,7 +219,7 @@
         CGFloat cellH = 93;
         CGFloat consultH = headerH + cellH * self.newests.count;
         self.consult.height = consultH;
-        [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.consult.frame) + maginWidth)];
+        [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.consult.frame) + maginWidth * 2)];
         [((UIScrollView *)self.view).header endRefreshing];
     } failure:^(NSError *error) {
         [((UIScrollView *)self.view).header endRefreshing];
@@ -248,7 +250,11 @@
     if(newest == nil)
     {
         vc = [[YTInformationController alloc] init];
+    } else {
+        vc = [YTNormalWebController webWithTitle:@"资讯详情" url:[NSString stringWithFormat:@"%@/information/%@&id=%@",YTH5Server, [NSDate stringDate], newest.infoId]];
+        ((YTNormalWebController *)vc).isDate = YES;
     }
+    
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

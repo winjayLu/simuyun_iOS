@@ -54,7 +54,7 @@
     // 全部产品
     UIButton *button = [[UIButton alloc] init];
     button.tag = ProductItemTypeAll;
-    UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"productItem%zd",ProductItemTypeAll + 1]];
+    UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"productItem%zd",ProductItemTypeAll]];
     [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     UIImage *imageHighl = [UIImage imageNamed:[NSString stringWithFormat:@"productItemanxia%zd",ProductItemTypeAll + 1]];
     [button setBackgroundImage:image forState:UIControlStateNormal];
@@ -91,7 +91,7 @@
         UIButton *button = [[UIButton alloc] init];
         button.tag = [itemType[i] intValue];
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-        int index = [itemType[i] intValue] + 1;
+        int index = [itemType[i] intValue] ;
         UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"productItem%zd",index]];
         UIImage *imageHighl = [UIImage imageNamed:[NSString stringWithFormat:@"productItemanxia%zd",index]];
         [button setBackgroundImage:image forState:UIControlStateNormal];

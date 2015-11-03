@@ -16,6 +16,7 @@
 #import "DXPopover.h"
 #import "YTProductdetailController.h"
 #import "UIBarButtonItem+Extension.h"
+#import "NSDate+Extension.h"
 
 @interface YTProductViewController ()
 
@@ -182,10 +183,12 @@
 
     YTProductModel *product = self.products[indexPath.section];
     NSString *url = nil;
+
     if (product.type_code == 1) {
-        url = [NSString stringWithFormat:@"%@/product/floating.html?id=%@&t=%d", YTH5Server ,product.pro_id, arc4random_uniform(50)];
+        url = [NSString stringWithFormat:@"%@/product/floating.html%@&id=%@", YTH5Server , [NSDate stringDate],product.pro_id];
     } else {
-        url = [NSString stringWithFormat:@"%@/product/fixed.html?id=%@&t=%d", YTH5Server ,product.pro_id, arc4random_uniform(50)];
+        // fixed.html
+        url = [NSString stringWithFormat:@"%@/product/fixed.html%@&id=%@", YTH5Server , [NSDate stringDate],product.pro_id];
     }
     YTProductdetailController *web = [[YTProductdetailController alloc] init];
     web.url = url;
@@ -202,7 +205,10 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
-    param[@"series"] = @(self.series);
+    YTLog(@"%d", self.series);
+    if (self.series < 9) {
+        param[@"series"] = @(self.series);
+    }
     if (self.history != nil && self.history.length > 0) {
         param[@"history"] = self.history;
     }
@@ -213,7 +219,6 @@
         [self.tableView reloadData];
         // 结束刷新状态
         [self.tableView.header endRefreshing];
-        
     } failure:^(NSError *error) {
         // 结束刷新状态
         [self.tableView.header endRefreshing];

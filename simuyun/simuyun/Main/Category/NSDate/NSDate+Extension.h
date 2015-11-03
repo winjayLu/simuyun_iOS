@@ -37,4 +37,7 @@
  *  根据传入的format,返回对应格式的字符串
  */
 - (NSString *)stringWithFormater:(NSString *)format;
+
+// 返回字符串类型的日期
++ (NSString *)stringDate;
 @end

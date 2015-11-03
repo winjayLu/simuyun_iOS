@@ -54,7 +54,7 @@
                     <rect key="frame" x="22" y="246" width="331" height="1"/>
                     <color key="backgroundColor" red="0.41568627450000001" green="0.41960784309999999" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dengluming" translatesAutoresizingMaskIntoConstraints="NO" id="HAO-w1-I59">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="yonghuming" translatesAutoresizingMaskIntoConstraints="NO" id="HAO-w1-I59">
                     <rect key="frame" x="22" y="210" width="21" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="21" id="d70-ul-fFW"/>
@@ -162,11 +162,11 @@
     </objects>
     <resources>
         <image name="backgrounddl" width="375" height="667"/>
-        <image name="dengluming" width="21" height="21"/>
         <image name="fansongyanzhnegmazc" width="115" height="33"/>
         <image name="mima" width="22" height="22"/>
         <image name="yanzhengma" width="22" height="22"/>
         <image name="yanzhengmakuang" width="115" height="33"/>
+        <image name="yonghuming" width="22" height="22"/>
         <image name="zhuceanxia" width="330" height="44"/>
         <image name="zhucezhengchang" width="330" height="44"/>
     </resources>

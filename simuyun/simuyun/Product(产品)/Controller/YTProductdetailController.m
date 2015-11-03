@@ -17,6 +17,7 @@
 #import "YTSenMailView.h"
 #import "CoreTFManagerVC.h"
 #import "YTBuyProductController.h"
+#import "NSDate+Extension.h"
 
 
 @interface YTProductdetailController () <shareCustomDelegate, senMailViewDelegate, UIWebViewDelegate>
@@ -49,9 +50,11 @@
     // 将控制器的View替换为webView
     UIWebView *mainView = [[UIWebView alloc] initWithFrame:DeviceBounds];
     
-    // 获取当前时间
-    //    [[NSDate date] stringWithFormater:@""];
-    [mainView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
+    // 加时间戳
+    NSMutableString *url = [NSMutableString string];
+    [url appendString:self.url];
+    [url appendString:[NSDate stringDate]];
+    [mainView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
     mainView.scalesPageToFit = YES;
     [mainView.scrollView setShowsVerticalScrollIndicator:NO];
     mainView.delegate = self;
@@ -122,10 +125,7 @@
     progressView.progressBarColor = YTViewBackground;
     // 设置进度条
     self.progressProxy.progressView = progressView;
-    // 将UIWebView代理指向YHWebViq   ewProgress
-//    self.webView.delegate = self.progressProxy;
-    // 设置webview代理转发到self
-//    self.progressProxy.webViewProxy = self;
+
     // 添加到视图
     [self.view addSubview:progressView];
 }
@@ -137,39 +137,28 @@
 {
     NSString *urlString = [[request URL] absoluteString];
     NSString *urls = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"%@",urls);
-    NSArray *urlComps = [urlString componentsSeparatedByString:@":"];
+    NSArray *urlComps = [urls componentsSeparatedByString:@":"];
     
     if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"app"])
     {
-        NSArray *arrFucnameAndParameter = [(NSString*)[urlComps objectAtIndex:1] componentsSeparatedByString:@":"];
-        
         // 跳转的地址和标题
-        if (arrFucnameAndParameter.count) {
-            NSString *command = arrFucnameAndParameter[0];
-            YTLog(@"%@", command);
-            YTBuyProductController *buy = [[YTBuyProductController alloc] init];
-            buy.product = self.product;
-            [self.navigationController pushViewController:buy animated:YES];
+        if (urlComps.count) {
+            NSString *command = urlComps[1];
+            if ([command isEqualToString:@"buynow"])
+            {
+                YTBuyProductController *buy = [[YTBuyProductController alloc] init];
+                buy.product = self.product;
+                [self.navigationController pushViewController:buy animated:YES];
+                
+            } else if ([command isEqualToString:@"closepage"])
+            {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
         }
     }
     return YES;
 }
 
-
-/**
- *  拼接地址
- */
-- (NSString *)appendingUrl:(NSString *)url
-{
-    NSMutableString *str = [NSMutableString string];
-    [str appendString:@"http://www.simuyun.com/academy/"];
-    if (url != nil) {
-        
-        [str appendString:url];
-    }
-    return str;
-}
 
 
 #pragma mark - lazy

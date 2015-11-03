@@ -7,6 +7,8 @@
 //
 
 #import "YTStockCell.h"
+#import "UIImageView+SD.h"
+#import "UIImageView+WebCache.h"
 
 @interface YTStockCell()
 
@@ -27,7 +29,6 @@
 @implementation YTStockCell
 
 - (void)awakeFromNib {
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -41,7 +42,7 @@
     _newes = newes;
     self.title.text = newes.title;
     self.summary.text = newes.summary;
-
+    [self.iconImage imageWithUrlStr:[NSString stringWithFormat:@"http://%@",newes.url]phImage:nil];
 }
 
 @end

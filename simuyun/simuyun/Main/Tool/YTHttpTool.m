@@ -9,6 +9,7 @@
 #import "YTHttpTool.h"
 #import "AFNetworking.h"
 #import "NSDictionary+Extension.h"
+#import "SVProgressHUD.h"
 
 @implementation YTHttpTool
 
@@ -31,6 +32,7 @@
               success(responseObject);
           }
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
           if (failure) {
               failure(error);
           }
@@ -55,6 +57,7 @@
               success(responseObject);
           }
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
           if (failure) {
               failure(error);
           }
@@ -86,6 +89,7 @@
             success(responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
         if (failure) {
             failure(error);
         }

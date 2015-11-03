@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="passwordField" destination="ZDZ-Ds-guR" id="we6-dx-eZl"/>
                 <outlet property="phoneField" destination="gbD-gI-tu9" id="pdb-dS-cHm"/>
+                <outlet property="sendBtn" destination="vvU-bM-gfo" id="e4v-jd-Arl"/>
                 <outlet property="view" destination="iw3-7P-Xfb" id="je6-8g-yEz"/>
                 <outlet property="yanzhenField" destination="Mis-Gn-ZhD" id="Urq-Ks-dLW"/>
             </connections>

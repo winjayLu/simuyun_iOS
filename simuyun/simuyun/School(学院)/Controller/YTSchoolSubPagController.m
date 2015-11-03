@@ -9,7 +9,7 @@
 #import "YTSchoolSubPagController.h"
 #import "YHWebViewProgress.h"
 #import "YHWebViewProgressView.h"
-
+#import "NSDate+Extension.h"
 
 
 @interface YTSchoolSubPagController () <UIWebViewDelegate>
@@ -119,6 +119,7 @@
         
         [str appendString:url];
     }
+    [str appendString:[NSDate stringDate]];
     return str;
 }
 

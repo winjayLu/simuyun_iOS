@@ -54,7 +54,7 @@
                     </variation>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- - -丨- - -" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ig5-0y-fq5" userLabel="昵称">
-                    <rect key="frame" x="0.0" y="211" width="242" height="8"/>
+                    <rect key="frame" x="0.0" y="201" width="242" height="18"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="242" id="TVm-Vs-TCQ"/>
                     </constraints>
@@ -273,7 +273,7 @@
                 <constraint firstItem="Ebg-tJ-kZj" firstAttribute="leading" secondItem="3iq-6B-ZvS" secondAttribute="leading" id="qZr-VF-pem"/>
                 <constraint firstItem="3iq-6B-ZvS" firstAttribute="height" secondItem="4yT-YE-IrP" secondAttribute="height" id="r1w-kI-g0X"/>
                 <constraint firstItem="tqg-Bw-g3r" firstAttribute="centerY" secondItem="4yT-YE-IrP" secondAttribute="centerY" id="sdy-3D-bvf"/>
-                <constraint firstItem="ig5-0y-fq5" firstAttribute="top" secondItem="v8b-bC-v4u" secondAttribute="bottom" constant="20" id="t0Z-zZ-otG"/>
+                <constraint firstItem="ig5-0y-fq5" firstAttribute="top" secondItem="v8b-bC-v4u" secondAttribute="bottom" constant="10" id="t0Z-zZ-otG"/>
                 <constraint firstItem="WUT-UR-MWe" firstAttribute="centerX" secondItem="v8b-bC-v4u" secondAttribute="centerX" id="tAY-Iq-StL"/>
                 <constraint firstItem="y4w-em-a0Z" firstAttribute="top" secondItem="Ebg-tJ-kZj" secondAttribute="bottom" constant="40" id="uIC-dk-GNI"/>
                 <constraint firstItem="rxw-AM-CBx" firstAttribute="leading" secondItem="tqg-Bw-g3r" secondAttribute="leading" id="v5g-pv-z2Y"/>

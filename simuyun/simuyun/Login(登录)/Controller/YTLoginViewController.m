@@ -114,7 +114,7 @@
                 acc.userName = responseObject[@"username"];
                 acc.password = responseObject[@"password"];
                 params[@"username"] = acc.userName;
-                params[@"password"] = acc.userName;
+                params[@"password"] = acc.password;
                 
                 // 2.发送一个POST请求
                 NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTSession];
@@ -127,7 +127,7 @@
                       [YTAccountTool save:acc];
                        [self transitionTabBarVC];
                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                      NSLog(@"%@", error);
+                      [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];   
                   }];
             } failure:^(NSError *error) {
 

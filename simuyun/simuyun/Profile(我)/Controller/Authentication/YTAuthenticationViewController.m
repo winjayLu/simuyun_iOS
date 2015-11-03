@@ -15,6 +15,7 @@
 #import "YTAuthenticationModel.h"
 #import "YTAuthenticationStatusController.h"
 #import "YTUserInfoTool.h"
+#import "UIBarButtonItem+Extension.h"
 
 
 #define maginTop 64
@@ -61,9 +62,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"理财师认证";
     // 获取机构信息
     [self loadOrgnazations];
     self.view.frame = CGRectMake(0, maginTop, DeviceWidth, DeviceHight - maginTop);
+    // 初始化左侧返回按钮
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithBg:@"fanhui" target:self action:@selector(blackClick)];
+}
+
+- (void)blackClick
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 /**
@@ -116,7 +125,6 @@
         [self.navigationController pushViewController:authVc animated:YES];
         
     } failure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"认证失败"];
     }];
     
 }

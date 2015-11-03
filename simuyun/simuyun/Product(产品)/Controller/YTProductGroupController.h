@@ -14,15 +14,15 @@
  *   产品分类类型
  */
 typedef enum {
-    ProductItemTypeTaiShan,   //  泰山
-    ProductItemTypeHuangShan,   // 黄山
-    ProductItemTypeSongShan,    // 嵩山
-    ProductItemTypeHenShan,     // 衡山
-    ProductItemTypeHuangHe,     // 黄河
-    ProductItemTypeChangJiang,  // 长江
-    ProductItemTypeLanCangJiang,    // 澜沧江
-    ProductItemTypeYaMaXun,     // 亚马逊
-    ProductItemTypeAll  // 全部产品
+    ProductItemTypeTaiShan = 1,   //  泰山
+    ProductItemTypeHenShan = 2,     // 衡山
+    ProductItemTypeSongShan = 3,    // 嵩山
+    ProductItemTypeHuangShan = 4,   // 黄山
+    ProductItemTypeChangJiang = 5,  // 长江
+    ProductItemTypeHuangHe = 6,     // 黄河
+    ProductItemTypeLanCangJiang = 7,    // 澜沧江
+    ProductItemTypeYaMaXun = 8,     // 亚马逊
+    ProductItemTypeAll = 9 // 全部产品
 } ProductItemType;
 
 

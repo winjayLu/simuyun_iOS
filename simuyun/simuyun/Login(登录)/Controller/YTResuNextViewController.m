@@ -15,6 +15,7 @@
 #import "YTAccountTool.h"
 #import "CALayer+Transition.h"
 #import "YTTabBarController.h"
+#import "NSString+Password.h"
 
 @interface YTResuNextViewController ()
 
@@ -79,7 +80,7 @@
     // 帐号模型
     YTAccount *account = [[YTAccount alloc] init];
     account.userName = self.username;
-    account.password = self.password.text;
+    account.password = [NSString md5:self.password.text];
     
     // 请求参数
     NSDictionary *params = @{@"username" : account.userName, @"password" : account.password};

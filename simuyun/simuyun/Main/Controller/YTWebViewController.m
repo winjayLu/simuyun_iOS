@@ -9,6 +9,7 @@
 #import "YTWebViewController.h"
 #import "YHWebViewProgress.h"
 #import "YHWebViewProgressView.h"
+#import "NSDate+Extension.h"
 
 
 @interface YTWebViewController () <UIWebViewDelegate>
@@ -47,8 +48,13 @@
     // 初始化进度条
     [self setupProgress];
     
+    // 加时间戳
+    NSMutableString *url = [NSMutableString string];
+    [url appendString:self.url];
+    [url appendString:[NSDate stringDate]];
+    
     // 加载网页
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
 }
 
 /**

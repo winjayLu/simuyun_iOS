@@ -14,6 +14,7 @@
 #import "NSDate+Extension.h"
 #import "YTSchoolSubPagController.h"
 #import "MJRefresh.h"
+#import "NSDate+Extension.h"
 
 @interface YTSchoolViewController () <UIWebViewDelegate>
 
@@ -30,8 +31,8 @@
     // 获取当前时间
 //    [[NSDate date] stringWithFormater:@""];
     mainView.delegate = self;
-//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?uid=%@&v=4.0", [self appendingUrl:nil], [YTAccountTool account].userId]];
-     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@?uid=%@&v=4.0", [self appendingUrl:nil], @"6dcb3fff72f4423ca5077d0741d2e884"]];
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@uid=%@&v=4.0", [self appendingUrl:nil], [YTAccountTool account].userId]];
+     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@uid=%@&v=4.0", [self appendingUrl:nil], @"6dcb3fff72f4423ca5077d0741d2e884"]];
     [mainView loadRequest:[NSURLRequest requestWithURL:url]];
     mainView.scalesPageToFit = YES;
     [mainView.scrollView setShowsVerticalScrollIndicator:NO];
@@ -93,11 +94,11 @@
 {
     NSMutableString *str = [NSMutableString string];
     [str appendString:@"http://www.simuyun.com/academy"];
-    //
     if (url != nil) {
         
         [str appendString:url];
     }
+    [str appendString:[NSDate stringDate]];
     return str;
 }
 

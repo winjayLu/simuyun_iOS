@@ -20,5 +20,9 @@
  */
 @property (nonatomic, copy) NSString *toTitle;
 
+// 是否加时间戳
+@property (nonatomic, assign) BOOL isDate;
+
+
 + (instancetype)webWithTitle:(NSString *)title url:(NSString *)url;
 @end

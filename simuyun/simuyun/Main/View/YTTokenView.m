@@ -40,24 +40,24 @@
 
 }
 
-- (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
-{
-    NSString *urlString = [[request URL] absoluteString];
-    NSString *urls = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"%@",urls);
-    NSArray *urlComps = [urlString componentsSeparatedByString:@":"];
-    //
-    if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"app"])
-    {
-        NSArray *arrFucnameAndParameter = [(NSString*)[urlComps objectAtIndex:1] componentsSeparatedByString:@":"];
-        // 跳转的地址和标题
-        if (arrFucnameAndParameter.count) {
-            NSString *command = arrFucnameAndParameter[0];
-            YTLog(@"%@", command);
-        }
-    }
-    return YES;
-}
+//- (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
+//{
+//    NSString *urlString = [[request URL] absoluteString];
+//    NSString *urls = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    NSLog(@"%@",urls);
+//    NSArray *urlComps = [urlString componentsSeparatedByString:@":"];
+//    //
+//    if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"app"])
+//    {
+//        NSArray *arrFucnameAndParameter = [(NSString*)[urlComps objectAtIndex:1] componentsSeparatedByString:@":"];
+//        // 跳转的地址和标题
+//        if (arrFucnameAndParameter.count) {
+//            NSString *command = arrFucnameAndParameter[0];
+//            YTLog(@"%@", command);
+//        }
+//    }
+//    return YES;
+//}
 
 
 @end
