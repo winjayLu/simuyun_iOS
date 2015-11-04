@@ -18,6 +18,8 @@
 #import "YTStockModel.h"
 #import "YTInformationWebViewController.h"
 #import "NSDate+Extension.h"
+#import "YTInformationTableViewCell.h"
+#import "YTInformation.h"
 
 // 左右间距
 #define maginWidth 7
@@ -79,6 +81,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [MobClick event:@"nav_click" attributes:@{@"按钮" : @"发现"}];
     // 初始化轮播图片
     [self setupPPTVC];
     // 初始化股指视图
@@ -190,7 +193,7 @@
 {
     [YTHttpTool get:YTNewes params:nil success:^(id responseObject) {
         NSLog(@"%@", responseObject);
-        self.newests = [YTNewest objectArrayWithKeyValuesArray:responseObject];
+        self.newests = [YTInformation objectArrayWithKeyValuesArray:responseObject];
         // 设置数据
         self.consult.newests = self.newests;
         // 调整高度
@@ -248,7 +251,7 @@
  *  资讯视图代理方法
  *
  */
-- (void)selectedCellWithRow:(YTNewest *)newest
+- (void)selectedCellWithRow:(YTInformation *)newest
 {
     UIViewController *vc = nil;
     if(newest == nil)
@@ -257,6 +260,7 @@
     } else {
         vc = [YTInformationWebViewController webWithTitle:@"资讯详情" url:[NSString stringWithFormat:@"%@/information/%@&id=%@",YTH5Server, [NSDate stringDate], newest.infoId]];
         ((YTInformationWebViewController *)vc).isDate = YES;
+        ((YTInformationWebViewController *)vc).information = newest;
     }
     
     vc.hidesBottomBarWhenPushed = YES;

@@ -32,6 +32,12 @@
  */
 @property (nonatomic, copy) NSString *newlabel;
 
+// 日期
+@property (nonatomic, copy) NSString *date;
+
+// 下载地址
+@property (nonatomic, copy) NSString *url;
+
 
 
 @end

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "YTNewest.h"
+#import "YTInformation.h"
 
 @protocol ConsultViewDelegate <NSObject>
 
@@ -15,7 +16,7 @@
  *  选中的资讯
  *
  */
-- (void)selectedCellWithRow:(YTNewest *)newest;
+- (void)selectedCellWithRow:(YTInformation *)newest;
 
 @end
 

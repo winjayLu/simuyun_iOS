@@ -21,8 +21,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="productIcon1" translatesAutoresizingMaskIntoConstraints="NO" id="7ia-XA-YDc">
                                 <rect key="frame" x="8" y="12" width="25" height="13"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="12.5" id="Acr-nt-iP9"/>
-                                    <constraint firstAttribute="width" constant="24.5" id="IsR-6A-czT"/>
+                                    <constraint firstAttribute="height" constant="13" id="Acr-nt-iP9"/>
+                                    <constraint firstAttribute="width" constant="25" id="IsR-6A-czT"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="start2" translatesAutoresizingMaskIntoConstraints="NO" id="9vo-78-u4v" userLabel="xinxin">
@@ -91,7 +91,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tus-Am-fGV" userLabel="投资起点">
-                        <rect key="frame" x="75" y="57" width="19" height="16"/>
+                        <rect key="frame" x="75" y="57" width="18.5" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -103,13 +103,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="封闭期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L03-Rj-AHN" userLabel="fenbiTitle">
-                        <rect key="frame" x="108" y="57" width="39" height="16"/>
+                        <rect key="frame" x="108.5" y="57" width="39" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cuu-vd-jxu" userLabel="封闭期">
-                        <rect key="frame" x="162" y="57" width="19" height="16"/>
+                        <rect key="frame" x="162.5" y="57" width="18.5" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>

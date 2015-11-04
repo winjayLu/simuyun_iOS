@@ -32,7 +32,10 @@
               success(responseObject);
           }
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-          [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+          if(operation.responseObject[@"message"] != nil)
+          {
+              [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+          }
           if (failure) {
               failure(error);
           }
@@ -57,7 +60,10 @@
               success(responseObject);
           }
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-          [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+          if(operation.responseObject[@"message"] != nil)
+          {
+              [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+          }
           if (failure) {
               failure(error);
           }
@@ -88,7 +94,10 @@
             success(responseObject);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+        if(operation.responseObject[@"message"] != nil)
+        {
+            [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+        }
         if (failure) {
             failure(error);
         }

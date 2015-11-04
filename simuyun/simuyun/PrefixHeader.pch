@@ -12,6 +12,7 @@
 #import "YTServerConfig.h"
 #import "YTHttpTool.h"
 #import "NSDictionary+Extension.h"
+#import "MobClick.h"
 
 // 通知
 #import "YTNotificationConst.h"

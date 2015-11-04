@@ -94,6 +94,8 @@
 {
     [super viewDidLoad];
     
+    [MobClick event:@"nav_click" attributes:@{@"按钮" : @"首页"}];
+    
     // 初始化顶部视图
     [self setupTopView];
     
@@ -362,10 +364,7 @@
     } else {
         YTMessageModel *message = self.todos[row - 1];
         vc = [[YTNormalWebController alloc] init];
-#warning TODO 修改地址
-        
-        ((YTNormalWebController *)vc).url = [NSString stringWithFormat:@"%@/information/%@&id=%@", YTH5Server, [NSDate stringDate], message.messageId];
-        ((YTNormalWebController *)vc).toTitle = @"待办事项";
+        vc = [YTNormalWebController webWithTitle:@"待办事项" url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
         ((YTNormalWebController *)vc).isDate = YES;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
@@ -386,7 +385,7 @@
             vc = [YTNormalWebController webWithTitle:@"我的奖品" url:[NSString stringWithFormat:@"%@/prizes%@", YTH5Server,[NSDate stringDate]]];
             break;
         case 2:
-            [SVProgressHUD showErrorWithStatus:@"没有这个页面"];
+            vc = [YTNormalWebController webWithTitle:@"云豆银行" url:[NSString stringWithFormat:@"%@/mall%@", YTH5Server,[NSDate stringDate]]];
             break;
     }
     if (vc != nil) {
@@ -593,10 +592,9 @@
     ShareManage *share = [ShareManage shareManage];
     //  设置分享内容
     [share shareConfig];
-    share.share_title = @"推荐私募云给好友";
-    share.share_content = @"";
-#warning 修改地址
-    share.share_url = @"";
+    share.share_title = @"推荐私募云";
+    share.share_content = @"聚合财富管理力量 成就资产管理价值";
+    share.share_url = @"http://www.simuyun.com/invite/invite.html";
     switch (tag) {
         case ShareButtonTypeWxShare:
             //  微信分享

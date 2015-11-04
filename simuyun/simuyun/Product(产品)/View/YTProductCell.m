@@ -102,8 +102,22 @@
 
     // 设置icon图片
     if (_product.series != 0) {
+        self.iconImage.hidden = NO;
         self.iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"productIcon%d",_product.series]];
+    } else
+    {
+        self.iconImage.hidden = YES;
     }
+    
+    // 调整icon的宽度
+    if (_product.series > 6) {
+        self.iconImage.width = 33;
+        self.titleLable.x = 49;
+    } else {
+        self.iconImage.width = 25;
+        self.titleLable.x = 41;
+    }
+
     
     // 设置标题
     self.titleLable.text = _product.pro_name;

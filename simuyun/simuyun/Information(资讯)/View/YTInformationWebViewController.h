@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YTInformation.h"
 
 @interface YTInformationWebViewController : UIViewController
 
@@ -23,6 +24,8 @@
 
 // 是否加时间戳
 @property (nonatomic, assign) BOOL isDate;
+
+@property (nonatomic, strong) YTInformation *information;
 
 
 + (instancetype)webWithTitle:(NSString *)title url:(NSString *)url;

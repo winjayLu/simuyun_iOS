@@ -9,6 +9,7 @@
 #import "YTConsultView.h"
 #import "YTStockCell.h"
 #import "YTNewest.h"
+#import "YTInformationTableViewCell.h"
 
 @interface YTConsultView() <UITableViewDelegate, UITableViewDataSource>
 
@@ -56,13 +57,13 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *identifier = @"stockCell";
-    YTStockCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    static NSString *identifier = @"Information";
+    YTInformationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell==nil) {
-        cell = [[[NSBundle mainBundle] loadNibNamed:@"YTStockCell" owner:nil options:nil] lastObject];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"YTInformationTableViewCell" owner:nil options:nil] lastObject];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.newes = self.newests[indexPath.row];
+    cell.information = self.newests[indexPath.row];
     return cell;
 }
 
@@ -121,7 +122,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    YTNewest *newe = self.newests[indexPath.row];
+    YTInformation *newe = self.newests[indexPath.row];
     if ([self.consultDelegate respondsToSelector:@selector(selectedCellWithRow:)]) {
         [self.consultDelegate selectedCellWithRow:newe];
     }

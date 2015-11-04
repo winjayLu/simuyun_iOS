@@ -84,9 +84,7 @@
     drawerMenu.delegate = self;
     self.drawerMenu = drawerMenu;
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithBg:@"saixuan" highBg:@"saixuananxia" target:self action:@selector(rightClick)];
-    
-
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithBg:@"saixuan" target:self action:@selector(rightClick)];
 }
 
 
@@ -96,6 +94,7 @@
 - (void)rightClick
 {
     self.tableView.header = nil;
+
     [self.drawerMenu showFromNavigationBar:self.navigationController.navigationBar animated:YES];
     
 }
@@ -111,6 +110,7 @@
  */
 - (void)selectedBtnWithType:(btnType)btnType
 {
+
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewOrder)];
     switch (btnType) {
         case btnTypeQuanBu:

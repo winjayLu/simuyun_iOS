@@ -136,6 +136,7 @@
     YTMessageModel *message = self.messages[indexPath.section];
     YTNormalWebController *normal = [YTNormalWebController webWithTitle:@"资讯详情" url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
     normal.isDate = YES;
+    normal.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:normal animated:YES];
 }
 

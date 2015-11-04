@@ -11,6 +11,7 @@
 #import "YTLoginViewController.h"
 #import "YTAccountTool.h"
 #import "YTUserInfoTool.h"
+#import "YTResourcesTool.h"
 #import "YTNavigationController.h"
 
 @interface YTLeftMenu()
@@ -166,6 +167,12 @@
 - (void)setUserInfo:(YTUserInfo *)userInfo
 {
     _userInfo = userInfo;
+    
+    YTResources *resourse = [YTResourcesTool resources];
+    // 隐藏关联 微信
+    if (resourse.versionFlag == 0) {
+        self.guanLianBtn.hidden = YES;
+    }
     if (_userInfo == nil) return;
     // 设置头像
     [self setIconImageWithImageUrl:userInfo.headImgUrl];

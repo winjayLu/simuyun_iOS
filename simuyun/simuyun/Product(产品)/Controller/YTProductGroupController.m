@@ -40,6 +40,7 @@
     [super viewDidLoad];
     self.title = @"产品";
     self.view.backgroundColor = YTGrayBackground;
+    [MobClick event:@"nav_click" attributes:@{@"按钮" : @"产品"}];
     
     // 名山系列
     self.lastTitle = [self creatTitleImage:0];

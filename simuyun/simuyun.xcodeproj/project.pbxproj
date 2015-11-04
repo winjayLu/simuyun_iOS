@@ -646,8 +646,8 @@
 		97C981C71BE79655005FDE2F /* YTMessageNum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMessageNum.m; sourceTree = "<group>"; };
 		97C981C91BE796C0005FDE2F /* YTMessageNumTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTMessageNumTool.h; sourceTree = "<group>"; };
 		97C981CA1BE796C0005FDE2F /* YTMessageNumTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMessageNumTool.m; sourceTree = "<group>"; };
-		97D0D3651BEA472000E27531 /* YTInformationWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTInformationWebViewController.h; sourceTree = "<group>"; };
-		97D0D3661BEA472000E27531 /* YTInformationWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTInformationWebViewController.m; sourceTree = "<group>"; };
+		97D0D3651BEA472000E27531 /* YTInformationWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YTInformationWebViewController.h; path = ../View/YTInformationWebViewController.h; sourceTree = "<group>"; };
+		97D0D3661BEA472000E27531 /* YTInformationWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YTInformationWebViewController.m; path = ../View/YTInformationWebViewController.m; sourceTree = "<group>"; };
 		97DD72C01BC421D90082C69F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		97DD72C21BC421E60082C69F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		97DD72C41BC421F40082C69F /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
@@ -1079,6 +1079,8 @@
 		97ABCB6D1BDDE37A0056C1A1 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				97D0D3651BEA472000E27531 /* YTInformationWebViewController.h */,
+				97D0D3661BEA472000E27531 /* YTInformationWebViewController.m */,
 				97ABCB701BDDE3E20056C1A1 /* YTInformationController.h */,
 				97ABCB711BDDE3E20056C1A1 /* YTInformationController.m */,
 				97ABCB731BDDE48B0056C1A1 /* YTIndustryViewController.h */,
@@ -1105,11 +1107,9 @@
 		97ABCB6F1BDDE37A0056C1A1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				97D0D3661BEA472000E27531 /* YTInformationWebViewController.m */,
 				97ABCB7F1BDE01660056C1A1 /* YTInformationTableViewCell.h */,
 				97ABCB801BDE01660056C1A1 /* YTInformationTableViewCell.m */,
 				97ABCB811BDE01660056C1A1 /* YTInformationTableViewCell.xib */,
-				97D0D3651BEA472000E27531 /* YTInformationWebViewController.h */,
 			);
 			path = View;
 			sourceTree = "<group>";

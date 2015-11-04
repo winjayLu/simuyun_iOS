@@ -12,6 +12,7 @@
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
 #import "WXApi.h"
+#import <MessageUI/MessageUI.h>
 
 
 @interface ShareManage() <MFMailComposeViewControllerDelegate, UINavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UMSocialUIDelegate>
@@ -97,20 +98,23 @@ static ShareManage *shareManage;
 #pragma mark 邮件分享
 - (void)displayEmailComposerSheet:(UIViewController *)vc
 {
+    
     _viewC = vc;
     MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
-    mailPicker.mailComposeDelegate = self;
-    self.mailVc = mailPicker;
-    //设置主题
-    [mailPicker setSubject:self.share_title];
-    // 添加一张图片
-    UIImage *addPic = [UIImage imageNamed: @"maillogo"];
-    NSData *imageData = UIImagePNGRepresentation(addPic);
-    [mailPicker addAttachmentData: imageData mimeType: @"image/png" fileName: @"Icon.png"];
-    // 设置正文
-    NSString *emailBody =[NSString stringWithFormat:@"%@",self.share_content];
-    [mailPicker setMessageBody:emailBody isHTML:YES];
-    [_viewC presentViewController:mailPicker animated:YES completion:nil];
+    if ([MFMailComposeViewController canSendMail]) {
+        mailPicker.mailComposeDelegate = self;
+        self.mailVc = mailPicker;
+        //设置主题
+        [mailPicker setSubject:self.share_title];
+        // 添加一张图片
+        UIImage *addPic = [UIImage imageNamed: @"maillogo"];
+        NSData *imageData = UIImagePNGRepresentation(addPic);
+        [mailPicker addAttachmentData: imageData mimeType: @"image/png" fileName: @"Icon.png"];
+        // 设置正文
+        NSString *emailBody =[NSString stringWithFormat:@"%@",self.share_content];
+        [mailPicker setMessageBody:emailBody isHTML:YES];
+        [_viewC presentViewController:mailPicker animated:YES completion:nil];
+    }
 }
 /**
  *  发送邮件代理方法

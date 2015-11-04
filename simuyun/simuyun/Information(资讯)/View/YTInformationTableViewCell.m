@@ -7,6 +7,7 @@
 //
 
 #import "YTInformationTableViewCell.h"
+#import "UIImageView+SD.h"
 
 // 左右间距
 #define maginWidth 7
@@ -49,8 +50,8 @@
     _information = information;
     self.title.text = information.title;
     self.summary.text = information.summary;
-//    self.dateLable.text = information.
-
+    self.dateLable.text = information.date;
+    [self.iconImage imageWithUrlStr:[NSString stringWithFormat:@"http://%@",information.url]phImage:nil];
 }
 
 - (void)awakeFromNib {

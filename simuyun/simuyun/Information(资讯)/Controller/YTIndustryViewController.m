@@ -90,7 +90,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *identifier = @"stockCell";
+    static NSString *identifier = @"Information";
     YTInformationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell==nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"YTInformationTableViewCell" owner:nil options:nil] lastObject];
@@ -131,6 +131,7 @@
     YTInformation *iformation = self.informations[indexPath.section];
     YTInformationWebViewController *normal = [YTInformationWebViewController webWithTitle:@"资讯详情" url:[NSString stringWithFormat:@"%@/information%@&id=%@",YTH5Server, [NSDate stringDate], iformation.infoId]];
     normal.isDate = YES;
+    normal.information = self.informations[indexPath.section];
     [self.navigationController pushViewController:normal animated:YES];
 }
 

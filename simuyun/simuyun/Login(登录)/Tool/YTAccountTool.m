@@ -12,7 +12,7 @@
 #import "NSDictionary+Extension.h"
 #import "NSString+Password.h"
 #import "SVProgressHUD.h"
-
+#import "APService.h"
 
 
 #define YTAccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"account.data"]
@@ -59,11 +59,16 @@
           account.userId = responseObject[@"userId"];
           account.token = responseObject[@"token"];
           [self save:account];
+          [APService setAlias:account.userId callbackSelector:nil object:nil];
           result(YES);
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-          [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+          if(operation.responseObject[@"message"] != nil)
+          {
+              [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+          }
           result(NO);
       }];
 }
+
 
 @end

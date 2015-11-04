@@ -106,7 +106,10 @@
               [YTAccountTool save:account];
                [self transitionTabBarVC];
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-              [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+              if(operation.responseObject[@"message"] != nil)
+              {
+                  [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+              }
               [self.navigationController popViewControllerAnimated:YES];
           }];
     } failure:^(NSError *error) {

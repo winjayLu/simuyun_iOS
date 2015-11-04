@@ -39,6 +39,7 @@
     
     // 获取是否有新消息
     [self loadNewStatus];
+    [MobClick event:@"nav_click" attributes:@{@"按钮" : @"消息"}];
 }
 /**
  *  获取是否有新消息

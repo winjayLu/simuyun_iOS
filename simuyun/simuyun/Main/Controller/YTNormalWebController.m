@@ -11,6 +11,8 @@
 #import "NSDate+Extension.h"
 #import "NSString+Password.h"
 #import "YTAccountTool.h"
+#import "YTReportContentController.h"
+#import "YTProductModel.h"
 
 
 @interface YTNormalWebController () <UIWebViewDelegate>
@@ -62,9 +64,20 @@
 
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    
+    
+//    NSString *urlString = [[request URL] absoluteString];
+//    NSString *urls = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    NSArray *urlComps = [urls componentsSeparatedByString:@":"];
+    
+    
     NSString *urlString = [[request URL] absoluteString];
-    NSString *urls = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSArray *urlComps = [urls componentsSeparatedByString:@":"];
+    NSArray *result = [urlString componentsSeparatedByString:@":"];
+    NSMutableArray *urlComps = [[NSMutableArray alloc] init];
+    for (NSString *str in result) {
+        [urlComps addObject:[str stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
     
     if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"app"])
     {
@@ -75,6 +88,7 @@
             {
                 YTNormalWebController *normal = [[YTNormalWebController alloc] init];
                 normal.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
+                normal.isDate = YES;
                 normal.toTitle = urlComps[3];
                 [self.navigationController pushViewController:normal animated:YES];
             } else if ([command isEqualToString:@"closepage"])
@@ -83,6 +97,16 @@
             } else if([command isEqualToString:@"changepassword"])
             {
                 [self changPasswordWithOld:urlComps[2] newPassword:urlComps[3]];
+            } else if ([command isEqualToString:@"filingdata"]) // 报备
+            {
+                YTReportContentController *report = [[YTReportContentController alloc] init];
+                YTProductModel *product = [[YTProductModel alloc] init];
+                product.order_id = urlComps[2];
+                product.order_code = urlComps[3];
+                product.customerName = urlComps[4];
+                product.buyMoney = [urlComps[5] intValue];
+                report.prouctModel = product;
+                [self.navigationController pushViewController:report animated:YES];
             }
         }
     }
@@ -95,8 +119,8 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"adviserId"] = [YTAccountTool account].userId;
-    param[@"password"] = [NSString md5:newPassword];
-    param[@"newPassword"] = [NSString md5:oldPassword];
+    param[@"password"] = [NSString md5:oldPassword];
+    param[@"newPassword"] = [NSString md5:newPassword];
     [YTHttpTool post:YTUpdatePassword params:param success:^(id responseObject) {
         // 执行js代码
         NSString *js = @"setData()";

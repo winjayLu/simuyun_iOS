@@ -248,7 +248,10 @@
               [self.navigationController popToRootViewControllerAnimated:YES];
           });
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-         [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+          if(operation.responseObject[@"message"] != nil)
+          {
+              [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+          }
       }];
 }
 
@@ -359,7 +362,9 @@
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
-    return NO;
+    if (action == @selector(paste:))
+        return NO;
+    return [super canPerformAction:action withSender:sender];
 }
 
 

@@ -29,14 +29,15 @@
     [super viewDidLoad];
     self.title = @"订单报备";
     YTReportViewController *report = [[YTReportViewController alloc] init];
-    report.view.frame = CGRectMake(0, 0, DeviceWidth, report.view.height);
+    report.view.frame = CGRectMake(0, 0, DeviceWidth, 1000);
     report.scroll = (UIScrollView *)self.view;
     report.view.backgroundColor = [UIColor whiteColor];
     [self addChildViewController:report];
     [self.view addSubview:report.view];
     report.prouctModel = self.prouctModel;
+    
+    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, 667)];
 
-    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, report.view.height)];
 }
 
 - (void)didReceiveMemoryWarning {

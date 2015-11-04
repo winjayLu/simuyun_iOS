@@ -15,22 +15,22 @@
 #define WXAppSecret @"6e1deaa7b9a8c1380bd69e3de47fcc21"
 
 // 友盟
-#define UmengAppKey @"545867defd98c5f23a0021da"  // 开发环境
-//#define UmengAppKey @"5514ed3cfd98c5bca4000872"  // 生产环境
+//#define UmengAppKey @"545867defd98c5f23a0021da"  // 开发环境
+#define UmengAppKey @"5514ed3cfd98c5bca4000872"  // 生产环境
 
 //  开发环境
-#define YTServer @"http://192.168.17.213:8080/api/app/"
+//#define YTServer @"http://192.168.17.213:8080/api/app/"
 //#define YTServer @"http://172.168.1.177:8080/api/app/"
 
 //  测试环境
 //#define YTServer @"http://192.168.17.212:8080/api/interface/api"
 
 //  生产环境
-//#define YTServer @"https://intime.simuyun.com/api/interface/api"
+#define YTServer @"https://intime.simuyun.com/api/app/"
 
 
 // H5测试地址
-#define YTH5Server @"http://192.168.17.213"
+#define YTH5Server @"http://www.simuyun.com"
 
 /** 接口名 */
 // 程序启动信息

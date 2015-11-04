@@ -25,14 +25,15 @@
 
 - (void)loadView
 {
+    
     // 将控制器的View替换为webView
     UIWebView *mainView = [[UIWebView alloc] initWithFrame:DeviceBounds];
     
     // 获取当前时间
 //    [[NSDate date] stringWithFormater:@""];
     mainView.delegate = self;
-//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@uid=%@&v=4.0", [self appendingUrl:nil], [YTAccountTool account].userId]];
-     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@uid=%@&v=4.0", [self appendingUrl:nil], @"6dcb3fff72f4423ca5077d0741d2e884"]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@uid=%@&v=4.0", [self appendingUrl:nil], [YTAccountTool account].userId]];
+//     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@uid=%@&v=4.0", [self appendingUrl:nil], @"6dcb3fff72f4423ca5077d0741d2e884"]];
     [mainView loadRequest:[NSURLRequest requestWithURL:url]];
     mainView.scalesPageToFit = YES;
     [mainView.scrollView setShowsVerticalScrollIndicator:NO];
@@ -46,7 +47,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [MobClick event:@"nav_click" attributes:@{@"按钮" : @"学院"}];
 }
 
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType

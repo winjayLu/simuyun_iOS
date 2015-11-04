@@ -109,6 +109,10 @@
  */
 @property (weak, nonatomic) IBOutlet UIImageView *huangGuanImage;
 
+// 是否修改了头像
+@property (nonatomic, assign) BOOL isChang;
+
+
 @end
 
 @implementation YTProfileTopView
@@ -165,9 +169,7 @@
     // 关闭相册界面
     [picker dismissViewControllerAnimated:YES completion:nil];
     UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
-    
-    
-    
+
     // 将新的图片保存到用户信息中
     YTUserInfo *userInfo = [YTUserInfoTool userInfo];
     userInfo.iconImage = image;
@@ -175,6 +177,7 @@
     // 发送通知
     [YTCenter postNotificationName:YTUpdateIconImage object:nil];
     
+    self.isChang = YES;
     // 设置图片到iconView上
     [self setIconImageWithImage:image];
     
@@ -201,6 +204,7 @@
     self.iconImage.image = image;
 }
 
+
 /**
  *  上传图片
  */
@@ -218,7 +222,10 @@
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         YTLog(@"%@",responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+        if(operation.responseObject[@"message"] != nil)
+        {
+            [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+        }
     }];
 }
 
@@ -295,8 +302,7 @@
     if (_userInfo == nil) return;
     
     // 设置头像
-    if (userInfo.iconImage == nil) {
-        
+    if (self.isChang == NO) {
         [self.iconImage imageWithUrlStr:userInfo.headImgUrl phImage:nil];
     }
     

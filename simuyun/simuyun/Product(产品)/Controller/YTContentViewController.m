@@ -8,6 +8,7 @@
 
 #import "YTContentViewController.h"
 #import "YTBuySuccessController.h"
+#import "UIBarButtonItem+Extension.h"
 
 @interface YTContentViewController ()
 
@@ -35,8 +36,14 @@
     [self.view addSubview:success.view];
     success.prouctModel = self.prouctModel;
     [(UIScrollView *)self.view setContentSize:CGSizeMake(success.view.width, success.view.height - 40)];
+    // 初始化左侧返回按钮
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithBg:@"fanhui" target:self action:@selector(blackClick)];
 }
 
+- (void)blackClick
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

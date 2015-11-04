@@ -11,9 +11,11 @@
 #import "DXPopover.h"
 #import "ShareCustomView.h"
 #import "ShareManage.h"
+#import "SVProgressHUD.h"
+#import "YTNormalWebController.h"
 
 
-@interface YTInformationWebViewController () <UIWebViewDelegate>
+@interface YTInformationWebViewController () <UIWebViewDelegate, shareCustomDelegate>
 
 // 弹出菜单
 @property (nonatomic, strong) DXPopover *popover;
@@ -64,6 +66,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = self.toTitle;
+    [self setupRightMenu];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,8 +78,11 @@
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSString *urlString = [[request URL] absoluteString];
-    NSString *urls = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSArray *urlComps = [urls componentsSeparatedByString:@":"];
+    NSArray *result = [urlString componentsSeparatedByString:@":"];
+    NSMutableArray *urlComps = [[NSMutableArray alloc] init];
+    for (NSString *str in result) {
+        [urlComps addObject:[str stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
     
     if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"app"])
     {
@@ -85,8 +91,9 @@
             NSString *command = urlComps[1];
             if ([command isEqualToString:@"openpage"])
             {
-                YTInformationWebViewController *normal = [[YTInformationWebViewController alloc] init];
+                YTNormalWebController *normal = [[YTNormalWebController alloc] init];
                 normal.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
+                normal.isDate = YES;
                 normal.toTitle = urlComps[3];
                 [self.navigationController pushViewController:normal animated:YES];
             } else if ([command isEqualToString:@"closepage"])
@@ -117,7 +124,7 @@
  */
 - (void)rightClick:(UIButton *)button
 {
-    if (self.popover != nil)
+    if (self.popover != nil || self.customView != nil)
     {
         [self.popover dismiss];
         return;
@@ -159,7 +166,7 @@
         share.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         share.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
         share.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
-        [share addTarget:self action:@selector(loadMoreProduct) forControlEvents:UIControlEventTouchUpInside];
+        [share addTarget:self action:@selector(shareClcik) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:share];
         
         _innerView = view;
@@ -201,10 +208,10 @@
     ShareManage *share = [ShareManage shareManage];
     //  设置分享内容
     [share shareConfig];
-    share.share_title = self.product.pro_name;
-    share.share_content = self.product.share_summary;
+    share.share_title = self.information.title;
+    share.share_content = self.information.summary;
     share.share_image = [UIImage imageNamed:@"maillogo"];
-    share.share_url = self.url;
+    share.share_url = [NSString stringWithFormat:@"http://www.simuyun.com/information/shared.html?id=%@", self.information.infoId];
     switch (tag) {
         case ShareButtonTypeWxShare:
             //  微信分享

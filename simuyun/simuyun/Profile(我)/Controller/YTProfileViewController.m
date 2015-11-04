@@ -69,9 +69,9 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
 //    self.nav.interactivePopGestureRecognizer.enabled = NO;
     
     // 初始化手势
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    pan.delegate = self;
-    [self.homeVc.view addGestureRecognizer:pan];
+//    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+//    pan.delegate = self;
+//    [self.homeVc.view addGestureRecognizer:pan];
 }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 
