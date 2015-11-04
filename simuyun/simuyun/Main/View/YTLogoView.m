@@ -190,9 +190,9 @@
     [self addSubview:logoButton];
     self.logoButton = logoButton;
     // 添加logo按钮的长按事件
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(btnLong:)];
-    longPress.minimumPressDuration = 1; //定义按的时间
-    [logoButton addGestureRecognizer:longPress];
+//    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(btnLong:)];
+//    longPress.minimumPressDuration = 1; //定义按的时间
+//    [logoButton addGestureRecognizer:longPress];
 }
 
 - (void)btnDragged:(UIButton *)sender withEvent:(UIEvent *)event {

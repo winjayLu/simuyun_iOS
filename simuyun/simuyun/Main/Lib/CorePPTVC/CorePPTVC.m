@@ -104,6 +104,7 @@
  */
 -(void)vcPrepare{
     
+    
     //注册cell
     [PPTCell registerWithNibForCollectionView:self.clv];
     

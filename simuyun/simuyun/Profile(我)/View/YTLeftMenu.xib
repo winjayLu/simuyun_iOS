@@ -53,7 +53,7 @@
                         </mask>
                     </variation>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="- - -丨- - -" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ig5-0y-fq5" userLabel="昵称">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ig5-0y-fq5" userLabel="昵称">
                     <rect key="frame" x="0.0" y="201" width="242" height="18"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="242" id="TVm-Vs-TCQ"/>
@@ -185,7 +185,7 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <inset key="contentEdgeInsets" minX="18" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="退出登录" backgroundImage="leftanniubeijing">
+                    <state key="normal" title="退出登录" backgroundImage="tuiChuBtn">
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
@@ -324,6 +324,7 @@
         <image name="huangguang" width="58" height="30"/>
         <image name="leftanniubeijing" width="50" height="33"/>
         <image name="quan" width="126" height="126"/>
+        <image name="tuiChuBtn" width="145" height="33"/>
         <image name="tuijian" width="22" height="22"/>
         <image name="xiangyou" width="7" height="18"/>
         <image name="yonghuziliao" width="22" height="22"/>

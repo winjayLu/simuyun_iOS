@@ -92,6 +92,7 @@
     if(_pagesView==nil){
         
         YTCloudObserveController *tvc1 = [[YTCloudObserveController alloc] init];
+        tvc1.superVc = self;
         YTTodoListViewController *tvc2 = [[YTTodoListViewController alloc] init];
         YTProductNewsController *tvc3 = [[YTProductNewsController alloc] init];
         YTSystemCenterController *tvc4 = [[YTSystemCenterController alloc] init];
@@ -119,7 +120,6 @@
         
         
         _pagesView=[CorePagesView viewWithOwnerVC:self pageModels:pageModels config:config];
-
     }
     
     return _pagesView;

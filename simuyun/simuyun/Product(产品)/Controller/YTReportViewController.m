@@ -21,7 +21,7 @@
 #import "AFNetworking.h"
 
 
-@interface YTReportViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, PhotoViewDelegate>
+@interface YTReportViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, PhotoViewDelegate, UITextFieldDelegate>
 
 /**
  *  产品名称
@@ -122,6 +122,8 @@
     [super viewDidLoad];
     // 初始化图片选择器
     [self setupPhotoView];
+    self.view.backgroundColor = YTGrayBackground;
+    self.typeField.delegate = self;
 }
 /**
  *  初始化图片选择器
@@ -156,7 +158,7 @@
     
     self.orderCodeLable.text = [NSString stringWithFormat:@"订单编号：%@",prouctModel.order_code];
     self.customerNameLable.text = [NSString stringWithFormat:@"客户：%@", prouctModel.customerName];
-    self.buyMoneyLable.text = [NSString stringWithFormat:@"认购金额：%d", prouctModel.buyMoney];
+    self.buyMoneyLable.text = [NSString stringWithFormat:@"认购金额：%d万", prouctModel.buyMoney];
 }
 
 /**
@@ -240,9 +242,11 @@
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTReport];
     [mgr POST:newUrl parameters:dict
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
-#warning 去订单详情
-          YTLog(@"%@", responseObject);
           [SVProgressHUD showSuccessWithStatus:@"报备成功"];
+          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+              
+              [self.navigationController popToRootViewControllerAnimated:YES];
+          });
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
          [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
       }];
@@ -353,6 +357,11 @@
     self.typeField.text = self.types[row];
 }
 
+- (BOOL)canPerformAction:(SEL)action withSender:(id)sender
+{
+    return NO;
+}
+
 
 #pragma mark - 键盘处理
 
@@ -397,7 +406,7 @@
 - (NSArray *)types
 {
     if (!_types) {
-        _types = [NSArray arrayWithObjects:@"身份证",@"护照",@"其他", nil];
+        _types = [NSArray arrayWithObjects:@"身份证",@"护照",@"营业执照", nil];
     }
     return _types;
 }

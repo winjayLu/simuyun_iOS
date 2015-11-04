@@ -12,6 +12,8 @@
 #import "YTInformationTableViewCell.h"
 #import "MJRefresh.h"
 #import "YTInformation.h"
+#import "YTInformationWebViewController.h"
+#import "NSDate+Extension.h"
 
 
 @interface YTIndustryViewController ()
@@ -48,7 +50,7 @@
 - (void)loadInformations
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"category"] = @"0";
+    params[@"category"] = @"1";
     params[@"offset"] = @"0";
     params[@"limit"] = @"20";
     
@@ -64,7 +66,7 @@
 - (void)loadMoreInformations
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"category"] = @"0";
+    params[@"category"] = @"1";
     params[@"offset"] = @(self.informations.count);
     params[@"limit"] = @"20";
     
@@ -126,7 +128,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    YTInformation *iformation = self.informations[indexPath.section];
+    YTInformationWebViewController *normal = [YTInformationWebViewController webWithTitle:@"资讯详情" url:[NSString stringWithFormat:@"%@/information%@&id=%@",YTH5Server, [NSDate stringDate], iformation.infoId]];
+    normal.isDate = YES;
+    [self.navigationController pushViewController:normal animated:YES];
 }
 
 

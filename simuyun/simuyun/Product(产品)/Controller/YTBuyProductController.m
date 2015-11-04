@@ -122,7 +122,6 @@
         content.prouctModel = self.product;
         [self.navigationController pushViewController:content animated:YES];
     } failure:^(NSError *error) {
-        [SVProgressHUD showErrorWithStatus:@"认购失败"];
     }];
 }
 

@@ -108,7 +108,7 @@ static ShareManage *shareManage;
     NSData *imageData = UIImagePNGRepresentation(addPic);
     [mailPicker addAttachmentData: imageData mimeType: @"image/png" fileName: @"Icon.png"];
     // 设置正文
-    NSString *emailBody =[NSString stringWithFormat:@"<font color='red'>eMail</font> %@",self.share_content];
+    NSString *emailBody =[NSString stringWithFormat:@"%@",self.share_content];
     [mailPicker setMessageBody:emailBody isHTML:YES];
     [_viewC presentViewController:mailPicker animated:YES completion:nil];
 }

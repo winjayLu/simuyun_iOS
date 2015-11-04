@@ -115,9 +115,15 @@
     self.renGouDateLable.text = [NSString stringWithFormat:@"认购时间：%@", order.create_time];
     
     // 认购期限
-    self.qiXianDateLable.text = [NSString stringWithFormat:@"投资期限：%@个月",order.term];
-    // 到期时间
+    if (order.term)
+    {
     
+        self.qiXianDateLable.text = [NSString stringWithFormat:@"投资期限：%@个月",order.term];
+    } else {
+        self.qiXianDateLable.text = @"投资期限";
+    }
+    
+    // 到期时间
     if (order.end_date) {
         self.qiXianDateLable.text = [NSString stringWithFormat:@"%@（%@到期）",self.qiXianDateLable.text, order.end_date];
     }

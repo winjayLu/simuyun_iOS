@@ -18,6 +18,7 @@
 #import "YTResultPasswordViewController.h"
 #import "YTAccountTool.h"
 #import "AFNetworking.h"
+#import "YTResourcesTool.h"
 
 
 // 登录
@@ -79,6 +80,23 @@
     
     // 设置导航栏
     [self setupNav];
+    
+    // iphoe 4 影藏微信登录提示语
+    if (DeviceHight < 568) {
+        for (UIView *view in self.weiChatView.subviews) {
+            if ([view isKindOfClass:[UIButton class]]) {
+                view.hidden = NO;
+            } else {
+                view.hidden = YES;
+            }
+        }
+    }
+    
+    // 审核阶段
+    if([YTResourcesTool resources].versionFlag == 0)
+    {
+        self.weiChatView.hidden = YES;
+    }
     
 }
 

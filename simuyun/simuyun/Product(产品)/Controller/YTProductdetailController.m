@@ -18,6 +18,8 @@
 #import "CoreTFManagerVC.h"
 #import "YTBuyProductController.h"
 #import "NSDate+Extension.h"
+#import "YTReportContentController.h"
+#import "YTNormalWebController.h"
 
 
 @interface YTProductdetailController () <shareCustomDelegate, senMailViewDelegate, UIWebViewDelegate>
@@ -50,14 +52,11 @@
     // 将控制器的View替换为webView
     UIWebView *mainView = [[UIWebView alloc] initWithFrame:DeviceBounds];
     
-    // 加时间戳
-    NSMutableString *url = [NSMutableString string];
-    [url appendString:self.url];
-    [url appendString:[NSDate stringDate]];
-    [mainView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+
     mainView.scalesPageToFit = YES;
     [mainView.scrollView setShowsVerticalScrollIndicator:NO];
     mainView.delegate = self;
+    self.webView = mainView;
     self.view = mainView;
     self.view.backgroundColor = YTGrayBackground;
 }
@@ -96,7 +95,10 @@
  */
 - (void)rightClick:(UIButton *)button
 {
-    if (self.popover != nil || self.customView != nil || self.sendMailView != nil) return;
+    if (self.popover != nil || self.customView != nil || self.sendMailView != nil){
+        [self.popover dismiss];
+        return;
+    }
     [button setBackgroundImage:[UIImage imageNamed:@"jihaoguanbi"] forState:UIControlStateNormal];
     DXPopover *popover = [DXPopover popover];
     self.popover = popover;
@@ -144,7 +146,7 @@
         // 跳转的地址和标题
         if (urlComps.count) {
             NSString *command = urlComps[1];
-            if ([command isEqualToString:@"buynow"])
+            if ([command isEqualToString:@"buynow"])    // 认购
             {
                 YTBuyProductController *buy = [[YTBuyProductController alloc] init];
                 buy.product = self.product;
@@ -153,6 +155,12 @@
             } else if ([command isEqualToString:@"closepage"])
             {
                 [self.navigationController popViewControllerAnimated:YES];
+            }else if ([command isEqualToString:@"openpage"])
+            {
+                YTNormalWebController *normal = [[YTNormalWebController alloc] init];
+                normal.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
+                normal.toTitle = urlComps[3];
+                [self.navigationController pushViewController:normal animated:YES];
             }
         }
     }
@@ -255,10 +263,10 @@
     ShareManage *share = [ShareManage shareManage];
     //  设置分享内容
     [share shareConfig];
-    share.share_title = @"杰哥正在帮你分享";
-    share.share_content = @"盈泰财富云旗下主要互联网产品有自主研发的私募云App和InTime系统，通过产品、运营、营销和结算等相关服务，致力成为中国第三方财富管理行业最佳运营服务商。";
-    share.share_image = [UIImage imageNamed:@"home_logo"];
-    share.share_url = @"http://www.caifuyun.cn/";
+    share.share_title = self.product.pro_name;
+    share.share_content = self.product.share_summary;
+    share.share_image = [UIImage imageNamed:@"maillogo"];
+    share.share_url = self.url;
     switch (tag) {
         case ShareButtonTypeWxShare:
             //  微信分享
@@ -278,9 +286,8 @@
         case ShareButtonTypeCopy:
         {
             UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-            pasteboard.string = share.share_url;
+            pasteboard.string = self.url;
             [SVProgressHUD showSuccessWithStatus:@"复制成功"];
-            [self.customView cancelMenu];
         }
             break;
     }

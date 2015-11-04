@@ -26,7 +26,7 @@ static YTResources *_resources;
     
     // 去服务器获取
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"os"] = @"ios-appstore";
+    dict[@"os"] = @"ios";
     dict[@"version"] = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     
     [YTHttpTool get:YTGetResources params:dict success:^(NSDictionary *responseObject)

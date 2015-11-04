@@ -13,6 +13,10 @@
 #import "MJRefresh.h"
 #import "YTAccountTool.h"
 #import "YTServiceModel.h"
+#import "YTMessageNumTool.h"
+#import "YTNormalWebController.h"
+#import "NSDate+Extension.h"
+#import "CoreArchive.h"
 
 
 @interface YTCloudObserveController ()
@@ -44,18 +48,23 @@
 - (void)loadNewChat
 {
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
-//    param[@"adviserId"] = [YTAccountTool account].userId;
-    param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
+    param[@"adviserId"] = [YTAccountTool account].userId;
+    //        param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
     param[@"category"] = @0;
-    [YTHttpTool get:YTCustomerService params:param success:^(id responseObject) {
-        self.services = [YTServiceModel objectArrayWithKeyValuesArray:responseObject[@"chatContentList"]];
+
+    [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
+        NSLog(@"%@", responseObject);
+        YTServiceModel * service =[YTServiceModel objectWithKeyValues:responseObject];
+        [self.services removeAllObjects];
+        [self.services addObject:service];
+        [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"lastTimestamp"];
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
     } failure:^(NSError *error) {
-        YTLog(@"%@", error);
         [self.tableView.header endRefreshing];
     }];
 }
+
 
 
 
@@ -75,7 +84,6 @@
     cell.layer.cornerRadius = 5;
     cell.layer.borderWidth = 1.0f;
     cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.layer.masksToBounds = YES;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.service = self.services[indexPath.section];
@@ -105,8 +113,26 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.tabBarItem.badgeValue = nil;
+    // 消息数字
+    self.superVc.tabBarItem.badgeValue = nil;
+    
+    YTServiceModel *service = self.services[indexPath.section];
+    
+    // 消息详情
+//    YTNormalWebController *normal = [YTNormalWebController webWithTitle:service. url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
+
+    YTNormalWebController *normal = [YTNormalWebController webWithTitle:@"平台客服" url:[NSString stringWithFormat:@"%@/livehelp%@",YTH5Server, [NSDate stringDate]]];
+    normal.isDate = YES;
+    normal.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:normal animated:YES];
+    
+    
+    YTMessageNum *num = [YTMessageNumTool messageNum];
+    num.CHAT_CONTENT = 0;
+    [self.tableView reloadData];
+    
 }
+
 
 
 

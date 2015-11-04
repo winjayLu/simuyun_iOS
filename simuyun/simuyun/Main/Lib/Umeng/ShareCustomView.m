@@ -9,6 +9,7 @@
 
 #import "ShareCustomView.h"
 #import "UIImage+Extend.h"
+#import "YTResourcesTool.h"
 
 #define menuBtnWidth    50  //按钮宽度
 #define menuBtnHeight   50  //按钮高度
@@ -50,11 +51,35 @@
         //  设置要分享的平台
         self.titleArr = titleArray;
         self.imageArr = imageArray;
-#warning 检测是否是审核阶段
+        if([YTResourcesTool resources].versionFlag == 0)
+        {
+            self.titleArr = [NSArray arrayWithObjects:@"邮件",@"短信",@"复制链接", nil];
+            self.imageArr = [NSArray arrayWithObjects:@"ShareButtonTypeEmail",@"ShareButtonTypeSms",@"ShareButtonTypeCopy", nil];
+        }
         //  创建子控件
         [self creatMainShareView];
     }
     return self;
+}
+
+- (instancetype)initWithTitleArray:(NSArray *)titleArray imageArray:(NSArray *)imageArray isHeight:(BOOL)isHeight
+{
+    self = [self init];
+    if (self) {
+        self.isHeight = isHeight;
+        //  设置要分享的平台
+        self.titleArr = titleArray;
+        self.imageArr = imageArray;
+        if([YTResourcesTool resources].versionFlag == 0)
+        {
+            self.titleArr = [NSArray arrayWithObjects:@"邮件",@"短信", nil];
+            self.imageArr = [NSArray arrayWithObjects:@"ShareButtonTypeEmail",@"ShareButtonTypeSms", nil];
+        }
+        //  创建子控件
+        [self creatMainShareView];
+    }
+    return self;
+
 }
 
 
@@ -77,6 +102,9 @@
     CGFloat shareMenuViewH = 130;
     if (self.titleArr.count > 4) {
         shareMenuViewH = shareMenuViewH *2;
+    } else if(self.isHeight)
+    {
+        shareMenuViewH = 200;
     }
     
     shareMenuView = [[UIView alloc]initWithFrame:CGRectMake(0, DeviceHight, DeviceWidth, shareMenuViewH)];

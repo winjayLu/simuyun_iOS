@@ -8,7 +8,10 @@
 // 消息
 
 #import <UIKit/UIKit.h>
+#import "YTMessageViewController.h"
 
 @interface YTCloudObserveController : UITableViewController
+
+@property (nonatomic, weak) YTMessageViewController *superVc;
 
 @end

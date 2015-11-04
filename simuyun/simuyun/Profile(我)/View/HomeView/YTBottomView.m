@@ -8,6 +8,7 @@
 
 #import "YTBottomView.h"
 #import "YTGroupCell.h"
+#import "YTResourcesTool.h"
 
 @interface YTBottomView() <UITableViewDelegate, UITableViewDataSource>
 
@@ -72,9 +73,11 @@
 {
     if (!_titles) {
         _titles = @[@"全部订单", @"我的奖品", @"云豆银行"];
+        if([YTResourcesTool resources].versionFlag == 0)
+        {
+            _titles = @[@"全部订单"];
+        }
     }
     return _titles;
 }
-
-
 @end

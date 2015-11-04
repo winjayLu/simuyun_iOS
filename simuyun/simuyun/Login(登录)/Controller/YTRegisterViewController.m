@@ -157,11 +157,8 @@
     NSDictionary *dict = @{@"phone" : self.userName.text, @"checkPhoneDuplicate" : @1};
     [YTHttpTool post:YTCaptcha params:dict success:^(id responseObject) {
         self.captcha = responseObject[@"captcha"];
-        if (responseObject[@"msg"]) {
-            [SVProgressHUD showErrorWithStatus:responseObject[@"msg"]];
-            [self.sendBtn stop];
-        }
     } failure:^(NSError *error) {
+        [self.sendBtn stop];
     }];
 }
 

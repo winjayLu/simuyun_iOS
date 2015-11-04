@@ -12,6 +12,7 @@
 #import "YTAccountTool.h"
 #import "YTAuthenticationViewController.h"
 #import "YTUserInfoTool.h"
+#import "NSString+Password.h"
 
 
 @interface YTBindingPhoneController ()
@@ -91,6 +92,7 @@
     [YTHttpTool post:YTCaptcha params:dict success:^(id responseObject) {
         self.captcha = responseObject[@"captcha"];
     } failure:^(NSError *error) {
+        [self.sendBtn stop];
     }];
 }
 
@@ -125,7 +127,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"phoneNumber"] = self.phoneField.text;
-    param[@"password"] = self.passwordField.text;
+    param[@"password"] = [NSString md5:self.passwordField.text];
     [SVProgressHUD showWithStatus:@"正在绑定" maskType:SVProgressHUDMaskTypeClear];
     [YTHttpTool post:YTBindPhone params:param success:^(id responseObject) {
         [SVProgressHUD dismiss];

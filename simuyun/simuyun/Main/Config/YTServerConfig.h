@@ -87,6 +87,8 @@
 #define YTEmailsharing @"emailsharing"
 // 绑定手机号
 #define YTBindPhone @"bindPhone"
+// 修改密码
+#define YTUpdatePassword @"updatePassword"
 
 
 

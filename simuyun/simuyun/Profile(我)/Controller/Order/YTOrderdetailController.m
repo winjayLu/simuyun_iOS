@@ -9,8 +9,11 @@
 #import "YTOrderdetailController.h"
 #import "YHWebViewProgress.h"
 #import "YHWebViewProgressView.h"
+#import "YTReportContentController.h"
+#import "YTProductModel.h"
+#import "YTNormalWebController.h"
 
-@interface YTOrderdetailController ()
+@interface YTOrderdetailController () <UIWebViewDelegate>
 @property (nonatomic, weak) UIWebView *webView;
 
 /**
@@ -32,6 +35,7 @@
     mainView.scalesPageToFit = YES;
     [mainView.scrollView setShowsVerticalScrollIndicator:NO];
     mainView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
+    mainView.delegate = self;
     self.view = mainView;
     self.webView = mainView;
     self.view.backgroundColor = YTGrayBackground;
@@ -64,10 +68,7 @@
     progressView.progressBarColor = YTViewBackground;
     // 设置进度条
     self.progressProxy.progressView = progressView;
-    // 将UIWebView代理指向YHWebViq   ewProgress
-    self.webView.delegate = self.progressProxy;
-    // 设置webview代理转发到self
-    //    self.progressProxy.webViewProxy = self;
+
     // 添加到视图
     [self.view addSubview:progressView];
 }
@@ -79,40 +80,40 @@
 {
     NSString *urlString = [[request URL] absoluteString];
     NSString *urls = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"%@",urls);
-    NSArray *urlComps = [urlString componentsSeparatedByString:@"://"];
-    //
-    if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"objc"])
+    NSArray *urlComps = [urls componentsSeparatedByString:@":"];
+    
+    if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"app"])
     {
-        NSArray *arrFucnameAndParameter = [(NSString*)[urlComps objectAtIndex:1] componentsSeparatedByString:@":/"];
-        
         // 跳转的地址和标题
-        if (arrFucnameAndParameter.count) {
-//            NSString *url = [arrFucnameAndParameter[0] substringFromIndex:4];
-            
-            //            YTWebViewController *vc = [[YTWebViewController alloc] init];
-            //            vc.url = [self appendingUrl:url];
-            
-            //            [self.navigationController pushViewController:vc animated:YES];
+        if (urlComps.count) {
+            NSString *command = urlComps[1];
+            if ([command isEqualToString:@"closepage"])
+            {
+                [self.navigationController popViewControllerAnimated:YES];
+            } else if ([command isEqualToString:@"filing"]) // 报备
+            {
+                YTReportContentController *report = [[YTReportContentController alloc] init];
+                YTProductModel *product = [[YTProductModel alloc] init];
+                product.order_code = self.order.order_code;
+                product.customerName = self.order.cust_name;
+                product.buyMoney = self.order.order_amt;
+                product.order_id = self.order.order_id;
+                report.prouctModel = product;
+                [self.navigationController pushViewController:report animated:YES];
+            } else if ([command isEqualToString:@"openpage"])
+            {
+                YTNormalWebController *normal = [[YTNormalWebController alloc] init];
+                normal.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
+                normal.toTitle = urlComps[3];
+                [self.navigationController pushViewController:normal animated:YES];
+            }
         }
     }
     return YES;
 }
 
 
-/**
- *  拼接地址
- */
-- (NSString *)appendingUrl:(NSString *)url
-{
-    NSMutableString *str = [NSMutableString string];
-    [str appendString:@"http://www.simuyun.com/academy/"];
-    if (url != nil) {
-        
-        [str appendString:url];
-    }
-    return str;
-}
+
 
 
 #pragma mark - lazy

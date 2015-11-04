@@ -12,6 +12,8 @@
 #import "YTAccountTool.h"
 #import "YTMessageModel.h"
 #import "CoreArchive.h"
+#import "YTNormalWebController.h"
+#import "NSDate+Extension.h"
 
 @interface YTProductNewsController ()
 
@@ -127,6 +129,14 @@
     UIView *headerView = [[UIView alloc] init];
     headerView.backgroundColor = [UIColor clearColor];
     return headerView;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    YTMessageModel *message = self.messages[indexPath.section];
+    YTNormalWebController *normal = [YTNormalWebController webWithTitle:@"资讯详情" url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
+    normal.isDate = YES;
+    [self.navigationController pushViewController:normal animated:YES];
 }
 
 #pragma mark - lazy

@@ -62,7 +62,7 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"YTStockCell" owner:nil options:nil] lastObject];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.newes = self.newests[indexPath.section];
+    cell.newes = self.newests[indexPath.row];
     return cell;
 }
 

@@ -22,6 +22,7 @@
     mainView.showsVerticalScrollIndicator = NO;
     self.view = mainView;
     self.view.backgroundColor = YTGrayBackground;
+    self.title = @"认购成功";
 }
 
 

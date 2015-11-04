@@ -16,6 +16,7 @@
 #import "CALayer+Transition.h"
 #import "YTTabBarController.h"
 #import "NSString+Password.h"
+#import "AFNetworking.h"
 
 @interface YTResuNextViewController ()
 
@@ -86,17 +87,28 @@
     NSDictionary *params = @{@"username" : account.userName, @"password" : account.password};
     [SVProgressHUD showWithStatus:@"正在修改" maskType:SVProgressHUDMaskTypeClear];
     [YTHttpTool post:YTresetPassword params:params success:^(id responseObject) {
+
         
-        NSLog(@"%@",responseObject);
         // 发起登录
-        [YTAccountTool loginAccount:account result:^(BOOL result) {
-            [SVProgressHUD dismiss];
-            if (result) {   // 登录成功
-                [self transitionTabBarVC];
-            } else {
-                [self.navigationController popViewControllerAnimated:YES];
-            }
-        }];
+        AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        params[@"username"] = account.userName;
+        params[@"password"] = account.password;
+        
+        // 2.发送一个POST请求
+        NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTSession];
+        
+        [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              // 保存账户信息
+              account.userId = responseObject[@"userId"];
+              account.token = responseObject[@"token"];
+              [YTAccountTool save:account];
+               [self transitionTabBarVC];
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+              [self.navigationController popViewControllerAnimated:YES];
+          }];
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
         [SVProgressHUD showErrorWithStatus:@"修改失败"];

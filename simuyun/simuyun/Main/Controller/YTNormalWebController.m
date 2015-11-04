@@ -9,6 +9,8 @@
 #import "YTNormalWebController.h"
 #import "YTAccountTool.h"
 #import "NSDate+Extension.h"
+#import "NSString+Password.h"
+#import "YTAccountTool.h"
 
 
 @interface YTNormalWebController () <UIWebViewDelegate>
@@ -69,7 +71,7 @@
         // 跳转的地址和标题
         if (urlComps.count) {
             NSString *command = urlComps[1];
-            if ([command isEqualToString:@"gopage"])
+            if ([command isEqualToString:@"openpage"])
             {
                 YTNormalWebController *normal = [[YTNormalWebController alloc] init];
                 normal.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
@@ -78,11 +80,38 @@
             } else if ([command isEqualToString:@"closepage"])
             {
                 [self.navigationController popViewControllerAnimated:YES];
+            } else if([command isEqualToString:@"changepassword"])
+            {
+                [self changPasswordWithOld:urlComps[2] newPassword:urlComps[3]];
             }
         }
     }
     return YES;
 }
+
+
+// 修改密码
+- (void)changPasswordWithOld:(NSString *)oldPassword newPassword:(NSString *)newPassword
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"adviserId"] = [YTAccountTool account].userId;
+    param[@"password"] = [NSString md5:newPassword];
+    param[@"newPassword"] = [NSString md5:oldPassword];
+    [YTHttpTool post:YTUpdatePassword params:param success:^(id responseObject) {
+        // 执行js代码
+        NSString *js = @"setData()";
+        [(UIWebView *)self.view stringByEvaluatingJavaScriptFromString:js];
+        YTAccount *account = [YTAccountTool account];
+        account.password = param[@"newPassword"];
+        [YTAccountTool save:account];
+    } failure:^(NSError *error) {
+        NSString *js = @"setData('failure')";
+        [(UIWebView *)self.view stringByEvaluatingJavaScriptFromString:js];
+    }];
+
+}
+
+
 
 /**
  *  清理webView缓存
@@ -92,14 +121,7 @@
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    // 判断当前加载成功的页面是哪个
-    if ([webView.request.URL.absoluteString isEqualToString:self.url]) {
-        NSString *js = [NSString stringWithFormat:@"document.getElementById('telnum').value = '%@';",[YTAccountTool account].token];
-        [webView stringByEvaluatingJavaScriptFromString:js];
-    }
-}
+
 
 
 @end

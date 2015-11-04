@@ -101,13 +101,20 @@
     
 
     // 设置icon图片
-    self.iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"productIcon%d",_product.series]];
+    if (_product.series != 0) {
+        self.iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"productIcon%d",_product.series]];
+    }
     
     // 设置标题
     self.titleLable.text = _product.pro_name;
     
     // 设置星星
-    self.startImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"start%d",_product.level]];
+    if (_product.level == 0) {
+        self.startImage.hidden = YES;
+    } else {
+        self.startImage.hidden = NO;
+        self.startImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"start%d",_product.level]];
+    }
     
     // 设置投资起点
     self.buyStartLable.text = _product.buy_start;

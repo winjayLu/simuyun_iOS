@@ -10,4 +10,9 @@
 
 @interface YTOrderCenterController : UITableViewController
 
+
+/**
+ *  已选则分类status
+ */
+@property (nonatomic, copy) NSString *status;
 @end

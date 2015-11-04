@@ -47,7 +47,13 @@
     _service = service;
     self.dateLable.text = service.create_time;
     self.contentLable.text = service.content;
-    [self.unreadNum setTitle:[NSString stringWithFormat:@"%d", [YTMessageNumTool messageNum].CHAT_CONTENT] forState:UIControlStateNormal];
+    YTMessageNum *num = [YTMessageNumTool messageNum];
+    
+    if (num.CHAT_CONTENT == 0) {
+        self.unreadNum.hidden = YES;
+    } else {
+        [self.unreadNum setTitle:[NSString stringWithFormat:@"%d", [YTMessageNumTool messageNum].CHAT_CONTENT] forState:UIControlStateNormal];
+    }
 }
 
 

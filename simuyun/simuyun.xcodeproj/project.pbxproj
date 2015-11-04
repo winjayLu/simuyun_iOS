@@ -99,7 +99,6 @@
 		9798E2111BD9EF9300B235AE /* YTOrderNetValueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9798E20F1BD9EF9300B235AE /* YTOrderNetValueCell.m */; };
 		9798E2121BD9EF9300B235AE /* YTOrderNetValueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9798E2101BD9EF9300B235AE /* YTOrderNetValueCell.xib */; };
 		979AFB431BE4BF5100158509 /* YTRedrainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 979AFB421BE4BF5100158509 /* YTRedrainViewController.m */; };
-		979AFB4A1BE503F800158509 /* HWPopMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 979AFB491BE503F800158509 /* HWPopMenu.m */; };
 		97A24D3B1BC89CC4004F479D /* UINavigationBar+BackgroundColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A24D3A1BC89CC4004F479D /* UINavigationBar+BackgroundColor.m */; };
 		97A61D781BC6893B000A5B17 /* YHWebViewProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A61D741BC6893B000A5B17 /* YHWebViewProgress.m */; };
 		97A61D791BC6893C000A5B17 /* YHWebViewProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A61D761BC6893B000A5B17 /* YHWebViewProgressView.m */; };
@@ -215,6 +214,7 @@
 		97C981C01BE72DE5005FDE2F /* YTSenMailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C981BF1BE72DE5005FDE2F /* YTSenMailView.m */; };
 		97C981C81BE79655005FDE2F /* YTMessageNum.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C981C71BE79655005FDE2F /* YTMessageNum.m */; };
 		97C981CB1BE796C0005FDE2F /* YTMessageNumTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C981CA1BE796C0005FDE2F /* YTMessageNumTool.m */; };
+		97D0D3671BEA472000E27531 /* YTInformationWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D0D3661BEA472000E27531 /* YTInformationWebViewController.m */; };
 		97DD72C11BC421D90082C69F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C01BC421D90082C69F /* libsqlite3.dylib */; };
 		97DD72C31BC421E60082C69F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C21BC421E60082C69F /* libz.dylib */; };
 		97DD72C51BC421F40082C69F /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C41BC421F40082C69F /* libstdc++.dylib */; };
@@ -421,8 +421,6 @@
 		9798E2101BD9EF9300B235AE /* YTOrderNetValueCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTOrderNetValueCell.xib; sourceTree = "<group>"; };
 		979AFB411BE4BF5100158509 /* YTRedrainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTRedrainViewController.h; sourceTree = "<group>"; };
 		979AFB421BE4BF5100158509 /* YTRedrainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTRedrainViewController.m; sourceTree = "<group>"; };
-		979AFB481BE503F800158509 /* HWPopMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWPopMenu.h; sourceTree = "<group>"; };
-		979AFB491BE503F800158509 /* HWPopMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWPopMenu.m; sourceTree = "<group>"; };
 		97A24D391BC89CC4004F479D /* UINavigationBar+BackgroundColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+BackgroundColor.h"; sourceTree = "<group>"; };
 		97A24D3A1BC89CC4004F479D /* UINavigationBar+BackgroundColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+BackgroundColor.m"; sourceTree = "<group>"; };
 		97A61D731BC6893B000A5B17 /* YHWebViewProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YHWebViewProgress.h; sourceTree = "<group>"; };
@@ -648,6 +646,8 @@
 		97C981C71BE79655005FDE2F /* YTMessageNum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMessageNum.m; sourceTree = "<group>"; };
 		97C981C91BE796C0005FDE2F /* YTMessageNumTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTMessageNumTool.h; sourceTree = "<group>"; };
 		97C981CA1BE796C0005FDE2F /* YTMessageNumTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMessageNumTool.m; sourceTree = "<group>"; };
+		97D0D3651BEA472000E27531 /* YTInformationWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTInformationWebViewController.h; sourceTree = "<group>"; };
+		97D0D3661BEA472000E27531 /* YTInformationWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTInformationWebViewController.m; sourceTree = "<group>"; };
 		97DD72C01BC421D90082C69F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		97DD72C21BC421E60082C69F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		97DD72C41BC421F40082C69F /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
@@ -930,8 +930,6 @@
 		978C6FE31BCF81C5003D183E /* View */ = {
 			isa = PBXGroup;
 			children = (
-				979AFB481BE503F800158509 /* HWPopMenu.h */,
-				979AFB491BE503F800158509 /* HWPopMenu.m */,
 				978C6FE41BCF8564003D183E /* YTProductCell.h */,
 				978C6FE51BCF8564003D183E /* YTProductCell.m */,
 				978C6FE61BCF8564003D183E /* YTProductCell.xib */,
@@ -1107,9 +1105,11 @@
 		97ABCB6F1BDDE37A0056C1A1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				97D0D3661BEA472000E27531 /* YTInformationWebViewController.m */,
 				97ABCB7F1BDE01660056C1A1 /* YTInformationTableViewCell.h */,
 				97ABCB801BDE01660056C1A1 /* YTInformationTableViewCell.m */,
 				97ABCB811BDE01660056C1A1 /* YTInformationTableViewCell.xib */,
+				97D0D3651BEA472000E27531 /* YTInformationWebViewController.h */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2297,11 +2297,11 @@
 				97BA6A151BD4B948001E291E /* YTConsultView.m in Sources */,
 				97A24D3B1BC89CC4004F479D /* UINavigationBar+BackgroundColor.m in Sources */,
 				978C626C1BE4A42900FE2C72 /* YTTodoViewCell.m in Sources */,
-				979AFB4A1BE503F800158509 /* HWPopMenu.m in Sources */,
 				97C605AC1BC260A400E555E8 /* YTNavigationController.m in Sources */,
 				9714A6F51BC7E0610018A14E /* yConst.m in Sources */,
 				97C606871BC2799400E555E8 /* UIBarButtonItem+Extension.m in Sources */,
 				9714A6F71BC7E0610018A14E /* YUBottomPopSelctView.m in Sources */,
+				97D0D3671BEA472000E27531 /* YTInformationWebViewController.m in Sources */,
 				97C3CE741BC2C17D00B7185D /* MBProgressHUD+WJ.m in Sources */,
 				978C62681BE4A3CE00FE2C72 /* YTTodoListViewController.m in Sources */,
 				9777E97D1BCA3A220016D071 /* YTNotificationConst.m in Sources */,
@@ -2425,8 +2425,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2445,7 +2445,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
@@ -2470,8 +2470,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2484,7 +2484,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -2498,12 +2498,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
 				INFOPLIST_FILE = simuyun/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2524,12 +2524,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
 				INFOPLIST_FILE = simuyun/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

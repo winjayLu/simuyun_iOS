@@ -35,10 +35,12 @@
 #import "HHAlertView.h"
 #import "YTBindingPhoneController.h"
 #import "NSDate+Extension.h"
+#import "ShareCustomView.h"
+#import "ShareManage.h"
 
 #define magin 3
 
-@interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate, UIScrollViewDelegate>
+@interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate, UIScrollViewDelegate, shareCustomDelegate>
 
 /**
  *  顶部视图
@@ -67,6 +69,8 @@
 // 是否加载用户信息
 @property (nonatomic, assign) BOOL isLoad;
 
+// 分享
+@property (nonatomic, weak) ShareCustomView *customView ;
 
 @end
 
@@ -124,11 +128,16 @@
         return;
     }
     // 重新加载用户信息
-    [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
-        if (result) {
-            [SVProgressHUD dismiss];
-            self.topView.userInfo = [YTUserInfoTool userInfo];
-        }
+    // 去服务器获取
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"advisersId"] = [YTAccountTool account].userId;
+    
+    [YTHttpTool get:YTUser params:dict success:^(id responseObject) {
+        YTUserInfo *userInfo = [YTUserInfo objectWithKeyValues:responseObject];
+        [YTUserInfoTool saveUserInfo:userInfo];
+        self.topView.userInfo = userInfo;
+    } failure:^(NSError *error) {
+
     }];
     // 加载待办事项
     [self loadTodos];
@@ -172,7 +181,6 @@
     if ([YTUserInfoTool userInfo] == nil) {
         [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
             if (result) {
-                [SVProgressHUD dismiss];
                 self.topView.userInfo = [YTUserInfoTool userInfo];
             }
         }];
@@ -231,6 +239,11 @@
     bottom.layer.cornerRadius = 5;
     bottom.layer.masksToBounds = YES;
     bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42 * 3);
+
+    if([YTResourcesTool resources].versionFlag == 0)
+    {
+        bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42);
+    }
     bottom.BottomDelegate = self;
     [self.view addSubview:bottom];
     self.bottom = bottom;
@@ -282,6 +295,10 @@
 
     // 修改底部菜单frame
     self.bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42 * 3);
+    if([YTResourcesTool resources].versionFlag == 0)
+    {
+       self.bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42);
+    }
     
     // 设置滚动范围
     [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.bottom.frame) + 64)];
@@ -307,8 +324,9 @@
     } else if([btnTitle isEqualToString:@"关联微信"]){
          [self relationWeChat];
     } else if([btnTitle isEqualToString:@"推荐私募云给好友"]){
-        
-        vc = [YTNormalWebController webWithTitle:@"测试" url:@"http://www.simuyun.com/product/floating.html"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self shareClcik];
+        });
     } else if([btnTitle isEqualToString:@"帮助"]){
         //
         vc = [YTNormalWebController webWithTitle:@"帮助" url:[NSString stringWithFormat:@"%@/help/", YTH5Server]];
@@ -359,9 +377,22 @@
  */
 - (void)didSelectedRow:(int)row
 {
-    YTOrderCenterController *order = [[YTOrderCenterController alloc] init];
-    order.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:order animated:YES];
+    UIViewController *vc = nil;
+    switch (row) {
+        case 0:
+            vc = [[YTOrderCenterController alloc] init];
+            break;
+        case 1:
+            vc = [YTNormalWebController webWithTitle:@"我的奖品" url:[NSString stringWithFormat:@"%@/prizes%@", YTH5Server,[NSDate stringDate]]];
+            break;
+        case 2:
+            [SVProgressHUD showErrorWithStatus:@"没有这个页面"];
+            break;
+    }
+    if (vc != nil) {
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 
@@ -408,6 +439,7 @@
             break;
         case TopButtonTypeDindan:   // 订单
             pushVc = [[YTOrderCenterController alloc] init];
+            ((YTOrderCenterController *)pushVc).status = @"[80]";
             break;
         case TopButtonTypeYeji:     // 业绩
             pushVc = [YTNormalWebController webWithTitle:@"我的业绩" url:[NSString stringWithFormat:@"%@/my/performance/",YTH5Server]];
@@ -465,6 +497,7 @@
  */
 - (void)Authentication
 {
+    YTUserInfo *u = [YTUserInfoTool userInfo];
     if ([YTUserInfoTool userInfo].phoneNumer == nil && [YTUserInfoTool userInfo].phoneNumer.length == 0) {
         YTBindingPhoneController *bing = [[YTBindingPhoneController alloc] init];
         bing.hidesBottomBarWhenPushed = YES;
@@ -494,7 +527,6 @@
  */
 - (void)relationWeChat
 {
-#warning TODO重新加载用户信息
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     
     //  友盟微信登录
@@ -510,9 +542,14 @@
             param[@"openid"] = account.openId;
             param[@"headimgurl"] = account.iconURL;
             [YTHttpTool post:YTBindWeChat params:param success:^(id responseObject) {
-                YTLog(@"%@", responseObject);
+                // 重新加载用户信息
+                [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
+                    if (result) {
+                        self.topView.userInfo = [YTUserInfoTool userInfo];
+                    }
+                }];
             } failure:^(NSError *error) {
-                YTLog(@"%@", error);
+
             }];
         }
     });
@@ -523,6 +560,53 @@
         param[@"address"] = response.data[@"location"];
     }];
 
+}
+#pragma mark - 分享
+// 分享
+- (void)shareClcik
+{
+    
+    if (self.customView != nil) return;
+    
+    //  设置分享视图平台数据
+    NSArray *titleArr = [NSArray arrayWithObjects:@"微信好友",@"朋友圈", nil];
+    NSArray *imgArr = [NSArray arrayWithObjects:@"ShareButtonTypeWxShare",@"ShareButtonTypeWxPyq", nil];
+    //  创建自定义分享视图
+    ShareCustomView *customView = [[ShareCustomView alloc] initWithTitleArray:titleArr imageArray:imgArr isHeight:YES];
+    customView.frame = self.view.bounds;
+    //  设置代理
+    customView.shareDelegate = self;
+    [self.view addSubview:customView];
+    self.customView = customView;
+}
+/**
+ *  自定义分享视图代理方法
+ *
+ */
+- (void)shareBtnClickWithIndex:(NSUInteger)tag
+{
+    self.customView = nil;
+    if (tag == ShareButtonTypeCancel) return;
+    // 移除分享菜单
+    [self.customView cancelMenu];
+    //  分享工具类
+    ShareManage *share = [ShareManage shareManage];
+    //  设置分享内容
+    [share shareConfig];
+    share.share_title = @"推荐私募云给好友";
+    share.share_content = @"";
+#warning 修改地址
+    share.share_url = @"";
+    switch (tag) {
+        case ShareButtonTypeWxShare:
+            //  微信分享
+            [share wxShareWithViewControll:self];
+            break;
+        case ShareButtonTypeWxPyq:
+            //  朋友圈分享
+            [share wxpyqShareWithViewControll:self];
+            break;
+    }
 }
 
 

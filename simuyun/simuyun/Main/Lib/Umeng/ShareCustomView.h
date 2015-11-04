@@ -37,7 +37,12 @@ typedef enum {
  *  @param titleArray 所有分享平台的标题
  *  @param NSArray    所有分享平台的图片
  */
-- (instancetype)initWithTitleArray:(NSArray *)titleArray imageArray:(NSArray *)imageArray;
+- (instancetype)initWithTitleArray:(NSArray *)titleArray imageArray:(NSArray *)imageArray ;
+
+- (instancetype)initWithTitleArray:(NSArray *)titleArray imageArray:(NSArray *)imageArray isHeight:(BOOL)isHeight;
+
+@property (nonatomic, assign) BOOL isHeight;
+
 
 /**
  *  代理

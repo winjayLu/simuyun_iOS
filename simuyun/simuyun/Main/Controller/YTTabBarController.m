@@ -70,7 +70,7 @@
     [self logoViewDidSelectProfileItem];
     
     // 开启定时器时时获取红包雨
-//    [self timerOn];
+    [self timerOn];
 
     // 获取是否有新消息
     [self loadMessageCount];
@@ -81,23 +81,24 @@
 
 - (void)getRedrain
 {
-#warning TODO 红包雨
+    if ([YTAccountTool account].userId == nil || [YTAccountTool account].userId.length == 0) {
+        return;
+    }
+
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
     dict[@"uid"] = [YTAccountTool account].userId;
     [YTHttpTool get:YTRedpacket params:dict success:^(NSDictionary *responseObject) {
-//        NSString *url = responseObject[@"redpage_url"];
-//        if (url.length > 0) {
-//            
-//        }
-        YTRedrainViewController *redRain = [[YTRedrainViewController alloc] init];
-        
-        redRain.url = nil;
-        redRain.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
-        redRain.modalPresentationStyle = UIModalPresentationOverFullScreen;
-        [self presentViewController:redRain animated:NO completion:^{
-        }];
-        // 停止定时器
-        [self timerOff];
+        NSString *url = responseObject[@"redpage_url"];
+        if (url != nil && url.length > 0) {
+            YTRedrainViewController *redRain = [[YTRedrainViewController alloc] init];
+            redRain.url = nil;
+            redRain.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+            redRain.modalPresentationStyle = UIModalPresentationOverFullScreen;
+            [self presentViewController:redRain animated:NO completion:^{
+            }];
+            // 停止定时器
+            
+        }
     } failure:^(NSError *error) {
         
     }];
@@ -143,7 +144,7 @@
     self.timer = timer;
     
     //加入主循环
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+//    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 }
 
 /*

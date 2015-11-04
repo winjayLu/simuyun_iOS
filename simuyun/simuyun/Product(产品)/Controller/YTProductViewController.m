@@ -40,7 +40,7 @@
     [super viewDidLoad];
 
     // 设置颜色
-    self.tableView.backgroundColor = YTViewBackground;
+    self.tableView.backgroundColor = YTGrayBackground;
     // 去掉下划线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 8, 0);
@@ -75,7 +75,7 @@
 {
     if (self.popover != nil)
     {
-        
+        [self.popover dismiss];
         return;
     }
     [button setBackgroundImage:[UIImage imageNamed:@"jihaoguanbi"] forState:UIControlStateNormal];
@@ -149,8 +149,9 @@
     }
     cell.layer.cornerRadius = 5;
     cell.layer.masksToBounds = YES;
+    cell.layer.borderWidth = 1.0f;
+    cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
     cell.product = self.products[indexPath.section];
     return cell;
 }
@@ -205,7 +206,6 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
-    YTLog(@"%d", self.series);
     if (self.series < 9) {
         param[@"series"] = @(self.series);
     }

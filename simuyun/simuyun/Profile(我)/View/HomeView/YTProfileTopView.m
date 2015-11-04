@@ -154,6 +154,7 @@
     }
     // 调用代理方法
     [self.delegate addPicker:imagePicker];
+    
 }
 
 /**
@@ -165,8 +166,7 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
     UIImage *image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
     
-    // 设置图片到iconView上
-    [self setIconImageWithImage:image];
+    
     
     // 将新的图片保存到用户信息中
     YTUserInfo *userInfo = [YTUserInfoTool userInfo];
@@ -175,8 +175,30 @@
     // 发送通知
     [YTCenter postNotificationName:YTUpdateIconImage object:nil];
     
+    // 设置图片到iconView上
+    [self setIconImageWithImage:image];
+    
     // 上传图片
     [self uploadImage:image];
+}
+
+#pragma mark - 设置数据
+/**
+ *  给iconView设置图片
+ */
+- (void)setIconImageWithImage:(UIImage *)image
+{
+    self.iconImage.layer.masksToBounds = YES;
+    self.iconImage.layer.cornerRadius = self.iconImage.frame.size.width * 0.5;
+    self.iconImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
+    self.iconImage.layer.shouldRasterize = YES;
+    self.iconImage.clipsToBounds = YES;
+    // 判断是否是更换图片
+    if(image == nil) {
+        self.iconImage.image = [UIImage imageNamed:@"avatar_default_big"];
+        return;
+    }
+    self.iconImage.image = image;
 }
 
 /**
@@ -186,7 +208,7 @@
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"advisersId"] = [YTAccountTool account].userId;
-    YTHttpFile *file = [YTHttpFile fileWithName:@"image" data:UIImageJPEGRepresentation(image, 1.0) mimeType:@"image/jpg" filename:@"image.jpg"];
+    YTHttpFile *file = [YTHttpFile fileWithName:@"filedata" data:UIImageJPEGRepresentation(image, 1.0) mimeType:@"image/jpg" filename:@"image.jpg"];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     // 2.发送请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTUploadUserImage];
@@ -261,25 +283,7 @@
     }
 }
 
-#pragma mark - 设置数据
-/**
- *  给iconView设置图片
- */
-- (void)setIconImageWithImage:(UIImage *)image
-{
-    self.iconImage.layer.masksToBounds = YES;
-    self.iconImage.layer.cornerRadius = self.iconImage.frame.size.width * 0.5;
-    self.iconImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    self.iconImage.layer.shouldRasterize = YES;
-    self.iconImage.clipsToBounds = YES;
-    // 判断是否是更换图片
-    if(image == nil) {
-        self.iconImage.image = [UIImage imageNamed:@"avatar_default_big"];
-        return;
-    }
-    
-    self.iconImage.image = image;
-}
+
 
 /**
  *  设置用资料
@@ -291,7 +295,10 @@
     if (_userInfo == nil) return;
     
     // 设置头像
-    [self.iconImage imageWithUrlStr:userInfo.headImgUrl phImage:nil];
+    if (userInfo.iconImage == nil) {
+        
+        [self.iconImage imageWithUrlStr:userInfo.headImgUrl phImage:nil];
+    }
     
     // 签到按钮
     if (userInfo.isSingIn) { // 已经签到
@@ -338,10 +345,10 @@
     // 我的业绩数量
     if (userInfo.completedOrderAmountCount > 10000) {
         self.wanLable.text = @"亿";
-        self.yeJiLable.text = [NSString stringWithFormat:@"%.2f", (double)userInfo.completedOrderCount / 10000];
+        self.yeJiLable.text = [NSString stringWithFormat:@"%.2f", (double)userInfo.completedOrderAmountCount / 10000];
     } else {
         self.wanLable.text = @"万";
-        self.yeJiLable.text = [NSString stringWithFormat:@"%d", userInfo.completedOrderCount];
+        self.yeJiLable.text = [NSString stringWithFormat:@"%d", userInfo.completedOrderAmountCount];
     }
     
     // 理财师等级

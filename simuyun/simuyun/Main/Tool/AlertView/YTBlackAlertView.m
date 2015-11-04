@@ -113,6 +113,7 @@ static UIWindow *_window;
     
     
     [detailLabel sizeToFit];
+    detailLabel.width = self.width;
     [self addSubview:detailLabel];
     self.detailLabel = detailLabel;
     

@@ -35,10 +35,7 @@
  */
 @property (nonatomic, strong) BFNavigationBarDrawer *drawerMenu;
 
-/**
- *  已选则分类status
- */
-@property (nonatomic, copy) NSString *status;
+
 
 
 @end
@@ -244,6 +241,7 @@
     YTOrderCenterModel *order = self.orders[indexPath.section];
     YTOrderdetailController *detail = [[YTOrderdetailController alloc] init];
     detail.url = [NSString stringWithFormat:@"%@/order%@&id=%@", YTH5Server, [NSDate stringDate], order.order_id];
+    detail.order = self.orders[indexPath.section];
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
 }

@@ -56,7 +56,7 @@
     button.tag = ProductItemTypeAll;
     UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"productItem%zd",ProductItemTypeAll]];
     [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-    UIImage *imageHighl = [UIImage imageNamed:[NSString stringWithFormat:@"productItemanxia%zd",ProductItemTypeAll + 1]];
+    UIImage *imageHighl = [UIImage imageNamed:[NSString stringWithFormat:@"productItemanxia%zd",ProductItemTypeAll]];
     [button setBackgroundImage:image forState:UIControlStateNormal];
     [button setBackgroundImage:imageHighl forState:UIControlStateHighlighted];
     button.frame = CGRectMake(0, CGRectGetMaxY(self.lastTitle.frame), DeviceWidth, ItemWidth);

@@ -141,6 +141,7 @@
 - (void)imagePickerDidCancel:(JFImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:nil];
+    [JFImagePickerController clear];
 }
 
 -(void)reloadDataImage{
@@ -209,11 +210,12 @@
 -(void)photoItemView:(YTPhotoMenultem *)messagePhotoItemView didSelectDeleteButtonAtIndex:(NSInteger)index isCamera:(BOOL)camera{
     if (camera) {
         [self.CameraPhotos removeObjectAtIndex:index - self.photos.count];
-        [ASSETHELPER.selectdCameraPhoto removeObjectAtIndex:index - self.photos.count];
+//        [ASSETHELPER.selectdCameraPhoto removeObjectAtIndex:index - self.photos.count];
     } else {
         [self.photos removeObjectAtIndex:index];
-        [ASSETHELPER.selectdPhotos removeObjectAtIndex:index];
-        [ASSETHELPER.selectdAssets removeObjectAtIndex:index];
+#warning 记录2各状态出错
+//        [ASSETHELPER.selectdPhotos removeObjectAtIndex:index];
+//        [ASSETHELPER.selectdAssets removeObjectAtIndex:index];
     }
     [self initlizerScrollView];
 }

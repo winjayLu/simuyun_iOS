@@ -16,7 +16,7 @@
 #import "YTInformationController.h"
 #import "MJRefresh.h"
 #import "YTStockModel.h"
-#import "YTNormalWebController.h"
+#import "YTInformationWebViewController.h"
 #import "NSDate+Extension.h"
 
 // 左右间距
@@ -107,7 +107,6 @@
     pptvc.view.frame = CGRectMake(maginWidth, maginWidth, DeviceWidth - 2 * maginWidth, 134 + pptvcY);
     pptvc.view.layer.cornerRadius = 5;
     pptvc.view.layer.masksToBounds = YES;
-    pptvc.view.backgroundColor = [UIColor clearColor];
     [self addChildViewController:pptvc];
     [self.view addSubview:pptvc.view];
     self.pptVC = pptvc;
@@ -143,6 +142,8 @@
     YTConsultView *consult = [[YTConsultView alloc] initWithFrame:CGRectMake(maginWidth, consultY, self.stock.width, consultH)];
     consult.layer.cornerRadius = 5;
     consult.layer.masksToBounds = YES;
+    consult.layer.borderWidth = 1.0f;
+    consult.layer.borderColor = YTColor(208, 208, 208).CGColor;
     consult.consultDelegate = self;
     [self.view addSubview:consult];
     self.consult = consult;
@@ -233,11 +234,14 @@
  */
 - (void)pptVcClick:(PPTModel *)pptModel
 {
-    YTWebViewController *webView = [[YTWebViewController alloc] init];
-    webView.url = pptModel.extension_url;
-    webView.toTitle = pptModel.title;
-    webView.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:webView animated:YES];
+    if (pptModel.extension_url != nil && pptModel.extension_url.length > 0) {
+        
+        YTWebViewController *webView = [[YTWebViewController alloc] init];
+        webView.url = pptModel.extension_url;
+        webView.toTitle = pptModel.title;
+        webView.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:webView animated:YES];
+    }
 }
 
 /**
@@ -251,8 +255,8 @@
     {
         vc = [[YTInformationController alloc] init];
     } else {
-        vc = [YTNormalWebController webWithTitle:@"资讯详情" url:[NSString stringWithFormat:@"%@/information/%@&id=%@",YTH5Server, [NSDate stringDate], newest.infoId]];
-        ((YTNormalWebController *)vc).isDate = YES;
+        vc = [YTInformationWebViewController webWithTitle:@"资讯详情" url:[NSString stringWithFormat:@"%@/information/%@&id=%@",YTH5Server, [NSDate stringDate], newest.infoId]];
+        ((YTInformationWebViewController *)vc).isDate = YES;
     }
     
     vc.hidesBottomBarWhenPushed = YES;
