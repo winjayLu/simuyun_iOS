@@ -57,7 +57,7 @@
  *  转场
  */
 -(void)transitionVc{
-    [self.layer transitionWithAnimType:TransitionAnimTypePageCurl subType:TransitionSubtypesFromBotoom curve:TransitionCurveEaseIn duration:1.0f];
+    [self.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.75f];
 }
 
 

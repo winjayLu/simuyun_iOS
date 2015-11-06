@@ -370,7 +370,7 @@
 
 #pragma mark - 键盘处理
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
 }
