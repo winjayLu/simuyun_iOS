@@ -120,7 +120,8 @@
     [SVProgressHUD showWithStatus:@"正在注册" maskType:SVProgressHUDMaskTypeClear];
     [YTHttpTool post:YTRegister params:params success:^(id responseObject) {
         // 发起登录
-        account.password = self.password.text;
+        
+        account.password = [NSString md5:self.password.text];
         [YTAccountTool loginAccount:account result:^(BOOL result) {
             [SVProgressHUD dismiss];
             if (result) {   // 登录成功
@@ -131,6 +132,7 @@
         }];
     } failure:^(NSError *error) {
     }];
+    [MobClick event:@"logReg_click" attributes: @{@"按钮" : @"注册"}];
 }
 /**
  *  转场到主界面
@@ -142,11 +144,13 @@
     [mainWindow.layer transitionWithAnimType:TransitionAnimTypeCube subType:TransitionSubtypesFromRight curve:TransitionCurveEaseOut duration:0.75f];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // 退出键盘
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
 }
+
+
 
 #pragma mark - sendServer
 /**
@@ -160,6 +164,7 @@
     } failure:^(NSError *error) {
         [self.sendBtn stop];
     }];
+    [MobClick event:@"logReg_click" attributes: @{@"按钮" : @"发送验证码"}];
 }
 
 

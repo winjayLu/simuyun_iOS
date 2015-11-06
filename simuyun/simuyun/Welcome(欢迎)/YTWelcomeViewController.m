@@ -43,15 +43,6 @@
             }
         }];
     }
-    // 发起登录
-    if ([YTAccountTool account]) {
-        [YTAccountTool loginAccount:[YTAccountTool account] result:^(BOOL result) {
-            if (result) {
-                // 获取用户信息
-                [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {}];
-            } 
-        }];
-    }
     // 转场
     [self transitionMainVC];
 }
@@ -65,13 +56,26 @@
         
         // 判断是否有登录过的账户
         if ([YTAccountTool account]) {
-            mainWindow.rootViewController = [[YTTabBarController alloc] init];
+            // 发起登录
+            if ([YTAccountTool account]) {
+                [YTAccountTool loginAccount:[YTAccountTool account] result:^(BOOL result) {
+                    if (result) {
+                        // 获取用户信息
+                        [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {}];
+                        mainWindow.rootViewController = [[YTTabBarController alloc] init];
+                    } else {
+                        mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
+                    }
+                    [mainWindow.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];
+                }];
+            }
         } else {
+            
             mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
+            [mainWindow.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];
         }
-        [mainWindow.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];
+        
     });
-    
 }
 
 #pragma mark - 准备数据

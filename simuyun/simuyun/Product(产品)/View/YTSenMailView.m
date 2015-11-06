@@ -142,6 +142,7 @@
 {
     // 退出键盘
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+//    if (self.mailField.text.length > 0) return;
     
     [UIView animateWithDuration:0.4 animations:^{
         shareMenuView.frame =CGRectMake(0, DeviceHight - 20, DeviceHight, 150);

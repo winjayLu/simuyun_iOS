@@ -126,7 +126,7 @@
         NSString *js = @"setData()";
         [(UIWebView *)self.view stringByEvaluatingJavaScriptFromString:js];
         YTAccount *account = [YTAccountTool account];
-        account.password = param[@"newPassword"];
+        account.password = [NSString md5:newPassword];
         [YTAccountTool save:account];
     } failure:^(NSError *error) {
         NSString *js = @"setData('failure')";

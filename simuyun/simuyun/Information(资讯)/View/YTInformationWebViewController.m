@@ -13,6 +13,7 @@
 #import "ShareManage.h"
 #import "SVProgressHUD.h"
 #import "YTNormalWebController.h"
+#import "YTUserInfoTool.h"
 
 
 @interface YTInformationWebViewController () <UIWebViewDelegate, shareCustomDelegate>
@@ -200,10 +201,10 @@
  */
 - (void)shareBtnClickWithIndex:(NSUInteger)tag
 {
+    [self.customView cancelMenu];
     self.customView = nil;
     if (tag == ShareButtonTypeCancel) return;
     // 移除分享菜单
-    [self.customView cancelMenu];
     //  分享工具类
     ShareManage *share = [ShareManage shareManage];
     //  设置分享内容
@@ -236,6 +237,7 @@
         }
             break;
     }
+    [MobClick event:@"share_click" attributes:@{@"内容类别" : @"资讯", @"分享途径" : @(tag) ,@"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 

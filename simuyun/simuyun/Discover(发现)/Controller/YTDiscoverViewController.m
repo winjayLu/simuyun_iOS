@@ -20,6 +20,9 @@
 #import "NSDate+Extension.h"
 #import "YTInformationTableViewCell.h"
 #import "YTInformation.h"
+#import "YTUserInfoTool.h"
+
+
 
 // 左右间距
 #define maginWidth 7
@@ -214,8 +217,7 @@
     [self getAdvertise];
     [self loadStock];
     [YTHttpTool get:YTNewes params:nil success:^(id responseObject) {
-        NSLog(@"%@", responseObject);
-        self.newests = [YTNewest objectArrayWithKeyValuesArray:responseObject];
+        self.newests = [YTInformation objectArrayWithKeyValuesArray:responseObject];
         // 设置数据
         self.consult.newests = self.newests;
         // 调整高度
@@ -245,6 +247,11 @@
         webView.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:webView animated:YES];
     }
+    if (pptModel.title == nil) {
+        pptModel.title = @"bannner没有名称";
+    }
+    
+    [MobClick event:@"banner_click" attributes:@{@"名称" : pptModel.title, @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 /**

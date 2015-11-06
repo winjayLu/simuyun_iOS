@@ -51,7 +51,7 @@
     [self.nextPassword setValue:YTColor(204, 204, 204) forKeyPath:@"_placeholderLabel.textColor"];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // 退出键盘
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];

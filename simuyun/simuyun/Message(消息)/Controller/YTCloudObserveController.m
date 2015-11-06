@@ -17,6 +17,7 @@
 #import "YTNormalWebController.h"
 #import "NSDate+Extension.h"
 #import "CoreArchive.h"
+#import "YTUserInfoTool.h"
 
 
 @interface YTCloudObserveController ()
@@ -57,12 +58,19 @@
         YTServiceModel * service =[YTServiceModel objectWithKeyValues:responseObject];
         [self.services removeAllObjects];
         [self.services addObject:service];
-        [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"lastTimestamp"];
+        [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"timestampCategory0"];
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
     } failure:^(NSError *error) {
         [self.tableView.header endRefreshing];
     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    [MobClick event:@"msgPanel_click" attributes:@{@"按钮" : @"消息", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 

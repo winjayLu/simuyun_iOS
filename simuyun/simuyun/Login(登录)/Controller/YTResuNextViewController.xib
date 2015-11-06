@@ -22,8 +22,11 @@
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2mZ-KA-box" userLabel="登录">
                     <rect key="frame" x="22" y="431" width="331" height="44"/>
-                    <state key="normal" backgroundImage="querenzhengchang"/>
-                    <state key="highlighted" backgroundImage="querenanxia"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="确认" backgroundImage="blackanxia"/>
+                    <state key="highlighted" backgroundImage="blackkuang">
+                        <color key="titleColor" red="0.40784313729999999" green="0.40784313729999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="confirmClick:" destination="-1" eventType="touchUpInside" id="QG0-6d-VbY"/>
                     </connections>
@@ -60,7 +63,7 @@
                     </constraints>
                     <color key="textColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
+                    <textInputTraits key="textInputTraits" keyboardType="namePhonePad" secureTextEntry="YES"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nSJ-7q-V8X">
                     <rect key="frame" x="22" y="234" width="331" height="49"/>
@@ -71,7 +74,7 @@
                     </constraints>
                     <color key="textColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
+                    <textInputTraits key="textInputTraits" keyboardType="namePhonePad" secureTextEntry="YES"/>
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="hYP-RQ-0Yw"/>
@@ -106,7 +109,7 @@
     </objects>
     <resources>
         <image name="backgrounddl" width="375" height="667"/>
-        <image name="querenanxia" width="330" height="44"/>
-        <image name="querenzhengchang" width="330" height="44"/>
+        <image name="blackanxia" width="330" height="44"/>
+        <image name="blackkuang" width="330" height="44"/>
     </resources>
 </document>

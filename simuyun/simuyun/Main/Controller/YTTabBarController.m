@@ -91,13 +91,13 @@
         NSString *url = responseObject[@"redpage_url"];
         if (url != nil && url.length > 0) {
             YTRedrainViewController *redRain = [[YTRedrainViewController alloc] init];
-            redRain.url = nil;
+            redRain.url = url;
             redRain.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
             redRain.modalPresentationStyle = UIModalPresentationOverFullScreen;
             [self presentViewController:redRain animated:NO completion:^{
             }];
             // 停止定时器
-            
+            [self timerOff];
         }
     } failure:^(NSError *error) {
         
@@ -112,13 +112,30 @@
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
         params[@"adviserId"] = [YTAccountTool account].userId;
-//    params[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
-    NSString *lastTimestamp = [CoreArchive strForKey:@"lastTimestamp"];
-    if (lastTimestamp == nil || lastTimestamp.length == 0) {
-        lastTimestamp = @"2013-01-01 00:00:00";
+    NSString *timestampCategory0 = [CoreArchive strForKey:@"timestampCategory0"];
+    NSString *timestampCategory1 = [CoreArchive strForKey:@"timestampCategory1"];
+    NSString *timestampCategory2 = [CoreArchive strForKey:@"timestampCategory2"];
+    NSString *timestampCategory3 = [CoreArchive strForKey:@"timestampCategory3"];
+    if (timestampCategory0 == nil || timestampCategory0.length == 0) {
+        timestampCategory0 = @"2013-01-01 00:00:00";
 
     }
-    params[@"timestamp"] = lastTimestamp;
+    if (timestampCategory1 == nil || timestampCategory1.length == 0) {
+        timestampCategory0 = @"2013-01-01 00:00:00";
+        
+    }
+    if (timestampCategory2 == nil || timestampCategory2.length == 0) {
+        timestampCategory0 = @"2013-01-01 00:00:00";
+        
+    }
+    if (timestampCategory3 == nil || timestampCategory3.length == 0) {
+        timestampCategory0 = @"2013-01-01 00:00:00";
+        
+    }
+    params[@"timestampCategory0"] = timestampCategory0;
+    params[@"timestampCategory1"] = timestampCategory1;
+    params[@"timestampCategory2"] = timestampCategory2;
+    params[@"timestampCategory3"] = timestampCategory3;
     [YTHttpTool get:YTMessageCount params:params success:^(id responseObject) {
         [YTMessageNumTool save:[YTMessageNum objectWithKeyValues:responseObject]];
         YTMessageNum *messageNum = [YTMessageNumTool messageNum];

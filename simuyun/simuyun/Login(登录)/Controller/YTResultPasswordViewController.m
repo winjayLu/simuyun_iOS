@@ -60,7 +60,7 @@
     [self.password setValue:YTColor(204, 204, 204) forKeyPath:@"_placeholderLabel.textColor"];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // 退出键盘
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
@@ -97,6 +97,8 @@
     YTResuNextViewController *next = [[YTResuNextViewController alloc] init];
     next.username = self.userName.text;
     [self.navigationController pushViewController:next animated:YES];
+    [MobClick event:@"logReg_click" attributes: @{@"按钮" : @"找回下一步"}];
+
 }
 
 

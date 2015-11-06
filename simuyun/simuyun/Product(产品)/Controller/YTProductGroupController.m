@@ -10,6 +10,7 @@
 
 #import "YTProductGroupController.h"
 #import "YTProductViewController.h"
+#import "YTUserInfoTool.h"
 
 #define TitleHeight 70
 #define ItemMagin 3
@@ -32,7 +33,7 @@
     // 将控制器的View替换为ScrollView
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:DeviceBounds];
     mainView.showsVerticalScrollIndicator = NO;
-    mainView.contentSize = CGSizeMake(DeviceWidth, GroupHeig * 2 + TitleHeight + ItemWidth + 8);
+    mainView.contentSize = CGSizeMake(DeviceWidth, GroupHeig * 2 + TitleHeight + ItemWidth );
     self.view = mainView;
 }
 
@@ -134,29 +135,39 @@
     switch (type) {
         case ProductItemTypeTaiShan:
             title = @"泰山系列";
+            
+            [MobClick event:@"proRecommand_click" attributes:@{@"类型" : @"泰山", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
         case ProductItemTypeHuangShan:
             title = @"黄山系列";
+            [MobClick event:@"proRecommand_click" attributes:@{@"类型" : @"黄山", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
         case ProductItemTypeSongShan:
             title = @"嵩山系列";
+            [MobClick event:@"proRecommand_click" attributes:@{@"类型" : @"嵩山", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
         case ProductItemTypeHenShan:
             title = @"恒山系列";
+            [MobClick event:@"proRecommand_click" attributes:@{@"类型" : @"恒山", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
         case ProductItemTypeHuangHe:
             title = @"黄河系列";
+            [MobClick event:@"proRecommand_click" attributes:@{@"类型" : @"黄河", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
         case ProductItemTypeChangJiang:
             title = @"长江系列";
+            [MobClick event:@"proRecommand_click" attributes:@{@"类型" : @"长江", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
         case ProductItemTypeLanCangJiang:
             title = @"澜沧江系列";
+            [MobClick event:@"proRecommand_click" attributes:@{@"类型" : @"澜沧江", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
         case ProductItemTypeYaMaXun:
             title = @"亚马逊系列";
+            [MobClick event:@"proRecommand_click" attributes:@{@"类型" : @"亚马逊", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;case ProductItemTypeAll:
             title = @"全部产品";
+            [MobClick event:@"proRecommand_click" attributes:@{@"类型" : @"全部", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
     }
     return title;

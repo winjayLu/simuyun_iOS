@@ -13,7 +13,6 @@
 #import "UIBarButtonItem+Extension.h"
 #import "YTContentView.h"
 #import "YTBottomView.h"
-#import "YTOtherViewController.h"
 #import "YTUserInfoTool.h"
 #import "SVProgressHUD.h"
 #import "YTOrderCenterController.h"
@@ -37,6 +36,7 @@
 #import "NSDate+Extension.h"
 #import "ShareCustomView.h"
 #import "ShareManage.h"
+#import "YTInformationWebViewController.h"
 
 #define magin 3
 
@@ -71,6 +71,9 @@
 
 // 分享
 @property (nonatomic, weak) ShareCustomView *customView ;
+
+// 签到弹出框
+@property (nonatomic, strong) YTBlackAlertView *blackAlert;
 
 @end
 
@@ -143,6 +146,9 @@
     }];
     // 加载待办事项
     [self loadTodos];
+    
+    // 刷新底部
+    [self.bottom isShow];
 }
 
 // 检查更新
@@ -361,6 +367,7 @@
         [YTCenter postNotificationName:YTJumpToTodoList object:nil];
         YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
         [appRootVC setSelectedIndex:0];
+        [MobClick event:@"main_click" attributes:@{@"按钮" : @"全部待办", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     } else {
         YTMessageModel *message = self.todos[row - 1];
         vc = [[YTNormalWebController alloc] init];
@@ -368,6 +375,7 @@
         ((YTNormalWebController *)vc).isDate = YES;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
+        [MobClick event:@"main_click" attributes:@{@"按钮" : @"单个待办", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     }
 }
 /**
@@ -380,12 +388,15 @@
     switch (row) {
         case 0:
             vc = [[YTOrderCenterController alloc] init];
+            [MobClick event:@"main_click" attributes:@{@"按钮" : @"全部订单", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
         case 1:
             vc = [YTNormalWebController webWithTitle:@"我的奖品" url:[NSString stringWithFormat:@"%@/prizes%@", YTH5Server,[NSDate stringDate]]];
+            [MobClick event:@"main_click" attributes:@{@"按钮" : @"我的奖品", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
         case 2:
             vc = [YTNormalWebController webWithTitle:@"云豆银行" url:[NSString stringWithFormat:@"%@/mall%@", YTH5Server,[NSDate stringDate]]];
+            [MobClick event:@"main_click" attributes:@{@"云豆银行" : @"我的奖品", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
     }
     if (vc != nil) {
@@ -464,7 +475,9 @@
  */
 - (void)signIn
 {
+    if(self.blackAlert != nil) return;
     YTBlackAlertView *alert = [YTBlackAlertView shared];
+    self.blackAlert = alert;
     // 发送请求
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"adviserId"] = [YTAccountTool account].userId;
@@ -478,16 +491,23 @@
         self.topView.userInfo = userInfo;
         // 资讯id
         NSString *infoId = responseObject[@"infoId"];
+        NSString *infoTitle = nil;
+        if (responseObject[@"infoTitle"]) {
+            infoTitle = responseObject[@"infoTitle"];
+        } else {
+            infoTitle = @"";
+        }
         // 弹出提醒
         [alert showAlertSignWithTitle:responseObject[@"infoTitle"] date:responseObject[@"signInDate"] yunDou:responseObject[@"todayPoint"] block:^{
             if (infoId != nil && infoId.length > 0) {
-                YTOtherViewController *other = [[YTOtherViewController alloc] init];
-                other.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:other animated:YES];
+                YTInformationWebViewController *normal = [YTInformationWebViewController webWithTitle:@"早知道" url:[NSString stringWithFormat:@"%@/information%@&id=%@",YTH5Server, [NSDate stringDate], infoId]];
+                normal.isDate = YES;
+                normal.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:normal animated:YES];
             }
         }];
     } failure:^(NSError *error) {
-        
+        self.blackAlert = nil;
     }];
 }
 /**
@@ -496,7 +516,6 @@
  */
 - (void)Authentication
 {
-    YTUserInfo *u = [YTUserInfoTool userInfo];
     if ([YTUserInfoTool userInfo].phoneNumer == nil && [YTUserInfoTool userInfo].phoneNumer.length == 0) {
         YTBindingPhoneController *bing = [[YTBindingPhoneController alloc] init];
         bing.hidesBottomBarWhenPushed = YES;
@@ -584,10 +603,10 @@
  */
 - (void)shareBtnClickWithIndex:(NSUInteger)tag
 {
-    self.customView = nil;
-    if (tag == ShareButtonTypeCancel) return;
     // 移除分享菜单
     [self.customView cancelMenu];
+    self.customView = nil;
+    if (tag == ShareButtonTypeCancel) return;
     //  分享工具类
     ShareManage *share = [ShareManage shareManage];
     //  设置分享内容

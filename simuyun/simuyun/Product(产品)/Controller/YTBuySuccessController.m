@@ -9,6 +9,7 @@
 #import "YTBuySuccessController.h"
 #import "YTReportContentController.h"
 #import "ShareManage.h"
+#import "YTUserInfoTool.h"
 
 
 @interface YTBuySuccessController ()
@@ -104,7 +105,7 @@
     YTReportContentController *report = [[YTReportContentController alloc] init];
     report.prouctModel = self.prouctModel;
     [self.navigationController pushViewController:report animated:YES];
-    
+    [MobClick event:@"book_click" attributes:@{@"按钮" : @"马上去报备", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  微信发送
@@ -145,6 +146,7 @@
  */
 - (IBAction)blackProductClcik:(UIButton *)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
+    [MobClick event:@"book_click" attributes:@{@"按钮" : @"回产品中心", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 

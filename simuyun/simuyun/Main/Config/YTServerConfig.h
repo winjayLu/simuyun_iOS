@@ -31,6 +31,7 @@
 
 // H5测试地址
 #define YTH5Server @"http://www.simuyun.com"
+//#define YTH5Server @"http://192.168.17.213"
 
 /** 接口名 */
 // 程序启动信息
@@ -84,7 +85,7 @@
 // 未读消息数量
 #define YTMessageCount @"messageCount"
 // 邮件获取产品资料
-#define YTEmailsharing @"emailsharing"
+#define YTEmailsharing @"products/emailsharing"
 // 绑定手机号
 #define YTBindPhone @"bindPhone"
 // 修改密码

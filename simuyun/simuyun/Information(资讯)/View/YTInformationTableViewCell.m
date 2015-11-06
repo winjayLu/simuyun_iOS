@@ -50,7 +50,10 @@
     _information = information;
     self.title.text = information.title;
     self.summary.text = information.summary;
-    self.dateLable.text = information.date;
+    if(information.date != nil && information.date.length > 0)
+    {
+        self.dateLable.text = information.date;
+    }
     [self.iconImage imageWithUrlStr:[NSString stringWithFormat:@"http://%@",information.url]phImage:nil];
 }
 

@@ -37,6 +37,9 @@
  */
 @property (weak, nonatomic) IBOutlet UIButton *guanLianBtn;
 
+// 关联微信箭头
+@property (weak, nonatomic) IBOutlet UIImageView *guanLianRightBtn;
+
 /**
  *  关联微信单击事件
  *
@@ -97,13 +100,15 @@
 - (IBAction)ziLiaoClick:(UIButton *)sender {
     
     [self senderNotification:sender];
+    
+    [MobClick event:@"drawer_click" attributes:@{@"按钮" : @"用户资料", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  关联微信单击事件
  *
  */
 - (IBAction)guanLianClick:(UIButton *)sender {
-    [self senderNotification:sender];
+    [self senderNotification:sender];[MobClick event:@"drawer_click" attributes:@{@"按钮" : @"关联微信", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 /**
@@ -119,6 +124,7 @@
  */
 - (IBAction)tuiJian:(UIButton *)sender {
     [self senderNotification:sender];
+    [MobClick event:@"drawer_click" attributes:@{@"按钮" : @"推荐App", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  帮助单击事件
@@ -126,6 +132,7 @@
  */
 - (IBAction)bangZhuClick:(UIButton *)sender {
     [self senderNotification:sender];
+    [MobClick event:@"drawer_click" attributes:@{@"帮助" : @"推荐App", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  关于单击事件
@@ -133,6 +140,7 @@
  */
 - (IBAction)guanYuClick:(UIButton *)sender {
     [self senderNotification:sender];
+    [MobClick event:@"drawer_click" attributes:@{@"按钮" : @"关于", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  退出单击事件
@@ -140,6 +148,8 @@
  */
 - (IBAction)tuiChuClick:(UIButton *)sender {
     [self senderNotification:sender];
+    [MobClick event:@"drawer_click" attributes:@{@"按钮" : @"退出", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+    
     // 获取程序主窗口
     UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
     mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
@@ -154,6 +164,7 @@
  */
 - (IBAction)phoneClick:(UIButton *)sender {
     [self senderNotification:sender];
+    [MobClick event:@"drawer_click" attributes:@{@"按钮" : @"拨打电话", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  发送通知
@@ -172,6 +183,7 @@
     // 隐藏关联 微信
     if (resourse.versionFlag == 0) {
         self.guanLianBtn.hidden = YES;
+        self.guanLianRightBtn.hidden = YES;
     }
     if (_userInfo == nil) return;
     // 设置头像
@@ -194,7 +206,7 @@
         self.guanLianBtn.enabled = NO;
     }
     // 理财师等级
-    self.huangGuanImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"lv%d",userInfo.adviserLevel]];
+    self.huangGuanImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"lv%d",userInfo.adviserLevel - 1]];
 }
 
 /**

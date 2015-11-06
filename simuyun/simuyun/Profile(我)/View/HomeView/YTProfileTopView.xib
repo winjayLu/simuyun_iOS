@@ -176,10 +176,10 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oad-Pf-04j">
-                    <rect key="frame" x="15" y="32" width="24" height="16"/>
+                    <rect key="frame" x="15" y="32" width="29" height="26"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="24" id="6BV-83-ngV"/>
-                        <constraint firstAttribute="height" constant="16" id="VO7-OJ-hYT"/>
+                        <constraint firstAttribute="width" constant="29" id="6BV-83-ngV"/>
+                        <constraint firstAttribute="height" constant="26" id="VO7-OJ-hYT"/>
                     </constraints>
                     <state key="normal" backgroundImage="chouti"/>
                     <connections>
@@ -293,7 +293,7 @@
     </objects>
     <resources>
         <image name="background-picture" width="375" height="270"/>
-        <image name="chouti" width="23" height="15"/>
+        <image name="chouti" width="44" height="49"/>
         <image name="dikuang" width="89" height="53"/>
         <image name="quan" width="126" height="126"/>
         <image name="weiqiandao" width="37" height="37"/>

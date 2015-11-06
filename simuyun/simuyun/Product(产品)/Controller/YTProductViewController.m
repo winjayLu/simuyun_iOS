@@ -54,6 +54,9 @@
     [self setupRightMenu];
 }
 
+
+
+
 /**
  *  右侧菜单
  */
@@ -83,9 +86,10 @@
     self.popover = popover;
     // 修正位置
     UIView *view = [[UIView alloc] init];
+//    view.frame = CGRectMake(DeviceWidth - 50, 0, 22, 22);
     view.frame = button.frame;
-    view.y = view.y - 33;
-    [popover showAtView:view withContentView:self.innerView inView:self.view];
+    view.y = view.y + 30;
+    [popover showAtView:view withContentView:self.innerView inView:self.tabBarController.view];
     popover.didDismissHandler = ^{
         [button setBackgroundImage:[UIImage imageNamed:@"jiahao"] forState:UIControlStateNormal];
         self.innerView.layer.cornerRadius = 0.0;
@@ -121,6 +125,7 @@
         _innerView = view;
     }
     return _innerView;
+
 }
 
 // 加载以往产品

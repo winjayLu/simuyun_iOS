@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.webView.backgroundColor = [UIColor whiteColor];
+    self.webView.backgroundColor = YTGrayBackground;
     self.webView.scalesPageToFit = YES;
     // 设置标题
     if(self.toTitle == nil)

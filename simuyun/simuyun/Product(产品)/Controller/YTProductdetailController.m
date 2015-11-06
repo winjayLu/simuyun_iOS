@@ -20,6 +20,7 @@
 #import "NSDate+Extension.h"
 #import "YTReportContentController.h"
 #import "YTNormalWebController.h"
+#import "YTUserInfoTool.h"
 
 
 @interface YTProductdetailController () <shareCustomDelegate, senMailViewDelegate, UIWebViewDelegate>
@@ -65,7 +66,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"产品详情";
-    self.webView.backgroundColor = [UIColor whiteColor];
     self.webView.scalesPageToFit = YES;
     
     // 初始化进度条
@@ -259,10 +259,10 @@
  */
 - (void)shareBtnClickWithIndex:(NSUInteger)tag
 {
+    [self.customView cancelMenu];
     self.customView = nil;
     if (tag == ShareButtonTypeCancel) return;
     // 移除分享菜单
-    [self.customView cancelMenu];
     //  分享工具类
     ShareManage *share = [ShareManage shareManage];
     //  设置分享内容
@@ -273,8 +273,11 @@
     if(self.product.type_code == 1)
     {
          share.share_url = [NSString stringWithFormat:@"http://www.simuyun.com/product/floating_shared.html?id=%@",self.product.pro_id];
+        
+        [MobClick event:@"productList_click" attributes: @{@"类型" : @"浮收", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     } else {
         share.share_url = [NSString stringWithFormat:@"http://www.simuyun.com/product/fixed_shared.html?id=%@",self.product.pro_id];
+        [MobClick event:@"productList_click" attributes: @{@"类型" : @"固收", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     }
     switch (tag) {
         case ShareButtonTypeWxShare:
@@ -300,6 +303,7 @@
         }
             break;
     }
+    [MobClick event:@"share_click" attributes:@{@"内容类别" : @"产品", @"分享途径" : @(tag) ,@"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 // 获取详细资料
@@ -329,8 +333,8 @@
     params[@"proId"] = self.product.pro_id;
     [YTHttpTool get:YTEmailsharing params:params success:^(id responseObject) {
         YTLog(@"%@", responseObject);
+        [SVProgressHUD showSuccessWithStatus:@"发送成功"];
     } failure:^(NSError *error) {
-        YTLog(@"%@", error);
     }];
     
     

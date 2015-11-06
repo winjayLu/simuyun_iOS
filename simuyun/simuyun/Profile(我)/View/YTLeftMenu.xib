@@ -54,16 +54,17 @@
                     </variation>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ig5-0y-fq5" userLabel="昵称">
-                    <rect key="frame" x="0.0" y="201" width="242" height="18"/>
+                    <rect key="frame" x="0.0" y="201" width="242" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="242" id="TVm-Vs-TCQ"/>
+                        <constraint firstAttribute="height" constant="30" id="n3a-DA-QOm"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                     <color key="textColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PaL-sz-tSE">
-                    <rect key="frame" x="0.0" y="294" width="241" height="30"/>
+                    <rect key="frame" x="0.0" y="304" width="241" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="DJK-zr-c1T"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="241" id="RyK-UN-6gn"/>
@@ -81,14 +82,14 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="2VW-dw-6hO">
-                    <rect key="frame" x="216" y="300" width="7" height="19"/>
+                    <rect key="frame" x="216" y="310" width="7" height="19"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="7" id="FHJ-mX-UwQ"/>
                         <constraint firstAttribute="height" constant="19" id="LVr-Ou-CPz"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yT-YE-IrP">
-                    <rect key="frame" x="0.0" y="342" width="241" height="30"/>
+                    <rect key="frame" x="0.0" y="352" width="241" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="241" id="3xF-7K-iPB"/>
                         <constraint firstAttribute="height" constant="30" id="Npb-aJ-GDo"/>
@@ -106,14 +107,14 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="tqg-Bw-g3r">
-                    <rect key="frame" x="216" y="348" width="7" height="19"/>
+                    <rect key="frame" x="216" y="358" width="7" height="19"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="7" id="rg1-Ye-V1C"/>
                         <constraint firstAttribute="height" constant="19" id="sv2-5Z-lq5"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iq-6B-ZvS">
-                    <rect key="frame" x="0.0" y="390" width="241" height="30"/>
+                    <rect key="frame" x="0.0" y="400" width="241" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="A1q-ve-tSb"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="241" id="bwT-HJ-g1h"/>
@@ -131,14 +132,14 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="rxw-AM-CBx">
-                    <rect key="frame" x="216" y="395" width="7" height="19"/>
+                    <rect key="frame" x="216" y="405" width="7" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="Ne5-sq-xiw"/>
                         <constraint firstAttribute="width" constant="7" id="Uki-rk-VqD"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ebg-tJ-kZj">
-                    <rect key="frame" x="0.0" y="438" width="241" height="30"/>
+                    <rect key="frame" x="0.0" y="448" width="241" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="2ut-0v-9G6"/>
                         <constraint firstAttribute="height" constant="30" id="Zt9-3j-7bm"/>
@@ -156,7 +157,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="kHV-yu-vmN">
-                    <rect key="frame" x="217" y="443" width="7" height="19"/>
+                    <rect key="frame" x="217" y="453" width="7" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="SJk-D2-yIF"/>
                         <constraint firstAttribute="width" constant="7" id="kdI-qg-ZGB"/>
@@ -177,7 +178,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4w-em-a0Z">
-                    <rect key="frame" x="50" y="508" width="140" height="30"/>
+                    <rect key="frame" x="50" y="518" width="140" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="qmr-wY-wd7"/>
                         <constraint firstAttribute="width" constant="140" id="rET-kL-EZD"/>
@@ -193,7 +194,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CqF-3z-uB9">
-                    <rect key="frame" x="0.0" y="246" width="241" height="30"/>
+                    <rect key="frame" x="0.0" y="256" width="241" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="3RA-CG-hIr"/>
                         <constraint firstAttribute="width" constant="241" id="4Cp-Xb-6Bt"/>
@@ -210,7 +211,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="ML9-Hm-k4Y">
-                    <rect key="frame" x="216" y="251" width="7" height="19"/>
+                    <rect key="frame" x="216" y="261" width="7" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="RDe-oB-Tvl"/>
                         <constraint firstAttribute="width" constant="7" id="p6i-r5-NiS"/>
@@ -240,7 +241,7 @@
                 <constraint firstAttribute="bottom" secondItem="Ebg-tJ-kZj" secondAttribute="bottom" constant="199" id="MZP-Bl-Egv"/>
                 <constraint firstItem="rxw-AM-CBx" firstAttribute="centerY" secondItem="3iq-6B-ZvS" secondAttribute="centerY" id="ONN-AW-PDD"/>
                 <constraint firstItem="3DC-4S-XPf" firstAttribute="leading" secondItem="ig5-0y-fq5" secondAttribute="leading" id="QdS-0Q-Rkn"/>
-                <constraint firstItem="CqF-3z-uB9" firstAttribute="top" secondItem="ig5-0y-fq5" secondAttribute="bottom" constant="27" id="R0m-vK-ORe"/>
+                <constraint firstItem="CqF-3z-uB9" firstAttribute="top" secondItem="ig5-0y-fq5" secondAttribute="bottom" constant="25" id="R0m-vK-ORe"/>
                 <constraint firstItem="v8b-bC-v4u" firstAttribute="top" secondItem="WUT-UR-MWe" secondAttribute="bottom" constant="-5" id="Sdm-5U-m83"/>
                 <constraint firstItem="WUT-UR-MWe" firstAttribute="centerX" secondItem="3DC-4S-XPf" secondAttribute="centerX" id="UAl-mi-B2Y"/>
                 <constraint firstItem="WUT-UR-MWe" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="UiN-iP-Gvc"/>
@@ -305,10 +306,12 @@
                     <exclude reference="d86-gS-17c"/>
                     <exclude reference="dTA-jr-Gqy"/>
                     <exclude reference="geh-EF-INW"/>
+                    <exclude reference="MZP-Bl-Egv"/>
                 </mask>
             </variation>
             <connections>
                 <outlet property="guanLianBtn" destination="PaL-sz-tSE" id="6Fm-cB-mfu"/>
+                <outlet property="guanLianRightBtn" destination="2VW-dw-6hO" id="5vI-PD-OqE"/>
                 <outlet property="huangGuanImage" destination="WUT-UR-MWe" id="aKe-IC-nwW"/>
                 <outlet property="iconImage" destination="Kyw-oe-x8Q" id="Zph-sE-7En"/>
                 <outlet property="nameLable" destination="ig5-0y-fq5" id="ho6-c2-QLA"/>

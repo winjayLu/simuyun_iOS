@@ -10,6 +10,7 @@
 #import "SVProgressHUD.h"
 #import "YTContentViewController.h"
 #import "YTAccountTool.h"
+#import "YTUserInfoTool.h"
 
 @interface YTBuyProductController ()
 
@@ -51,8 +52,10 @@
 {
     [super viewDidAppear:animated];
     [self.nameLable becomeFirstResponder];
+    
+    [MobClick event:@"book_click" attributes:@{@"按钮" : @"客户姓名", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
 }
@@ -77,6 +80,7 @@
         oldMoney += 100;
     }
     self.buyMoney.text = [NSString stringWithFormat:@"%zd",oldMoney];
+    [MobClick event:@"book_click" attributes:@{@"按钮" : sender.titleLabel.text, @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 - (IBAction)nextBtn:(UIButton *)sender {
@@ -123,6 +127,8 @@
         [self.navigationController pushViewController:content animated:YES];
     } failure:^(NSError *error) {
     }];
+
+    [MobClick event:@"book_click" attributes:@{@"按钮" : @"提交认购", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 

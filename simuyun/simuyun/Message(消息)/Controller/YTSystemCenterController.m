@@ -14,6 +14,7 @@
 #import "CoreArchive.h"
 #import "YTNormalWebController.h"
 #import "NSDate+Extension.h"
+#import "YTUserInfoTool.h"
 
 @interface YTSystemCenterController ()
 
@@ -42,6 +43,13 @@
     self.tableView.footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreChat)];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MobClick event:@"msgPanel_click" attributes:@{@"按钮" : @"系统公告", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+}
+
 // 加载新数据
 - (void)loadNewChat
 {
@@ -54,7 +62,7 @@
     param[@"pageNo"] = @(self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         self.messages = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
-        [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"lastTimestamp"];
+        [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"timestampCategory3"];
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
     } failure:^(NSError *error) {
@@ -137,6 +145,7 @@
     normal.isDate = YES;
     normal.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:normal animated:YES];
+    [MobClick event:@"msg_click" attributes:@{@"类型" : @"公告", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 #pragma mark - lazy

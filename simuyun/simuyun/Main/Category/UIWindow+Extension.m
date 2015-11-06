@@ -45,7 +45,7 @@
         self.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m1,m2,m3,m4,m5] enterBlock:^{
             // 登录控制器
             self.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
-            [self transitionVc];
+//            [self transitionVc];
         }];
     } else {
         // 欢迎控制器

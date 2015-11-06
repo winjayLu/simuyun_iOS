@@ -236,6 +236,7 @@
 - (IBAction)renZhenClick:(UIButton *)sender {
     // 调用代理方法
     [self sendDelegate:TopButtonTypeRenzhen];
+    [MobClick event:@"main_click" attributes:@{@"按钮" : @"认证", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  签到按钮点击事件
@@ -244,6 +245,7 @@
     // 调用代理方法
     sender.enabled = NO;
     [self sendDelegate:TopButtonTypeQiandao];
+    [MobClick event:@"main_click" attributes:@{@"按钮" : @"签到", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  云豆按钮点击事件
@@ -251,6 +253,7 @@
 - (IBAction)yunDouClick:(UIButton *)sender {
     // 调用代理方法
     [self sendDelegate:TopButtonTypeYundou];
+    [MobClick event:@"main_click" attributes:@{@"按钮" : @"云豆", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  我的客户点击事件
@@ -258,6 +261,7 @@
 - (IBAction)keHuBtn:(id)sender {
     // 调用代理方法
     [self sendDelegate:TopButtonTypeKehu];
+    [MobClick event:@"main_click" attributes:@{@"按钮" : @"我的客户", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  我的订单点击事件
@@ -265,6 +269,7 @@
 - (IBAction)orderClick:(UIButton *)sender {
     // 调用代理方法
     [self sendDelegate:TopButtonTypeDindan];
+    [MobClick event:@"main_click" attributes:@{@"按钮" : @"完成订单", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  我的业绩点击事件
@@ -272,12 +277,14 @@
 - (IBAction)yeJiBtn:(UIButton *)sender {
     // 调用代理方法
     [self sendDelegate:TopButtonTypeYeji];
+    [MobClick event:@"main_click" attributes:@{@"按钮" : @"我的业绩", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  菜单点击事件
  */
 - (IBAction)menuClick:(UIButton *)sender {
     [self sendDelegate:TopButtonTypeMenu];
+    [MobClick event:@"main_click" attributes:@{@"按钮" : @"侧边栏", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  调用代理方法
@@ -358,10 +365,8 @@
     }
     
     // 理财师等级
-    self.huangGuanImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"lv%d",userInfo.adviserLevel]];
+    self.huangGuanImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"lv%d",userInfo.adviserLevel - 1]];
 
-
-    
 }
 
 

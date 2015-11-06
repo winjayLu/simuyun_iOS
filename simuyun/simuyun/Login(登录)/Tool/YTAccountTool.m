@@ -13,6 +13,9 @@
 #import "NSString+Password.h"
 #import "SVProgressHUD.h"
 #import "APService.h"
+#import "YTLoginViewController.h"
+#import "CALayer+Anim.h"
+#import "CALayer+Transition.h"
 
 
 #define YTAccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"account.data"]
@@ -48,7 +51,7 @@
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"username"] = account.userName;
-    params[@"password"] = [NSString md5:account.password];
+    params[@"password"] = account.password;
     
     // 2.发送一个POST请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTSession];
@@ -56,6 +59,7 @@
     [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           // 保存账户信息
+          account.password = params[@"password"];
           account.userId = responseObject[@"userId"];
           account.token = responseObject[@"token"];
           [self save:account];
@@ -69,6 +73,8 @@
           result(NO);
       }];
 }
+
+
 
 
 @end

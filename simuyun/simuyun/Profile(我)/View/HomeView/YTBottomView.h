@@ -19,4 +19,7 @@
 
 @property (nonatomic, weak) id<BottomViewDelegate> BottomDelegate;
 
+// 是否显示
+- (void)isShow;
+
 @end

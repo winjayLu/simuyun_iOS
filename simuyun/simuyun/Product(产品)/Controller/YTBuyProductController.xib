@@ -235,7 +235,10 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="pFs-fg-wR2"/>
                     </constraints>
-                    <state key="normal" backgroundImage="xiayibu"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="下一步" backgroundImage="hongseanniu">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                     <connections>
                         <action selector="nextBtn:" destination="-1" eventType="touchUpInside" id="w3H-iA-Tjr"/>
                     </connections>
@@ -314,7 +317,7 @@
     </objects>
     <resources>
         <image name="anxiakuang" width="111" height="53"/>
-        <image name="xiayibu" width="355" height="44"/>
+        <image name="hongseanniu" width="355" height="44"/>
         <image name="zhengchangkuang" width="111" height="53"/>
     </resources>
 </document>

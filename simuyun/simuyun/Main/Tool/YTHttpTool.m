@@ -10,6 +10,7 @@
 #import "AFNetworking.h"
 #import "NSDictionary+Extension.h"
 #import "SVProgressHUD.h"
+#import "YTAccountTool.h"
 
 @implementation YTHttpTool
 
@@ -21,13 +22,17 @@
 {
     // 1.创建一个请求管理者
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-
+    if ([YTAccountTool account].token != nil && [YTAccountTool account].token.length > 0) {
+        [mgr.requestSerializer setValue:[YTAccountTool account].token forHTTPHeaderField:@"token"];
+    }
+    
     // 2.发送一个POST请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, url];
 //    NSLog(@"%@", newUrl);
 //    NSLog(@"%@", [NSDictionary httpWithDictionary:params]);
     [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          
           if (success) {
               success(responseObject);
           }
@@ -50,6 +55,9 @@
 {
     // 1.创建一个请求管理者
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    if ([YTAccountTool account].token != nil && [YTAccountTool account].token.length > 0) {
+        [mgr.requestSerializer setValue:[YTAccountTool account].token forHTTPHeaderField:@"token"];
+    }
     // 2.发送一个GET请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, url];
     YTLog(@"%@",newUrl);
@@ -78,10 +86,11 @@
 {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    if ([YTAccountTool account].token != nil && [YTAccountTool account].token.length > 0) {
+//        [manager.requestSerializer setValue:[YTAccountTool account].token forHTTPHeaderField:@"token"];
+//    }
     // 2.发送请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, url];
-
-    YTLog(@"%@", newUrl);
     
     [manager POST:newUrl parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         // 上传文件设置

@@ -75,8 +75,11 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="J4C-Pg-8nK"/>
                     </constraints>
-                    <state key="normal" backgroundImage="dengluanxia"/>
-                    <state key="highlighted" backgroundImage="dengluzhengchang"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="登录" backgroundImage="blackanxia"/>
+                    <state key="highlighted" backgroundImage="blackkuang">
+                        <color key="titleColor" red="0.40784313725490196" green="0.40784313725490196" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="loginClick:" destination="-1" eventType="touchUpInside" id="K3X-lx-ZUq"/>
                     </connections>
@@ -235,8 +238,8 @@
     </objects>
     <resources>
         <image name="backgrounddl" width="375" height="667"/>
-        <image name="dengluanxia" width="330" height="44"/>
-        <image name="dengluzhengchang" width="330" height="44"/>
+        <image name="blackanxia" width="330" height="44"/>
+        <image name="blackkuang" width="330" height="44"/>
         <image name="mima" width="22" height="22"/>
         <image name="weixin" width="32" height="32"/>
         <image name="weixinlogin_down" width="62" height="62"/>

@@ -14,6 +14,7 @@
 #import "YTInformation.h"
 #import "YTInformationWebViewController.h"
 #import "NSDate+Extension.h"
+#import "YTUserInfoTool.h"
 
 @interface YTOpinionController ()
 /**
@@ -37,6 +38,13 @@
     [self.tableView.header beginRefreshing];
     
     self.tableView.footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreInformations)];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MobClick event:@"artPanel_click" attributes:@{@"按钮" : @"云观点", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 
@@ -125,10 +133,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     YTInformation *iformation = self.informations[indexPath.section];
-    YTInformationWebViewController *normal = [YTInformationWebViewController webWithTitle:@"资讯详情" url:[NSString stringWithFormat:@"%@/information%@&id=%@",YTH5Server, [NSDate stringDate], iformation.infoId]];
+    YTInformationWebViewController *normal = [YTInformationWebViewController webWithTitle:@"云观点" url:[NSString stringWithFormat:@"%@/information%@&id=%@",YTH5Server, [NSDate stringDate], iformation.infoId]];
     normal.isDate = YES;
     normal.information = self.informations[indexPath.section];
     [self.navigationController pushViewController:normal animated:YES];
+    [MobClick event:@"msg_click" attributes:@{@"类型" : @"云观点", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 

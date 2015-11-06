@@ -214,7 +214,10 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="09H-dq-SU1"/>
                     </constraints>
-                    <state key="normal" backgroundImage="xzqbb"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="现在去报备" backgroundImage="chengseanniu">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                     <connections>
                         <action selector="reportClick:" destination="-1" eventType="touchUpInside" id="JGL-xC-kgd"/>
                     </connections>
@@ -224,7 +227,10 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="Rvb-dQ-94r"/>
                     </constraints>
-                    <state key="normal" backgroundImage="hcpzx"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="回产品中心" backgroundImage="hongseanniu">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                     <connections>
                         <action selector="blackProductClcik:" destination="-1" eventType="touchUpInside" id="w5Y-Ld-AQk"/>
                     </connections>
@@ -296,11 +302,11 @@
         </view>
     </objects>
     <resources>
+        <image name="chengseanniu" width="355" height="44"/>
         <image name="duanxin" width="32" height="32"/>
         <image name="edqzcgbannner" width="375" height="120"/>
-        <image name="hcpzx" width="355" height="44"/>
+        <image name="hongseanniu" width="355" height="44"/>
         <image name="weixin" width="32" height="32"/>
-        <image name="xzqbb" width="355" height="44"/>
         <image name="youjian" width="32" height="32"/>
     </resources>
 </document>

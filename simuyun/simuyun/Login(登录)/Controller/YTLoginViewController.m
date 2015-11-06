@@ -19,6 +19,8 @@
 #import "YTAccountTool.h"
 #import "AFNetworking.h"
 #import "YTResourcesTool.h"
+#import "APService.h"
+#import "NSString+Password.h"
 
 
 // 登录
@@ -136,7 +138,6 @@
                 
                 // 2.发送一个POST请求
                 NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTSession];
-                
                 [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
                       // 保存账户信息
@@ -144,6 +145,7 @@
                       acc.token = responseObject[@"token"];
                       [YTAccountTool save:acc];
                        [self transitionTabBarVC];
+                      [APService setAlias:responseObject[@"userId"] callbackSelector:nil object:nil];
                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                       if(operation.responseObject[@"message"] != nil)
                       {
@@ -161,10 +163,11 @@
         param[@"sex"] = response.data[@"gender"];
         param[@"address"] = response.data[@"location"];
     }];
+    [MobClick event:@"logReg_click" attributes: @{@"按钮" : @"微信登录"}];
     
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // 退出键盘
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
@@ -184,7 +187,8 @@
     
     YTAccount *account = [[YTAccount alloc] init];
     account.userName = self.userName.text;
-    account.password = self.passWord.text;
+    
+    account.password = [NSString md5:self.passWord.text];
     // 发起登录
     [SVProgressHUD showWithStatus:@"正在登录" maskType:SVProgressHUDMaskTypeClear];
     [YTAccountTool loginAccount:account result:^(BOOL result) {
@@ -195,6 +199,7 @@
             [SVProgressHUD showErrorWithStatus:@"密码不正确"];
         }
     }];
+    [MobClick event:@"logReg_click" attributes: @{@"按钮" : @"登录"}];
 }
 /**
  *  转场到主界面
@@ -217,6 +222,7 @@
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
     YTRegisterViewController *registerVc = [[YTRegisterViewController alloc] init];
     [self.navigationController pushViewController:registerVc animated:YES];
+    [MobClick event:@"logReg_click" attributes: @{@"按钮" : @"注册"}];
 }
 /**
  *  忘记密码
@@ -227,6 +233,7 @@
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
     YTResultPasswordViewController *resultVc = [[YTResultPasswordViewController alloc] init];
     [self.navigationController pushViewController:resultVc animated:YES];
+    [MobClick event:@"logReg_click" attributes: @{@"按钮" : @"忘记密码"}];
 }
 
 #pragma mark - NavigationController

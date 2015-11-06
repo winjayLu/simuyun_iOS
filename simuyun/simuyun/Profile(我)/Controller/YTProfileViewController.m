@@ -9,7 +9,6 @@
 #import "YTProfileViewController.h"
 #import "YTHomeViewController.h"
 #import "YTMenuViewController.h"
-#import "YTOtherViewController.h"
 #import "UIView+Extension.h"
 #import "UINavigationBar+BackgroundColor.h"
 #import "UIImage+Extend.h"
@@ -85,6 +84,8 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
  *  @param recognizer
  */
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
+    
+   
     
     
     CGFloat x = [recognizer translationInView:self.view].x;

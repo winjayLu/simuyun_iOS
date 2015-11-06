@@ -14,7 +14,7 @@
 #import "CoreArchive.h"
 #import "YTNormalWebController.h"
 #import "NSDate+Extension.h"
-
+#import "YTUserInfoTool.h"
 
 @interface YTTodoListViewController ()
 // 起始页
@@ -56,12 +56,18 @@
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         NSLog(@"%@", responseObject);
         self.messages = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
-        [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"lastTimestamp"];
+        [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"timestampCategory1"];
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
     } failure:^(NSError *error) {
         [self.tableView.header endRefreshing];
     }];
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MobClick event:@"msgPanel_click" attributes:@{@"按钮" : @"待办事项", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 
@@ -133,10 +139,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     YTMessageModel *message = self.messages[indexPath.section];
-    YTNormalWebController *normal = [YTNormalWebController webWithTitle:@"资讯详情" url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
+    YTNormalWebController *normal = [YTNormalWebController webWithTitle:@"待办事项" url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
     normal.isDate = YES;
     normal.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:normal animated:YES];
+
+    [MobClick event:@"msg_click" attributes:@{@"类型" : @"待办", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 

@@ -158,8 +158,6 @@
 		97C605B01BC260A400E555E8 /* YTProductTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605A31BC260A400E555E8 /* YTProductTool.m */; };
 		97C605D91BC2621F00E555E8 /* YTHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605C61BC2621F00E555E8 /* YTHomeViewController.m */; };
 		97C605DA1BC2621F00E555E8 /* YTMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605C81BC2621F00E555E8 /* YTMenuViewController.m */; };
-		97C605DB1BC2621F00E555E8 /* YTOtherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605CA1BC2621F00E555E8 /* YTOtherViewController.m */; };
-		97C605DC1BC2621F00E555E8 /* YTOtherViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C605CB1BC2621F00E555E8 /* YTOtherViewController.xib */; };
 		97C605DD1BC2621F00E555E8 /* YTProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605CD1BC2621F00E555E8 /* YTProfileViewController.m */; };
 		97C605DF1BC2621F00E555E8 /* YTSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605D71BC2621F00E555E8 /* YTSchoolViewController.m */; };
 		97C605F31BC2622E00E555E8 /* YTDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605E31BC2622E00E555E8 /* YTDiscoverViewController.m */; };
@@ -168,8 +166,6 @@
 		97C605F61BC2622E00E555E8 /* YTAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605EB1BC2622E00E555E8 /* YTAccount.m */; };
 		97C605F71BC2622E00E555E8 /* YTAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605EE1BC2622E00E555E8 /* YTAccountTool.m */; };
 		97C605F81BC2622E00E555E8 /* YTMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605F21BC2622E00E555E8 /* YTMessageViewController.m */; };
-		97C606031BC2628200E555E8 /* TempViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605FF1BC2628200E555E8 /* TempViewController.m */; };
-		97C606041BC2628200E555E8 /* TempViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C606001BC2628200E555E8 /* TempViewController.xib */; };
 		97C6061A1BC266A900E555E8 /* CALayer+Anim.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C606171BC266A900E555E8 /* CALayer+Anim.m */; };
 		97C6061B1BC266A900E555E8 /* CALayer+Transition.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C606191BC266A900E555E8 /* CALayer+Transition.m */; };
 		97C6061F1BC2670E00E555E8 /* NSArray+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C6061E1BC2670E00E555E8 /* NSArray+Extend.m */; };
@@ -538,9 +534,6 @@
 		97C605C61BC2621F00E555E8 /* YTHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTHomeViewController.m; sourceTree = "<group>"; };
 		97C605C71BC2621F00E555E8 /* YTMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTMenuViewController.h; sourceTree = "<group>"; };
 		97C605C81BC2621F00E555E8 /* YTMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMenuViewController.m; sourceTree = "<group>"; };
-		97C605C91BC2621F00E555E8 /* YTOtherViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTOtherViewController.h; sourceTree = "<group>"; };
-		97C605CA1BC2621F00E555E8 /* YTOtherViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTOtherViewController.m; sourceTree = "<group>"; };
-		97C605CB1BC2621F00E555E8 /* YTOtherViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTOtherViewController.xib; sourceTree = "<group>"; };
 		97C605CC1BC2621F00E555E8 /* YTProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTProfileViewController.h; sourceTree = "<group>"; };
 		97C605CD1BC2621F00E555E8 /* YTProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTProfileViewController.m; sourceTree = "<group>"; };
 		97C605D61BC2621F00E555E8 /* YTSchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSchoolViewController.h; sourceTree = "<group>"; };
@@ -556,9 +549,6 @@
 		97C605EE1BC2622E00E555E8 /* YTAccountTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAccountTool.m; sourceTree = "<group>"; };
 		97C605F11BC2622E00E555E8 /* YTMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTMessageViewController.h; sourceTree = "<group>"; };
 		97C605F21BC2622E00E555E8 /* YTMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMessageViewController.m; sourceTree = "<group>"; };
-		97C605FE1BC2628200E555E8 /* TempViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TempViewController.h; sourceTree = "<group>"; };
-		97C605FF1BC2628200E555E8 /* TempViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TempViewController.m; sourceTree = "<group>"; };
-		97C606001BC2628200E555E8 /* TempViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TempViewController.xib; sourceTree = "<group>"; };
 		97C606161BC266A900E555E8 /* CALayer+Anim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Anim.h"; sourceTree = "<group>"; };
 		97C606171BC266A900E555E8 /* CALayer+Anim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Anim.m"; sourceTree = "<group>"; };
 		97C606181BC266A900E555E8 /* CALayer+Transition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Transition.h"; sourceTree = "<group>"; };
@@ -1142,7 +1132,6 @@
 				979AFB3F1BE4BF3800158509 /* Redrain(红包雨) */,
 				97ABCB6C1BDDE3550056C1A1 /* Information(资讯) */,
 				97973CFC1BC3C5E500B7B4CB /* Welcome(欢迎) */,
-				97C605F91BC2628200E555E8 /* Temp(测试) */,
 				97C605E01BC2622E00E555E8 /* Discover(发现) */,
 				97C605E41BC2622E00E555E8 /* Login(登录) */,
 				97C605EF1BC2622E00E555E8 /* Message(消息) */,
@@ -1481,9 +1470,6 @@
 				97C605C61BC2621F00E555E8 /* YTHomeViewController.m */,
 				97C605C71BC2621F00E555E8 /* YTMenuViewController.h */,
 				97C605C81BC2621F00E555E8 /* YTMenuViewController.m */,
-				97C605C91BC2621F00E555E8 /* YTOtherViewController.h */,
-				97C605CA1BC2621F00E555E8 /* YTOtherViewController.m */,
-				97C605CB1BC2621F00E555E8 /* YTOtherViewController.xib */,
 				97C605CC1BC2621F00E555E8 /* YTProfileViewController.h */,
 				97C605CD1BC2621F00E555E8 /* YTProfileViewController.m */,
 				9798E2011BD9E0C000B235AE /* Order */,
@@ -1647,24 +1633,6 @@
 				978C626F1BE4ABFA00FE2C72 /* YTProductNewsController.m */,
 				978C62711BE4AD9E00FE2C72 /* YTSystemCenterController.h */,
 				978C62721BE4AD9E00FE2C72 /* YTSystemCenterController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		97C605F91BC2628200E555E8 /* Temp(测试) */ = {
-			isa = PBXGroup;
-			children = (
-				97C605FA1BC2628200E555E8 /* Controller */,
-			);
-			path = "Temp(测试)";
-			sourceTree = "<group>";
-		};
-		97C605FA1BC2628200E555E8 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				97C605FE1BC2628200E555E8 /* TempViewController.h */,
-				97C605FF1BC2628200E555E8 /* TempViewController.m */,
-				97C606001BC2628200E555E8 /* TempViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2097,7 +2065,6 @@
 				978122D61BE35A720035D6DE /* YTAuthenticationErrorController.xib in Resources */,
 				97187A8F1BC666E200C64609 /* YTWebViewController.xib in Resources */,
 				970020C71BD64B9F00231F52 /* YTBuySuccessController.xib in Resources */,
-				97C605DC1BC2621F00E555E8 /* YTOtherViewController.xib in Resources */,
 				971503AC1BC75E78007E27D0 /* PPTCell.xib in Resources */,
 				9790F8CC1BDF140900965C7B /* YTAuthenticationViewController.xib in Resources */,
 				97C606A71BC2985700E555E8 /* UMSocialLocalizable.strings in Resources */,
@@ -2131,7 +2098,6 @@
 				97DE83141BD1042900E3C5CA /* YTResuNextViewController.xib in Resources */,
 				97DE830D1BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.xib in Resources */,
 				97C605F51BC2622E00E555E8 /* YTLoginViewController.xib in Resources */,
-				97C606041BC2628200E555E8 /* TempViewController.xib in Resources */,
 				97C606B11BC2985700E555E8 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				97C606721BC270CC00E555E8 /* CoreSDWebImage.bundle in Resources */,
 				97C606AB1BC2985700E555E8 /* UMSCommentInputControlleriPad.xib in Resources */,
@@ -2227,7 +2193,6 @@
 				97BF5BF41BD7902700053BD0 /* JFPhotoBrowserViewController.m in Sources */,
 				97C6061F1BC2670E00E555E8 /* NSArray+Extend.m in Sources */,
 				97BC997A1BD4DB610090BDE8 /* CorePagesBarView.m in Sources */,
-				97C606031BC2628200E555E8 /* TempViewController.m in Sources */,
 				97187A8E1BC666E200C64609 /* YTWebViewController.m in Sources */,
 				978122D51BE35A720035D6DE /* YTAuthenticationErrorController.m in Sources */,
 				97ABCB7E1BDDE5460056C1A1 /* YTKnowController.m in Sources */,
@@ -2332,7 +2297,6 @@
 				97BF5BF61BD7902700053BD0 /* YTPhotoMenultem.m in Sources */,
 				97C6067F1BC271DE00E555E8 /* Reachability.m in Sources */,
 				978C6FE11BCF8193003D183E /* YTProductViewController.m in Sources */,
-				97C605DB1BC2621F00E555E8 /* YTOtherViewController.m in Sources */,
 				97C6066A1BC2700600E555E8 /* UIButton+SD.m in Sources */,
 				97C605F81BC2622E00E555E8 /* YTMessageViewController.m in Sources */,
 				97C3CE251BC29FE800B7185D /* ShareCustomView.m in Sources */,
@@ -2425,8 +2389,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2470,8 +2434,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2498,8 +2462,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
 				INFOPLIST_FILE = simuyun/Info.plist;
@@ -2524,8 +2488,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
 				INFOPLIST_FILE = simuyun/Info.plist;

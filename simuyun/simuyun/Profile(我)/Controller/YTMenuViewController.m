@@ -56,7 +56,7 @@
     self.leftMenu = leftMenu;
     
     // 设置ScrollView的滚动范围
-    [(UIScrollView *)self.view setContentSize:CGSizeMake(leftMenu.width, leftMenu.height - 49)];
+    [(UIScrollView *)self.view setContentSize:CGSizeMake(leftMenu.width, leftMenu.height - 69)];
     
     // 监听通知
     [YTCenter addObserver:self selector:@selector(leftUpdate) name:YTUpdateIconImage object:nil];

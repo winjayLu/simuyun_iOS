@@ -99,8 +99,11 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w20-Qf-UPe" userLabel="登录">
                     <rect key="frame" x="22" y="461" width="331" height="44"/>
-                    <state key="normal" backgroundImage="zhucezhengchang"/>
-                    <state key="highlighted" backgroundImage="zhuceanxia"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <state key="normal" title="注册" backgroundImage="blackanxia"/>
+                    <state key="highlighted" backgroundImage="blackkuang">
+                        <color key="titleColor" red="0.40784313729999999" green="0.40784313729999999" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="registerClick:" destination="-1" eventType="touchUpInside" id="kks-Dr-JTY"/>
                     </connections>
@@ -162,12 +165,12 @@
     </objects>
     <resources>
         <image name="backgrounddl" width="375" height="667"/>
+        <image name="blackanxia" width="330" height="44"/>
+        <image name="blackkuang" width="330" height="44"/>
         <image name="fansongyanzhnegmazc" width="115" height="33"/>
         <image name="mima" width="22" height="22"/>
         <image name="yanzhengma" width="22" height="22"/>
         <image name="yanzhengmakuang" width="115" height="33"/>
         <image name="yonghuming" width="22" height="22"/>
-        <image name="zhuceanxia" width="330" height="44"/>
-        <image name="zhucezhengchang" width="330" height="44"/>
     </resources>
 </document>
