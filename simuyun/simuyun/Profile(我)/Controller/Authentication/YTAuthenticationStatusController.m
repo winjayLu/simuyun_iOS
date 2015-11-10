@@ -37,10 +37,10 @@
         self.nameLable.text = self.authen.realName;
         self.organizationNameLable.text = self.authen.orgName;
         if (self.authen.submitTime != nil) {
-            self.detailLable.text = [NSString stringWithFormat:@"您于%@提交了资料，请联系您所在机构管理员在云台系统进行审核，如7日内没有审核通过，系统会自动驳回申请，对此有其他疑问，请致电400-188-8488或者在App中与平台客服直接联系。", self.authen.submitTime];
+            self.detailLable.text = [NSString stringWithFormat:@"您于%@提交了资料，请联系您所在机构管理员在云台系统进行审核，如7日内没有审核通过，系统会自动驳回申请，对此有其他疑问，请致电400-188-8848或者在App中与平台客服直接联系。", self.authen.submitTime];
         } else
         {
-            self.detailLable.text = @"您提交了资料，请联系您所在机构管理员在云台系统进行审核，如7日内没有审核通过，系统会自动驳回申请，对此有其他疑问，请致电400-188-8488或者在App中与平台客服直接联系。";
+            self.detailLable.text = @"您提交了资料，请联系您所在机构管理员在云台系统进行审核，如7日内没有审核通过，系统会自动驳回申请，对此有其他疑问，请致电400-188-8848或者在App中与平台客服直接联系。";
         }
     }
     
@@ -74,7 +74,7 @@
     _authen = authen;
     self.nameLable.text = authen.realName;
     self.organizationNameLable.text = authen.orgName;
-    self.detailLable.text = [NSString stringWithFormat:@"您于%@提交了资料，请联系您所在机构管理员在云台系统进行审核，如7日内没有审核通过，系统会自动驳回申请，对此有其他疑问，请致电400-188-8488或者在App中与平台客服直接联系。", authen.submitTime];
+    self.detailLable.text = [NSString stringWithFormat:@"您于%@提交了资料，请联系您所在机构管理员在云台系统进行审核，如7日内没有审核通过，系统会自动驳回申请，对此有其他疑问，请致电400-188-8848或者在App中与平台客服直接联系。", authen.submitTime];
 }
 
 - (void)didReceiveMemoryWarning {

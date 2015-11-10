@@ -7,7 +7,6 @@
 //
 
 #import "YTConsultView.h"
-#import "YTStockCell.h"
 #import "YTNewest.h"
 #import "YTInformationTableViewCell.h"
 
@@ -76,12 +75,12 @@
 // 设置cell之间headerview的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 30; // you can have your own choice, of course
+    return 33; // you can have your own choice, of course
 }
 // 设置headerview的颜色
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIButton *view = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.width, 30)];
+    UIButton *view = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.width, 40)];
     view.backgroundColor = [UIColor whiteColor];
     
     // 红点
@@ -106,7 +105,6 @@
     black.size = black.image.size;
     black.center = view.center;
     black.x = self.width - black.image.size.width - 15;
-    black.y += 2;
     [view addSubview:black];
     
     [view addTarget:self action:@selector(titleClcik) forControlEvents:UIControlEventTouchUpInside];

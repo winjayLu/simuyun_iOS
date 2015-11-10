@@ -54,7 +54,11 @@
     {
         self.dateLable.text = information.date;
     }
-    [self.iconImage imageWithUrlStr:[NSString stringWithFormat:@"http://%@",information.url]phImage:nil];
+    if (information.url == nil || information.url.length == 0) {
+        self.iconImage.image = [UIImage imageNamed:@"yunguandian"];
+    } else {
+        [self.iconImage imageWithUrlStr:[NSString stringWithFormat:@"http://%@",information.url]phImage:nil];
+    }
 }
 
 - (void)awakeFromNib {

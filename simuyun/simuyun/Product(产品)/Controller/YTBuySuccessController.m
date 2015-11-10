@@ -135,12 +135,14 @@
 {
     if (!_shareManage) {
         ShareManage *share = [ShareManage shareManage];
-        share.share_content = [NSString stringWithFormat:@"募集帐号:%@\n开户行:%@\n帐号:%@", self.accountNameLable.text, self.accountBankLable.text, self.accountLable.text];
+        share.share_title = @"打款信息";
+        share.share_content = [NSString stringWithFormat:@"客户姓名：%@认购%d万%@\n开户名：%@\n募集银行：%@\n募集帐号：%@\n打款备注：%@认购%@", self.prouctModel.customerName, self.prouctModel.buyMoney, self.prouctModel.pro_name, self.accountNameLable.text, self.accountBankLable.text, self.accountLable.text, self.prouctModel.customerName, self.prouctModel.pro_name];
         share.share_url = nil;
         _shareManage = share;
     }
     return _shareManage;
 }
+
 /**
  *  回产品中心
  */

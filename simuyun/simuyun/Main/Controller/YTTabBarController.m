@@ -19,6 +19,9 @@
 #import "YTRedrainViewController.h"
 #import "YTMessageNumTool.h"
 #import "CoreArchive.h"
+#import "SVProgressHUD.h"
+#import "AFNetworking.h"
+#import "NSDictionary+Extension.h"
 
 
 @interface YTTabBarController () <YTLogoViewDelegate>
@@ -87,21 +90,36 @@
 
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
     dict[@"uid"] = [YTAccountTool account].userId;
-    [YTHttpTool get:YTRedpacket params:dict success:^(NSDictionary *responseObject) {
-        NSString *url = responseObject[@"redpage_url"];
-        if (url != nil && url.length > 0) {
-            YTRedrainViewController *redRain = [[YTRedrainViewController alloc] init];
-            redRain.url = url;
-            redRain.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
-            redRain.modalPresentationStyle = UIModalPresentationOverFullScreen;
-            [self presentViewController:redRain animated:NO completion:^{
-            }];
-            // 停止定时器
-            [self timerOff];
-        }
-    } failure:^(NSError *error) {
-        
-    }];
+    
+    // 1.创建一个请求管理者
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+//    if ([YTAccountTool account].token != nil && [YTAccountTool account].token.length > 0) {
+//        [mgr.requestSerializer setValue:[YTAccountTool account].token forHTTPHeaderField:@"token"];
+//    }
+    // 2.发送一个GET请求
+    NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTRedpacket];
+
+    [mgr GET:newUrl parameters:[NSDictionary httpWithDictionary:dict]
+     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+         NSString *url = responseObject[@"redpage_url"];
+         if (url != nil && url.length > 0) {
+             YTRedrainViewController *redRain = [[YTRedrainViewController alloc] init];
+             redRain.url = url;
+             redRain.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+             redRain.modalPresentationStyle = UIModalPresentationOverFullScreen;
+             [self presentViewController:redRain animated:NO completion:^{
+             }];
+             // 停止定时器
+             [self timerOff];
+         }
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         if(operation.responseObject[@"message"] != nil)
+         {
+             [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+         }
+     }];
+
+
 }
 
 /**
@@ -155,7 +173,7 @@
     
     if(self.timer!=nil) return;
     
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(getRedrain) userInfo:nil repeats:YES];
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:30.0f target:self selector:@selector(getRedrain) userInfo:nil repeats:YES];
     
     //记录
     self.timer = timer;

@@ -69,6 +69,9 @@
           if(operation.responseObject[@"message"] != nil)
           {
               [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+          }else if(error.userInfo[@"NSLocalizedDescription"] != nil)
+          {
+              [SVProgressHUD showInfoWithStatus:@"请检查您的网络连接"];
           }
           result(NO);
       }];

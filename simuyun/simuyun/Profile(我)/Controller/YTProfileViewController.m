@@ -33,6 +33,10 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
 @property (nonatomic, weak) YTMenuViewController *menuVc;   // 菜单控制器
 @property (nonatomic, strong) UIPanGestureRecognizer *panRecongnizer; // 侧滑手势
 
+// 是否可以滑动
+@property (nonatomic, assign) BOOL isPan;
+
+
 @end
 
 @implementation YTProfileViewController
@@ -68,15 +72,19 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
 //    self.nav.interactivePopGestureRecognizer.enabled = NO;
     
     // 初始化手势
-//    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-//    pan.delegate = self;
-//    [self.homeVc.view addGestureRecognizer:pan];
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+    pan.delegate = self;
+    [self.homeVc.view addGestureRecognizer:pan];
+    self.panRecongnizer = pan;
 }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 
 {
     return YES;
 }
+
+
+
 
 /**
  *  处理拖动事件
@@ -85,20 +93,31 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
  */
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer {
     
-   
     
+    // 手指当前位置
+    CGFloat locationX = [recognizer locationInView:self.view].x;
     
+    // 移动
     CGFloat x = [recognizer translationInView:self.view].x;
+//    YTLog(@"手指当前位置%f", locationX);
+//    YTLog(@"移动范围%f", x);
+    if (locationX > 50 && self.isPan == NO) {
+        [self showHome];
+        return;
+    }
+    self.isPan = YES;
+
     // 禁止在主界面的时候向左滑动
     if ( x < 0) {
         [self showHome];
         return;
     }
     // 最大滑动范围241
-    if (x > 240) {
+    if (x > 5) {
         [self showMenu];
         return;
     }
+
     
     CGFloat dis = self.distance + x;
     
@@ -118,10 +137,11 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
     }
     YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     CGPoint old = appRootVC.tabBar.center;
-    appRootVC.tabBar.center = CGPointMake(self.view.center.x + dis, old.y);
     self.homeVc.view.center = CGPointMake(self.view.center.x + dis, self.view.center.y);
     CGFloat menuCenterMove = dis * (self.menuCenterXEnd - self.menuCenterXStart) / self.leftDistance;
     self.menuVc.view.center = CGPointMake(self.menuCenterXStart + menuCenterMove, self.view.center.y);
+
+    appRootVC.tabBar.center = CGPointMake(self.view.center.x + dis, old.y);
 }
 
 
@@ -129,9 +149,11 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
  *  展示侧边栏
  */
 - (void)showMenu {
+
     self.distance = self.leftDistance;
     self.sta = kStateMenu;
     [self doSlide:0];
+    [self.homeVc.view removeGestureRecognizer:self.panRecongnizer];
 }
 
 /**
@@ -141,6 +163,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
     self.distance = 0;
     self.sta = kStateHome;
     [self doSlide:1];
+    [self.homeVc.view addGestureRecognizer:self.panRecongnizer];
 }
 
 /**
@@ -160,13 +183,14 @@ static UIWindow *_window;
             navCenterX = DeviceWidth * 0.5;
             self.homeVc.view.center = self.view.center;
             self.menuVc.view.center = CGPointMake(menuCenterX, self.view.center.y);
-            appRootVC.tabBar.center = CGPointMake(self.view.center.x, old.y);
+            appRootVC.tabBar.center = CGPointMake(self.homeVc.view.center.x, old.y);
         } else {
             menuCenterX = DeviceWidth * 0.5;
             navCenterX = menuCenterX + 241;
-            appRootVC.tabBar.center = CGPointMake(navCenterX, old.y);
             self.homeVc.view.center = CGPointMake(navCenterX, DeviceHight * 0.5);
             self.menuVc.view.center = CGPointMake(menuCenterX, self.view.center.y);
+            appRootVC.tabBar.center = CGPointMake(self.homeVc.view.center.x, old.y);
+            
         }
     } completion:^(BOOL finished) {
         if (proportion != 1) {
@@ -185,6 +209,7 @@ static UIWindow *_window;
             cover.backgroundColor = [UIColor clearColor];
             [cover addTarget:self action:@selector(coverClick:) forControlEvents:UIControlEventTouchDown];
             [_window addSubview:cover];
+//
         }
     }];
 }
@@ -204,7 +229,7 @@ static UIWindow *_window;
     _window.hidden = YES;
     [_window removeFromSuperview];
     _window = nil;
-    
+    self.isPan = NO;
     [self showHome];
 }
 

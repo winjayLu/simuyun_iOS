@@ -150,6 +150,9 @@
                       if(operation.responseObject[@"message"] != nil)
                       {
                           [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+                      } else if(error.userInfo[@"NSLocalizedDescription"] != nil)
+                      {
+                          [SVProgressHUD showInfoWithStatus:@"请检查您的网络连接"];
                       }
                   }];
             } failure:^(NSError *error) {
@@ -196,7 +199,6 @@
             [SVProgressHUD dismiss];
             [self transitionTabBarVC];
         } else {
-            [SVProgressHUD showErrorWithStatus:@"密码不正确"];
         }
     }];
     [MobClick event:@"logReg_click" attributes: @{@"按钮" : @"登录"}];

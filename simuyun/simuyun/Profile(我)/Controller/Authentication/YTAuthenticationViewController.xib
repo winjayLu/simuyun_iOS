@@ -101,7 +101,7 @@
                         <constraint firstItem="bVN-2i-YLy" firstAttribute="top" secondItem="ONk-7y-Pbo" secondAttribute="top" id="zRH-Jy-lxH"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注意：请向您所属机构管理员咨询机构数字代码或者输入机构简称进行检索选择，如您的机构还未在私募云平台注册，请致电400-188-8488或者在App中与平台客服直接联系。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRB-bJ-TgZ">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注意：请向您所属机构管理员咨询机构数字代码或者输入机构简称进行检索选择，如您的机构还未在私募云平台注册，请致电400-188-8848或者在App中与平台客服直接联系。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRB-bJ-TgZ">
                     <rect key="frame" x="10" y="277" width="355" height="47"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.77254901960784317" green="0.047058823529411764" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>

@@ -116,6 +116,7 @@
     [self addChildViewController:pptvc];
     [self.view addSubview:pptvc.view];
     self.pptVC = pptvc;
+    self.pptVC.pptModels = self.ppts;
     pptvc.pptItemClickBlock = ^(PPTModel *pptModel){
         [self pptVcClick:pptModel];
     };
@@ -132,6 +133,7 @@
     stock.layer.masksToBounds = YES;
     [self.view addSubview:stock];
     self.stock = stock;
+    self.stock.stocks = self.stocks;
 }
 /**
  *  初始化资讯视图
@@ -140,7 +142,7 @@
 - (void)setupConsult
 {
     // 标题高度
-    CGFloat headerH = 30;
+    CGFloat headerH = 33;
     // cell高度
     CGFloat cellH = 93;
     CGFloat consultY = CGRectGetMaxY(self.stock.frame) + maginWidth;
@@ -151,6 +153,7 @@
     consult.layer.borderWidth = 1.0f;
     consult.layer.borderColor = YTColor(208, 208, 208).CGColor;
     consult.consultDelegate = self;
+    consult.newests = self.newests;
     [self.view addSubview:consult];
     self.consult = consult;
     
@@ -265,6 +268,9 @@
     {
         vc = [[YTInformationController alloc] init];
     } else {
+        if (newest.infoId == nil || newest.infoId.length == 0) {
+            return;
+        }
         vc = [YTInformationWebViewController webWithTitle:@"资讯详情" url:[NSString stringWithFormat:@"%@/information/%@&id=%@",YTH5Server, [NSDate stringDate], newest.infoId]];
         ((YTInformationWebViewController *)vc).isDate = YES;
         ((YTInformationWebViewController *)vc).information = newest;
@@ -280,7 +286,10 @@
 - (NSArray *)ppts
 {
     if (!_ppts) {
-        _ppts = [[NSArray alloc] init];
+        // 初始化假数据
+        PPTModel *ppt = [[PPTModel alloc] init];
+        ppt.image = [UIImage imageNamed:@"tuxiangzhanwei"];
+        _ppts = [NSArray arrayWithObjects:ppt, nil];
     }
     return _ppts;
 }
@@ -288,15 +297,50 @@
 - (NSArray *)stocks
 {
     if (!_stocks) {
-        _stocks = [[NSArray alloc] init];
+        // 初始化假数据
+        NSMutableArray *temp = [NSMutableArray array];
+        for (int i = 0; i < 4; i++) {
+            YTStockModel *stock = [[YTStockModel alloc] init];
+            switch (i) {
+                case 0:
+                    stock.name = @"上证指数";
+                    break;
+                case 1:
+                    stock.name = @"深证指数";
+                    break;
+                case 2:
+                    stock.name = @"创业板指";
+                    break;
+                case 3:
+                    stock.name = @"中小板指";
+                    break;
+            }
+            stock.index = 0;
+            stock.rate = 0;
+            stock.volume = 0;
+            stock.gain = 0.01;
+            [temp addObject:stock];
+        }
+        
+        _stocks = [NSArray arrayWithArray:temp];
     }
     return _stocks;
 }
 
+
+
 - (NSArray *)newests
 {
     if (!_newests) {
-        _newests = [[NSArray alloc] init];
+        NSMutableArray *temp = [NSMutableArray array];
+        for (int i = 0; i < 2; i++) {
+            YTInformation *information = [[YTInformation alloc] init];
+            information.title = @"欢迎来到盈泰财富云";
+            information.summary = @"我们坚持B2B模式，服务于财富管理机构和资产管理机构。我们坚持从金融走向互联网，专注于“互联网+”财富管理。我们坚持以市场化的机制，提供体制化、平台化的强力支撑。";
+            information.date = @"今天";
+            [temp addObject:information];
+        }
+        _newests = [NSArray arrayWithArray:temp];
     }
     return _newests;
 }

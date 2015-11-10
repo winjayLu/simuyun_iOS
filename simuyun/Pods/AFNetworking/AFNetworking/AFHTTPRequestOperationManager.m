@@ -99,6 +99,7 @@
 {
     NSError *serializationError = nil;
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:&serializationError];
+    request.timeoutInterval = 30.0f;
     if (serializationError) {
         if (failure) {
 #pragma clang diagnostic push
@@ -140,7 +141,7 @@
                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithHTTPMethod:@"GET" URLString:URLString parameters:parameters success:success failure:failure];
-
+    
     [self.operationQueue addOperation:operation];
 
     return operation;

@@ -34,18 +34,16 @@
     [mainView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
     mainView.scalesPageToFit = YES;
     [mainView.scrollView setShowsVerticalScrollIndicator:NO];
-    mainView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, -49, 0);
     mainView.delegate = self;
+    mainView.backgroundColor = YTGrayBackground;
     self.view = mainView;
     self.webView = mainView;
-    self.view.backgroundColor = YTGrayBackground;
 }
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"订单详情";
-    self.webView.backgroundColor = [UIColor whiteColor];
     self.webView.scalesPageToFit = YES;
     
     

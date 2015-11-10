@@ -7,6 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YTReportViewController">
             <connections>
+                <outlet property="CertificatesNumberConstr" destination="RAK-HP-fSK" id="D2P-EU-Nvm"/>
+                <outlet property="ReferenceLable" destination="X2L-0H-ahT" id="luq-Bp-9jL"/>
+                <outlet property="ReferenceLine" destination="FtJ-b9-ltv" id="afB-F4-Cp3"/>
                 <outlet property="bankField" destination="1VJ-te-dmh" id="Bbg-la-k9Z"/>
                 <outlet property="bankHangField" destination="IfW-Jx-QHI" id="VYP-kH-uhy"/>
                 <outlet property="branchField" destination="OHV-NN-GbE" id="zAW-fB-DtR"/>
@@ -116,16 +119,9 @@
                         <constraint firstAttribute="height" constant="16" id="pK3-D2-PGo"/>
                     </constraints>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="身份证" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u1h-zM-bEW">
-                    <rect key="frame" x="105" y="178" width="246" height="18"/>
-                    <color key="tintColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="textColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FtJ-b9-ltv">
                     <rect key="frame" x="10" y="206" width="365" height="1"/>
-                    <color key="backgroundColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.77254901960784317" green="0.77254901960784317" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="Pn5-ps-i9Z"/>
                     </constraints>
@@ -136,23 +132,16 @@
                     <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F5O-dh-7Ho">
-                    <rect key="frame" x="105" y="232" width="260" height="18"/>
-                    <color key="tintColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
-                </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YLF-5G-irm">
                     <rect key="frame" x="10" y="260" width="365" height="1"/>
-                    <color key="backgroundColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.77254901960784317" green="0.77254901960784317" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="Qd7-OB-KeC"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yqf-Tf-j3h">
                     <rect key="frame" x="10" y="314" width="365" height="1"/>
-                    <color key="backgroundColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.77254901960784317" green="0.77254901960784317" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="Ccj-ks-NdE"/>
                     </constraints>
@@ -164,8 +153,11 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1VJ-te-dmh">
-                    <rect key="frame" x="105" y="286" width="260" height="18"/>
+                    <rect key="frame" x="105" y="280" width="260" height="30"/>
                     <color key="tintColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="SlX-Js-IGl"/>
+                    </constraints>
                     <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
@@ -175,15 +167,18 @@
                     </connections>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IfW-Jx-QHI">
-                    <rect key="frame" x="105" y="340" width="260" height="18"/>
+                    <rect key="frame" x="105" y="334" width="260" height="30"/>
                     <color key="tintColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Y0P-D5-oyR"/>
+                    </constraints>
                     <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gaW-XU-jmz">
                     <rect key="frame" x="10" y="368" width="365" height="1"/>
-                    <color key="backgroundColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.77254901960784317" green="0.77254901960784317" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="ouc-DZ-I4U"/>
                     </constraints>
@@ -201,15 +196,18 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OHV-NN-GbE">
-                    <rect key="frame" x="105" y="394" width="260" height="18"/>
+                    <rect key="frame" x="105" y="388" width="260" height="30"/>
                     <color key="tintColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="oef-23-RNI"/>
+                    </constraints>
                     <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZ8-N7-jTp">
                     <rect key="frame" x="11" y="422" width="364" height="1"/>
-                    <color key="backgroundColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.77254901960784317" green="0.77254901960784317" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="hxw-dN-LEB"/>
                     </constraints>
@@ -222,7 +220,7 @@
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A6f-r5-PUN">
                     <rect key="frame" x="10" y="476" width="365" height="1"/>
-                    <color key="backgroundColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.77254901960784317" green="0.77254901960784317" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="WD9-sy-Zj7"/>
                     </constraints>
@@ -248,7 +246,7 @@
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="myd-ku-ofs">
                     <rect key="frame" x="10" y="530" width="365" height="1"/>
-                    <color key="backgroundColor" red="0.41176470590000003" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.77254901960784317" green="0.77254901960784317" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="qYg-id-SaW"/>
                     </constraints>
@@ -259,6 +257,28 @@
                     <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="身份证" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u1h-zM-bEW">
+                    <rect key="frame" x="105" y="172" width="246" height="30"/>
+                    <color key="tintColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="sxu-hC-oV7"/>
+                        <constraint firstAttribute="height" constant="30" id="x93-it-Oeh"/>
+                    </constraints>
+                    <color key="textColor" red="0.14901960784313725" green="0.14901960784313725" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F5O-dh-7Ho">
+                    <rect key="frame" x="105" y="226" width="260" height="30"/>
+                    <color key="tintColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="jFB-9l-9WK"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="taN-pe-dHq"/>
+                    </constraints>
+                    <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" keyboardType="namePhonePad"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -271,6 +291,8 @@
                 <constraint firstItem="myd-ku-ofs" firstAttribute="leading" secondItem="bBW-mx-ADC" secondAttribute="leading" id="3oK-ZC-501"/>
                 <constraint firstItem="1IC-zV-4nI" firstAttribute="centerY" secondItem="X2L-0H-ahT" secondAttribute="centerY" id="4uv-sH-Ydz"/>
                 <constraint firstAttribute="trailing" secondItem="1VJ-te-dmh" secondAttribute="trailing" constant="10" id="79K-7P-Yie"/>
+                <constraint firstItem="gaW-XU-jmz" firstAttribute="top" secondItem="o4N-SJ-7aJ" secondAttribute="bottom" constant="10" id="9rJ-SY-kFT"/>
+                <constraint firstItem="YLF-5G-irm" firstAttribute="top" secondItem="Y31-uA-uRc" secondAttribute="bottom" constant="10" id="CuT-68-QDE"/>
                 <constraint firstItem="IfW-Jx-QHI" firstAttribute="leading" secondItem="o4N-SJ-7aJ" secondAttribute="trailing" constant="20" id="Dlw-MU-ycG"/>
                 <constraint firstItem="gaW-XU-jmz" firstAttribute="leading" secondItem="o4N-SJ-7aJ" secondAttribute="leading" constant="1" id="Dmc-nc-S41"/>
                 <constraint firstItem="FtJ-b9-ltv" firstAttribute="leading" secondItem="X2L-0H-ahT" secondAttribute="leading" id="E54-U2-6PA"/>
@@ -308,6 +330,7 @@
                 <constraint firstItem="YLF-5G-irm" firstAttribute="leading" secondItem="Y31-uA-uRc" secondAttribute="leading" id="dvY-NI-437"/>
                 <constraint firstItem="FtJ-b9-ltv" firstAttribute="top" secondItem="u1h-zM-bEW" secondAttribute="bottom" constant="10" id="f9G-wo-2mQ"/>
                 <constraint firstItem="6ag-3o-DSG" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="fN0-XC-g5w"/>
+                <constraint firstItem="FtJ-b9-ltv" firstAttribute="top" secondItem="X2L-0H-ahT" secondAttribute="bottom" constant="10" id="fkY-v5-29D"/>
                 <constraint firstItem="u1h-zM-bEW" firstAttribute="centerY" secondItem="X2L-0H-ahT" secondAttribute="centerY" id="gAz-oy-qjA"/>
                 <constraint firstAttribute="trailing" secondItem="2Dp-gb-RGl" secondAttribute="trailing" constant="10" id="jaP-cN-Nsb"/>
                 <constraint firstAttribute="trailing" secondItem="F5O-dh-7Ho" secondAttribute="trailing" constant="10" id="jqm-BJ-EXw"/>
@@ -323,7 +346,9 @@
                 <constraint firstItem="OHV-NN-GbE" firstAttribute="leading" secondItem="gsh-bS-0ki" secondAttribute="trailing" constant="20" id="ozl-yA-Wus"/>
                 <constraint firstItem="Yqf-Tf-j3h" firstAttribute="top" secondItem="1VJ-te-dmh" secondAttribute="bottom" constant="10" id="pp5-AB-hKr"/>
                 <constraint firstAttribute="trailing" secondItem="IfW-Jx-QHI" secondAttribute="trailing" constant="10" id="pvQ-vL-Igc"/>
+                <constraint firstItem="KZ8-N7-jTp" firstAttribute="top" secondItem="gsh-bS-0ki" secondAttribute="bottom" constant="10" id="q8K-cx-l6n"/>
                 <constraint firstItem="KZ8-N7-jTp" firstAttribute="leading" secondItem="gsh-bS-0ki" secondAttribute="leading" constant="1" id="r90-f8-iWo"/>
+                <constraint firstItem="Yqf-Tf-j3h" firstAttribute="top" secondItem="PTj-dm-iPk" secondAttribute="bottom" constant="10" id="rF1-hY-KbD"/>
                 <constraint firstItem="A6f-r5-PUN" firstAttribute="top" secondItem="vEJ-ae-X4M" secondAttribute="bottom" constant="10" id="t95-Og-NDI"/>
                 <constraint firstItem="vEJ-ae-X4M" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="tHl-6T-7HU"/>
                 <constraint firstAttribute="trailing" secondItem="Cbp-5S-O6x" secondAttribute="trailing" constant="10" id="tYb-mQ-D5u"/>
@@ -335,6 +360,11 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <variation key="default">
                 <mask key="constraints">
+                    <exclude reference="f9G-wo-2mQ"/>
+                    <exclude reference="EkZ-TA-x1T"/>
+                    <exclude reference="pp5-AB-hKr"/>
+                    <exclude reference="E9Y-Yu-Dqx"/>
+                    <exclude reference="m2N-kL-AIs"/>
                     <exclude reference="d9L-xl-Fda"/>
                     <exclude reference="lGS-m8-fNe"/>
                     <exclude reference="SpQ-BG-tiB"/>

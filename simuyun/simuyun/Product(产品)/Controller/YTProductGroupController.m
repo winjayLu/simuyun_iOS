@@ -16,7 +16,7 @@
 #define ItemMagin 3
 #define ItemWidth (DeviceWidth * 0.5 - ItemMagin * 0.5)
 // 系列高度
-#define GroupHeig (ItemWidth * 2 + 3 + TitleHeight)
+#define GroupHeig (ItemWidth * 2.0 + ItemMagin + TitleHeight)
 
 
 @interface YTProductGroupController ()
@@ -33,7 +33,7 @@
     // 将控制器的View替换为ScrollView
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:DeviceBounds];
     mainView.showsVerticalScrollIndicator = NO;
-    mainView.contentSize = CGSizeMake(DeviceWidth, GroupHeig * 2 + TitleHeight + ItemWidth );
+    mainView.contentSize = CGSizeMake(DeviceWidth, GroupHeig * 2.0 + TitleHeight + ItemWidth );
     self.view = mainView;
 }
 

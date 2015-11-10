@@ -78,7 +78,7 @@
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="guanLianClick:" destination="iN0-l3-epB" eventType="touchDown" id="SqJ-02-gl2"/>
+                        <action selector="guanLianClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="2T4-9x-1UG"/>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="2VW-dw-6hO">
@@ -103,7 +103,7 @@
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="tuiJian:" destination="iN0-l3-epB" eventType="touchDown" id="cda-J5-Wjj"/>
+                        <action selector="tuiJian:" destination="iN0-l3-epB" eventType="touchUpInside" id="zfX-JZ-2cz"/>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="tqg-Bw-g3r">
@@ -128,7 +128,7 @@
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="bangZhuClick:" destination="iN0-l3-epB" eventType="touchDown" id="Qem-Eo-gYI"/>
+                        <action selector="bangZhuClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="vFe-Jr-gTm"/>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="rxw-AM-CBx">
@@ -153,7 +153,7 @@
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="guanYuClick:" destination="iN0-l3-epB" eventType="touchDown" id="nLG-an-m20"/>
+                        <action selector="guanYuClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="AZS-zQ-ffe"/>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="kHV-yu-vmN">
@@ -174,7 +174,7 @@
                         <color key="titleColor" red="0.45098039215686275" green="0.45098039215686275" blue="0.46274509803921571" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="phoneClick:" destination="iN0-l3-epB" eventType="touchDown" id="rLf-rN-17K"/>
+                        <action selector="phoneClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="BLw-U7-a1i"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4w-em-a0Z">
@@ -190,7 +190,7 @@
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="tuiChuClick:" destination="iN0-l3-epB" eventType="touchDown" id="X2r-In-udm"/>
+                        <action selector="tuiChuClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="c1H-7a-WIq"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CqF-3z-uB9">
@@ -207,7 +207,7 @@
                         <color key="titleColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="ziLiaoClick:" destination="iN0-l3-epB" eventType="touchDown" id="dfl-A9-Rjj"/>
+                        <action selector="ziLiaoClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="QNd-kb-wu1"/>
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="ML9-Hm-k4Y">

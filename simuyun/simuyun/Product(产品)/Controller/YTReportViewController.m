@@ -114,6 +114,27 @@
  */
 @property (nonatomic, strong) NSArray *ZhenJian;
 
+/**
+ *  证件号码约束
+ */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *CertificatesNumberConstr;
+/**
+ *  参照lable
+ */
+@property (weak, nonatomic) IBOutlet UILabel *ReferenceLable;
+/**
+ *  参照分割线
+ */
+@property (weak, nonatomic) IBOutlet UIView *ReferenceLine;
+/**
+ *  证件名称视图
+ */
+@property (nonatomic, weak) UIView *certificatesView;
+/**
+ *  自定义证件名称
+ */
+@property (nonatomic, weak) UITextField *catesViewTypeName;
+
 @end
 
 @implementation YTReportViewController
@@ -232,8 +253,16 @@
 - (void)startReport
 {
 
+    // 证件名称
+    NSString *typeName = nil;
+    if ([self.typeField.text isEqualToString:@"其它"]) {
+        typeName = self.catesViewTypeName.text;
+    } else {
+        typeName = self.typeField.text;
+    }
+    
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"param"] = [NSString stringWithFormat:@"{\"advisers_id\" : \"%@\", \"order_id\" : \"%@\", \"cust_name\" : \"%@\", \"cust_bank\" : \"%@\", \"cust_bank_detail\" : \"%@\", \"cust_bank_acct\" : \"%@\", \"credentialsname\" : \"%@\", \"credentialsnumber\" : \"%@\", \"annex\" : %@}",[YTAccountTool account].userId, self.prouctModel.order_id, self.prouctModel.customerName, self.bankHangField.text, self.branchField.text, self.bankField.text, self.typeField.text,self.numberField.text,[self annexWithSlps]];
+    dict[@"param"] = [NSString stringWithFormat:@"{\"advisers_id\" : \"%@\", \"order_id\" : \"%@\", \"cust_name\" : \"%@\", \"cust_bank\" : \"%@\", \"cust_bank_detail\" : \"%@\", \"cust_bank_acct\" : \"%@\", \"credentialsname\" : \"%@\", \"credentialsnumber\" : \"%@\", \"annex\" : %@}",[YTAccountTool account].userId, self.prouctModel.order_id, self.prouctModel.customerName, self.bankHangField.text, self.branchField.text, self.bankField.text, typeName,self.numberField.text,[self annexWithSlps]];
     // 1.创建一个请求管理者
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     NSLog(@"%@", dict);
@@ -251,6 +280,9 @@
           if(operation.responseObject[@"message"] != nil)
           {
               [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+          } else if(error.userInfo[@"NSLocalizedDescription"] != nil)
+          {
+              [SVProgressHUD showInfoWithStatus:@"请检查您的网络连接"];
           }
       }];
 }
@@ -289,7 +321,6 @@
         [annex appendString:[NSString stringWithFormat:@",\"file_name\":\"%@\"}",slip.original]];
     }
     [annex appendString:@"]"];
-    YTLog(@"%@", annex);
     return annex;
 }
 
@@ -325,6 +356,13 @@
         [SVProgressHUD showErrorWithStatus:@"请上传打款凭条"];
         return YES;
     }
+    if ([self.typeField.text isEqualToString:@"其他"]) {
+        if (self.catesViewTypeName.text.length == 0) {
+            [SVProgressHUD showErrorWithStatus:@"请输入证件名称"];
+            return YES;
+        }
+    }
+    
     return NO;
 }
 
@@ -339,6 +377,7 @@
         self.bankHangField.text = [NSString getBankFromCardNumber:sender.text];
     }
 }
+
 
 
 #pragma mark - pickerDelegate
@@ -357,7 +396,32 @@
 }
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    self.typeField.text = self.types[row];
+    NSString *selectedType = self.types[row];
+    
+
+    // 判断是否是其他类型
+    if ([selectedType isEqualToString:@"其它"]) {
+        self.CertificatesNumberConstr.constant = 78;
+        if (self.certificatesView == nil) {
+            [self createCertificatesName];
+            self.photo.y = self.titleLable.y - 20 + 54;
+            self.informationPhoto.y = self.informationLable.y - 20 + 54;
+            // 更新键盘位置
+            [self updateKeyboardPosition];
+        }
+    } else {
+        self.CertificatesNumberConstr.constant = 25;
+        if (self.certificatesView != nil) {
+            [self.certificatesView removeFromSuperview];
+            self.certificatesView = nil;
+            self.photo.y = self.titleLable.y - 20 - 54;
+            self.informationPhoto.y = self.informationLable.y - 20 - 54;
+            self.scroll.contentSize = CGSizeMake(DeviceWidth, 667);
+        }
+    }
+    
+    self.typeField.text = selectedType;
+    
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
@@ -366,6 +430,46 @@
         return NO;
     return [super canPerformAction:action withSender:sender];
 }
+
+#pragma mark - 创建证件名称选项
+- (void)createCertificatesName
+{
+    UIView *certificatesView = [[UIView alloc] init];
+    certificatesView.backgroundColor = [UIColor clearColor];
+    certificatesView.frame = CGRectMake(0, CGRectGetMaxY(self.ReferenceLine.frame) + 1, DeviceWidth, 53);
+    [self.view addSubview:certificatesView];
+    self.certificatesView = certificatesView;
+    
+    // 标题
+    UILabel *lable = [[UILabel alloc] init];
+    lable.frame = CGRectMake(10, 25, 0, 0);
+    lable.text = @"证件名称：";
+    lable.font = [UIFont systemFontOfSize:15];
+    [lable sizeToFit];
+    lable.textColor = YTColor(102, 102, 102);
+    [certificatesView addSubview:lable];
+    
+    // 输入框
+    UITextField *inputName = [[UITextField alloc] init];
+    CGFloat inputX = CGRectGetMaxX(lable.frame) + 20;
+    CGFloat inputW = DeviceWidth - inputX - 10;
+    inputName.size = CGSizeMake(inputW, 30);
+    inputName.center = lable.center;
+    inputName.x = inputX;
+    [inputName setFont:lable.font];
+    inputName.tintColor = YTColor(51, 51, 51);
+    inputName.textColor = YTColor(51, 51, 51);
+    inputName.textAlignment = NSTextAlignmentRight;
+    [certificatesView addSubview:inputName];
+    self.catesViewTypeName = inputName;
+    
+    // 分割线
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = YTColor(208, 208, 208);
+    line.frame = CGRectMake(10, certificatesView.height - 1, DeviceWidth, 1);
+    [certificatesView addSubview:line];
+}
+
 
 
 #pragma mark - 键盘处理
@@ -391,6 +495,25 @@
         return @[tfm1,tfm2,tfm3,tfm4,tfm5];
         
     }];
+    
+}
+
+// 设置键盘位置
+- (void)updateKeyboardPosition
+{
+    [CoreTFManagerVC uninstallManagerForVC:self];
+    [CoreTFManagerVC installManagerForVC:self scrollView:self.scroll tfModels:^NSArray *{
+
+        TFModel *tfm6 = [TFModel modelWithTextFiled:self.catesViewTypeName inputView:nil name:@"" insetBottom:65];
+        TFModel *tfm2=[TFModel modelWithTextFiled:self.numberField inputView:nil name:@"" insetBottom:65];
+        TFModel *tfm3=[TFModel modelWithTextFiled:self.bankField inputView:nil name:@"" insetBottom:65];
+        TFModel *tfm4=[TFModel modelWithTextFiled:self.bankHangField inputView:nil name:@"" insetBottom:65];
+        TFModel *tfm5=[TFModel modelWithTextFiled:self.branchField inputView:nil name:@"" insetBottom:65];
+        
+        return @[tfm6,tfm2,tfm3,tfm4,tfm5];
+        
+    }];
+    self.scroll.contentSize = CGSizeMake(DeviceWidth, 720);
 }
 
 
@@ -411,7 +534,7 @@
 - (NSArray *)types
 {
     if (!_types) {
-        _types = [NSArray arrayWithObjects:@"身份证",@"护照",@"营业执照", nil];
+        _types = [NSArray arrayWithObjects:@"身份证",@"护照",@"其它", nil];
     }
     return _types;
 }
@@ -431,6 +554,7 @@
     }
     return _ZhenJian;
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
