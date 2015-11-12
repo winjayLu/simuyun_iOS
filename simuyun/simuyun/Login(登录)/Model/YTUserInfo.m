@@ -14,7 +14,6 @@
 @implementation YTUserInfo
 
 
-#warning 修改机构名称
 - (NSString *)organizationName
 {
     if (_organizationName == nil) {
@@ -23,14 +22,6 @@
     return _organizationName;
 }
 
-//- (void)setHeadImgUrl:(NSString *)headImgUrl
-//{
-//    
-//    NSMutableString *newUrl = [NSMutableString string];
-//    [newUrl appendString:headImgUrl];
-//    [newUrl appendString:[NSDate stringDate]];
-//    _headImgUrl = newUrl;
-//}
 
 
 @end

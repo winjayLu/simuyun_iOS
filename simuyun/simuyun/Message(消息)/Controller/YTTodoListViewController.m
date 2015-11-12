@@ -11,7 +11,6 @@
 #import "YTTodoViewCell.h"
 #import "YTAccountTool.h"
 #import "YTMessageModel.h"
-#import "CoreArchive.h"
 #import "YTNormalWebController.h"
 #import "NSDate+Extension.h"
 #import "YTUserInfoTool.h"
@@ -36,12 +35,19 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewChat)];
-    // 马上进入刷新状态
-    [self.tableView.header beginRefreshing];
     
     // 下拉刷新
     self.tableView.footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreChat)];
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // 马上进入刷新状态
+    [self.tableView.header beginRefreshing];
+    [MobClick event:@"msgPanel_click" attributes:@{@"按钮" : @"待办事项", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+}
+
 
 // 加载新数据
 - (void)loadNewChat
@@ -56,18 +62,12 @@
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         NSLog(@"%@", responseObject);
         self.messages = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
-        [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"timestampCategory1"];
+
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
     } failure:^(NSError *error) {
         [self.tableView.header endRefreshing];
     }];
-}
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [MobClick event:@"msgPanel_click" attributes:@{@"按钮" : @"待办事项", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 

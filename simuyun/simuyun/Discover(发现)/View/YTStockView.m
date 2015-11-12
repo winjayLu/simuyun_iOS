@@ -39,16 +39,16 @@
     CGFloat maxW = 0.0;
     for (int i = 0; i < _stocks.count; i ++) {
         YTStockItem *item = [YTStockItem stockItem];
-        //        item.stockModel = _stocks[i];
+        item.stockModel = _stocks[i];
         item.backgroundColor = [UIColor whiteColor];
         item.layer.cornerRadius = 5;
         item.layer.masksToBounds = YES;
-        item.stockModel = stocks[i];
-        maxW = leftMagin + i * (itemW + leftMagin);
+        maxW = i * (itemW + leftMagin);
         item.frame = CGRectMake(maxW, topMagin, itemW, itemH);
+
         [self addSubview:item];
     }
-    self.contentSize = CGSizeMake(maxW + itemW + leftMagin, self.height);
+    self.contentSize = CGSizeMake(maxW + itemW , self.height);
 }
 
 @end

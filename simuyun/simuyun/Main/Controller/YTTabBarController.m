@@ -131,17 +131,14 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
         params[@"adviserId"] = [YTAccountTool account].userId;
     NSString *timestampCategory0 = [CoreArchive strForKey:@"timestampCategory0"];
-    NSString *timestampCategory1 = [CoreArchive strForKey:@"timestampCategory1"];
+//    NSString *timestampCategory1 = [CoreArchive strForKey:@"timestampCategory1"];
     NSString *timestampCategory2 = [CoreArchive strForKey:@"timestampCategory2"];
     NSString *timestampCategory3 = [CoreArchive strForKey:@"timestampCategory3"];
     if (timestampCategory0 == nil || timestampCategory0.length == 0) {
         timestampCategory0 = @"2013-01-01 00:00:00";
 
     }
-    if (timestampCategory1 == nil || timestampCategory1.length == 0) {
-        timestampCategory0 = @"2013-01-01 00:00:00";
-        
-    }
+
     if (timestampCategory2 == nil || timestampCategory2.length == 0) {
         timestampCategory0 = @"2013-01-01 00:00:00";
         
@@ -151,7 +148,6 @@
         
     }
     params[@"timestampCategory0"] = timestampCategory0;
-    params[@"timestampCategory1"] = timestampCategory1;
     params[@"timestampCategory2"] = timestampCategory2;
     params[@"timestampCategory3"] = timestampCategory3;
     [YTHttpTool get:YTMessageCount params:params success:^(id responseObject) {

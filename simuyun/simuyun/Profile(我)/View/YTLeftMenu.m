@@ -187,7 +187,12 @@
     }
     if (_userInfo == nil) return;
     // 设置头像
-    [self setIconImageWithImageUrl:userInfo.headImgUrl];
+    if (_userInfo.iconImage != nil){
+        self.iconImage.image = [YTUserInfoTool userInfo].iconImage;
+    } else {
+        [self setIconImageWithImageUrl:userInfo.headImgUrl];
+    }
+    
     // 认证状态
     if (userInfo.adviserStatus) {
         // 设置昵称
@@ -216,8 +221,8 @@
 {
     self.iconImage.layer.masksToBounds = YES;
     self.iconImage.layer.cornerRadius = self.iconImage.frame.size.width * 0.5;
-    self.iconImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    self.iconImage.layer.shouldRasterize = YES;
+//    self.iconImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
+//    self.iconImage.layer.shouldRasterize = YES;
     self.iconImage.clipsToBounds = YES;
     
     UIImage *placeholder = [UIImage imageNamed:@"avatar_default_big"];
@@ -233,7 +238,7 @@
  */
 - (void)updateIconImage
 {
-    self.iconImage.image = [YTUserInfoTool userInfo].iconImage;
+    self.userInfo = [YTUserInfoTool userInfo];
 }
 
 @end

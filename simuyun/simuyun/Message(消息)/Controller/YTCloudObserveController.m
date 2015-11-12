@@ -123,8 +123,8 @@
 {
     // 消息数字
     self.superVc.tabBarItem.badgeValue = nil;
-    
-    YTServiceModel *service = self.services[indexPath.section];
+//    
+//    YTServiceModel *service = self.services[indexPath.section];
     
     // 消息详情
 //    YTNormalWebController *normal = [YTNormalWebController webWithTitle:service. url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];

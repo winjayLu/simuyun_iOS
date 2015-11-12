@@ -59,7 +59,7 @@
 /**
  *  待办事项数据
  */
-@property (nonatomic, strong) NSArray *todos;
+@property (nonatomic, strong) NSMutableArray *todos;
 
 @property (nonatomic, weak) UIScrollView *mainView;
 
@@ -141,6 +141,8 @@
         YTUserInfo *userInfo = [YTUserInfo objectWithKeyValues:responseObject];
         [YTUserInfoTool saveUserInfo:userInfo];
         self.topView.userInfo = userInfo;
+        // 发送通知
+        [YTCenter postNotificationName:YTUpdateIconImage object:nil];
     } failure:^(NSError *error) {
 
     }];
@@ -228,8 +230,12 @@
     
     CGFloat groupCellHeight = 42;
     CGFloat conetentCellHeight = 52;
-    CGFloat todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
-    
+    CGFloat todoHeight = 0;
+    if (self.todos.count > 3) {
+        todoHeight = groupCellHeight + 3 * conetentCellHeight;
+    } else {
+        todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
+    }
     YTContentView *content = [[YTContentView alloc] init];
     content.frame = CGRectMake(magin, CGRectGetMaxY(self.topView.frame), self.view.width - magin * 2, todoHeight);
     content.layer.cornerRadius = 5;
@@ -237,6 +243,7 @@
     content.daili = self;
     [self.view addSubview:content];
     self.todoView = content;
+    [YTCenter addObserver:self selector:@selector(loadTodos) name:YTUpdateTodoList object:nil];
 }
 /**
  *  初始化底部菜单
@@ -280,7 +287,7 @@
     param[@"adviserId"] = [YTAccountTool account].userId;
 //            param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
     param[@"category"] = @1;
-    param[@"pagesize"] = @3;
+    param[@"pagesize"] = @20;
     param[@"pageNo"] = @(1);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         self.todos = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
@@ -298,7 +305,12 @@
     // 修改todo的frame
     CGFloat groupCellHeight = 42;
     CGFloat conetentCellHeight = 52;
-    CGFloat todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
+    CGFloat todoHeight = 0;
+    if (self.todos.count > 3) {
+        todoHeight = groupCellHeight + 3 * conetentCellHeight;
+    } else {
+         todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
+    }
     self.todoView.frame = CGRectMake(magin, CGRectGetMaxY(self.topView.frame), self.view.width - magin * 2, todoHeight);
 
     // 修改底部菜单frame
@@ -362,14 +374,14 @@
 - (void)selectedTodo:(NSUInteger)row
 {
     UIViewController *vc = nil;
-    if (row == 0) {
+    if (row == -1) {
         // 获取根控制器
         [YTCenter postNotificationName:YTJumpToTodoList object:nil];
         YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
         [appRootVC setSelectedIndex:0];
         [MobClick event:@"main_click" attributes:@{@"按钮" : @"全部待办", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     } else {
-        YTMessageModel *message = self.todos[row - 1];
+        YTMessageModel *message = self.todos[row];
         vc = [[YTNormalWebController alloc] init];
         vc = [YTNormalWebController webWithTitle:@"待办事项" url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
         ((YTNormalWebController *)vc).isDate = YES;
@@ -630,10 +642,10 @@
 #pragma mark - 获取数据
 
 #pragma mark - 懒加载
-- (NSArray *)todos
+- (NSMutableArray *)todos
 {
     if (!_todos) {
-        _todos = [[NSArray alloc] init];
+        _todos = [[NSMutableArray alloc] init];
     }
     return _todos;
 }

@@ -73,9 +73,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    /**
-     *  对未安装的用户隐藏微信登录按钮，只提供其他登录方式（比如手机号注册登录、游客登录等）
-     */
+ 
     // 修改textField占位文字颜色
     [self.userName setValue:YTColor(204, 204, 204) forKeyPath:@"_placeholderLabel.textColor"];
     [self.passWord setValue:YTColor(204, 204, 204) forKeyPath:@"_placeholderLabel.textColor"];
@@ -98,6 +96,13 @@
     if([YTResourcesTool resources].versionFlag == 0)
     {
         self.weiChatView.hidden = YES;
+    }
+    
+    // 是否有帐号信息
+    YTAccount *account = [YTAccountTool account];
+    if (account != nil) {
+        self.userName.text = account.userName;
+        self.passWord.text = account.password;
     }
     
 }

@@ -38,6 +38,15 @@
  */
 @property (nonatomic, weak) UIButton *logoButton;
 
+// logo 背景图片
+@property (nonatomic, weak) UIImageView *bgView;
+
+//// logo 背景图片
+//@property (nonatomic, weak) UIImageView *bgView2;
+//
+//@property (nonatomic, assign) BOOL isBig;
+
+
 @end
 
 @implementation YTLogoView
@@ -51,15 +60,79 @@
         [self setupAudio];
         // 初始化按钮
         [self setupLogoBtn];
+#warning logo呼吸
+        //设置定时检测
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(scaleLogo) userInfo:nil repeats:YES];
     }
     return self;
 }
+
+
+- (void)scaleLogo
+{
+//    if (self.isBig) {
+//        [UIView animateWithDuration:0.8 animations:^{
+//            self.bgView.transform = CGAffineTransformScale(self.bgView.transform,1.1, 1.1);
+//        }];
+//        self.isBig = NO;
+//    } else {
+//        [UIView animateWithDuration:0.8 animations:^{
+//            self.bgView.transform = CGAffineTransformIdentity;
+//        }];
+//        self.isBig = YES;
+//    }
+    
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//         self.transform = CGAffineTransformScale(self.transform, 0, 10);
+//    });
+    
+//    if (self.isBig) {
+//        self.isBig = NO;
+//        [UIView animateWithDuration:1.4 animations:^{
+//            self.bgView.hidden = NO;
+//            self.bgView.transform = CGAffineTransformScale(self.bgView.transform,1.2, 1.2);
+//        } completion:^(BOOL finished) {
+//            self.bgView2.hidden = NO;
+////            self.bgView.transform = CGAffineTransformIdentity;
+//        }];
+//        
+//    } else {
+//        self.isBig = YES;
+//        [UIView animateWithDuration:1.4 animations:^{
+//            self.bgView2.hidden = NO;
+//            self.bgView2.transform = CGAffineTransformScale(self.bgView2.transform,1.2, 1.2);
+//        } completion:^(BOOL finished) {
+//            
+//            self.bgView.hidden = NO;
+////            self.bgView2.transform = CGAffineTransformIdentity;
+//        }];
+//        
+//    }
+    
+    
+//    [UIView animateWithDuration:1.4 animations:^{
+//        self.bgView.transform = CGAffineTransformScale(self.bgView.transform,1.2, 1.2);
+//    } completion:^(BOOL finished) {
+//
+//        self.bgView.transform = CGAffineTransformIdentity;
+//    }];
+    [UIView animateWithDuration:1.4 animations:^{
+        self.bgView.alpha = 1.0;
+//        self.bgView.hidden = 
+        self.bgView.transform = CGAffineTransformScale(self.bgView.transform,1.1, 1.1);
+    } completion:^(BOOL finished) {
+        self.bgView.alpha = 0.0;
+        self.bgView.transform = CGAffineTransformIdentity;
+    }];
+}
+
 
 /**
  *  logo按钮的单击事件
  */
 - (void)logoClick
 {
+
     // 调用代理方法
     if ([self.delegate respondsToSelector:@selector(logoViewDidSelectProfileItem)]) {
         [self.delegate logoViewDidSelectProfileItem];
@@ -178,12 +251,29 @@
  */
 - (void)setupLogoBtn
 {
+    // logo按钮
     UIButton *logoButton = [[UIButton alloc] init];
     [logoButton setBackgroundImage:self.logoImage forState:UIControlStateNormal];
     [logoButton setBackgroundImage:self.logoImage forState:UIControlStateHighlighted];
     // 按钮单击事件
     [logoButton addTarget:self action:@selector(logoClick) forControlEvents:UIControlEventTouchUpInside];
     logoButton.size = self.logoImage.size;
+    
+    // 背景图片1
+    UIImageView *bgView = [[UIImageView alloc] init];
+    bgView.image = [UIImage imageNamed:@"shuibowen"];
+    bgView.size = logoButton.size;
+    [self addSubview:bgView];
+    self.bgView = bgView;
+    
+//    // 背景图片2
+//    UIImageView *bgView2 = [[UIImageView alloc] init];
+//    bgView2.image = [UIImage imageNamed:@"shuibowen"];
+//    bgView2.size = logoButton.size;
+//    bgView2.hidden = YES;
+//    [self addSubview:bgView2];
+//    self.bgView2 = bgView2;
+
     // 移出按钮范围事件
 //    [logoButton addTarget:self action:@selector(logoExit) forControlEvents:UIControlEventTouchDragExit];
     

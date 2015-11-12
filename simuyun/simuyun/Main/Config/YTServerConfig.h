@@ -89,6 +89,8 @@
 #define YTBindPhone @"bindPhone"
 // 修改密码
 #define YTUpdatePassword @"updatePassword"
+// 删除待办事项
+#define YTMessageContent @"messageContent"
 
 
 

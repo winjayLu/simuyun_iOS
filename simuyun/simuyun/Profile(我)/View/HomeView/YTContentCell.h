@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWTableViewCell.h"
 
-@interface YTContentCell : UITableViewCell
+
+@interface YTContentCell : SWTableViewCell
 
 /**
  *  待办事项标题

@@ -33,4 +33,9 @@
  */
 + (NSString *)createCUID;
 
+
+
+//身份证号
++ (BOOL)validateIdentityCard: (NSString *)identityCard;
+
 @end

@@ -53,13 +53,12 @@
     // 将控制器的View替换为webView
     UIWebView *mainView = [[UIWebView alloc] initWithFrame:DeviceBounds];
     
-
     mainView.scalesPageToFit = YES;
     [mainView.scrollView setShowsVerticalScrollIndicator:NO];
     mainView.delegate = self;
     self.webView = mainView;
     self.view = mainView;
-    self.view.backgroundColor = YTGrayBackground;
+    self.view.backgroundColor = YTColor(231, 231, 231);
 }
 
 
@@ -167,6 +166,7 @@
                 [self.navigationController pushViewController:normal animated:YES];
             }
         }
+
     }
     return YES;
 }

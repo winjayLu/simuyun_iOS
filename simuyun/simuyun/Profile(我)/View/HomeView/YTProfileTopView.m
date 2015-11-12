@@ -193,8 +193,6 @@
 {
     self.iconImage.layer.masksToBounds = YES;
     self.iconImage.layer.cornerRadius = self.iconImage.frame.size.width * 0.5;
-    self.iconImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
-    self.iconImage.layer.shouldRasterize = YES;
     self.iconImage.clipsToBounds = YES;
     // 判断是否是更换图片
     if(image == nil) {
@@ -308,13 +306,13 @@
 {
     _userInfo = userInfo;
     if (_userInfo == nil) return;
-    
     // 设置头像
     if (self.isChang == NO) {
-        [self.iconImage imageWithUrlStr:userInfo.headImgUrl phImage:nil];
+
+        [self.iconImage imageWithUrlStr:userInfo.headImgUrl phImage:[UIImage imageNamed:@"avatar_default_big"]];
     }
-    
-    // 签到按钮
+
+	    // 签到按钮
     if (userInfo.isSingIn) { // 已经签到
         [self.qiaoDaoBtn setBackgroundImage:[UIImage imageNamed:@"yiqiandao"] forState:UIControlStateNormal];
         self.qiaoDaoBtn.enabled = NO;
@@ -322,11 +320,9 @@
         [self.qiaoDaoBtn setBackgroundImage:[UIImage imageNamed:@"weiqiandao"] forState:UIControlStateNormal];
         self.qiaoDaoBtn.enabled = YES;
     }
-    
-    // 云豆
+ 	    // 云豆
     [self.yunDouBtn setTitle:[NSString stringWithFormat:@"%d", userInfo.myPoint] forState:UIControlStateNormal];
-    
-    
+
     if (userInfo.adviserStatus == 1 || userInfo.adviserStatus == 3) {
         self.renZhenBtn.hidden = NO;
         [self.renZhenBtn setBackgroundImage:[UIImage imageNamed:@"weirenzheng"] forState:UIControlStateNormal];

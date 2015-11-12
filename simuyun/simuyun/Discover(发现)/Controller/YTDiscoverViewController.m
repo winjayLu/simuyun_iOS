@@ -128,7 +128,7 @@
 - (void)setupStock
 {
     YTStockView *stock = [[YTStockView alloc] init];
-    stock.frame = CGRectMake(maginWidth, CGRectGetMaxY(self.pptVC.view.frame) + maginWidth - pptvcY, self.pptVC.view.width, 89);
+    stock.frame = CGRectMake(maginWidth, CGRectGetMaxY(self.pptVC.view.frame) - pptvcY + 1, self.pptVC.view.width, 89 - maginWidth);
     stock.layer.cornerRadius = 5;
     stock.layer.masksToBounds = YES;
     [self.view addSubview:stock];

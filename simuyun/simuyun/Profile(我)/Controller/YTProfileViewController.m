@@ -101,7 +101,7 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
     CGFloat x = [recognizer translationInView:self.view].x;
 //    YTLog(@"手指当前位置%f", locationX);
 //    YTLog(@"移动范围%f", x);
-    if (locationX > 50 && self.isPan == NO) {
+    if (locationX > 60 && self.isPan == NO) {
         [self showHome];
         return;
     }
@@ -113,35 +113,35 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
         return;
     }
     // 最大滑动范围241
-    if (x > 5) {
+    if (x > 0) {
         [self showMenu];
         return;
     }
 
     
-    CGFloat dis = self.distance + x;
-    
-    if (recognizer.state == UIGestureRecognizerStateCancelled) {
-        [self showHome];
-        return;
-    }
-    
-    // 当手势停止时执行操作
-    if (recognizer.state == UIGestureRecognizerStateEnded) {
-        if (dis >= 241 * 0.5) {
-            [self showMenu];
-        } else {
-            [self showHome];
-        }
-        return;
-    }
-    YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    CGPoint old = appRootVC.tabBar.center;
-    self.homeVc.view.center = CGPointMake(self.view.center.x + dis, self.view.center.y);
-    CGFloat menuCenterMove = dis * (self.menuCenterXEnd - self.menuCenterXStart) / self.leftDistance;
-    self.menuVc.view.center = CGPointMake(self.menuCenterXStart + menuCenterMove, self.view.center.y);
-
-    appRootVC.tabBar.center = CGPointMake(self.view.center.x + dis, old.y);
+//    CGFloat dis = self.distance + x;
+//    
+//    if (recognizer.state == UIGestureRecognizerStateCancelled) {
+//        [self showHome];
+//        return;
+//    }
+//    
+//    // 当手势停止时执行操作
+//    if (recognizer.state == UIGestureRecognizerStateEnded) {
+//        if (dis >= 241 * 0.5) {
+//            [self showMenu];
+//        } else {
+//            [self showHome];
+//        }
+//        return;
+//    }
+//    YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+//    CGPoint old = appRootVC.tabBar.center;
+//    self.homeVc.view.center = CGPointMake(self.view.center.x + dis, self.view.center.y);
+//    CGFloat menuCenterMove = dis * (self.menuCenterXEnd - self.menuCenterXStart) / self.leftDistance;
+//    self.menuVc.view.center = CGPointMake(self.menuCenterXStart + menuCenterMove, self.view.center.y);
+//
+//    appRootVC.tabBar.center = CGPointMake(self.view.center.x + dis, old.y);
 }
 
 

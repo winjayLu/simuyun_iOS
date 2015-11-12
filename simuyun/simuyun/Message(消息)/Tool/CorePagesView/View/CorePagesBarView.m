@@ -10,6 +10,7 @@
 #import "CorePageModel.h"
 #import "CAAnimation+PagesViewBarShake.h"
 #import "UIImage+Extend.h"
+#import "YTMessageNumTool.h"
 
 #define rgba(r,g,b,a) [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
 
@@ -215,6 +216,21 @@
 -(void)btnClick:(CorePagesBarBtn *)btn{
     
     [btn isShow:NO];
+    
+    // 待办事项特殊处理
+    NSString *btnTitle = btn.currentTitle;
+    if ([btnTitle isEqualToString:@"待办事项"]) {
+        // 消息数量
+        YTMessageNum *messageNum = [YTMessageNumTool messageNum];
+        int todoNum = messageNum.TODO_LIST;
+        if (todoNum > 0) {
+            [btn isShow:YES];
+        } else {
+            [btn isShow:NO];
+        }
+    }
+    
+    
     if(self.selectedBtn == btn) return;
     
     self.selectedBtn=btn;
@@ -234,10 +250,27 @@
 
 -(void)setSelectedBtn:(CorePagesBarBtn *)selectedBtn{
     
+    
+    
     if(_selectedBtn == selectedBtn) return;
     
     if(_selectedBtn != nil) _selectedBtn.selected=NO;
     [selectedBtn isShow:NO];
+    
+    // 待办事项特殊处理
+    NSString *btnTitle = selectedBtn.currentTitle;
+    if ([btnTitle isEqualToString:@"待办事项"]) {
+        // 消息数量
+        YTMessageNum *messageNum = [YTMessageNumTool messageNum];
+        int todoNum = messageNum.TODO_LIST;
+        if (todoNum > 0) {
+            [selectedBtn isShow:YES];
+        } else {
+            [selectedBtn isShow:NO];
+        }
+    }
+    
+    
     selectedBtn.selected=YES;
     
     self.pageChangeMax=ABS(_selectedBtn.tag - selectedBtn.tag)>1;

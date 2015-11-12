@@ -123,6 +123,6 @@
     </objects>
     <resources>
         <image name="hongseanniu" width="355" height="44"/>
-        <image name="renzhengshibai" width="375" height="120"/>
+        <image name="renzhengshibai" width="367" height="120"/>
     </resources>
 </document>

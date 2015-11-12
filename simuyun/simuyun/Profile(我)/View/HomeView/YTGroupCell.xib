@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -29,13 +29,13 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="待办事项" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObL-Di-lMR">
-                        <rect key="frame" x="33" y="12" width="60" height="18"/>
+                        <rect key="frame" x="29" y="12" width="60" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.27843137254901962" green="0.27843137254901962" blue="0.27843137254901962" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MC6-hL-LRb">
-                        <rect key="frame" x="0.0" y="40" width="320" height="1"/>
+                        <rect key="frame" x="0.0" y="41" width="320" height="1"/>
                         <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="h2n-OX-3ef"/>
@@ -50,7 +50,7 @@
                     <constraint firstAttribute="trailing" secondItem="2TY-09-CvL" secondAttribute="trailing" constant="14" id="MDq-aX-cdw"/>
                     <constraint firstAttribute="trailing" secondItem="MC6-hL-LRb" secondAttribute="trailing" id="XP8-lr-72O"/>
                     <constraint firstItem="MC6-hL-LRb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="e59-Dt-xnp"/>
-                    <constraint firstItem="ObL-Di-lMR" firstAttribute="leading" secondItem="QN3-0Q-k01" secondAttribute="trailing" constant="14" id="ltJ-G5-sha"/>
+                    <constraint firstItem="ObL-Di-lMR" firstAttribute="leading" secondItem="QN3-0Q-k01" secondAttribute="trailing" constant="10" id="ltJ-G5-sha"/>
                     <constraint firstItem="QN3-0Q-k01" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="lzU-2h-CeE"/>
                 </constraints>
             </tableViewCellContentView>
