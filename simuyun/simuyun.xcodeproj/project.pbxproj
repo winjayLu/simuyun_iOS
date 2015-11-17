@@ -147,14 +147,6 @@
 		97BF5BCE1BD74F5A00053BD0 /* YTReportViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97BF5BCC1BD74F5A00053BD0 /* YTReportViewController.xib */; };
 		97BF5BD31BD77FF000053BD0 /* AGNumberForBank.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF5BD21BD77FF000053BD0 /* AGNumberForBank.m */; };
 		97BF5BD71BD78A6C00053BD0 /* YTReportContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF5BD61BD78A6C00053BD0 /* YTReportContentController.m */; };
-		97BF5BEE1BD7902700053BD0 /* JFAssetHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF5BDB1BD7902700053BD0 /* JFAssetHelper.m */; };
-		97BF5BEF1BD7902700053BD0 /* JFImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF5BDD1BD7902700053BD0 /* JFImageCollectionViewController.m */; };
-		97BF5BF01BD7902700053BD0 /* JFImageGroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF5BDF1BD7902700053BD0 /* JFImageGroupTableViewController.m */; };
-		97BF5BF11BD7902700053BD0 /* JFImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF5BE11BD7902700053BD0 /* JFImageManager.m */; };
-		97BF5BF21BD7902700053BD0 /* JFImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF5BE31BD7902700053BD0 /* JFImagePickerController.m */; };
-		97BF5BF31BD7902700053BD0 /* JFImagePickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF5BE51BD7902700053BD0 /* JFImagePickerViewCell.m */; };
-		97BF5BF41BD7902700053BD0 /* JFPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF5BE71BD7902700053BD0 /* JFPhotoBrowserViewController.m */; };
-		97BF5BF51BD7902700053BD0 /* JFPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF5BE91BD7902700053BD0 /* JFPhotoView.m */; };
 		97BF5BF61BD7902700053BD0 /* YTPhotoMenultem.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF5BEB1BD7902700053BD0 /* YTPhotoMenultem.m */; };
 		97BF5BF71BD7902700053BD0 /* YTPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF5BED1BD7902700053BD0 /* YTPhotoView.m */; };
 		97BF5BFE1BD7BF0B00053BD0 /* YTResources.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BF5BFD1BD7BF0B00053BD0 /* YTResources.m */; };
@@ -199,20 +191,10 @@
 		97C6066B1BC2700600E555E8 /* UIImageView+SD.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C606671BC2700600E555E8 /* UIImageView+SD.m */; };
 		97C606711BC270CC00E555E8 /* UIImage+ReMake.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C6066E1BC270CC00E555E8 /* UIImage+ReMake.m */; };
 		97C606721BC270CC00E555E8 /* CoreSDWebImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97C606701BC270CC00E555E8 /* CoreSDWebImage.bundle */; };
-		97C6067E1BC271DE00E555E8 /* CoreStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C606751BC271DE00E555E8 /* CoreStatus.m */; };
-		97C6067F1BC271DE00E555E8 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C6067B1BC271DE00E555E8 /* Reachability.m */; };
 		97C606871BC2799400E555E8 /* UIBarButtonItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C606861BC2799400E555E8 /* UIBarButtonItem+Extension.m */; };
 		97C6068A1BC27BD600E555E8 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C606891BC27BD600E555E8 /* NSDate+Extension.m */; };
 		97C606A71BC2985700E555E8 /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 97C6068D1BC2985700E555E8 /* UMSocialLocalizable.strings */; };
 		97C606A81BC2985700E555E8 /* libUMSocial_Sdk_4.2.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C6069B1BC2985700E555E8 /* libUMSocial_Sdk_4.2.5.a */; };
-		97C606A91BC2985700E555E8 /* UMSCommentDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C6069D1BC2985700E555E8 /* UMSCommentDetailController.xib */; };
-		97C606AA1BC2985700E555E8 /* UMSCommentInputController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C6069E1BC2985700E555E8 /* UMSCommentInputController.xib */; };
-		97C606AB1BC2985700E555E8 /* UMSCommentInputControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C6069F1BC2985700E555E8 /* UMSCommentInputControlleriPad.xib */; };
-		97C606AC1BC2985700E555E8 /* UMShareEditViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C606A01BC2985700E555E8 /* UMShareEditViewController.xib */; };
-		97C606AD1BC2985700E555E8 /* UMShareEditViewControlleriPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C606A11BC2985700E555E8 /* UMShareEditViewControlleriPad.xib */; };
-		97C606AE1BC2985700E555E8 /* UMSLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C606A21BC2985700E555E8 /* UMSLoginViewController.xib */; };
-		97C606AF1BC2985700E555E8 /* UMSnsAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C606A31BC2985700E555E8 /* UMSnsAccountViewController.xib */; };
-		97C606B01BC2985700E555E8 /* UMSShareListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C606A41BC2985700E555E8 /* UMSShareListController.xib */; };
 		97C606B11BC2985700E555E8 /* UMSocialSDKResourcesNew.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97C606A51BC2985700E555E8 /* UMSocialSDKResourcesNew.bundle */; };
 		97C606B31BC298BA00E555E8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C606B21BC298BA00E555E8 /* SystemConfiguration.framework */; };
 		97C606BA1BC29B9100E555E8 /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C606B51BC29B9100E555E8 /* libSocialWechat.a */; };
@@ -252,6 +234,14 @@
 		97ED0CD31BE2460200E95750 /* YTProductdetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97ED0CD21BE2460200E95750 /* YTProductdetailController.m */; };
 		97ED0CD61BE248B300E95750 /* YTOrderdetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97ED0CD51BE248B300E95750 /* YTOrderdetailController.m */; };
 		97F17F5B1BE0CB63006E6DA8 /* YTSlipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F17F5A1BE0CB63006E6DA8 /* YTSlipModel.m */; };
+		97F8E0AF1BFB249000BA444E /* JFAssetHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F8E0AE1BFB249000BA444E /* JFAssetHelper.m */; };
+		97F8E0B21BFB249B00BA444E /* JFImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F8E0B11BFB249B00BA444E /* JFImageManager.m */; };
+		97F8E0B51BFB24AC00BA444E /* JFImageCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F8E0B41BFB24AC00BA444E /* JFImageCollectionViewController.m */; };
+		97F8E0B81BFB24B400BA444E /* JFImageGroupTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F8E0B71BFB24B400BA444E /* JFImageGroupTableViewController.m */; };
+		97F8E0BB1BFB24C100BA444E /* JFImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F8E0BA1BFB24C100BA444E /* JFImagePickerController.m */; };
+		97F8E0BE1BFB24C800BA444E /* JFImagePickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F8E0BD1BFB24C800BA444E /* JFImagePickerViewCell.m */; };
+		97F8E0C11BFB24CF00BA444E /* JFPhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F8E0C01BFB24CF00BA444E /* JFPhotoBrowserViewController.m */; };
+		97F8E0C41BFB24D900BA444E /* JFPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F8E0C31BFB24D900BA444E /* JFPhotoView.m */; };
 		C7C7A3BFF6245A07C6961ED3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1695905209A227AB6ABE80C8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -532,22 +522,6 @@
 		97BF5BD41BD7805B00053BD0 /* AGNumberForBank.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGNumberForBank.h; sourceTree = "<group>"; };
 		97BF5BD51BD78A6C00053BD0 /* YTReportContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTReportContentController.h; sourceTree = "<group>"; };
 		97BF5BD61BD78A6C00053BD0 /* YTReportContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTReportContentController.m; sourceTree = "<group>"; };
-		97BF5BDA1BD7902700053BD0 /* JFAssetHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAssetHelper.h; sourceTree = "<group>"; };
-		97BF5BDB1BD7902700053BD0 /* JFAssetHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAssetHelper.m; sourceTree = "<group>"; };
-		97BF5BDC1BD7902700053BD0 /* JFImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFImageCollectionViewController.h; sourceTree = "<group>"; };
-		97BF5BDD1BD7902700053BD0 /* JFImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFImageCollectionViewController.m; sourceTree = "<group>"; };
-		97BF5BDE1BD7902700053BD0 /* JFImageGroupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFImageGroupTableViewController.h; sourceTree = "<group>"; };
-		97BF5BDF1BD7902700053BD0 /* JFImageGroupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFImageGroupTableViewController.m; sourceTree = "<group>"; };
-		97BF5BE01BD7902700053BD0 /* JFImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFImageManager.h; sourceTree = "<group>"; };
-		97BF5BE11BD7902700053BD0 /* JFImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFImageManager.m; sourceTree = "<group>"; };
-		97BF5BE21BD7902700053BD0 /* JFImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFImagePickerController.h; sourceTree = "<group>"; };
-		97BF5BE31BD7902700053BD0 /* JFImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFImagePickerController.m; sourceTree = "<group>"; };
-		97BF5BE41BD7902700053BD0 /* JFImagePickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFImagePickerViewCell.h; sourceTree = "<group>"; };
-		97BF5BE51BD7902700053BD0 /* JFImagePickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFImagePickerViewCell.m; sourceTree = "<group>"; };
-		97BF5BE61BD7902700053BD0 /* JFPhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPhotoBrowserViewController.h; sourceTree = "<group>"; };
-		97BF5BE71BD7902700053BD0 /* JFPhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPhotoBrowserViewController.m; sourceTree = "<group>"; };
-		97BF5BE81BD7902700053BD0 /* JFPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPhotoView.h; sourceTree = "<group>"; };
-		97BF5BE91BD7902700053BD0 /* JFPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPhotoView.m; sourceTree = "<group>"; };
 		97BF5BEA1BD7902700053BD0 /* YTPhotoMenultem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPhotoMenultem.h; sourceTree = "<group>"; };
 		97BF5BEB1BD7902700053BD0 /* YTPhotoMenultem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTPhotoMenultem.m; sourceTree = "<group>"; };
 		97BF5BEC1BD7902700053BD0 /* YTPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPhotoView.h; sourceTree = "<group>"; };
@@ -633,13 +607,6 @@
 		97C6066D1BC270CC00E555E8 /* UIImage+ReMake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ReMake.h"; sourceTree = "<group>"; };
 		97C6066E1BC270CC00E555E8 /* UIImage+ReMake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ReMake.m"; sourceTree = "<group>"; };
 		97C606701BC270CC00E555E8 /* CoreSDWebImage.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = CoreSDWebImage.bundle; sourceTree = "<group>"; };
-		97C606741BC271DE00E555E8 /* CoreStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreStatus.h; sourceTree = "<group>"; };
-		97C606751BC271DE00E555E8 /* CoreStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreStatus.m; sourceTree = "<group>"; };
-		97C606771BC271DE00E555E8 /* CoreNetworkStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreNetworkStatus.h; sourceTree = "<group>"; };
-		97C606781BC271DE00E555E8 /* CoreStatusProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreStatusProtocol.h; sourceTree = "<group>"; };
-		97C6067A1BC271DE00E555E8 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		97C6067B1BC271DE00E555E8 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		97C6067D1BC271DE00E555E8 /* CoreStatusSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreStatusSingleton.h; sourceTree = "<group>"; };
 		97C606811BC273F000E555E8 /* YTServerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTServerConfig.h; sourceTree = "<group>"; };
 		97C606821BC2742A00E555E8 /* YTColorConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTColorConfig.h; sourceTree = "<group>"; };
 		97C606831BC2744A00E555E8 /* YTMessageConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTMessageConfig.h; sourceTree = "<group>"; };
@@ -660,14 +627,6 @@
 		97C606991BC2985700E555E8 /* UMSocialSnsPlatformManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialSnsPlatformManager.h; sourceTree = "<group>"; };
 		97C6069A1BC2985700E555E8 /* UMSocialSnsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialSnsService.h; sourceTree = "<group>"; };
 		97C6069B1BC2985700E555E8 /* libUMSocial_Sdk_4.2.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSocial_Sdk_4.2.5.a; sourceTree = "<group>"; };
-		97C6069D1BC2985700E555E8 /* UMSCommentDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSCommentDetailController.xib; sourceTree = "<group>"; };
-		97C6069E1BC2985700E555E8 /* UMSCommentInputController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSCommentInputController.xib; sourceTree = "<group>"; };
-		97C6069F1BC2985700E555E8 /* UMSCommentInputControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSCommentInputControlleriPad.xib; sourceTree = "<group>"; };
-		97C606A01BC2985700E555E8 /* UMShareEditViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMShareEditViewController.xib; sourceTree = "<group>"; };
-		97C606A11BC2985700E555E8 /* UMShareEditViewControlleriPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMShareEditViewControlleriPad.xib; sourceTree = "<group>"; };
-		97C606A21BC2985700E555E8 /* UMSLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSLoginViewController.xib; sourceTree = "<group>"; };
-		97C606A31BC2985700E555E8 /* UMSnsAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSnsAccountViewController.xib; sourceTree = "<group>"; };
-		97C606A41BC2985700E555E8 /* UMSShareListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UMSShareListController.xib; sourceTree = "<group>"; };
 		97C606A51BC2985700E555E8 /* UMSocialSDKResourcesNew.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResourcesNew.bundle; sourceTree = "<group>"; };
 		97C606A61BC2985700E555E8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UMSocialLocalizable.strings"; sourceTree = "<group>"; };
 		97C606B21BC298BA00E555E8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -732,6 +691,22 @@
 		97ED0CD51BE248B300E95750 /* YTOrderdetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTOrderdetailController.m; sourceTree = "<group>"; };
 		97F17F591BE0CB63006E6DA8 /* YTSlipModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSlipModel.h; sourceTree = "<group>"; };
 		97F17F5A1BE0CB63006E6DA8 /* YTSlipModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSlipModel.m; sourceTree = "<group>"; };
+		97F8E0AD1BFB249000BA444E /* JFAssetHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFAssetHelper.h; sourceTree = "<group>"; };
+		97F8E0AE1BFB249000BA444E /* JFAssetHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFAssetHelper.m; sourceTree = "<group>"; };
+		97F8E0B01BFB249B00BA444E /* JFImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFImageManager.h; sourceTree = "<group>"; };
+		97F8E0B11BFB249B00BA444E /* JFImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFImageManager.m; sourceTree = "<group>"; };
+		97F8E0B31BFB24AC00BA444E /* JFImageCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFImageCollectionViewController.h; sourceTree = "<group>"; };
+		97F8E0B41BFB24AC00BA444E /* JFImageCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFImageCollectionViewController.m; sourceTree = "<group>"; };
+		97F8E0B61BFB24B400BA444E /* JFImageGroupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFImageGroupTableViewController.h; sourceTree = "<group>"; };
+		97F8E0B71BFB24B400BA444E /* JFImageGroupTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFImageGroupTableViewController.m; sourceTree = "<group>"; };
+		97F8E0B91BFB24C100BA444E /* JFImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFImagePickerController.h; sourceTree = "<group>"; };
+		97F8E0BA1BFB24C100BA444E /* JFImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFImagePickerController.m; sourceTree = "<group>"; };
+		97F8E0BC1BFB24C800BA444E /* JFImagePickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFImagePickerViewCell.h; sourceTree = "<group>"; };
+		97F8E0BD1BFB24C800BA444E /* JFImagePickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFImagePickerViewCell.m; sourceTree = "<group>"; };
+		97F8E0BF1BFB24CF00BA444E /* JFPhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPhotoBrowserViewController.h; sourceTree = "<group>"; };
+		97F8E0C01BFB24CF00BA444E /* JFPhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPhotoBrowserViewController.m; sourceTree = "<group>"; };
+		97F8E0C21BFB24D900BA444E /* JFPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JFPhotoView.h; sourceTree = "<group>"; };
+		97F8E0C31BFB24D900BA444E /* JFPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JFPhotoView.m; sourceTree = "<group>"; };
 		EE4C2D6D5E8167BC60D82A90 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1361,36 +1336,13 @@
 			children = (
 				97E783EA1BE61D8600B98A9C /* DXPopover.h */,
 				97E783EB1BE61D8600B98A9C /* DXPopover.m */,
-				97BF5BD91BD7902700053BD0 /* JFImagePickerController */,
 				97BF5BEA1BD7902700053BD0 /* YTPhotoMenultem.h */,
 				97BF5BEB1BD7902700053BD0 /* YTPhotoMenultem.m */,
 				97BF5BEC1BD7902700053BD0 /* YTPhotoView.h */,
 				97BF5BED1BD7902700053BD0 /* YTPhotoView.m */,
+				97F8E0941BFB232100BA444E /* JFImagePickerController */,
 			);
 			path = Tool;
-			sourceTree = "<group>";
-		};
-		97BF5BD91BD7902700053BD0 /* JFImagePickerController */ = {
-			isa = PBXGroup;
-			children = (
-				97BF5BDA1BD7902700053BD0 /* JFAssetHelper.h */,
-				97BF5BDB1BD7902700053BD0 /* JFAssetHelper.m */,
-				97BF5BDC1BD7902700053BD0 /* JFImageCollectionViewController.h */,
-				97BF5BDD1BD7902700053BD0 /* JFImageCollectionViewController.m */,
-				97BF5BDE1BD7902700053BD0 /* JFImageGroupTableViewController.h */,
-				97BF5BDF1BD7902700053BD0 /* JFImageGroupTableViewController.m */,
-				97BF5BE01BD7902700053BD0 /* JFImageManager.h */,
-				97BF5BE11BD7902700053BD0 /* JFImageManager.m */,
-				97BF5BE21BD7902700053BD0 /* JFImagePickerController.h */,
-				97BF5BE31BD7902700053BD0 /* JFImagePickerController.m */,
-				97BF5BE41BD7902700053BD0 /* JFImagePickerViewCell.h */,
-				97BF5BE51BD7902700053BD0 /* JFImagePickerViewCell.m */,
-				97BF5BE61BD7902700053BD0 /* JFPhotoBrowserViewController.h */,
-				97BF5BE71BD7902700053BD0 /* JFPhotoBrowserViewController.m */,
-				97BF5BE81BD7902700053BD0 /* JFPhotoView.h */,
-				97BF5BE91BD7902700053BD0 /* JFPhotoView.m */,
-			);
-			path = JFImagePickerController;
 			sourceTree = "<group>";
 		};
 		97BF5BF81BD7BE6A00053BD0 /* Model */ = {
@@ -1497,7 +1449,6 @@
 				97C3CE6E1BC2C17D00B7185D /* MBProgressHUD */,
 				97C3CE621BC2BAEF00B7185D /* SVProgressHUD */,
 				97C6068B1BC2985700E555E8 /* Umeng */,
-				97C606731BC271DE00E555E8 /* CoreStatus */,
 				97C6065D1BC2700600E555E8 /* SDWebImage */,
 			);
 			path = Lib;
@@ -1874,44 +1825,6 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
-		97C606731BC271DE00E555E8 /* CoreStatus */ = {
-			isa = PBXGroup;
-			children = (
-				97C606741BC271DE00E555E8 /* CoreStatus.h */,
-				97C606751BC271DE00E555E8 /* CoreStatus.m */,
-				97C606761BC271DE00E555E8 /* Lib */,
-			);
-			path = CoreStatus;
-			sourceTree = "<group>";
-		};
-		97C606761BC271DE00E555E8 /* Lib */ = {
-			isa = PBXGroup;
-			children = (
-				97C606771BC271DE00E555E8 /* CoreNetworkStatus.h */,
-				97C606781BC271DE00E555E8 /* CoreStatusProtocol.h */,
-				97C606791BC271DE00E555E8 /* Reachability */,
-				97C6067C1BC271DE00E555E8 /* Singleton */,
-			);
-			path = Lib;
-			sourceTree = "<group>";
-		};
-		97C606791BC271DE00E555E8 /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				97C6067A1BC271DE00E555E8 /* Reachability.h */,
-				97C6067B1BC271DE00E555E8 /* Reachability.m */,
-			);
-			path = Reachability;
-			sourceTree = "<group>";
-		};
-		97C6067C1BC271DE00E555E8 /* Singleton */ = {
-			isa = PBXGroup;
-			children = (
-				97C6067D1BC271DE00E555E8 /* CoreStatusSingleton.h */,
-			);
-			path = Singleton;
-			sourceTree = "<group>";
-		};
 		97C606801BC2739100E555E8 /* Config */ = {
 			isa = PBXGroup;
 			children = (
@@ -1950,7 +1863,6 @@
 				97C6068D1BC2985700E555E8 /* UMSocialLocalizable.strings */,
 				97C6068F1BC2985700E555E8 /* Header */,
 				97C6069B1BC2985700E555E8 /* libUMSocial_Sdk_4.2.5.a */,
-				97C6069C1BC2985700E555E8 /* SocialSDKXib */,
 				97C606A51BC2985700E555E8 /* UMSocialSDKResourcesNew.bundle */,
 			);
 			path = UMSocial_Sdk_4.2.5;
@@ -1972,21 +1884,6 @@
 				97C6069A1BC2985700E555E8 /* UMSocialSnsService.h */,
 			);
 			path = Header;
-			sourceTree = "<group>";
-		};
-		97C6069C1BC2985700E555E8 /* SocialSDKXib */ = {
-			isa = PBXGroup;
-			children = (
-				97C6069D1BC2985700E555E8 /* UMSCommentDetailController.xib */,
-				97C6069E1BC2985700E555E8 /* UMSCommentInputController.xib */,
-				97C6069F1BC2985700E555E8 /* UMSCommentInputControlleriPad.xib */,
-				97C606A01BC2985700E555E8 /* UMShareEditViewController.xib */,
-				97C606A11BC2985700E555E8 /* UMShareEditViewControlleriPad.xib */,
-				97C606A21BC2985700E555E8 /* UMSLoginViewController.xib */,
-				97C606A31BC2985700E555E8 /* UMSnsAccountViewController.xib */,
-				97C606A41BC2985700E555E8 /* UMSShareListController.xib */,
-			);
-			path = SocialSDKXib;
 			sourceTree = "<group>";
 		};
 		97C606B41BC29B9100E555E8 /* Wechat */ = {
@@ -2057,6 +1954,29 @@
 				97E783E81BE6106600B98A9C /* YTServiceModel.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		97F8E0941BFB232100BA444E /* JFImagePickerController */ = {
+			isa = PBXGroup;
+			children = (
+				97F8E0AD1BFB249000BA444E /* JFAssetHelper.h */,
+				97F8E0AE1BFB249000BA444E /* JFAssetHelper.m */,
+				97F8E0B01BFB249B00BA444E /* JFImageManager.h */,
+				97F8E0B11BFB249B00BA444E /* JFImageManager.m */,
+				97F8E0B31BFB24AC00BA444E /* JFImageCollectionViewController.h */,
+				97F8E0B41BFB24AC00BA444E /* JFImageCollectionViewController.m */,
+				97F8E0B61BFB24B400BA444E /* JFImageGroupTableViewController.h */,
+				97F8E0B71BFB24B400BA444E /* JFImageGroupTableViewController.m */,
+				97F8E0B91BFB24C100BA444E /* JFImagePickerController.h */,
+				97F8E0BA1BFB24C100BA444E /* JFImagePickerController.m */,
+				97F8E0BC1BFB24C800BA444E /* JFImagePickerViewCell.h */,
+				97F8E0BD1BFB24C800BA444E /* JFImagePickerViewCell.m */,
+				97F8E0BF1BFB24CF00BA444E /* JFPhotoBrowserViewController.h */,
+				97F8E0C01BFB24CF00BA444E /* JFPhotoBrowserViewController.m */,
+				97F8E0C21BFB24D900BA444E /* JFPhotoView.h */,
+				97F8E0C31BFB24D900BA444E /* JFPhotoView.m */,
+			);
+			path = JFImagePickerController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2172,9 +2092,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97C606AF1BC2985700E555E8 /* UMSnsAccountViewController.xib in Resources */,
 				970020B21BD6162B00231F52 /* YTBuyProductController.xib in Resources */,
-				97C606AC1BC2985700E555E8 /* UMShareEditViewController.xib in Resources */,
 				978122D61BE35A720035D6DE /* YTAuthenticationErrorController.xib in Resources */,
 				97187A8F1BC666E200C64609 /* YTWebViewController.xib in Resources */,
 				970020C71BD64B9F00231F52 /* YTBuySuccessController.xib in Resources */,
@@ -2188,19 +2106,15 @@
 				971503B81BC76961007E27D0 /* CorePPTVC.xib in Resources */,
 				97BF5BCE1BD74F5A00053BD0 /* YTReportViewController.xib in Resources */,
 				97BC99771BD4DB610090BDE8 /* CorePagesView.xib in Resources */,
-				97C606AD1BC2985700E555E8 /* UMShareEditViewControlleriPad.xib in Resources */,
 				97973D011BC3C5E500B7B4CB /* YTWelcomeViewController.xib in Resources */,
 				9790F8D11BDF1A2100965C7B /* YTAuthenticationStatusController.xib in Resources */,
 				9714A6EE1BC7E0610018A14E /* FontAwesome.ttf in Resources */,
 				9769F9FA1BC9676B001B1F02 /* YTGroupCell.xib in Resources */,
-				97C606A91BC2985700E555E8 /* UMSCommentDetailController.xib in Resources */,
-				97C606AE1BC2985700E555E8 /* UMSLoginViewController.xib in Resources */,
 				9769F9F71BC9676B001B1F02 /* YTContentCell.xib in Resources */,
 				972B880A1BFAD3D0002A7E9B /* LICENSE in Resources */,
 				978775151BE8A200002A8B42 /* YTBindingPhoneController.xib in Resources */,
 				9798E20D1BD9E15100B235AE /* YTOrderCenterCell.xib in Resources */,
 				97C3CE6B1BC2BAEF00B7185D /* SVProgressHUD.bundle in Resources */,
-				97C606AA1BC2985700E555E8 /* UMSCommentInputController.xib in Resources */,
 				975F78041BCFCD3D00589D22 /* Assets.xcassets in Resources */,
 				978218281BD0E40C000159E8 /* YTResultPasswordViewController.xib in Resources */,
 				9769FA061BC968F2001B1F02 /* YTLeftMenu.xib in Resources */,
@@ -2213,10 +2127,8 @@
 				97C605F51BC2622E00E555E8 /* YTLoginViewController.xib in Resources */,
 				97C606B11BC2985700E555E8 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				97C606721BC270CC00E555E8 /* CoreSDWebImage.bundle in Resources */,
-				97C606AB1BC2985700E555E8 /* UMSCommentInputControlleriPad.xib in Resources */,
 				975149511BDCB79B0017B6E8 /* YTCustomerServiceCell.xib in Resources */,
 				978218201BD0CA28000159E8 /* YTRegisterViewController.xib in Resources */,
-				97C606B01BC2985700E555E8 /* UMSShareListController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2276,7 +2188,6 @@
 			files = (
 				97BF5BD31BD77FF000053BD0 /* AGNumberForBank.m in Sources */,
 				9714A6EF1BC7E0610018A14E /* NSString+FontAwesome.m in Sources */,
-				97C6067E1BC271DE00E555E8 /* CoreStatus.m in Sources */,
 				97BC99751BD4DB610090BDE8 /* CorePagesViewConfig.m in Sources */,
 				97C981C81BE79655005FDE2F /* YTMessageNum.m in Sources */,
 				9782181F1BD0CA28000159E8 /* YTRegisterViewController.m in Sources */,
@@ -2288,7 +2199,7 @@
 				97C3CE221BC29E2D00B7185D /* ShareManage.m in Sources */,
 				97C605F61BC2622E00E555E8 /* YTAccount.m in Sources */,
 				97C3CE6C1BC2BAEF00B7185D /* SVProgressHUD.m in Sources */,
-				97BF5BF31BD7902700053BD0 /* JFImagePickerViewCell.m in Sources */,
+				97F8E0B21BFB249B00BA444E /* JFImageManager.m in Sources */,
 				97BC99781BD4DB610090BDE8 /* CorePageModel.m in Sources */,
 				97C6061B1BC266A900E555E8 /* CALayer+Transition.m in Sources */,
 				97C981CB1BE796C0005FDE2F /* YTMessageNumTool.m in Sources */,
@@ -2305,7 +2216,6 @@
 				972B88081BFAD3D0002A7E9B /* AFURLResponseSerialization.m in Sources */,
 				972B88051BFAD3D0002A7E9B /* AFSecurityPolicy.m in Sources */,
 				9769F9F51BC9676B001B1F02 /* YTBottomView.m in Sources */,
-				97BF5BF41BD7902700053BD0 /* JFPhotoBrowserViewController.m in Sources */,
 				97C6061F1BC2670E00E555E8 /* NSArray+Extend.m in Sources */,
 				97BC997A1BD4DB610090BDE8 /* CorePagesBarView.m in Sources */,
 				97187A8E1BC666E200C64609 /* YTWebViewController.m in Sources */,
@@ -2317,7 +2227,9 @@
 				97C981C01BE72DE5005FDE2F /* YTSenMailView.m in Sources */,
 				97C606251BC2679F00E555E8 /* NSString+Extend.m in Sources */,
 				97BC997D1BD4DC8B0090BDE8 /* YTCloudObserveController.m in Sources */,
+				97F8E0BE1BFB24C800BA444E /* JFImagePickerViewCell.m in Sources */,
 				9769F9F81BC9676B001B1F02 /* YTContentView.m in Sources */,
+				97F8E0B51BFB24AC00BA444E /* JFImageCollectionViewController.m in Sources */,
 				978218231BD0DF72000159E8 /* JKCountDownButton.m in Sources */,
 				972B88131BFAD3D0002A7E9B /* UIWebView+AFNetworking.m in Sources */,
 				978C62731BE4AD9E00FE2C72 /* YTSystemCenterController.m in Sources */,
@@ -2329,12 +2241,12 @@
 				97973CE71BC3BE7000B7B4CB /* NSString+File.m in Sources */,
 				9780A6EE1BDF74B000E973D9 /* AutocompletionTableView.m in Sources */,
 				97973CF71BC3C11500B7B4CB /* CoreNewFeatureVC.m in Sources */,
+				97F8E0B81BFB24B400BA444E /* JFImageGroupTableViewController.m in Sources */,
 				97C606321BC2692B00E555E8 /* UIFont+Extend.m in Sources */,
 				97E783EC1BE61D8600B98A9C /* DXPopover.m in Sources */,
 				9714A6F21BC7E0610018A14E /* UIColor+YUColor.m in Sources */,
 				97ABCB751BDDE48B0056C1A1 /* YTIndustryViewController.m in Sources */,
 				9798E2081BD9E13700B235AE /* YTOrderCenterModel.m in Sources */,
-				97BF5BF51BD7902700053BD0 /* JFPhotoView.m in Sources */,
 				97C605F41BC2622E00E555E8 /* YTLoginViewController.m in Sources */,
 				97DE830C1BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.m in Sources */,
 				97C3CE6D1BC2BAEF00B7185D /* SVRadialGradientLayer.m in Sources */,
@@ -2342,13 +2254,13 @@
 				971503AA1BC75E78007E27D0 /* PPTModel.m in Sources */,
 				97C605F71BC2622E00E555E8 /* YTAccountTool.m in Sources */,
 				9714A6F41BC7E0610018A14E /* UIWindow+YUBottomPoper.m in Sources */,
-				97BF5BEF1BD7902700053BD0 /* JFImageCollectionViewController.m in Sources */,
 				9769FA051BC968F2001B1F02 /* YTLeftMenu.m in Sources */,
 				97C606551BC26F0A00E555E8 /* UIView+Extension.m in Sources */,
 				970020CA1BD6507F00231F52 /* YTContentViewController.m in Sources */,
 				97E44B711BD344E300952B11 /* YTStockItem.m in Sources */,
 				970020B11BD6162B00231F52 /* YTBuyProductController.m in Sources */,
 				978FA78A1BDA236100E53DA4 /* BFNavigationBarDrawer.m in Sources */,
+				97F8E0C41BFB24D900BA444E /* JFPhotoView.m in Sources */,
 				978C6FEB1BCFA280003D183E /* YTProductModel.m in Sources */,
 				971503AB1BC75E78007E27D0 /* PPTCell.m in Sources */,
 				9714A6F01BC7E0610018A14E /* UIButton+Bootstrap.m in Sources */,
@@ -2359,13 +2271,14 @@
 				972B88101BFAD3D0002A7E9B /* UIImageView+AFNetworking.m in Sources */,
 				97973CFA1BC3C11500B7B4CB /* NewFeatureScrollView.m in Sources */,
 				972B88111BFAD3D0002A7E9B /* UIProgressView+AFNetworking.m in Sources */,
-				97BF5BEE1BD7902700053BD0 /* JFAssetHelper.m in Sources */,
 				97C605DD1BC2621F00E555E8 /* YTProfileViewController.m in Sources */,
 				97E44B761BD348BF00952B11 /* YTUserInfo.m in Sources */,
 				97BC99741BD4DB610090BDE8 /* CAAnimation+PagesViewBarShake.m in Sources */,
 				97DE830B1BD0FB5300E3C5CA /* CoreTFManagerVC.m in Sources */,
 				97973CE81BC3BE7000B7B4CB /* CoreArchive.m in Sources */,
 				97C606481BC269CC00E555E8 /* UIImage+Extend.m in Sources */,
+				97F8E0BB1BFB24C100BA444E /* JFImagePickerController.m in Sources */,
+				97F8E0AF1BFB249000BA444E /* JFAssetHelper.m in Sources */,
 				971503A91BC75E78007E27D0 /* PPTLayout.m in Sources */,
 				97C605AD1BC260A400E555E8 /* YTTabBarController.m in Sources */,
 				97BF5BCD1BD74F5A00053BD0 /* YTReportViewController.m in Sources */,
@@ -2402,11 +2315,11 @@
 				97C606711BC270CC00E555E8 /* UIImage+ReMake.m in Sources */,
 				972B88061BFAD3D0002A7E9B /* AFURLConnectionOperation.m in Sources */,
 				972B88011BFAD3D0002A7E9B /* AFHTTPRequestOperation.m in Sources */,
+				97F8E0C11BFB24CF00BA444E /* JFPhotoBrowserViewController.m in Sources */,
 				97973CFB1BC3C11500B7B4CB /* UIApplication+Extend.m in Sources */,
 				97BC99791BD4DB610090BDE8 /* CorePagesBarBtn.m in Sources */,
 				971503A81BC75E78007E27D0 /* PPTConst.m in Sources */,
 				97ABCB6B1BDDCA000056C1A1 /* YTNewest.m in Sources */,
-				97BF5BF21BD7902700053BD0 /* JFImagePickerController.m in Sources */,
 				978C6FE71BCF8564003D183E /* YTProductCell.m in Sources */,
 				972B880C1BFAD3D0002A7E9B /* AFNetworkActivityIndicatorManager.m in Sources */,
 				9790F8CB1BDF140900965C7B /* YTAuthenticationViewController.m in Sources */,
@@ -2417,12 +2330,10 @@
 				97E783E91BE6106600B98A9C /* YTServiceModel.m in Sources */,
 				97ABCB7B1BDDE5140056C1A1 /* YTOpinionController.m in Sources */,
 				97ABCB821BDE01660056C1A1 /* YTInformationTableViewCell.m in Sources */,
-				97BF5BF11BD7902700053BD0 /* JFImageManager.m in Sources */,
 				9790F8D01BDF1A2100965C7B /* YTAuthenticationStatusController.m in Sources */,
 				97C605DF1BC2621F00E555E8 /* YTSchoolViewController.m in Sources */,
 				97BF5BF71BD7902700053BD0 /* YTPhotoView.m in Sources */,
 				97BF5BF61BD7902700053BD0 /* YTPhotoMenultem.m in Sources */,
-				97C6067F1BC271DE00E555E8 /* Reachability.m in Sources */,
 				978C6FE11BCF8193003D183E /* YTProductViewController.m in Sources */,
 				972B88021BFAD3D0002A7E9B /* AFHTTPRequestOperationManager.m in Sources */,
 				97C6066A1BC2700600E555E8 /* UIButton+SD.m in Sources */,
@@ -2446,7 +2357,6 @@
 				97973CF91BC3C11500B7B4CB /* NewFeatureModel.m in Sources */,
 				97C3CE6A1BC2BAEF00B7185D /* SVIndefiniteAnimatedView.m in Sources */,
 				9714A6F61BC7E0610018A14E /* YUBottomPopSelctModel.m in Sources */,
-				97BF5BF01BD7902700053BD0 /* JFImageGroupTableViewController.m in Sources */,
 				97C6066B1BC2700600E555E8 /* UIImageView+SD.m in Sources */,
 				97C605D91BC2621F00E555E8 /* YTHomeViewController.m in Sources */,
 				972B88031BFAD3D0002A7E9B /* AFHTTPSessionManager.m in Sources */,
@@ -2539,7 +2449,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "";
@@ -2578,7 +2488,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;

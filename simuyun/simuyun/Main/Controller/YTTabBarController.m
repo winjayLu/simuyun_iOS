@@ -134,8 +134,6 @@
              }
          }
      }];
-
-
 }
 
 /**
@@ -151,13 +149,12 @@
     NSString *timestampCategory3 = [CoreArchive strForKey:@"timestampCategory3"];
     if (timestampCategory0 == nil || timestampCategory0.length == 0) {
         timestampCategory0 = @"2013-01-01 00:00:00";
-
     }
     if (timestampCategory2 == nil || timestampCategory2.length == 0) {
-        timestampCategory0 = @"2013-01-01 00:00:00";
+        timestampCategory2 = @"2013-01-01 00:00:00";
     }
     if (timestampCategory3 == nil || timestampCategory3.length == 0) {
-        timestampCategory0 = @"2013-01-01 00:00:00";
+        timestampCategory3 = @"2013-01-01 00:00:00";
     }
     params[@"timestampCategory0"] = timestampCategory0;
     params[@"timestampCategory2"] = timestampCategory2;
@@ -168,6 +165,7 @@
         if (messageNum.CHAT_CONTENT > 0) {
             self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", messageNum.CHAT_CONTENT];
         }
+        [YTCenter postNotificationName:YTUpdateChatContent object:nil];
     } failure:^(NSError *error) {
     }];
 }
@@ -297,6 +295,11 @@
     YTNavigationController *nav = [[YTNavigationController alloc] initWithRootViewController:vc];
     [self addChildViewController:nav];
     return vc;
+}
+
+- (void)dealloc
+{
+    [YTCenter removeObserver:self];
 }
 
 

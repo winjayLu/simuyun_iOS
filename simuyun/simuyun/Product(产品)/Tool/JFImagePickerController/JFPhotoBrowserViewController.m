@@ -103,6 +103,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 	if (!isBrowser) {
 		if (ASSETHELPER.selectdPhotos.count>0) {
@@ -156,7 +157,6 @@
 		}
 	}
 }
-#warning 修改图片选择
 - (void)selectPhoto{
 //    return;
 //    CGFloat pageWidth = photosView.frame.size.width;

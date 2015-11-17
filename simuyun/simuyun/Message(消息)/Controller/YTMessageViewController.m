@@ -37,10 +37,18 @@
     [super viewDidLoad];
     [YTCenter addObserver:self selector:@selector(jump) name:YTJumpToTodoList object:nil];
     
-    // 获取是否有新消息
-    [self loadNewStatus];
+    // 监听客服消息数字变化
+    [YTCenter addObserver:self selector:@selector(loadNewStatus) name:YTUpdateChatContent object:nil];
     [MobClick event:@"nav_click" attributes:@{@"按钮" : @"消息"}];
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // 获取是否有新消息
+    [self loadNewStatus];
+}
+
 /**
  *  获取是否有新消息
  *

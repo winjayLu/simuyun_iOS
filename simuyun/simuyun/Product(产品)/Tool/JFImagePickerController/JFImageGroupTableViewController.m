@@ -27,6 +27,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
 	self.navigationItem.title = @"相册";
 	UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
 	self.navigationItem.rightBarButtonItem = cancel;

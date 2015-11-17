@@ -34,6 +34,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
 	self.navigationItem.title = [[ASSETHELPER.assetGroups objectAtIndex:ASSETHELPER.currentGroupIndex] valueForProperty:ALAssetsGroupPropertyName];
 	UIBarButtonItem *cancel = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancel)];
 	self.navigationItem.rightBarButtonItem = cancel;
@@ -41,6 +42,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
 	self.navigationItem.title = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }

@@ -367,9 +367,9 @@
             return YES;
         }
     } else if([self.typeField.text isEqualToString:@"身份证"]){
-        if([NSString validateIdentityCard:self.numberField.text])
+        if(![NSString validateIdentityCard:self.numberField.text])
         {
-            [SVProgressHUD showErrorWithStatus:@"请输入正确的身份证号码"];
+            [SVProgressHUD showErrorWithStatus:@"身份证号码不正确"];
             return YES;
         }
     }

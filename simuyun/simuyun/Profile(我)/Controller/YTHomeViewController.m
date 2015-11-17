@@ -373,7 +373,6 @@
  */
 - (void)selectedTodo:(NSUInteger)row
 {
-    UIViewController *vc = nil;
     if (row == -1) {
         // 获取根控制器
         [YTCenter postNotificationName:YTJumpToTodoList object:nil];
@@ -382,9 +381,9 @@
         [MobClick event:@"main_click" attributes:@{@"按钮" : @"全部待办", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     } else {
         YTMessageModel *message = self.todos[row];
-        vc = [[YTNormalWebController alloc] init];
-        vc = [YTNormalWebController webWithTitle:@"待办事项" url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
-        ((YTNormalWebController *)vc).isDate = YES;
+
+        YTNormalWebController *vc = [YTNormalWebController webWithTitle:@"待办事项" url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
+        vc.isDate = YES;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
         [MobClick event:@"main_click" attributes:@{@"按钮" : @"单个待办", @"机构" : [YTUserInfoTool userInfo].organizationName}];
@@ -504,12 +503,6 @@
         self.topView.userInfo = userInfo;
         // 资讯id
         NSString *infoId = responseObject[@"infoId"];
-        NSString *infoTitle = nil;
-        if (responseObject[@"infoTitle"]) {
-            infoTitle = responseObject[@"infoTitle"];
-        } else {
-            infoTitle = @"";
-        }
         // 弹出提醒
         [alert showAlertSignWithTitle:responseObject[@"infoTitle"] date:responseObject[@"signInDate"] yunDou:responseObject[@"todayPoint"] block:^{
             if (infoId != nil && infoId.length > 0) {

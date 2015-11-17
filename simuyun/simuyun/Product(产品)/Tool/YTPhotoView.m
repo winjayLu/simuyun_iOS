@@ -213,7 +213,6 @@
 //        [ASSETHELPER.selectdCameraPhoto removeObjectAtIndex:index - self.photos.count];
     } else {
         [self.photos removeObjectAtIndex:index];
-#warning 记录2各状态出错
 //        [ASSETHELPER.selectdPhotos removeObjectAtIndex:index];
 //        [ASSETHELPER.selectdAssets removeObjectAtIndex:index];
     }

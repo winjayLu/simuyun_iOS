@@ -97,6 +97,7 @@
                         resultHandler(temp);
                     });
                 }
+                CGImageRelease(part);
             } else {
                 [memCache setObject:@"normal" forKey:asset.defaultRepresentation.filename];
             }

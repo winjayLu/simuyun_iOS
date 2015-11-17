@@ -173,9 +173,11 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
  */
 static UIWindow *_window;
 - (void)doSlide:(CGFloat)proportion {
+    
+    __block CGFloat menuCenterX;
+    __block CGFloat navCenterX;
+    
     [UIView animateWithDuration:0.3 animations:^{
-        CGFloat menuCenterX;
-        CGFloat navCenterX;
         YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
         CGPoint old = appRootVC.tabBar.center;
         if (proportion == 1) {

@@ -11,3 +11,4 @@ extern NSString *const YTRedrain;
 extern NSString *const YTUpdateTodoList;
 extern NSString *const YTUpdateMessageNum;
 extern NSString *const YTStopRequest;
+extern NSString *const YTUpdateChatContent;

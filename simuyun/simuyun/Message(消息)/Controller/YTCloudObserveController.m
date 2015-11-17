@@ -39,12 +39,22 @@
     
     // 去掉下划线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewChat)];
     // 马上进入刷新状态
     [self.tableView.header beginRefreshing];
     
+    // 监听客服消息数字变化
+    [YTCenter addObserver:self selector:@selector(updateChatContent) name:YTUpdateChatContent object:nil];
 }
+
+- (void)updateChatContent
+{
+    [self.tableView reloadData];
+}
+
+
 // 加载新数据
 - (void)loadNewChat
 {
@@ -69,7 +79,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+    
     [MobClick event:@"msgPanel_click" attributes:@{@"按钮" : @"消息", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
@@ -139,6 +149,12 @@
     num.CHAT_CONTENT = 0;
     [self.tableView reloadData];
     
+}
+
+
+- (void)dealloc
+{
+    [YTCenter removeObserver:self];
 }
 
 

@@ -60,7 +60,6 @@
         [self setupAudio];
         // 初始化按钮
         [self setupLogoBtn];
-#warning logo呼吸
         //设置定时检测
 //        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(scaleLogo) userInfo:nil repeats:YES];
     }

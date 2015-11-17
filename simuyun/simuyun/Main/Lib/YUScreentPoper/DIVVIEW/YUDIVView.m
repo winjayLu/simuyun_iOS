@@ -129,6 +129,9 @@
     
     
 }
+-(void)setMargin:(float) margin
+{
+}
 @end
 
 // 版权属于原作者
