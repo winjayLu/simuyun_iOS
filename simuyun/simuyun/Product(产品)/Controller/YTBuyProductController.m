@@ -44,6 +44,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"填写认购信息";
+    // 投资起点
+    NSString *buy_start = self.product.buy_start;
+    self.buyMoney.text = [buy_start substringToIndex:buy_start.length - 1];
 }
 
 
@@ -85,7 +88,7 @@
 
 - (IBAction)nextBtn:(UIButton *)sender {
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
-//     本地校验
+    // 本地校验
     if (self.nameLable.text == nil || [self.nameLable.text isEqualToString:@""]) {
         [SVProgressHUD showErrorWithStatus:@"请填写投资人姓名"];
         return;
@@ -94,12 +97,12 @@
         [SVProgressHUD showErrorWithStatus:@"金额不能为0"];
         return;
     }
-//     判断剩余额度
-//    if([self.buyMoney.text intValue] > self.product.remaining_amt)
-//    {
-//        [SVProgressHUD showErrorWithStatus:@"额度不足,请重新选择额度"];
-//        return;
-//    }
+    // 判断剩余额度
+    if([self.buyMoney.text intValue] > self.product.remaining_amt)
+    {
+        [SVProgressHUD showErrorWithStatus:@"额度不足,请重新选择额度"];
+        return;
+    }
     
     [self buyNow];
 }

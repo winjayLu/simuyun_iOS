@@ -66,6 +66,8 @@
         }
     } else {
         self.todoNumBtn.hidden = YES;
+        // 发送通知
+        [YTCenter postNotificationName:YTUpdateMessageNum object:nil];
     }
 }
 
@@ -175,9 +177,6 @@
     // 删除服务器数据
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-//    if ([YTAccountTool account].token != nil && [YTAccountTool account].token.length > 0) {
-//        [mgr.requestSerializer setValue:[YTAccountTool account].token forHTTPHeaderField:@"token"];
-//    }
     
     // 2.发送一个POST请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTMessageContent];

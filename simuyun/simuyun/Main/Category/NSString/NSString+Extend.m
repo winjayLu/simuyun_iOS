@@ -85,4 +85,47 @@
     return [identityCardPredicate evaluateWithObject:identityCard];
 }
 
+
+// 对应的消息标题
++ (NSString *)titleWithCategoryCode:(int)categoryCode
+{
+    NSString *categoryStr = nil;
+    switch (categoryCode) {    // 判断类型
+        case 11:
+            categoryStr = @"订单到期";
+            break;
+        case 12:
+            categoryStr = @"报备提醒";
+            break;
+        case 21:
+            categoryStr = @"产品成立";
+            break;
+        case 22:
+            categoryStr = @"产品分红";
+            break;
+        case 23:
+            categoryStr = @"产品付息";
+            break;
+        case 24:
+            categoryStr = @"产品上线";
+            break;
+        case 31:
+            categoryStr = @"系统公告";
+            break;
+        case 32:
+            categoryStr = @"云豆发放";
+            break;
+        case 33:
+            categoryStr = @"等级变更";
+            break;
+        case 34:
+            categoryStr = @"系统维护";
+            break;
+        case 35:
+            categoryStr = @"认证通知";
+            break;
+    }
+    return categoryStr;
+}
+
 @end

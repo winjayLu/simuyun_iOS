@@ -22,9 +22,6 @@
 {
     // 1.创建一个请求管理者
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    if ([YTAccountTool account].token != nil && [YTAccountTool account].token.length > 0) {
-        [mgr.requestSerializer setValue:[YTAccountTool account].token forHTTPHeaderField:@"token"];
-    }
     
     // 2.发送一个POST请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, url];
@@ -58,9 +55,7 @@
 {
     // 1.创建一个请求管理者
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    if ([YTAccountTool account].token != nil && [YTAccountTool account].token.length > 0) {
-        [mgr.requestSerializer setValue:[YTAccountTool account].token forHTTPHeaderField:@"token"];
-    }
+
     // 2.发送一个GET请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, url];
     YTLog(@"%@",newUrl);

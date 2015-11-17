@@ -32,25 +32,32 @@ typedef NS_ENUM(NSInteger, BFNavigationBarDrawerState) {
 	NSLayoutConstraint *verticalDrawerConstraint;
 }
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-		[self setup];
-    }
-    return self;
-}
+//- (id)initWithFrame:(CGRect)frame
+//{
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//		[self setup];
+//    }
+//    return self;
+//}
+//
+//- (id)initWithCoder:(NSCoder *)decoder {
+//    if (self = [super initWithCoder:decoder]) {
+//        [self setup];
+//    }
+//    return self;
+//}
 
-- (id)initWithCoder:(NSCoder *)decoder {
-    if (self = [super initWithCoder:decoder]) {
-        [self setup];
-    }
-    return self;
-}
 
-- (id)init
+
+
+- (instancetype)initWithisYiQueRen:(BOOL)isYiQueRen
 {
     self = [self initWithFrame:CGRectMake(0, 0, DeviceWidth, 46)];
+    if (self) {
+        self.isYiQueRen = isYiQueRen;
+        [self setup];
+    }
     self.userInteractionEnabled = YES;
     return self;
 }
@@ -196,6 +203,9 @@ typedef NS_ENUM(NSInteger, BFNavigationBarDrawerState) {
             case 3:
                 title = @"已确认";
                 btn.tag = btnTypeYiQueRen;
+                if (self.isYiQueRen) {
+                    [self btnClcik:btn];
+                }
                 break;
             case 4:
                 title = @"已失效";

@@ -11,7 +11,6 @@
 #import "YTAccountTool.h"
 #import "YTOrderCenterModel.h"
 #import "UIBarButtonItem+Extension.h"
-#import "BFNavigationBarDrawer.h"
 #import "MJRefresh.h"
 #import "YTTabBarController.h"
 #import "YTOrderdetailController.h"
@@ -71,7 +70,7 @@
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewOrder)];
     // 马上进入刷新状态
     [self.tableView.header beginRefreshing];
-    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreOrder)];
+    self.tableView.footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreOrder)];
 }
 
 /**
@@ -79,7 +78,7 @@
  */
 - (void)setupItem
 {
-    BFNavigationBarDrawer *drawerMenu = [[BFNavigationBarDrawer alloc] init];
+    BFNavigationBarDrawer *drawerMenu = [[BFNavigationBarDrawer alloc] initWithisYiQueRen:self.isYiQueRen];
     drawerMenu.scrollView = self.tableView;
     drawerMenu.delegate = self;
     self.drawerMenu = drawerMenu;
@@ -94,9 +93,8 @@
 - (void)rightClick
 {
     self.tableView.header = nil;
-
-    [self.drawerMenu showFromNavigationBar:self.navigationController.navigationBar animated:YES];
     
+    [self.drawerMenu showFromNavigationBar:self.navigationController.navigationBar animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -138,7 +136,6 @@
  */
 - (void)loadNewOrder
 {
-    self.tableView.footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreOrder)];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"advisers_id"] = [YTAccountTool account].userId;
     if (self.status == nil) {

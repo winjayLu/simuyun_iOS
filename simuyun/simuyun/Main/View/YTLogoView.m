@@ -62,11 +62,10 @@
         [self setupLogoBtn];
 #warning logo呼吸
         //设置定时检测
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(scaleLogo) userInfo:nil repeats:YES];
+//        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(scaleLogo) userInfo:nil repeats:YES];
     }
     return self;
 }
-
 
 - (void)scaleLogo
 {
@@ -116,14 +115,14 @@
 //
 //        self.bgView.transform = CGAffineTransformIdentity;
 //    }];
-    [UIView animateWithDuration:1.4 animations:^{
-        self.bgView.alpha = 1.0;
-//        self.bgView.hidden = 
-        self.bgView.transform = CGAffineTransformScale(self.bgView.transform,1.1, 1.1);
-    } completion:^(BOOL finished) {
-        self.bgView.alpha = 0.0;
-        self.bgView.transform = CGAffineTransformIdentity;
-    }];
+//    [UIView animateWithDuration:1.4 animations:^{
+//        self.bgView.alpha = 1.0;
+////        self.bgView.hidden = 
+//        self.bgView.transform = CGAffineTransformScale(self.bgView.transform,1.1, 1.1);
+//    } completion:^(BOOL finished) {
+//        self.bgView.alpha = 0.0;
+//        self.bgView.transform = CGAffineTransformIdentity;
+//    }];
 }
 
 

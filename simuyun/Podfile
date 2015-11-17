@@ -1,6 +1,5 @@
 platform :ios, “7.0”
 pod 'SDWebImage', '~> 3.7.3'
-pod 'AFNetworking', '~> 2.6.0'
 pod 'MJExtension', '~> 2.5.12'
 pod 'MJRefresh', '~> 2.4.11'
 pod 'UMengAnalytics'

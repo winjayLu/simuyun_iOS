@@ -39,7 +39,6 @@
  */
 @property (nonatomic, copy) NSString *buy_start;
 
-
 /**
  *  已募集金额
  */

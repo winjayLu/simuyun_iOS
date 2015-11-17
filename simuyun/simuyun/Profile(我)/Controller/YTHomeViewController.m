@@ -141,8 +141,8 @@
         YTUserInfo *userInfo = [YTUserInfo objectWithKeyValues:responseObject];
         [YTUserInfoTool saveUserInfo:userInfo];
         self.topView.userInfo = userInfo;
-        // 发送通知
-        [YTCenter postNotificationName:YTUpdateIconImage object:nil];
+//        // 发送通知
+//        [YTCenter postNotificationName:YTUpdateIconImage object:nil];
     } failure:^(NSError *error) {
 
     }];
@@ -462,6 +462,7 @@
         case TopButtonTypeDindan:   // 订单
             pushVc = [[YTOrderCenterController alloc] init];
             ((YTOrderCenterController *)pushVc).status = @"[80]";
+            ((YTOrderCenterController *)pushVc).isYiQueRen = YES;
             break;
         case TopButtonTypeYeji:     // 业绩
             pushVc = [YTNormalWebController webWithTitle:@"我的业绩" url:[NSString stringWithFormat:@"%@/my/performance/",YTH5Server]];

@@ -29,6 +29,9 @@ typedef enum {
 
 @interface BFNavigationBarDrawer : UIView
 
+@property (nonatomic, assign) BOOL isYiQueRen;
+
+
 @property (nonatomic, readonly, getter=isVisible) BOOL visible;
 @property (nonatomic) UIScrollView *scrollView;
 
@@ -38,5 +41,7 @@ typedef enum {
 
 - (void)showFromNavigationBar:(UINavigationBar *)bar animated:(BOOL)animated;
 - (void)hideAnimated:(BOOL)animated;
+
+- (instancetype)initWithisYiQueRen:(BOOL)isYiQueRen;
 
 @end

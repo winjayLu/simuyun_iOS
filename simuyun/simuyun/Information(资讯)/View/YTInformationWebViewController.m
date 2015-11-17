@@ -232,7 +232,7 @@
         case ShareButtonTypeCopy:
         {
             UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-            pasteboard.string = self.url;
+            pasteboard.string = share.share_url;
             [SVProgressHUD showSuccessWithStatus:@"复制成功"];
         }
             break;

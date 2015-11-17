@@ -9,3 +9,4 @@ extern NSString *const YTUpdateIconImage;
 extern NSString *const YTUpdateUserInfo;
 extern NSString *const YTRedrain;
 extern NSString *const YTUpdateTodoList;
+extern NSString *const YTUpdateMessageNum;

@@ -49,6 +49,9 @@
  */
 @property (nonatomic,assign) BOOL pageChangeMax;
 
+// todo 按钮
+@property (nonatomic, weak) CorePagesBarBtn *todoBtn;
+
 
 @end
 
@@ -70,6 +73,8 @@
     
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screenRotate) name:UIDeviceOrientationDidChangeNotification object:nil];
+    
+    [YTCenter addObserver:self selector:@selector(updateMessageNum) name:YTUpdateMessageNum object:nil];
 }
 
 -(void)screenRotate{
@@ -83,6 +88,11 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
+// 更新待办事项小红点
+- (void)updateMessageNum {
+    [self.todoBtn isShow:NO];
+}
 
 -(void)setPageModels:(NSArray *)pageModels{
     
@@ -117,6 +127,10 @@
         
         //设置文字
         [btn setTitle:str forState:UIControlStateNormal];
+        
+        if ([str isEqualToString:@"待办事项"]) {
+            self.todoBtn = btn;
+        }
         
         //设置tag
         btn.tag=i;

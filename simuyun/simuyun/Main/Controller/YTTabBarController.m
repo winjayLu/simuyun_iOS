@@ -72,30 +72,40 @@
     // 选中个人中心控制器
     [self logoViewDidSelectProfileItem];
     
-    // 开启定时器时时获取红包雨
+    // 开启定时器时时获取信息
     [self timerOn];
-
+    
     // 获取是否有新消息
     [self loadMessageCount];
 }
-/**
- *  获取红包雨
- */
 
-- (void)getRedrain
+/**
+ *  定时检测
+ */
+- (void)timingDetection
 {
+    
     if ([YTAccountTool account].userId == nil || [YTAccountTool account].userId.length == 0) {
         return;
     }
+    // 获取是否有新消息
+    [self loadMessageCount];
+    
+    // 获取红包雨
+    [self getRedrain];
+}
 
+
+/**
+ *  获取红包雨
+ */
+- (void)getRedrain
+{
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
     dict[@"uid"] = [YTAccountTool account].userId;
     
     // 1.创建一个请求管理者
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-//    if ([YTAccountTool account].token != nil && [YTAccountTool account].token.length > 0) {
-//        [mgr.requestSerializer setValue:[YTAccountTool account].token forHTTPHeaderField:@"token"];
-//    }
     // 2.发送一个GET请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTRedpacket];
 
@@ -129,23 +139,19 @@
 - (void)loadMessageCount
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-        params[@"adviserId"] = [YTAccountTool account].userId;
+    params[@"adviserId"] = [YTAccountTool account].userId;
     NSString *timestampCategory0 = [CoreArchive strForKey:@"timestampCategory0"];
-//    NSString *timestampCategory1 = [CoreArchive strForKey:@"timestampCategory1"];
     NSString *timestampCategory2 = [CoreArchive strForKey:@"timestampCategory2"];
     NSString *timestampCategory3 = [CoreArchive strForKey:@"timestampCategory3"];
     if (timestampCategory0 == nil || timestampCategory0.length == 0) {
         timestampCategory0 = @"2013-01-01 00:00:00";
 
     }
-
     if (timestampCategory2 == nil || timestampCategory2.length == 0) {
         timestampCategory0 = @"2013-01-01 00:00:00";
-        
     }
     if (timestampCategory3 == nil || timestampCategory3.length == 0) {
         timestampCategory0 = @"2013-01-01 00:00:00";
-        
     }
     params[@"timestampCategory0"] = timestampCategory0;
     params[@"timestampCategory2"] = timestampCategory2;
@@ -169,7 +175,7 @@
     
     if(self.timer!=nil) return;
     
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:30.0f target:self selector:@selector(getRedrain) userInfo:nil repeats:YES];
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:30.0f target:self selector:@selector(timingDetection) userInfo:nil repeats:YES];
     
     //记录
     self.timer = timer;

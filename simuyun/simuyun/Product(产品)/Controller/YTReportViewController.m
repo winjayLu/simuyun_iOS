@@ -19,6 +19,7 @@
 #import "YTAccountTool.h"
 #import "YTSlipModel.h"
 #import "AFNetworking.h"
+#import "NSString+Extend.h"
 
 
 @interface YTReportViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, PhotoViewDelegate, UITextFieldDelegate>
@@ -359,6 +360,12 @@
     if ([self.typeField.text isEqualToString:@"其他"]) {
         if (self.catesViewTypeName.text.length == 0) {
             [SVProgressHUD showErrorWithStatus:@"请输入证件名称"];
+            return YES;
+        }
+    } else if([self.typeField.text isEqualToString:@"身份证"]){
+        if([NSString validateIdentityCard:self.numberField.text])
+        {
+            [SVProgressHUD showErrorWithStatus:@"请输入正确的身份证号码"];
             return YES;
         }
     }

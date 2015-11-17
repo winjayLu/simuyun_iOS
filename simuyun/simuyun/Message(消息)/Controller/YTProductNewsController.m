@@ -15,6 +15,7 @@
 #import "YTNormalWebController.h"
 #import "NSDate+Extension.h"
 #import "YTUserInfoTool.h"
+#import "NSString+Extend.h"
 
 @interface YTProductNewsController ()
 
@@ -31,7 +32,7 @@
     [super viewDidLoad];
     
     self.tableView.backgroundColor = YTGrayBackground;
-    self.tableView.contentInset = UIEdgeInsetsMake(-34, 0, 91, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(-34, 0, 55, 0);
     
     // 去掉下划线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -142,7 +143,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     YTMessageModel *message = self.messages[indexPath.section];
-    YTNormalWebController *normal = [YTNormalWebController webWithTitle:@"资讯详情" url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
+    YTNormalWebController *normal = [YTNormalWebController webWithTitle:[NSString titleWithCategoryCode:message.category2Code] url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
     normal.isDate = YES;
     normal.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:normal animated:YES];

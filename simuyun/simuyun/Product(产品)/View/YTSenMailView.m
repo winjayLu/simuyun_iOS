@@ -39,6 +39,7 @@
     if (self) {
         //  创建子控件
         [self creatMainShareView:vc];
+        [self.mailField becomeFirstResponder];
     }
     return self;
 }
@@ -109,7 +110,7 @@
     [view addSubview:mailField];
     self.mailField = mailField;
     [CoreTFManagerVC installManagerForVC:vc scrollView:nil tfModels:^NSArray *{
-        TFModel *tfm1=[TFModel modelWithTextFiled:mailField inputView:nil name:@"" insetBottom:123];
+        TFModel *tfm1=[TFModel modelWithTextFiled:mailField inputView:nil name:@"" insetBottom:140];
         return @[tfm1];
     }];
     

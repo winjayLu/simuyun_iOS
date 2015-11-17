@@ -38,4 +38,8 @@
 //身份证号
 + (BOOL)validateIdentityCard: (NSString *)identityCard;
 
+
+// 对应的消息标题
++ (NSString *)titleWithCategoryCode:(int)categoryCode;
+
 @end

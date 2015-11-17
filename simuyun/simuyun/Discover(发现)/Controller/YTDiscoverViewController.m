@@ -198,14 +198,13 @@
 - (void)loadNewes
 {
     [YTHttpTool get:YTNewes params:nil success:^(id responseObject) {
-        NSLog(@"%@", responseObject);
         self.newests = [YTInformation objectArrayWithKeyValuesArray:responseObject];
         // 设置数据
         self.consult.newests = self.newests;
         // 调整高度
-        CGFloat headerH = 30;
+        CGFloat headerH = 33;
         CGFloat cellH = 93;
-        CGFloat consultH = headerH + cellH * self.newests.count - 1;
+        CGFloat consultH = headerH + cellH * self.newests.count;
         self.consult.height = consultH;
         [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.consult.frame) + maginWidth * 2 )];
     } failure:^(NSError *error) {
@@ -224,7 +223,7 @@
         // 设置数据
         self.consult.newests = self.newests;
         // 调整高度
-        CGFloat headerH = 30;
+        CGFloat headerH = 33;
         CGFloat cellH = 93;
         CGFloat consultH = headerH + cellH * self.newests.count;
         self.consult.height = consultH;
