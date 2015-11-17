@@ -9,3 +9,4 @@ NSString *const YTUpdateUserInfo = @"YTUpdateUserInfo";
 NSString *const YTRedrain = @"YTRedrain";
 NSString *const YTUpdateTodoList = @"YTUpdateTodoList";
 NSString *const YTUpdateMessageNum = @"YTUpdateMessageNum";
+NSString *const YTStopRequest = @"YTStopRequest";

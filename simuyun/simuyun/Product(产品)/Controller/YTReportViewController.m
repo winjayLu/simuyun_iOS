@@ -280,7 +280,11 @@
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           if(operation.responseObject[@"message"] != nil)
           {
-              [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+              if ([operation.responseObject[@"message"] isEqualToString:@"tokenError"]) {
+                  [YTHttpTool tokenError];
+              } else {
+                  [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+              }
           } else if(error.userInfo[@"NSLocalizedDescription"] != nil)
           {
               [SVProgressHUD showInfoWithStatus:@"请检查您的网络连接"];

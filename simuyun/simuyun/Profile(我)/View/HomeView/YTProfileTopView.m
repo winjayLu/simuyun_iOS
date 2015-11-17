@@ -222,7 +222,11 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if(operation.responseObject[@"message"] != nil)
         {
-            [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+            if ([operation.responseObject[@"message"] isEqualToString:@"tokenError"]) {
+                [YTHttpTool tokenError];
+            } else {
+                [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+            }
         }
         
     }];

@@ -26,6 +26,7 @@
 
 #import <Availability.h>
 #import <Security/Security.h>
+#import "YTAccountTool.h"
 
 #if defined(__IPHONE_OS_VERSION_MIN_REQUIRED)
 #import <UIKit/UIKit.h>
@@ -100,6 +101,9 @@
     NSError *serializationError = nil;
     NSMutableURLRequest *request = [self.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters error:&serializationError];
     request.timeoutInterval = 30.0f;
+    if ([YTAccountTool account].token != nil && [YTAccountTool account].token.length > 0) {
+        [request addValue:[YTAccountTool account].token forHTTPHeaderField:@"token"];
+    }
     if (serializationError) {
         if (failure) {
 #pragma clang diagnostic push
@@ -112,7 +116,7 @@
 
         return nil;
     }
-
+    
     return [self HTTPRequestOperationWithRequest:request success:success failure:failure];
 }
 
@@ -183,6 +187,9 @@
 {
     NSError *serializationError = nil;
     NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters constructingBodyWithBlock:block error:&serializationError];
+    if ([YTAccountTool account].token != nil && [YTAccountTool account].token.length > 0) {
+        [request addValue:[YTAccountTool account].token forHTTPHeaderField:@"token"];
+    }
     if (serializationError) {
         if (failure) {
 #pragma clang diagnostic push

@@ -44,6 +44,11 @@
 + (void)post:(NSString *)url params:(id)params files:(NSArray *)files success:(void (^)(id responseObject))success failure:(void (^)(NSError *error))failure;
 
 
+/**
+ *  token错误
+ */
++ (void)tokenError;
+
 @end
 
 @interface YTHttpFile : NSObject

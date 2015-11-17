@@ -11,9 +11,12 @@
 #import "NSDictionary+Extension.h"
 #import "SVProgressHUD.h"
 #import "YTAccountTool.h"
+#import "HHAlertView.h"
+#import "YTNavigationController.h"
+#import "YTLoginViewController.h"
+#import "YTUserInfoTool.h"
 
 @implementation YTHttpTool
-
 /**
  *  post请求
  *
@@ -25,8 +28,8 @@
     
     // 2.发送一个POST请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, url];
-//    NSLog(@"%@", newUrl);
-//    NSLog(@"%@", [NSDictionary httpWithDictionary:params]);
+    NSLog(@"%@", newUrl);
+    NSLog(@"%@", [NSDictionary httpWithDictionary:params]);
     [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           
@@ -36,7 +39,11 @@
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           if(operation.responseObject[@"message"] != nil)
           {
-              [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+              if ([operation.responseObject[@"message"] isEqualToString:@"tokenError"]) {
+                  [YTHttpTool tokenError];
+              } else {
+                  [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+              }
           } else if(error.userInfo[@"NSLocalizedDescription"] != nil)
           {
               [SVProgressHUD showInfoWithStatus:@"请检查您的网络连接"];
@@ -68,7 +75,11 @@
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           if(operation.responseObject[@"message"] != nil)
           {
-              [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+              if ([operation.responseObject[@"message"] isEqualToString:@"tokenError"]) {
+                  [YTHttpTool tokenError];
+              } else {
+                  [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+              }
           } else if(error.userInfo[@"NSLocalizedDescription"] != nil)
           {
               [SVProgressHUD showInfoWithStatus:@"请检查您的网络连接"];
@@ -106,12 +117,36 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         if(operation.responseObject[@"message"] != nil)
         {
-            [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+            if ([operation.responseObject[@"message"] isEqualToString:@"tokenError"]) {
+                [self tokenError];
+            } else {
+                [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+            }
         }
         if (failure) {
             failure(error);
         }
     }];
+}
+
+
+/**
+ *  token错误重新登录
+ */
++ (void)tokenError
+{
+    [YTCenter postNotificationName:YTStopRequest object:nil];
+    HHAlertView *alert = [HHAlertView shared];
+    [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"gantan" Title:@"危险警告" detail:@"请重新登录" cancelButton:nil Okbutton:@"重新登录" block:^(HHAlertButton buttonindex) {
+        // 清除用户信息
+        [YTUserInfoTool clearUserInfo];
+        // 获取程序主窗口
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
+            mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
+        });
+    }];
+    
 }
 
 
