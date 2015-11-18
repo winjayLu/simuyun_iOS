@@ -10,19 +10,20 @@
 #import "YTReportViewController.h"
 #import "CoreTFManagerVC.h"
 #import "NSString+Extend.h"
-#import "YTPhotoView.h"
+#import "YTPhotoViewController.h"
 #import "UIView+Extension.h"
 #import "SVProgressHUD.h"
 #import "UIImage+Extend.h"
 #import "NSString+Extend.h"
-#import "YTPhotoMenultem.h"
 #import "YTAccountTool.h"
 #import "YTSlipModel.h"
 #import "AFNetworking.h"
 #import "NSString+Extend.h"
+#import "JKAssets.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 
-@interface YTReportViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, PhotoViewDelegate, UITextFieldDelegate>
+@interface YTReportViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UITextFieldDelegate>
 
 /**
  *  产品名称
@@ -94,7 +95,7 @@
 /**
  *  打款凭条图片选择器
  */
-@property (nonatomic, weak) YTPhotoView *photo;
+@property (nonatomic, weak) YTPhotoViewController *photo;
 /**
  *  证件资料Lable
  */
@@ -103,7 +104,7 @@
 /**
  *  打款凭条图片选择器
  */
-@property (nonatomic, weak) YTPhotoView *informationPhoto;
+@property (nonatomic, weak) YTPhotoViewController *informationPhoto;
 
 /**
  *  上传成功的打款凭条
@@ -155,17 +156,23 @@
 {
     // 打款凭条
     CGFloat photoX = CGRectGetMaxX(self.titleLable.frame);
-    YTPhotoView *photo = [[YTPhotoView alloc] initWithFrame:CGRectMake(photoX, self.titleLable.y - 20, DeviceWidth - photoX - 10, 53)];
-    photo.delegate = self;
-    [self.view addSubview:photo];
+    YTPhotoViewController *photo = [[YTPhotoViewController alloc] init];
+    photo.viewWidth = DeviceWidth - photoX - 10;
+    photo.view.frame = CGRectMake(photoX, self.titleLable.y - 15, DeviceWidth - photoX - 10, 53);
+    [self.view addSubview:photo.view];
+    [self addChildViewController:photo];
     self.photo = photo;
+    
     
     // 证件资料
     CGFloat informationPhotoX = CGRectGetMaxX(self.informationLable.frame);
-    YTPhotoView *informationPhoto = [[YTPhotoView alloc] initWithFrame:CGRectMake(photoX, self.informationLable.y - 20, DeviceWidth - informationPhotoX - 10, 53)];
-    informationPhoto.delegate = self;
-    [self.view addSubview:informationPhoto];
+    YTPhotoViewController *informationPhoto = [[YTPhotoViewController alloc] init];
+    informationPhoto.viewWidth = DeviceWidth - informationPhotoX - 10;
+    informationPhoto.view.frame = CGRectMake(photoX, self.informationLable.y - 15, DeviceWidth - informationPhotoX - 10, 53);
+    [self.view addSubview:informationPhoto.view];
+    [self addChildViewController:informationPhoto];
     self.informationPhoto = informationPhoto;
+    
 }
 
 
@@ -201,7 +208,7 @@
 {
     
     NSMutableArray *files = [NSMutableArray array];
-    for (YTPhotoMenultem *item in self.photo.itemArray) {
+    for (UIImage *image in self.photo.selectedPhoto) {
         YTHttpFile *file = [[YTHttpFile alloc] init];
         // 文件名
         NSString *name = [NSString createCUID];
@@ -209,14 +216,14 @@
         file.name = [NSString stringWithFormat:@"%@",name];
         file.mimeType = @"image/jpg";
         // 文件数据
-        file.data = UIImageJPEGRepresentation(item.contentImage, 0.5);
+        file.data = UIImageJPEGRepresentation(image, 0.5);
         [files addObject:file];
     }
+    YTLog(@"%zd",files.count);
     [YTHttpTool post:YTSlip params:nil files:files success:^(id responseObject) {
         YTLog(@"%@", responseObject);
         self.Slips = [YTSlipModel objectArrayWithKeyValuesArray:responseObject];
-        NSLog(@"%zd", self.informationPhoto.itemArray.count);
-        if (self.informationPhoto.itemArray.count == 0) {
+        if (self.informationPhoto.selectedPhoto.count == 0) {
             [self startReport];
         } else {
             [self uploadZhenJian];
@@ -230,7 +237,7 @@
 {
     
     NSMutableArray *files = [NSMutableArray array];
-    for (YTPhotoMenultem *item in self.informationPhoto.itemArray) {
+    for (UIImage *image in self.informationPhoto.selectedPhoto) {
         YTHttpFile *file = [[YTHttpFile alloc] init];
         // 文件名
         NSString *name = [NSString createCUID];
@@ -238,15 +245,15 @@
         file.name = [NSString stringWithFormat:@"%@",name];
         file.mimeType = @"image/jpg";
         // 文件数据
-        file.data = UIImageJPEGRepresentation(item.contentImage, 0.5);
+        file.data = UIImageJPEGRepresentation(image, 0.5);
         [files addObject:file];
     }
     [YTHttpTool post:YTSlip params:nil files:files success:^(id responseObject) {
-//        YTLog(@"%@", responseObject);
+        //        YTLog(@"%@", responseObject);
         self.ZhenJian = [YTSlipModel objectArrayWithKeyValuesArray:responseObject];
         [self startReport];
     } failure:^(NSError *error) {
-//        [SVProgressHUD showErrorWithStatus:@"报备失败"];
+        //        [SVProgressHUD showErrorWithStatus:@"报备失败"];
     }];
 }
 
@@ -273,7 +280,7 @@
     [mgr POST:newUrl parameters:dict
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           [SVProgressHUD showSuccessWithStatus:@"报备成功"];
-          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
               
               [self.navigationController popToRootViewControllerAnimated:YES];
           });
@@ -288,6 +295,8 @@
           } else if(error.userInfo[@"NSLocalizedDescription"] != nil)
           {
               [SVProgressHUD showInfoWithStatus:@"请检查您的网络连接"];
+          } else {
+              [SVProgressHUD showErrorWithStatus:@"报备失败"];
           }
       }];
 }
@@ -355,8 +364,8 @@
         [SVProgressHUD showErrorWithStatus:@"请输入分行支行"];
         return YES;
     }
-    NSLog(@"%zd", self.photo.itemArray.count);
-     if(self.photo.itemArray.count == 0)
+//    NSLog(@"%zd", self.photo.assetsArray.count);
+     if(self.photo.selectedPhoto.count == 0)
     {
         [SVProgressHUD showErrorWithStatus:@"请上传打款凭条"];
         return YES;
@@ -415,8 +424,8 @@
         self.CertificatesNumberConstr.constant = 78;
         if (self.certificatesView == nil) {
             [self createCertificatesName];
-            self.photo.y = self.titleLable.y - 20 + 54;
-            self.informationPhoto.y = self.informationLable.y - 20 + 54;
+            self.photo.view.y = self.titleLable.y - 20 + 54;
+            self.informationPhoto.view.y = self.informationLable.y - 20 + 54;
             // 更新键盘位置
             [self updateKeyboardPosition];
         }
@@ -425,8 +434,8 @@
         if (self.certificatesView != nil) {
             [self.certificatesView removeFromSuperview];
             self.certificatesView = nil;
-            self.photo.y = self.titleLable.y - 20 - 54;
-            self.informationPhoto.y = self.informationLable.y - 20 - 54;
+            self.photo.view.y = self.titleLable.y - 20 - 54;
+            self.informationPhoto.view.y = self.informationLable.y - 20 - 54;
             self.scroll.contentSize = CGSizeMake(DeviceWidth, 667);
         }
     }

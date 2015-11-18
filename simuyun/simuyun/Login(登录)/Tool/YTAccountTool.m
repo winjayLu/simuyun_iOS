@@ -55,7 +55,8 @@
     
     // 2.发送一个POST请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTSession];
-
+    YTLog(@"%@", newUrl);
+    YTLog(@"%@", params);
     [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           // 保存账户信息
