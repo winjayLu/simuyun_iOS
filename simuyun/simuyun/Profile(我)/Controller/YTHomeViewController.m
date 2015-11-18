@@ -123,6 +123,9 @@
     // 检查更新
     [self updateData];
 }
+
+
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -244,6 +247,7 @@
     [self.view addSubview:content];
     self.todoView = content;
     [YTCenter addObserver:self selector:@selector(loadTodos) name:YTUpdateTodoList object:nil];
+    [YTCenter addObserver:self selector:@selector(updateTodos) name:YTUpdateTodoFrame object:nil];
 }
 /**
  *  初始化底部菜单
@@ -314,10 +318,11 @@
     self.todoView.frame = CGRectMake(magin, CGRectGetMaxY(self.topView.frame), self.view.width - magin * 2, todoHeight);
 
     // 修改底部菜单frame
-    self.bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42 * 3);
     if([YTResourcesTool resources].versionFlag == 0)
     {
        self.bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42);
+    } else {
+        self.bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42 * 3);
     }
     
     // 设置滚动范围
@@ -351,7 +356,8 @@
         //
         vc = [YTNormalWebController webWithTitle:@"帮助" url:[NSString stringWithFormat:@"%@/help/", YTH5Server]];
     } else if([btnTitle isEqualToString:@"关于私募云"]){
-        vc = [YTNormalWebController webWithTitle:@"关于私募云" url:[NSString stringWithFormat:@"%@/about/", YTH5Server]];
+        vc = [YTNormalWebController webWithTitle:@"关于私募云" url:[NSString stringWithFormat:@"%@/about/?ver=4.0&t=%@", YTH5Server, [NSDate stringDate]]];
+        ((YTNormalWebController *)vc).isDate = YES;
     } else if([btnTitle isEqualToString:@"400-188-8848"]){
         UIWebView *callWebview =[[UIWebView alloc] init];
         NSURL *telURL =[NSURL URLWithString:@"tel://400-188-8848"];

@@ -187,7 +187,7 @@
         // 剩余数量小于4，重新加载
         if (_todos.count < 4)
         {
-            [YTCenter postNotificationName:YTUpdateTodoList object:nil];
+            [YTCenter postNotificationName:YTUpdateTodoFrame object:nil];
         }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         if(error.userInfo[@"NSLocalizedDescription"] != nil)

@@ -75,6 +75,7 @@
         _titles = @[@"全部订单", @"我的奖品", @"云豆银行"];
         if([YTResourcesTool resources].versionFlag == 0)
         {
+            
             _titles = @[@"全部订单"];
         }
     }

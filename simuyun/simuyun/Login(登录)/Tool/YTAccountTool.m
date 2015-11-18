@@ -77,6 +77,8 @@
           }else if(error.userInfo[@"NSLocalizedDescription"] != nil)
           {
               [SVProgressHUD showInfoWithStatus:@"请检查您的网络连接"];
+          } else {
+              [SVProgressHUD showErrorWithStatus:@"登录失败"];
           }
           result(NO);
       }];

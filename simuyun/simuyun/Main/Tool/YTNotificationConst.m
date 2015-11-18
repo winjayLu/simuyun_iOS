@@ -8,6 +8,7 @@ NSString *const YTUpdateIconImage = @"YTUpdateIconImage";
 NSString *const YTUpdateUserInfo = @"YTUpdateUserInfo";
 NSString *const YTRedrain = @"YTRedrain";
 NSString *const YTUpdateTodoList = @"YTUpdateTodoList";
+NSString *const YTUpdateTodoFrame = @"YTUpdateTodoFrame";
 NSString *const YTUpdateMessageNum = @"YTUpdateMessageNum";
 NSString *const YTStopRequest = @"YTStopRequest";
 NSString *const YTUpdateChatContent = @"YTUpdateChatContent";
