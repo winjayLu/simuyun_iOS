@@ -18,6 +18,7 @@
 #import "NSDate+Extension.h"
 #import "CoreArchive.h"
 #import "YTUserInfoTool.h"
+#import "YTDataHintView.h"
 
 
 @interface YTCloudObserveController ()
@@ -64,7 +65,6 @@
     param[@"category"] = @0;
 
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
-        NSLog(@"%@", responseObject);
         YTServiceModel * service =[YTServiceModel objectWithKeyValues:responseObject];
         [self.services removeAllObjects];
         [self.services addObject:service];

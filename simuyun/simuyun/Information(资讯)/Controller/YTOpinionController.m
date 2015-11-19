@@ -15,12 +15,19 @@
 #import "YTInformationWebViewController.h"
 #import "NSDate+Extension.h"
 #import "YTUserInfoTool.h"
+#import "YTDataHintView.h"
+
 
 @interface YTOpinionController ()
 /**
  *  咨询列表
  */
 @property (nonatomic, strong) NSMutableArray *informations;
+
+/**
+ *  数据状态提示
+ */
+@property (nonatomic, weak) YTDataHintView *hintView;
 @end
 
 @implementation YTOpinionController
@@ -38,6 +45,19 @@
     [self.tableView.header beginRefreshing];
     
     self.tableView.footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreInformations)];
+    // 初始化提醒视图
+    [self setupHintView];
+}
+
+/**
+ *  初始化提醒视图
+ */
+- (void)setupHintView
+{
+    YTDataHintView *hintView =[[YTDataHintView alloc] init];
+    CGPoint center = CGPointMake(self.tableView.centerX, self.tableView.centerY - 100);
+    [hintView showLoadingWithInView:self.tableView center:center];
+    self.hintView = hintView;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -53,6 +73,7 @@
  */
 - (void)loadInformations
 {
+    [self.hintView switchContentTypeWIthType:contentTypeLoading];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"category"] = @"3";
     params[@"offset"] = @"0";
@@ -62,8 +83,10 @@
         self.informations = [YTInformation objectArrayWithKeyValuesArray:responseObject];
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
+        [self.hintView changeContentTypeWith:self.informations];
     } failure:^(NSError *error) {
         [self.tableView.header endRefreshing];
+        [self.hintView ContentFailure];
     }];
 }
 

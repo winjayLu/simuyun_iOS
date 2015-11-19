@@ -16,6 +16,7 @@
 #import "NSDate+Extension.h"
 #import "YTUserInfoTool.h"
 #import "NSString+Extend.h"
+#import "YTDataHintView.h"
 
 @interface YTSystemCenterController ()
 
@@ -23,13 +24,17 @@
 @property (nonatomic, assign) int pageNo;
 
 @property (nonatomic, strong) NSMutableArray *messages;
-
+/**
+ *  数据状态提示
+ */
+@property (nonatomic, weak) YTDataHintView *hintView;
 @end
 
 @implementation YTSystemCenterController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    // 初始化提醒视图
+    [self setupHintView];
     self.tableView.backgroundColor = YTGrayBackground;
     self.tableView.contentInset = UIEdgeInsetsMake(-34, 0, 55, 0);
     
@@ -42,6 +47,18 @@
     
     // 下拉刷新
     self.tableView.footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreChat)];
+    
+}
+
+/**
+ *  初始化提醒视图
+ */
+- (void)setupHintView
+{
+    YTDataHintView *hintView =[[YTDataHintView alloc] init];
+    CGPoint center = CGPointMake(self.tableView.centerX, self.tableView.centerY - 100);
+    [hintView showLoadingWithInView:self.tableView center:center];
+    self.hintView = hintView;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -54,6 +71,7 @@
 // 加载新数据
 - (void)loadNewChat
 {
+    [self.hintView switchContentTypeWIthType:contentTypeLoading];
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
         param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"category"] = @3;
@@ -65,8 +83,10 @@
         [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"timestampCategory3"];
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
+        [self.hintView changeContentTypeWith:self.messages];
     } failure:^(NSError *error) {
         [self.tableView.header endRefreshing];
+        [self.hintView ContentFailure];
     }];
 }
 

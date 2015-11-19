@@ -17,6 +17,7 @@
 #import "YTProductdetailController.h"
 #import "UIBarButtonItem+Extension.h"
 #import "NSDate+Extension.h"
+#import "YTDataHintView.h"
 
 @interface YTProductViewController ()
 
@@ -31,6 +32,10 @@
 
 
 @property (nonatomic, strong) NSArray *products;
+/**
+ *  数据状态提示
+ */
+@property (nonatomic, weak) YTDataHintView *hintView;
 
 @end
 
@@ -52,8 +57,20 @@
     
     // 右侧菜单
     [self setupRightMenu];
+    // 初始化提醒视图
+    [self setupHintView];
 }
 
+/**
+ *  初始化提醒视图
+ */
+- (void)setupHintView
+{
+    YTDataHintView *hintView =[[YTDataHintView alloc] init];
+    CGPoint center = CGPointMake(self.tableView.centerX, self.tableView.centerY - 89);
+    [hintView showLoadingWithInView:self.tableView center:center];
+    self.hintView = hintView;
+}
 
 
 
@@ -209,6 +226,7 @@
 #pragma mark - 获取数据
 - (void)loadProduct
 {
+    [self.hintView switchContentTypeWIthType:contentTypeLoading];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
     if (self.series < 9) {
@@ -224,9 +242,11 @@
         [self.tableView reloadData];
         // 结束刷新状态
         [self.tableView.header endRefreshing];
+        [self.hintView changeContentTypeWith:self.products];
     } failure:^(NSError *error) {
         // 结束刷新状态
         [self.tableView.header endRefreshing];
+        [self.hintView ContentFailure];
     }];
 }
 

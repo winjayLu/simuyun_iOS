@@ -17,6 +17,7 @@
 #import "YTWelcomeViewController.h"
 #import "UIWindow+Extension.h"
 #import "YTResourcesTool.h"
+#import "HHAlertView.h"
 
 @interface AppDelegate ()
 
@@ -137,6 +138,10 @@
     // 取得自定义字段内容
     NSString *customizeField1 = [userInfo valueForKey:@"customizeField1"]; //自定义参数，key是自己定义的
     NSLog(@"content =[%@], badge=[%zd], sound=[%@], customize field =[%@]",content,badge,sound,customizeField1);
+    HHAlertView *alert = [HHAlertView shared];
+    [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"" Title:@"推送消息" detail:userInfo.description cancelButton:@"呵呵" Okbutton:@"哈哈" block:^(HHAlertButton buttonindex) {
+        
+    }];
     
     
     [APService handleRemoteNotification:userInfo];
@@ -155,6 +160,13 @@
     // 取得自定义字段内容
     NSString *customizeField1 = [userInfo valueForKey:@"customizeField1"]; //自定义参数，key是自己定义的
     NSLog(@"content =[%@], badge=[%zd], sound=[%@], customize field =[%@]",content,badge,sound,customizeField1);
+    
+    HHAlertView *alert = [HHAlertView shared];
+    [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"" Title:@"推送消息" detail:userInfo.description cancelButton:@"呵呵" Okbutton:@"哈哈" block:^(HHAlertButton buttonindex) {
+        
+    }];
+
+    
     // iOS7
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
@@ -166,9 +178,8 @@
 - (void)checkNotification:(NSDictionary *)launchOptions
 {
     NSDictionary *remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
-    YTLog(@"%@", remoteNotification);
+//    YTLog(@"%@", remoteNotification);}
 }
-
 
 /**
  *  接受到内存警告

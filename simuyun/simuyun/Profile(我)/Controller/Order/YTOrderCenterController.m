@@ -15,6 +15,7 @@
 #import "YTTabBarController.h"
 #import "YTOrderdetailController.h"
 #import "NSDate+Extension.h"
+#import "YTDataHintView.h"
 
 
 @interface YTOrderCenterController () <UITableViewDataSource, UITableViewDelegate, BarDrawerDelegate>
@@ -35,7 +36,10 @@
 @property (nonatomic, strong) BFNavigationBarDrawer *drawerMenu;
 
 
-
+/**
+ *  数据状态提示
+ */
+@property (nonatomic, weak) YTDataHintView *hintView;
 
 @end
 
@@ -43,6 +47,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // 初始化提醒视图
+    [self setupHintView];
     
     // 初始化tableView
     [self setupTableView];
@@ -52,6 +58,17 @@
     
 }
 
+/**
+ *  初始化提醒视图
+ */
+- (void)setupHintView
+{
+    YTDataHintView *hintView =[[YTDataHintView alloc] init];
+    CGPoint center = CGPointMake(self.tableView.centerX, self.tableView.centerY - 55);
+    [hintView showLoadingWithInView:self.view tableView:self.tableView center:center];
+    hintView.isRemove = YES;
+    self.hintView = hintView;
+}
 
 /**
  *  初始化tableView
@@ -136,6 +153,8 @@
  */
 - (void)loadNewOrder
 {
+    [self.orders removeAllObjects];
+    [self.hintView switchContentTypeWIthType:contentTypeLoading];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"advisers_id"] = [YTAccountTool account].userId;
     if (self.status == nil) {
@@ -147,12 +166,14 @@
     self.pageno = 1;
     dict[@"pageno"] = @(self.pageno);
     [YTHttpTool get:YTOrders params:dict success:^(id responseObject) {
-        NSLog(@"%@", responseObject);
         self.orders = [YTOrderCenterModel objectArrayWithKeyValuesArray:responseObject];
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
+        [self.hintView changeContentTypeWith:self.orders];
     } failure:^(NSError *error) {
+        [self.tableView reloadData];
         [self.tableView.header endRefreshing];
+        [self.hintView ContentFailure];
     }];
 }
 

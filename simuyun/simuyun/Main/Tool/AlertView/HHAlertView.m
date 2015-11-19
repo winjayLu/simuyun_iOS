@@ -79,16 +79,6 @@ NSInteger const HHAlertview_SIZE_DETAIL_FONT = 14;
 
 
 
-- (UIViewController *)appRootViewController
-{
-    UIViewController *appRootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
-    UIViewController *topVC = appRootVC;
-    while (topVC.presentedViewController) {
-        topVC = topVC.presentedViewController;
-    }
-    return topVC;
-}
-
 
 static UIWindow *_window;
 - (void)showAlertWithStyle:(HHAlertStyle)HHAlertStyle imageName:(NSString *)imagename Title:(NSString *)title detail:(NSString *)detail cancelButton:(NSString *)cancel Okbutton:(NSString *)ok block:(selectButton)block
@@ -146,21 +136,25 @@ static UIWindow *_window;
         _detailLabel  = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_titleLabel.frame) + 10, [self getSelfSize].width - 15, HHAlertview_SIZE_TITLE_FONT)];
         [_detailLabel setNumberOfLines:0];
     }
-    NSMutableAttributedString * attributedString1 = [[NSMutableAttributedString alloc] initWithString:detail];
-    NSMutableParagraphStyle * paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle1 setLineSpacing:10];
-    [attributedString1 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle1 range:NSMakeRange(0, [detail length])];
-    [_detailLabel setAttributedText:attributedString1];
-    [_detailLabel sizeToFit];
-    _detailLabel.textColor = [UIColor grayColor];
-    [_detailLabel setNumberOfLines:0];
-    [_detailLabel setFont:[UIFont systemFontOfSize:HHAlertview_SIZE_DETAIL_FONT]];
-    [_detailLabel setTextAlignment:NSTextAlignmentCenter];
+    if (detail != nil) {
+        
+        NSMutableAttributedString * attributedString1 = [[NSMutableAttributedString alloc] initWithString:detail];
+        NSMutableParagraphStyle * paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle1 setLineSpacing:10];
+        [attributedString1 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle1 range:NSMakeRange(0, [detail length])];
+        [_detailLabel setAttributedText:attributedString1];
+        [_detailLabel sizeToFit];
+        _detailLabel.textColor = [UIColor grayColor];
+        [_detailLabel setNumberOfLines:0];
+        [_detailLabel setFont:[UIFont systemFontOfSize:HHAlertview_SIZE_DETAIL_FONT]];
+        [_detailLabel setTextAlignment:NSTextAlignmentCenter];
+        
+        [_detailLabel sizeToFit];
+        [_detailLabel setFrame:CGRectMake(15, CGRectGetMaxY(_titleLabel.frame) + 10, [self getSelfSize].width - 30, _detailLabel.frame.size.height)];
+        [_detailLabel setTextColor:txtColor];
+        [self addSubview:_detailLabel];
+    }
     
-    [_detailLabel sizeToFit];
-    [_detailLabel setFrame:CGRectMake(15, CGRectGetMaxY(_titleLabel.frame) + 10, [self getSelfSize].width - 30, _detailLabel.frame.size.height)];
-    [_detailLabel setTextColor:txtColor];
-    [self addSubview:_detailLabel];
     
 }
 

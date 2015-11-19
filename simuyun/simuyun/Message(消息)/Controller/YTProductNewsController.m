@@ -16,6 +16,7 @@
 #import "NSDate+Extension.h"
 #import "YTUserInfoTool.h"
 #import "NSString+Extend.h"
+#import "YTDataHintView.h"
 
 @interface YTProductNewsController ()
 
@@ -24,12 +25,20 @@
 
 @property (nonatomic, strong) NSMutableArray *messages;
 
+/**
+ *  数据状态提示
+ */
+@property (nonatomic, weak) YTDataHintView *hintView;
+
 @end
 
 @implementation YTProductNewsController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // 初始化提醒视图
+    [self setupHintView];
     
     self.tableView.backgroundColor = YTGrayBackground;
     self.tableView.contentInset = UIEdgeInsetsMake(-34, 0, 55, 0);
@@ -43,7 +52,20 @@
     
     // 下拉刷新
     self.tableView.footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreChat)];
+    
 }
+
+/**
+ *  初始化提醒视图
+ */
+- (void)setupHintView
+{
+    YTDataHintView *hintView =[[YTDataHintView alloc] init];
+    CGPoint center = CGPointMake(self.tableView.centerX, self.tableView.centerY - 100);
+    [hintView showLoadingWithInView:self.tableView center:center];
+    self.hintView = hintView;
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -55,9 +77,9 @@
 // 加载新数据
 - (void)loadNewChat
 {
+    [self.hintView switchContentTypeWIthType:contentTypeLoading];
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
         param[@"adviserId"] = [YTAccountTool account].userId;
-//    param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
     param[@"category"] = @2;
     param[@"pagesize"] = @20;
     self.pageNo = 1;
@@ -67,8 +89,10 @@
         [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"timestampCategory2"];
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
+        [self.hintView changeContentTypeWith:self.messages];
     } failure:^(NSError *error) {
         [self.tableView.header endRefreshing];
+        [self.hintView ContentFailure];
     }];
 }
 
@@ -76,19 +100,16 @@
 - (void)loadMoreChat
 {
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
-        param[@"adviserId"] = [YTAccountTool account].userId;
-//    param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
+    param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"category"] = @2;
     param[@"pagesize"] = @20;
     param[@"pageNo"] = @(++self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
-        YTLog(@"%@", responseObject);
         [self.messages addObjectsFromArray:[YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]]];
         [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"lastTimestamp"];
         [self.tableView reloadData];
         [self.tableView.footer endRefreshing];
     } failure:^(NSError *error) {
-        YTLog(@"%@", error);
         [self.tableView.footer endRefreshing];
     }];
 }
