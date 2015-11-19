@@ -154,6 +154,7 @@
 - (void)loadNewOrder
 {
     [self.orders removeAllObjects];
+    [self.tableView reloadData];
     [self.hintView switchContentTypeWIthType:contentTypeLoading];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"advisers_id"] = [YTAccountTool account].userId;
@@ -222,7 +223,7 @@
     cell.layer.masksToBounds = YES;
     cell.layer.borderWidth = 1.0f;
     cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.order = self.orders[indexPath.section];
     return cell;
 }
@@ -256,6 +257,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YTOrderCenterModel *order = self.orders[indexPath.section];
     YTOrderdetailController *detail = [[YTOrderdetailController alloc] init];
     detail.url = [NSString stringWithFormat:@"%@/order%@&id=%@", YTH5Server, [NSDate stringDate], order.order_id];

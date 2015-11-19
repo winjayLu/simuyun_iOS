@@ -10,7 +10,6 @@
 
 #import "YTCloudObserveController.h"
 #import "YTCustomerServiceCell.h"
-#import "MJRefresh.h"
 #import "YTAccountTool.h"
 #import "YTServiceModel.h"
 #import "YTMessageNumTool.h"
@@ -19,6 +18,7 @@
 #import "CoreArchive.h"
 #import "YTUserInfoTool.h"
 #import "YTDataHintView.h"
+#import "MJRefresh.h"
 
 
 @interface YTCloudObserveController ()
@@ -27,7 +27,10 @@
 // 客服消息
 @property (nonatomic, strong) NSMutableArray *services;
 
-
+/**
+ *  数据状态提示
+ */
+@property (nonatomic, weak) YTDataHintView *hintView;
 @end
 
 @implementation YTCloudObserveController
@@ -40,28 +43,36 @@
     
     // 去掉下划线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    // 设置下拉刷新
-    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewChat)];
-    // 马上进入刷新状态
-    [self.tableView.header beginRefreshing];
+    // 禁用tableView滚动
+    self.tableView.scrollEnabled =NO;
+    [self loadNewChat];
     
     // 监听客服消息数字变化
-    [YTCenter addObserver:self selector:@selector(updateChatContent) name:YTUpdateChatContent object:nil];
+    [YTCenter addObserver:self selector:@selector(loadNewChat) name:YTUpdateChatContent object:nil];
+    // 初始化提醒视图
+    [self setupHintView];
+    
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewChat)];
 }
 
-- (void)updateChatContent
+/**
+ *  初始化提醒视图
+ */
+- (void)setupHintView
 {
-    [self.tableView reloadData];
+    YTDataHintView *hintView =[[YTDataHintView alloc] init];
+    CGPoint center = CGPointMake(self.tableView.centerX, self.tableView.centerY - 100);
+    [hintView showLoadingWithInView:self.tableView center:center];
+    self.hintView = hintView;
 }
 
 
 // 加载新数据
 - (void)loadNewChat
 {
+    [self.hintView switchContentTypeWIthType:contentTypeLoading];
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
     param[@"adviserId"] = [YTAccountTool account].userId;
-    //        param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
     param[@"category"] = @0;
 
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
@@ -70,9 +81,11 @@
         [self.services addObject:service];
         [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"timestampCategory0"];
         [self.tableView reloadData];
+        [self.hintView changeContentTypeWith:self.services];
         [self.tableView.header endRefreshing];
     } failure:^(NSError *error) {
         [self.tableView.header endRefreshing];
+        [self.hintView ContentFailure];
     }];
 }
 
@@ -103,7 +116,7 @@
     cell.layer.borderWidth = 1.0f;
     cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
     cell.layer.masksToBounds = YES;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.service = self.services[indexPath.section];
     return cell;
 }
@@ -131,13 +144,9 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     // 消息数字
     self.superVc.tabBarItem.badgeValue = nil;
-//    
-//    YTServiceModel *service = self.services[indexPath.section];
-    
-    // 消息详情
-//    YTNormalWebController *normal = [YTNormalWebController webWithTitle:service. url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
 
     YTNormalWebController *normal = [YTNormalWebController webWithTitle:@"平台客服" url:[NSString stringWithFormat:@"%@/livehelp%@",YTH5Server, [NSDate stringDate]]];
     normal.isDate = YES;

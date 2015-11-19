@@ -91,14 +91,15 @@
     // 初始化咨讯
     [self setupConsult];
     
-    // 获取轮播图片
-    [self getAdvertise];
-    
-    // 获取股指数据
-    [self loadStock];
-    
-    // 获取最新资讯列表
-    [self loadNewes];
+//    // 获取轮播图片
+//    [self getAdvertise];
+//    
+//    // 获取股指数据
+//    [self loadStock];
+//    
+//    // 获取最新资讯列表
+//    [self loadNewes];
+    [((UIScrollView *)(self.view)).header beginRefreshing];
 }
 
 
@@ -185,11 +186,10 @@
     [YTHttpTool get:YTStockindex params:nil success:^(id responseObject) {
         self.stocks = [YTStockModel objectArrayWithKeyValuesArray:responseObject];
         self.stock.stocks = self.stocks;
+        self.stock.contentOffset = CGPointMake(42, 0);
     } failure:^(NSError *error) {
         
     }];
-    
-
 }
 /**
  *  获取资讯列表

@@ -54,14 +54,15 @@
  */
 -(void)corePagesBarBtnPrePare{
     [self setBackgroundColor:[UIColor whiteColor]];
-    UIView *view = [[UIView alloc] init];
-    view.frame = CGRectMake(DeviceWidth * 0.25 - 0.5, 0, 0.5, 34);
-    view.backgroundColor = YTColor(231, 231, 231);
-    [self addSubview:view];
+    UIView *line = [[UIView alloc] init];
+    line.frame = CGRectMake(DeviceWidth * 0.25 - 0.5, 0, 0.5, 34);
+    line.backgroundColor = YTColor(231, 231, 231);
+    [self addSubview:line];
+    
     
     UIImageView *icon = [[UIImageView alloc] init];
     icon.image = [UIImage imageNamed:@"weidu"];
-    icon.frame = CGRectMake(view.x - 14, 5, 9, 9);
+    icon.frame = CGRectMake(line.x - 14, 5, 9, 9);
     icon.hidden = YES;
     [self addSubview:icon];
     self.hongDian = icon;

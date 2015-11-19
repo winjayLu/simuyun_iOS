@@ -122,8 +122,10 @@
     }
     cell.layer.cornerRadius = 5;
     cell.layer.masksToBounds = YES;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
+    cell.layer.borderWidth = 1.0f;
+    cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    cell.isShowLine = NO;
     cell.information = self.informations[indexPath.section];
     return cell;
 }
@@ -153,6 +155,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YTInformation *iformation = self.informations[indexPath.section];
     YTInformationWebViewController *normal = [YTInformationWebViewController webWithTitle:@"云观察" url:[NSString stringWithFormat:@"%@/information%@&id=%@",YTH5Server, [NSDate stringDate], iformation.infoId]];
     normal.isDate = YES;

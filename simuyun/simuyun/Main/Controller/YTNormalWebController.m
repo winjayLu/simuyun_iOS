@@ -65,19 +65,12 @@
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
 {
     
-    
-//    NSString *urlString = [[request URL] absoluteString];
-//    NSString *urls = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//    NSArray *urlComps = [urls componentsSeparatedByString:@":"];
-    
-    
     NSString *urlString = [[request URL] absoluteString];
     NSArray *result = [urlString componentsSeparatedByString:@":"];
     NSMutableArray *urlComps = [[NSMutableArray alloc] init];
     for (NSString *str in result) {
         [urlComps addObject:[str stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }
-    
     
     if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"app"])
     {
@@ -134,7 +127,6 @@
     }];
 
 }
-
 
 
 /**

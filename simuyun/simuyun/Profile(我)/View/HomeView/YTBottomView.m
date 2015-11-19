@@ -51,7 +51,7 @@
     if (cell==nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"YTGroupCell" owner:nil options:nil] lastObject];
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.title = self.titles[indexPath.row];
     return cell;
 }
@@ -63,6 +63,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([self.BottomDelegate respondsToSelector:@selector(didSelectedRow:)]) {
         [self.BottomDelegate didSelectedRow:(int)indexPath.row];
     }

@@ -261,7 +261,7 @@
 
     if([YTResourcesTool resources].versionFlag == 0)
     {
-        bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42);
+        bottom.height = 42;
     }
     bottom.BottomDelegate = self;
     [self.view addSubview:bottom];
@@ -318,12 +318,7 @@
     self.todoView.frame = CGRectMake(magin, CGRectGetMaxY(self.topView.frame), self.view.width - magin * 2, todoHeight);
 
     // 修改底部菜单frame
-    if([YTResourcesTool resources].versionFlag == 0)
-    {
-       self.bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42);
-    } else {
-        self.bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42 * 3);
-    }
+    self.bottom.y = CGRectGetMaxY(self.todoView.frame) + 8;
     
     // 设置滚动范围
     [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.bottom.frame) + 64)];

@@ -13,4 +13,7 @@
 
 @property (nonatomic, strong) YTInformation *information;
 
+@property (nonatomic, assign) bool isShowLine;
+
+
 @end

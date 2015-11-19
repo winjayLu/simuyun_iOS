@@ -61,7 +61,7 @@
     YHWebViewProgressView *progressView = [[YHWebViewProgressView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 2)];
     progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
     progressView.barAnimationDuration = 0.5;
-    progressView.progressBarColor = YTViewBackground;
+    progressView.progressBarColor = YTRGBA(0, 0, 0, 0.75);
     // 设置进度条
     self.progressProxy.progressView = progressView;
     // 将UIWebView代理指向YHWebViq   ewProgress
@@ -101,6 +101,9 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    CGSize oldSzie = ((UIWebView *)self.view).scrollView.contentSize;
+    [((UIWebView *)self.view).scrollView setContentSize:CGSizeMake(oldSzie.width, oldSzie.height - 120)];
+
     self.title = self.titleData;
     [self.progressProxy.progressView setProgress:1.0f animated:NO];
     self.view.userInteractionEnabled = YES;

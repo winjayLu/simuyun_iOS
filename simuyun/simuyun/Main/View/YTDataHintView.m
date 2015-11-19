@@ -128,7 +128,7 @@
  */
 - (void)failureClick
 {
-    if (self.tableView != nil) {
+    if (self.tableView != nil && self.tableView.header != nil) {
         [self.tableView.header beginRefreshing];
     }
     [self switchContentTypeWIthType:contentTypeLoading];

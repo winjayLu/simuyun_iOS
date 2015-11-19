@@ -30,6 +30,12 @@
  *  日期
  */
 @property (weak, nonatomic) IBOutlet UILabel *dateLable;
+
+/**
+ *  分割线
+ */
+@property (weak, nonatomic) IBOutlet UIView *lineView;
+
 @end
 
 @implementation YTInformationTableViewCell
@@ -59,6 +65,12 @@
     } else {
         [self.iconImage imageWithUrlStr:[NSString stringWithFormat:@"http://%@",information.url]phImage:nil];
     }
+}
+
+- (void)setIsShowLine:(bool)isShowLine
+{
+    _isShowLine = isShowLine;
+    self.lineView.hidden = !isShowLine;
 }
 
 - (void)awakeFromNib {

@@ -173,7 +173,7 @@
     cell.layer.masksToBounds = YES;
     cell.layer.borderWidth = 1.0f;
     cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.product = self.products[indexPath.section];
     return cell;
 }
@@ -203,7 +203,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YTProductModel *product = self.products[indexPath.section];
     NSString *url = nil;
 

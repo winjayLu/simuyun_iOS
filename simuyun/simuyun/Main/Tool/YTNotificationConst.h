@@ -10,6 +10,7 @@ extern NSString *const YTUpdateUserInfo;
 extern NSString *const YTRedrain;
 extern NSString *const YTUpdateTodoList;
 extern NSString *const YTUpdateTodoFrame;
+extern NSString *const YTUpdateTodoData;
 extern NSString *const YTUpdateMessageNum;
 extern NSString *const YTStopRequest;
 extern NSString *const YTUpdateChatContent;

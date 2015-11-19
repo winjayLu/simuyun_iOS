@@ -93,7 +93,7 @@
         cell.delegate = self;
         cell.rightUtilityButtons = [self rightButtons];
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     YTMessageModel *message =  self.todos[indexPath.row];
     cell.summary = message.summary;
     
@@ -152,6 +152,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([self.daili respondsToSelector:@selector(selectedTodo:)]) {
         [self.daili selectedTodo:indexPath.row];
     }
@@ -189,6 +190,7 @@
         {
             [YTCenter postNotificationName:YTUpdateTodoFrame object:nil];
         }
+        [YTCenter postNotificationName:YTUpdateTodoData object:nil];
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         if(error.userInfo[@"NSLocalizedDescription"] != nil)
         {

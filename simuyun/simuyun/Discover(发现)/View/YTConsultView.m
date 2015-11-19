@@ -61,7 +61,7 @@
     if (cell==nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"YTInformationTableViewCell" owner:nil options:nil] lastObject];
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.information = self.newests[indexPath.row];
     return cell;
 }
@@ -120,6 +120,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YTInformation *newe = self.newests[indexPath.row];
     if ([self.consultDelegate respondsToSelector:@selector(selectedCellWithRow:)]) {
         [self.consultDelegate selectedCellWithRow:newe];

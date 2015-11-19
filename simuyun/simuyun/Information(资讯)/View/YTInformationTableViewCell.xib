@@ -11,32 +11,32 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jYT-OX-Dlk" id="ssd-7l-1Wk">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="92.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kuang" translatesAutoresizingMaskIntoConstraints="NO" id="dvv-rc-nsm">
-                        <rect key="frame" x="15" y="7" width="103" height="78"/>
+                        <rect key="frame" x="7" y="7" width="103" height="78"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="103" id="BL0-3h-7hG"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XNh-rs-mtC" userLabel="展示图片">
-                        <rect key="frame" x="15" y="12" width="98" height="73"/>
+                        <rect key="frame" x="7" y="12" width="98" height="73"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="私募名家谈丨" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TM8-as-Yyo">
-                        <rect key="frame" x="125" y="15" width="138" height="17"/>
+                        <rect key="frame" x="117" y="15" width="146" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="阿凡达,你阿凡达,你阿凡达,你阿凡达,你阿凡达,你阿凡达,你阿凡达,你阿凡达,你阿凡达,你阿凡达,你" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gts-s3-Kmz">
-                        <rect key="frame" x="125" y="42" width="188" height="36"/>
+                        <rect key="frame" x="117" y="42" width="196" height="36"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.41176470590000003" green="0.41176470590000003" blue="0.41176470590000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRX-6r-gLD">
-                        <rect key="frame" x="15" y="92" width="315" height="1"/>
+                        <rect key="frame" x="7" y="92" width="323" height="1"/>
                         <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="qEf-hs-f84"/>
@@ -54,7 +54,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="TM8-as-Yyo" firstAttribute="top" secondItem="ssd-7l-1Wk" secondAttribute="top" constant="15" id="1Jq-Rf-7lt"/>
-                    <constraint firstItem="hRX-6r-gLD" firstAttribute="leading" secondItem="ssd-7l-1Wk" secondAttribute="leading" constant="15" id="4Yt-hx-pfo"/>
+                    <constraint firstItem="hRX-6r-gLD" firstAttribute="leading" secondItem="ssd-7l-1Wk" secondAttribute="leading" constant="7" id="4Yt-hx-pfo"/>
                     <constraint firstAttribute="trailing" secondItem="JJl-Ai-S1f" secondAttribute="trailing" constant="12" id="73w-cb-nQx"/>
                     <constraint firstItem="XNh-rs-mtC" firstAttribute="top" secondItem="dvv-rc-nsm" secondAttribute="top" constant="5" id="7IF-fZ-oTo"/>
                     <constraint firstItem="JJl-Ai-S1f" firstAttribute="bottom" secondItem="TM8-as-Yyo" secondAttribute="bottom" id="A3j-Qt-cIQ"/>
@@ -62,7 +62,7 @@
                     <constraint firstAttribute="bottom" secondItem="Gts-s3-Kmz" secondAttribute="bottom" constant="15" id="G4b-XX-ZBV"/>
                     <constraint firstItem="TM8-as-Yyo" firstAttribute="leading" secondItem="dvv-rc-nsm" secondAttribute="trailing" constant="7" id="IRV-1H-1O6"/>
                     <constraint firstItem="Gts-s3-Kmz" firstAttribute="width" secondItem="TM8-as-Yyo" secondAttribute="width" id="JAE-vV-KbQ"/>
-                    <constraint firstItem="dvv-rc-nsm" firstAttribute="leading" secondItem="ssd-7l-1Wk" secondAttribute="leading" constant="15" id="JHe-y3-Xef"/>
+                    <constraint firstItem="dvv-rc-nsm" firstAttribute="leading" secondItem="ssd-7l-1Wk" secondAttribute="leading" constant="7" id="JHe-y3-Xef"/>
                     <constraint firstAttribute="trailing" secondItem="Gts-s3-Kmz" secondAttribute="trailing" constant="7" id="KeJ-xR-LAF"/>
                     <constraint firstAttribute="trailing" secondItem="Gts-s3-Kmz" secondAttribute="trailing" constant="7" id="LUR-3F-UOV"/>
                     <constraint firstAttribute="trailing" secondItem="TM8-as-Yyo" secondAttribute="trailing" constant="15" id="Lvg-FX-EO8"/>
@@ -93,6 +93,7 @@
             <connections>
                 <outlet property="dateLable" destination="JJl-Ai-S1f" id="tF9-Ii-UJr"/>
                 <outlet property="iconImage" destination="XNh-rs-mtC" id="S0l-Ac-Fpk"/>
+                <outlet property="lineView" destination="hRX-6r-gLD" id="1iK-WA-W9Z"/>
                 <outlet property="summary" destination="Gts-s3-Kmz" id="vqf-6C-bym"/>
                 <outlet property="title" destination="TM8-as-Yyo" id="QSN-Hg-3tu"/>
             </connections>
