@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -54,7 +54,7 @@
                     </variation>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ig5-0y-fq5" userLabel="昵称">
-                    <rect key="frame" x="0.0" y="201" width="242" height="30"/>
+                    <rect key="frame" x="0.0" y="206" width="242" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="242" id="TVm-Vs-TCQ"/>
                         <constraint firstAttribute="height" constant="30" id="n3a-DA-QOm"/>
@@ -64,7 +64,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PaL-sz-tSE">
-                    <rect key="frame" x="0.0" y="304" width="241" height="30"/>
+                    <rect key="frame" x="0.0" y="314" width="241" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="DJK-zr-c1T"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="241" id="RyK-UN-6gn"/>
@@ -82,14 +82,14 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="2VW-dw-6hO">
-                    <rect key="frame" x="216" y="310" width="7" height="19"/>
+                    <rect key="frame" x="216" y="320" width="7" height="19"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="7" id="FHJ-mX-UwQ"/>
                         <constraint firstAttribute="height" constant="19" id="LVr-Ou-CPz"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yT-YE-IrP">
-                    <rect key="frame" x="0.0" y="352" width="241" height="30"/>
+                    <rect key="frame" x="0.0" y="362" width="241" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="241" id="3xF-7K-iPB"/>
                         <constraint firstAttribute="height" constant="30" id="Npb-aJ-GDo"/>
@@ -107,14 +107,14 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="tqg-Bw-g3r">
-                    <rect key="frame" x="216" y="358" width="7" height="19"/>
+                    <rect key="frame" x="216" y="368" width="7" height="19"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="7" id="rg1-Ye-V1C"/>
                         <constraint firstAttribute="height" constant="19" id="sv2-5Z-lq5"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3iq-6B-ZvS">
-                    <rect key="frame" x="0.0" y="400" width="241" height="30"/>
+                    <rect key="frame" x="0.0" y="410" width="241" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="A1q-ve-tSb"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="241" id="bwT-HJ-g1h"/>
@@ -132,14 +132,14 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="rxw-AM-CBx">
-                    <rect key="frame" x="216" y="405" width="7" height="19"/>
+                    <rect key="frame" x="216" y="415" width="7" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="Ne5-sq-xiw"/>
                         <constraint firstAttribute="width" constant="7" id="Uki-rk-VqD"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ebg-tJ-kZj">
-                    <rect key="frame" x="0.0" y="448" width="241" height="30"/>
+                    <rect key="frame" x="0.0" y="458" width="241" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="2ut-0v-9G6"/>
                         <constraint firstAttribute="height" constant="30" id="Zt9-3j-7bm"/>
@@ -157,7 +157,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="kHV-yu-vmN">
-                    <rect key="frame" x="217" y="453" width="7" height="19"/>
+                    <rect key="frame" x="217" y="463" width="7" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="SJk-D2-yIF"/>
                         <constraint firstAttribute="width" constant="7" id="kdI-qg-ZGB"/>
@@ -178,7 +178,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4w-em-a0Z">
-                    <rect key="frame" x="50" y="518" width="140" height="30"/>
+                    <rect key="frame" x="50" y="528" width="140" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="qmr-wY-wd7"/>
                         <constraint firstAttribute="width" constant="140" id="rET-kL-EZD"/>
@@ -194,7 +194,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CqF-3z-uB9">
-                    <rect key="frame" x="0.0" y="256" width="241" height="30"/>
+                    <rect key="frame" x="0.0" y="266" width="241" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="3RA-CG-hIr"/>
                         <constraint firstAttribute="width" constant="241" id="4Cp-Xb-6Bt"/>
@@ -211,7 +211,7 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiangyou" translatesAutoresizingMaskIntoConstraints="NO" id="ML9-Hm-k4Y">
-                    <rect key="frame" x="216" y="261" width="7" height="19"/>
+                    <rect key="frame" x="216" y="271" width="7" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="RDe-oB-Tvl"/>
                         <constraint firstAttribute="width" constant="7" id="p6i-r5-NiS"/>
@@ -241,7 +241,7 @@
                 <constraint firstAttribute="bottom" secondItem="Ebg-tJ-kZj" secondAttribute="bottom" constant="199" id="MZP-Bl-Egv"/>
                 <constraint firstItem="rxw-AM-CBx" firstAttribute="centerY" secondItem="3iq-6B-ZvS" secondAttribute="centerY" id="ONN-AW-PDD"/>
                 <constraint firstItem="3DC-4S-XPf" firstAttribute="leading" secondItem="ig5-0y-fq5" secondAttribute="leading" id="QdS-0Q-Rkn"/>
-                <constraint firstItem="CqF-3z-uB9" firstAttribute="top" secondItem="ig5-0y-fq5" secondAttribute="bottom" constant="25" id="R0m-vK-ORe"/>
+                <constraint firstItem="CqF-3z-uB9" firstAttribute="top" secondItem="ig5-0y-fq5" secondAttribute="bottom" constant="30" id="R0m-vK-ORe"/>
                 <constraint firstItem="v8b-bC-v4u" firstAttribute="top" secondItem="WUT-UR-MWe" secondAttribute="bottom" constant="-5" id="Sdm-5U-m83"/>
                 <constraint firstItem="WUT-UR-MWe" firstAttribute="centerX" secondItem="3DC-4S-XPf" secondAttribute="centerX" id="UAl-mi-B2Y"/>
                 <constraint firstItem="WUT-UR-MWe" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="UiN-iP-Gvc"/>
@@ -274,7 +274,7 @@
                 <constraint firstItem="Ebg-tJ-kZj" firstAttribute="leading" secondItem="3iq-6B-ZvS" secondAttribute="leading" id="qZr-VF-pem"/>
                 <constraint firstItem="3iq-6B-ZvS" firstAttribute="height" secondItem="4yT-YE-IrP" secondAttribute="height" id="r1w-kI-g0X"/>
                 <constraint firstItem="tqg-Bw-g3r" firstAttribute="centerY" secondItem="4yT-YE-IrP" secondAttribute="centerY" id="sdy-3D-bvf"/>
-                <constraint firstItem="ig5-0y-fq5" firstAttribute="top" secondItem="v8b-bC-v4u" secondAttribute="bottom" constant="10" id="t0Z-zZ-otG"/>
+                <constraint firstItem="ig5-0y-fq5" firstAttribute="top" secondItem="v8b-bC-v4u" secondAttribute="bottom" constant="15" id="t0Z-zZ-otG"/>
                 <constraint firstItem="WUT-UR-MWe" firstAttribute="centerX" secondItem="v8b-bC-v4u" secondAttribute="centerX" id="tAY-Iq-StL"/>
                 <constraint firstItem="y4w-em-a0Z" firstAttribute="top" secondItem="Ebg-tJ-kZj" secondAttribute="bottom" constant="40" id="uIC-dk-GNI"/>
                 <constraint firstItem="rxw-AM-CBx" firstAttribute="leading" secondItem="tqg-Bw-g3r" secondAttribute="leading" id="v5g-pv-z2Y"/>
@@ -315,6 +315,7 @@
                 <outlet property="huangGuanImage" destination="WUT-UR-MWe" id="aKe-IC-nwW"/>
                 <outlet property="iconImage" destination="Kyw-oe-x8Q" id="Zph-sE-7En"/>
                 <outlet property="nameLable" destination="ig5-0y-fq5" id="ho6-c2-QLA"/>
+                <outlet property="tuijianTopConstraint" destination="Yoe-FK-805" id="aIL-xx-m9W"/>
             </connections>
         </view>
     </objects>

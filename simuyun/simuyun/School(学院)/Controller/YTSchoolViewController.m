@@ -43,10 +43,13 @@
 
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     [MobClick event:@"nav_click" attributes:@{@"按钮" : @"学院"}];
 }
+
 
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
 {

@@ -46,9 +46,6 @@
                 self.leftMenu.userInfo = [YTUserInfoTool userInfo];
             }
         }];
-    } else
-    {
-        self.leftMenu.userInfo = [YTUserInfoTool userInfo];
     }
    
     [self.view addSubview:leftMenu];
@@ -59,6 +56,11 @@
     
     // 监听通知
     [YTCenter addObserver:self selector:@selector(leftUpdate) name:YTUpdateIconImage object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    self.leftMenu.userInfo = [YTUserInfoTool userInfo];
 }
 
 /**

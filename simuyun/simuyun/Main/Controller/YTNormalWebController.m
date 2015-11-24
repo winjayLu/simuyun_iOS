@@ -13,6 +13,7 @@
 #import "YTAccountTool.h"
 #import "YTReportContentController.h"
 #import "YTProductModel.h"
+#import "YTViewPdfViewController.h"
 
 
 @interface YTNormalWebController () <UIWebViewDelegate>
@@ -100,6 +101,12 @@
                 product.buyMoney = [urlComps[5] intValue];
                 report.prouctModel = product;
                 [self.navigationController pushViewController:report animated:YES];
+            } else if ([command isEqualToString:@"viewpdf"])
+            {
+                YTViewPdfViewController *viewPdf = [[YTViewPdfViewController alloc] init];
+                viewPdf.url = urlComps[2];
+                viewPdf.shareTitle = urlComps[3];
+                [self.navigationController pushViewController:viewPdf animated:YES];
             }
         }
     }

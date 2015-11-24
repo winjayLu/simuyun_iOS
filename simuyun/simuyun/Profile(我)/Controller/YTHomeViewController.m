@@ -67,7 +67,7 @@
 @property (nonatomic, strong) YTTokenView *token;
 
 // 是否加载用户信息
-@property (nonatomic, assign) BOOL isLoad;
+//@property (nonatomic, assign) BOOL isLoad;
 
 // 分享
 @property (nonatomic, weak) ShareCustomView *customView ;
@@ -110,12 +110,6 @@
     
     // 监听左侧菜单通知
     [self leftMenuNotification];
-    
-    // 加载待办事项
-    [self loadTodos];
-    
-    // 获取用户信息
-    [self loadUserInfo];
    
     // 填充token
     self.token = [[YTTokenView alloc] init];
@@ -130,30 +124,12 @@
 {
     [super viewWillAppear:animated];
     
-    // 判断标志位
-    if (self.isLoad) {
-        self.isLoad = NO;
-        return;
-    }
-    // 重新加载用户信息
-    // 去服务器获取
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"advisersId"] = [YTAccountTool account].userId;
-    
-    [YTHttpTool get:YTUser params:dict success:^(id responseObject) {
-        YTUserInfo *userInfo = [YTUserInfo objectWithKeyValues:responseObject];
-        [YTUserInfoTool saveUserInfo:userInfo];
-        self.topView.userInfo = userInfo;
-//        // 发送通知
-//        [YTCenter postNotificationName:YTUpdateIconImage object:nil];
-    } failure:^(NSError *error) {
-
-    }];
+    [self loadUserInfo];
     // 加载待办事项
     [self loadTodos];
     
     // 刷新底部
-    [self.bottom isShow];
+//    [self.bottom isShow];
 }
 
 // 检查更新
@@ -190,7 +166,6 @@
 - (void)loadUserInfo
 {
     // 第一次加载
-
     if ([YTUserInfoTool userInfo] == nil) {
         [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
             if (result) {
@@ -200,7 +175,6 @@
     } else {
         self.topView.userInfo = [YTUserInfoTool userInfo];
     }
-    self.isLoad = YES;
 }
 
 
@@ -289,7 +263,6 @@
 {
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
     param[@"adviserId"] = [YTAccountTool account].userId;
-//            param[@"adviserId"] = @"001e4ef1d3344057a995376d2ee623d4";
     param[@"category"] = @1;
     param[@"pagesize"] = @20;
     param[@"pageNo"] = @(1);

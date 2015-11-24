@@ -96,6 +96,7 @@
 		978122D11BE3403A0035D6DE /* YTAuthenticationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 978122D01BE3403A0035D6DE /* YTAuthenticationModel.m */; };
 		978122D51BE35A720035D6DE /* YTAuthenticationErrorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 978122D31BE35A720035D6DE /* YTAuthenticationErrorController.m */; };
 		978122D61BE35A720035D6DE /* YTAuthenticationErrorController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 978122D41BE35A720035D6DE /* YTAuthenticationErrorController.xib */; };
+		9781C0961C030E5700DDF3DE /* YTViewPdfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9781C0951C030E5700DDF3DE /* YTViewPdfViewController.m */; };
 		9782181F1BD0CA28000159E8 /* YTRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9782181D1BD0CA28000159E8 /* YTRegisterViewController.m */; };
 		978218201BD0CA28000159E8 /* YTRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9782181E1BD0CA28000159E8 /* YTRegisterViewController.xib */; };
 		978218231BD0DF72000159E8 /* JKCountDownButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 978218221BD0DF72000159E8 /* JKCountDownButton.m */; };
@@ -437,6 +438,8 @@
 		978122D21BE35A720035D6DE /* YTAuthenticationErrorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAuthenticationErrorController.h; sourceTree = "<group>"; };
 		978122D31BE35A720035D6DE /* YTAuthenticationErrorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAuthenticationErrorController.m; sourceTree = "<group>"; };
 		978122D41BE35A720035D6DE /* YTAuthenticationErrorController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTAuthenticationErrorController.xib; sourceTree = "<group>"; };
+		9781C0941C030E5700DDF3DE /* YTViewPdfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTViewPdfViewController.h; sourceTree = "<group>"; };
+		9781C0951C030E5700DDF3DE /* YTViewPdfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTViewPdfViewController.m; sourceTree = "<group>"; };
 		9782181C1BD0CA28000159E8 /* YTRegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTRegisterViewController.h; sourceTree = "<group>"; };
 		9782181D1BD0CA28000159E8 /* YTRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTRegisterViewController.m; sourceTree = "<group>"; };
 		9782181E1BD0CA28000159E8 /* YTRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTRegisterViewController.xib; sourceTree = "<group>"; };
@@ -1589,6 +1592,8 @@
 				978C6FE01BCF8193003D183E /* YTProductViewController.m */,
 				97ED0CD11BE2460200E95750 /* YTProductdetailController.h */,
 				97ED0CD21BE2460200E95750 /* YTProductdetailController.m */,
+				9781C0941C030E5700DDF3DE /* YTViewPdfViewController.h */,
+				9781C0951C030E5700DDF3DE /* YTViewPdfViewController.m */,
 				970020AE1BD6162B00231F52 /* YTBuyProductController.h */,
 				970020AF1BD6162B00231F52 /* YTBuyProductController.m */,
 				970020B01BD6162B00231F52 /* YTBuyProductController.xib */,
@@ -2359,6 +2364,7 @@
 				972B880B1BFAD3D0002A7E9B /* README.md in Sources */,
 				97973CE01BC3A75700B7B4CB /* YTBadgeTool.m in Sources */,
 				97A61D781BC6893B000A5B17 /* YHWebViewProgress.m in Sources */,
+				9781C0961C030E5700DDF3DE /* YTViewPdfViewController.m in Sources */,
 				972B88071BFAD3D0002A7E9B /* AFURLRequestSerialization.m in Sources */,
 				97C605B01BC260A400E555E8 /* YTProductTool.m in Sources */,
 				979AFB431BE4BF5100158509 /* YTRedrainViewController.m in Sources */,
@@ -2579,7 +2585,10 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = "COCOAPODS=1";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"COCOAPODS=1",
+					"DEBUG=1",
+				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = simuyun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

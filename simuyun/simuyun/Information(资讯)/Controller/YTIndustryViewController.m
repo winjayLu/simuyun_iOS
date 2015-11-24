@@ -128,7 +128,7 @@
     cell.layer.borderWidth = 1.0f;
     cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    cell.isShowLine = NO;
+    cell.isShowLine = YES;
     cell.information = self.informations[indexPath.section];
     return cell;
 }

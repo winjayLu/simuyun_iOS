@@ -49,12 +49,13 @@
     self = [self init];
     if (self) {
         //  设置要分享的平台
-        self.titleArr = titleArray;
-        self.imageArr = imageArray;
         if([YTResourcesTool resources].versionFlag == 0)
         {
             self.titleArr = [NSArray arrayWithObjects:@"邮件",@"短信",@"复制链接", nil];
             self.imageArr = [NSArray arrayWithObjects:@"ShareButtonTypeEmail",@"ShareButtonTypeSms",@"ShareButtonTypeCopy", nil];
+        } else {
+            self.titleArr = titleArray;
+            self.imageArr = imageArray;
         }
         //  创建子控件
         [self creatMainShareView];
@@ -99,9 +100,9 @@
     mainGrayBg.tag = ShareButtonTypeCancel;
     [mainGrayBg  addGestureRecognizer:tapGR];
 
-    CGFloat shareMenuViewH = 130;
+    CGFloat shareMenuViewH = 170;
     if (self.titleArr.count > 4) {
-        shareMenuViewH = shareMenuViewH *2;
+        shareMenuViewH = 260;
     } else if(self.isHeight)
     {
         shareMenuViewH = 200;

@@ -33,7 +33,6 @@
     // 将控制器的View替换为ScrollView
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:DeviceBounds];
     mainView.showsVerticalScrollIndicator = NO;
-    mainView.contentSize = CGSizeMake(DeviceWidth, GroupHeig * 2.0 + TitleHeight + ItemWidth );
     self.view = mainView;
 }
 
@@ -63,8 +62,9 @@
     [button setBackgroundImage:imageHighl forState:UIControlStateHighlighted];
     button.frame = CGRectMake(0, CGRectGetMaxY(self.lastTitle.frame), DeviceWidth, ItemWidth);
     [self.view addSubview:button];
-
+    ((UIScrollView *)self.view).contentSize = CGSizeMake(DeviceWidth, CGRectGetMaxY(button.frame));
 }
+
 
 // 创建标题
 - (UIView *)creatTitleImage:(int)groupIndex

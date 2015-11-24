@@ -36,6 +36,7 @@
  */
 @property (weak, nonatomic) IBOutlet UIView *lineView;
 
+
 @end
 
 @implementation YTInformationTableViewCell
@@ -69,8 +70,7 @@
 
 - (void)setIsShowLine:(bool)isShowLine
 {
-    _isShowLine = isShowLine;
-    self.lineView.hidden = !isShowLine;
+    self.lineView.hidden = isShowLine;
 }
 
 - (void)awakeFromNib {

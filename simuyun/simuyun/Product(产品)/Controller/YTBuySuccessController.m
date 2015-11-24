@@ -93,7 +93,7 @@
     self.accountNameLable.text = prouctModel.raise_account_name;
     self.accountBankLable.text = prouctModel.raise_bank;
     self.accountLable.text = prouctModel.raise_account;
-    self.tiShiLable.text = [NSString stringWithFormat:@"请于%@前完成一下操作，否则视为认购失败", prouctModel.end_time];
+    self.tiShiLable.text = [NSString stringWithFormat:@"请于%@前完成以下操作，否则视为认购失败", prouctModel.report_deadline];
 }
 
 

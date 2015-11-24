@@ -21,15 +21,11 @@
 #import "YTReportContentController.h"
 #import "YTNormalWebController.h"
 #import "YTUserInfoTool.h"
+#import "YTViewPdfViewController.h"
 
 
 @interface YTProductdetailController () <shareCustomDelegate, senMailViewDelegate, UIWebViewDelegate>
 @property (nonatomic, weak) UIWebView *webView;
-
-/**
- *  进度条代理
- */
-@property (nonatomic, strong) YHWebViewProgress *progressProxy;
 
 // 弹出菜单
 @property (nonatomic, strong) DXPopover *popover;
@@ -66,9 +62,6 @@
     [super viewDidLoad];
     self.title = @"产品详情";
     self.webView.scalesPageToFit = YES;
-    
-    // 初始化进度条
-    [self setupProgress];
     
     // 加载网页
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
@@ -114,22 +107,7 @@
 }
 
 
-/**
- *  初始化进度条
- */
-- (void)setupProgress
-{
-    // 创建进度条
-    YHWebViewProgressView *progressView = [[YHWebViewProgressView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 2)];
-    progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
-    progressView.barAnimationDuration = 0.5;
-    progressView.progressBarColor = YTViewBackground;
-    // 设置进度条
-    self.progressProxy.progressView = progressView;
 
-    // 添加到视图
-    [self.view addSubview:progressView];
-}
 
 
 #pragma mark - UIWebViewDelegate
@@ -154,16 +132,23 @@
                 buy.product = self.product;
                 [self.navigationController pushViewController:buy animated:YES];
                 
-            } else if ([command isEqualToString:@"closepage"])
+            } else if ([command isEqualToString:@"closepage"])  // 关闭页面
             {
                 [self.navigationController popViewControllerAnimated:YES];
-            }else if ([command isEqualToString:@"openpage"])
+            } else if ([command isEqualToString:@"openpage"])   // 打开新页面
             {
                 YTNormalWebController *normal = [[YTNormalWebController alloc] init];
                 normal.isDate = YES;
                 normal.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
                 normal.toTitle = urlComps[3];
                 [self.navigationController pushViewController:normal animated:YES];
+            } else if ([command isEqualToString:@"viewpdf"])
+            {
+                YTViewPdfViewController *viewPdf = [[YTViewPdfViewController alloc] init];
+                viewPdf.product = self.product;
+                viewPdf.url = urlComps[2];
+                viewPdf.shareTitle = urlComps[3];
+                [self.navigationController pushViewController:viewPdf animated:YES];
             }
         }
 
@@ -173,14 +158,7 @@
 
 
 
-#pragma mark - lazy
-- (YHWebViewProgress *)progressProxy
-{
-    if (!_progressProxy) {
-        _progressProxy = [[YHWebViewProgress alloc] init];
-    }
-    return _progressProxy;
-}
+
 
 // 菜单内容
 - (UIView *)innerView
@@ -273,11 +251,8 @@
     if(self.product.type_code == 1)
     {
          share.share_url = [NSString stringWithFormat:@"http://www.simuyun.com/product/floating_shared.html?id=%@",self.product.pro_id];
-        
-        [MobClick event:@"productList_click" attributes: @{@"类型" : @"浮收", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     } else {
         share.share_url = [NSString stringWithFormat:@"http://www.simuyun.com/product/fixed_shared.html?id=%@",self.product.pro_id];
-        [MobClick event:@"productList_click" attributes: @{@"类型" : @"固收", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     }
     switch (tag) {
         case ShareButtonTypeWxShare:

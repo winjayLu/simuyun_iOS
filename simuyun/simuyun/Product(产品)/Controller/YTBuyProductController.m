@@ -123,7 +123,7 @@
         [SVProgressHUD dismiss];
         self.product.customerName = self.nameLable.text;
         self.product.order_id = responseObject[@"order_id"];
-        self.product.end_time = responseObject[@"end_time"];
+        self.product.report_deadline = responseObject[@"report_deadline"];
         self.product.order_code = responseObject[@"order_code"];
         self.product.buyMoney = [self.buyMoney.text intValue];
         YTContentViewController *content = [[YTContentViewController alloc] init];

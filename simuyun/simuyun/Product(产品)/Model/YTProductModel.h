@@ -113,7 +113,7 @@
 /**
  *  最晚报备时间
  */
-@property (nonatomic, copy) NSString *end_time;
+@property (nonatomic, copy) NSString *report_deadline;
 
 
 

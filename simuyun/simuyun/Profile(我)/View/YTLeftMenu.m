@@ -83,6 +83,12 @@
 
 // 皇冠
 @property (weak, nonatomic) IBOutlet UIImageView *huangGuanImage;
+
+/**
+ *  推荐私募云给好友顶部约束
+ */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tuijianTopConstraint;
+
 @end
 
 
@@ -184,6 +190,7 @@
     if (resourse.versionFlag == 0) {
         self.guanLianBtn.hidden = YES;
         self.guanLianRightBtn.hidden = YES;
+        self.tuijianTopConstraint.constant = -30;
     }
     if (_userInfo == nil) return;
     // 设置头像

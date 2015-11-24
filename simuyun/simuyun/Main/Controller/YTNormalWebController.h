@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YTProductModel.h"
 
 @interface YTNormalWebController : UIViewController
 /**
@@ -22,6 +23,7 @@
 
 // 是否加时间戳
 @property (nonatomic, assign) BOOL isDate;
+
 
 
 + (instancetype)webWithTitle:(NSString *)title url:(NSString *)url;

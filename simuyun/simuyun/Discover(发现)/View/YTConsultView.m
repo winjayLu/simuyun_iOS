@@ -63,6 +63,7 @@
     }
     cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.information = self.newests[indexPath.row];
+    cell.isShowLine = NO;
     return cell;
 }
 

@@ -66,6 +66,21 @@
  */
 @property (weak, nonatomic) IBOutlet UILabel *danWeiLable;
 
+/**
+ *  title右边的约束
+ */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleRightConstraint;
+
+/**
+ *  title左边的约束
+ */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLeftConstraint;
+/**
+ *  icon的宽度约束
+ */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconWidthConstraint;
+
+
 @end
 
 
@@ -98,36 +113,34 @@
 - (void)setProduct:(YTProductModel *)product
 {
     _product = product;
-    
 
     // 设置icon图片
     if (_product.series != 0) {
+        self.iconWidthConstraint.constant = 25;
+        self.titleLeftConstraint.constant = 8;
         self.iconImage.hidden = NO;
         self.iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"productIcon%d",_product.series]];
+        // 调整icon的宽度
+        if (_product.series > 6) {
+            self.iconWidthConstraint.constant = 33;
+        }
     } else
     {
         self.iconImage.hidden = YES;
-    }
-    
-    // 调整icon的宽度
-    if (_product.series > 6) {
-        self.iconImage.width = 33;
-        self.titleLable.x = 49;
-    } else {
-        self.iconImage.width = 25;
-        self.titleLable.x = 41;
+        self.titleLeftConstraint.constant = -25;
     }
 
-    
     // 设置标题
     self.titleLable.text = _product.pro_name;
     
     // 设置星星
     if (_product.level == 0) {
+        self.titleRightConstraint.constant = -60;
         self.startImage.hidden = YES;
     } else {
         self.startImage.hidden = NO;
         self.startImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"start%d",_product.level]];
+        self.titleRightConstraint.constant = 5;
     }
     
     // 设置投资起点
