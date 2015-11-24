@@ -39,14 +39,6 @@
     if (DeviceHight > 667) {
         leftMenu.height = DeviceHight;
     }
-    // // 获取用户信息
-    if ([YTUserInfoTool userInfo] == nil) {
-        [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
-            if (result) {
-                self.leftMenu.userInfo = [YTUserInfoTool userInfo];
-            }
-        }];
-    }
    
     [self.view addSubview:leftMenu];
     self.leftMenu = leftMenu;
@@ -60,7 +52,16 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    self.leftMenu.userInfo = [YTUserInfoTool userInfo];
+    // // 获取用户信息
+    if ([YTUserInfoTool userInfo] == nil) {
+        [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
+            if (result) {
+                self.leftMenu.userInfo = [YTUserInfoTool userInfo];
+            }
+        }];
+    } else {
+        self.leftMenu.userInfo = [YTUserInfoTool userInfo];
+    }
 }
 
 /**

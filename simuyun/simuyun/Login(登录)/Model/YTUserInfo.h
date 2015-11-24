@@ -25,8 +25,8 @@
 // 机构名称
 @property (nonatomic, copy) NSString *organizationName;
 
-// 微信昵称
-@property (nonatomic, copy) NSString *weChatNickName;
+// 微信id
+@property (nonatomic, copy) NSString *wechatUnionid;
 
 // 头像地址
 @property (nonatomic, copy) NSString *headImgUrl;

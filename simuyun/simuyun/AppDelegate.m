@@ -177,7 +177,7 @@
  */
 - (void)checkNotification:(NSDictionary *)launchOptions
 {
-    NSDictionary *remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
+//    NSDictionary *remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
 //    YTLog(@"%@", remoteNotification);}
 }
 

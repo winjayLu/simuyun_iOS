@@ -160,12 +160,18 @@
     params[@"timestampCategory2"] = timestampCategory2;
     params[@"timestampCategory3"] = timestampCategory3;
     [YTHttpTool get:YTMessageCount params:params success:^(id responseObject) {
+        YTMessageNum *oldMessage = [YTMessageNumTool messageNum];
         [YTMessageNumTool save:[YTMessageNum objectWithKeyValues:responseObject]];
-        YTMessageNum *messageNum = [YTMessageNumTool messageNum];
-        if (messageNum.CHAT_CONTENT > 0) {
-            self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", messageNum.CHAT_CONTENT];
+        YTMessageNum *newMessageNum = [YTMessageNumTool messageNum];
+        if (oldMessage != nil && (newMessageNum.TODO_LIST > oldMessage.TODO_LIST)) {
+            [YTCenter postNotificationName:YTUpdateTodoData object:nil];
         }
-        [YTCenter postNotificationName:YTUpdateChatContent object:nil];
+
+        if (newMessageNum.CHAT_CONTENT > 0) {
+            self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", newMessageNum.CHAT_CONTENT];
+            [YTCenter postNotificationName:YTUpdateChatContent object:nil];
+        }
+        
     } failure:^(NSError *error) {
     }];
 }
@@ -244,8 +250,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    // 添加一个logo按钮到tabBar上
-    [self setupLogoView];
+    if (self.logo == nil) {
+        // 添加一个logo按钮到tabBar上
+        [self setupLogoView];
+    }
+    
 }
 
 - (void)setupLogoView

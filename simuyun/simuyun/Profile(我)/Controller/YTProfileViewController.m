@@ -211,7 +211,6 @@ static UIWindow *_window;
             cover.backgroundColor = [UIColor clearColor];
             [cover addTarget:self action:@selector(coverClick:) forControlEvents:UIControlEventTouchDown];
             [_window addSubview:cover];
-//
         }
     }];
 }

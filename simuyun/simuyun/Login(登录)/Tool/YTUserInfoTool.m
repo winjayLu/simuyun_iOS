@@ -45,7 +45,7 @@ static YTUserInfo *_userInfo;
  */
 + (void)loadUserInfoWithresult:(void (^)(BOOL result))result
 {
-    // 已经有用户信息,直接返回
+//     已经有用户信息,直接返回
     if (_userInfo) {
         result(YES);
         return;
@@ -62,6 +62,25 @@ static YTUserInfo *_userInfo;
         result(NO);
     }];
 
+}
+
+
+/**
+ *  重新获取最新的用户信息
+ *
+ */
++ (void)loadNewUserInfo:(void (^)(BOOL result))result
+{
+    // 去服务器获取
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"advisersId"] = [YTAccountTool account].userId;
+    
+    [YTHttpTool get:YTUser params:dict success:^(id responseObject) {
+        _userInfo = [YTUserInfo objectWithKeyValues:responseObject];
+        result(YES);
+    } failure:^(NSError *error) {
+        result(NO);
+    }];
 }
 
 @end

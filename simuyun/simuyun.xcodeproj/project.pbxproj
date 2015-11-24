@@ -38,7 +38,6 @@
 		971503B71BC76961007E27D0 /* CorePPTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 971503B51BC76961007E27D0 /* CorePPTVC.m */; };
 		971503B81BC76961007E27D0 /* CorePPTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 971503B61BC76961007E27D0 /* CorePPTVC.xib */; };
 		971503BB1BC769FB007E27D0 /* PPTPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 971503BA1BC769FB007E27D0 /* PPTPageControl.m */; };
-		97187A8E1BC666E200C64609 /* YTWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97187A8C1BC666E200C64609 /* YTWebViewController.m */; };
 		97187A8F1BC666E200C64609 /* YTWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97187A8D1BC666E200C64609 /* YTWebViewController.xib */; };
 		972B88011BFAD3D0002A7E9B /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87DA1BFAD3D0002A7E9B /* AFHTTPRequestOperation.m */; };
 		972B88021BFAD3D0002A7E9B /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87DC1BFAD3D0002A7E9B /* AFHTTPRequestOperationManager.m */; };
@@ -215,7 +214,6 @@
 		97C6068A1BC27BD600E555E8 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C606891BC27BD600E555E8 /* NSDate+Extension.m */; };
 		97C606A71BC2985700E555E8 /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 97C6068D1BC2985700E555E8 /* UMSocialLocalizable.strings */; };
 		97C606A81BC2985700E555E8 /* libUMSocial_Sdk_4.2.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C6069B1BC2985700E555E8 /* libUMSocial_Sdk_4.2.5.a */; };
-		97C606B11BC2985700E555E8 /* UMSocialSDKResourcesNew.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97C606A51BC2985700E555E8 /* UMSocialSDKResourcesNew.bundle */; };
 		97C606B31BC298BA00E555E8 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C606B21BC298BA00E555E8 /* SystemConfiguration.framework */; };
 		97C606BA1BC29B9100E555E8 /* libSocialWechat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C606B51BC29B9100E555E8 /* libSocialWechat.a */; };
 		97C606BB1BC29B9200E555E8 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C606B61BC29B9100E555E8 /* libWeChatSDK.a */; };
@@ -330,8 +328,6 @@
 		971503B61BC76961007E27D0 /* CorePPTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CorePPTVC.xib; sourceTree = "<group>"; };
 		971503B91BC769FB007E27D0 /* PPTPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PPTPageControl.h; path = ../PPTPageControl.h; sourceTree = "<group>"; };
 		971503BA1BC769FB007E27D0 /* PPTPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PPTPageControl.m; path = ../PPTPageControl.m; sourceTree = "<group>"; };
-		97187A8B1BC666E200C64609 /* YTWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTWebViewController.h; sourceTree = "<group>"; };
-		97187A8C1BC666E200C64609 /* YTWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTWebViewController.m; sourceTree = "<group>"; };
 		97187A8D1BC666E200C64609 /* YTWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTWebViewController.xib; sourceTree = "<group>"; };
 		972B87D91BFAD3D0002A7E9B /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		972B87DA1BFAD3D0002A7E9B /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -674,7 +670,6 @@
 		97C606991BC2985700E555E8 /* UMSocialSnsPlatformManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialSnsPlatformManager.h; sourceTree = "<group>"; };
 		97C6069A1BC2985700E555E8 /* UMSocialSnsService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialSnsService.h; sourceTree = "<group>"; };
 		97C6069B1BC2985700E555E8 /* libUMSocial_Sdk_4.2.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUMSocial_Sdk_4.2.5.a; sourceTree = "<group>"; };
-		97C606A51BC2985700E555E8 /* UMSocialSDKResourcesNew.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UMSocialSDKResourcesNew.bundle; sourceTree = "<group>"; };
 		97C606A61BC2985700E555E8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/UMSocialLocalizable.strings"; sourceTree = "<group>"; };
 		97C606B21BC298BA00E555E8 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		97C606B51BC29B9100E555E8 /* libSocialWechat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSocialWechat.a; sourceTree = "<group>"; };
@@ -1518,8 +1513,6 @@
 				97C605981BC260A400E555E8 /* YTNavigationController.m */,
 				97C605991BC260A400E555E8 /* YTTabBarController.h */,
 				97C6059A1BC260A400E555E8 /* YTTabBarController.m */,
-				97187A8B1BC666E200C64609 /* YTWebViewController.h */,
-				97187A8C1BC666E200C64609 /* YTWebViewController.m */,
 				97187A8D1BC666E200C64609 /* YTWebViewController.xib */,
 				97ED0CCE1BE223CA00E95750 /* YTNormalWebController.h */,
 				97ED0CCF1BE223CA00E95750 /* YTNormalWebController.m */,
@@ -1956,7 +1949,6 @@
 				97C6068D1BC2985700E555E8 /* UMSocialLocalizable.strings */,
 				97C6068F1BC2985700E555E8 /* Header */,
 				97C6069B1BC2985700E555E8 /* libUMSocial_Sdk_4.2.5.a */,
-				97C606A51BC2985700E555E8 /* UMSocialSDKResourcesNew.bundle */,
 			);
 			path = UMSocial_Sdk_4.2.5;
 			sourceTree = "<group>";
@@ -2196,7 +2188,6 @@
 				97DE83141BD1042900E3C5CA /* YTResuNextViewController.xib in Resources */,
 				97DE830D1BD0FB5300E3C5CA /* CoreTFKeyBoardToolBarView.xib in Resources */,
 				97C605F51BC2622E00E555E8 /* YTLoginViewController.xib in Resources */,
-				97C606B11BC2985700E555E8 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				97C606721BC270CC00E555E8 /* CoreSDWebImage.bundle in Resources */,
 				975149511BDCB79B0017B6E8 /* YTCustomerServiceCell.xib in Resources */,
 				978218201BD0CA28000159E8 /* YTRegisterViewController.xib in Resources */,
@@ -2288,7 +2279,6 @@
 				9769F9F51BC9676B001B1F02 /* YTBottomView.m in Sources */,
 				97C6061F1BC2670E00E555E8 /* NSArray+Extend.m in Sources */,
 				97BC997A1BD4DB610090BDE8 /* CorePagesBarView.m in Sources */,
-				97187A8E1BC666E200C64609 /* YTWebViewController.m in Sources */,
 				978122D51BE35A720035D6DE /* YTAuthenticationErrorController.m in Sources */,
 				97ABCB7E1BDDE5460056C1A1 /* YTKnowController.m in Sources */,
 				9714A6F31BC7E0610018A14E /* UIView+YUStyle.m in Sources */,
@@ -2527,7 +2517,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "c9acdc3f-1393-4076-85a5-cb7112d3c091";
@@ -2566,7 +2556,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "c9acdc3f-1393-4076-85a5-cb7112d3c091";
 				SDKROOT = iphoneos;

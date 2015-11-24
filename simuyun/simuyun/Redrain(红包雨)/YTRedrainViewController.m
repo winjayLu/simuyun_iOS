@@ -42,7 +42,7 @@
     NSString *urlString = [[request URL] absoluteString];
     NSString *urls = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     if (urls != nil && ![urls isEqualToString:self.url]) {
-        [self dismissViewControllerAnimated:nil completion:nil];
+        [self dismissViewControllerAnimated:NO completion:nil];
     }
     
     return YES;

@@ -57,7 +57,7 @@
     if (self) {
         
         // 初始化录音配置
-        [self setupAudio];
+//        [self setupAudio];
         // 初始化按钮
         [self setupLogoBtn];
         //设置定时检测
@@ -257,12 +257,12 @@
     [logoButton addTarget:self action:@selector(logoClick) forControlEvents:UIControlEventTouchUpInside];
     logoButton.size = self.logoImage.size;
     
-    // 背景图片1
-    UIImageView *bgView = [[UIImageView alloc] init];
-    bgView.image = [UIImage imageNamed:@"shuibowen"];
-    bgView.size = logoButton.size;
-    [self addSubview:bgView];
-    self.bgView = bgView;
+//    // 背景图片1
+//    UIImageView *bgView = [[UIImageView alloc] init];
+//    bgView.image = [UIImage imageNamed:@"shuibowen"];
+//    bgView.size = logoButton.size;
+//    [self addSubview:bgView];
+//    self.bgView = bgView;
     
 //    // 背景图片2
 //    UIImageView *bgView2 = [[UIImageView alloc] init];

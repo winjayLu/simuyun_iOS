@@ -306,7 +306,7 @@
         <image name="duanxin" width="32" height="32"/>
         <image name="edqzcgbannner" width="375" height="120"/>
         <image name="hongseanniu" width="355" height="44"/>
-        <image name="weixin" width="32" height="32"/>
+        <image name="weixin" width="62" height="62"/>
         <image name="youjian" width="32" height="32"/>
     </resources>
 </document>

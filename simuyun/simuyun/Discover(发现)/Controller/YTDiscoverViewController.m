@@ -8,7 +8,6 @@
 
 #import "YTDiscoverViewController.h"
 #import "CorePPTVC.h"
-#import "YTWebViewController.h"
 #import "YTStockView.h"
 #import "YTConsultView.h"
 #import "YTNewest.h"
@@ -19,6 +18,7 @@
 #import "NSDate+Extension.h"
 #import "YTInformationTableViewCell.h"
 #import "YTInformation.h"
+#import "YTNormalWebController.h"
 #import "YTUserInfoTool.h"
 
 
@@ -241,7 +241,7 @@
 {
     if (pptModel.extension_url != nil && pptModel.extension_url.length > 0) {
         
-        YTWebViewController *webView = [[YTWebViewController alloc] init];
+        YTNormalWebController *webView = [[YTNormalWebController alloc] init];
         webView.url = pptModel.extension_url;
         webView.toTitle = pptModel.title;
         webView.hidesBottomBarWhenPushed = YES;

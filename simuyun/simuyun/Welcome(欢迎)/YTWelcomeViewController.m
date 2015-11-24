@@ -60,8 +60,6 @@
             if ([YTAccountTool account]) {
                 [YTAccountTool loginAccount:[YTAccountTool account] result:^(BOOL result) {
                     if (result) {
-                        // 获取用户信息
-                        [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {}];
                         mainWindow.rootViewController = [[YTTabBarController alloc] init];
                     } else {
                         mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];

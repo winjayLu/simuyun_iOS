@@ -66,8 +66,8 @@
 // h5页面填充token
 @property (nonatomic, strong) YTTokenView *token;
 
-// 是否加载用户信息
-//@property (nonatomic, assign) BOOL isLoad;
+// 是否重新加载用户信息
+@property (nonatomic, assign) BOOL isLoad;
 
 // 分享
 @property (nonatomic, weak) ShareCustomView *customView ;
@@ -116,6 +116,9 @@
     
     // 检查更新
     [self updateData];
+    
+    // 加载用户信息
+    [self loadUserInfo];
 }
 
 
@@ -124,9 +127,18 @@
 {
     [super viewWillAppear:animated];
     
-    [self loadUserInfo];
+    if(self.isLoad == NO)
+    {
+        self.isLoad = YES;
+    } else {    // 重新加载用户信息
+        [YTUserInfoTool loadNewUserInfo:^(BOOL result) {
+            self.topView.userInfo = [YTUserInfoTool userInfo];
+        }];
+    }
+    
     // 加载待办事项
     [self loadTodos];
+    
     
     // 刷新底部
 //    [self.bottom isShow];
@@ -314,7 +326,7 @@
     // 判断点击了哪个按钮
     if ([btnTitle isEqualToString:@"用户资料"]) {
         vc = [YTNormalWebController webWithTitle:@"用户资料" url:[NSString stringWithFormat:@"%@/my/profile/", YTH5Server]];
-    } else if([btnTitle isEqualToString:@"关联微信"]){
+    } else if([btnTitle isEqualToString:@"关联微信"] || [btnTitle isEqualToString:@"已关联微信"]){
          [self relationWeChat];
     } else if([btnTitle isEqualToString:@"推荐私募云给好友"]){
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -541,7 +553,7 @@
             param[@"headimgurl"] = account.iconURL;
             [YTHttpTool post:YTBindWeChat params:param success:^(id responseObject) {
                 // 重新加载用户信息
-                [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
+                [YTUserInfoTool loadNewUserInfo:^(BOOL result) {
                     if (result) {
                         self.topView.userInfo = [YTUserInfoTool userInfo];
                     }

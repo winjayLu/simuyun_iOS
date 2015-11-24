@@ -36,4 +36,10 @@
  */
 + (void)loadUserInfoWithresult:(void (^)(BOOL result))result;
 
+/**
+ *  重新获取最新的用户信息
+ *
+ */
++ (void)loadNewUserInfo:(void (^)(BOOL result))result;
+
 @end

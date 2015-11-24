@@ -24,22 +24,7 @@
       "scale" : "2x"
     },
     {
-      "resizing" : {
-        "mode" : "9-part",
-        "center" : {
-          "mode" : "tile",
-          "width" : 1,
-          "height" : 1
-        },
-        "cap-insets" : {
-          "bottom" : 2,
-          "top" : 2,
-          "right" : 45,
-          "left" : 44
-        }
-      },
       "idiom" : "universal",
-      "filename" : "dibubackgroud@3x.png",
       "scale" : "3x"
     }
   ],

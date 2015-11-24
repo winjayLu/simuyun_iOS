@@ -10,6 +10,7 @@
 #import "UIImage+Extend.h"
 #import "CoreTFManagerVC.h"
 #import "SVProgressHUD.h"
+#import "YTUserInfoTool.h"
 
 @interface YTSenMailView()
 {
@@ -113,6 +114,11 @@
         TFModel *tfm1=[TFModel modelWithTextFiled:mailField inputView:nil name:@"" insetBottom:140];
         return @[tfm1];
     }];
+    // 获取用户邮箱
+    YTUserInfo *userInfo = [YTUserInfoTool userInfo];
+    if (userInfo != nil && userInfo.email.length > 0) {
+        mailField.text = userInfo.email;
+    }
     
     // 按钮
     UIButton *button = [[UIButton alloc] init];

@@ -218,7 +218,7 @@ static UIWindow *_window;
     [self addSubview:button];
     
     // 标题
-    UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, button.height - 30,self.width, 15)];
+    UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(10, button.height - 30,self.width - 20, 15)];
     titleLable.text = title;
     [titleLable setFont:[UIFont systemFontOfSize:15]];
     [titleLable setTextAlignment:NSTextAlignmentCenter];

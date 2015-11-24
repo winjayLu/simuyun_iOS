@@ -212,7 +212,7 @@
             self.nameLable.text = userInfo.organizationName;
         }
     }
-    if (userInfo.weChatNickName.length > 0)
+    if (userInfo.wechatUnionid.length > 0)
     {
         [self.guanLianBtn setTitle:@"已关联微信" forState:UIControlStateNormal];
         self.guanLianBtn.enabled = NO;
