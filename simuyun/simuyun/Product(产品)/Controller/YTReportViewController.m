@@ -25,22 +25,6 @@
 
 @interface YTReportViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UITextFieldDelegate>
 
-/**
- *  产品名称
- */
-@property (weak, nonatomic) IBOutlet UILabel *productNameLable;
-/**
- *  订单编号
- */
-@property (weak, nonatomic) IBOutlet UILabel *orderCodeLable;
-/**
- *  客户名称
- */
-@property (weak, nonatomic) IBOutlet UILabel *customerNameLable;
-/**
- *  认购金额
- */
-@property (weak, nonatomic) IBOutlet UILabel *buyMoneyLable;
 
 /**
  *  证件类型
@@ -176,19 +160,6 @@
 }
 
 
-/**
- *  设置数据
- *
- */
-- (void)setProuctModel:(YTProductModel *)prouctModel
-{
-    _prouctModel = prouctModel;
-    self.productNameLable.text = prouctModel.pro_name;
-    
-    self.orderCodeLable.text = [NSString stringWithFormat:@"订单编号：%@",prouctModel.order_code];
-    self.customerNameLable.text = [NSString stringWithFormat:@"客户：%@", prouctModel.customerName];
-    self.buyMoneyLable.text = [NSString stringWithFormat:@"认购金额：%d万", prouctModel.buyMoney];
-}
 
 /**
  *  报备
@@ -436,7 +407,7 @@
             self.certificatesView = nil;
             self.photo.view.y = self.titleLable.y - 20 - 54;
             self.informationPhoto.view.y = self.informationLable.y - 20 - 54;
-            self.scroll.contentSize = CGSizeMake(DeviceWidth, 667);
+            self.scroll.contentSize = CGSizeMake(DeviceWidth, self.view.height);
         }
     }
     
@@ -533,7 +504,7 @@
         return @[tfm6,tfm2,tfm3,tfm4,tfm5];
         
     }];
-    self.scroll.contentSize = CGSizeMake(DeviceWidth, 720);
+    self.scroll.contentSize = CGSizeMake(DeviceWidth, self.view.height + 53);
 }
 
 

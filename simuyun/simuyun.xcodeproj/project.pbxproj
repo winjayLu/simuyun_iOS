@@ -39,6 +39,8 @@
 		971503B81BC76961007E27D0 /* CorePPTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 971503B61BC76961007E27D0 /* CorePPTVC.xib */; };
 		971503BB1BC769FB007E27D0 /* PPTPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 971503BA1BC769FB007E27D0 /* PPTPageControl.m */; };
 		97187A8F1BC666E200C64609 /* YTWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97187A8D1BC666E200C64609 /* YTWebViewController.xib */; };
+		9719F7D81C04696E009849B8 /* YTReportTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9719F7D71C04696E009849B8 /* YTReportTopView.m */; };
+		9719F7DA1C04697C009849B8 /* YTReportTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9719F7D91C04697C009849B8 /* YTReportTopView.xib */; };
 		972B88011BFAD3D0002A7E9B /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87DA1BFAD3D0002A7E9B /* AFHTTPRequestOperation.m */; };
 		972B88021BFAD3D0002A7E9B /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87DC1BFAD3D0002A7E9B /* AFHTTPRequestOperationManager.m */; };
 		972B88031BFAD3D0002A7E9B /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87DE1BFAD3D0002A7E9B /* AFHTTPSessionManager.m */; };
@@ -329,6 +331,9 @@
 		971503B91BC769FB007E27D0 /* PPTPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PPTPageControl.h; path = ../PPTPageControl.h; sourceTree = "<group>"; };
 		971503BA1BC769FB007E27D0 /* PPTPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PPTPageControl.m; path = ../PPTPageControl.m; sourceTree = "<group>"; };
 		97187A8D1BC666E200C64609 /* YTWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTWebViewController.xib; sourceTree = "<group>"; };
+		9719F7D61C04696E009849B8 /* YTReportTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTReportTopView.h; sourceTree = "<group>"; };
+		9719F7D71C04696E009849B8 /* YTReportTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTReportTopView.m; sourceTree = "<group>"; };
+		9719F7D91C04697C009849B8 /* YTReportTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTReportTopView.xib; sourceTree = "<group>"; };
 		972B87D91BFAD3D0002A7E9B /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		972B87DA1BFAD3D0002A7E9B /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		972B87DB1BFAD3D0002A7E9B /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -1103,6 +1108,9 @@
 				978C6FE61BCF8564003D183E /* YTProductCell.xib */,
 				97C981BE1BE72DE5005FDE2F /* YTSenMailView.h */,
 				97C981BF1BE72DE5005FDE2F /* YTSenMailView.m */,
+				9719F7D61C04696E009849B8 /* YTReportTopView.h */,
+				9719F7D71C04696E009849B8 /* YTReportTopView.m */,
+				9719F7D91C04697C009849B8 /* YTReportTopView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2163,6 +2171,7 @@
 				9790F8CC1BDF140900965C7B /* YTAuthenticationViewController.xib in Resources */,
 				97C606A71BC2985700E555E8 /* UMSocialLocalizable.strings in Resources */,
 				9769F9FC1BC9676B001B1F02 /* YTProfileTopView.xib in Resources */,
+				9719F7DA1C04697C009849B8 /* YTReportTopView.xib in Resources */,
 				978C626D1BE4A42900FE2C72 /* YTTodoViewCell.xib in Resources */,
 				97ABCB831BDE01660056C1A1 /* YTInformationTableViewCell.xib in Resources */,
 				97973CDD1BC391BA00B7B4CB /* PushConfig.plist in Resources */,
@@ -2271,6 +2280,7 @@
 				97C606471BC269CC00E555E8 /* UIImage+Cut.m in Sources */,
 				9798E2111BD9EF9300B235AE /* YTOrderNetValueCell.m in Sources */,
 				9769F9F61BC9676B001B1F02 /* YTContentCell.m in Sources */,
+				9719F7D81C04696E009849B8 /* YTReportTopView.m in Sources */,
 				9714A6F81BC7E0610018A14E /* YUDarkGlassView.m in Sources */,
 				97C6061A1BC266A900E555E8 /* CALayer+Anim.m in Sources */,
 				97C606261BC2679F00E555E8 /* NSString+Password.m in Sources */,

@@ -75,32 +75,24 @@
 // 签到弹出框
 @property (nonatomic, strong) YTBlackAlertView *blackAlert;
 
+
 @end
 
 @implementation YTHomeViewController
 
 
-- (void)loadView
-{
-    // 将控制器的View替换为ScrollView
-    UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:DeviceBounds];
-    mainView.bounces = NO;
-    mainView.showsVerticalScrollIndicator = NO;
-    mainView.contentSize = CGSizeMake(100, 10000);
-    mainView.delegate = self;
-    self.view = mainView;
-    self.mainView = mainView;
-    self.view.backgroundColor = YTViewBackground;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.view.backgroundColor = YTViewBackground;
     
     [MobClick event:@"nav_click" attributes:@{@"按钮" : @"首页"}];
     
     // 初始化顶部视图
     [self setupTopView];
+    
+    // 初始化底部ScrollView
+    [self setupScrollView];
     
     // 初始化待办事项
     [self setupTodoView];
@@ -138,11 +130,9 @@
     
     // 加载待办事项
     [self loadTodos];
-    
-    
-    // 刷新底部
-//    [self.bottom isShow];
 }
+
+
 
 // 检查更新
 - (void)updateData
@@ -210,6 +200,25 @@
     self.topView = topView;
     
 }
+
+/**
+ *  初始化底部ScrollView
+ */
+- (void)setupScrollView
+{
+    // 底部视图为Scrollview
+    CGFloat scrollViewY = CGRectGetMaxY(self.topView.frame);
+    CGFloat scrollViewH = DeviceHight - scrollViewY;
+    UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, scrollViewY, DeviceWidth, scrollViewH)];
+    mainView.bounces = NO;
+    mainView.showsVerticalScrollIndicator = NO;
+    mainView.contentSize = CGSizeMake(DeviceWidth, scrollViewH);
+    mainView.delegate = self;
+    mainView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:mainView];
+    self.mainView = mainView;
+}
+
 /**
  *  初始化待办事项
  */
@@ -226,11 +235,11 @@
         todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
     }
     YTContentView *content = [[YTContentView alloc] init];
-    content.frame = CGRectMake(magin, CGRectGetMaxY(self.topView.frame), self.view.width - magin * 2, todoHeight);
+    content.frame = CGRectMake(magin, 0, self.view.width - magin * 2, todoHeight);
     content.layer.cornerRadius = 5;
     content.layer.masksToBounds = YES;
     content.daili = self;
-    [self.view addSubview:content];
+    [self.mainView addSubview:content];
     self.todoView = content;
     [YTCenter addObserver:self selector:@selector(loadTodos) name:YTUpdateTodoList object:nil];
     [YTCenter addObserver:self selector:@selector(updateTodos) name:YTUpdateTodoFrame object:nil];
@@ -250,10 +259,10 @@
         bottom.height = 42;
     }
     bottom.BottomDelegate = self;
-    [self.view addSubview:bottom];
+    [self.mainView addSubview:bottom];
     self.bottom = bottom;
     // 设置滚动范围
-    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame) + 64)];
+    [self.mainView setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame) + 64)];
 }
 
 #pragma makr - 监听通知
@@ -300,13 +309,13 @@
     } else {
          todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
     }
-    self.todoView.frame = CGRectMake(magin, CGRectGetMaxY(self.topView.frame), self.view.width - magin * 2, todoHeight);
+    self.todoView.frame = CGRectMake(magin, 0, self.view.width - magin * 2, todoHeight);
 
     // 修改底部菜单frame
     self.bottom.y = CGRectGetMaxY(self.todoView.frame) + 8;
     
     // 设置滚动范围
-    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.bottom.frame) + 64)];
+    [self.mainView setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.bottom.frame) + 64)];
 }
 
 #pragma mark - 响应事件

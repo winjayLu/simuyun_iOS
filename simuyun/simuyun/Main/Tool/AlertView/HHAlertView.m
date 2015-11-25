@@ -7,6 +7,7 @@
 //
 
 #import "HHAlertView.h"
+#import "UIImage+Extend.h"
 
 
 #define OKBUTTON_BACKGROUND_COLOR [UIColor colorWithRed:200/255.0 green:22/255.0 blue:29/255.0 alpha:1]
@@ -165,14 +166,16 @@ static UIWindow *_window;
     if(cancel != nil)
     {
         _cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_detailLabel.frame) + 15, Button_SIZE_WIDTH, Buutton_SIZE_HEIGHT)];
-        [_cancelButton setBackgroundColor:CANCELBUTTON_BACKGROUND_COLOR];
+        [_cancelButton setBackgroundImage:[UIImage imageWithColor:CANCELBUTTON_BACKGROUND_COLOR] forState:UIControlStateNormal];
+//        [_cancelButton setBackgroundColor:CANCELBUTTON_BACKGROUND_COLOR];
         [_cancelButton setTitle:cancel forState:UIControlStateNormal];
         [_cancelButton addTarget:self action:@selector(dismissWithCancel) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_cancelButton];
         
         _OkButton = [[UIButton alloc] initWithFrame:CGRectMake(_cancelButton.frame.size.width, CGRectGetMaxY(_detailLabel.frame) + 15, Button_SIZE_WIDTH, Buutton_SIZE_HEIGHT)];
         [_OkButton setTitle:ok forState:UIControlStateNormal];
-        [_OkButton setBackgroundColor:OKBUTTON_BACKGROUND_COLOR];
+//        [_OkButton setBackgroundColor:OKBUTTON_BACKGROUND_COLOR];
+        [_OkButton setBackgroundImage:[UIImage imageWithColor:OKBUTTON_BACKGROUND_COLOR] forState:UIControlStateNormal];
         [_OkButton addTarget:self action:@selector(dismissWithOk) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_OkButton];
         
@@ -185,7 +188,8 @@ static UIWindow *_window;
     } else {
         _OkButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_detailLabel.frame) + 15, Button_SIZE_WIDTH * 2, Buutton_SIZE_HEIGHT)];
         [_OkButton setTitle:ok forState:UIControlStateNormal];
-        [_OkButton setBackgroundColor:OKBUTTON_BACKGROUND_COLOR];
+//        [_OkButton setBackgroundColor:OKBUTTON_BACKGROUND_COLOR];
+        [_OkButton setBackgroundImage:[UIImage imageWithColor:OKBUTTON_BACKGROUND_COLOR] forState:UIControlStateNormal];
         [_OkButton addTarget:self action:@selector(dismissWithOk) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_OkButton];
         

@@ -99,6 +99,7 @@
                 product.order_code = urlComps[3];
                 product.customerName = urlComps[4];
                 product.buyMoney = [urlComps[5] intValue];
+                product.pro_name = urlComps[6];
                 report.prouctModel = product;
                 [self.navigationController pushViewController:report animated:YES];
             } else if ([command isEqualToString:@"viewpdf"])

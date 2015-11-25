@@ -149,6 +149,11 @@
                 viewPdf.url = urlComps[2];
                 viewPdf.shareTitle = urlComps[3];
                 [self.navigationController pushViewController:viewPdf animated:YES];
+            } else if([command isEqualToString:@"copytoclipboard"])
+            {
+                UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                pasteboard.string = urlComps[2];
+                [SVProgressHUD showSuccessWithStatus:@"复制成功"];
             }
         }
 
