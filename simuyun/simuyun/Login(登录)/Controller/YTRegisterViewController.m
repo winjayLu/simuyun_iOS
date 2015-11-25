@@ -228,6 +228,10 @@
     {
         [SVProgressHUD showErrorWithStatus:@"手机号码不正确"];
         return YES;
+    } else if(self.password.text.length < 6)
+    {
+        [SVProgressHUD showErrorWithStatus:@"请输入6-14位密码"];
+        return YES;
     }
     if(zhuCe) {
         if (self.registerNumber.text.length == 0) {

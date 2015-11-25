@@ -190,9 +190,7 @@
         file.data = UIImageJPEGRepresentation(image, 0.5);
         [files addObject:file];
     }
-    YTLog(@"%zd",files.count);
     [YTHttpTool post:YTSlip params:nil files:files success:^(id responseObject) {
-        YTLog(@"%@", responseObject);
         self.Slips = [YTSlipModel objectArrayWithKeyValuesArray:responseObject];
         if (self.informationPhoto.selectedPhoto.count == 0) {
             [self startReport];
@@ -200,7 +198,6 @@
             [self uploadZhenJian];
         }
     } failure:^(NSError *error) {
-//        [SVProgressHUD showErrorWithStatus:@"报备失败"];
     }];
 }
 // 上传证件资料
@@ -220,11 +217,9 @@
         [files addObject:file];
     }
     [YTHttpTool post:YTSlip params:nil files:files success:^(id responseObject) {
-        //        YTLog(@"%@", responseObject);
         self.ZhenJian = [YTSlipModel objectArrayWithKeyValuesArray:responseObject];
         [self startReport];
     } failure:^(NSError *error) {
-        //        [SVProgressHUD showErrorWithStatus:@"报备失败"];
     }];
 }
 
@@ -265,7 +260,7 @@
               }
           } else if(error.userInfo[@"NSLocalizedDescription"] != nil)
           {
-              [SVProgressHUD showInfoWithStatus:@"请检查您的网络连接"];
+              [SVProgressHUD showInfoWithStatus:@"网络链接失败\n请稍候再试"];
           } else {
               [SVProgressHUD showErrorWithStatus:@"报备失败"];
           }
@@ -295,7 +290,6 @@
     }
     if (self.ZhenJian.count == 0) {
         [annex appendString:@"]"];
-        YTLog(@"%@", annex);
         return annex;
     }
     for (int i = 0; i < self.ZhenJian.count; i++) {
@@ -335,7 +329,6 @@
         [SVProgressHUD showErrorWithStatus:@"请输入分行支行"];
         return YES;
     }
-//    NSLog(@"%zd", self.photo.assetsArray.count);
      if(self.photo.selectedPhoto.count == 0)
     {
         [SVProgressHUD showErrorWithStatus:@"请上传打款凭条"];
@@ -430,7 +423,7 @@
     certificatesView.frame = CGRectMake(0, CGRectGetMaxY(self.ReferenceLine.frame) + 1, DeviceWidth, 53);
     [self.view addSubview:certificatesView];
     self.certificatesView = certificatesView;
-    
+
     // 标题
     UILabel *lable = [[UILabel alloc] init];
     lable.frame = CGRectMake(10, 25, 0, 0);

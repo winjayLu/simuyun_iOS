@@ -26,4 +26,6 @@
  */
 @property (nonatomic, strong) UIImage *logoImage;
 
+- (void)showAnimation;
+
 @end

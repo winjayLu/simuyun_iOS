@@ -46,7 +46,7 @@
               }
           } else if(error.userInfo[@"NSLocalizedDescription"] != nil)
           {
-              [SVProgressHUD showInfoWithStatus:@"请检查您的网络连接"];
+              [SVProgressHUD showInfoWithStatus:@"网络链接失败\n请稍候再试"];
           } else {
               [SVProgressHUD dismiss];
           }
@@ -83,10 +83,6 @@
                   [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
               }
           }
-//          else if(error.userInfo[@"NSLocalizedDescription"] != nil)
-//          {
-//              [SVProgressHUD showInfoWithStatus:@"请检查您的网络连接"];
-//          }
           if (failure) {
               failure(error);
           }
@@ -101,9 +97,6 @@
 {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    if ([YTAccountTool account].token != nil && [YTAccountTool account].token.length > 0) {
-//        [manager.requestSerializer setValue:[YTAccountTool account].token forHTTPHeaderField:@"token"];
-//    }
     // 2.发送请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, url];
     
@@ -125,6 +118,9 @@
             } else {
                 [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
             }
+        } else if(error.userInfo[@"NSLocalizedDescription"] != nil)
+        {
+            [SVProgressHUD showInfoWithStatus:@"网络链接失败\n请稍候再试"];
         }
         if (failure) {
             failure(error);
@@ -149,7 +145,6 @@
             mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
         });
     }];
-    
 }
 
 

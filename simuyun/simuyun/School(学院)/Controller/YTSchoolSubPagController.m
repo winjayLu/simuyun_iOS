@@ -107,6 +107,11 @@
     self.title = self.titleData;
     [self.progressProxy.progressView setProgress:1.0f animated:NO];
     self.view.userInteractionEnabled = YES;
+    // 禁用用户选择
+    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
+    
+    // 禁用长按弹出框
+    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
 }
 
 

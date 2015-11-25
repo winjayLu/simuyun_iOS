@@ -254,7 +254,8 @@
         // 添加一个logo按钮到tabBar上
         [self setupLogoView];
     }
-    
+    // 执行动画
+    [self.logo showAnimation];
 }
 
 - (void)setupLogoView
@@ -266,7 +267,6 @@
     logo.delegate = self;
     [self.tabBar addSubview:logo];
     self.logo = logo;
-    
 }
 
 - (void)logoViewDidSelectProfileItem

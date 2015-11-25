@@ -194,7 +194,7 @@
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         if(error.userInfo[@"NSLocalizedDescription"] != nil)
         {
-            [SVProgressHUD showInfoWithStatus:@"请检查您的网络连接"];
+            [SVProgressHUD showInfoWithStatus:@"网络链接失败\n请稍候再试"];
         }
     }];
     

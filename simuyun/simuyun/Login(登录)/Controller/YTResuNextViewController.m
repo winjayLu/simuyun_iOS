@@ -73,7 +73,7 @@
         return;
     } else if (![self.password.text isEqualToString:self.nextPassword.text])
     {
-        [SVProgressHUD showErrorWithStatus:@"两次密码输入不一致"];
+        [SVProgressHUD showErrorWithStatus:@"两次密码不一致"];
         return;
     }
     // YTresetPassword

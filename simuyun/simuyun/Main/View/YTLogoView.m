@@ -41,12 +41,6 @@
 // logo 背景图片
 @property (nonatomic, weak) UIImageView *bgView;
 
-//// logo 背景图片
-//@property (nonatomic, weak) UIImageView *bgView2;
-//
-//@property (nonatomic, assign) BOOL isBig;
-
-
 @end
 
 @implementation YTLogoView
@@ -55,73 +49,12 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
         // 初始化录音配置
 //        [self setupAudio];
         // 初始化按钮
         [self setupLogoBtn];
-        //设置定时检测
-//        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(scaleLogo) userInfo:nil repeats:YES];
     }
     return self;
-}
-
-- (void)scaleLogo
-{
-//    if (self.isBig) {
-//        [UIView animateWithDuration:0.8 animations:^{
-//            self.bgView.transform = CGAffineTransformScale(self.bgView.transform,1.1, 1.1);
-//        }];
-//        self.isBig = NO;
-//    } else {
-//        [UIView animateWithDuration:0.8 animations:^{
-//            self.bgView.transform = CGAffineTransformIdentity;
-//        }];
-//        self.isBig = YES;
-//    }
-    
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//         self.transform = CGAffineTransformScale(self.transform, 0, 10);
-//    });
-    
-//    if (self.isBig) {
-//        self.isBig = NO;
-//        [UIView animateWithDuration:1.4 animations:^{
-//            self.bgView.hidden = NO;
-//            self.bgView.transform = CGAffineTransformScale(self.bgView.transform,1.2, 1.2);
-//        } completion:^(BOOL finished) {
-//            self.bgView2.hidden = NO;
-////            self.bgView.transform = CGAffineTransformIdentity;
-//        }];
-//        
-//    } else {
-//        self.isBig = YES;
-//        [UIView animateWithDuration:1.4 animations:^{
-//            self.bgView2.hidden = NO;
-//            self.bgView2.transform = CGAffineTransformScale(self.bgView2.transform,1.2, 1.2);
-//        } completion:^(BOOL finished) {
-//            
-//            self.bgView.hidden = NO;
-////            self.bgView2.transform = CGAffineTransformIdentity;
-//        }];
-//        
-//    }
-    
-    
-//    [UIView animateWithDuration:1.4 animations:^{
-//        self.bgView.transform = CGAffineTransformScale(self.bgView.transform,1.2, 1.2);
-//    } completion:^(BOOL finished) {
-//
-//        self.bgView.transform = CGAffineTransformIdentity;
-//    }];
-//    [UIView animateWithDuration:1.4 animations:^{
-//        self.bgView.alpha = 1.0;
-////        self.bgView.hidden = 
-//        self.bgView.transform = CGAffineTransformScale(self.bgView.transform,1.1, 1.1);
-//    } completion:^(BOOL finished) {
-//        self.bgView.alpha = 0.0;
-//        self.bgView.transform = CGAffineTransformIdentity;
-//    }];
 }
 
 
@@ -130,12 +63,61 @@
  */
 - (void)logoClick
 {
-
     // 调用代理方法
     if ([self.delegate respondsToSelector:@selector(logoViewDidSelectProfileItem)]) {
         [self.delegate logoViewDidSelectProfileItem];
     }
+    [self showAnimation];
 }
+
+/**
+ *  播放动画
+ */
+- (void)showAnimation
+{
+    [self.bgView startAnimating];
+}
+
+
+#pragma mark - 初始化方法
+/**
+ *  初始化logo按钮
+ */
+- (void)setupLogoBtn
+{
+    // logo按钮
+    UIButton *logoButton = [[UIButton alloc] init];
+    // 按钮单击事件
+    [logoButton addTarget:self action:@selector(logoClick) forControlEvents:UIControlEventTouchUpInside];
+    logoButton.size = self.logoImage.size;
+    [self addSubview:logoButton];
+    self.logoButton = logoButton;
+    
+    // 背景图片
+    UIImageView *bgView = [[UIImageView alloc] init];
+    bgView.image = self.logoImage;
+    NSMutableArray *dict = [NSMutableArray array];
+    for (int i = 1; i < 13; i++) {
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"logoanimate%d", i]];
+        [dict addObject:image];
+    }
+    bgView.animationImages = dict;
+    bgView.animationRepeatCount = 1;
+    bgView.animationDuration = dict.count * 0.1f;
+    bgView.size = logoButton.size;
+    [self addSubview:bgView];
+    self.bgView = bgView;
+    
+
+    // 移出按钮范围事件
+//    [logoButton addTarget:self action:@selector(logoExit) forControlEvents:UIControlEventTouchDragExit];
+    
+    // 添加logo按钮的长按事件
+//    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(btnLong:)];
+//    longPress.minimumPressDuration = 1; //定义按的时间
+//    [logoButton addGestureRecognizer:longPress];
+}
+
 
 /**
  *  logo按钮的长按事件
@@ -164,7 +146,7 @@
         self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(detectionVoice) userInfo:nil repeats:YES];
         
     } else if(gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-
+        
         // 结束录音
         self.isTape = NO;
         double cTime = self.recorder.currentTime;
@@ -173,7 +155,7 @@
             [SVProgressHUD showSuccessWithStatus:@"消息已发出"];
             
             // 读取二进制音频文件
-//            NSData *audio = [NSData dataWithContentsOfURL:self.urlPlay];
+            //            NSData *audio = [NSData dataWithContentsOfURL:self.urlPlay];
         }else {
             //删除记录的文件
             [self.recorder deleteRecording];
@@ -240,47 +222,6 @@
     }
     // 修改指示器中的图片
     [MBProgressHUD setImageName:image];
-}
-
-
-#pragma mark - 初始化方法
-/**
- *  初始化logo按钮
- */
-- (void)setupLogoBtn
-{
-    // logo按钮
-    UIButton *logoButton = [[UIButton alloc] init];
-    [logoButton setBackgroundImage:self.logoImage forState:UIControlStateNormal];
-    [logoButton setBackgroundImage:self.logoImage forState:UIControlStateHighlighted];
-    // 按钮单击事件
-    [logoButton addTarget:self action:@selector(logoClick) forControlEvents:UIControlEventTouchUpInside];
-    logoButton.size = self.logoImage.size;
-    
-//    // 背景图片1
-//    UIImageView *bgView = [[UIImageView alloc] init];
-//    bgView.image = [UIImage imageNamed:@"shuibowen"];
-//    bgView.size = logoButton.size;
-//    [self addSubview:bgView];
-//    self.bgView = bgView;
-    
-//    // 背景图片2
-//    UIImageView *bgView2 = [[UIImageView alloc] init];
-//    bgView2.image = [UIImage imageNamed:@"shuibowen"];
-//    bgView2.size = logoButton.size;
-//    bgView2.hidden = YES;
-//    [self addSubview:bgView2];
-//    self.bgView2 = bgView2;
-
-    // 移出按钮范围事件
-//    [logoButton addTarget:self action:@selector(logoExit) forControlEvents:UIControlEventTouchDragExit];
-    
-    [self addSubview:logoButton];
-    self.logoButton = logoButton;
-    // 添加logo按钮的长按事件
-//    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(btnLong:)];
-//    longPress.minimumPressDuration = 1; //定义按的时间
-//    [logoButton addGestureRecognizer:longPress];
 }
 
 - (void)btnDragged:(UIButton *)sender withEvent:(UIEvent *)event {
@@ -401,7 +342,7 @@
 - (UIImage *)logoImage
 {
     if (!_logoImage) {
-        _logoImage = [UIImage imageNamed:@"yunjian"];
+        _logoImage = [UIImage imageNamed:@"logoanimate12"];
     }
     return _logoImage;
 }

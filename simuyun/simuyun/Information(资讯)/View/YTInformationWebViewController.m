@@ -59,7 +59,6 @@
     }
     mainView.scalesPageToFit = YES;
     mainView.delegate = self;
-    [mainView.scrollView setShowsVerticalScrollIndicator:NO];
     self.view = mainView;
     self.view.backgroundColor = YTGrayBackground;
 }

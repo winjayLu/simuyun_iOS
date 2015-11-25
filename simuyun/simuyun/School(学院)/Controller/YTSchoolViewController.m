@@ -80,7 +80,12 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    [((UIWebView *)self.view).scrollView.header endRefreshing];
+    [webView.scrollView.header endRefreshing];
+    // 禁用用户选择
+    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
+    
+    // 禁用长按弹出框
+    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
