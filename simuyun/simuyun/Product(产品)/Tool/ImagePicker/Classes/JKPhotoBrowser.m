@@ -26,17 +26,20 @@ static NSString *kJKPhotoBrowserCellIdentifier = @"kJKPhotoBrowserCellIdentifier
 
 @implementation JKPhotoBrowser
 
-- (id)initWithFrame:(CGRect)frame
+
+- (instancetype)initWithFrame:(CGRect)frame isShow:(BOOL)isShow
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [JKUtil getColor:@"282828"];
         self.autoresizesSubviews = YES;
+        self.isShowYuLan = isShow;
         [self collectionView];
         [self topView];
     }
     return self;
 }
+
 
 - (void)closePhotoBrower
 {
@@ -229,17 +232,20 @@ static NSString *kJKPhotoBrowserCellIdentifier = @"kJKPhotoBrowserCellIdentifier
         [button addTarget:self action:@selector(closePhotoBrower) forControlEvents:UIControlEventTouchUpInside];
         [_topView addSubview:button];
         
-        _checkButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        UIImage  *img1 = [UIImage imageNamed:@"photo_check_default"];
-        UIImage  *imgH = [UIImage imageNamed:@"photo_check_selected"];
-        _checkButton.frame = CGRectMake(0, 0, img1.size.width, img1.size.height);
-        [_checkButton setBackgroundImage:img1 forState:UIControlStateNormal];
-        [_checkButton setBackgroundImage:imgH forState:UIControlStateSelected];
-        [_checkButton addTarget:self action:@selector(photoDidChecked) forControlEvents:UIControlEventTouchUpInside];
-        _checkButton.exclusiveTouch = YES;
-        _checkButton.right = self.width-10;
-        _checkButton.centerY = button.centerY;
-        [_topView addSubview:_checkButton];
+        if (!self.isShowYuLan)
+        {
+            _checkButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            UIImage  *img1 = [UIImage imageNamed:@"photo_check_default"];
+            UIImage  *imgH = [UIImage imageNamed:@"photo_check_selected"];
+            _checkButton.frame = CGRectMake(0, 0, img1.size.width, img1.size.height);
+            [_checkButton setBackgroundImage:img1 forState:UIControlStateNormal];
+            [_checkButton setBackgroundImage:imgH forState:UIControlStateSelected];
+            [_checkButton addTarget:self action:@selector(photoDidChecked) forControlEvents:UIControlEventTouchUpInside];
+            _checkButton.exclusiveTouch = YES;
+            _checkButton.right = self.width-10;
+            _checkButton.centerY = button.centerY;
+            [_topView addSubview:_checkButton];
+        }
         
         [self addSubview:_topView];
     }

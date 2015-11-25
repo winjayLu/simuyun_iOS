@@ -27,6 +27,12 @@
 
 @property (nonatomic, assign) NSInteger    currentPage;
 
+/**
+ *  是否显示预览
+ */
+@property (nonatomic, assign) BOOL isShowYuLan;
+
+- (instancetype)initWithFrame:(CGRect)frame isShow:(BOOL)isShow;
 
 - (void)show:(BOOL)animated;
 - (void)hide:(BOOL)animated;

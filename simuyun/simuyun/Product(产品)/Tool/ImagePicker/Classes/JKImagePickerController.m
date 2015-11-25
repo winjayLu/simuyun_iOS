@@ -109,16 +109,16 @@ ALAssetsFilter * ALAssetsFilterFromJKImagePickerControllerFilterType(JKImagePick
 
     self.navigationItem.titleView = self.titleButton;
     
-//    UIButton *preBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    preBtn.frame = CGRectMake(0, 0, 50, 30);
-//    [preBtn setTitle:@"预览" forState:UIControlStateNormal];
-//    [preBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [preBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
-//    [preBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateDisabled];
-//    [preBtn addTarget:self action:@selector(previewPhotoesSelected) forControlEvents:UIControlEventTouchUpInside];
-//    UIBarButtonItem *preItem = [[UIBarButtonItem alloc] initWithCustomView:preBtn];
-//    [self.navigationItem setRightBarButtonItem:preItem animated:NO];
-//    self.navigationItem.rightBarButtonItem.enabled = NO;
+    UIButton *preBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    preBtn.frame = CGRectMake(0, 0, 50, 30);
+    [preBtn setTitle:@"预览" forState:UIControlStateNormal];
+    [preBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [preBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
+    [preBtn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateDisabled];
+    [preBtn addTarget:self action:@selector(previewPhotoesSelected) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *preItem = [[UIBarButtonItem alloc] initWithCustomView:preBtn];
+    [self.navigationItem setRightBarButtonItem:preItem animated:NO];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
 }
 
 - (void)cancelEventDidTouched
@@ -184,12 +184,13 @@ ALAssetsFilter * ALAssetsFilterFromJKImagePickerControllerFilterType(JKImagePick
     [self passSelectedAssets];
 }
 
-- (void)browerPhotoes:(NSArray *)array page:(NSInteger)page
+- (void)browerPhotoes:(NSArray *)array page:(NSInteger)page isShow:(BOOL)isShow
 {
-    JKPhotoBrowser  *photoBorwser = [[JKPhotoBrowser alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    JKPhotoBrowser  *photoBorwser = [[JKPhotoBrowser alloc] initWithFrame:[UIScreen mainScreen].bounds isShow:isShow];
     photoBorwser.delegate = self;
     photoBorwser.pickerController = self;
     photoBorwser.currentPage = page;
+    photoBorwser.isShowYuLan = isShow;
     photoBorwser.assetsArray = [NSMutableArray arrayWithArray:array];
     [photoBorwser show:YES];
 }
@@ -208,7 +209,7 @@ ALAssetsFilter * ALAssetsFilterFromJKImagePickerControllerFilterType(JKImagePick
                                 [assets addObject:asset];
                                 // Check if the loading finished
                                 if (assets.count == weakSelf.selectedAssetArray.count) {
-                                    [weakSelf browerPhotoes:assets page:0];
+                                    [weakSelf browerPhotoes:assets page:0 isShow:YES];
                                 }
                             } failureBlock:^(NSError *error) {
 
@@ -547,7 +548,7 @@ static NSString *kJKAssetsFooterViewIdentifier = @"kJKAssetsFooterViewIdentifier
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self browerPhotoes:self.assetsArray page:[indexPath row]-1];
+    [self browerPhotoes:self.assetsArray page:[indexPath row]-1 isShow:NO];
 }
 
 #pragma mark - getter
