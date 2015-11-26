@@ -26,6 +26,7 @@
 
 @interface AppDelegate ()
 
+
 @end
 
 @implementation AppDelegate
@@ -38,14 +39,14 @@
     // 获取程序启动信息
     [YTResourcesTool loadResourcesWithresult:^(BOOL result) {}];
     
-    // 友盟分享及微信登录
-    [self setupUmeng];
-    
-    // 集成极光推送
-    [self setupJpush:launchOptions];
-    
     // 检测是否有推送消息
     [self checkNotification:launchOptions];
+
+    // 友盟分享及微信登录
+    [self setupUmeng];
+
+    // 集成极光推送
+    [self setupJpush:launchOptions];
     
     // 创建窗口
     self.window = [[UIWindow alloc] init];
@@ -121,15 +122,12 @@
     
     [APService setupWithOption:launchOptions];
     [APService setLogOFF];
-    
-
 }
 
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     [APService registerDeviceToken:deviceToken];
-
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -152,9 +150,9 @@
  */
 - (void)checkNotification:(NSDictionary *)launchOptions
 {
-    NSDictionary *remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
-//    YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:remoteNotification];
-//    [YTJpushTool saveJpush:jpush];
+    NSDictionary* remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:remoteNotification];
+    [YTJpushTool saveJpush:jpush];
     if (remoteNotification) {
         [YTJpushTool saveTest:remoteNotification];
     }
@@ -166,6 +164,7 @@
  */
 - (void)receivedPushNotification:(NSDictionary *)userInfo
 {
+    if ([YTJpushTool jpush]) return;
     YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:userInfo];
     HHAlertView *alert = [HHAlertView shared];
     [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"" Title:@"推送消息" detail:userInfo.description cancelButton:@"呵呵" Okbutton:@"哈哈" block:^(HHAlertButton buttonindex) {

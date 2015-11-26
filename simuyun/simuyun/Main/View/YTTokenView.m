@@ -32,14 +32,4 @@
     self.delegate = self;
 }
 
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    // 执行js代码
-    NSString *js = [NSString stringWithFormat:@"setData('%@', '%@');",[YTAccountTool account].token, [YTAccountTool account].userId];
-    [webView stringByEvaluatingJavaScriptFromString:js];
-}
-
-
-
-
 @end

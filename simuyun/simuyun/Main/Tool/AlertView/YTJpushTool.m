@@ -59,7 +59,7 @@ static NSDictionary *_test;
 
 + (void)saveTest:(NSDictionary *)test
 {
-    _test = [test copy];
+    _test = test;
 }
 
 @end

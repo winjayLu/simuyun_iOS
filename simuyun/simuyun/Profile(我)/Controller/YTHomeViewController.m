@@ -41,7 +41,7 @@
 
 #define magin 3
 
-@interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate, UIScrollViewDelegate, shareCustomDelegate>
+@interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate, UIScrollViewDelegate, shareCustomDelegate, UIWebViewDelegate>
 
 /**
  *  顶部视图
@@ -106,29 +106,13 @@
    
     // 填充token
     self.token = [[YTTokenView alloc] init];
+    self.token.delegate = self;
     
     // 检查更新
     [self updateData];
     
     // 加载用户信息
     [self loadUserInfo];
-    
-    
-    // 检测是否有推送消息
-    
-//    YTJpushModel *jpush = [YTJpushTool jpush];
-    
-//    if (jpush != nil) {
-//        YTNormalWebController *webVc = [YTNormalWebController webWithTitle:jpush.title url:jpush.jumpUrl];
-//        webVc.hidesBottomBarWhenPushed = YES;
-//        [self.navigationController pushViewController:webVc animated:YES];
-//    }
-    NSDictionary *dict = [YTJpushTool test];
-    if (dict) {        
-        HHAlertView *alert = [HHAlertView shared];
-        [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"" Title:@"推送消息" detail:dict.description cancelButton:@"呵呵" Okbutton:@"哈哈" block:^(HHAlertButton buttonindex) {
-        }];
-    }
 }
 
 
@@ -645,6 +629,54 @@
     }
 }
 
+#pragma mark - 推送跳转
+- (void)pushNotificationWithJump
+{
+    // 检测是否有推送消息
+    YTJpushModel *jpush = [YTJpushTool jpush];
+    if (jpush) {
+        YTNormalWebController *webView =[YTNormalWebController webWithTitle:jpush.title url:jpush.jumpUrl];
+        webView.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:webView animated:NO];
+        [YTJpushTool saveJpush:nil];
+    }
+}
+
+
+#pragma mark - UIWebViewDelegate
+
+- (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    
+    NSString *urlString = [[request URL] absoluteString];
+    NSArray *result = [urlString componentsSeparatedByString:@":"];
+    NSMutableArray *urlComps = [[NSMutableArray alloc] init];
+    for (NSString *str in result) {
+        [urlComps addObject:[str stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"app"])
+    {
+        // 跳转的地址和标题
+        if (urlComps.count) {
+            NSString *command = urlComps[1];
+            if ([command isEqualToString:@"closepage"])
+            {
+                [self.token removeFromSuperview];
+                self.token = nil;
+                [self pushNotificationWithJump];
+            }
+        }
+    }
+    return YES;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    // 执行js代码
+    NSString *js = [NSString stringWithFormat:@"setData('%@', '%@');",[YTAccountTool account].token, [YTAccountTool account].userId];
+    [webView stringByEvaluatingJavaScriptFromString:js];
+}
+
 
 #pragma mark - 获取数据
 
@@ -656,7 +688,6 @@
     }
     return _todos;
 }
-
 
 - (void)dealloc
 {
