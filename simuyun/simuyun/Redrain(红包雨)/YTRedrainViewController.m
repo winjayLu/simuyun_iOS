@@ -17,9 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    if (self.url == nil ) {
-//        self.url = @"http://www.simuyun.com/redpackets";
-//    }
+
     // 将控制器的View替换为webView
     UIWebView *mainView = [[UIWebView alloc] initWithFrame:DeviceBounds];
     

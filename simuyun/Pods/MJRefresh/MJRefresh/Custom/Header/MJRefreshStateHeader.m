@@ -11,7 +11,7 @@
 @interface MJRefreshStateHeader()
 {
     /** 显示上一次刷新时间的label */
-    __weak UILabel *_lastUpdatedTimeLabel;
+//    __weak UILabel *_lastUpdatedTimeLabel;
     /** 显示刷新状态的label */
     __weak UILabel *_stateLabel;
 }
@@ -37,13 +37,13 @@
     return _stateLabel;
 }
 
-- (UILabel *)lastUpdatedTimeLabel
-{
-    if (!_lastUpdatedTimeLabel) {
-        [self addSubview:_lastUpdatedTimeLabel = [UILabel label]];
-    }
-    return _lastUpdatedTimeLabel;
-}
+//- (UILabel *)lastUpdatedTimeLabel
+//{
+//    if (!_lastUpdatedTimeLabel) {
+//        [self addSubview:_lastUpdatedTimeLabel = [UILabel label]];
+//    }
+//    return _lastUpdatedTimeLabel;
+//}
 
 #pragma mark - 公共方法
 - (void)setTitle:(NSString *)title forState:(MJRefreshState)state
@@ -114,15 +114,15 @@
     } else {
         // 状态
         self.stateLabel.mj_x = 0;
-        self.stateLabel.mj_y = 0;
+        self.stateLabel.mj_y = 15;
         self.stateLabel.mj_w = self.mj_w;
         self.stateLabel.mj_h = self.mj_h * 0.5;
         
         // 更新时间
-        self.lastUpdatedTimeLabel.mj_x = 0;
-        self.lastUpdatedTimeLabel.mj_y = self.stateLabel.mj_h;
-        self.lastUpdatedTimeLabel.mj_w = self.mj_w;
-        self.lastUpdatedTimeLabel.mj_h = self.mj_h - self.lastUpdatedTimeLabel.mj_y;
+//        self.lastUpdatedTimeLabel.mj_x = 0;
+//        self.lastUpdatedTimeLabel.mj_y = self.stateLabel.mj_h;
+//        self.lastUpdatedTimeLabel.mj_w = self.mj_w;
+//        self.lastUpdatedTimeLabel.mj_h = self.mj_h - self.lastUpdatedTimeLabel.mj_y;
     }
 }
 
@@ -134,6 +134,6 @@
     self.stateLabel.text = self.stateTitles[@(state)];
     
     // 重新设置key（重新显示时间）
-    self.lastUpdatedTimeKey = self.lastUpdatedTimeKey;
+//    self.lastUpdatedTimeKey = self.lastUpdatedTimeKey;
 }
 @end

@@ -37,6 +37,7 @@
 #import "ShareCustomView.h"
 #import "ShareManage.h"
 #import "YTInformationWebViewController.h"
+#import "YTJpushTool.h"
 
 #define magin 3
 
@@ -111,6 +112,23 @@
     
     // 加载用户信息
     [self loadUserInfo];
+    
+    
+    // 检测是否有推送消息
+    
+//    YTJpushModel *jpush = [YTJpushTool jpush];
+    
+//    if (jpush != nil) {
+//        YTNormalWebController *webVc = [YTNormalWebController webWithTitle:jpush.title url:jpush.jumpUrl];
+//        webVc.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:webVc animated:YES];
+//    }
+    NSDictionary *dict = [YTJpushTool test];
+    if (dict) {        
+        HHAlertView *alert = [HHAlertView shared];
+        [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"" Title:@"推送消息" detail:dict.description cancelButton:@"呵呵" Okbutton:@"哈哈" block:^(HHAlertButton buttonindex) {
+        }];
+    }
 }
 
 

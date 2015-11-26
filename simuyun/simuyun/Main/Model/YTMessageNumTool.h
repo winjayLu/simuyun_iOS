@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "YTMessageNum.h"
 
+// 消息模块工具类
+
 @interface YTMessageNumTool : NSObject
 
 /**

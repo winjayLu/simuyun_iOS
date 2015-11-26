@@ -35,6 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = YTGrayBackground;
     [YTCenter addObserver:self selector:@selector(jump) name:YTJumpToTodoList object:nil];
     
     // 监听客服消息数字变化

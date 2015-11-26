@@ -32,7 +32,6 @@
     [super viewDidLoad];
 
     self.title = @"资讯中心";
-
     self.view.backgroundColor = YTGrayBackground;
 }
 

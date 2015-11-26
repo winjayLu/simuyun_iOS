@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "YTResources.h"
 
+// 程序资源信息工具类
+
+
 @interface YTResourcesTool : NSObject
 
 

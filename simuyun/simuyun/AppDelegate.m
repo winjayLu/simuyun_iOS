@@ -18,6 +18,11 @@
 #import "UIWindow+Extension.h"
 #import "YTResourcesTool.h"
 #import "HHAlertView.h"
+#import "YTJpushModel.h"
+#import "YTTabBarController.h"
+#import "YTNormalWebController.h"
+#import "YTNavigationController.h"
+#import "YTJpushTool.h"
 
 @interface AppDelegate ()
 
@@ -28,7 +33,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // 清空数字
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
     // 获取程序启动信息
     [YTResourcesTool loadResourcesWithresult:^(BOOL result) {}];
@@ -129,44 +134,13 @@
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    // 取得 APNs 标准信息内容
-    NSDictionary *aps = [userInfo valueForKey:@"aps"];
-    NSString *content = [aps valueForKey:@"alert"]; //推送显示的内容
-    NSInteger badge = [[aps valueForKey:@"badge"] integerValue]; //badge数量
-    NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
-    
-    // 取得自定义字段内容
-    NSString *customizeField1 = [userInfo valueForKey:@"customizeField1"]; //自定义参数，key是自己定义的
-    NSLog(@"content =[%@], badge=[%zd], sound=[%@], customize field =[%@]",content,badge,sound,customizeField1);
-    HHAlertView *alert = [HHAlertView shared];
-    [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"" Title:@"推送消息" detail:userInfo.description cancelButton:@"呵呵" Okbutton:@"哈哈" block:^(HHAlertButton buttonindex) {
-        
-    }];
-    
-    
+    [self receivedPushNotification:userInfo];
     [APService handleRemoteNotification:userInfo];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
-    
-    
-    // 取得 APNs 标准信息内容
-    NSDictionary *aps = [userInfo valueForKey:@"aps"];
-    NSString *content = [aps valueForKey:@"alert"]; //推送显示的内容
-    NSInteger badge = [[aps valueForKey:@"badge"] integerValue]; //badge数量
-    NSString *sound = [aps valueForKey:@"sound"]; //播放的声音
-    
-    // 取得自定义字段内容
-    NSString *customizeField1 = [userInfo valueForKey:@"customizeField1"]; //自定义参数，key是自己定义的
-    NSLog(@"content =[%@], badge=[%zd], sound=[%@], customize field =[%@]",content,badge,sound,customizeField1);
-    
-    HHAlertView *alert = [HHAlertView shared];
-    [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"" Title:@"推送消息" detail:userInfo.description cancelButton:@"呵呵" Okbutton:@"哈哈" block:^(HHAlertButton buttonindex) {
-        
-    }];
-
-    
+    [self receivedPushNotification:userInfo];
     // iOS7
     [APService handleRemoteNotification:userInfo];
     completionHandler(UIBackgroundFetchResultNewData);
@@ -174,12 +148,55 @@
 
 /**
  *  检测是否有推送消息
+ *  自动跳转
  */
 - (void)checkNotification:(NSDictionary *)launchOptions
 {
-//    NSDictionary *remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
-//    YTLog(@"%@", remoteNotification);}
+    NSDictionary *remoteNotification = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
+//    YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:remoteNotification];
+//    [YTJpushTool saveJpush:jpush];
+    if (remoteNotification) {
+        [YTJpushTool saveTest:remoteNotification];
+    }
 }
+
+/**
+ *  程序内收到推送消息
+ *
+ */
+- (void)receivedPushNotification:(NSDictionary *)userInfo
+{
+    YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:userInfo];
+    HHAlertView *alert = [HHAlertView shared];
+    [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"" Title:@"推送消息" detail:userInfo.description cancelButton:@"呵呵" Okbutton:@"哈哈" block:^(HHAlertButton buttonindex) {
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            // 需要跳转的控制器
+            YTNormalWebController *webVc = [YTNormalWebController webWithTitle:jpush.title url:jpush.jumpUrl];
+            webVc.hidesBottomBarWhenPushed = YES;
+            // 获取当前控制器
+            YTNavigationController *keyVc = [self keyViewController];
+            [keyVc pushViewController:webVc animated:YES];
+        });
+    }];
+}
+
+/**
+ *  获取当前正在显示的控制器
+ *
+ */
+- (YTNavigationController *)keyViewController
+{
+    UIViewController *appRootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        UIViewController *keyVc = ((UITabBarController *)appRootVC).selectedViewController;
+        return (YTNavigationController *)keyVc;
+    }
+    return nil;
+}
+
+
+
 
 /**
  *  接受到内存警告
