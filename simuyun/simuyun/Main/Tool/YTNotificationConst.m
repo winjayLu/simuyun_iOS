@@ -7,7 +7,6 @@ NSString *const YTJumpToTodoList = @"YTJumpToTodoList";
 NSString *const YTUpdateIconImage = @"YTUpdateIconImage";
 NSString *const YTUpdateUserInfo = @"YTUpdateUserInfo";
 NSString *const YTRedrain = @"YTRedrain";
-NSString *const YTUpdateTodoList = @"YTUpdateTodoList";
 NSString *const YTUpdateTodoFrame = @"YTUpdateTodoFrame";
 NSString *const YTUpdateTodoData = @"YTUpdateTodoData";
 NSString *const YTUpdateMessageNum = @"YTUpdateMessageNum";

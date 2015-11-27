@@ -14,19 +14,18 @@
 //  开发环境
 #define YTServer @"http://192.168.17.213:8080/api/app/"
 #define YTH5Server @"http://192.168.17.213"
+#define UmengAppKey @"545867defd98c5f23a0021da"
 #else
 //  生产环境
 #define YTServer @"https://intime.simuyun.com/api/app/"
 #define YTH5Server @"http://www.simuyun.com"
+#define UmengAppKey @"5514ed3cfd98c5bca4000872"
 #endif
 
 //  微信
 #define WXAppID @"wx7259d65d4382e566"
 #define WXAppSecret @"6e1deaa7b9a8c1380bd69e3de47fcc21"
 
-// 友盟
-//#define UmengAppKey @"545867defd98c5f23a0021da"  // 开发环境
-#define UmengAppKey @"5514ed3cfd98c5bca4000872"  // 生产环境
 
 
 /** 接口名 */

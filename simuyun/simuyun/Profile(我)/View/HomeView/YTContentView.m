@@ -185,18 +185,17 @@
     param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"messageId"] = messageId;
     [mgr DELETE:newUrl parameters:[NSDictionary httpWithDictionary:param] success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        // 剩余数量小于4，重新加载
-        if (_todos.count < 4)
-        {
-            [YTCenter postNotificationName:YTUpdateTodoFrame object:nil];
-        }
-        [YTCenter postNotificationName:YTUpdateTodoData object:nil];
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         if(error.userInfo[@"NSLocalizedDescription"] != nil)
         {
             [SVProgressHUD showInfoWithStatus:@"网络链接失败\n请稍候再试"];
         }
     }];
+    // 剩余数量小于4，调整界面
+    if (_todos.count < 4)
+    {
+        [YTCenter postNotificationName:YTUpdateTodoFrame object:nil];
+    }
     
     // 修改todo数量
     YTMessageNum *messageNum = [YTMessageNumTool messageNum];

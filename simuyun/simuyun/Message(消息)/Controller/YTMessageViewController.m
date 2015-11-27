@@ -11,7 +11,6 @@
 #import "YTCloudObserveController.h"
 #import "YTHttpTool.h"
 #import "CorePagesBarBtn.h"
-#import "YTTodoListViewController.h"
 #import "YTProductNewsController.h"
 #import "YTSystemCenterController.h"
 #import "YTAccountTool.h"
@@ -103,17 +102,17 @@
         
         YTCloudObserveController *tvc1 = [[YTCloudObserveController alloc] init];
         tvc1.superVc = self;
-        YTTodoListViewController *tvc2 = [[YTTodoListViewController alloc] init];
+//        YTTodoListViewController *tvc2 = [[YTTodoListViewController alloc] init];
         YTProductNewsController *tvc3 = [[YTProductNewsController alloc] init];
         YTSystemCenterController *tvc4 = [[YTSystemCenterController alloc] init];
         
         
         CorePageModel *model1=[CorePageModel model:tvc1 pageBarName:@"消息"];
-        CorePageModel *model2=[CorePageModel model:tvc2 pageBarName:@"待办事项"];
+//        CorePageModel *model2=[CorePageModel model:tvc2 pageBarName:@"待办事项"];
         CorePageModel *model3=[CorePageModel model:tvc3 pageBarName:@"产品动态"];
         CorePageModel *model4=[CorePageModel model:tvc4 pageBarName:@"系统通知"];
         
-        NSArray *pageModels=@[model1,model2,model3,model4];
+        NSArray *pageModels=@[model1,model3,model4];
         
         
         //自定义配置

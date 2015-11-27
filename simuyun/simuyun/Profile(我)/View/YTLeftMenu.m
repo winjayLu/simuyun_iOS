@@ -228,8 +228,6 @@
 {
     self.iconImage.layer.masksToBounds = YES;
     self.iconImage.layer.cornerRadius = self.iconImage.frame.size.width * 0.5;
-//    self.iconImage.layer.rasterizationScale = [UIScreen mainScreen].scale;
-//    self.iconImage.layer.shouldRasterize = YES;
     self.iconImage.clipsToBounds = YES;
     
     UIImage *placeholder = [UIImage imageNamed:@"avatar_default_big"];

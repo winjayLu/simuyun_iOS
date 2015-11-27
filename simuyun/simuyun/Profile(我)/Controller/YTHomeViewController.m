@@ -38,6 +38,8 @@
 #import "ShareManage.h"
 #import "YTInformationWebViewController.h"
 #import "YTJpushTool.h"
+#import "TimerLoopView.h"
+#import "YTTodoListViewController.h"
 
 #define magin 3
 
@@ -77,6 +79,9 @@
 @property (nonatomic, strong) YTBlackAlertView *blackAlert;
 
 
+// 跑马灯视图
+@property (nonatomic, weak) TimerLoopView *loopView;
+
 @end
 
 @implementation YTHomeViewController
@@ -91,6 +96,9 @@
     
     // 初始化顶部视图
     [self setupTopView];
+    
+    // 初始化运营公告跑马灯
+    [self setupLoopView];
     
     // 初始化底部ScrollView
     [self setupScrollView];
@@ -204,15 +212,32 @@
 }
 
 /**
+ *  初始化跑马灯视图
+ */
+- (void)setupLoopView
+{
+    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:10];
+    for (int i=0; i<5; i++) {
+        LoopObj *obj=[[LoopObj alloc]init];
+        obj.LabelName=[NSString stringWithFormat:@"盈泰财富云恒山%d号",i];
+        [array addObject:obj];
+    }
+    TimerLoopView *loop=[[TimerLoopView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), DeviceWidth, 40) withitemArray:array];
+    [self.view addSubview:loop];
+    self.loopView = loop;
+
+}
+
+/**
  *  初始化底部ScrollView
  */
 - (void)setupScrollView
 {
     // 底部视图为Scrollview
-    CGFloat scrollViewY = CGRectGetMaxY(self.topView.frame);
+    CGFloat scrollViewY = CGRectGetMaxY(self.loopView.frame);
     CGFloat scrollViewH = DeviceHight - scrollViewY;
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, scrollViewY, DeviceWidth, scrollViewH)];
-    mainView.bounces = NO;
+//    mainView.bounces = NO;
     mainView.showsVerticalScrollIndicator = NO;
     mainView.contentSize = CGSizeMake(DeviceWidth, scrollViewH);
     mainView.delegate = self;
@@ -243,8 +268,7 @@
     content.daili = self;
     [self.mainView addSubview:content];
     self.todoView = content;
-    [YTCenter addObserver:self selector:@selector(loadTodos) name:YTUpdateTodoList object:nil];
-    [YTCenter addObserver:self selector:@selector(updateTodos) name:YTUpdateTodoFrame object:nil];
+    [YTCenter addObserver:self selector:@selector(loadTodos) name:YTUpdateTodoFrame object:nil];
 }
 /**
  *  初始化底部菜单
@@ -371,10 +395,10 @@
 - (void)selectedTodo:(NSUInteger)row
 {
     if (row == -1) {
-        // 获取根控制器
-        [YTCenter postNotificationName:YTJumpToTodoList object:nil];
-        YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-        [appRootVC setSelectedIndex:0];
+        YTTodoListViewController *todoVc = [[YTTodoListViewController alloc] init];
+        todoVc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:todoVc animated:YES];
+        
         [MobClick event:@"main_click" attributes:@{@"按钮" : @"全部待办", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     } else {
         YTMessageModel *message = self.todos[row];

@@ -40,9 +40,10 @@
  *  修改Cell的frame
  *
  */
+// frame.origin.x +
 - (void)setFrame:(CGRect)frame
 {
-    CGRect newF = {{frame.origin.x + maginWidth, frame.origin.y}, {frame.size.width - maginWidth * 2, frame.size.height}};
+    CGRect newF = {{ maginWidth, frame.origin.y}, {DeviceWidth - maginWidth * 2, frame.size.height}};
     [super setFrame:newF];
 }
 

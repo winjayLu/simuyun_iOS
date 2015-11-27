@@ -10,8 +10,9 @@
 
 #import <UIKit/UIKit.h>
 #import "YTMessageModel.h"
+#import "SWTableViewCell.h"
 
-@interface YTTodoViewCell : UITableViewCell
+@interface YTTodoViewCell : SWTableViewCell
 
 + (instancetype)todoCell;
 
