@@ -550,8 +550,8 @@
 		97B08AA91BC2472B007EBD24 /* simuyunUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = simuyunUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		97B08AAD1BC2472B007EBD24 /* simuyunUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = simuyunUITests.m; sourceTree = "<group>"; };
 		97B08AAF1BC2472B007EBD24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		97B4B1281C07F31500A0FF3A /* TimerLoopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerLoopView.h; sourceTree = "<group>"; };
-		97B4B1291C07F31500A0FF3A /* TimerLoopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerLoopView.m; sourceTree = "<group>"; };
+		97B4B1281C07F31500A0FF3A /* TimerLoopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TimerLoopView.h; path = ../../Tool/TimerLoopView.h; sourceTree = "<group>"; };
+		97B4B1291C07F31500A0FF3A /* TimerLoopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TimerLoopView.m; path = ../../Tool/TimerLoopView.m; sourceTree = "<group>"; };
 		97B9404B1C0696CA0092FA12 /* YTJpushTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YTJpushTool.h; path = AlertView/YTJpushTool.h; sourceTree = "<group>"; };
 		97B9404C1C0696CA0092FA12 /* YTJpushTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YTJpushTool.m; path = AlertView/YTJpushTool.m; sourceTree = "<group>"; };
 		97B9404E1C0697540092FA12 /* YTJpushModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTJpushModel.h; sourceTree = "<group>"; };
@@ -1022,6 +1022,8 @@
 		9769F9E71BC9676B001B1F02 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
+				97B4B1281C07F31500A0FF3A /* TimerLoopView.h */,
+				97B4B1291C07F31500A0FF3A /* TimerLoopView.m */,
 				9769F9E81BC9676B001B1F02 /* YTBottomView.h */,
 				9769F9E91BC9676B001B1F02 /* YTBottomView.m */,
 				9769F9EA1BC9676B001B1F02 /* YTContentCell.h */,
@@ -1664,8 +1666,6 @@
 		97C605CF1BC2621F00E555E8 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
-				97B4B1281C07F31500A0FF3A /* TimerLoopView.h */,
-				97B4B1291C07F31500A0FF3A /* TimerLoopView.m */,
 				9780A6EC1BDF74B000E973D9 /* AutocompletionTableView.h */,
 				9780A6ED1BDF74B000E973D9 /* AutocompletionTableView.m */,
 				978FA7881BDA236100E53DA4 /* BFNavigationBarDrawer.h */,

@@ -53,6 +53,7 @@
     [self setupHintView];
     
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewChat)];
+    
 }
 
 /**
@@ -92,7 +93,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [self.tableView reloadData];
     [MobClick event:@"msgPanel_click" attributes:@{@"按钮" : @"消息", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 

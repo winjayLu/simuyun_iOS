@@ -43,6 +43,8 @@
 
     // 去掉下划线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -34, 0);
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewChat)];
     
@@ -85,7 +87,6 @@
     self.pageNo = 1;
     param[@"pageNo"] = @(self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
-        NSLog(@"%@", responseObject);
         self.messages = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
@@ -106,7 +107,6 @@
     param[@"pagesize"] = @20;
     param[@"pageNo"] = @(++self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
-        YTLog(@"%@", responseObject);
         [self.messages addObjectsFromArray:[YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]]];
         [self.tableView reloadData];
         [self.tableView.footer endRefreshing];

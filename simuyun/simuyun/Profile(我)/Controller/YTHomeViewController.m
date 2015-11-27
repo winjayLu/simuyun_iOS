@@ -43,7 +43,7 @@
 
 #define magin 3
 
-@interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate, UIScrollViewDelegate, shareCustomDelegate, UIWebViewDelegate>
+@interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate, UIScrollViewDelegate, shareCustomDelegate, UIWebViewDelegate, loopViewDelegate>
 
 /**
  *  顶部视图
@@ -97,9 +97,6 @@
     // 初始化顶部视图
     [self setupTopView];
     
-    // 初始化运营公告跑马灯
-    [self setupLoopView];
-    
     // 初始化底部ScrollView
     [self setupScrollView];
     
@@ -116,11 +113,14 @@
     self.token = [[YTTokenView alloc] init];
     self.token.delegate = self;
     
-    // 检查更新
-    [self updateData];
-    
     // 加载用户信息
     [self loadUserInfo];
+    
+    // 获取运营公告跑马灯
+    [self loadLoopView];
+    
+    // 检查更新
+    [self updateData];
 }
 
 
@@ -211,23 +211,45 @@
     
 }
 
+#pragma mark - 跑马灯
 /**
  *  初始化跑马灯视图
  */
-- (void)setupLoopView
+- (void)loadLoopView
 {
-    NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:10];
-    for (int i=0; i<5; i++) {
-        LoopObj *obj=[[LoopObj alloc]init];
-        obj.LabelName=[NSString stringWithFormat:@"盈泰财富云恒山%d号",i];
-        [array addObject:obj];
-    }
-    TimerLoopView *loop=[[TimerLoopView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), DeviceWidth, 40) withitemArray:array];
-    [self.view addSubview:loop];
-    self.loopView = loop;
-
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:10];
+        for (int i=1; i<4; i++) {
+            LoopObj *obj=[[LoopObj alloc]init];
+            obj.LabelName=[NSString stringWithFormat:@"盈泰财富云恒山%d号",i];
+            [array addObject:obj];
+        }
+        TimerLoopView *loop=[[TimerLoopView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), DeviceWidth, 40) withitemArray:array];
+        [self.view addSubview:loop];
+        loop.loopDelegate = self;
+        self.loopView = loop;
+        self.mainView.y = CGRectGetMaxY(self.loopView.frame);
+    });
 }
 
+// 跑马灯代理方法
+- (void)removeVIew
+{
+    [self.loopView removeFromSuperview];
+    self.loopView = nil;
+    self.mainView.y = CGRectGetMaxY(self.topView.frame);
+}
+
+- (void)pushView:(LoopObj *)loopObj
+{
+    YTNormalWebController *webVc =[YTNormalWebController webWithTitle:loopObj.LabelName url:@"http://www.caimuyun.cn"];
+    webVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:webVc animated:YES];
+}
+
+#pragma mark - 底部视图
 /**
  *  初始化底部ScrollView
  */
@@ -235,6 +257,9 @@
 {
     // 底部视图为Scrollview
     CGFloat scrollViewY = CGRectGetMaxY(self.loopView.frame);
+    if (scrollViewY == 0) {
+        scrollViewY = CGRectGetMaxY(self.topView.frame);
+    }
     CGFloat scrollViewH = DeviceHight - scrollViewY;
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, scrollViewY, DeviceWidth, scrollViewH)];
 //    mainView.bounces = NO;

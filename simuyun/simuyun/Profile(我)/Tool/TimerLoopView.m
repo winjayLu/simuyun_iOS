@@ -10,7 +10,7 @@
 
 #import "TimerLoopView.h"
 
-
+#define repeat 3
 
 @implementation LoopObj
 
@@ -35,8 +35,13 @@
     CGFloat _width;
     
     
-     NSTimer *m_timer;
+    NSTimer *m_timer;
+
 }
+/**
+ *  当前循环次数
+ */
+@property (nonatomic, assign) int repeatCount;
 
 -(void)makeselfUI;
 
@@ -141,7 +146,7 @@
 - (void)startTimer
 {
     if (m_timer == nil) {
-        m_timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(updateTitle) userInfo:nil repeats:YES];
+        m_timer = [NSTimer timerWithTimeInterval:3.0 target:self selector:@selector(updateTitle) userInfo:nil repeats:YES];
         [[NSRunLoop mainRunLoop] addTimer:m_timer forMode:NSRunLoopCommonModes];
     }
 }
@@ -159,11 +164,24 @@
  */
 - (void)titleClick
 {
-    [self releaseTimer];
+    NSUInteger selectedIndex = 0;
+    if (autoIndex < _itemarray.count) {
+        selectedIndex = autoIndex;
+    }
+    LoopObj *selectObj = _itemarray[selectedIndex];
+    [self.loopDelegate pushView:selectObj];
 }
 
 - (void)updateTitle
 {
+    /**
+     *  判断是否全部轮播三册
+     */
+    if (self.repeatCount > _itemarray.count * repeat) {
+        [self releaseTimer];
+        [self.loopDelegate removeVIew];
+    }
+    
     //起始位置
     UIView *topLabel = (UIView *)[abstractScrollview viewWithTag:10];
     CGPoint point1 = CGPointMake(0, 0);
@@ -183,7 +201,7 @@
     }
     
     [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:2.0];
+    [UIView setAnimationDuration:2];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDelegate:self];
     
@@ -197,6 +215,7 @@
     abstractScrollview.contentOffset = pointmiddle;
     
     [UIView commitAnimations];
+    self.repeatCount++;
     
 }
 

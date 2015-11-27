@@ -10,7 +10,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 //loop Object
 @interface LoopObj : NSObject
 
@@ -18,6 +17,17 @@
 @property (nonatomic,strong)NSString              *LabelName;
 
 @end
+
+
+@protocol loopViewDelegate <NSObject>
+
+- (void)removeVIew;
+
+- (void)pushView:(LoopObj *)loopObj;
+
+@end
+
+
 
 @interface TimerLoopView : UIView
 
@@ -29,6 +39,11 @@
 
 
 @property(nonatomic,readonly) NSArray   *itemarray;
+
+/**
+ *  代理
+ */
+@property (nonatomic, weak) id loopDelegate;
 
 
 //startTimer
