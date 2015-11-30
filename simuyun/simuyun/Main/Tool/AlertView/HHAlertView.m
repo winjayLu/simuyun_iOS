@@ -87,18 +87,17 @@ static UIWindow *_window;
  
     [self uiStyle];
     _secletBlock = block;
-    switch (HHAlertStyle) {
-        case HHAlertStyleDefault:
-        {
-            [self drawTick:imagename];
-        }
-            break;
-    }
     
+    [self drawTick:imagename];
     
     [self configtext:title detail:detail];
     
-    [self configButton:cancel Okbutton:ok];
+    
+    if (HHAlertStyle == HHAlertStyleDefault) {
+        [self configButton:cancel Okbutton:ok];
+    } else {
+        [self jpushConfigButton:cancel Okbutton:ok];
+    }
     
     _window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     _window.backgroundColor = YTRGBA(0, 0, 0, 0.1);
@@ -163,18 +162,24 @@ static UIWindow *_window;
 - (void)configButton:(NSString *)cancel Okbutton:(NSString *)ok
 {
 
+//    CGFloat Button_SIZE_WIDTH = (HHAlertview_SIZE_WIDTH * 0.5);
+//    CGFloat okBtnWidth = Button_SIZE_WIDTH;
+//    CGFloat cancelBtnWidth = Button_SIZE_WIDTH;
+//    if (alertStyle == HHAlertStyleJpush) {
+//        okBtnWidth = HHAlertview_SIZE_WIDTH * 0.67;
+//        cancelBtnWidth = HHAlertview_SIZE_WIDTH * 0.33;
+//    }
+
     if(cancel != nil)
     {
         _cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_detailLabel.frame) + 15, Button_SIZE_WIDTH, Buutton_SIZE_HEIGHT)];
         [_cancelButton setBackgroundImage:[UIImage imageWithColor:CANCELBUTTON_BACKGROUND_COLOR] forState:UIControlStateNormal];
-//        [_cancelButton setBackgroundColor:CANCELBUTTON_BACKGROUND_COLOR];
         [_cancelButton setTitle:cancel forState:UIControlStateNormal];
         [_cancelButton addTarget:self action:@selector(dismissWithCancel) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_cancelButton];
         
         _OkButton = [[UIButton alloc] initWithFrame:CGRectMake(_cancelButton.frame.size.width, CGRectGetMaxY(_detailLabel.frame) + 15, Button_SIZE_WIDTH, Buutton_SIZE_HEIGHT)];
         [_OkButton setTitle:ok forState:UIControlStateNormal];
-//        [_OkButton setBackgroundColor:OKBUTTON_BACKGROUND_COLOR];
         [_OkButton setBackgroundImage:[UIImage imageWithColor:OKBUTTON_BACKGROUND_COLOR] forState:UIControlStateNormal];
         [_OkButton addTarget:self action:@selector(dismissWithOk) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_OkButton];
@@ -188,7 +193,6 @@ static UIWindow *_window;
     } else {
         _OkButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_detailLabel.frame) + 15, Button_SIZE_WIDTH * 2, Buutton_SIZE_HEIGHT)];
         [_OkButton setTitle:ok forState:UIControlStateNormal];
-//        [_OkButton setBackgroundColor:OKBUTTON_BACKGROUND_COLOR];
         [_OkButton setBackgroundImage:[UIImage imageWithColor:OKBUTTON_BACKGROUND_COLOR] forState:UIControlStateNormal];
         [_OkButton addTarget:self action:@selector(dismissWithOk) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_OkButton];
@@ -202,6 +206,34 @@ static UIWindow *_window;
     }
     
 }
+
+- (void)jpushConfigButton:(NSString *)cancel Okbutton:(NSString *)ok
+{
+    
+    CGFloat okBtnWidth = HHAlertview_SIZE_WIDTH * 0.67;
+    CGFloat cancelBtnWidth = HHAlertview_SIZE_WIDTH * 0.33;
+
+    _cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_detailLabel.frame) + 15, cancelBtnWidth, Buutton_SIZE_HEIGHT)];
+    [_cancelButton setBackgroundImage:[UIImage imageNamed:@"pushBlack"] forState:UIControlStateNormal];
+    [_cancelButton setBackgroundImage:[UIImage imageNamed:@"pushBlackanxia"] forState:UIControlStateHighlighted];
+    [_cancelButton setTitle:cancel forState:UIControlStateNormal];
+    [_cancelButton addTarget:self action:@selector(dismissWithCancel) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_cancelButton];
+    
+    _OkButton = [[UIButton alloc] initWithFrame:CGRectMake(_cancelButton.frame.size.width, CGRectGetMaxY(_detailLabel.frame) + 15, okBtnWidth, Buutton_SIZE_HEIGHT)];
+    [_OkButton setTitle:ok forState:UIControlStateNormal];
+    [_OkButton setBackgroundImage:[UIImage imageNamed:@"pushok"] forState:UIControlStateNormal];
+    [_OkButton setBackgroundImage:[UIImage imageNamed:@"pushokanxia"] forState:UIControlStateHighlighted];
+    [_OkButton addTarget:self action:@selector(dismissWithOk) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_OkButton];
+    
+    CGFloat oldx = self.frame.origin.x;
+    CGFloat oldw = self.frame.size.width;
+    CGFloat viewH = CGRectGetMaxY(_cancelButton.frame);
+    CGFloat viewY = (DeviceHight - viewH) * 0.5;
+    self.frame = CGRectMake(oldx, viewY, oldw, viewH);
+}
+
 
 - (void)dismissWithCancel
 {
@@ -224,22 +256,20 @@ static UIWindow *_window;
 - (void)destroy
 {
     
-//    [UIView animateWithDuration:0.5 animations:^{
-        self.alpha=0;
-        self.layer.cornerRadius = 5;
-        self.layer.shadowOffset = CGSizeMake(0, 5);
-        self.layer.shadowOpacity = 0.3f;
-        self.layer.shadowRadius = 20.0f;
-//    } completion:^(BOOL finished) {
-        [_OkButton removeFromSuperview];
-        [_cancelButton removeFromSuperview];
-        _OkButton=nil;
-        _cancelButton = nil;
-        _secletBlock=nil;
-        [self removeFromSuperview];
-        _window.hidden = YES;
-        _window = nil;
-//    }];
+    self.alpha=0;
+    self.layer.cornerRadius = 5;
+    self.layer.shadowOffset = CGSizeMake(0, 5);
+    self.layer.shadowOpacity = 0.3f;
+    self.layer.shadowRadius = 20.0f;
+    
+    [_OkButton removeFromSuperview];
+    [_cancelButton removeFromSuperview];
+    _OkButton=nil;
+    _cancelButton = nil;
+    _secletBlock=nil;
+    [self removeFromSuperview];
+    _window.hidden = YES;
+    _window = nil;
 }
 
 

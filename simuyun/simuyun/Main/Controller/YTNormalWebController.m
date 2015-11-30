@@ -45,6 +45,7 @@
     } else {
         [mainView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
     }
+
     mainView.scalesPageToFit = YES;
     mainView.delegate = self;
     [mainView.scrollView setShowsVerticalScrollIndicator:NO];

@@ -55,7 +55,6 @@
     
     // 初始化Item
     [self setupItem];
-    
 }
 
 /**

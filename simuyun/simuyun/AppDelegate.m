@@ -167,16 +167,19 @@
     if ([YTJpushTool jpush]) return;
     YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:userInfo];
     HHAlertView *alert = [HHAlertView shared];
-    [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"" Title:@"推送消息" detail:userInfo.description cancelButton:@"呵呵" Okbutton:@"哈哈" block:^(HHAlertButton buttonindex) {
+    [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"推送消息" detail:@"ssss" cancelButton:@"返回" Okbutton:@"产品中心" block:^(HHAlertButton buttonindex) {
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            // 需要跳转的控制器
-            YTNormalWebController *webVc = [YTNormalWebController webWithTitle:jpush.title url:jpush.jumpUrl];
-            webVc.hidesBottomBarWhenPushed = YES;
-            // 获取当前控制器
-            YTNavigationController *keyVc = [self keyViewController];
-            [keyVc pushViewController:webVc animated:YES];
-        });
+        if(buttonindex == HHAlertButtonOk)
+        {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                // 需要跳转的控制器
+                YTNormalWebController *webVc = [YTNormalWebController webWithTitle:jpush.title url:jpush.jumpUrl];
+                webVc.hidesBottomBarWhenPushed = YES;
+                // 获取当前控制器
+                YTNavigationController *keyVc = [self keyViewController];
+                [keyVc pushViewController:webVc animated:YES];
+            });
+        }
     }];
 }
 

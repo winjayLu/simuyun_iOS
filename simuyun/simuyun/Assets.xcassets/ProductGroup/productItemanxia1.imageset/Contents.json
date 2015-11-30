@@ -2,16 +2,15 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "productItemanxia1.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "taishananxia@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "taishananxia@3x.png",
       "scale" : "3x"
     }
   ],

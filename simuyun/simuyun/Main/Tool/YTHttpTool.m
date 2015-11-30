@@ -136,11 +136,11 @@
 {
     [YTCenter postNotificationName:YTStopRequest object:nil];
     HHAlertView *alert = [HHAlertView shared];
-    [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"gantan" Title:@"危险警告" detail:@"请重新登录" cancelButton:nil Okbutton:@"重新登录" block:^(HHAlertButton buttonindex) {
+    [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"gantan" Title:YTTokenError detail:YTTokenErrorContent cancelButton:nil Okbutton:@"知道了" block:^(HHAlertButton buttonindex) {
         // 清除用户信息
         [YTUserInfoTool clearUserInfo];
         // 获取程序主窗口
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.75 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
             mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
         });

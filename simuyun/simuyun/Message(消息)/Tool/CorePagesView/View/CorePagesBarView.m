@@ -69,12 +69,9 @@
     self.showsHorizontalScrollIndicator=NO;
     
     self.backgroundColor = [UIColor whiteColor];
-//    self.backgroundColor = [UIColor clearColor];
     
     //注册通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screenRotate) name:UIDeviceOrientationDidChangeNotification object:nil];
-    
-    [YTCenter addObserver:self selector:@selector(updateMessageNum) name:YTUpdateMessageNum object:nil];
 }
 
 -(void)screenRotate{
@@ -86,12 +83,6 @@
     
     //移除通知
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-
-// 更新待办事项小红点
-- (void)updateMessageNum {
-    [self.todoBtn isShow:NO];
 }
 
 -(void)setPageModels:(NSArray *)pageModels{
@@ -128,9 +119,6 @@
         //设置文字
         [btn setTitle:str forState:UIControlStateNormal];
         
-        if ([str isEqualToString:@"待办事项"]) {
-            self.todoBtn = btn;
-        }
         
         //设置tag
         btn.tag=i;
@@ -230,20 +218,6 @@
 -(void)btnClick:(CorePagesBarBtn *)btn{
     
     [btn isShow:NO];
-    
-    // 待办事项特殊处理
-    NSString *btnTitle = btn.currentTitle;
-    if ([btnTitle isEqualToString:@"待办事项"]) {
-        // 消息数量
-        YTMessageNum *messageNum = [YTMessageNumTool messageNum];
-        int todoNum = messageNum.TODO_LIST;
-        if (todoNum > 0) {
-            [btn isShow:YES];
-        } else {
-            [btn isShow:NO];
-        }
-    }
-    
     
     if(self.selectedBtn == btn) return;
     

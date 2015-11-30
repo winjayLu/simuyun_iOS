@@ -256,6 +256,7 @@
 		97ED0CD31BE2460200E95750 /* YTProductdetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97ED0CD21BE2460200E95750 /* YTProductdetailController.m */; };
 		97ED0CD61BE248B300E95750 /* YTOrderdetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97ED0CD51BE248B300E95750 /* YTOrderdetailController.m */; };
 		97F17F5B1BE0CB63006E6DA8 /* YTSlipModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F17F5A1BE0CB63006E6DA8 /* YTSlipModel.m */; };
+		97F44E511C0BF0DE0069569E /* YTOperationCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F44E501C0BF0DE0069569E /* YTOperationCenterController.m */; };
 		C7C7A3BFF6245A07C6961ED3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1695905209A227AB6ABE80C8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -744,6 +745,8 @@
 		97ED0CD51BE248B300E95750 /* YTOrderdetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTOrderdetailController.m; sourceTree = "<group>"; };
 		97F17F591BE0CB63006E6DA8 /* YTSlipModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSlipModel.h; sourceTree = "<group>"; };
 		97F17F5A1BE0CB63006E6DA8 /* YTSlipModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSlipModel.m; sourceTree = "<group>"; };
+		97F44E4F1C0BF0DE0069569E /* YTOperationCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTOperationCenterController.h; sourceTree = "<group>"; };
+		97F44E501C0BF0DE0069569E /* YTOperationCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTOperationCenterController.m; sourceTree = "<group>"; };
 		EE4C2D6D5E8167BC60D82A90 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1800,6 +1803,8 @@
 				97C605F21BC2622E00E555E8 /* YTMessageViewController.m */,
 				97BC997B1BD4DC8B0090BDE8 /* YTCloudObserveController.h */,
 				97BC997C1BD4DC8B0090BDE8 /* YTCloudObserveController.m */,
+				97F44E4F1C0BF0DE0069569E /* YTOperationCenterController.h */,
+				97F44E501C0BF0DE0069569E /* YTOperationCenterController.m */,
 				978C626E1BE4ABFA00FE2C72 /* YTProductNewsController.h */,
 				978C626F1BE4ABFA00FE2C72 /* YTProductNewsController.m */,
 				978C62711BE4AD9E00FE2C72 /* YTSystemCenterController.h */,
@@ -2340,6 +2345,7 @@
 				97B940501C0697540092FA12 /* YTJpushModel.m in Sources */,
 				9780A3391BFC3AB0005A7527 /* UIView+JKPicker.m in Sources */,
 				9769FA051BC968F2001B1F02 /* YTLeftMenu.m in Sources */,
+				97F44E511C0BF0DE0069569E /* YTOperationCenterController.m in Sources */,
 				97C606551BC26F0A00E555E8 /* UIView+Extension.m in Sources */,
 				970020CA1BD6507F00231F52 /* YTContentViewController.m in Sources */,
 				97E44B711BD344E300952B11 /* YTStockItem.m in Sources */,

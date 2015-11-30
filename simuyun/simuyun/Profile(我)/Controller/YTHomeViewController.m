@@ -244,7 +244,7 @@
 
 - (void)pushView:(LoopObj *)loopObj
 {
-    YTNormalWebController *webVc =[YTNormalWebController webWithTitle:loopObj.LabelName url:@"http://www.caimuyun.cn"];
+    YTNormalWebController *webVc =[YTNormalWebController webWithTitle:loopObj.LabelName url:@"http://www.caifuyun.cn"];
     webVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webVc animated:YES];
 }
