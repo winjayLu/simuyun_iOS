@@ -40,6 +40,7 @@
 #import "YTJpushTool.h"
 #import "TimerLoopView.h"
 #import "YTTodoListViewController.h"
+#import "YTAboutViewController.h"
 
 #define magin 3
 
@@ -231,6 +232,8 @@
         loop.loopDelegate = self;
         self.loopView = loop;
         self.mainView.y = CGRectGetMaxY(self.loopView.frame);
+        CGSize oldContent = self.mainView.contentSize;
+        self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height + 40);
     });
 }
 
@@ -240,6 +243,8 @@
     [self.loopView removeFromSuperview];
     self.loopView = nil;
     self.mainView.y = CGRectGetMaxY(self.topView.frame);
+    CGSize oldContent = self.mainView.contentSize;
+    self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height - 40);
 }
 
 - (void)pushView:(LoopObj *)loopObj
@@ -367,6 +372,11 @@
     
     // 设置滚动范围
     [self.mainView setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.bottom.frame) + 64)];
+    
+    if (self.loopView != nil) {
+        CGSize oldContent = self.mainView.contentSize;
+        self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height + 40);
+    }
 }
 
 #pragma mark - 响应事件
@@ -396,8 +406,7 @@
         //
         vc = [YTNormalWebController webWithTitle:@"帮助" url:[NSString stringWithFormat:@"%@/help/", YTH5Server]];
     } else if([btnTitle isEqualToString:@"关于私募云"]){
-        vc = [YTNormalWebController webWithTitle:@"关于私募云" url:[NSString stringWithFormat:@"%@/about/?ver=4.0&t=%@", YTH5Server, [NSDate stringDate]]];
-        ((YTNormalWebController *)vc).isDate = YES;
+        vc = [[YTAboutViewController alloc] init];
     } else if([btnTitle isEqualToString:@"400-188-8848"]){
         UIWebView *callWebview =[[UIWebView alloc] init];
         NSURL *telURL =[NSURL URLWithString:@"tel://400-188-8848"];

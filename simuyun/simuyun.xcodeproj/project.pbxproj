@@ -60,6 +60,8 @@
 		972B88111BFAD3D0002A7E9B /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87FC1BFAD3D0002A7E9B /* UIProgressView+AFNetworking.m */; };
 		972B88121BFAD3D0002A7E9B /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87FE1BFAD3D0002A7E9B /* UIRefreshControl+AFNetworking.m */; };
 		972B88131BFAD3D0002A7E9B /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B88001BFAD3D0002A7E9B /* UIWebView+AFNetworking.m */; };
+		973D3DC11C0D76AE006D6B0C /* YTAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 973D3DBF1C0D76AE006D6B0C /* YTAboutViewController.m */; };
+		973D3DC21C0D76AE006D6B0C /* YTAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 973D3DC01C0D76AE006D6B0C /* YTAboutViewController.xib */; };
 		975149501BDCB79B0017B6E8 /* YTCustomerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9751494E1BDCB79B0017B6E8 /* YTCustomerServiceCell.m */; };
 		975149511BDCB79B0017B6E8 /* YTCustomerServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9751494F1BDCB79B0017B6E8 /* YTCustomerServiceCell.xib */; };
 		975149541BDCB87A0017B6E8 /* YTBlackAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 975149531BDCB87A0017B6E8 /* YTBlackAlertView.m */; };
@@ -376,6 +378,9 @@
 		972B87FE1BFAD3D0002A7E9B /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		972B87FF1BFAD3D0002A7E9B /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		972B88001BFAD3D0002A7E9B /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		973D3DBE1C0D76AE006D6B0C /* YTAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAboutViewController.h; sourceTree = "<group>"; };
+		973D3DBF1C0D76AE006D6B0C /* YTAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAboutViewController.m; sourceTree = "<group>"; };
+		973D3DC01C0D76AE006D6B0C /* YTAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTAboutViewController.xib; sourceTree = "<group>"; };
 		9751494D1BDCB79B0017B6E8 /* YTCustomerServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTCustomerServiceCell.h; sourceTree = "<group>"; };
 		9751494E1BDCB79B0017B6E8 /* YTCustomerServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTCustomerServiceCell.m; sourceTree = "<group>"; };
 		9751494F1BDCB79B0017B6E8 /* YTCustomerServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTCustomerServiceCell.xib; sourceTree = "<group>"; };
@@ -1007,6 +1012,16 @@
 				972B88001BFAD3D0002A7E9B /* UIWebView+AFNetworking.m */,
 			);
 			path = "UIKit+AFNetworking";
+			sourceTree = "<group>";
+		};
+		973D3DBD1C0D7695006D6B0C /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				973D3DBE1C0D76AE006D6B0C /* YTAboutViewController.h */,
+				973D3DBF1C0D76AE006D6B0C /* YTAboutViewController.m */,
+				973D3DC01C0D76AE006D6B0C /* YTAboutViewController.xib */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 		9751494C1BDCB74D0017B6E8 /* View */ = {
@@ -1649,6 +1664,7 @@
 				978C62661BE4A3CD00FE2C72 /* YTTodoListViewController.h */,
 				978C62671BE4A3CE00FE2C72 /* YTTodoListViewController.m */,
 				9798E2011BD9E0C000B235AE /* Order */,
+				973D3DBD1C0D7695006D6B0C /* Other */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2185,6 +2201,7 @@
 				971503AC1BC75E78007E27D0 /* PPTCell.xib in Resources */,
 				9790F8CC1BDF140900965C7B /* YTAuthenticationViewController.xib in Resources */,
 				97C606A71BC2985700E555E8 /* UMSocialLocalizable.strings in Resources */,
+				973D3DC21C0D76AE006D6B0C /* YTAboutViewController.xib in Resources */,
 				9769F9FC1BC9676B001B1F02 /* YTProfileTopView.xib in Resources */,
 				9719F7DA1C04697C009849B8 /* YTReportTopView.xib in Resources */,
 				978C626D1BE4A42900FE2C72 /* YTTodoViewCell.xib in Resources */,
@@ -2359,6 +2376,7 @@
 				97BF5BFE1BD7BF0B00053BD0 /* YTResources.m in Sources */,
 				97B08A8D1BC2472B007EBD24 /* AppDelegate.m in Sources */,
 				9798E20C1BD9E15100B235AE /* YTOrderCenterCell.m in Sources */,
+				973D3DC11C0D76AE006D6B0C /* YTAboutViewController.m in Sources */,
 				9780A32F1BFC3AB0005A7527 /* JKAssetsGroupCell.m in Sources */,
 				972B88101BFAD3D0002A7E9B /* UIImageView+AFNetworking.m in Sources */,
 				97973CFA1BC3C11500B7B4CB /* NewFeatureScrollView.m in Sources */,
@@ -2603,10 +2621,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"COCOAPODS=1",
-					"DEBUG=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "COCOAPODS=1";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = simuyun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

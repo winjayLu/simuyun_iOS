@@ -133,8 +133,8 @@
     if (self.customView != nil) return;
     
     //  设置分享视图平台数据
-    NSArray *titleArr = [NSArray arrayWithObjects:@"微信好友",@"朋友圈",@"邮件",@"短信",@"复制链接", nil];
-    NSArray *imgArr = [NSArray arrayWithObjects:@"ShareButtonTypeWxShare",@"ShareButtonTypeWxPyq",@"ShareButtonTypeEmail",@"ShareButtonTypeSms",@"ShareButtonTypeCopy", nil];
+    NSArray *titleArr = [NSArray arrayWithObjects:@"微信好友",@"朋友圈", nil];
+    NSArray *imgArr = [NSArray arrayWithObjects:@"ShareButtonTypeWxShare",@"ShareButtonTypeWxPyq", nil];
     //  创建自定义分享视图
     ShareCustomView *customView = [[ShareCustomView alloc] initWithTitleArray:titleArr imageArray:imgArr];
     customView.frame = self.view.bounds;

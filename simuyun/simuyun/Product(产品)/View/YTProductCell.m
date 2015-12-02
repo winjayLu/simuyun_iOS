@@ -126,8 +126,9 @@
         }
     } else
     {
+        self.iconWidthConstraint.constant = 0;
         self.iconImage.hidden = YES;
-        self.titleLeftConstraint.constant = -25;
+        self.titleLeftConstraint.constant = -1;
     }
 
     // 设置标题
