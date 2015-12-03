@@ -108,7 +108,7 @@
  */
 - (void)rightClick
 {
-    self.tableView.header = nil;
+    self.tableView.header.hidden = YES;
     
     [self.drawerMenu showFromNavigationBar:self.navigationController.navigationBar animated:YES];
 }
@@ -125,7 +125,7 @@
 - (void)selectedBtnWithType:(btnType)btnType
 {
 
-    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewOrder)];
+    self.tableView.header.hidden = NO;
     switch (btnType) {
         case btnTypeQuanBu:
             self.status = nil;

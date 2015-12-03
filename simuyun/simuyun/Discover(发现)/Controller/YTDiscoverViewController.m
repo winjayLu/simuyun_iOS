@@ -269,6 +269,7 @@
             return;
         }
         vc = [YTInformationWebViewController webWithTitle:@"资讯详情" url:[NSString stringWithFormat:@"%@/information/%@&id=%@",YTH5Server, [NSDate stringDate], newest.infoId]];
+        
         ((YTInformationWebViewController *)vc).isDate = YES;
         ((YTInformationWebViewController *)vc).information = newest;
     }

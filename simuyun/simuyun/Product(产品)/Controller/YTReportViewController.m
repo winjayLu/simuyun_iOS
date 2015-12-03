@@ -381,8 +381,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     NSString *selectedType = self.types[row];
-    
-
+    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
     // 判断是否是其他类型
     if ([selectedType isEqualToString:@"其它"]) {
         self.CertificatesNumberConstr.constant = 78;
@@ -391,7 +390,7 @@
             self.photo.view.y = self.titleLable.y - 20 + 54;
             self.informationPhoto.view.y = self.informationLable.y - 20 + 54;
             // 更新键盘位置
-            [self updateKeyboardPosition];
+            [self updateKeyboardPosition:NO];
         }
     } else {
         self.CertificatesNumberConstr.constant = 25;
@@ -400,7 +399,8 @@
             self.certificatesView = nil;
             self.photo.view.y = self.titleLable.y - 20 - 54;
             self.informationPhoto.view.y = self.informationLable.y - 20 - 54;
-            self.scroll.contentSize = CGSizeMake(DeviceWidth, self.view.height);
+            // 更新键盘位置
+            [self updateKeyboardPosition:YES];
         }
     }
     
@@ -471,9 +471,9 @@
         picker.delegate = self;
         
         TFModel *tfm1=[TFModel modelWithTextFiled:self.typeField inputView:picker name:@"" insetBottom:11];
-        TFModel *tfm2=[TFModel modelWithTextFiled:self.numberField inputView:nil name:@"" insetBottom:11];
+        TFModel *tfm2=[TFModel modelWithTextFiled:self.numberField inputView:nil name:@"" insetBottom:65];
         TFModel *tfm3=[TFModel modelWithTextFiled:self.bankField inputView:nil name:@"" insetBottom:65];
-        TFModel *tfm4=[TFModel modelWithTextFiled:self.bankHangField inputView:nil name:@"" insetBottom:11];
+        TFModel *tfm4=[TFModel modelWithTextFiled:self.bankHangField inputView:nil name:@"" insetBottom:65];
         TFModel *tfm5=[TFModel modelWithTextFiled:self.branchField inputView:nil name:@"" insetBottom:11];
         
         return @[tfm1,tfm2,tfm3,tfm4,tfm5];
@@ -483,18 +483,37 @@
 }
 
 // 设置键盘位置
-- (void)updateKeyboardPosition
+- (void)updateKeyboardPosition:(BOOL)isIncrease
 {
+    if (isIncrease) {   // 选择了身份证或护照
+        [CoreTFManagerVC uninstallManagerForVC:self];
+        [CoreTFManagerVC installManagerForVC:self scrollView:self.scroll tfModels:^NSArray *{
+//            UIPickerView *picker = [[UIPickerView alloc] init];
+//            picker.delegate = self;
+            TFModel *tfm1=[TFModel modelWithTextFiled:self.typeField inputView:nil name:@"" insetBottom:11];
+            TFModel *tfm2=[TFModel modelWithTextFiled:self.numberField inputView:nil name:@"" insetBottom:11];
+            TFModel *tfm3=[TFModel modelWithTextFiled:self.bankField inputView:nil name:@"" insetBottom:11];
+            TFModel *tfm4=[TFModel modelWithTextFiled:self.bankHangField inputView:nil name:@"" insetBottom:11];
+            TFModel *tfm5=[TFModel modelWithTextFiled:self.branchField inputView:nil name:@"" insetBottom:-43];
+            
+            return @[tfm1,tfm2,tfm3,tfm4,tfm5];
+            
+        }];
+        self.scroll.contentSize = CGSizeMake(DeviceWidth, self.view.height);
+        return;
+    }
+    //   选择了其他
     [CoreTFManagerVC uninstallManagerForVC:self];
     [CoreTFManagerVC installManagerForVC:self scrollView:self.scroll tfModels:^NSArray *{
 
+        TFModel *tfm1=[TFModel modelWithTextFiled:self.typeField inputView:nil name:@"" insetBottom:11];
         TFModel *tfm6 = [TFModel modelWithTextFiled:self.catesViewTypeName inputView:nil name:@"" insetBottom:65];
-        TFModel *tfm2=[TFModel modelWithTextFiled:self.numberField inputView:nil name:@"" insetBottom:65];
-        TFModel *tfm3=[TFModel modelWithTextFiled:self.bankField inputView:nil name:@"" insetBottom:65];
-        TFModel *tfm4=[TFModel modelWithTextFiled:self.bankHangField inputView:nil name:@"" insetBottom:65];
+        TFModel *tfm2=[TFModel modelWithTextFiled:self.numberField inputView:nil name:@"" insetBottom:119];
+        TFModel *tfm3=[TFModel modelWithTextFiled:self.bankField inputView:nil name:@"" insetBottom:119];
+        TFModel *tfm4=[TFModel modelWithTextFiled:self.bankHangField inputView:nil name:@"" insetBottom:119];
         TFModel *tfm5=[TFModel modelWithTextFiled:self.branchField inputView:nil name:@"" insetBottom:65];
         
-        return @[tfm6,tfm2,tfm3,tfm4,tfm5];
+        return @[tfm1, tfm6,tfm2,tfm3,tfm4,tfm5];
         
     }];
     self.scroll.contentSize = CGSizeMake(DeviceWidth, self.view.height + 53);
