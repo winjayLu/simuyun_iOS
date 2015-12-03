@@ -13,7 +13,7 @@
 #import "YTAuthenticationViewController.h"
 #import "YTUserInfoTool.h"
 #import "NSString+Password.h"
-
+#import "CoreTFManagerVC.h"
 
 @interface YTBindingPhoneController ()
 
@@ -148,6 +148,28 @@
     userInfo.phoneNumer = self.phoneField.text;
     [YTUserInfoTool saveUserInfo:userInfo];
 }
+
+#pragma mark - 键盘与文本框的处理
+
+- (void)viewDidAppear:(BOOL)animated
+{
+
+    [super viewDidAppear:animated];
+    [CoreTFManagerVC installManagerForVC:self scrollView:nil tfModels:^NSArray *{
+        
+        TFModel *tfm1=[TFModel modelWithTextFiled:self.phoneField inputView:nil name:@"" insetBottom:12];
+        TFModel *tfm2=[TFModel modelWithTextFiled:self.yanzhenField inputView:nil name:@"" insetBottom:12];
+        TFModel *tfm3=[TFModel modelWithTextFiled:self.passwordField inputView:nil name:@"" insetBottom:12];
+        return @[tfm1, tfm2, tfm3];
+    }];
+}
+-(void)viewDidDisappear:(BOOL)animated{
+    
+    [super viewDidDisappear:animated];
+    
+    [CoreTFManagerVC uninstallManagerForVC:self];
+}
+
 
 
 

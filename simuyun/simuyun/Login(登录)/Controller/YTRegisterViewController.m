@@ -17,6 +17,7 @@
 #import "CALayer+Anim.h"
 #import "CALayer+Transition.h"
 #import "NSString+Password.h"
+#import "YTLoginAuthenticationController.h"
 
 // 注册
 
@@ -107,6 +108,7 @@
  *  注册按钮单击
  */
 - (IBAction)registerClick:(UIButton *)sender {
+    
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
     if ([self checkTextWith:YES]) return;
     
@@ -139,9 +141,9 @@
  */
 - (void)transitionTabBarVC
 {
-    UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
-    mainWindow.rootViewController = [[YTTabBarController alloc] init];
-    [mainWindow.layer transitionWithAnimType:TransitionAnimTypeCube subType:TransitionSubtypesFromRight curve:TransitionCurveEaseOut duration:0.75f];
+    YTLoginAuthenticationController *authen = [[YTLoginAuthenticationController alloc] init];
+    
+    [self.navigationController pushViewController:authen animated:YES];
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -149,7 +151,6 @@
     // 退出键盘
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
 }
-
 
 
 #pragma mark - sendServer

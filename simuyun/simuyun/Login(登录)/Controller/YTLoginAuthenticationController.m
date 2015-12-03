@@ -1,12 +1,12 @@
 //
-//  YTAuthenticationViewController.m
+//  YTLoginAuthenticationController.m
 //  simuyun
 //
-//  Created by Luwinjay on 15/10/27.
+//  Created by Luwinjay on 15/12/3.
 //  Copyright © 2015年 YTWealth. All rights reserved.
 //
 
-#import "YTAuthenticationViewController.h"
+#import "YTLoginAuthenticationController.h"
 #import "AutocompletionTableView.h"
 #import "CoreTFManagerVC.h"
 #import "YTOrgnazationModel.h"
@@ -16,11 +16,14 @@
 #import "YTAuthenticationStatusController.h"
 #import "YTUserInfoTool.h"
 #import "UIBarButtonItem+Extension.h"
-
+#import "UINavigationBar+BackgroundColor.h"
+#import "UIBarButtonItem+Extension.h"
+#import "YTTabBarController.h"
+#import "CALayer+Transition.h"
 
 #define maginTop 64
 
-@interface YTAuthenticationViewController () <AutocompletionTableViewDelegate>
+@interface YTLoginAuthenticationController ()<AutocompletionTableViewDelegate>
 
 /**
  *  客户名称
@@ -56,23 +59,26 @@
  */
 @property (nonatomic, strong) NSMutableArray *orgnaNames;
 
+
+- (IBAction)pushMainClick;
+
+
 @end
 
-@implementation YTAuthenticationViewController
+@implementation YTLoginAuthenticationController
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"理财师认证";
-    // 获取机构信息
-    [self loadOrgnazations];
-    self.view.frame = CGRectMake(0, maginTop, DeviceWidth, DeviceHight - maginTop);
-    // 初始化左侧返回按钮
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithBg:@"fanhui" target:self action:@selector(blackClick)];
-}
 
-- (void)blackClick
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    // 初始化导航栏
+    [self setupNav];
+    
+    // 修改textField占位文字颜色
+    [self.userNameLable setValue:YTColor(204, 204, 204) forKeyPath:@"_placeholderLabel.textColor"];
+    [self.mechanismNameLable setValue:YTColor(204, 204, 204) forKeyPath:@"_placeholderLabel.textColor"];
+    [self loadOrgnazations];
 }
 
 /**
@@ -114,28 +120,39 @@
     dict[@"orgId"] = selectedOrgna.party_id;
     [YTHttpTool post:YTAuthAdviser params:dict success:^(id responseObject) {
         [SVProgressHUD dismiss];
-        YTAuthenticationModel *authen = [[YTAuthenticationModel alloc] init];
-        authen.realName = self.userNameLable.text;
-        authen.orgName = self.mechanismNameLable.text;
-        authen.submitTime = responseObject[@"submitTime"];
-        YTAuthenticationStatusController *authVc = [[YTAuthenticationStatusController alloc] init];
-        authVc.authen = authen;
-        [self updateUserInfo];
-        
-        [self.navigationController pushViewController:authVc animated:YES];
-        
+        [self transitionTabBarVC];
     } failure:^(NSError *error) {
     }];
     
 }
 
-// 修改用户信息
-- (void)updateUserInfo
+/**
+ *  转场到主界面
+ */
+- (void)transitionTabBarVC
 {
-    [YTCenter postNotificationName:YTUpdateUserInfo object:nil];
-    YTUserInfo *userInfo =[YTUserInfoTool userInfo];
-    userInfo.adviserStatus = 2;
-    [YTUserInfoTool saveUserInfo:userInfo];
+    
+    UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
+    mainWindow.rootViewController = [[YTTabBarController alloc] init];
+    [mainWindow.layer transitionWithAnimType:TransitionAnimTypeCube subType:TransitionSubtypesFromRight curve:TransitionCurveEaseOut duration:0.75f];
+}
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    // 退出键盘
+    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+}
+/**
+ *  设置导航栏状态
+ */
+- (void)setupNav
+{
+    self.navigationController.navigationBar.hidden = YES;
+    self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    // 隐藏子控件
+    [self navigationBarWithHidden:YES];
+
 }
 
 
@@ -143,8 +160,8 @@
 #pragma mark - AutoCompleteTableViewDelegate
 
 - (NSArray*) autoCompletion:(AutocompletionTableView*) completer suggestionsFor:(NSString*) string{
-
-
+    
+    
     return self.orgnaNames;
 }
 
@@ -158,13 +175,13 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.view.frame = CGRectMake(0, maginTop, DeviceWidth, DeviceHight - maginTop);
     [self.mechanismNameLable addTarget:self.autoCompleter action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
     
     [CoreTFManagerVC installManagerForVC:self scrollView:nil tfModels:^NSArray *{
         
-        TFModel *tfm1=[TFModel modelWithTextFiled:self.mechanismNameLable inputView:nil name:@"" insetBottom:120];
-        return @[tfm1];
+        TFModel *tfm1=[TFModel modelWithTextFiled:self.userNameLable inputView:nil name:@"" insetBottom:20];
+        TFModel *tfm2=[TFModel modelWithTextFiled:self.mechanismNameLable inputView:nil name:@"" insetBottom:120];
+        return @[tfm1, tfm2];
     }];
 }
 -(void)viewDidDisappear:(BOOL)animated{
@@ -174,11 +191,6 @@
     [CoreTFManagerVC uninstallManagerForVC:self];
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-    // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
-}
 
 #pragma mark - lazy
 - (NSArray *)orgnazations
@@ -197,6 +209,11 @@
     return _orgnaNames;
 }
 
+- (IBAction)pushMainClick {
+    [self transitionTabBarVC];
+    
+}
+
 - (AutocompletionTableView *)autoCompleter
 {
     if (!_autoCompleter)
@@ -204,18 +221,33 @@
         NSMutableDictionary *options = [NSMutableDictionary dictionaryWithCapacity:2];
         [options setValue:[NSNumber numberWithBool:YES] forKey:ACOCaseSensitive];
         [options setValue:nil forKey:ACOUseSourceFont];
-        
+        [options setValue:@2 forKey:@"style"];
         _autoCompleter = [[AutocompletionTableView alloc] initWithTextField:self.mechanismNameLable inViewController:self withOptions:options];
         _autoCompleter.autoCompleteDelegate = self;
     }
     return _autoCompleter;
 }
 
+/**
+ *  隐藏/显示navgatinonBar的子控件
+ */
+- (void)navigationBarWithHidden:(BOOL)hidden
+{
+    NSArray *list=self.navigationController.navigationBar.subviews;
+    for (id obj in list) {
+        if ([obj isKindOfClass:[UIImageView class]]) {
+            UIImageView *imageView=(UIImageView *)obj;
+            imageView.hidden=hidden;
+        }
+    }
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
-
 
 
 @end

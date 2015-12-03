@@ -68,7 +68,7 @@
     [MobClick event:@"artPanel_click" attributes:@{@"按钮" : @"行业资讯", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
-
+// category
 /**
  *  加载最新的资讯数据
  */

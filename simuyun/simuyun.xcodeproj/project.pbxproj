@@ -117,6 +117,8 @@
 		978C6FE71BCF8564003D183E /* YTProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 978C6FE51BCF8564003D183E /* YTProductCell.m */; };
 		978C6FE81BCF8564003D183E /* YTProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 978C6FE61BCF8564003D183E /* YTProductCell.xib */; };
 		978C6FEB1BCFA280003D183E /* YTProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 978C6FEA1BCFA280003D183E /* YTProductModel.m */; };
+		978F8CD41C10487F0041F661 /* YTLoginAuthenticationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 978F8CD21C10487F0041F661 /* YTLoginAuthenticationController.m */; };
+		978F8CD51C10487F0041F661 /* YTLoginAuthenticationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 978F8CD31C10487F0041F661 /* YTLoginAuthenticationController.xib */; };
 		978FA78A1BDA236100E53DA4 /* BFNavigationBarDrawer.m in Sources */ = {isa = PBXBuildFile; fileRef = 978FA7891BDA236100E53DA4 /* BFNavigationBarDrawer.m */; };
 		9790F8CB1BDF140900965C7B /* YTAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9790F8C91BDF140900965C7B /* YTAuthenticationViewController.m */; };
 		9790F8CC1BDF140900965C7B /* YTAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9790F8CA1BDF140900965C7B /* YTAuthenticationViewController.xib */; };
@@ -478,6 +480,9 @@
 		978C6FE61BCF8564003D183E /* YTProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTProductCell.xib; sourceTree = "<group>"; };
 		978C6FE91BCFA280003D183E /* YTProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTProductModel.h; sourceTree = "<group>"; };
 		978C6FEA1BCFA280003D183E /* YTProductModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTProductModel.m; sourceTree = "<group>"; };
+		978F8CD11C10487F0041F661 /* YTLoginAuthenticationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTLoginAuthenticationController.h; sourceTree = "<group>"; };
+		978F8CD21C10487F0041F661 /* YTLoginAuthenticationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTLoginAuthenticationController.m; sourceTree = "<group>"; };
+		978F8CD31C10487F0041F661 /* YTLoginAuthenticationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTLoginAuthenticationController.xib; sourceTree = "<group>"; };
 		978FA7881BDA236100E53DA4 /* BFNavigationBarDrawer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFNavigationBarDrawer.h; sourceTree = "<group>"; };
 		978FA7891BDA236100E53DA4 /* BFNavigationBarDrawer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFNavigationBarDrawer.m; sourceTree = "<group>"; };
 		9790F8C81BDF140900965C7B /* YTAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAuthenticationViewController.h; sourceTree = "<group>"; };
@@ -1773,6 +1778,9 @@
 				97DE83101BD1042900E3C5CA /* YTResuNextViewController.h */,
 				97DE83111BD1042900E3C5CA /* YTResuNextViewController.m */,
 				97DE83121BD1042900E3C5CA /* YTResuNextViewController.xib */,
+				978F8CD11C10487F0041F661 /* YTLoginAuthenticationController.h */,
+				978F8CD21C10487F0041F661 /* YTLoginAuthenticationController.m */,
+				978F8CD31C10487F0041F661 /* YTLoginAuthenticationController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2215,6 +2223,7 @@
 				9714A6EE1BC7E0610018A14E /* FontAwesome.ttf in Resources */,
 				9769F9FA1BC9676B001B1F02 /* YTGroupCell.xib in Resources */,
 				9769F9F71BC9676B001B1F02 /* YTContentCell.xib in Resources */,
+				978F8CD51C10487F0041F661 /* YTLoginAuthenticationController.xib in Resources */,
 				972B880A1BFAD3D0002A7E9B /* LICENSE in Resources */,
 				978775151BE8A200002A8B42 /* YTBindingPhoneController.xib in Resources */,
 				9798E20D1BD9E15100B235AE /* YTOrderCenterCell.xib in Resources */,
@@ -2300,6 +2309,7 @@
 				97ED0CD61BE248B300E95750 /* YTOrderdetailController.m in Sources */,
 				9780A6F11BDF824F00E973D9 /* YTOrgnazationModel.m in Sources */,
 				97C3CE221BC29E2D00B7185D /* ShareManage.m in Sources */,
+				978F8CD41C10487F0041F661 /* YTLoginAuthenticationController.m in Sources */,
 				97C605F61BC2622E00E555E8 /* YTAccount.m in Sources */,
 				97C3CE6C1BC2BAEF00B7185D /* SVProgressHUD.m in Sources */,
 				97BC99781BD4DB610090BDE8 /* CorePageModel.m in Sources */,
@@ -2654,6 +2664,10 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+				);
 				INFOPLIST_FILE = simuyun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

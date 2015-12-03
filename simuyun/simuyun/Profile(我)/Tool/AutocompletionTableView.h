@@ -50,6 +50,8 @@
 @end
 
 @interface AutocompletionTableView : UITableView <UITableViewDataSource, UITableViewDelegate>
+
+
 // Dictionary of NSStrings of your auto-completion terms
 @property (nonatomic, strong) NSArray *suggestionsDictionary; 
 

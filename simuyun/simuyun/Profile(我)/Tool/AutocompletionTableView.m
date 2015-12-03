@@ -29,6 +29,10 @@
     
     // frame must align to the textfield 
     CGRect frame = CGRectMake(0, 257, DeviceWidth, 120);
+    if ([self.options[@"style"]  isEqual: @(2)])
+    {
+        frame = CGRectMake( 22 , 295, DeviceWidth - 44, 120);
+    }
 //    CGRect frame = CGRectMake(textField.frame.origin.x, CGRectGetMaxY(textField.frame), textField.frame.size.width, 120);
     
     // save the font info to reuse in cells
@@ -46,8 +50,15 @@
     
     // to get rid of "extra empty cell" on the bottom
     // when there's only one cell in the table
-    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, textField.frame.size.width, 1)]; 
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, textField.frame.size.width, 1)];
     v.backgroundColor = [UIColor clearColor];
+    if ([self.options[@"style"]  isEqual: @(2)])
+    {
+        self.backgroundColor = YTColor(37, 37, 39);
+        v.hidden = YES;
+        // 去掉下划线
+        self.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
     [self setTableFooterView:v];
     self.hidden = YES;  
     [parentViewController.view addSubview:self];
@@ -104,6 +115,15 @@
     cell.textLabel.adjustsFontSizeToFitWidth = NO;
     cell.textLabel.text = [self.suggestionOptions objectAtIndex:indexPath.row];
 
+    if ([self.options[@"style"]  isEqual: @(2)])
+    {
+        // YTRGBA(255, 255, 255, 0.8);
+        cell.backgroundColor = [UIColor clearColor];
+        cell.contentView.backgroundColor = YTColor(37, 37, 39);
+        cell.textLabel.textColor = YTColor(153, 153, 153);
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    }
+    
     return cell;
 }
 

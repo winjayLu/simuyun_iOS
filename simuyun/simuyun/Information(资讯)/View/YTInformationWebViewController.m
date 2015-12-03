@@ -210,7 +210,8 @@
     [share shareConfig];
     share.share_title = self.information.title;
     share.share_content = self.information.summary;
-    share.share_image = [UIImage imageNamed:@"maillogo"];
+    // 设置分享图片
+    share.share_image = [UIImage imageNamed:[NSString stringWithFormat:@"inforcategory%d.jpg",self.information.category]];
     share.share_url = [NSString stringWithFormat:@"http://www.simuyun.com/information/shared.html?id=%@", self.information.infoId];
     switch (tag) {
         case ShareButtonTypeWxShare:

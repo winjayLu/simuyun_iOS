@@ -22,6 +22,11 @@
 #import "YTNormalWebController.h"
 #import "YTUserInfoTool.h"
 #import "YTViewPdfViewController.h"
+#import "YTAuthenticationViewController.h"
+#import "YTAuthenticationStatusController.h"
+#import "YTAuthenticationErrorController.h"
+#import "HHAlertView.h"
+
 
 
 @interface YTProductdetailController () <shareCustomDelegate, senMailViewDelegate, UIWebViewDelegate>
@@ -128,6 +133,9 @@
             NSString *command = urlComps[1];
             if ([command isEqualToString:@"buynow"])    // 认购
             {
+                // 判断是否认证
+                if (![self isAuthentication]) return YES;
+                
                 YTBuyProductController *buy = [[YTBuyProductController alloc] init];
                 buy.product = self.product;
                 [self.navigationController pushViewController:buy animated:YES];
@@ -142,7 +150,7 @@
                 normal.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
                 normal.toTitle = urlComps[3];
                 [self.navigationController pushViewController:normal animated:YES];
-            } else if ([command isEqualToString:@"viewpdf"])
+            } else if ([command isEqualToString:@"viewpdf"])    // 打开pdf
             {
                 YTViewPdfViewController *viewPdf = [[YTViewPdfViewController alloc] init];
                 viewPdf.product = self.product;
@@ -154,11 +162,50 @@
                 UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
                 pasteboard.string = urlComps[2];
                 [SVProgressHUD showSuccessWithStatus:@"复制成功"];
+            } else if ([command isEqualToString:@"cantbuy"])
+            {
+                // 判断是否认证
+                if (![self isAuthentication]) return YES;
+                [SVProgressHUD showInfoWithStatus:@"此产品已被叫停"];
             }
         }
 
     }
     return YES;
+}
+
+/**
+ *  判断理财师是否认证
+ */
+- (BOOL)isAuthentication
+{
+    // 0 已认证， 1 未认证， 2 认证中， 3 驳回
+    BOOL result = YES;
+    YTUserInfo *userInfo = [YTUserInfoTool userInfo];
+    UIViewController *vc = nil;
+    switch (userInfo.adviserStatus) {
+        case 0:
+            break;
+        case 1:
+            vc = [[YTAuthenticationViewController alloc] init];
+            result = NO;
+            break;
+        case 2:
+            vc = [[YTAuthenticationStatusController alloc] init];
+            result = NO;
+            break;
+        case 3:
+            vc = [[YTAuthenticationErrorController alloc] init];
+            result = NO;
+            break;
+    }
+    HHAlertView *alert = [HHAlertView shared];
+    [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"没有操作权限" detail:@"您还未认证为理财师，无法进行此操作" cancelButton:@"返回" Okbutton:@"立即认证" block:^(HHAlertButton buttonindex) {
+        if (buttonindex == HHAlertButtonOk) {
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }];
+    return result;
 }
 
 

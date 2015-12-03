@@ -154,12 +154,12 @@
     if (resources.version != nil && resources.version.length > 0) { // 有新版本
         if ([resources.isMustUpdate isEqualToString:@"y"]) {
             HHAlertView *alert = [HHAlertView shared];
-            [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"gantan" Title:@"发现新版本" detail:resources.adverts cancelButton:nil Okbutton:@"去更新" block:^(HHAlertButton buttonindex) {
+            [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"发现新版本" detail:resources.adverts cancelButton:nil Okbutton:@"去更新" block:^(HHAlertButton buttonindex) {
                  [[UIApplication sharedApplication] openURL:updateUrl];
             }];
         } else {
             HHAlertView *alert = [HHAlertView shared];
-            [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"gantan" Title:@"发现新版本" detail:resources.adverts cancelButton:@"取消" Okbutton:@"去更新" block:^(HHAlertButton buttonindex) {
+            [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"发现新版本" detail:resources.adverts cancelButton:@"取消" Okbutton:@"去更新" block:^(HHAlertButton buttonindex) {
                 if (buttonindex == HHAlertButtonOk) {
                     
                     [[UIApplication sharedApplication] openURL:updateUrl];

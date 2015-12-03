@@ -38,6 +38,11 @@
 // 下载地址
 @property (nonatomic, copy) NSString *url;
 
+/**
+ *  资讯分类
+ */
+@property (nonatomic, assign) int category;
+
 
 
 @end

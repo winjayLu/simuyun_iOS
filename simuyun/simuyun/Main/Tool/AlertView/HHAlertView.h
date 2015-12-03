@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, HHAlertButton){
  *the style of the logo
  */
 typedef NS_ENUM(NSInteger, HHAlertStyle){
-    HHAlertStyleDefault,
+//    HHAlertStyleDefault,
     HHAlertStyleJpush
 
 };

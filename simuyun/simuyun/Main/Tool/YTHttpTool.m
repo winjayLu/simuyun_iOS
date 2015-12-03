@@ -136,7 +136,7 @@
 {
     [YTCenter postNotificationName:YTStopRequest object:nil];
     HHAlertView *alert = [HHAlertView shared];
-    [alert showAlertWithStyle:HHAlertStyleDefault imageName:@"gantan" Title:YTTokenError detail:YTTokenErrorContent cancelButton:nil Okbutton:@"知道了" block:^(HHAlertButton buttonindex) {
+    [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:YTTokenError detail:YTTokenErrorContent cancelButton:nil Okbutton:@"知道了" block:^(HHAlertButton buttonindex) {
         // 清除用户信息
         [YTUserInfoTool clearUserInfo];
         // 获取程序主窗口
