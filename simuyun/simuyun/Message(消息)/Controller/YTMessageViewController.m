@@ -74,7 +74,7 @@
     for (UIView *view in self.pagesView.pagesBarView.subviews) {
         if ([view isKindOfClass:[CorePagesBarBtn class]]) {
             BOOL isShow = YES;
-            if ([self.status[i]  isEqual: @0] || i == 0) {
+            if ([self.status[i]  isEqual: @0] || i == 0 || i == 1) {
                 isShow = NO;
             }
             [(CorePagesBarBtn *)view isShow:isShow];

@@ -126,7 +126,7 @@
     YTGroupCell *groupCell = [[[NSBundle mainBundle] loadNibNamed:@"YTGroupCell" owner:nil options:nil] lastObject];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(todoTitleClick)];
     [groupCell addGestureRecognizer:tap];
-    
+    groupCell.isShowLine = NO;
     self.groupCell = groupCell;
     // 待办事项数量
     UIButton *todoNum = [[UIButton alloc] init];

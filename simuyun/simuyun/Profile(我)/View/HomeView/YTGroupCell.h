@@ -16,4 +16,8 @@
  *  跳转的页面
  */
 @property (nonatomic, strong) Class pushVc;
+
+@property (nonatomic, assign) BOOL isShowLine;
+
+
 @end

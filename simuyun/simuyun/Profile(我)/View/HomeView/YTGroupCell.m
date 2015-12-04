@@ -12,6 +12,9 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *titleLable;
 
+@property (weak, nonatomic) IBOutlet UIView *lineView;
+
+
 @end
 
 
@@ -32,6 +35,12 @@
     _title = title;
     self.titleLable.text = _title;
     
+}
+
+- (void)setIsShowLine:(BOOL)isShowLine
+{
+    _isShowLine = isShowLine;
+    self.lineView.hidden = !isShowLine;
 }
 
 @end

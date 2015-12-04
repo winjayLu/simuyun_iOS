@@ -96,6 +96,7 @@
     }];
     [sender didFinished:^NSString *(JKCountDownButton *countDownButton, int second) {
         countDownButton.enabled = YES;
+        [sender setTitleColor:YTColor(215, 58, 46) forState:UIControlStateNormal];
         [sender setBackgroundImage:[UIImage imageNamed:@"yanzhengmakuang"] forState:UIControlStateNormal];
         return @"重新获取";
         

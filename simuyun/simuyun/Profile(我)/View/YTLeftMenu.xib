@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="241" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-cebian" translatesAutoresizingMaskIntoConstraints="NO" id="3DC-4S-XPf">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundcebian.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="3DC-4S-XPf">
                     <rect key="frame" x="0.0" y="0.0" width="241" height="667"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="242" id="kyk-cp-uY4"/>
@@ -320,7 +320,7 @@
         </view>
     </objects>
     <resources>
-        <image name="background-cebian" width="241" height="667"/>
+        <image name="backgroundcebian.jpg" width="241" height="667"/>
         <image name="bangzhu" width="22" height="22"/>
         <image name="dianhau" width="37" height="37"/>
         <image name="guanlianweixin" width="22" height="22"/>

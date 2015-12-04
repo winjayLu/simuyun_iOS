@@ -68,6 +68,7 @@
                 _second = _totalSecond;
                 if (_didFinishedBlock)
                 {
+                    self.titleLabel.textColor = YTColor(215, 58, 46);
                     [self setTitle:_didFinishedBlock(self,_totalSecond)forState:UIControlStateNormal];
                     [self setTitle:_didFinishedBlock(self,_totalSecond)forState:UIControlStateDisabled];
 

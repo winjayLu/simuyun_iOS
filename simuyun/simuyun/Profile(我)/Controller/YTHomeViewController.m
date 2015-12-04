@@ -305,6 +305,10 @@
             groupCell.pushVc = [YTAuthenticationErrorController class];
             break;
     }
+    if ([YTUserInfoTool userInfo].phoneNumer == nil && [YTUserInfoTool userInfo].phoneNumer.length == 0) {
+        groupCell.pushVc = [YTBindingPhoneController class];
+    }
+    groupCell.isShowLine = NO;
     groupCell.layer.cornerRadius = 5;
     groupCell.layer.masksToBounds = YES;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(todoTitleClick)];
@@ -341,6 +345,9 @@
             self.groupCell.title = @"认证理财师(未成功)";
             self.groupCell.pushVc = [YTAuthenticationErrorController class];
             break;
+    }
+    if ([YTUserInfoTool userInfo].phoneNumer == nil && [YTUserInfoTool userInfo].phoneNumer.length == 0) {
+        self.groupCell.pushVc = [YTBindingPhoneController class];
     }
     [self updateTodos];
 }
@@ -653,34 +660,7 @@
         self.blackAlert = nil;
     }];
 }
-/**
- *  认证
- *
- */
-- (void)Authentication
-{
-    if ([YTUserInfoTool userInfo].phoneNumer == nil && [YTUserInfoTool userInfo].phoneNumer.length == 0) {
-        YTBindingPhoneController *bing = [[YTBindingPhoneController alloc] init];
-        bing.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:bing animated:YES];
-        return;
-    }
-    
-    UIViewController *vc = nil;
-    int status = [YTUserInfoTool userInfo].adviserStatus;
-    if(status == 1)
-    {
-        vc = [[YTAuthenticationViewController alloc] init];
-    } else if (status == 2)
-    {
-        vc = [[YTAuthenticationStatusController alloc] init];
-    } else if (status == 3)
-    {
-        vc = [[YTAuthenticationErrorController alloc] init];
-    }
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
-}
+
 
 /**
  *  关联微信
@@ -756,7 +736,7 @@
     ShareManage *share = [ShareManage shareManage];
     //  设置分享内容
     [share shareConfig];
-    share.share_title = @"推荐私募云";
+    share.share_title = @"推荐理财师好友安装私募云，一起来聚合财富管理力量！";
     share.share_content = @"推荐理财师好友安装私募云，一起来聚合财富管理力量！";
     share.share_url = @"http://www.simuyun.com/invite/invite.html";
     share.share_image = [UIImage imageNamed:@"fenxiangpic.jpg"];

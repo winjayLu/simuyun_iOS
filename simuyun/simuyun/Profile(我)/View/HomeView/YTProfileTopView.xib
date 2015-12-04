@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="270"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background-picture" translatesAutoresizingMaskIntoConstraints="NO" id="TR6-ku-oa3" userLabel="bj">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundpicture.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="TR6-ku-oa3" userLabel="bj">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="270"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="万" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" enabled="NO" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tma-5d-N7b" userLabel="万">
@@ -277,9 +277,9 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="background-picture" width="375" height="270"/>
+        <image name="backgroundpicture.jpg" width="241" height="667"/>
         <image name="chouti" width="44" height="49"/>
-        <image name="dikuang" width="89" height="53"/>
+        <image name="dikuang" width="87" height="53"/>
         <image name="quan" width="126" height="126"/>
         <image name="weiqiandao" width="37" height="37"/>
         <image name="yundou" width="18" height="19"/>

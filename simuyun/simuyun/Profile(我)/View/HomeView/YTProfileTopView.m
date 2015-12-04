@@ -233,6 +233,7 @@
 - (IBAction)qiaoDaoClick:(UIButton *)sender {
     // 调用代理方法
     sender.enabled = NO;
+    sender.hidden = YES;
     [self sendDelegate:TopButtonTypeQiandao];
     [MobClick event:@"main_click" attributes:@{@"按钮" : @"签到", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
@@ -306,9 +307,11 @@
     if (userInfo.isSingIn) { // 已经签到
         [self.qiaoDaoBtn setBackgroundImage:[UIImage imageNamed:@"yiqiandao"] forState:UIControlStateNormal];
         self.qiaoDaoBtn.enabled = NO;
+        self.qiaoDaoBtn.hidden = YES;
     } else {    // 未签到
         [self.qiaoDaoBtn setBackgroundImage:[UIImage imageNamed:@"weiqiandao"] forState:UIControlStateNormal];
         self.qiaoDaoBtn.enabled = YES;
+        self.qiaoDaoBtn.hidden = NO;
     }
  	    // 云豆
     [self.yunDouBtn setTitle:[NSString stringWithFormat:@"%d", userInfo.myPoint] forState:UIControlStateNormal];

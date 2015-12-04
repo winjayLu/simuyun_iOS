@@ -80,7 +80,7 @@
     [self.hintView switchContentTypeWIthType:contentTypeLoading];
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
     param[@"adviserId"] = [YTAccountTool account].userId;
-    param[@"category"] = @2;
+    param[@"category"] = @4;
     param[@"pagesize"] = @20;
     self.pageNo = 1;
     param[@"pageNo"] = @(self.pageNo);
@@ -101,7 +101,7 @@
 {
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
     param[@"adviserId"] = [YTAccountTool account].userId;
-    param[@"category"] = @2;
+    param[@"category"] = @4;
     param[@"pagesize"] = @20;
     param[@"pageNo"] = @(++self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
