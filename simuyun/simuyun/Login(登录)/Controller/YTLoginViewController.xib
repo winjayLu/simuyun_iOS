@@ -61,7 +61,7 @@
                     <color key="tintColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="textColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <textInputTraits key="textInputTraits" keyboardType="namePhonePad" secureTextEntry="YES"/>
+                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mima" translatesAutoresizingMaskIntoConstraints="NO" id="dAM-5v-e6E">
                     <rect key="frame" x="22" y="277" width="21" height="21"/>
@@ -240,7 +240,7 @@
         <image name="backgrounddl" width="375" height="667"/>
         <image name="blackanxia" width="330" height="44"/>
         <image name="blackkuang" width="330" height="44"/>
-        <image name="mima" width="21" height="21"/>
+        <image name="mima" width="22" height="22"/>
         <image name="weixin" width="62" height="62"/>
         <image name="weixinlogin_down" width="62" height="62"/>
         <image name="yonghuming" width="22" height="22"/>

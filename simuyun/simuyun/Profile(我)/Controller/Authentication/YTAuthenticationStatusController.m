@@ -29,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"认证状态";
+    self.title = @"认证中";
     // 加载认证信息
     if (self.authen == nil) {
         [self loadAuthen];

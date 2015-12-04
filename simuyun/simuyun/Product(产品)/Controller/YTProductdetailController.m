@@ -185,7 +185,7 @@
     UIViewController *vc = nil;
     switch (userInfo.adviserStatus) {
         case 0:
-            break;
+            return result;
         case 1:
             vc = [[YTAuthenticationViewController alloc] init];
             result = NO;

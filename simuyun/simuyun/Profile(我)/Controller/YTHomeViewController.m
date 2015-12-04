@@ -331,6 +331,7 @@
             if (self.groupCell != nil) {
                 [self.groupCell removeFromSuperview];
                 self.groupCell = nil;
+                [self updateTodos];
             }
             return;
         case 1:
@@ -736,7 +737,7 @@
     ShareManage *share = [ShareManage shareManage];
     //  设置分享内容
     [share shareConfig];
-    share.share_title = @"推荐理财师好友安装私募云，一起来聚合财富管理力量！";
+    share.share_title = @"私募云：理财师的移动执业工具";
     share.share_content = @"推荐理财师好友安装私募云，一起来聚合财富管理力量！";
     share.share_url = @"http://www.simuyun.com/invite/invite.html";
     share.share_image = [UIImage imageNamed:@"fenxiangpic.jpg"];
@@ -747,6 +748,7 @@
             break;
         case ShareButtonTypeWxPyq:
             //  朋友圈分享
+             share.share_title = @"推荐理财师好友安装私募云，一起来聚合财富管理力量！";
             [share wxpyqShareWithViewControll:self];
             break;
     }
