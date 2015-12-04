@@ -11,6 +11,9 @@
 #import "YTUserInfoTool.h"
 #import "YTAccountTool.h"
 
+#define YTUserinfoPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"userinfo.data"]
+
+
 @implementation YTUserInfoTool
 
 // 用户信息
@@ -37,31 +40,7 @@ static YTUserInfo *_userInfo;
 + (void)saveUserInfo:(YTUserInfo *)userInfo;
 {
     _userInfo = userInfo;
-}
-
-/**
- *  加载用户信息
- *  成功返回YES
- */
-+ (void)loadUserInfoWithresult:(void (^)(BOOL result))result
-{
-//     已经有用户信息,直接返回
-    if (_userInfo) {
-        result(YES);
-        return;
-    }
-    
-    // 去服务器获取
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"advisersId"] = [YTAccountTool account].userId;
-    
-    [YTHttpTool get:YTUser params:dict success:^(id responseObject) {
-        _userInfo = [YTUserInfo objectWithKeyValues:responseObject];
-        result(YES);
-    } failure:^(NSError *error) {
-        result(NO);
-    }];
-
+    [self saveLocal:_userInfo];
 }
 
 
@@ -69,18 +48,39 @@ static YTUserInfo *_userInfo;
  *  重新获取最新的用户信息
  *
  */
-+ (void)loadNewUserInfo:(void (^)(BOOL result))result
++ (void)loadNewUserInfo:(void (^)(BOOL finally))finally
 {
     // 去服务器获取
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"advisersId"] = [YTAccountTool account].userId;
     
     [YTHttpTool get:YTUser params:dict success:^(id responseObject) {
-        _userInfo = [YTUserInfo objectWithKeyValues:responseObject];
-        result(YES);
+        [self saveUserInfo:[YTUserInfo objectWithKeyValues:responseObject]];
+        finally(YES);
     } failure:^(NSError *error) {
-        result(NO);
+        finally(NO);
     }];
 }
+
+
+
+/**
+ *  本地存储用户信息
+ */
++ (void)saveLocal:(YTUserInfo *)userInfo
+{
+    [NSKeyedArchiver archiveRootObject:userInfo toFile:YTUserinfoPath];
+}
+
+/**
+ *  获得上次本地存储的帐号
+ */
++ (YTUserInfo *)localUserInfo;
+{
+    YTUserInfo *userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:YTUserinfoPath];
+    _userInfo = userInfo;
+    return userInfo;
+}
+
 
 @end

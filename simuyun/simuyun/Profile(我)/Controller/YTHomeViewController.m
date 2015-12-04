@@ -41,6 +41,10 @@
 #import "TimerLoopView.h"
 #import "YTTodoListViewController.h"
 #import "YTAboutViewController.h"
+#import "YTGroupCell.h"
+#import "YTAuthenticationViewController.h"
+#import "YTAuthenticationStatusController.h"
+#import "YTAuthenticationErrorController.h"
 
 #define magin 3
 
@@ -70,8 +74,6 @@
 // h5页面填充token
 @property (nonatomic, strong) YTTokenView *token;
 
-// 是否重新加载用户信息
-@property (nonatomic, assign) BOOL isLoad;
 
 // 分享
 @property (nonatomic, weak) ShareCustomView *customView ;
@@ -82,6 +84,9 @@
 
 // 跑马灯视图
 @property (nonatomic, weak) TimerLoopView *loopView;
+
+// 认证提醒
+@property (nonatomic, weak) YTGroupCell *groupCell;
 
 @end
 
@@ -98,8 +103,14 @@
     // 初始化顶部视图
     [self setupTopView];
     
+    // 加载用户信息
+    [self loadUserInfo];
+    
     // 初始化底部ScrollView
     [self setupScrollView];
+    
+    // 初始化提醒认证视图
+    [self setupAuthentication];
     
     // 初始化待办事项
     [self setupTodoView];
@@ -114,11 +125,10 @@
     self.token = [[YTTokenView alloc] init];
     self.token.delegate = self;
     
-    // 加载用户信息
-    [self loadUserInfo];
+   
     
     // 获取运营公告跑马灯
-    [self loadLoopView];
+//    [self loadLoopView];
     
     // 检查更新
     [self updateData];
@@ -130,14 +140,14 @@
 {
     [super viewWillAppear:animated];
     
-    if(self.isLoad == NO)
-    {
-        self.isLoad = YES;
-    } else {    // 重新加载用户信息
-        [YTUserInfoTool loadNewUserInfo:^(BOOL result) {
+    // // 获取用户信息
+    [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
+        if (finally) {
             self.topView.userInfo = [YTUserInfoTool userInfo];
-        }];
-    }
+            [YTCenter postNotificationName:YTUpdateIconImage object:nil];
+            [self updateAuthentication];
+        }
+    }];
     
     // 加载待办事项
     [self loadTodos];
@@ -178,15 +188,9 @@
  */
 - (void)loadUserInfo
 {
-    // 第一次加载
-    if ([YTUserInfoTool userInfo] == nil) {
-        [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
-            if (result) {
-                self.topView.userInfo = [YTUserInfoTool userInfo];
-            }
-        }];
-    } else {
-        self.topView.userInfo = [YTUserInfoTool userInfo];
+    if ([YTUserInfoTool localUserInfo] != nil)
+    {
+         self.topView.userInfo = [YTUserInfoTool localUserInfo];
     }
 }
 
@@ -261,13 +265,14 @@
 - (void)setupScrollView
 {
     // 底部视图为Scrollview
+
     CGFloat scrollViewY = CGRectGetMaxY(self.loopView.frame);
+    
     if (scrollViewY == 0) {
         scrollViewY = CGRectGetMaxY(self.topView.frame);
     }
     CGFloat scrollViewH = DeviceHight - scrollViewY;
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, scrollViewY, DeviceWidth, scrollViewH)];
-//    mainView.bounces = NO;
     mainView.showsVerticalScrollIndicator = NO;
     mainView.contentSize = CGSizeMake(DeviceWidth, scrollViewH);
     mainView.delegate = self;
@@ -275,6 +280,81 @@
     [self.view addSubview:mainView];
     self.mainView = mainView;
 }
+
+
+/**
+ *  初始化提醒认证视图
+ */
+- (void)setupAuthentication
+{
+    YTGroupCell *groupCell = [[[NSBundle mainBundle] loadNibNamed:@"YTGroupCell" owner:nil options:nil] lastObject];
+    YTUserInfo *userInfo = [YTUserInfoTool userInfo];
+    switch (userInfo.adviserStatus) {
+        case 0:
+            return;
+        case 1:
+            groupCell.title = @"认证理财师";
+            groupCell.pushVc = [YTAuthenticationViewController class];
+            break;
+        case 2:
+            groupCell.title = @"认证理财师(审核中)";
+            groupCell.pushVc = [YTAuthenticationStatusController class];
+            break;
+        case 3:
+            groupCell.title = @"认证理财师(未成功)";
+            groupCell.pushVc = [YTAuthenticationErrorController class];
+            break;
+    }
+    groupCell.layer.cornerRadius = 5;
+    groupCell.layer.masksToBounds = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(todoTitleClick)];
+    [groupCell addGestureRecognizer:tap];
+    // 计算groupCell的高度
+    
+    CGFloat groupCellHeight = 42;
+    groupCell.frame = CGRectMake(magin, 0, self.view.width - magin * 2, groupCellHeight);
+    [self.mainView addSubview:groupCell];
+    self.groupCell = groupCell;
+}
+/**
+ *  更新认证状态
+ */
+- (void)updateAuthentication
+{
+    YTUserInfo *userInfo = [YTUserInfoTool userInfo];
+    switch (userInfo.adviserStatus) {
+        case 0:
+            if (self.groupCell != nil) {
+                [self.groupCell removeFromSuperview];
+                self.groupCell = nil;
+            }
+            return;
+        case 1:
+            self.groupCell.title = @"认证理财师";
+            self.groupCell.pushVc = [YTAuthenticationViewController class];
+            break;
+        case 2:
+            self.groupCell.title = @"认证理财师(审核中)";
+            self.groupCell.pushVc = [YTAuthenticationStatusController class];
+            break;
+        case 3:
+            self.groupCell.title = @"认证理财师(未成功)";
+            self.groupCell.pushVc = [YTAuthenticationErrorController class];
+            break;
+    }
+    [self updateTodos];
+}
+
+
+- (void)todoTitleClick
+{
+    UIViewController *vc = [[self.groupCell.pushVc alloc] init];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+
 
 /**
  *  初始化待办事项
@@ -293,6 +373,9 @@
     }
     YTContentView *content = [[YTContentView alloc] init];
     content.frame = CGRectMake(magin, 0, self.view.width - magin * 2, todoHeight);
+    if (self.groupCell != nil) {
+        content.frame = CGRectMake(magin, CGRectGetMaxY(self.groupCell.frame) + 8, self.view.width - magin * 2, todoHeight);
+    }
     content.layer.cornerRadius = 5;
     content.layer.masksToBounds = YES;
     content.daili = self;
@@ -366,7 +449,9 @@
          todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
     }
     self.todoView.frame = CGRectMake(magin, 0, self.view.width - magin * 2, todoHeight);
-
+    if (self.groupCell != nil) {
+        self.todoView.frame = CGRectMake(magin, CGRectGetMaxY(self.groupCell.frame) + 8, self.view.width - magin * 2, todoHeight);
+    }
     // 修改底部菜单frame
     self.bottom.y = CGRectGetMaxY(self.todoView.frame) + 8;
     
@@ -462,7 +547,7 @@
             break;
         case 2:
             vc = [YTNormalWebController webWithTitle:@"云豆银行" url:[NSString stringWithFormat:@"%@/mall%@", YTH5Server,[NSDate stringDate]]];
-            [MobClick event:@"main_click" attributes:@{@"云豆银行" : @"我的奖品", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+            [MobClick event:@"main_click" attributes:@{@"按钮" : @"云豆银行", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
     }
     if (vc != nil) {
@@ -501,9 +586,6 @@
     UIViewController *pushVc = nil;
     YTBlackAlertView *alert = [YTBlackAlertView shared];
     switch (type) {
-        case TopButtonTypeRenzhen:  // 认证
-            [self Authentication];
-            break;
         case TopButtonTypeQiandao:  // 签到
             [self signIn];
             break;
@@ -622,9 +704,11 @@
             param[@"headimgurl"] = account.iconURL;
             [YTHttpTool post:YTBindWeChat params:param success:^(id responseObject) {
                 // 重新加载用户信息
-                [YTUserInfoTool loadNewUserInfo:^(BOOL result) {
-                    if (result) {
+                [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
+                    if (finally) {
                         self.topView.userInfo = [YTUserInfoTool userInfo];
+                        [YTCenter postNotificationName:YTUpdateIconImage object:nil];
+                        [self updateAuthentication];
                     }
                 }];
             } failure:^(NSError *error) {
@@ -673,8 +757,9 @@
     //  设置分享内容
     [share shareConfig];
     share.share_title = @"推荐私募云";
-    share.share_content = @"聚合财富管理力量 成就资产管理价值";
+    share.share_content = @"推荐理财师好友安装私募云，一起来聚合财富管理力量！";
     share.share_url = @"http://www.simuyun.com/invite/invite.html";
+    share.share_image = [UIImage imageNamed:@"fenxiangpic.jpg"];
     switch (tag) {
         case ShareButtonTypeWxShare:
             //  微信分享

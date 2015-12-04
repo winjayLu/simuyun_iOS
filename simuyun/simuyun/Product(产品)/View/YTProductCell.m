@@ -7,6 +7,9 @@
 //
 
 #import "YTProductCell.h"
+#import "UIImageView+SD.h"
+
+
 
 // 左右间距
 #define maginWidth 7
@@ -119,7 +122,8 @@
         self.iconWidthConstraint.constant = 25;
         self.titleLeftConstraint.constant = 8;
         self.iconImage.hidden = NO;
-        self.iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"productIcon%d",_product.series]];
+//        self.iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"productIcon%d",_product.series]];
+         [self.iconImage imageWithUrlStr:product.icon_url phImage:nil];
         // 调整icon的宽度
         if (_product.series > 6) {
             self.iconWidthConstraint.constant = 33;

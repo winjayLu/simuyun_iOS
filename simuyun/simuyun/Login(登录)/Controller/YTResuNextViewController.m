@@ -17,6 +17,7 @@
 #import "YTTabBarController.h"
 #import "NSString+Password.h"
 #import "AFNetworking.h"
+#import "YTUserInfoTool.h"
 
 @interface YTResuNextViewController ()
 
@@ -104,7 +105,11 @@
               account.userId = responseObject[@"userId"];
               account.token = responseObject[@"token"];
               [YTAccountTool save:account];
-               [self transitionTabBarVC];
+              [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
+                  if (finally) {
+                      [self transitionTabBarVC];
+                  }
+              }];
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               if(operation.responseObject[@"message"] != nil)
               {

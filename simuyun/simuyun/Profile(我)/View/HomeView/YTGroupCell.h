@@ -12,5 +12,8 @@
 
 @property (nonatomic, copy) NSString *title;
 
-
+/**
+ *  跳转的页面
+ */
+@property (nonatomic, strong) Class pushVc;
 @end

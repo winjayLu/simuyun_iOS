@@ -163,18 +163,6 @@
                         <action selector="qiaoDaoClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="eqr-CZ-dFq"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSe-Qo-Rfp" userLabel="未认证">
-                    <rect key="frame" x="10" y="164" width="37" height="37"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="37" id="AcG-Z3-tom"/>
-                        <constraint firstAttribute="height" constant="37" id="bmk-GQ-KqR"/>
-                    </constraints>
-                    <inset key="imageEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="25"/>
-                    <state key="normal" backgroundImage="weirenzheng"/>
-                    <connections>
-                        <action selector="renZhenClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="13Y-fq-QxZ"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oad-Pf-04j">
                     <rect key="frame" x="15" y="32" width="29" height="26"/>
                     <constraints>
@@ -215,7 +203,6 @@
                 <constraint firstItem="0EK-Rx-hhm" firstAttribute="top" secondItem="CrT-a4-ocu" secondAttribute="bottom" constant="14" id="LaL-8C-2Kh"/>
                 <constraint firstItem="98T-Fi-cUv" firstAttribute="top" secondItem="zM7-Sr-Sgp" secondAttribute="bottom" constant="19" id="LeY-Ry-vzF"/>
                 <constraint firstAttribute="trailing" secondItem="TR6-ku-oa3" secondAttribute="trailing" id="NVR-PB-TOB"/>
-                <constraint firstItem="psv-5Z-FRq" firstAttribute="top" secondItem="xSe-Qo-Rfp" secondAttribute="bottom" constant="15" id="Pkt-8q-xAP"/>
                 <constraint firstItem="tbU-xM-BgG" firstAttribute="leading" secondItem="xO5-bn-mkv" secondAttribute="leading" id="QRq-Lu-njB"/>
                 <constraint firstAttribute="bottom" secondItem="psv-5Z-FRq" secondAttribute="bottom" constant="23" id="R99-Cu-t5P"/>
                 <constraint firstItem="xO5-bn-mkv" firstAttribute="width" secondItem="zM7-Sr-Sgp" secondAttribute="width" id="SIt-Nd-WZA"/>
@@ -237,7 +224,6 @@
                 <constraint firstItem="71c-4s-gBb" firstAttribute="bottom" secondItem="psv-5Z-FRq" secondAttribute="bottom" id="gEn-bX-Bny"/>
                 <constraint firstItem="ZK9-mr-7Kc" firstAttribute="width" secondItem="PXL-kS-EuD" secondAttribute="width" id="jPD-r2-IpY"/>
                 <constraint firstItem="xO5-bn-mkv" firstAttribute="top" secondItem="zM7-Sr-Sgp" secondAttribute="bottom" constant="15" id="lno-6f-Z0W"/>
-                <constraint firstItem="psv-5Z-FRq" firstAttribute="leading" secondItem="xSe-Qo-Rfp" secondAttribute="leading" id="m46-ws-OUQ"/>
                 <constraint firstItem="tma-5d-N7b" firstAttribute="leading" secondItem="ZK9-mr-7Kc" secondAttribute="trailing" constant="3" id="mEx-xB-3gR"/>
                 <constraint firstItem="uQ9-IY-0yg" firstAttribute="leading" secondItem="BX1-C4-cxp" secondAttribute="leading" id="n5h-7a-1II"/>
                 <constraint firstItem="zM7-Sr-Sgp" firstAttribute="width" secondItem="BX1-C4-cxp" secondAttribute="width" id="opo-HL-cjJ"/>
@@ -278,7 +264,6 @@
                 <outlet property="nameLable" destination="0EK-Rx-hhm" id="CFa-aF-53t"/>
                 <outlet property="orderLable" destination="tbU-xM-BgG" id="cxd-4f-HdS"/>
                 <outlet property="qiaoDaoBtn" destination="psv-5Z-FRq" id="k4c-CY-w4g"/>
-                <outlet property="renZhenBtn" destination="xSe-Qo-Rfp" id="Ts5-qB-g5l"/>
                 <outlet property="wanLable" destination="tma-5d-N7b" id="sW6-6v-LGx"/>
                 <outlet property="yeJiLable" destination="ZK9-mr-7Kc" id="sYF-za-YQ3"/>
                 <outlet property="yunDouBtn" destination="71c-4s-gBb" id="h8d-4c-h3Q"/>
@@ -297,7 +282,6 @@
         <image name="dikuang" width="89" height="53"/>
         <image name="quan" width="126" height="126"/>
         <image name="weiqiandao" width="37" height="37"/>
-        <image name="weirenzheng" width="37" height="37"/>
         <image name="yundou" width="18" height="19"/>
     </resources>
 </document>

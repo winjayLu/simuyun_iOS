@@ -37,12 +37,6 @@
  */
 @property (weak, nonatomic) IBOutlet UIButton *renZhenBtn;
 /**
- *  认证按钮单击事件
- *
- */
-- (IBAction)renZhenClick:(UIButton *)sender;
-
-/**
  *  签到按钮
  */
 @property (weak, nonatomic) IBOutlet UIButton *qiaoDaoBtn;
@@ -233,14 +227,6 @@
 }
 
 #pragma mark - 按钮点击
-/**
- *  认证按钮点击事件
- */
-- (IBAction)renZhenClick:(UIButton *)sender {
-    // 调用代理方法
-    [self sendDelegate:TopButtonTypeRenzhen];
-    [MobClick event:@"main_click" attributes:@{@"按钮" : @"认证", @"机构" : [YTUserInfoTool userInfo].organizationName}];
-}
 /**
  *  签到按钮点击事件
  */

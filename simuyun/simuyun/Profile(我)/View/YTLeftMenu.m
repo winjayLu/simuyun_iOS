@@ -138,7 +138,7 @@
  */
 - (IBAction)bangZhuClick:(UIButton *)sender {
     [self senderNotification:sender];
-    [MobClick event:@"drawer_click" attributes:@{@"帮助" : @"推荐App", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+    [MobClick event:@"drawer_click" attributes:@{@"按钮" : @"帮助", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  关于单击事件
@@ -237,13 +237,6 @@
         return;
     }
     [self.iconImage imageWithUrlStr:imageUrl phImage:placeholder];
-}
-/**
- *  修改头像
- */
-- (void)updateIconImage
-{
-    self.userInfo = [YTUserInfoTool userInfo];
 }
 
 @end

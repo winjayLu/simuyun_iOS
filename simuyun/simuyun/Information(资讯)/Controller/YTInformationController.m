@@ -51,7 +51,7 @@
         
         CorePageModel *model1=[CorePageModel model:tvc1 pageBarName:@"行业资讯"];
         CorePageModel *model2=[CorePageModel model:tvc2 pageBarName:@"云观察"];
-        CorePageModel *model3=[CorePageModel model:tvc3 pageBarName:@"云观点"];
+        CorePageModel *model3=[CorePageModel model:tvc3 pageBarName:@"云视点"];
         CorePageModel *model4=[CorePageModel model:tvc4 pageBarName:@"早知道"];
         
         NSArray *pageModels=@[model1,model2,model3,model4];

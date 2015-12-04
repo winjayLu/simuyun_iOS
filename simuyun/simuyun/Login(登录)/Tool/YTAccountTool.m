@@ -16,6 +16,7 @@
 #import "YTLoginViewController.h"
 #import "CALayer+Anim.h"
 #import "CALayer+Transition.h"
+#import "YTUserInfoTool.h"
 
 
 #define YTAccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"account.data"]
@@ -65,7 +66,12 @@
           account.token = responseObject[@"token"];
           [self save:account];
           [APService setAlias:account.userId callbackSelector:nil object:nil];
-          result(YES);
+          
+          [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
+              if (finally) {
+                  result(YES);
+              }
+          }];
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           if(operation.responseObject[@"message"] != nil)
           {

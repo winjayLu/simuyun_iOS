@@ -22,7 +22,7 @@
 -(void)imageWithUrlStr:(NSString *)urlStr phImage:(UIImage *)phImage{
     
     if(urlStr==nil) {
-        NSLog(@"错误：URL地址为空");
+        self.image = phImage;
         return;
     }
     

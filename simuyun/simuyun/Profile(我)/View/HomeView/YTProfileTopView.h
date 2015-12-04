@@ -13,7 +13,7 @@
  *   按钮类型
  */
 typedef enum {
-    TopButtonTypeRenzhen,   //  未认证
+//    TopButtonTypeRenzhen,   //  未认证
     TopButtonTypeQiandao,   //  签到
     TopButtonTypeYundou,    //  云豆
     TopButtonTypeKehu,      //  我的客户

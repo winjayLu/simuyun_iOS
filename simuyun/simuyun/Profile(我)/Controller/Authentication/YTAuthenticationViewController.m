@@ -158,13 +158,12 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.view.frame = CGRectMake(0, maginTop, DeviceWidth, DeviceHight - maginTop);
     [self.mechanismNameLable addTarget:self.autoCompleter action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingChanged];
     
     [CoreTFManagerVC installManagerForVC:self scrollView:nil tfModels:^NSArray *{
-        
-        TFModel *tfm1=[TFModel modelWithTextFiled:self.mechanismNameLable inputView:nil name:@"" insetBottom:120];
-        return @[tfm1];
+        TFModel *tfm1=[TFModel modelWithTextFiled:self.userNameLable inputView:nil name:@"" insetBottom:20];
+        TFModel *tfm2=[TFModel modelWithTextFiled:self.mechanismNameLable inputView:nil name:@"" insetBottom:120];
+        return @[tfm1, tfm2];
     }];
 }
 -(void)viewDidDisappear:(BOOL)animated{

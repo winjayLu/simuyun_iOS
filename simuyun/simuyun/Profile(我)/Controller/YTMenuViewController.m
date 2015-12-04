@@ -48,19 +48,10 @@
     
     // 监听通知
     [YTCenter addObserver:self selector:@selector(leftUpdate) name:YTUpdateIconImage object:nil];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    // // 获取用户信息
-    if ([YTUserInfoTool userInfo] == nil) {
-        [YTUserInfoTool loadUserInfoWithresult:^(BOOL result) {
-            if (result) {
-                self.leftMenu.userInfo = [YTUserInfoTool userInfo];
-            }
-        }];
-    } else {
-        self.leftMenu.userInfo = [YTUserInfoTool userInfo];
+    if ([YTUserInfoTool localUserInfo] != nil)
+    {
+        self.leftMenu.userInfo = [YTUserInfoTool localUserInfo];
+        return;
     }
 }
 
@@ -69,8 +60,7 @@
  */
 - (void)leftUpdate
 {
-    // 更新头像
-    [self.leftMenu updateIconImage];
+    self.leftMenu.userInfo = [YTUserInfoTool userInfo];
 }
 
 - (void)didReceiveMemoryWarning {

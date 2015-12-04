@@ -30,16 +30,21 @@
  */
 + (void)clearUserInfo;
 
-/**
- *  加载用户信息
- *  成功返回YES
- */
-+ (void)loadUserInfoWithresult:(void (^)(BOOL result))result;
 
 /**
  *  重新获取最新的用户信息
  *
  */
-+ (void)loadNewUserInfo:(void (^)(BOOL result))result;
++ (void)loadNewUserInfo:(void (^)(BOOL finally))finally;
+
+/**
+ *  本地存储用户信息
+ */
++ (void)saveLocal:(YTUserInfo *)userInfo;
+
+/**
+ *  获得上次本地存储的帐号
+ */
++ (YTUserInfo *)localUserInfo;
 
 @end

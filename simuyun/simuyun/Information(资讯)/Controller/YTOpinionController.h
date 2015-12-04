@@ -6,7 +6,7 @@
 //  Copyright © 2015年 YTWealth. All rights reserved.
 //
 
-// 云观点
+// 云视点
 
 #import <UIKit/UIKit.h>
 

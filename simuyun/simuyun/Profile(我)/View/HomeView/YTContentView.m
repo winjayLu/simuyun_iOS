@@ -23,6 +23,12 @@
 // 待办事项数量
 @property (nonatomic, weak) UIButton *todoNumBtn;
 
+/**
+ *  待办事项标题
+ */
+@property (nonatomic, weak) YTGroupCell *groupCell;
+
+
 @end
 
 @implementation YTContentView
@@ -112,17 +118,16 @@
 // 设置cell之间headerview的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 43;
+    return 42;
 }
 // 设置headerview的颜色
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     YTGroupCell *groupCell = [[[NSBundle mainBundle] loadNibNamed:@"YTGroupCell" owner:nil options:nil] lastObject];
-    groupCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(todoTitleClick)];
     [groupCell addGestureRecognizer:tap];
     
+    self.groupCell = groupCell;
     // 待办事项数量
     UIButton *todoNum = [[UIButton alloc] init];
     todoNum.center = groupCell.center;
@@ -142,6 +147,7 @@
 
 - (void)todoTitleClick
 {
+    self.groupCell.selected = YES;
     if ([self.daili respondsToSelector:@selector(selectedTodo:)]) {
         [self.daili selectedTodo:-1];
     }

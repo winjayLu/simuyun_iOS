@@ -2631,10 +2631,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"COCOAPODS=1",
-					"DEBUG=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "COCOAPODS=1";
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INFOPLIST_FILE = simuyun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -2664,10 +2661,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"$(inherited)",
-					"COCOAPODS=1",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = simuyun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

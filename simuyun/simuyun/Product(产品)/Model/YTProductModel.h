@@ -21,6 +21,11 @@
 //@property (nonatomic, assign) int label;
 @property (nonatomic, assign) int series;
 
+/**
+ *  icon图片地址
+ */
+@property (nonatomic, copy) NSString *icon_url;
+
 
 /**
  *  产品名称

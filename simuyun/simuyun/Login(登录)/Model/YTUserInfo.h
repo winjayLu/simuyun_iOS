@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface YTUserInfo : NSObject
+@interface YTUserInfo : NSObject <NSCoding>
 
 /**
  *  用户昵称

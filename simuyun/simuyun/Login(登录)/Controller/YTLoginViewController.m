@@ -21,6 +21,7 @@
 #import "YTResourcesTool.h"
 #import "APService.h"
 #import "NSString+Password.h"
+#import "YTUserInfoTool.h"
 
 
 // 登录
@@ -146,7 +147,11 @@
                       acc.userId = responseObject[@"userId"];
                       acc.token = responseObject[@"token"];
                       [YTAccountTool save:acc];
-                       [self transitionTabBarVC];
+                      [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
+                          if (finally) {
+                              [self transitionTabBarVC];
+                          }
+                      }];
                       [APService setAlias:responseObject[@"userId"] callbackSelector:nil object:nil];
                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                       if(operation.responseObject[@"message"] != nil)
