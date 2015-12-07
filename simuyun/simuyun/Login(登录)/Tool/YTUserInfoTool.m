@@ -11,8 +11,6 @@
 #import "YTUserInfoTool.h"
 #import "YTAccountTool.h"
 
-#define YTUserinfoPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"userinfo.data"]
-
 
 @implementation YTUserInfoTool
 
@@ -40,9 +38,7 @@ static YTUserInfo *_userInfo;
 + (void)saveUserInfo:(YTUserInfo *)userInfo;
 {
     _userInfo = userInfo;
-    [self saveLocal:_userInfo];
 }
-
 
 /**
  *  重新获取最新的用户信息
@@ -62,25 +58,6 @@ static YTUserInfo *_userInfo;
     }];
 }
 
-
-
-/**
- *  本地存储用户信息
- */
-+ (void)saveLocal:(YTUserInfo *)userInfo
-{
-    [NSKeyedArchiver archiveRootObject:userInfo toFile:YTUserinfoPath];
-}
-
-/**
- *  获得上次本地存储的帐号
- */
-+ (YTUserInfo *)localUserInfo;
-{
-    YTUserInfo *userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:YTUserinfoPath];
-    _userInfo = userInfo;
-    return userInfo;
-}
 
 
 @end

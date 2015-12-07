@@ -185,9 +185,8 @@
 {
     _userInfo = userInfo;
     
-    YTResources *resourse = [YTResourcesTool resources];
     // 隐藏关联 微信
-    if (resourse.versionFlag == 0) {
+    if ([YTResourcesTool isVersionFlag] == NO) {
         self.guanLianBtn.hidden = YES;
         self.guanLianRightBtn.hidden = YES;
         self.tuijianTopConstraint.constant = -30;

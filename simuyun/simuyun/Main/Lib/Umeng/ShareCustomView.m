@@ -49,7 +49,7 @@
     self = [self init];
     if (self) {
         //  设置要分享的平台
-        if([YTResourcesTool resources].versionFlag == 0)
+        if([YTResourcesTool isVersionFlag] == NO)
         {
             self.titleArr = [NSArray arrayWithObjects:@"邮件",@"短信",@"复制链接", nil];
             self.imageArr = [NSArray arrayWithObjects:@"ShareButtonTypeEmail",@"ShareButtonTypeSms",@"ShareButtonTypeCopy", nil];
@@ -71,7 +71,7 @@
         //  设置要分享的平台
         self.titleArr = titleArray;
         self.imageArr = imageArray;
-        if([YTResourcesTool resources].versionFlag == 0)
+        if([YTResourcesTool isVersionFlag] == NO)
         {
             self.titleArr = [NSArray arrayWithObjects:@"邮件",@"短信", nil];
             self.imageArr = [NSArray arrayWithObjects:@"ShareButtonTypeEmail",@"ShareButtonTypeSms", nil];

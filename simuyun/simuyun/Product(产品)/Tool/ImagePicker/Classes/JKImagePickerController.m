@@ -299,6 +299,8 @@ ALAssetsFilter * ALAssetsFilterFromJKImagePickerControllerFilterType(JKImagePick
     
     // Update view
     [self.collectionView reloadData];
+//    CGFloat height = self.collectionView.contentSize.height + self.collectionView.width;
+    self.collectionView.contentOffset = CGPointMake(0,  MAXFLOAT);
 }
 
 - (void)loadAssetsGroupsWithTypes:(NSArray *)types completion:(void (^)(NSArray *assetsGroups))completion
@@ -559,6 +561,7 @@ static NSString *kJKAssetsFooterViewIdentifier = @"kJKAssetsFooterViewIdentifier
     [self addAssetsObject:assetURL];
     [self resetFinishFrame];
     [self.collectionView reloadData];
+
 }
 
 - (void)photoBrowser:(JKPhotoBrowser *)photoBrowser didDeselectAtIndex:(NSInteger)index
@@ -568,6 +571,7 @@ static NSString *kJKAssetsFooterViewIdentifier = @"kJKAssetsFooterViewIdentifier
     [self removeAssetsObject:assetURL];
     [self resetFinishFrame];
     [self.collectionView reloadData];
+    
 }
 
 #pragma mark- UIImagePickerViewController

@@ -31,4 +31,17 @@
  */
 + (void)saveResources:(YTResources *)resources;
 
+/**
+ *  思路:收到服务器显示,本地持久化,新特性时清除本地数据
+ 封装方法,返回bool,是否可以显示
+ */
+/**
+ *  是否可以显示,一些功能
+ *
+ *  @return YES可以显示,NO不可以显示
+ */
++ (BOOL)isVersionFlag;
+
+
+
 @end

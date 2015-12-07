@@ -123,7 +123,6 @@
         [self transitionTabBarVC];
     } failure:^(NSError *error) {
     }];
-    
 }
 
 /**
@@ -148,10 +147,11 @@
  */
 - (void)setupNav
 {
+    self.title = @"认证理财师";
     self.navigationController.navigationBar.hidden = YES;
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     // 隐藏子控件
-    [self navigationBarWithHidden:YES];
+//    [self navigationBarWithHidden:YES];
 
 }
 
@@ -180,7 +180,7 @@
     [CoreTFManagerVC installManagerForVC:self scrollView:nil tfModels:^NSArray *{
         
         TFModel *tfm1=[TFModel modelWithTextFiled:self.userNameLable inputView:nil name:@"" insetBottom:20];
-        TFModel *tfm2=[TFModel modelWithTextFiled:self.mechanismNameLable inputView:nil name:@"" insetBottom:120];
+        TFModel *tfm2=[TFModel modelWithTextFiled:self.mechanismNameLable inputView:nil name:@"" insetBottom:140];
         return @[tfm1, tfm2];
     }];
 }

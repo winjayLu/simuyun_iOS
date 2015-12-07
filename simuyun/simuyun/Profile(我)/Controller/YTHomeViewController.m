@@ -81,12 +81,14 @@
 // 签到弹出框
 @property (nonatomic, strong) YTBlackAlertView *blackAlert;
 
-
 // 跑马灯视图
 @property (nonatomic, weak) TimerLoopView *loopView;
 
 // 认证提醒
 @property (nonatomic, weak) YTGroupCell *groupCell;
+
+// 第一次加载
+@property (nonatomic, assign) BOOL firstLoad;
 
 @end
 
@@ -102,9 +104,6 @@
     
     // 初始化顶部视图
     [self setupTopView];
-    
-    // 加载用户信息
-    [self loadUserInfo];
     
     // 初始化底部ScrollView
     [self setupScrollView];
@@ -125,10 +124,8 @@
     self.token = [[YTTokenView alloc] init];
     self.token.delegate = self;
     
-   
-    
     // 获取运营公告跑马灯
-//    [self loadLoopView];
+    [self loadLoopView];
     
     // 检查更新
     [self updateData];
@@ -140,14 +137,21 @@
 {
     [super viewWillAppear:animated];
     
-    // // 获取用户信息
-    [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
-        if (finally) {
-            self.topView.userInfo = [YTUserInfoTool userInfo];
-            [YTCenter postNotificationName:YTUpdateIconImage object:nil];
-            [self updateAuthentication];
-        }
-    }];
+    if (!self.firstLoad) {
+        // 加载用户信息
+        self.topView.userInfo = [YTUserInfoTool userInfo];
+        [YTCenter postNotificationName:YTUpdateIconImage object:nil];
+        self.firstLoad = YES;
+    } else {
+        // 重新加载用户信息
+        [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
+            if (finally) {
+                self.topView.userInfo = [YTUserInfoTool userInfo];
+                [YTCenter postNotificationName:YTUpdateIconImage object:nil];
+                [self updateAuthentication];
+            }
+        }];
+    }
     
     // 加载待办事项
     [self loadTodos];
@@ -180,20 +184,6 @@
         }
     }
 }
-
-
-
-/**
- *  加载用户信息
- */
-- (void)loadUserInfo
-{
-    if ([YTUserInfoTool localUserInfo] != nil)
-    {
-         self.topView.userInfo = [YTUserInfoTool localUserInfo];
-    }
-}
-
 
 #pragma mark - 初始化
 /**
@@ -401,7 +391,7 @@
     bottom.layer.masksToBounds = YES;
     bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42 * 3);
 
-    if([YTResourcesTool resources].versionFlag == 0)
+    if([YTResourcesTool isVersionFlag] == NO)
     {
         bottom.height = 42;
     }

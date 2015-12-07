@@ -45,7 +45,6 @@
 - (void)setupTopView
 {
     YTReportTopView *topView = [YTReportTopView reportTopView];
-    topView.frame = CGRectMake(0, 0, DeviceWidth, topView.height);
     topView.prouctModel = self.prouctModel;
     [self.view addSubview:topView];
     self.topView = topView;

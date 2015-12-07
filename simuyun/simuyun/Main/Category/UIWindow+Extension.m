@@ -13,6 +13,7 @@
 #import "CoreNewFeatureVC.h"
 #import "CALayer+Transition.h"
 #import "UIImage+Extend.h"
+#import "CoreArchive.h"
 
 @implementation UIWindow (Extension)
 
@@ -21,11 +22,14 @@
  */
 - (void)chooseRootviewController
 {
-    
-    
+
     // 判断显示新特性还是欢迎界面
     if ([CoreNewFeatureVC canShowNewFeature])
     {
+        
+        // 重新打开AppStore开关
+        [CoreArchive setStr:nil key:@"versionFlag"];
+        
         NSString *imageName = @"newFeature";
         if (iPhone6) {
             imageName = @"newFeatureiphone6";
@@ -45,7 +49,6 @@
         self.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m1,m2,m3,m4,m5] enterBlock:^{
             // 登录控制器
             self.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
-//            [self transitionVc];
         }];
     } else {
         // 欢迎控制器

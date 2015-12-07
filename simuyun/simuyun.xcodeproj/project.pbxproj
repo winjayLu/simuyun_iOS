@@ -156,6 +156,8 @@
 		97ABCB821BDE01660056C1A1 /* YTInformationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97ABCB801BDE01660056C1A1 /* YTInformationTableViewCell.m */; };
 		97ABCB831BDE01660056C1A1 /* YTInformationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97ABCB811BDE01660056C1A1 /* YTInformationTableViewCell.xib */; };
 		97ABCB861BDE128D0056C1A1 /* YTInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 97ABCB851BDE128D0056C1A1 /* YTInformation.m */; };
+		97AD4E6C1C152DAA00541412 /* YTAutocompletionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97AD4E6A1C152DAA00541412 /* YTAutocompletionCell.m */; };
+		97AD4E6D1C152DAA00541412 /* YTAutocompletionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97AD4E6B1C152DAA00541412 /* YTAutocompletionCell.xib */; };
 		97B08A8A1BC2472B007EBD24 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08A891BC2472B007EBD24 /* main.m */; };
 		97B08A8D1BC2472B007EBD24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08A8C1BC2472B007EBD24 /* AppDelegate.m */; };
 		97B08AA31BC2472B007EBD24 /* simuyunTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08AA21BC2472B007EBD24 /* simuyunTests.m */; };
@@ -550,6 +552,9 @@
 		97ABCB811BDE01660056C1A1 /* YTInformationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTInformationTableViewCell.xib; sourceTree = "<group>"; };
 		97ABCB841BDE128D0056C1A1 /* YTInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTInformation.h; sourceTree = "<group>"; };
 		97ABCB851BDE128D0056C1A1 /* YTInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTInformation.m; sourceTree = "<group>"; };
+		97AD4E691C152DAA00541412 /* YTAutocompletionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAutocompletionCell.h; sourceTree = "<group>"; };
+		97AD4E6A1C152DAA00541412 /* YTAutocompletionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAutocompletionCell.m; sourceTree = "<group>"; };
+		97AD4E6B1C152DAA00541412 /* YTAutocompletionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTAutocompletionCell.xib; sourceTree = "<group>"; };
 		97B08A851BC2472B007EBD24 /* simuyun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simuyun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97B08A891BC2472B007EBD24 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		97B08A8B1BC2472B007EBD24 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../../AppDelegate.h; sourceTree = "<group>"; };
@@ -1692,6 +1697,9 @@
 			children = (
 				9780A6EC1BDF74B000E973D9 /* AutocompletionTableView.h */,
 				9780A6ED1BDF74B000E973D9 /* AutocompletionTableView.m */,
+				97AD4E691C152DAA00541412 /* YTAutocompletionCell.h */,
+				97AD4E6A1C152DAA00541412 /* YTAutocompletionCell.m */,
+				97AD4E6B1C152DAA00541412 /* YTAutocompletionCell.xib */,
 				978FA7881BDA236100E53DA4 /* BFNavigationBarDrawer.h */,
 				978FA7891BDA236100E53DA4 /* BFNavigationBarDrawer.m */,
 			);
@@ -2225,6 +2233,7 @@
 				9769F9F71BC9676B001B1F02 /* YTContentCell.xib in Resources */,
 				978F8CD51C10487F0041F661 /* YTLoginAuthenticationController.xib in Resources */,
 				972B880A1BFAD3D0002A7E9B /* LICENSE in Resources */,
+				97AD4E6D1C152DAA00541412 /* YTAutocompletionCell.xib in Resources */,
 				978775151BE8A200002A8B42 /* YTBindingPhoneController.xib in Resources */,
 				9798E20D1BD9E15100B235AE /* YTOrderCenterCell.xib in Resources */,
 				97C3CE6B1BC2BAEF00B7185D /* SVProgressHUD.bundle in Resources */,
@@ -2347,6 +2356,7 @@
 				972B88131BFAD3D0002A7E9B /* UIWebView+AFNetworking.m in Sources */,
 				978C62731BE4AD9E00FE2C72 /* YTSystemCenterController.m in Sources */,
 				97DE83131BD1042900E3C5CA /* YTResuNextViewController.m in Sources */,
+				97AD4E6C1C152DAA00541412 /* YTAutocompletionCell.m in Sources */,
 				97C605AB1BC260A400E555E8 /* UIWindow+Extension.m in Sources */,
 				972B880E1BFAD3D0002A7E9B /* UIAlertView+AFNetworking.m in Sources */,
 				97C605AF1BC260A400E555E8 /* YTHttpTool.m in Sources */,
@@ -2553,8 +2563,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2576,7 +2586,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "0841cec0-9d20-41c9-9973-6089a38a60b5";
+				PROVISIONING_PROFILE = "c9acdc3f-1393-4076-85a5-cb7112d3c091";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2598,8 +2608,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2614,7 +2624,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "0841cec0-9d20-41c9-9973-6089a38a60b5";
+				PROVISIONING_PROFILE = "c9acdc3f-1393-4076-85a5-cb7112d3c091";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2626,8 +2636,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
@@ -2644,7 +2654,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0841cec0-9d20-41c9-9973-6089a38a60b5";
+				PROVISIONING_PROFILE = "c9acdc3f-1393-4076-85a5-cb7112d3c091";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -2656,8 +2666,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
@@ -2673,7 +2683,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0841cec0-9d20-41c9-9973-6089a38a60b5";
+				PROVISIONING_PROFILE = "c9acdc3f-1393-4076-85a5-cb7112d3c091";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};

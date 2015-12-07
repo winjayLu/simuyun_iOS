@@ -74,7 +74,7 @@
 {
     if (!_titles) {
         _titles = @[@"全部订单", @"我的奖品", @"云豆银行"];
-        if([YTResourcesTool resources].versionFlag == 0)
+        if([YTResourcesTool isVersionFlag] == NO)
         {
             
             _titles = @[@"全部订单"];
@@ -86,7 +86,7 @@
 
 - (void)isShow
 {
-    if([YTResourcesTool resources].versionFlag != 0)
+    if([YTResourcesTool isVersionFlag] == NO)
     {
         _titles = @[@"全部订单", @"我的奖品", @"云豆银行"];
     }

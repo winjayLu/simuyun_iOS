@@ -7,6 +7,7 @@
 //
 
 #import "YTResourcesTool.h"
+#import "CoreArchive.h"
 
 @implementation YTResourcesTool
 
@@ -53,6 +54,28 @@ static YTResources *_resources;
 + (void)saveResources:(YTResources *)resources
 {
     _resources = resources;
+    if (resources.versionFlag == 1) {
+        [CoreArchive setStr:@"YES" key:@"versionFlag"];
+    }
 }
+
+/**
+ *  思路:收到服务器显示,本地持久化,新特性时清除本地数据
+    封装方法,返回bool,是否可以显示
+ */
+/**
+ *  是否可以显示,一些功能
+ *
+ *  @return YES可以显示,NO不可以显示
+ */
++ (BOOL)isVersionFlag
+{
+    NSString *versionFlag = [CoreArchive strForKey:@"versionFlag"];
+    if (versionFlag.length > 0) {
+        return  YES;
+    }
+    return NO;
+}
+
 
 @end

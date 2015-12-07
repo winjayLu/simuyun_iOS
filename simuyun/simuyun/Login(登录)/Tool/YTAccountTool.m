@@ -17,6 +17,7 @@
 #import "CALayer+Anim.h"
 #import "CALayer+Transition.h"
 #import "YTUserInfoTool.h"
+#import "CoreArchive.h"
 
 
 #define YTAccountPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"account.data"]
@@ -28,6 +29,9 @@
 + (void)save:(YTAccount *)account
 {
     [NSKeyedArchiver archiveRootObject:account toFile:YTAccountPath];
+    if (account != nil) {
+        [CoreArchive setStr:account.userName key:@"userName"];
+    }
 }
 
 /**

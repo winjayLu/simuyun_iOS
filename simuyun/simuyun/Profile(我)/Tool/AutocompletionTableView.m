@@ -6,6 +6,7 @@
 //
 
 #import "AutocompletionTableView.h"
+#import "YTAutocompletionCell.h"
 
 @interface AutocompletionTableView () 
 @property (nonatomic, strong) NSArray *suggestionOptions; // of selected NSStrings 
@@ -28,10 +29,10 @@
     self.options = options;
     
     // frame must align to the textfield 
-    CGRect frame = CGRectMake(0, 257, DeviceWidth, 120);
+    CGRect frame = CGRectMake(0, 257, DeviceWidth, 128);
     if ([self.options[@"style"]  isEqual: @(2)])
     {
-        frame = CGRectMake( 22 , 295, DeviceWidth - 44, 120);
+        frame = CGRectMake( 22 , 345, DeviceWidth - 44, 128);
     }
 //    CGRect frame = CGRectMake(textField.frame.origin.x, CGRectGetMaxY(textField.frame), textField.frame.size.width, 120);
     
@@ -44,7 +45,8 @@
     self.delegate = self;
     self.dataSource = self;
     self.scrollEnabled = YES;
-    
+    // 去掉下划线
+    self.separatorStyle = UITableViewCellSeparatorStyleNone;
     // turn off standard correction
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
     
@@ -97,32 +99,34 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *AutoCompleteRowIdentifier = @"AutoCompleteRowIdentifier";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:AutoCompleteRowIdentifier];
+    NSString *AutoCompleteRowIdentifier = @"autocompletion";
+    YTAutocompletionCell *cell = [tableView dequeueReusableCellWithIdentifier:AutoCompleteRowIdentifier];
+
     if (cell == nil) 
     {
-        cell = [[UITableViewCell alloc] 
-                 initWithStyle:UITableViewCellStyleDefault reuseIdentifier:AutoCompleteRowIdentifier];
+        cell = [YTAutocompletionCell autocompletionCell];
     }
     
-    if ([self.options valueForKey:ACOUseSourceFont]) 
-    {
-        cell.textLabel.font = [self.options valueForKey:ACOUseSourceFont];
-    } else 
-    {
-        cell.textLabel.font = self.cellLabelFont;
-    }
-    cell.textLabel.adjustsFontSizeToFitWidth = NO;
-    cell.textLabel.text = [self.suggestionOptions objectAtIndex:indexPath.row];
+//    if ([self.options valueForKey:ACOUseSourceFont]) 
+//    {
+//        cell.textLabel.font = [self.options valueForKey:ACOUseSourceFont];
+//    } else {
+//        cell.textLabel.font = self.cellLabelFont;
+//    }
+//    cell.textLabel.adjustsFontSizeToFitWidth = NO;
+    cell.titleLable.text = [self.suggestionOptions objectAtIndex:indexPath.row];
+
 
     if ([self.options[@"style"]  isEqual: @(2)])
     {
-        // YTRGBA(255, 255, 255, 0.8);
-        cell.backgroundColor = [UIColor clearColor];
-        cell.contentView.backgroundColor = YTColor(37, 37, 39);
-        cell.textLabel.textColor = YTColor(153, 153, 153);
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+//        cell.backgroundColor = [UIColor clearColor];
+//        cell.contentView.backgroundColor = YTColor(37, 37, 39);
+        cell.backgroundColor = YTRGBA(0, 0, 0, 0.2);
+        self.backgroundColor = [UIColor clearColor];
+        cell.contentView.backgroundColor = [UIColor clearColor];
+        cell.titleLable.textColor = YTColor(204, 204, 204);
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     
     return cell;
 }

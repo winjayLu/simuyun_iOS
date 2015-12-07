@@ -37,14 +37,6 @@
  */
 + (void)loadNewUserInfo:(void (^)(BOOL finally))finally;
 
-/**
- *  本地存储用户信息
- */
-+ (void)saveLocal:(YTUserInfo *)userInfo;
 
-/**
- *  获得上次本地存储的帐号
- */
-+ (YTUserInfo *)localUserInfo;
 
 @end

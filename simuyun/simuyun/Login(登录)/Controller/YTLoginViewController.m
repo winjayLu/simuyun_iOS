@@ -22,6 +22,7 @@
 #import "APService.h"
 #import "NSString+Password.h"
 #import "YTUserInfoTool.h"
+#import "CoreArchive.h"
 
 
 // 登录
@@ -93,15 +94,15 @@
     }
     
     // 审核阶段
-    if([YTResourcesTool resources].versionFlag == 0)
+    if([YTResourcesTool isVersionFlag] == NO)
     {
         self.weiChatView.hidden = YES;
     }
     
     // 是否有帐号信息
-    YTAccount *account = [YTAccountTool account];
-    if (account != nil) {
-        self.userName.text = account.userName;
+    NSString *userName = [CoreArchive strForKey:@"userName"];
+    if (userName != nil && userName.length > 0) {
+        self.userName.text = userName;
     }
 }
 

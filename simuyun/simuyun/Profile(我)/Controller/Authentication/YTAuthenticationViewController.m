@@ -162,7 +162,7 @@
     
     [CoreTFManagerVC installManagerForVC:self scrollView:nil tfModels:^NSArray *{
         TFModel *tfm1=[TFModel modelWithTextFiled:self.userNameLable inputView:nil name:@"" insetBottom:20];
-        TFModel *tfm2=[TFModel modelWithTextFiled:self.mechanismNameLable inputView:nil name:@"" insetBottom:120];
+        TFModel *tfm2=[TFModel modelWithTextFiled:self.mechanismNameLable inputView:nil name:@"" insetBottom:140];
         return @[tfm1, tfm2];
     }];
 }

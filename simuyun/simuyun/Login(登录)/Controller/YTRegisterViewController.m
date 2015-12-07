@@ -109,6 +109,8 @@
  *  注册按钮单击
  */
 - (IBAction)registerClick:(UIButton *)sender {
+    [self transitionTabBarVC];
+    return;
     
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
     if ([self checkTextWith:YES]) return;
