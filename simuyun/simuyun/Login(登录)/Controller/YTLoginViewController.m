@@ -82,7 +82,7 @@
     // 设置导航栏
     [self setupNav];
     
-    // iphoe 4 影藏微信登录提示语
+    // iphoe 4 隐藏微信登录提示语
     if (DeviceHight < 568) {
         for (UIView *view in self.weiChatView.subviews) {
             if ([view isKindOfClass:[UIButton class]]) {

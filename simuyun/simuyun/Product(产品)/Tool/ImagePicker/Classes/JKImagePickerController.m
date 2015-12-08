@@ -226,7 +226,16 @@ ALAssetsFilter * ALAssetsFilterFromJKImagePickerControllerFilterType(JKImagePick
                          completion:^(NSArray *assetsGroups) {
                              if ([assetsGroups count]>0) {
                                  weakSelf.titleButton.enabled = YES;
-                                 weakSelf.selectAssetsGroup = [assetsGroups objectAtIndex:0];
+                                 NSInteger selectIndex = 0;
+                                 for (int i = 0; i < assetsGroups.count; i++) {
+                                     ALAssetsGroup *group = assetsGroups[i];
+                                     NSString* groupname = [group valueForProperty:ALAssetsGroupPropertyName];
+                                     if ([groupname isEqualToString:@"相机胶卷"]) {
+                                         selectIndex = i;
+                                     }
+                                 }
+                                 
+                                 weakSelf.selectAssetsGroup = [assetsGroups objectAtIndex:selectIndex];
                                  
                                  weakSelf.assetsGroupsView.assetsGroups = assetsGroups;
                                  
@@ -299,8 +308,6 @@ ALAssetsFilter * ALAssetsFilterFromJKImagePickerControllerFilterType(JKImagePick
     
     // Update view
     [self.collectionView reloadData];
-//    CGFloat height = self.collectionView.contentSize.height + self.collectionView.width;
-    self.collectionView.contentOffset = CGPointMake(0,  MAXFLOAT);
 }
 
 - (void)loadAssetsGroupsWithTypes:(NSArray *)types completion:(void (^)(NSArray *assetsGroups))completion
@@ -463,7 +470,7 @@ static NSString *kJKAssetsFooterViewIdentifier = @"kJKAssetsFooterViewIdentifier
     if ([indexPath row]<=0) {
         cell.asset = nil;
     }else{
-        ALAsset *asset = self.assetsArray[indexPath.row-1];
+        ALAsset *asset = self.assetsArray[self.assetsArray.count - indexPath.row];
         cell.asset = asset;
         NSURL *assetURL = [asset valueForProperty:ALAssetPropertyAssetURL];
         cell.isSelected = [self assetIsSelected:assetURL];
@@ -561,7 +568,6 @@ static NSString *kJKAssetsFooterViewIdentifier = @"kJKAssetsFooterViewIdentifier
     [self addAssetsObject:assetURL];
     [self resetFinishFrame];
     [self.collectionView reloadData];
-
 }
 
 - (void)photoBrowser:(JKPhotoBrowser *)photoBrowser didDeselectAtIndex:(NSInteger)index
@@ -571,7 +577,6 @@ static NSString *kJKAssetsFooterViewIdentifier = @"kJKAssetsFooterViewIdentifier
     [self removeAssetsObject:assetURL];
     [self resetFinishFrame];
     [self.collectionView reloadData];
-    
 }
 
 #pragma mark- UIImagePickerViewController

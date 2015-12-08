@@ -18,14 +18,12 @@
 /**
  *  icon标签
  */
-//@property (nonatomic, assign) int label;
 @property (nonatomic, assign) int series;
 
 /**
  *  icon图片地址
  */
 @property (nonatomic, copy) NSString *icon_url;
-
 
 /**
  *  产品名称
@@ -100,6 +98,10 @@
 @property (nonatomic, copy) NSString *raise_account;
 // 募集银行
 @property (nonatomic, copy) NSString *raise_bank;
+
+// 截至认购时间
+@property (nonatomic, copy) NSString *pub_end_time;
+
 
 
 

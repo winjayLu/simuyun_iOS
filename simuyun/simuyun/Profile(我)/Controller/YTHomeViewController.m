@@ -193,7 +193,7 @@
 {
     // 顶部视图
     YTProfileTopView *topView = [YTProfileTopView profileTopView];
-    topView.frame = CGRectMake(0, 0, self.view.frame.size.width, 270);
+    topView.frame = CGRectMake(0, 0, self.view.frame.size.width, 310);
     topView.delegate = self;
     [topView setIconImageWithImage:nil];
     topView.layer.masksToBounds = YES;
@@ -212,7 +212,6 @@
  */
 - (void)loadLoopView
 {
-    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
         NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:10];
@@ -221,13 +220,17 @@
             obj.LabelName=[NSString stringWithFormat:@"盈泰财富云恒山%d号",i];
             [array addObject:obj];
         }
-        TimerLoopView *loop=[[TimerLoopView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame), DeviceWidth, 40) withitemArray:array];
+        TimerLoopView *loop=[[TimerLoopView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - 40, DeviceWidth, 40) withitemArray:array];
+        loop.height = 0;
         [self.view addSubview:loop];
         loop.loopDelegate = self;
         self.loopView = loop;
-        self.mainView.y = CGRectGetMaxY(self.loopView.frame);
+        [UIView animateWithDuration:0.5 animations:^{
+            loop.height = 40;
+            self.mainView.y = CGRectGetMaxY(self.loopView.frame);
+        }];
         CGSize oldContent = self.mainView.contentSize;
-        self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height + 40);
+        self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height + 48);
     });
 }
 
@@ -236,9 +239,11 @@
 {
     [self.loopView removeFromSuperview];
     self.loopView = nil;
-    self.mainView.y = CGRectGetMaxY(self.topView.frame);
+    [UIView animateWithDuration:0.5 animations:^{
+        self.mainView.y = 262;
+    }];
     CGSize oldContent = self.mainView.contentSize;
-    self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height - 40);
+    self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height - 48);
 }
 
 - (void)pushView:(LoopObj *)loopObj
@@ -255,17 +260,17 @@
 - (void)setupScrollView
 {
     // 底部视图为Scrollview
-
     CGFloat scrollViewY = CGRectGetMaxY(self.loopView.frame);
     
     if (scrollViewY == 0) {
-        scrollViewY = CGRectGetMaxY(self.topView.frame);
+        scrollViewY = 262;
     }
     CGFloat scrollViewH = DeviceHight - scrollViewY;
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, scrollViewY, DeviceWidth, scrollViewH)];
     mainView.showsVerticalScrollIndicator = NO;
     mainView.contentSize = CGSizeMake(DeviceWidth, scrollViewH);
     mainView.delegate = self;
+//    mainView.bounces = NO;
     mainView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:mainView];
     self.mainView = mainView;
@@ -306,7 +311,7 @@
     // 计算groupCell的高度
     
     CGFloat groupCellHeight = 42;
-    groupCell.frame = CGRectMake(magin, 0, self.view.width - magin * 2, groupCellHeight);
+    groupCell.frame = CGRectMake(magin, 8, self.view.width - magin * 2, groupCellHeight);
     [self.mainView addSubview:groupCell];
     self.groupCell = groupCell;
 }
@@ -370,7 +375,7 @@
         todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
     }
     YTContentView *content = [[YTContentView alloc] init];
-    content.frame = CGRectMake(magin, 0, self.view.width - magin * 2, todoHeight);
+    content.frame = CGRectMake(magin, 8, self.view.width - magin * 2, todoHeight);
     if (self.groupCell != nil) {
         content.frame = CGRectMake(magin, CGRectGetMaxY(self.groupCell.frame) + 8, self.view.width - magin * 2, todoHeight);
     }
@@ -446,7 +451,7 @@
     } else {
          todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
     }
-    self.todoView.frame = CGRectMake(magin, 0, self.view.width - magin * 2, todoHeight);
+    self.todoView.frame = CGRectMake(magin, 8, self.view.width - magin * 2, todoHeight);
     if (self.groupCell != nil) {
         self.todoView.frame = CGRectMake(magin, CGRectGetMaxY(self.groupCell.frame) + 8, self.view.width - magin * 2, todoHeight);
     }
@@ -458,7 +463,7 @@
     
     if (self.loopView != nil) {
         CGSize oldContent = self.mainView.contentSize;
-        self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height + 40);
+        self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height + 480);
     }
 }
 
@@ -571,7 +576,7 @@
  *
  */
 -(void)addPicker:(UIImagePickerController *)picker{
-    
+     [MobClick event:@"main_click" attributes:@{@"按钮" : @"更换头像", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     [self presentViewController:picker animated:YES completion:nil];
 }
 /**
@@ -588,6 +593,8 @@
             [self signIn];
             break;
         case TopButtonTypeYundou:   // 云豆
+#warning 测试
+            [self loadLoopView];
             [alert showAlertWithTitle:YTYunDouGuiZe detail:YTYunDouGuiZeContent];
             break;
         case TopButtonTypeKehu:     // 客户

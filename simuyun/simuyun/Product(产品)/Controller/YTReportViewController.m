@@ -387,18 +387,19 @@
         self.CertificatesNumberConstr.constant = 78;
         if (self.certificatesView == nil) {
             [self createCertificatesName];
-            self.photo.view.y = self.titleLable.y - 20 + 54;
-            self.informationPhoto.view.y = self.informationLable.y - 20 + 54;
+            self.photo.view.y = self.titleLable.y - 15 + 53;
+            self.informationPhoto.view.y = self.informationLable.y - 15 + 53;
             // 更新键盘位置
             [self updateKeyboardPosition:NO];
         }
+
     } else {
         self.CertificatesNumberConstr.constant = 25;
         if (self.certificatesView != nil) {
             [self.certificatesView removeFromSuperview];
             self.certificatesView = nil;
-            self.photo.view.y = self.titleLable.y - 20 - 54;
-            self.informationPhoto.view.y = self.informationLable.y - 20 - 54;
+            self.photo.view.y = self.titleLable.y - 15 - 53;
+            self.informationPhoto.view.y = self.informationLable.y - 15 - 53;
             // 更新键盘位置
             [self updateKeyboardPosition:YES];
         }

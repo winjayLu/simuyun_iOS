@@ -10,7 +10,7 @@
 
 #import "TimerLoopView.h"
 
-#define repeat 3
+#define repeat 1
 
 @implementation LoopObj
 
@@ -65,7 +65,15 @@
 {
     autoIndex=0;
     //for test
-    abstractScrollview=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0,_width , _height)];
+    CGFloat magin = 10;
+    
+    UIImageView *iconView = [[UIImageView alloc] init];
+    iconView.image = [UIImage imageNamed:@"voice"];
+    iconView.frame = CGRectMake(magin, 10, 24, 20);
+    [self addSubview:iconView];
+    abstractScrollview=[[UIScrollView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(iconView.frame) + magin, 0,_width , _height)];
+    abstractScrollview.backgroundColor = [UIColor clearColor];
+    self.backgroundColor = YTRGBA(0, 0, 0, 0.5);
     [self addSubview:abstractScrollview];
     
     //contentSize
@@ -83,6 +91,7 @@
         [label setText:obj.LabelName];
         label.textColor = [UIColor whiteColor];
         label.tag=10+i;
+        label.backgroundColor = [UIColor clearColor];
         [abstractScrollview addSubview:label];
         
         if (i==[_itemarray count]-1) {
@@ -92,6 +101,7 @@
             labelLast.textColor = [UIColor whiteColor];
             [labelLast setText:obj.LabelName];
             labelLast.tag=10+i+1;
+            label.backgroundColor = [UIColor clearColor];
             [abstractScrollview addSubview:labelLast];
         }
     }
@@ -102,6 +112,7 @@
     
     // 创建一个可以接受事件的Button
     UIButton *button = [[UIButton alloc] init];
+    button.backgroundColor = [UIColor clearColor];
     button.frame = self.bounds;
     [button addTarget:self action:@selector(titleClick) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:button];

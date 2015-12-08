@@ -8,8 +8,10 @@
 
 #import "YTProductCell.h"
 #import "UIImageView+SD.h"
-
-
+#import "NSDate+Extension.h"
+#import "NSDate+Extension.h"
+#import "NSString+Extend.h"
+#import "MZTimerLabel.h"
 
 // 左右间距
 #define maginWidth 7
@@ -84,6 +86,8 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconWidthConstraint;
 
 
+@property (nonatomic, strong) MZTimerLabel *timeLable;
+
 @end
 
 
@@ -116,7 +120,7 @@
 - (void)setProduct:(YTProductModel *)product
 {
     _product = product;
-
+    
     // 设置icon图片
     if (_product.series != 0) {
         self.iconWidthConstraint.constant = 25;
@@ -174,9 +178,22 @@
         self.danWeiLable.text = @"万";
         self.yimujiLable.text = [NSString stringWithFormat:@"%.0f",_product.raised_amt];
     }
+    NSLog(@"%@", _product.pub_end_time);
+//    NSDate *date = [_product.pub_end_time stringWithDate:@"yyyy-MM-dd HH:mm:00"];
+    //yyyy-MM-ddHH:mm:ss
+    NSDate *date = [NSDate date];
     
-    
+    NSDate *pub_end_time = [_product.pub_end_time stringWithDate:@"yyyy-MM-dd HH:mm"];
 
+    NSDateComponents *comp = [date componentsToDate:pub_end_time];
+    NSLog(@"%@",comp);
+    NSLog(@"%zd",comp.second);
+    [self.timeLable pause];
+//    long second = abs(comp.second) + arc4random_uniform(60);
+    MZTimerLabel *timer = [[MZTimerLabel alloc] initWithLabel:self.titleLable andTimerType:MZTimerLabelTypeTimer];
+    [timer setCountDownTime:comp.second];
+    [timer start];
+    self.timeLable = timer;
     
 }
 
