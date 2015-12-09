@@ -65,6 +65,8 @@
 		975149501BDCB79B0017B6E8 /* YTCustomerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9751494E1BDCB79B0017B6E8 /* YTCustomerServiceCell.m */; };
 		975149511BDCB79B0017B6E8 /* YTCustomerServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9751494F1BDCB79B0017B6E8 /* YTCustomerServiceCell.xib */; };
 		975149541BDCB87A0017B6E8 /* YTBlackAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 975149531BDCB87A0017B6E8 /* YTBlackAlertView.m */; };
+		9754FA8C1C17D72900CC8091 /* YTLiquidationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9754FA8A1C17D72900CC8091 /* YTLiquidationCell.m */; };
+		9754FA8D1C17D72900CC8091 /* YTLiquidationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9754FA8B1C17D72900CC8091 /* YTLiquidationCell.xib */; };
 		975F78041BCFCD3D00589D22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 975F78031BCFCD3D00589D22 /* Assets.xcassets */; };
 		976084241BD8F89E0037A4F7 /* YTSchoolSubPagController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976084231BD8F89E0037A4F7 /* YTSchoolSubPagController.m */; };
 		9769F9F51BC9676B001B1F02 /* YTBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9769F9E91BC9676B001B1F02 /* YTBottomView.m */; };
@@ -391,6 +393,9 @@
 		9751494F1BDCB79B0017B6E8 /* YTCustomerServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTCustomerServiceCell.xib; sourceTree = "<group>"; };
 		975149521BDCB87A0017B6E8 /* YTBlackAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTBlackAlertView.h; sourceTree = "<group>"; };
 		975149531BDCB87A0017B6E8 /* YTBlackAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTBlackAlertView.m; sourceTree = "<group>"; };
+		9754FA891C17D72900CC8091 /* YTLiquidationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTLiquidationCell.h; sourceTree = "<group>"; };
+		9754FA8A1C17D72900CC8091 /* YTLiquidationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTLiquidationCell.m; sourceTree = "<group>"; };
+		9754FA8B1C17D72900CC8091 /* YTLiquidationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTLiquidationCell.xib; sourceTree = "<group>"; };
 		975F78031BCFCD3D00589D22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		976084221BD8F89E0037A4F7 /* YTSchoolSubPagController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSchoolSubPagController.h; sourceTree = "<group>"; };
 		976084231BD8F89E0037A4F7 /* YTSchoolSubPagController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSchoolSubPagController.m; sourceTree = "<group>"; };
@@ -1091,6 +1096,9 @@
 				978C6FE41BCF8564003D183E /* YTProductCell.h */,
 				978C6FE51BCF8564003D183E /* YTProductCell.m */,
 				978C6FE61BCF8564003D183E /* YTProductCell.xib */,
+				9754FA891C17D72900CC8091 /* YTLiquidationCell.h */,
+				9754FA8A1C17D72900CC8091 /* YTLiquidationCell.m */,
+				9754FA8B1C17D72900CC8091 /* YTLiquidationCell.xib */,
 				97C981BE1BE72DE5005FDE2F /* YTSenMailView.h */,
 				97C981BF1BE72DE5005FDE2F /* YTSenMailView.m */,
 				9719F7D61C04696E009849B8 /* YTReportTopView.h */,
@@ -2230,6 +2238,7 @@
 				97973CDD1BC391BA00B7B4CB /* PushConfig.plist in Resources */,
 				971503B81BC76961007E27D0 /* CorePPTVC.xib in Resources */,
 				97BF5BCE1BD74F5A00053BD0 /* YTReportViewController.xib in Resources */,
+				9754FA8D1C17D72900CC8091 /* YTLiquidationCell.xib in Resources */,
 				97BC99771BD4DB610090BDE8 /* CorePagesView.xib in Resources */,
 				97973D011BC3C5E500B7B4CB /* YTWelcomeViewController.xib in Resources */,
 				9790F8D11BDF1A2100965C7B /* YTAuthenticationStatusController.xib in Resources */,
@@ -2442,6 +2451,7 @@
 				97D0D3671BEA472000E27531 /* YTInformationWebViewController.m in Sources */,
 				978F4CAB1C16792800A36E0F /* UIView+JKPicker.m in Sources */,
 				97C3CE741BC2C17D00B7185D /* MBProgressHUD+WJ.m in Sources */,
+				9754FA8C1C17D72900CC8091 /* YTLiquidationCell.m in Sources */,
 				978C62681BE4A3CE00FE2C72 /* YTTodoListViewController.m in Sources */,
 				9777E97D1BCA3A220016D071 /* YTNotificationConst.m in Sources */,
 				975149501BDCB79B0017B6E8 /* YTCustomerServiceCell.m in Sources */,

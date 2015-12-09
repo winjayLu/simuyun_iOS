@@ -1,23 +1,19 @@
 //
-//  YTProductCell.m
+//  YTLiquidationCell.m
 //  simuyun
 //
-//  Created by Luwinjay on 15/10/15.
+//  Created by Luwinjay on 15/12/9.
 //  Copyright © 2015年 YTWealth. All rights reserved.
 //
 
-#import "YTProductCell.h"
+#import "YTLiquidationCell.h"
 #import "UIImageView+SD.h"
-#import "NSDate+Extension.h"
-#import "NSString+Extend.h"
-#import "MZTimerLabel.h"
+
 
 // 左右间距
 #define maginWidth 7
 
-
-
-@interface YTProductCell()
+@interface YTLiquidationCell()
 
 /**
  *  爆款icon
@@ -87,16 +83,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeUnitLable;
 
 
-/**
- *  背景图片
- */
-@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
-
-
 @end
 
-
-@implementation YTProductCell
+@implementation YTLiquidationCell
 
 
 /**
@@ -128,7 +117,7 @@
         self.iconWidthConstraint.constant = 25;
         self.titleLeftConstraint.constant = 8;
         self.iconImage.hidden = NO;
-         [self.iconImage imageWithUrlStr:product.icon_url phImage:nil];
+        [self.iconImage imageWithUrlStr:product.icon_url phImage:nil];
         // 调整icon的宽度
         if (_product.series > 6) {
             self.iconWidthConstraint.constant = 33;
@@ -139,7 +128,7 @@
         self.iconImage.hidden = YES;
         self.titleLeftConstraint.constant = -1;
     }
-
+    
     // 设置标题
     self.titleLable.text = _product.pro_name;
     
@@ -170,18 +159,8 @@
         self.danWeiLable.text = @"万";
         self.yimujiLable.text = [NSString stringWithFormat:@"%.0f",_product.raised_amt];
     }
-    // 设置截止打款时间
-    if (_product.componentsDate.day > 0) {
-        self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.day];
-        self.timeUnitLable.text = @"天";
-    } else if (_product.componentsDate.hour > 0) {
-        self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.hour];
-        self.timeUnitLable.text = @"小时";
-    } else if (_product.componentsDate.minute > 0) {
-        self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.minute];
-        self.timeUnitLable.text = @"分钟";
-    }
-    
 }
+
+
 
 @end

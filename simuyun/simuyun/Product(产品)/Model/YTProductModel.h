@@ -102,8 +102,10 @@
 // 截至认购时间
 @property (nonatomic, copy) NSString *pub_end_time;
 
-
-
+/**
+ *  距离现在的时间
+ */
+@property (nonatomic, strong) NSDateComponents *componentsDate;
 
 #pragma mark - 订单字段
 /**

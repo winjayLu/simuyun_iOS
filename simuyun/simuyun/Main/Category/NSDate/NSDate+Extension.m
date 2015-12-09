@@ -17,7 +17,7 @@
 {
     NSCalendar *calendar = [NSCalendar currentCalendar];
 //    NSInteger unit = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond;
-    NSInteger unit = NSCalendarUnitSecond;
+    NSInteger unit = NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute;
     NSDateComponents *components = [calendar components:unit fromDate:self toDate:toDate options:0];
     
     return components;

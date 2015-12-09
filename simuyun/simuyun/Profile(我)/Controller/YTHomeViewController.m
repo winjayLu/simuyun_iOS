@@ -460,10 +460,9 @@
     
     // 设置滚动范围
     [self.mainView setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.bottom.frame) + 64)];
-    
     if (self.loopView != nil) {
         CGSize oldContent = self.mainView.contentSize;
-        self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height + 480);
+        self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height + 48);
     }
 }
 

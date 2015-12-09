@@ -25,7 +25,7 @@
 /**
  *  推送详情
  */
-@property (nonatomic, copy) NSString *datail;
+@property (nonatomic, copy) NSString *detail;
 
 
 /**

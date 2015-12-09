@@ -7,6 +7,8 @@
 //
 
 #import "YTProductModel.h"
+#import "NSDate+Extension.h"
+#import "NSString+Extend.h"
 
 @implementation YTProductModel
 
@@ -47,6 +49,18 @@
 - (void)setExpected_yield:(NSString *)expected_yield
 {
     _expected_yield = [NSString stringWithFormat:@"%@%%",expected_yield];
+}
+
+/**
+ *  截止报备时间
+ *
+ */
+- (void)setPub_end_time:(NSString *)pub_end_time
+{
+    _pub_end_time = pub_end_time;
+    NSDate *date = [NSDate date];
+    NSDate *endTime = [pub_end_time stringWithDate:@"yyyy-MM-dd HH:mm"];
+    _componentsDate = [date componentsToDate:endTime];
 }
 
 
