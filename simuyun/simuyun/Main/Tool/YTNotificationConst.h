@@ -11,3 +11,5 @@ extern NSString *const YTUpdateTodoFrame;
 extern NSString *const YTUpdateMessageNum;
 extern NSString *const YTStopRequest;
 extern NSString *const YTUpdateChatContent;
+extern NSString *const YTSelectedCustomer;
+extern NSString *const YTCancelCustomer;

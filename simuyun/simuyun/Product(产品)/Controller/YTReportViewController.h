@@ -10,6 +10,7 @@
 
 #import <UIKit/UIKit.h>
 #import "YTProductModel.h"
+#import "YTCusomerModel.h"
 
 @interface YTReportViewController : UIViewController
 
@@ -18,5 +19,8 @@
 
 // 产品模型
 @property (nonatomic, strong) YTProductModel *prouctModel;
+
+// 客户模型
+@property (nonatomic, strong) YTCusomerModel *cusomerModel;
 
 @end

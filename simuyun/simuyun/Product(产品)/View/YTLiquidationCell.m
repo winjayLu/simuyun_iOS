@@ -72,16 +72,6 @@
  */
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconWidthConstraint;
 
-/**
- *  截止打款时间
- */
-@property (weak, nonatomic) IBOutlet UILabel *endTimeLabel;
-
-/**
- *  时间单位
- */
-@property (weak, nonatomic) IBOutlet UILabel *timeUnitLable;
-
 
 @end
 

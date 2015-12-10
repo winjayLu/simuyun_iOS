@@ -69,6 +69,10 @@
 		9754FA8D1C17D72900CC8091 /* YTLiquidationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9754FA8B1C17D72900CC8091 /* YTLiquidationCell.xib */; };
 		975F78041BCFCD3D00589D22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 975F78031BCFCD3D00589D22 /* Assets.xcassets */; };
 		976084241BD8F89E0037A4F7 /* YTSchoolSubPagController.m in Sources */ = {isa = PBXBuildFile; fileRef = 976084231BD8F89E0037A4F7 /* YTSchoolSubPagController.m */; };
+		976530951C1968B900F9D7F1 /* QKInfoCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 976530941C1968B900F9D7F1 /* QKInfoCard.m */; };
+		976530991C1968E800F9D7F1 /* YTCustomerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 976530971C1968E800F9D7F1 /* YTCustomerView.m */; };
+		9765309A1C1968E800F9D7F1 /* YTCustomerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 976530981C1968E800F9D7F1 /* YTCustomerView.xib */; };
+		9765309D1C196A9200F9D7F1 /* YTCusomerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9765309C1C196A9200F9D7F1 /* YTCusomerModel.m */; };
 		9769F9F51BC9676B001B1F02 /* YTBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9769F9E91BC9676B001B1F02 /* YTBottomView.m */; };
 		9769F9F61BC9676B001B1F02 /* YTContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9769F9EB1BC9676B001B1F02 /* YTContentCell.m */; };
 		9769F9F71BC9676B001B1F02 /* YTContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9769F9EC1BC9676B001B1F02 /* YTContentCell.xib */; };
@@ -399,6 +403,13 @@
 		975F78031BCFCD3D00589D22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		976084221BD8F89E0037A4F7 /* YTSchoolSubPagController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSchoolSubPagController.h; sourceTree = "<group>"; };
 		976084231BD8F89E0037A4F7 /* YTSchoolSubPagController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSchoolSubPagController.m; sourceTree = "<group>"; };
+		976530931C1968B900F9D7F1 /* QKInfoCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QKInfoCard.h; sourceTree = "<group>"; };
+		976530941C1968B900F9D7F1 /* QKInfoCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QKInfoCard.m; sourceTree = "<group>"; };
+		976530961C1968E800F9D7F1 /* YTCustomerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTCustomerView.h; sourceTree = "<group>"; };
+		976530971C1968E800F9D7F1 /* YTCustomerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTCustomerView.m; sourceTree = "<group>"; };
+		976530981C1968E800F9D7F1 /* YTCustomerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTCustomerView.xib; sourceTree = "<group>"; };
+		9765309B1C196A9200F9D7F1 /* YTCusomerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTCusomerModel.h; sourceTree = "<group>"; };
+		9765309C1C196A9200F9D7F1 /* YTCusomerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTCusomerModel.m; sourceTree = "<group>"; };
 		9769F9E81BC9676B001B1F02 /* YTBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTBottomView.h; sourceTree = "<group>"; };
 		9769F9E91BC9676B001B1F02 /* YTBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTBottomView.m; sourceTree = "<group>"; };
 		9769F9EA1BC9676B001B1F02 /* YTContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTContentCell.h; sourceTree = "<group>"; };
@@ -1086,6 +1097,8 @@
 				978C6FEA1BCFA280003D183E /* YTProductModel.m */,
 				97F17F591BE0CB63006E6DA8 /* YTSlipModel.h */,
 				97F17F5A1BE0CB63006E6DA8 /* YTSlipModel.m */,
+				9765309B1C196A9200F9D7F1 /* YTCusomerModel.h */,
+				9765309C1C196A9200F9D7F1 /* YTCusomerModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1104,6 +1117,9 @@
 				9719F7D61C04696E009849B8 /* YTReportTopView.h */,
 				9719F7D71C04696E009849B8 /* YTReportTopView.m */,
 				9719F7D91C04697C009849B8 /* YTReportTopView.xib */,
+				976530961C1968E800F9D7F1 /* YTCustomerView.h */,
+				976530971C1968E800F9D7F1 /* YTCustomerView.m */,
+				976530981C1968E800F9D7F1 /* YTCustomerView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1484,6 +1500,8 @@
 				97E783EB1BE61D8600B98A9C /* DXPopover.m */,
 				978F4CAE1C16B68600A36E0F /* MZTimerLabel.h */,
 				978F4CAF1C16B68600A36E0F /* MZTimerLabel.m */,
+				976530931C1968B900F9D7F1 /* QKInfoCard.h */,
+				976530941C1968B900F9D7F1 /* QKInfoCard.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -2236,6 +2254,7 @@
 				978C626D1BE4A42900FE2C72 /* YTTodoViewCell.xib in Resources */,
 				97ABCB831BDE01660056C1A1 /* YTInformationTableViewCell.xib in Resources */,
 				97973CDD1BC391BA00B7B4CB /* PushConfig.plist in Resources */,
+				9765309A1C1968E800F9D7F1 /* YTCustomerView.xib in Resources */,
 				971503B81BC76961007E27D0 /* CorePPTVC.xib in Resources */,
 				97BF5BCE1BD74F5A00053BD0 /* YTReportViewController.xib in Resources */,
 				9754FA8D1C17D72900CC8091 /* YTLiquidationCell.xib in Resources */,
@@ -2330,6 +2349,7 @@
 				97ABCB861BDE128D0056C1A1 /* YTInformation.m in Sources */,
 				97DE830E1BD0FB5300E3C5CA /* TFModel.m in Sources */,
 				9769F9F91BC9676B001B1F02 /* YTGroupCell.m in Sources */,
+				976530991C1968E800F9D7F1 /* YTCustomerView.m in Sources */,
 				97ED0CD61BE248B300E95750 /* YTOrderdetailController.m in Sources */,
 				9780A6F11BDF824F00E973D9 /* YTOrgnazationModel.m in Sources */,
 				97C3CE221BC29E2D00B7185D /* ShareManage.m in Sources */,
@@ -2339,6 +2359,7 @@
 				97BC99781BD4DB610090BDE8 /* CorePageModel.m in Sources */,
 				97C6061B1BC266A900E555E8 /* CALayer+Transition.m in Sources */,
 				97C981CB1BE796C0005FDE2F /* YTMessageNumTool.m in Sources */,
+				9765309D1C196A9200F9D7F1 /* YTCusomerModel.m in Sources */,
 				978F4CA61C16792800A36E0F /* JKPhotoBrowser.m in Sources */,
 				97ED0CD31BE2460200E95750 /* YTProductdetailController.m in Sources */,
 				9769F9FB1BC9676B001B1F02 /* YTProfileTopView.m in Sources */,
@@ -2422,6 +2443,7 @@
 				97C605DD1BC2621F00E555E8 /* YTProfileViewController.m in Sources */,
 				97E44B761BD348BF00952B11 /* YTUserInfo.m in Sources */,
 				97BC99741BD4DB610090BDE8 /* CAAnimation+PagesViewBarShake.m in Sources */,
+				976530951C1968B900F9D7F1 /* QKInfoCard.m in Sources */,
 				97DE830B1BD0FB5300E3C5CA /* CoreTFManagerVC.m in Sources */,
 				97973CE81BC3BE7000B7B4CB /* CoreArchive.m in Sources */,
 				97C606481BC269CC00E555E8 /* UIImage+Extend.m in Sources */,

@@ -31,7 +31,6 @@
 #define WXAppID @"wx7259d65d4382e566"
 #define WXAppSecret @"6e1deaa7b9a8c1380bd69e3de47fcc21"
 
-
 /** 接口名 */
 // 程序启动信息
 #define YTGetResources @"resources"
@@ -91,6 +90,8 @@
 #define YTUpdatePassword @"updatePassword"
 // 删除待办事项
 #define YTMessageContent @"messageContent"
+// 查询客户列表
+#define YTCust @"cust"
 
 
 

@@ -11,3 +11,5 @@ NSString *const YTUpdateTodoData = @"YTUpdateTodoData";
 NSString *const YTUpdateMessageNum = @"YTUpdateMessageNum";
 NSString *const YTStopRequest = @"YTStopRequest";
 NSString *const YTUpdateChatContent = @"YTUpdateChatContent";
+NSString *const YTSelectedCustomer = @"YTSelectedCustomer";
+NSString *const YTCancelCustomer = @"YTCancelCustomer";

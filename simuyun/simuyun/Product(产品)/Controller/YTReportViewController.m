@@ -23,6 +23,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 
 
+
 @interface YTReportViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UITextFieldDelegate>
 
 
@@ -121,6 +122,7 @@
  */
 @property (nonatomic, weak) UITextField *catesViewTypeName;
 
+
 @end
 
 @implementation YTReportViewController
@@ -132,6 +134,53 @@
     self.view.backgroundColor = YTGrayBackground;
     self.typeField.delegate = self;
 }
+
+
+
+/**
+ *  设置客户数据
+ *
+ */
+- (void)setCusomerModel:(YTCusomerModel *)cusomerModel
+{
+
+    _cusomerModel = cusomerModel;
+    
+    // 判断证件类型
+    NSString *credentialsname = cusomerModel.credentialsname;
+    if ([credentialsname isEqualToString:@"身份证"] || [credentialsname isEqualToString:@"护照"]) {
+        self.typeField.text = credentialsname;
+    } else {
+        self.CertificatesNumberConstr.constant = 78;
+        if (self.certificatesView == nil) {
+            [self createCertificatesName];
+            self.photo.view.y = self.titleLable.y - 15 + 53;
+            self.informationPhoto.view.y = self.informationLable.y - 15 + 53;
+            // 更新键盘位置
+            [self updateKeyboardPosition:NO];
+        }
+        self.typeField.text = @"其它";
+        self.catesViewTypeName.text = credentialsname;
+    }
+    
+    // 证件号码
+    self.numberField.text = cusomerModel.credentialsnumber;
+    
+    // 银行卡号
+    self.bankField.text = cusomerModel.cust_bank_acct;
+    
+    // 开户行
+    self.bankHangField.text = cusomerModel.cust_bank;
+    
+    // 分行
+    self.branchField.text = cusomerModel.cust_bank_detail;
+    
+    
+
+}
+
+
+
 /**
  *  初始化图片选择器
  *
@@ -158,8 +207,6 @@
     self.informationPhoto = informationPhoto;
     
 }
-
-
 
 /**
  *  报备
@@ -235,18 +282,22 @@
         typeName = self.typeField.text;
     }
     
+    NSString *cust_id = @"";
+    if (self.cusomerModel != nil)
+    {
+        cust_id = self.cusomerModel.cust_id;
+    }
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"param"] = [NSString stringWithFormat:@"{\"advisers_id\" : \"%@\", \"order_id\" : \"%@\", \"cust_name\" : \"%@\", \"cust_bank\" : \"%@\", \"cust_bank_detail\" : \"%@\", \"cust_bank_acct\" : \"%@\", \"credentialsname\" : \"%@\", \"credentialsnumber\" : \"%@\", \"annex\" : %@}",[YTAccountTool account].userId, self.prouctModel.order_id, self.prouctModel.customerName, self.bankHangField.text, self.branchField.text, self.bankField.text, typeName,self.numberField.text,[self annexWithSlps]];
+    dict[@"param"] = [NSString stringWithFormat:@"{\"cust_id\" : \"%@\",\"advisers_id\" : \"%@\", \"order_id\" : \"%@\", \"cust_name\" : \"%@\", \"cust_bank\" : \"%@\", \"cust_bank_detail\" : \"%@\", \"cust_bank_acct\" : \"%@\", \"credentialsname\" : \"%@\", \"credentialsnumber\" : \"%@\", \"annex\" : %@}",cust_id ,[YTAccountTool account].userId, self.prouctModel.order_id, self.prouctModel.customerName, self.bankHangField.text, self.branchField.text, self.bankField.text, typeName,self.numberField.text,[self annexWithSlps]];
     // 1.创建一个请求管理者
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    NSLog(@"%@", dict);
     
     // 2.发送一个POST请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTReport];
     [mgr POST:newUrl parameters:dict
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           [SVProgressHUD showSuccessWithStatus:@"报备成功"];
-          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
               
               [self.navigationController popToRootViewControllerAnimated:YES];
           });
@@ -334,7 +385,7 @@
         [SVProgressHUD showErrorWithStatus:@"请上传打款凭条"];
         return YES;
     }
-    if ([self.typeField.text isEqualToString:@"其他"]) {
+    if ([self.typeField.text isEqualToString:@"其它"]) {
         if (self.catesViewTypeName.text.length == 0) {
             [SVProgressHUD showErrorWithStatus:@"请输入证件名称"];
             return YES;
@@ -558,6 +609,8 @@
     }
     return _ZhenJian;
 }
+
+
 
 
 - (void)didReceiveMemoryWarning {
