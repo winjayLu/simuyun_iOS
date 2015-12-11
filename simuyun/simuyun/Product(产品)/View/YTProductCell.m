@@ -92,6 +92,11 @@
  */
 @property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 
+/**
+ *  截止打款标题
+ */
+@property (weak, nonatomic) IBOutlet UILabel *endtimeTitleLable;
+
 
 @end
 
@@ -137,7 +142,7 @@
     {
         self.iconWidthConstraint.constant = 0;
         self.iconImage.hidden = YES;
-        self.titleLeftConstraint.constant = -1;
+        self.titleLeftConstraint.constant = -0.5;
     }
 
     // 设置标题
@@ -180,6 +185,19 @@
     } else if (_product.componentsDate.minute > 0) {
         self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.minute];
         self.timeUnitLable.text = @"分钟";
+    }
+    
+    if (_product.state == 20)    // 产品状态
+    {
+        // 暂停募集
+        self.timeUnitLable.text = @"暂停募集";
+        self.endTimeLabel.hidden = YES;
+        self.endtimeTitleLable.hidden = YES;
+        self.bgImageView.image = [UIImage imageNamed:@"huimogu"];
+    } else {
+        self.endTimeLabel.hidden = NO;
+        self.endtimeTitleLable.hidden = NO;
+        self.bgImageView.image = [UIImage imageNamed:@"logobackground"];
     }
     
 }

@@ -18,6 +18,7 @@
 #import "UIBarButtonItem+Extension.h"
 #import "NSDate+Extension.h"
 #import "YTDataHintView.h"
+#import "YTLiquidationCell.h"
 
 @interface YTProductViewController ()
 
@@ -164,18 +165,34 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *identifier = @"productCell";
-    YTProductCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (cell==nil) {
-        cell =[YTProductCell productCell];
+    YTProductModel *product = self.products[indexPath.section];
+    UITableViewCell *cell;
+    if (product.state == 30)
+    {
+        static NSString *identifier = @"liquidation";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell==nil) {
+            cell =[YTLiquidationCell productCell];
+            cell.layer.cornerRadius = 5;
+            cell.layer.masksToBounds = YES;
+            cell.layer.borderWidth = 1.0f;
+            cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        }
+        ((YTLiquidationCell *)cell).product = product;
+    } else {
+        static NSString *identifier = @"productCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell==nil) {
+            cell =[YTProductCell productCell];
+            cell.layer.cornerRadius = 5;
+            cell.layer.masksToBounds = YES;
+            cell.layer.borderWidth = 1.0f;
+            cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        }
+        ((YTProductCell *)cell).product = product;
     }
-    cell.layer.cornerRadius = 5;
-    cell.layer.masksToBounds = YES;
-    cell.layer.borderWidth = 1.0f;
-    cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    cell.product = self.products[indexPath.section];
     return cell;
 }
 

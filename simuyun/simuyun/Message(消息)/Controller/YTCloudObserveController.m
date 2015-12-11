@@ -112,12 +112,12 @@
     YTCustomerServiceCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell==nil) {
         cell =[YTCustomerServiceCell CustomerServiceCell];
+        cell.layer.cornerRadius = 5;
+        cell.layer.borderWidth = 1.0f;
+        cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
+        cell.layer.masksToBounds = YES;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
-    cell.layer.cornerRadius = 5;
-    cell.layer.borderWidth = 1.0f;
-    cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
-    cell.layer.masksToBounds = YES;
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.service = self.services[indexPath.section];
     return cell;
 }

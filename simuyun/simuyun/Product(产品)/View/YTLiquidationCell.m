@@ -91,7 +91,7 @@
 
 + (instancetype)productCell
 {
-    return [[[NSBundle mainBundle] loadNibNamed:@"YTProductCell" owner:nil options:nil] lastObject];
+    return [[[NSBundle mainBundle] loadNibNamed:@"YTLiquidationCell" owner:nil options:nil] lastObject];
 }
 
 /**
@@ -116,12 +116,11 @@
     {
         self.iconWidthConstraint.constant = 0;
         self.iconImage.hidden = YES;
-        self.titleLeftConstraint.constant = -1;
+        self.titleLeftConstraint.constant = -0.5;
     }
     
     // 设置标题
     self.titleLable.text = _product.pro_name;
-    
     
     // 设置投资起点
     self.buyStartLable.text = _product.buy_start;

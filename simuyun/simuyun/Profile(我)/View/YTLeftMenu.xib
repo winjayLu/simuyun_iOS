@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -77,6 +77,9 @@
                     <state key="normal" title="关联微信" image="guanlianweixin" backgroundImage="leftanniubeijing">
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <state key="highlighted" image="guanlianweixinanxia" backgroundImage="leftanniubeijinganxia">
+                        <color key="titleColor" red="0.79607843137254897" green="0.14117647058823529" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="guanLianClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="2T4-9x-1UG"/>
                     </connections>
@@ -101,6 +104,9 @@
                     <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="推荐私募云给好友" image="tuijian" backgroundImage="leftanniubeijing">
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="highlighted" image="tuijiananxia" backgroundImage="leftanniubeijinganxia">
+                        <color key="titleColor" red="0.79607843137254897" green="0.14117647058823529" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="tuiJian:" destination="iN0-l3-epB" eventType="touchUpInside" id="zfX-JZ-2cz"/>
@@ -127,6 +133,9 @@
                     <state key="normal" title="帮助" image="bangzhu" backgroundImage="leftanniubeijing">
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <state key="highlighted" image="bangzhuanxia" backgroundImage="leftanniubeijinganxia">
+                        <color key="titleColor" red="0.79607843137254897" green="0.14117647058823529" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="bangZhuClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="vFe-Jr-gTm"/>
                     </connections>
@@ -151,6 +160,9 @@
                     <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="关于私募云" image="guanyu" backgroundImage="leftanniubeijing">
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="highlighted" image="guanyuanxia" backgroundImage="leftanniubeijinganxia">
+                        <color key="titleColor" red="0.79607843137254897" green="0.14117647058823529" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="guanYuClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="AZS-zQ-ffe"/>
@@ -189,6 +201,9 @@
                     <state key="normal" title="退出登录" backgroundImage="tuiChuBtn">
                         <color key="titleColor" red="0.90980392160000001" green="0.90980392160000001" blue="0.90980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <state key="highlighted" backgroundImage="leftanniubeijinganxia">
+                        <color key="titleColor" red="0.32549019607843138" green="0.32549019607843138" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="tuiChuClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="c1H-7a-WIq"/>
                     </connections>
@@ -205,6 +220,9 @@
                     <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="用户资料" image="yonghuziliao" backgroundImage="leftanniubeijing">
                         <color key="titleColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="highlighted" image="yonghuziliaoanxia" backgroundImage="leftanniubeijinganxia">
+                        <color key="titleColor" red="0.79607843137254897" green="0.14117647058823529" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="ziLiaoClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="QNd-kb-wu1"/>
@@ -317,20 +335,27 @@
                 <outlet property="nameLable" destination="ig5-0y-fq5" id="ho6-c2-QLA"/>
                 <outlet property="tuijianTopConstraint" destination="Yoe-FK-805" id="aIL-xx-m9W"/>
             </connections>
+            <point key="canvasLocation" x="251.5" y="387.5"/>
         </view>
     </objects>
     <resources>
         <image name="backgroundcebian.jpg" width="241" height="667"/>
         <image name="bangzhu" width="22" height="22"/>
+        <image name="bangzhuanxia" width="22" height="22"/>
         <image name="dianhau" width="37" height="37"/>
         <image name="guanlianweixin" width="22" height="22"/>
+        <image name="guanlianweixinanxia" width="22" height="22"/>
         <image name="guanyu" width="22" height="22"/>
+        <image name="guanyuanxia" width="22" height="22"/>
         <image name="huangguang" width="58" height="30"/>
         <image name="leftanniubeijing" width="50" height="33"/>
+        <image name="leftanniubeijinganxia" width="145" height="33"/>
         <image name="quan" width="126" height="126"/>
         <image name="tuiChuBtn" width="145" height="33"/>
         <image name="tuijian" width="22" height="22"/>
+        <image name="tuijiananxia" width="22" height="22"/>
         <image name="xiangyou" width="7" height="18"/>
         <image name="yonghuziliao" width="22" height="22"/>
+        <image name="yonghuziliaoanxia" width="22" height="22"/>
     </resources>
 </document>

@@ -11,6 +11,14 @@
 @interface YTProductModel : NSObject
 
 /**
+ *  产品状态
+ *  10 正常
+ *  20 停止
+ *  30 清算
+ */
+@property (nonatomic, assign) int state;
+
+/**
  *  产品id
  */
 @property (nonatomic, copy) NSString *pro_id;

@@ -101,33 +101,21 @@
 {
     NSString *AutoCompleteRowIdentifier = @"autocompletion";
     YTAutocompletionCell *cell = [tableView dequeueReusableCellWithIdentifier:AutoCompleteRowIdentifier];
-
     if (cell == nil) 
     {
         cell = [YTAutocompletionCell autocompletionCell];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
-    
-//    if ([self.options valueForKey:ACOUseSourceFont]) 
-//    {
-//        cell.textLabel.font = [self.options valueForKey:ACOUseSourceFont];
-//    } else {
-//        cell.textLabel.font = self.cellLabelFont;
-//    }
-//    cell.textLabel.adjustsFontSizeToFitWidth = NO;
     cell.titleLable.text = [self.suggestionOptions objectAtIndex:indexPath.row];
 
 
     if ([self.options[@"style"]  isEqual: @(2)])
     {
-//        cell.backgroundColor = [UIColor clearColor];
-//        cell.contentView.backgroundColor = YTColor(37, 37, 39);
         cell.backgroundColor = YTRGBA(0, 0, 0, 0.2);
         self.backgroundColor = [UIColor clearColor];
         cell.contentView.backgroundColor = [UIColor clearColor];
         cell.titleLable.textColor = YTColor(204, 204, 204);
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    
     return cell;
 }
 

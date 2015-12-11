@@ -217,12 +217,12 @@
     YTOrderCenterCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell==nil) {
         cell =[YTOrderCenterCell orderCenterCell];
+        cell.layer.cornerRadius = 5;
+        cell.layer.masksToBounds = YES;
+        cell.layer.borderWidth = 1.0f;
+        cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
-    cell.layer.cornerRadius = 5;
-    cell.layer.masksToBounds = YES;
-    cell.layer.borderWidth = 1.0f;
-    cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.order = self.orders[indexPath.section];
     return cell;
 }

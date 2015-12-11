@@ -60,10 +60,10 @@
     YTInformationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell==nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"YTInformationTableViewCell" owner:nil options:nil] lastObject];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.isShowLine = NO;
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.information = self.newests[indexPath.row];
-    cell.isShowLine = NO;
     return cell;
 }
 

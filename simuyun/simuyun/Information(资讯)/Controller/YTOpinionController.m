@@ -121,13 +121,13 @@
     YTInformationTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell==nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"YTInformationTableViewCell" owner:nil options:nil] lastObject];
+        cell.layer.cornerRadius = 5;
+        cell.layer.masksToBounds = YES;
+        cell.layer.borderWidth = 1.0f;
+        cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        cell.isShowLine = YES;
     }
-    cell.layer.cornerRadius = 5;
-    cell.layer.masksToBounds = YES;
-    cell.layer.borderWidth = 1.0f;
-    cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    cell.isShowLine = YES;
     cell.information = self.informations[indexPath.section];
     return cell;
 }

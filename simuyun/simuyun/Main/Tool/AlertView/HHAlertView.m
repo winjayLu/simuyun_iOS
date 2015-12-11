@@ -122,7 +122,7 @@ static UIWindow *_window;
 #pragma mark private method
 - (void)configtext:(NSString *)title detail:(NSString *)detail
 {
-    if (_titleLabel==nil) {
+    if (_titleLabel==nil && title.length > 0) {
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_logoView.frame) + 10, [self getSelfSize].width, HHAlertview_SIZE_TITLE_FONT+5)];
     }
     
@@ -136,7 +136,7 @@ static UIWindow *_window;
         _detailLabel  = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_titleLabel.frame) + 10, [self getSelfSize].width - 15, HHAlertview_SIZE_TITLE_FONT)];
         [_detailLabel setNumberOfLines:0];
     }
-    if (detail != nil) {
+    if (detail != nil && detail.length > 0) {
         
         NSMutableAttributedString * attributedString1 = [[NSMutableAttributedString alloc] initWithString:detail];
         NSMutableParagraphStyle * paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];

@@ -376,6 +376,7 @@
     }
     YTContentView *content = [[YTContentView alloc] init];
     content.frame = CGRectMake(magin, 8, self.view.width - magin * 2, todoHeight);
+    content.todos = self.todos;
     if (self.groupCell != nil) {
         content.frame = CGRectMake(magin, CGRectGetMaxY(self.groupCell.frame) + 8, self.view.width - magin * 2, todoHeight);
     }
@@ -384,7 +385,8 @@
     content.daili = self;
     [self.mainView addSubview:content];
     self.todoView = content;
-    [YTCenter addObserver:self selector:@selector(loadTodos) name:YTUpdateTodoFrame object:nil];
+    [YTCenter addObserver:self selector:@selector(updateTodoFrame) name:YTUpdateTodoFrame object:nil];
+    [YTCenter addObserver:self selector:@selector(loadTodos) name:YTUpdateTodoData object:nil];
 }
 /**
  *  初始化底部菜单
@@ -430,8 +432,11 @@
     param[@"pagesize"] = @20;
     param[@"pageNo"] = @(1);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
-        self.todos = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
-        [self updateTodos];
+        NSMutableArray *array = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
+        if (array.count > 0) {
+            self.todos = array;
+            [self updateTodos];
+        }
     } failure:^(NSError *error) {
     }];
 }
@@ -441,7 +446,13 @@
 {
     // 设置数据
     self.todoView.todos = self.todos;
-    
+    // 更新frame
+    [self updateTodoFrame];
+
+}
+// 修改todoView的frame
+- (void)updateTodoFrame
+{
     // 修改todo的frame
     CGFloat groupCellHeight = 42;
     CGFloat conetentCellHeight = 52;
@@ -449,7 +460,7 @@
     if (self.todos.count > 3) {
         todoHeight = groupCellHeight + 3 * conetentCellHeight;
     } else {
-         todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
+        todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
     }
     self.todoView.frame = CGRectMake(magin, 8, self.view.width - magin * 2, todoHeight);
     if (self.groupCell != nil) {
@@ -523,6 +534,14 @@
         [MobClick event:@"main_click" attributes:@{@"按钮" : @"全部待办", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     } else {
         YTMessageModel *message = self.todos[row];
+        if (message.messageId.length == 0) {
+           UIViewController *rootVc =  [UIApplication sharedApplication].keyWindow.rootViewController;
+            if ([rootVc isKindOfClass:[YTTabBarController class]]) {
+                ((YTTabBarController *)rootVc).selectedIndex = 1;
+            }
+            return;
+        }
+        
 
         YTNormalWebController *vc = [YTNormalWebController webWithTitle:@"待办事项" url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
         vc.isDate = YES;
@@ -806,6 +825,9 @@
 {
     if (!_todos) {
         _todos = [[NSMutableArray alloc] init];
+        YTMessageModel *message = [[YTMessageModel alloc] init];
+        message.summary = @"亲,您还没有购买产品哦";
+        [_todos addObject:message];
     }
     return _todos;
 }

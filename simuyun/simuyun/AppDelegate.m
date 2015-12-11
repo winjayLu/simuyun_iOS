@@ -165,13 +165,10 @@
 - (void)receivedPushNotification:(NSDictionary *)userInfo
 {
     if ([YTJpushTool jpush]) return;
-    NSLog(@"%@", userInfo);
-    NSLog(@"%@", userInfo.description);
     YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:userInfo];
 
     HHAlertView *alert = [HHAlertView shared];
-    [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"推送消息" detail:@"ssss" cancelButton:@"返回" Okbutton:@"产品中心" block:^(HHAlertButton buttonindex) {
-        
+    [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"查看详情" block:^(HHAlertButton buttonindex) {
         if(buttonindex == HHAlertButtonOk)
         {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{

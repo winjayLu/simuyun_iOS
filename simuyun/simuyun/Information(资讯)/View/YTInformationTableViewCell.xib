@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jYT-OX-Dlk" id="ssd-7l-1Wk">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="92.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="93"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kuang" translatesAutoresizingMaskIntoConstraints="NO" id="dvv-rc-nsm">
@@ -36,7 +36,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hRX-6r-gLD">
-                        <rect key="frame" x="7" y="92" width="323" height="1"/>
+                        <rect key="frame" x="7" y="92" width="306" height="1"/>
                         <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="qEf-hs-f84"/>
@@ -76,7 +76,7 @@
                     <constraint firstItem="Gts-s3-Kmz" firstAttribute="top" secondItem="TM8-as-Yyo" secondAttribute="bottom" constant="10" id="kZU-bM-og0"/>
                     <constraint firstItem="XNh-rs-mtC" firstAttribute="leading" secondItem="dvv-rc-nsm" secondAttribute="leading" id="kwp-AL-YQi"/>
                     <constraint firstItem="JJl-Ai-S1f" firstAttribute="leading" secondItem="TM8-as-Yyo" secondAttribute="trailing" constant="5" id="rUw-au-ufm"/>
-                    <constraint firstAttribute="trailing" secondItem="hRX-6r-gLD" secondAttribute="trailing" constant="-10" id="tZC-SJ-HL0"/>
+                    <constraint firstAttribute="trailing" secondItem="hRX-6r-gLD" secondAttribute="trailing" constant="7" id="tZC-SJ-HL0"/>
                     <constraint firstAttribute="trailing" secondItem="Gts-s3-Kmz" secondAttribute="trailing" constant="15" id="zbj-Rb-t62"/>
                 </constraints>
                 <variation key="default">

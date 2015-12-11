@@ -90,17 +90,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-
-
     static NSString *identifier = @"contentCell";
     YTContentCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    YTMessageModel *message =  self.todos[indexPath.row];
     if (cell==nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"YTContentCell" owner:nil options:nil] lastObject];
         cell.delegate = self;
-        cell.rightUtilityButtons = [self rightButtons];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    YTMessageModel *message =  self.todos[indexPath.row];
+    if (message.messageId.length >0) {
+        cell.rightUtilityButtons = [self rightButtons];
+    } else {
+        cell.rightUtilityButtons = nil;
+    }
+    
     cell.summary = message.summary;
     
     return cell;
@@ -189,6 +192,11 @@
     param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"messageId"] = messageId;
     [mgr DELETE:newUrl parameters:[NSDictionary httpWithDictionary:param] success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        // 剩余数量小于4，获取新数据
+        if (_todos.count < 4)
+        {
+            [YTCenter postNotificationName:YTUpdateTodoData object:nil];
+        }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         if(error.userInfo[@"NSLocalizedDescription"] != nil)
         {
@@ -205,7 +213,6 @@
     YTMessageNum *messageNum = [YTMessageNumTool messageNum];
     messageNum.TODO_LIST -= 1;
     [YTMessageNumTool save:messageNum];
-    
     [self setTodoNum];
 }
 

@@ -50,8 +50,8 @@
     YTGroupCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell==nil) {
         cell = [[[NSBundle mainBundle] loadNibNamed:@"YTGroupCell" owner:nil options:nil] lastObject];
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     cell.title = self.titles[indexPath.row];
     return cell;
 }
