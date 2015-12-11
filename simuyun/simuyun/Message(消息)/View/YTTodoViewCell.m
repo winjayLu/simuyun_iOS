@@ -8,6 +8,7 @@
 // 待办事项
 
 #import "YTTodoViewCell.h"
+#import "UIImageView+SD.h"
 
 // 左右间距
 #define maginWidth 7
@@ -51,43 +52,9 @@
 - (void)setMessage:(YTMessageModel *)message
 {
     _message = message;
-    NSString *imageName = nil;
-    switch (message.category2Code) {    // 判断类型
-        case 11:
-            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
-            break;
-        case 12:
-            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
-            break;
-        case 21:
-            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
-            break;
-        case 22:
-            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
-            break;
-        case 23:
-            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
-            break;
-        case 24:
-            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
-            break;
-        case 31:
-            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
-            break;
-        case 32:
-            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
-            break;
-        case 33:
-            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
-            break;
-        case 34:
-            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
-            break;
-        case 35:
-            imageName = [NSString stringWithFormat:@"message%d",message.category2Code];
-            break;
-    }
-    self.iconImage.image = [UIImage imageNamed:imageName];
+    
+    // 设置图片
+    [self.iconImage imageWithUrlStr:_message.iconUrl phImage:[UIImage imageNamed:@"messagePl"]];
     
     self.titleLable.text = _message.title;
     self.detailLable.text = _message.summary;

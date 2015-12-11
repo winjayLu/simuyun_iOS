@@ -163,13 +163,14 @@
                         <action selector="qiaoDaoClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="eqr-CZ-dFq"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oad-Pf-04j">
-                    <rect key="frame" x="15" y="32" width="29" height="26"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oad-Pf-04j">
+                    <rect key="frame" x="15" y="32" width="49" height="46"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="29" id="6BV-83-ngV"/>
-                        <constraint firstAttribute="height" constant="26" id="VO7-OJ-hYT"/>
+                        <constraint firstAttribute="width" constant="49" id="6BV-83-ngV"/>
+                        <constraint firstAttribute="height" constant="46" id="VO7-OJ-hYT"/>
                     </constraints>
-                    <state key="normal" backgroundImage="chouti"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="20" maxY="20"/>
+                    <state key="normal" image="chouti"/>
                     <connections>
                         <action selector="menuClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="BaK-Za-XZc"/>
                     </connections>
@@ -268,7 +269,7 @@
                 <outlet property="yeJiLable" destination="ZK9-mr-7Kc" id="sYF-za-YQ3"/>
                 <outlet property="yunDouBtn" destination="71c-4s-gBb" id="h8d-4c-h3Q"/>
             </connections>
-            <point key="canvasLocation" x="219.5" y="333"/>
+            <point key="canvasLocation" x="226.5" y="335"/>
         </view>
         <tapGestureRecognizer id="HSJ-4S-tfC">
             <connections>

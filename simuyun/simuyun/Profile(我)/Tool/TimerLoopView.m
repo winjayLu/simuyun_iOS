@@ -10,11 +10,11 @@
 
 #import "TimerLoopView.h"
 
-#define repeat 1
+#define repeat 3
 
 @implementation LoopObj
 
-@synthesize LabelName=_LabelName;
+@synthesize title=_title;
 
 @end
 
@@ -88,7 +88,7 @@
         LoopObj *obj=(LoopObj*)[_itemarray objectAtIndex:i];
         
         UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(0, _height*i, _width, _height)];
-        [label setText:obj.LabelName];
+        [label setText:obj.title];
         label.textColor = [UIColor whiteColor];
         label.tag=10+i;
         label.backgroundColor = [UIColor clearColor];
@@ -99,7 +99,7 @@
             LoopObj *obj=(LoopObj*)[_itemarray objectAtIndex:0];
             UILabel *labelLast=[[UILabel alloc]initWithFrame:CGRectMake(0, _height*(i+1), _width, _height)];
             labelLast.textColor = [UIColor whiteColor];
-            [labelLast setText:obj.LabelName];
+            [labelLast setText:obj.title];
             labelLast.tag=10+i+1;
             label.backgroundColor = [UIColor clearColor];
             [abstractScrollview addSubview:labelLast];

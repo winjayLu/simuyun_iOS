@@ -26,6 +26,10 @@
 // 二级分类
 @property (nonatomic, assign) int category2Code;
 
+// 图片地址
+@property (nonatomic, copy) NSString *iconUrl;
+
+
 // 字符串
 @property (nonatomic, copy) NSString *createDate;
 

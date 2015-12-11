@@ -91,6 +91,8 @@
 #define YTMessageContent @"messageContent"
 // 查询客户列表
 #define YTCust @"cust"
+// 跑马灯
+#define YTMarquee @"marquee"
 
 
 

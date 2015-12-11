@@ -13,8 +13,10 @@
 //loop Object
 @interface LoopObj : NSObject
 
+@property (nonatomic, copy) NSString *message_id;
 
-@property (nonatomic,strong)NSString              *LabelName;
+
+@property (nonatomic,strong)NSString *title;
 
 @end
 

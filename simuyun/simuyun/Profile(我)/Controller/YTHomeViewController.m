@@ -212,14 +212,9 @@
  */
 - (void)loadLoopView
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        NSMutableArray *array=[[NSMutableArray alloc]initWithCapacity:10];
-        for (int i=1; i<4; i++) {
-            LoopObj *obj=[[LoopObj alloc]init];
-            obj.LabelName=[NSString stringWithFormat:@"盈泰财富云恒山%d号",i];
-            [array addObject:obj];
-        }
+    [YTHttpTool get:YTMarquee params:nil success:^(id responseObject) {
+        NSLog(@"%@", responseObject);
+        NSArray *array = [LoopObj objectArrayWithKeyValuesArray:responseObject];
         TimerLoopView *loop=[[TimerLoopView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - 40, DeviceWidth, 40) withitemArray:array];
         loop.height = 0;
         [self.view addSubview:loop];
@@ -231,7 +226,9 @@
         }];
         CGSize oldContent = self.mainView.contentSize;
         self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height + 48);
-    });
+        
+    } failure:^(NSError *error) {
+    }];
 }
 
 // 跑马灯代理方法
@@ -248,7 +245,8 @@
 
 - (void)pushView:(LoopObj *)loopObj
 {
-    YTNormalWebController *webVc =[YTNormalWebController webWithTitle:loopObj.LabelName url:@"http://www.caifuyun.cn"];
+    
+    YTNormalWebController *webVc = [YTNormalWebController webWithTitle:loopObj.title url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], loopObj.message_id]];
     webVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webVc animated:YES];
 }
@@ -611,8 +609,6 @@
             [self signIn];
             break;
         case TopButtonTypeYundou:   // 云豆
-#warning 测试
-            [self loadLoopView];
             [alert showAlertWithTitle:YTYunDouGuiZe detail:YTYunDouGuiZeContent];
             break;
         case TopButtonTypeKehu:     // 客户
@@ -826,7 +822,7 @@
     if (!_todos) {
         _todos = [[NSMutableArray alloc] init];
         YTMessageModel *message = [[YTMessageModel alloc] init];
-        message.summary = @"亲,您还没有购买产品哦";
+        message.summary = @"认购了产品才有待办事项提醒";
         [_todos addObject:message];
     }
     return _todos;
