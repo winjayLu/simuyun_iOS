@@ -99,9 +99,8 @@
         [sender setTitleColor:YTColor(215, 58, 46) forState:UIControlStateNormal];
         [sender setBackgroundImage:[UIImage imageNamed:@"yanzhengmakuang"] forState:UIControlStateNormal];
         return @"重新获取";
-        
     }];
-    
+
     // 向服务器发送验证码
     [self sendRegisterNumber];
 }
@@ -109,9 +108,7 @@
  *  注册按钮单击
  */
 - (IBAction)registerClick:(UIButton *)sender {
-    [self transitionTabBarVC];
-    return;
-    
+
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
     if ([self checkTextWith:YES]) return;
     

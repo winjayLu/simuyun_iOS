@@ -25,8 +25,6 @@
 
     self.title = @"关于私募云";
     // 获取版本号
-    double version = [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] doubleValue];
-    // [NSString stringWithFormat:@"V %.2f",version];
     self.versionLable.text = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] ;
 }
 

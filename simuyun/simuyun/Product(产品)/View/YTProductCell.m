@@ -175,17 +175,6 @@
         self.danWeiLable.text = @"万";
         self.yimujiLable.text = [NSString stringWithFormat:@"%.0f",_product.raised_amt];
     }
-    // 设置截止打款时间
-    if (_product.componentsDate.day > 0) {
-        self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.day];
-        self.timeUnitLable.text = @"天";
-    } else if (_product.componentsDate.hour > 0) {
-        self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.hour];
-        self.timeUnitLable.text = @"小时";
-    } else if (_product.componentsDate.minute > 0) {
-        self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.minute];
-        self.timeUnitLable.text = @"分钟";
-    }
     
     if (_product.state == 20)    // 产品状态
     {
@@ -198,6 +187,18 @@
         self.endTimeLabel.hidden = NO;
         self.endtimeTitleLable.hidden = NO;
         self.bgImageView.image = [UIImage imageNamed:@"logobackground"];
+        
+        // 设置截止打款时间
+        if (_product.componentsDate.day > 0) {
+            self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.day];
+            self.timeUnitLable.text = @"天";
+        } else if (_product.componentsDate.hour > 0) {
+            self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.hour];
+            self.timeUnitLable.text = @"小时";
+        } else if (_product.componentsDate.minute > 0) {
+            self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.minute];
+            self.timeUnitLable.text = @"分钟";
+        }
     }
     
 }

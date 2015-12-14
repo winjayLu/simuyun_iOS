@@ -12,6 +12,7 @@
 #import "YTReportContentController.h"
 #import "YTProductModel.h"
 #import "YTNormalWebController.h"
+#import "YTUserInfoTool.h"
 
 @interface YTOrderdetailController () <UIWebViewDelegate>
 @property (nonatomic, weak) UIWebView *webView;
@@ -101,6 +102,8 @@
                 product.order_id = self.order.order_id;
                 report.prouctModel = product;
                 [self.navigationController pushViewController:report animated:YES];
+                
+                [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"报备", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             } else if ([command isEqualToString:@"openpage"])
             {
                 YTNormalWebController *normal = [[YTNormalWebController alloc] init];

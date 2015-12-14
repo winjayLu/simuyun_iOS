@@ -45,13 +45,8 @@
     return self;
 }
 
-
-
-
 - (void)creatMainShareView:(UIViewController *)vc
 {
-    
-    
     mainGrayBg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, DeviceHight)];
     [mainGrayBg setImage:[UIImage imageWithColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.2]]];
     
@@ -69,7 +64,12 @@
     [self addSubview:shareMenuView];
     
     [UIView animateWithDuration:0.4 animations:^{
-        shareMenuView.frame =CGRectMake(0,DeviceHight - shareMenuViewH, DeviceWidth,shareMenuViewH);
+        if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
+            shareMenuView.frame =CGRectMake(0,DeviceHight - shareMenuViewH, DeviceWidth,shareMenuViewH);
+        } else {
+            shareMenuView.frame =CGRectMake(0,DeviceHight - shareMenuViewH - 256, DeviceWidth,shareMenuViewH);
+        }
+        
         mainGrayBg.alpha = 1.0;
     } completion:^(BOOL finished) {
     }];

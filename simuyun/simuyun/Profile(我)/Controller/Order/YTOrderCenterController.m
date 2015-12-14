@@ -16,6 +16,7 @@
 #import "YTOrderdetailController.h"
 #import "NSDate+Extension.h"
 #import "YTDataHintView.h"
+#import "YTUserInfoTool.h"
 
 
 @interface YTOrderCenterController () <UITableViewDataSource, UITableViewDelegate, BarDrawerDelegate>
@@ -263,6 +264,7 @@
     detail.order = self.orders[indexPath.section];
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
+    [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"查看订单详情", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 #pragma mark - lazy

@@ -9,6 +9,7 @@
 #import "YTBottomView.h"
 #import "YTGroupCell.h"
 #import "YTResourcesTool.h"
+#import "YTUserInfoTool.h"
 
 @interface YTBottomView() <UITableViewDelegate, UITableViewDataSource>
 
@@ -28,20 +29,16 @@
         // 去掉下划线
         self.separatorStyle = UITableViewCellSeparatorStyleNone;
         // 禁用tableView滚动
-        self.scrollEnabled =NO;
+        self.scrollEnabled = NO;
     }
     return self;
 }
-
-
-
 
 #pragma mark - Table view data source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.titles.count;
 }
-
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -53,6 +50,16 @@
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
     cell.title = self.titles[indexPath.row];
+    if (indexPath.row == 0) {
+        YTUserInfo *userInfo = [YTUserInfoTool userInfo];
+        if (userInfo.preparedforNum == 0) {
+            cell.detailTitle = @"";
+        } else {
+            cell.detailTitle = [NSString stringWithFormat:@"（%d笔订单待报备）", userInfo.preparedforNum];
+        }
+    } else {
+        cell.detailTitle = @"";
+    }
     return cell;
 }
 
@@ -81,15 +88,6 @@
         }
     }
     return _titles;
-}
-
-
-- (void)isShow
-{
-    if([YTResourcesTool isVersionFlag] == NO)
-    {
-        _titles = @[@"全部订单", @"我的奖品", @"云豆银行"];
-    }
 }
 
 @end

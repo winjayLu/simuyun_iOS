@@ -23,8 +23,6 @@
  */
 @property(nonatomic,retain)id <senMailViewDelegate> sendDelegate;
 
-
-
 - (instancetype)initWithViewController:(UIViewController *)vc;
 
 @end

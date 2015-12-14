@@ -149,6 +149,8 @@
                 self.topView.userInfo = [YTUserInfoTool userInfo];
                 [YTCenter postNotificationName:YTUpdateIconImage object:nil];
                 [self updateAuthentication];
+                // 更换待报备订单数量
+                [self.bottom reloadData];
             }
         }];
     }
@@ -245,10 +247,10 @@
 
 - (void)pushView:(LoopObj *)loopObj
 {
-    
     YTNormalWebController *webVc = [YTNormalWebController webWithTitle:loopObj.title url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], loopObj.message_id]];
     webVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:webVc animated:YES];
+    [MobClick event:@"main_click" attributes:@{@"按钮" : @"跑马灯", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 #pragma mark - 底部视图
@@ -282,19 +284,20 @@
 {
     YTGroupCell *groupCell = [[[NSBundle mainBundle] loadNibNamed:@"YTGroupCell" owner:nil options:nil] lastObject];
     YTUserInfo *userInfo = [YTUserInfoTool userInfo];
+    groupCell.title = @"认证理财师";
     switch (userInfo.adviserStatus) {
         case 0:
             return;
         case 1:
-            groupCell.title = @"认证理财师";
+            self.groupCell.detailTitle = @"";
             groupCell.pushVc = [YTAuthenticationViewController class];
             break;
         case 2:
-            groupCell.title = @"认证理财师(审核中)";
+            groupCell.detailTitle = @"（审核中）";
             groupCell.pushVc = [YTAuthenticationStatusController class];
             break;
         case 3:
-            groupCell.title = @"认证理财师(未成功)";
+            groupCell.detailTitle = @"（未成功）";
             groupCell.pushVc = [YTAuthenticationErrorController class];
             break;
     }
@@ -319,6 +322,7 @@
 - (void)updateAuthentication
 {
     YTUserInfo *userInfo = [YTUserInfoTool userInfo];
+    self.groupCell.title = @"认证理财师";
     switch (userInfo.adviserStatus) {
         case 0:
             if (self.groupCell != nil) {
@@ -328,15 +332,15 @@
             }
             return;
         case 1:
-            self.groupCell.title = @"认证理财师";
+            self.groupCell.detailTitle = @"";
             self.groupCell.pushVc = [YTAuthenticationViewController class];
             break;
         case 2:
-            self.groupCell.title = @"认证理财师(审核中)";
+            self.groupCell.detailTitle = @"（审核中）";
             self.groupCell.pushVc = [YTAuthenticationStatusController class];
             break;
         case 3:
-            self.groupCell.title = @"认证理财师(未成功)";
+            self.groupCell.detailTitle = @"（未成功）";
             self.groupCell.pushVc = [YTAuthenticationErrorController class];
             break;
     }
@@ -391,10 +395,9 @@
  */
 - (void)setupBottom
 {
-    YTBottomView *bottom = [[YTBottomView alloc] init];
+    YTBottomView *bottom = [[YTBottomView alloc] initWithFrame:CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42 * 3)];
     bottom.layer.cornerRadius = 5;
     bottom.layer.masksToBounds = YES;
-    bottom.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42 * 3);
 
     if([YTResourcesTool isVersionFlag] == NO)
     {
@@ -403,8 +406,10 @@
     bottom.BottomDelegate = self;
     [self.mainView addSubview:bottom];
     self.bottom = bottom;
+    // 更换待报备订单数量
     // 设置滚动范围
     [self.mainView setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame) + 64)];
+    [self.bottom reloadData];
 }
 
 #pragma makr - 监听通知
@@ -540,7 +545,6 @@
             return;
         }
         
-
         YTNormalWebController *vc = [YTNormalWebController webWithTitle:@"待办事项" url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
         vc.isDate = YES;
         vc.hidesBottomBarWhenPushed = YES;
@@ -770,7 +774,7 @@
 {
     // 检测是否有推送消息
     YTJpushModel *jpush = [YTJpushTool jpush];
-    if (jpush) {
+    if (jpush != nil && jpush.jumpUrl != nil && jpush.jumpUrl.length > 0) {
         YTNormalWebController *webView =[YTNormalWebController webWithTitle:jpush.title url:jpush.jumpUrl];
         webView.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:webView animated:NO];
@@ -822,7 +826,7 @@
     if (!_todos) {
         _todos = [[NSMutableArray alloc] init];
         YTMessageModel *message = [[YTMessageModel alloc] init];
-        message.summary = @"认购了产品才有待办事项提醒";
+        message.summary = @"您还没有待办事项，快去认购产品吧！";
         [_todos addObject:message];
     }
     return _todos;

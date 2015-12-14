@@ -37,7 +37,13 @@ static YTUserInfo *_userInfo;
  */
 + (void)saveUserInfo:(YTUserInfo *)userInfo;
 {
-    _userInfo = userInfo;
+    if (_userInfo.iconImage != nil) {
+        userInfo.iconImage = _userInfo.iconImage;
+        _userInfo = userInfo;
+    } else {
+        _userInfo = userInfo;
+    }
+    
 }
 
 /**

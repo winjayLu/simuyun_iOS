@@ -166,6 +166,7 @@
 {
     if ([YTJpushTool jpush]) return;
     YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:userInfo];
+    if (jpush == nil || jpush.jumpUrl == nil || jpush.jumpUrl.length == 0) return;
 
     HHAlertView *alert = [HHAlertView shared];
     [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"查看详情" block:^(HHAlertButton buttonindex) {

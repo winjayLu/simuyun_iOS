@@ -21,7 +21,7 @@
 #import "NSString+Extend.h"
 #import "JKAssets.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-
+#import "YTUserInfoTool.h"
 
 
 @interface YTReportViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UITextFieldDelegate>
@@ -174,9 +174,8 @@
     
     // 分行
     self.branchField.text = cusomerModel.cust_bank_detail;
-    
-    
 
+    
 }
 
 
@@ -423,7 +422,7 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
-    return 3;
+    return 5;
 }
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
@@ -455,9 +454,8 @@
             [self updateKeyboardPosition:YES];
         }
     }
-    
     self.typeField.text = selectedType;
-    
+    [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"选择证件类型", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
@@ -589,7 +587,7 @@
 - (NSArray *)types
 {
     if (!_types) {
-        _types = [NSArray arrayWithObjects:@"身份证",@"护照",@"其它", nil];
+        _types = [NSArray arrayWithObjects:@"身份证",@"护照",@"港澳通行证", @"营业执照", @"其它", nil];
     }
     return _types;
 }

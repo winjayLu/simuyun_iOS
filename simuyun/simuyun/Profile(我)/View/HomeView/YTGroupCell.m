@@ -14,6 +14,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *lineView;
 
+// 子标题
+@property (weak, nonatomic) IBOutlet UILabel *detailLable;
 
 @end
 
@@ -41,6 +43,12 @@
 {
     _isShowLine = isShowLine;
     self.lineView.hidden = !isShowLine;
+}
+
+- (void)setDetailTitle:(NSString *)detailTitle
+{
+    _detailTitle = detailTitle;
+    self.detailLable.text = _detailTitle;
 }
 
 @end

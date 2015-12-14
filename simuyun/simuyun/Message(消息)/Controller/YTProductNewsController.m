@@ -106,7 +106,6 @@
     param[@"pageNo"] = @(++self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         [self.messages addObjectsFromArray:[YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]]];
-        [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"lastTimestamp"];
         [self.tableView reloadData];
         [self.tableView.footer endRefreshing];
     } failure:^(NSError *error) {

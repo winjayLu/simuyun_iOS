@@ -58,6 +58,8 @@
 - (void)setPub_end_time:(NSString *)pub_end_time
 {
     _pub_end_time = pub_end_time;
+    
+    if (_pub_end_time.length == 0) return;
     NSDate *date = [NSDate date];
     NSDate *endTime = [pub_end_time stringWithDate:@"yyyy-MM-dd HH:mm"];
     _componentsDate = [date componentsToDate:endTime];

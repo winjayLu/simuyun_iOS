@@ -120,6 +120,7 @@
     dict[@"orgId"] = selectedOrgna.party_id;
     [YTHttpTool post:YTAuthAdviser params:dict success:^(id responseObject) {
         [SVProgressHUD dismiss];
+        [YTUserInfoTool userInfo].adviserStatus = 2;
         [self transitionTabBarVC];
     } failure:^(NSError *error) {
     }];

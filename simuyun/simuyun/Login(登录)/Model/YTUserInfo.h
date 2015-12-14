@@ -60,5 +60,9 @@
  */
 @property (nonatomic, strong) UIImage *iconImage;
 
+// 待报备订单数量
+@property (nonatomic, assign) int preparedforNum;
+
+
 
 @end

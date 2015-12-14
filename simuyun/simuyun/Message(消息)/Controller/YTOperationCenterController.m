@@ -86,7 +86,7 @@
     param[@"pageNo"] = @(self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         self.messages = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
-        [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"timestampCategory2"];
+        [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"timestampCategory4"];
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
         [self.hintView changeContentTypeWith:self.messages];

@@ -11,7 +11,7 @@
 
 
 //#ifdef DEBUG
-////  开发环境
+//  开发环境
 #define YTServer @"http://192.168.17.213:8080/api/app/"
 #define YTH5Server @"http://192.168.17.213"
 #define UmengAppKey @"545867defd98c5f23a0021da"

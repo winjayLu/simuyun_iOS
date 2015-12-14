@@ -15,6 +15,7 @@
 #import "AFNetworking.h"
 #import "NSString+Extend.h"
 #import "YTAccountTool.h"
+#import "YTUserInfoTool.h"
 
 @interface YTReportContentController ()
 
@@ -74,11 +75,13 @@
     self.reportVc.cusomerModel = customer;
     [self.infoCard hide];
     self.infoCard = nil;
+    [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"快速报备确认", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 - (void)cancelCustomer
 {
     [self.infoCard hide];
+    [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"快速报备取消", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 /**

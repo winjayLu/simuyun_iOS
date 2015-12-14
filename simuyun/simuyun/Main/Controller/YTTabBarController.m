@@ -147,6 +147,7 @@
     NSString *timestampCategory0 = [CoreArchive strForKey:@"timestampCategory0"];
     NSString *timestampCategory2 = [CoreArchive strForKey:@"timestampCategory2"];
     NSString *timestampCategory3 = [CoreArchive strForKey:@"timestampCategory3"];
+    NSString *timestampCategory4 = [CoreArchive strForKey:@"timestampCategory4"];
     if (timestampCategory0 == nil || timestampCategory0.length == 0) {
         timestampCategory0 = @"2013-01-01 00:00:00";
     }
@@ -156,9 +157,14 @@
     if (timestampCategory3 == nil || timestampCategory3.length == 0) {
         timestampCategory3 = @"2013-01-01 00:00:00";
     }
+    // 运营公告
+    if (timestampCategory4 == nil || timestampCategory4.length == 0) {
+        timestampCategory4 = @"2013-01-01 00:00:00";
+    }
     params[@"timestampCategory0"] = timestampCategory0;
     params[@"timestampCategory2"] = timestampCategory2;
     params[@"timestampCategory3"] = timestampCategory3;
+    params[@"timestampCategory4"] = timestampCategory4;
     [YTHttpTool get:YTMessageCount params:params success:^(id responseObject) {
         YTMessageNum *oldMessage = [YTMessageNumTool messageNum];
         [YTMessageNumTool save:[YTMessageNum objectWithKeyValues:responseObject]];
@@ -166,12 +172,10 @@
         if (oldMessage != nil && (newMessageNum.TODO_LIST > oldMessage.TODO_LIST)) {
             [YTCenter postNotificationName:YTUpdateTodoFrame object:nil];
         }
-
         if (newMessageNum.CHAT_CONTENT > 0) {
             self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", newMessageNum.CHAT_CONTENT];
             [YTCenter postNotificationName:YTUpdateChatContent object:nil];
         }
-        
     } failure:^(NSError *error) {
     }];
 }

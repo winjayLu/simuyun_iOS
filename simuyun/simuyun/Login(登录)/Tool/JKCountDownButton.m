@@ -53,7 +53,6 @@
             NSString *title = [NSString stringWithFormat:@"%d秒",_second];
             [self setTitle:title forState:UIControlStateNormal];
             [self setTitle:title forState:UIControlStateDisabled];
-
         }
     }
 }
@@ -71,13 +70,11 @@
                     self.titleLabel.textColor = YTColor(215, 58, 46);
                     [self setTitle:_didFinishedBlock(self,_totalSecond)forState:UIControlStateNormal];
                     [self setTitle:_didFinishedBlock(self,_totalSecond)forState:UIControlStateDisabled];
-
                 }
                 else
                 {
                     [self setTitle:@"重新获取" forState:UIControlStateNormal];
                     [self setTitle:@"重新获取" forState:UIControlStateDisabled];
-
                 }
             }
         }

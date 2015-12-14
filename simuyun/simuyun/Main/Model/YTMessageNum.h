@@ -23,4 +23,8 @@
 
 // 系统通知
 @property (nonatomic, assign) int PRODUCT_NEWS;
+
+// 运营公告
+@property (nonatomic, assign) int OPERATION_LIST;
+
 @end
