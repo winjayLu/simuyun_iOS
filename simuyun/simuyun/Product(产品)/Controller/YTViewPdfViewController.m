@@ -39,6 +39,7 @@
     
     mainView.scalesPageToFit = YES;
     [mainView.scrollView setShowsVerticalScrollIndicator:NO];
+    mainView.opaque = NO;
     mainView.delegate = self;
     self.webView = mainView;
     self.view = mainView;

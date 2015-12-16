@@ -650,8 +650,6 @@
 - (void)signIn
 {
     if(self.blackAlert != nil) return;
-    YTBlackAlertView *alert = [YTBlackAlertView shared];
-    self.blackAlert = alert;
     // 发送请求
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"adviserId"] = [YTAccountTool account].userId;
@@ -667,6 +665,8 @@
         YTInformation *iformation = [YTInformation objectWithKeyValues:responseObject[@"information"]];
         // 弹出提醒
         if (iformation != nil && iformation.infoId.length > 0) {
+            YTBlackAlertView *alert = [YTBlackAlertView shared];
+            self.blackAlert = alert;
             [alert showAlertSignWithTitle:iformation.title date:responseObject[@"signInDate"] yunDou:responseObject[@"todayPoint"] block:^{
                 YTInformationWebViewController *normal = [YTInformationWebViewController webWithTitle:@"早知道" url:[NSString stringWithFormat:@"%@/information%@&id=%@",YTH5Server, [NSDate stringDate], iformation.infoId]];
                 normal.isDate = YES;

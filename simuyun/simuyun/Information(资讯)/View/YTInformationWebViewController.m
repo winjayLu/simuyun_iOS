@@ -57,6 +57,7 @@
     } else {
         [mainView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
     }
+    mainView.opaque = NO;
     mainView.scalesPageToFit = YES;
     mainView.delegate = self;
     self.view = mainView;

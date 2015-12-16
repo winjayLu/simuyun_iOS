@@ -34,6 +34,7 @@
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@uid=%@&v=4.0", [self appendingUrl:nil], [YTAccountTool account].userId]];
     [mainView loadRequest:[NSURLRequest requestWithURL:url]];
     mainView.scalesPageToFit = YES;
+    mainView.opaque = NO;
     [mainView.scrollView setShowsVerticalScrollIndicator:NO];
     mainView.scrollView.header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [mainView reload];

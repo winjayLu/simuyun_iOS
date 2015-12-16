@@ -16,6 +16,7 @@
 @property (nonatomic, copy) NSString *appWelcomeImg;
 
 // appstroe开关
+// 0 隐藏  1 显示
 @property (nonatomic, assign) int versionFlag;
 
 // 新版本内容

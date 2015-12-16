@@ -48,6 +48,7 @@
 
     mainView.scalesPageToFit = YES;
     mainView.delegate = self;
+    mainView.opaque = NO;
     [mainView.scrollView setShowsVerticalScrollIndicator:NO];
     self.view = mainView;
     self.view.backgroundColor = YTGrayBackground;

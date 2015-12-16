@@ -34,6 +34,7 @@
     webView.frame = DeviceBounds;
     webView.delegate = self;
     webView.scalesPageToFit = YES;
+    webView.opaque = NO;
     self.view = webView;
     self.webView = webView;
 }
