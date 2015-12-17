@@ -132,6 +132,12 @@
     [SVProgressHUD showWithStatus:@"正在绑定" maskType:SVProgressHUDMaskTypeClear];
     [YTHttpTool post:YTBindPhone params:param success:^(id responseObject) {
         [SVProgressHUD dismiss];
+        // 修改本地存储的帐号信息
+        YTAccount *account = [YTAccountTool account];
+        account.userName = self.phoneField.text;
+        account.password = [NSString md5:self.passwordField.text];
+        [YTAccountTool save:account];
+        
         YTAuthenticationViewController *authen = [[YTAuthenticationViewController alloc] init];
         authen.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:authen animated:YES];

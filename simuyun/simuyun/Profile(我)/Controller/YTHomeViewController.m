@@ -480,6 +480,9 @@
         CGSize oldContent = self.mainView.contentSize;
         self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height + 48);
     }
+    
+    // 修改提醒数字
+    [self.todoView setTodoNum];
 }
 
 #pragma mark - 响应事件

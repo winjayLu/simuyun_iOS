@@ -72,8 +72,6 @@
         }
     } else {
         self.todoNumBtn.hidden = YES;
-        // 发送通知
-        [YTCenter postNotificationName:YTUpdateMessageNum object:nil];
     }
 }
 

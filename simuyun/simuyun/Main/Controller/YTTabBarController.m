@@ -171,7 +171,7 @@
         YTMessageNum *oldMessage = [YTMessageNumTool messageNum];
         [YTMessageNumTool save:[YTMessageNum objectWithKeyValues:responseObject]];
         YTMessageNum *newMessageNum = [YTMessageNumTool messageNum];
-        if (oldMessage != nil && (newMessageNum.TODO_LIST > oldMessage.TODO_LIST)) {
+        if (oldMessage != nil && (newMessageNum.TODO_LIST != oldMessage.TODO_LIST)) {
             [YTCenter postNotificationName:YTUpdateTodoFrame object:nil];
         }
         if (newMessageNum.CHAT_CONTENT > 0) {

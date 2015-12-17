@@ -34,5 +34,7 @@
  *  待办事项
  */
 @property (nonatomic, strong) NSMutableArray *todos;
+// 设置消息数量
+- (void)setTodoNum;
 
 @end
