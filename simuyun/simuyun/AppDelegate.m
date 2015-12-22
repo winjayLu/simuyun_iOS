@@ -25,8 +25,6 @@
 #import "YTJpushTool.h"
 
 @interface AppDelegate ()
-
-
 @end
 
 @implementation AppDelegate
@@ -167,15 +165,14 @@
     if ([YTJpushTool jpush]) return;
     YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:userInfo];
     if (jpush == nil || jpush.jumpUrl == nil || jpush.jumpUrl.length == 0) return;
-
     HHAlertView *alert = [HHAlertView shared];
     [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"查看详情" block:^(HHAlertButton buttonindex) {
         if(buttonindex == HHAlertButtonOk)
         {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 // 需要跳转的控制器
-                
                 YTNormalWebController *webVc = [YTNormalWebController webWithTitle:jpush.title url:[NSString stringWithFormat:@"%@%@",YTH5Server, jpush.jumpUrl]];
+                webVc.isDate = YES;
                 webVc.hidesBottomBarWhenPushed = YES;
                 // 获取当前控制器
                 YTNavigationController *keyVc = [self keyViewController];

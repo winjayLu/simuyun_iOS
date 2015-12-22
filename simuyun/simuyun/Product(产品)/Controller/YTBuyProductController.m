@@ -49,15 +49,13 @@
     self.buyMoney.text = [buy_start substringToIndex:buy_start.length - 1];
 }
 
-
-
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     [self.nameLable becomeFirstResponder];
-    
     [MobClick event:@"book_click" attributes:@{@"按钮" : @"客户姓名", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];

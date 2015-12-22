@@ -171,6 +171,8 @@
     [MobClick event:@"msg_click" attributes:@{@"类型" : @"运营公告详情", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
+
+
 #pragma mark - lazy
 - (NSMutableArray *)messages
 {

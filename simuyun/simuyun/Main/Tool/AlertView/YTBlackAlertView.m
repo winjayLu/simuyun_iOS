@@ -21,7 +21,10 @@
 @property (nonatomic, weak) UILabel *detailLabel;
 @property (nonatomic, weak) UIImageView *bg;
 @property (nonatomic, copy) titleClcik titleblock;
-
+/**
+ *  关闭按钮
+ */
+@property (nonatomic, weak) UIButton *closeBtn;
 
 @end
 
@@ -126,7 +129,7 @@ static UIWindow *_window;
     button.frame = CGRectMake((self.width - btnW) * 0.5,  CGRectGetMaxY(detailLabel.frame) + btnMaginTop, btnW, btnW);
     [button addTarget:self action:@selector(destroy) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:button];
-    
+    self.closeBtn = button;
     // 调整自身Frame
     CGFloat maxY = CGRectGetMaxY(button.frame);
     self.frame = CGRectMake(maginLeft, (DeviceHight - maxY) * 0.5, alertWidth, maxY);
@@ -160,9 +163,11 @@ static UIWindow *_window;
     } completion:^(BOOL finished) {
         [_titleLabel removeFromSuperview];
         [_detailLabel removeFromSuperview];
+        [_closeBtn removeFromSuperview];
         [_bg removeFromSuperview];
         _titleLabel=nil;
         _detailLabel = nil;
+        _closeBtn = nil;
         _bg=nil;
         [self removeFromSuperview];
         _window.hidden = YES;

@@ -408,7 +408,6 @@
     bottom.BottomDelegate = self;
     [self.mainView addSubview:bottom];
     self.bottom = bottom;
-    // 更换待报备订单数量
     // 设置滚动范围
     [self.mainView setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(bottom.frame) + 64)];
     [self.bottom reloadData];
@@ -685,7 +684,7 @@
 }
 
 
-
+#pragma mark - 关联微信
 /**
  *  关联微信
  *
@@ -777,20 +776,6 @@
     }
 }
 
-#pragma mark - 推送跳转
-- (void)pushNotificationWithJump
-{
-    // 检测是否有推送消息
-    YTJpushModel *jpush = [YTJpushTool jpush];
-    if (jpush != nil && jpush.jumpUrl != nil && jpush.jumpUrl.length > 0) {
-        YTNormalWebController *webView =[YTNormalWebController webWithTitle:jpush.title url:jpush.jumpUrl];
-        webView.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:webView animated:NO];
-        [YTJpushTool saveJpush:nil];
-    }
-}
-
-
 #pragma mark - UIWebViewDelegate
 
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
@@ -828,8 +813,20 @@
     [webView stringByEvaluatingJavaScriptFromString:js];
 }
 
+#pragma mark - 推送跳转
+- (void)pushNotificationWithJump
+{
+    // 检测是否有推送消息
+    YTJpushModel *jpush = [YTJpushTool jpush];
+    if (jpush != nil && jpush.jumpUrl != nil && jpush.jumpUrl.length > 0) {
+        YTNormalWebController *webView =[YTNormalWebController webWithTitle:jpush.title url:[NSString stringWithFormat:@"%@%@",YTH5Server, jpush.jumpUrl]];;
+        webView.isDate = YES;
+        webView.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:webView animated:NO];
+        [YTJpushTool saveJpush:nil];
+    }
+}
 
-#pragma mark - 获取数据
 
 #pragma mark - 懒加载
 - (NSMutableArray *)todos

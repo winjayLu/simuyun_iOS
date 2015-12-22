@@ -11,6 +11,8 @@
 #import "YTProductGroupController.h"
 #import "YTProductViewController.h"
 #import "YTUserInfoTool.h"
+#import "YTNavigationController.h"
+#import "YTSearchViewController.h"
 
 #define TitleHeight 70
 #define ItemMagin 3
@@ -19,10 +21,15 @@
 #define GroupHeig (ItemWidth * 2.0 + ItemMagin + TitleHeight)
 
 
-@interface YTProductGroupController ()
+@interface YTProductGroupController () <UISearchBarDelegate>
 
 // 最后一个标题
 @property (nonatomic, weak) UIView *lastTitle;
+
+/**
+ *  搜索框
+ */
+@property (nonatomic, weak) UISearchBar *search;
 
 @end
 
@@ -41,6 +48,9 @@
     self.title = @"产品";
     self.view.backgroundColor = YTGrayBackground;
     [MobClick event:@"nav_click" attributes:@{@"按钮" : @"产品"}];
+    
+    // 初始化SearchBar
+    [self setupSearchBar];
     
     // 名山系列
     self.lastTitle = [self creatTitleImage:0];
@@ -65,13 +75,40 @@
     ((UIScrollView *)self.view).contentSize = CGSizeMake(DeviceWidth, CGRectGetMaxY(button.frame));
 }
 
+#pragma mark - SearchBarDelegate
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    
+    YTSearchViewController *vc = [[YTSearchViewController alloc] init];
+    YTNavigationController *nav = [[YTNavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:NO completion:nil];
+    
+    return NO;
+}
+
+
+
+#pragma mark - 初始化
+/**
+ *  创建搜索框
+ *
+ */
+- (void)setupSearchBar
+{
+    UISearchBar *search = [[UISearchBar alloc] init];
+    search.frame = CGRectMake(0, 0, DeviceWidth, 44);
+    search.placeholder = @"产品搜索";
+    search.delegate = self;
+    [self.view addSubview:search];
+    self.search = search;
+}
 
 // 创建标题
 - (UIView *)creatTitleImage:(int)groupIndex
 {
     // 标题容器
     UIView *content = [[UIView alloc] init];
-    content.frame = CGRectMake(0, groupIndex * GroupHeig, DeviceWidth, TitleHeight);
+    content.frame = CGRectMake(0, groupIndex * GroupHeig + self.search.height, DeviceWidth, TitleHeight);
     content.backgroundColor = YTGrayBackground;
 
     

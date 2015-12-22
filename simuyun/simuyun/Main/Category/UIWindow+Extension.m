@@ -14,6 +14,9 @@
 #import "CALayer+Transition.h"
 #import "UIImage+Extend.h"
 #import "CoreArchive.h"
+#import "YTAccountTool.h"
+#import "YTNavigationController.h"
+#import "SVProgressHUD.h"
 
 @implementation UIWindow (Extension)
 
@@ -45,8 +48,30 @@
         
         // 新特性控制器
         self.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m1,m2,m3,m4,m5] enterBlock:^{
-            // 登录控制器
-            self.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
+           
+            
+            // 判断是否有登录过的账户
+            if ([YTAccountTool account]) {
+                // 发起登录
+                [SVProgressHUD showWithStatus:@"正在登录" maskType:SVProgressHUDMaskTypeClear];
+                if ([YTAccountTool account]) {
+                    [YTAccountTool loginAccount:[YTAccountTool account] result:^(BOOL result) {
+                        [SVProgressHUD dismiss];
+                        if (result) {
+                            self.rootViewController = [[YTTabBarController alloc] init];
+                        } else {
+                            self.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
+                        }
+                        [self.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];
+                    }];
+                }
+            } else {
+                
+                // 登录控制器
+                self.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
+                [self.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];
+            }
+            
         }];
     } else {
         // 欢迎控制器
@@ -57,9 +82,9 @@
 /**
  *  转场
  */
--(void)transitionVc{
-    [self.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.75f];
-}
+//-(void)transitionVc{
+//    [self.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.75f];
+//}
 
 
 @end
