@@ -50,7 +50,7 @@
     [MobClick event:@"nav_click" attributes:@{@"按钮" : @"产品"}];
     
     // 初始化SearchBar
-    [self setupSearchBar];
+//    [self setupSearchBar];
     
     // 名山系列
     self.lastTitle = [self creatTitleImage:0];

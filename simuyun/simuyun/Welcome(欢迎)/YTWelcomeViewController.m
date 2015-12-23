@@ -53,7 +53,6 @@
         
         // 获取程序主窗口
         UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
-        
         // 判断是否有登录过的账户
         if ([YTAccountTool account]) {
             // 发起登录
@@ -68,11 +67,9 @@
                 }];
             }
         } else {
-            
             mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
             [mainWindow.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];
         }
-        
     });
 }
 

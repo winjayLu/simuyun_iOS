@@ -112,6 +112,7 @@
                 [self.navigationController pushViewController:viewPdf animated:YES];
             }
         }
+        return NO;
     }
     return YES;
 }

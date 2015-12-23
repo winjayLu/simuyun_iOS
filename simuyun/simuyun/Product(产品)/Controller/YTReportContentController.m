@@ -104,6 +104,8 @@
          // 如果客户数量>0
          if (self.customers.count > 0)
          {
+             // 退出键盘
+             [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
              QKInfoCard *infoCard = [[QKInfoCard alloc] initWithView:self.view];
              NSMutableArray *array = [[NSMutableArray alloc] init];
              for (YTCusomerModel *cusomer in self.customers) {

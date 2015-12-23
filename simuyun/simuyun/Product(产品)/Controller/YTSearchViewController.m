@@ -19,8 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+
     // 设置NavgationBar
     [self setupNavgationBar];
 }
@@ -31,7 +30,7 @@
     // 搜索框
     UISearchBar *search = [[UISearchBar alloc] init];
     search.frame = CGRectMake(0, 0, DeviceWidth, 44);
-    search.placeholder = @"产品搜索";
+    search.placeholder = @"请输入产品名称";
     self.navigationItem.titleView = search;
     self.search = search;
     
@@ -71,12 +70,10 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
     return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
     return 0;
 }
 

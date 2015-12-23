@@ -13,6 +13,7 @@
 #import "YTUserInfoTool.h"
 #import "YTResourcesTool.h"
 #import "YTNavigationController.h"
+#import "YTMessageNumTool.h"
 
 @interface YTLeftMenu()
 
@@ -163,6 +164,8 @@
     [YTAccountTool save:nil];
     // 清除用户信息
     [YTUserInfoTool clearUserInfo];
+    // 清除数字提醒
+    [YTMessageNumTool save:nil];
 }
 /**
  *  拨打电话

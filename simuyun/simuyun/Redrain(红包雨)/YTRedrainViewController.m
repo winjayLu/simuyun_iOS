@@ -41,6 +41,7 @@
     NSString *urls = [urlString stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     if (urls != nil && ![urls isEqualToString:self.url]) {
         [self dismissViewControllerAnimated:NO completion:nil];
+        return NO;
     }
     
     return YES;

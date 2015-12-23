@@ -95,7 +95,7 @@
             school.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:school animated:YES];
         }
-        
+        return NO;
     }
     return YES;
 }

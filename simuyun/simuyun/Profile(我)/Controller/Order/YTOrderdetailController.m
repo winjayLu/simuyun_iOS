@@ -114,7 +114,7 @@
                 [self.navigationController pushViewController:normal animated:YES];
             }
         }
- 
+        return NO;
     }
     return YES;
 }

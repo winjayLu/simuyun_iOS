@@ -173,6 +173,7 @@
                 [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : urlComps[2], @"机构" : [YTUserInfoTool userInfo].organizationName}];
             }
         }
+        return NO;
     }
     return YES;
 }
