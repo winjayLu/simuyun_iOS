@@ -212,6 +212,9 @@
     share.share_content = self.information.summary;
     // 设置分享图片
     share.share_image = [UIImage imageNamed:[NSString stringWithFormat:@"inforcategory%d.jpg",self.information.category]];
+    if (self.information.date == nil || self.information.date.length == 0) {
+        share.share_image = [UIImage imageNamed:@"inforcategory4"];
+    }
     share.share_url = [NSString stringWithFormat:@"http://www.simuyun.com/information/shared.html?id=%@", self.information.infoId];
     switch (tag) {
         case ShareButtonTypeWxShare:

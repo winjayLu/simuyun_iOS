@@ -147,7 +147,7 @@ static UIWindow *_window;
         _detailLabel.textColor = [UIColor grayColor];
         [_detailLabel setNumberOfLines:0];
         [_detailLabel setFont:[UIFont systemFontOfSize:HHAlertview_SIZE_DETAIL_FONT]];
-        [_detailLabel setTextAlignment:NSTextAlignmentCenter];
+        [_detailLabel setTextAlignment:NSTextAlignmentLeft];
         
         [_detailLabel sizeToFit];
         [_detailLabel setFrame:CGRectMake(15, CGRectGetMaxY(_titleLabel.frame) + 10, [self getSelfSize].width - 30, _detailLabel.frame.size.height)];

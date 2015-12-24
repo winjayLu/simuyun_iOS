@@ -148,7 +148,7 @@
     
     // 判断证件类型
     NSString *credentialsname = cusomerModel.credentialsname;
-    if ([credentialsname isEqualToString:@"身份证"] || [credentialsname isEqualToString:@"护照"]) {
+    if ([credentialsname isEqualToString:@"身份证"] || [credentialsname isEqualToString:@"护照"] || [credentialsname isEqualToString:@"港澳通行证"] || [credentialsname isEqualToString:@"营业执照"]) {
         self.typeField.text = credentialsname;
     } else {
         self.CertificatesNumberConstr.constant = 78;

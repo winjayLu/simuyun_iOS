@@ -144,7 +144,7 @@
         
         _height=self.frame.size.height;
         
-        assert([teams count]!=0);
+        assert([teams count]!= 0);
         // Initialization code
          [self makeselfUI];
         

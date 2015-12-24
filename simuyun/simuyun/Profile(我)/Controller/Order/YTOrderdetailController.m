@@ -109,10 +109,11 @@
                 YTNormalWebController *normal = [[YTNormalWebController alloc] init];
                 normal.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
                 normal.isDate = YES;
-                normal.toTitle = urlComps[3];
+                normal.toTitle = @"产品详情";
                 [self.navigationController pushViewController:normal animated:YES];
             }
         }
+ 
     }
     return YES;
 }

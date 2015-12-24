@@ -154,19 +154,22 @@
                 viewPdf.url = urlComps[2];
                 viewPdf.shareTitle = urlComps[3];
                 [self.navigationController pushViewController:viewPdf animated:YES];
-                [MobClick event:@"book_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"pdf简版", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+                [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"pdf简版", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             } else if([command isEqualToString:@"copytoclipboard"])
             {
                 UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
                 pasteboard.string = urlComps[2];
                 [SVProgressHUD showSuccessWithStatus:@"复制成功"];
-                [MobClick event:@"book_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"复制打款帐号", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+                [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"复制打款帐号", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             } else if ([command isEqualToString:@"cantbuy"])
             {
                 // 判断是否认证
                 if (![self isAuthentication]) return YES;
                 // 认购
                 [self buyNow];
+            } else if ([command isEqualToString:@"mobclick"])   // 事件统计
+            {
+                [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : urlComps[2], @"机构" : [YTUserInfoTool userInfo].organizationName}];
             }
         }
     }
@@ -226,7 +229,8 @@
                 [self.navigationController pushViewController:normal animated:YES];
             }
         }];
-    } else {
+    } else if (self.product.state == 20)
+    {
         [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"无法认购" detail:[NSString stringWithFormat:@"%@目前已经结算，您可以看看其它产品或联系平台客服。", self.product.pro_name] cancelButton:@"再看看" Okbutton:@"联系客服" block:^(HHAlertButton buttonindex) {
             if (buttonindex == HHAlertButtonOk) {
                 YTNormalWebController *normal = [YTNormalWebController webWithTitle:@"平台客服" url:[NSString stringWithFormat:@"%@/livehelp%@",YTH5Server, [NSDate stringDate]]];
@@ -235,8 +239,17 @@
                 [self.navigationController pushViewController:normal animated:YES];
             }
         }];
+    } else {
+        [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"无法认购" detail:[NSString stringWithFormat:@"%@目前处于不可认购状态，您可以看看其它产品或联系平台客服。", self.product.pro_name] cancelButton:@"再看看" Okbutton:@"联系客服" block:^(HHAlertButton buttonindex) {
+            if (buttonindex == HHAlertButtonOk) {
+                YTNormalWebController *normal = [YTNormalWebController webWithTitle:@"平台客服" url:[NSString stringWithFormat:@"%@/livehelp%@",YTH5Server, [NSDate stringDate]]];
+                normal.isDate = YES;
+                normal.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:normal animated:YES];
+            }
+        }];
     }
-    [MobClick event:@"book_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"认购", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+    [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"认购", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 
@@ -394,7 +407,7 @@
         [SVProgressHUD showSuccessWithStatus:@"发送成功"];
     } failure:^(NSError *error) {
     }];
-    [MobClick event:@"book_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"获取详细资料", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+    [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"获取详细资料", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 

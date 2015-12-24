@@ -174,7 +174,8 @@
         {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 // 需要跳转的控制器
-                YTNormalWebController *webVc = [YTNormalWebController webWithTitle:jpush.title url:jpush.jumpUrl];
+                
+                YTNormalWebController *webVc = [YTNormalWebController webWithTitle:jpush.title url:[NSString stringWithFormat:@"%@%@",YTH5Server, jpush.jumpUrl]];
                 webVc.hidesBottomBarWhenPushed = YES;
                 // 获取当前控制器
                 YTNavigationController *keyVc = [self keyViewController];

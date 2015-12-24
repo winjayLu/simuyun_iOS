@@ -205,7 +205,6 @@
     topView.clipsToBounds = YES;
     [self.view addSubview:topView];
     self.topView = topView;
-    
 }
 
 #pragma mark - 跑马灯
@@ -215,19 +214,21 @@
 - (void)loadLoopView
 {
     [YTHttpTool get:YTMarquee params:nil success:^(id responseObject) {
-        NSLog(@"%@", responseObject);
         NSArray *array = [LoopObj objectArrayWithKeyValuesArray:responseObject];
-        TimerLoopView *loop=[[TimerLoopView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - 40, DeviceWidth, 40) withitemArray:array];
-        loop.height = 0;
-        [self.view addSubview:loop];
-        loop.loopDelegate = self;
-        self.loopView = loop;
-        [UIView animateWithDuration:0.5 animations:^{
-            loop.height = 40;
-            self.mainView.y = CGRectGetMaxY(self.loopView.frame);
-        }];
-        CGSize oldContent = self.mainView.contentSize;
-        self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height + 48);
+        
+        if (array.count > 0) {
+            TimerLoopView *loop=[[TimerLoopView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topView.frame) - 40, DeviceWidth, 40) withitemArray:array];
+            loop.height = 0;
+            [self.view addSubview:loop];
+            loop.loopDelegate = self;
+            self.loopView = loop;
+            [UIView animateWithDuration:0.5 animations:^{
+                loop.height = 40;
+                self.mainView.y = CGRectGetMaxY(self.loopView.frame);
+            }];
+            CGSize oldContent = self.mainView.contentSize;
+            self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height + 48);
+        }
         
     } failure:^(NSError *error) {
     }];
@@ -661,14 +662,15 @@
         userInfo.myPoint = [totalPoint intValue];
         [YTUserInfoTool saveUserInfo:userInfo];
         self.topView.userInfo = userInfo;
-        // 资讯id
-        NSString *infoId = responseObject[@"infoId"];
+        // 资讯模型
+        YTInformation *iformation = [YTInformation objectWithKeyValues:responseObject[@"information"]];
         // 弹出提醒
-        [alert showAlertSignWithTitle:responseObject[@"infoTitle"] date:responseObject[@"signInDate"] yunDou:responseObject[@"todayPoint"] block:^{
-            if (infoId != nil && infoId.length > 0) {
-                YTInformationWebViewController *normal = [YTInformationWebViewController webWithTitle:@"早知道" url:[NSString stringWithFormat:@"%@/information%@&id=%@",YTH5Server, [NSDate stringDate], infoId]];
+        [alert showAlertSignWithTitle:iformation.title date:responseObject[@"signInDate"] yunDou:responseObject[@"todayPoint"] block:^{
+            if (iformation.infoId != nil && iformation.infoId.length > 0) {
+                YTInformationWebViewController *normal = [YTInformationWebViewController webWithTitle:@"早知道" url:[NSString stringWithFormat:@"%@/information%@&id=%@",YTH5Server, [NSDate stringDate], iformation.infoId]];
                 normal.isDate = YES;
                 normal.hidesBottomBarWhenPushed = YES;
+                normal.information = iformation;
                 [self.navigationController pushViewController:normal animated:YES];
             }
         }];
@@ -813,7 +815,10 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     // 执行js代码
-    NSString *js = [NSString stringWithFormat:@"setData('%@', '%@');",[YTAccountTool account].token, [YTAccountTool account].userId];
+    // userid
+    // token
+    // version
+    NSString *js = [NSString stringWithFormat:@"setData('%@', '%@'， '%@');",[YTAccountTool account].token, [YTAccountTool account].userId, [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
     [webView stringByEvaluatingJavaScriptFromString:js];
 }
 
