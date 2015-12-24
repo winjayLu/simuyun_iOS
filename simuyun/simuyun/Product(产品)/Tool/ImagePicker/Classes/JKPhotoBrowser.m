@@ -111,8 +111,8 @@ static NSString *kJKPhotoBrowserCellIdentifier = @"kJKPhotoBrowserCellIdentifier
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     JKPhotoBrowserCell *cell = (JKPhotoBrowserCell *)[collectionView dequeueReusableCellWithReuseIdentifier:kJKPhotoBrowserCellIdentifier forIndexPath:indexPath];
-    
-    cell.asset = [self.assetsArray objectAtIndex:indexPath.row];
+
+    cell.asset = [self.assetsArray objectAtIndex: self.assetsArray.count - indexPath.row - 1];
     return cell;
     
 }
@@ -169,7 +169,7 @@ static NSString *kJKPhotoBrowserCellIdentifier = @"kJKPhotoBrowserCellIdentifier
     self.numberLabel.text = [NSString stringWithFormat:@"%lu/%lu",(long)(_currentPage+1),(unsigned long)[self.assetsArray count]];
     self.numberLabel.text = [NSString stringWithFormat:@"%lu/%lu",(long)(_currentPage+1),(unsigned long)[self.assetsArray count]];
     
-    ALAsset  *asset = [self.assetsArray objectAtIndex:_currentPage];
+    ALAsset  *asset = [self.assetsArray objectAtIndex:self.assetsArray.count - _currentPage -1];
     NSURL *assetURL = [asset valueForProperty:ALAssetPropertyAssetURL];
     self.checkButton.selected = [self assetIsSelected:assetURL];
 }

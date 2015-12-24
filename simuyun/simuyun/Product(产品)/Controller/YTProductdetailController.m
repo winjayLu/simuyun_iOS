@@ -74,7 +74,22 @@
     
     // 右侧菜单
     [self setupRightMenu];
+    
+    // 是否从订单跳转过来
+    if (self.isOrder) {
+        // 获取产品详情
+        [self loadProductDetail];
+    }
 }
+#warning 待完善
+/**
+ *  获取产品详情
+ */
+- (void)loadProductDetail
+{
+    // 通过id 获取产品详情
+}
+
 
 /**
  *  右侧菜单

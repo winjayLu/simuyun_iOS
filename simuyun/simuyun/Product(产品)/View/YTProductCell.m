@@ -190,7 +190,12 @@
         
         // 设置截止打款时间
         if (_product.componentsDate.day > 0) {
-            self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.day];
+            if (_product.componentsDate.hour > 17)
+            {
+                self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.day + 1];
+            } else {
+                self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.day];
+            }
             self.timeUnitLable.text = @"天";
         } else if (_product.componentsDate.hour > 0) {
             self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.hour];
@@ -200,7 +205,6 @@
             self.timeUnitLable.text = @"分钟";
         }
     }
-    
 }
 
 @end

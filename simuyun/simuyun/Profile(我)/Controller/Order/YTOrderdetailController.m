@@ -13,6 +13,8 @@
 #import "YTProductModel.h"
 #import "YTNormalWebController.h"
 #import "YTUserInfoTool.h"
+#import "YTProductdetailController.h"
+
 
 @interface YTOrderdetailController () <UIWebViewDelegate>
 @property (nonatomic, weak) UIWebView *webView;
@@ -107,20 +109,16 @@
                 [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"报备", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             } else if ([command isEqualToString:@"openpage"])
             {
-                YTNormalWebController *normal = [[YTNormalWebController alloc] init];
-                normal.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
-                normal.isDate = YES;
-                normal.toTitle = @"产品详情";
-                [self.navigationController pushViewController:normal animated:YES];
+                YTProductdetailController *proDetail = [[YTProductdetailController alloc] init];
+                proDetail.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
+                proDetail.isOrder = YES;
+                [self.navigationController pushViewController:proDetail animated:YES];
             }
         }
         return NO;
     }
     return YES;
 }
-
-
-
 
 
 #pragma mark - lazy

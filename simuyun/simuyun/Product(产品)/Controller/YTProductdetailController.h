@@ -15,6 +15,12 @@
  */
 @property (nonatomic, copy) NSString *url;
 
+/**
+ *  是否从订单跳转过来
+ *  是 yes
+ */
+@property (nonatomic, assign) BOOL isOrder;
+
 
 ///**
 // *  页面标题

@@ -557,13 +557,15 @@ static NSString *kJKAssetsFooterViewIdentifier = @"kJKAssetsFooterViewIdentifier
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+
     [self browerPhotoes:self.assetsArray page:[indexPath row]-1 isShow:NO];
 }
 
 #pragma mark - getter
 - (void)photoBrowser:(JKPhotoBrowser *)photoBrowser didSelectAtIndex:(NSInteger)index
 {
-    ALAsset *asset = self.assetsArray[index];
+    ALAsset *asset = self.assetsArray[self.assetsArray.count - index - 1];
     NSURL *assetURL = [asset valueForProperty:ALAssetPropertyAssetURL];
     [self addAssetsObject:assetURL];
     [self resetFinishFrame];
@@ -572,7 +574,7 @@ static NSString *kJKAssetsFooterViewIdentifier = @"kJKAssetsFooterViewIdentifier
 
 - (void)photoBrowser:(JKPhotoBrowser *)photoBrowser didDeselectAtIndex:(NSInteger)index
 {
-    ALAsset *asset = self.assetsArray[index];
+    ALAsset *asset = self.assetsArray[self.assetsArray.count - index - 1];
     NSURL *assetURL = [asset valueForProperty:ALAssetPropertyAssetURL];
     [self removeAssetsObject:assetURL];
     [self resetFinishFrame];
