@@ -250,6 +250,7 @@
 {
     YTNormalWebController *webVc = [YTNormalWebController webWithTitle:loopObj.title url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], loopObj.message_id]];
     webVc.hidesBottomBarWhenPushed = YES;
+    webVc.isDate = YES;
     [self.navigationController pushViewController:webVc animated:YES];
     [MobClick event:@"main_click" attributes:@{@"按钮" : @"跑马灯", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
@@ -665,19 +666,21 @@
         // 资讯模型
         YTInformation *iformation = [YTInformation objectWithKeyValues:responseObject[@"information"]];
         // 弹出提醒
-        [alert showAlertSignWithTitle:iformation.title date:responseObject[@"signInDate"] yunDou:responseObject[@"todayPoint"] block:^{
-            if (iformation.infoId != nil && iformation.infoId.length > 0) {
+        if (iformation != nil && iformation.infoId.length > 0) {
+            [alert showAlertSignWithTitle:iformation.title date:responseObject[@"signInDate"] yunDou:responseObject[@"todayPoint"] block:^{
                 YTInformationWebViewController *normal = [YTInformationWebViewController webWithTitle:@"早知道" url:[NSString stringWithFormat:@"%@/information%@&id=%@",YTH5Server, [NSDate stringDate], iformation.infoId]];
                 normal.isDate = YES;
                 normal.hidesBottomBarWhenPushed = YES;
                 normal.information = iformation;
                 [self.navigationController pushViewController:normal animated:YES];
-            }
-        }];
+                [MobClick event:@"main_click" attributes:@{@"按钮" : @"签到早知道", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+            }];
+        }
     } failure:^(NSError *error) {
         self.blackAlert = nil;
     }];
 }
+
 
 
 /**
@@ -818,7 +821,7 @@
     // userid
     // token
     // version
-    NSString *js = [NSString stringWithFormat:@"setData('%@', '%@'， '%@');",[YTAccountTool account].token, [YTAccountTool account].userId, [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+    NSString *js = [NSString stringWithFormat:@"setData('%@', '%@', '%@');",[YTAccountTool account].token, [YTAccountTool account].userId, [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
     [webView stringByEvaluatingJavaScriptFromString:js];
 }
 

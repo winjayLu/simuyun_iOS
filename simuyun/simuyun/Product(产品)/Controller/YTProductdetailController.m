@@ -214,12 +214,12 @@
 - (void)buyNow
 {
     HHAlertView *alert = [HHAlertView shared];
-    if (self.product.state == 10)
+    if (self.product.state == 10)   // 可以购买
     {
         YTBuyProductController *buy = [[YTBuyProductController alloc] init];
         buy.product = self.product;
         [self.navigationController pushViewController:buy animated:YES];
-    } else if (self.product.state == 20)
+    } else if (self.product.state == 20)    // 暂停募集
     {
         [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"无法认购" detail:[NSString stringWithFormat:@"%@目前已经暂停募集，您可以看看其它产品或联系平台客服。", self.product.pro_name] cancelButton:@"再看看" Okbutton:@"联系客服" block:^(HHAlertButton buttonindex) {
             if (buttonindex == HHAlertButtonOk) {
@@ -229,7 +229,7 @@
                 [self.navigationController pushViewController:normal animated:YES];
             }
         }];
-    } else if (self.product.state == 20)
+    } else if (self.product.state == 30)    // 已经清算
     {
         [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"无法认购" detail:[NSString stringWithFormat:@"%@目前已经结算，您可以看看其它产品或联系平台客服。", self.product.pro_name] cancelButton:@"再看看" Okbutton:@"联系客服" block:^(HHAlertButton buttonindex) {
             if (buttonindex == HHAlertButtonOk) {
@@ -239,8 +239,8 @@
                 [self.navigationController pushViewController:normal animated:YES];
             }
         }];
-    } else {
-        [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"无法认购" detail:[NSString stringWithFormat:@"%@目前处于不可认购状态，您可以看看其它产品或联系平台客服。", self.product.pro_name] cancelButton:@"再看看" Okbutton:@"联系客服" block:^(HHAlertButton buttonindex) {
+    } else {    // 未发行
+        [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"无法认购" detail:@"您所在的机构未同意发行该产品，您可以看看其它产品或联系平台客服。" cancelButton:@"再看看" Okbutton:@"联系客服" block:^(HHAlertButton buttonindex) {
             if (buttonindex == HHAlertButtonOk) {
                 YTNormalWebController *normal = [YTNormalWebController webWithTitle:@"平台客服" url:[NSString stringWithFormat:@"%@/livehelp%@",YTH5Server, [NSDate stringDate]]];
                 normal.isDate = YES;
