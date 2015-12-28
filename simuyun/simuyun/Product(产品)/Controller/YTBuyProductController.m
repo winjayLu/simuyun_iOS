@@ -36,6 +36,12 @@
  */
 - (IBAction)nextBtn:(UIButton *)sender;
 
+/**
+ *  是否显示键盘
+ */
+@property (nonatomic, assign) BOOL keyboardIsVisible;
+
+
 
 @end
 
@@ -47,23 +53,48 @@
     // 投资起点
     NSString *buy_start = self.product.buy_start;
     self.buyMoney.text = [buy_start substringToIndex:buy_start.length - 1];
+    
+    // 监听键盘通知
+    [YTCenter  addObserver:self selector:@selector(keyboardDidShow)  name:UIKeyboardDidShowNotification  object:nil];
+    [YTCenter addObserver:self selector:@selector(keyboardDidHide)  name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.nameLable becomeFirstResponder];
+    self.keyboardIsVisible = YES;
     [MobClick event:@"book_click" attributes:@{@"按钮" : @"客户姓名", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
+#pragma mark - 键盘处理
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    self.keyboardIsVisible = NO;
+}
+
+- (void)keyboardDidShow
+{
+    self.keyboardIsVisible = YES;
+}
+
+- (void)keyboardDidHide
+{
+    self.keyboardIsVisible = NO;
 }
 
 
+/**
+ *  金额按钮
+ *
+ */
 - (IBAction)buyNumber:(UIButton *)sender {
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    if (self.keyboardIsVisible) {
+        [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+        self.keyboardIsVisible = NO;
+        return;
+    }
     
     // 旧的金额
     NSUInteger oldMoney = [self.buyMoney.text integerValue];
@@ -85,7 +116,6 @@
 }
 
 - (IBAction)nextBtn:(UIButton *)sender {
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
     // 本地校验
     if (self.nameLable.text == nil || [self.nameLable.text isEqualToString:@""]) {
         [SVProgressHUD showErrorWithStatus:@"请填写投资人姓名"];
@@ -133,6 +163,10 @@
     [MobClick event:@"book_click" attributes:@{@"按钮" : @"提交认购", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
+- (void)dealloc
+{
+    [YTCenter removeObserver:self];
+}
 
 
 

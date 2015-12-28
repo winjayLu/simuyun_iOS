@@ -106,14 +106,14 @@
     YTReportContentController *report = [[YTReportContentController alloc] init];
     report.prouctModel = self.prouctModel;
     [self.navigationController pushViewController:report animated:YES];
-    [MobClick event:@"book_click" attributes:@{@"按钮" : @"马上去报备", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+    [MobClick event:@"buySuccess_click" attributes:@{@"按钮" : @"马上去报备", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  微信发送
  */
 - (IBAction)weiChatClick:(UIButton *)sender {
     [self.shareManage wxShareWithViewControll:self];
-    
+    [MobClick event:@"buySuccess_click" attributes:@{@"按钮" : @"微信发送打款帐号", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  邮件发送
@@ -121,14 +121,15 @@
  */
 - (IBAction)emailClick:(UIButton *)sender {
     [self.shareManage displayEmailComposerSheet:self];
+    [MobClick event:@"buySuccess_click" attributes:@{@"按钮" : @"邮件发送打款帐号", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 /**
  *  短信发送
  *
  */
 - (IBAction)smsClick:(UIButton *)sender {
-
     [self.shareManage smsShareWithViewControll:self];
+    [MobClick event:@"buySuccess_click" attributes:@{@"按钮" : @"短信发送打款帐号", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 

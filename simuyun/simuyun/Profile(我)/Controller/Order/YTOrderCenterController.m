@@ -17,6 +17,7 @@
 #import "NSDate+Extension.h"
 #import "YTDataHintView.h"
 #import "YTUserInfoTool.h"
+#import "SVProgressHUD.h"
 
 
 @interface YTOrderCenterController () <UITableViewDataSource, UITableViewDelegate, BarDrawerDelegate>
@@ -71,6 +72,19 @@
 }
 
 /**
+ *  提醒报备状态
+ *
+ */
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (self.isOrder)
+    {
+        [SVProgressHUD showSuccessWithStatus:@"报备成功"];
+    }
+}
+
+/**
  *  初始化tableView
  */
 - (void)setupTableView
@@ -99,8 +113,14 @@
     drawerMenu.scrollView = self.tableView;
     drawerMenu.delegate = self;
     self.drawerMenu = drawerMenu;
-    
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithBg:@"saixuan" target:self action:@selector(rightClick)];
+    // 初始化左侧返回按钮
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithBg:@"fanhui" target:self action:@selector(blackClick)];
+}
+
+- (void)blackClick
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 

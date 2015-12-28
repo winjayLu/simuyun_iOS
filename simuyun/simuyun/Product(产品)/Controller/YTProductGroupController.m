@@ -13,6 +13,10 @@
 #import "YTUserInfoTool.h"
 #import "YTNavigationController.h"
 #import "YTSearchViewController.h"
+#import "YTProductModel.h"
+#import "AFNetworking.h"
+
+
 
 #define TitleHeight 70
 #define ItemMagin 3
@@ -31,6 +35,11 @@
  */
 @property (nonatomic, weak) UISearchBar *search;
 
+/**
+ *  搜索控制器
+ */
+@property (nonatomic, strong) YTSearchViewController *searchVc;
+
 @end
 
 @implementation YTProductGroupController
@@ -48,9 +57,9 @@
     self.title = @"产品";
     self.view.backgroundColor = YTGrayBackground;
     [MobClick event:@"nav_click" attributes:@{@"按钮" : @"产品"}];
-    
+
     // 初始化SearchBar
-//    [self setupSearchBar];
+    [self setupSearchBar];
     
     // 名山系列
     self.lastTitle = [self creatTitleImage:0];
@@ -79,11 +88,30 @@
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
     
-    YTSearchViewController *vc = [[YTSearchViewController alloc] init];
-    YTNavigationController *nav = [[YTNavigationController alloc] initWithRootViewController:vc];
+    YTNavigationController *nav = [[YTNavigationController alloc] initWithRootViewController:self.searchVc];
     [self presentViewController:nav animated:NO completion:nil];
-    
+    [MobClick event:@"proRecommand_click" attributes:@{@"类型" : @"产品搜索", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     return NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self loadProduct];
+}
+
+#pragma mark - 获取热门产品数据
+- (void)loadProduct
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    // 2.发送一个GET请求
+
+    [mgr GET:@"http://www.simuyun.com/peyunupload/label/hotproduct.json" parameters:nil
+     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+         self.searchVc.products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+     }];
 }
 
 
@@ -217,6 +245,14 @@
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - 懒加载
+- (YTSearchViewController *)searchVc
+{
+    if (!_searchVc) {
+        _searchVc = [[YTSearchViewController alloc] init];
+    }
+    return _searchVc;
+}
 
 
 @end

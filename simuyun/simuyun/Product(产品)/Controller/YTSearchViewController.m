@@ -8,10 +8,31 @@
 
 #import "YTSearchViewController.h"
 #import "UIBarButtonItem+Extension.h"
+#import "YTProductCell.h"
+#import "MJRefresh.h"
+#import "YTProductModel.h"
+#import "MJExtension.h"
+#import "YTBuyProductController.h"
+#import "YTAccountTool.h"
+#import "DXPopover.h"
+#import "YTProductdetailController.h"
+#import "UIBarButtonItem+Extension.h"
+#import "NSDate+Extension.h"
+#import "YTLiquidationCell.h"
+//#import "UIView+Extension.h"
 
-@interface YTSearchViewController ()
+@interface YTSearchViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, weak) UISearchBar *search;
+
+/**
+ *  搜索到的产品列表
+ */
+@property (nonatomic, strong) NSArray *searchProducts;
+
+
+@property (nonatomic, weak) UITableView *tableView;
+
 
 @end
 
@@ -19,9 +40,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    self.view.backgroundColor = YTGrayBackground;
+    
+    // 初始化tableview
+    [self setupTableView];
+    
     // 设置NavgationBar
     [self setupNavgationBar];
+    [self.tableView reloadData];
 }
 
 
@@ -55,80 +82,155 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.search becomeFirstResponder];
+    if (self.searchProducts.count == 0) {
+        [self.search becomeFirstResponder];
+    } else {
+        [self updateTableViewFrame];
+    }
+}
+/**
+ *  初始化tableview
+ */
+- (void)setupTableView
+{
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, DeviceHight - 310)];
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    [self.view addSubview:tableView];
+    self.tableView = tableView;
+    // 设置颜色
+    self.tableView.backgroundColor = YTGrayBackground;
+    // 去掉下划线
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 8, 0);
+    
+    UIView *hotSearch = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 40)];
+    hotSearch.backgroundColor = [UIColor clearColor];
+    UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, DeviceWidth, 40)];
+    lable.text = @"热门搜索";
+    lable.textColor = YTColor(102, 102, 102);
+    lable.font = [UIFont systemFontOfSize:13];
+    [hotSearch addSubview:lable];
+    self.tableView.tableHeaderView = hotSearch;
+}
+
+/**
+ *  更新tableviewFrame
+ */
+- (void)updateTableViewFrame
+{
+    self.tableView.frame = CGRectMake(0, 0, DeviceWidth, DeviceHight);
 }
 
 
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return 1;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    YTProductModel *product = self.products[indexPath.section];
+    UITableViewCell *cell;
+    if (self.searchProducts.count == 0)
+    {
+        
+    }
     
-    // Configure the cell...
-    
+    if (product.state == 30)
+    {
+        static NSString *identifier = @"liquidation";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell==nil) {
+            cell =[YTLiquidationCell productCell];
+            cell.layer.cornerRadius = 5;
+            cell.layer.masksToBounds = YES;
+            cell.layer.borderWidth = 1.0f;
+            cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        }
+        ((YTLiquidationCell *)cell).product = product;
+    } else {
+        static NSString *identifier = @"productCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell==nil) {
+            cell =[YTProductCell productCell];
+            cell.layer.cornerRadius = 5;
+            cell.layer.masksToBounds = YES;
+            cell.layer.borderWidth = 1.0f;
+            cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        }
+        ((YTProductCell *)cell).product = product;
+    }
     return cell;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 122;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+// 设置section的数目，即是你有多少个cell
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return self.products.count;
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+// 设置cell之间headerview的高度
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0 && self.searchProducts.count == 0) {
+        return 0;
+    }
+    return 8.0; // you can have your own choice, of course
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+// 设置headerview的颜色
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = [UIColor clearColor];
+    return headerView;
 }
-*/
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // 退出键盘
+    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    YTProductModel *product = self.products[indexPath.section];
+    NSString *url = nil;
+    
+    if (product.type_code == 1) {
+        url = [NSString stringWithFormat:@"%@/product/floating.html%@&id=%@", YTH5Server , [NSDate stringDate],product.pro_id];
+    } else {
+        // fixed.html
+        url = [NSString stringWithFormat:@"%@/product/fixed.html%@&id=%@", YTH5Server , [NSDate stringDate],product.pro_id];
+    }
+    YTProductdetailController *web = [[YTProductdetailController alloc] init];
+    web.url = url;
+    web.hidesBottomBarWhenPushed = YES;
+    web.product = self.products[indexPath.section];
+    [self.navigationController pushViewController:web animated:YES];
 }
-*/
+
+
+
+#pragma mark - 懒加载
+- (NSArray *)products
+{
+    if (!_products) {
+        _products = [[NSArray alloc] init];
+    }
+    return _products;
+}
+
+- (NSArray *)searchProducts
+{
+    if (!_searchProducts) {
+        _searchProducts = [[NSArray alloc] init];
+    }
+    return _searchProducts;
+}
 
 @end

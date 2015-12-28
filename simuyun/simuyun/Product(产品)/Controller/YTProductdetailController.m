@@ -15,7 +15,7 @@
 #import "ShareManage.h"
 #import "SVProgressHUD.h"
 #import "YTSenMailView.h"
-#import "CoreTFManagerVC.h"
+//#import "CoreTFManagerVC.h"
 #import "YTBuyProductController.h"
 #import "NSDate+Extension.h"
 #import "YTReportContentController.h"
@@ -415,6 +415,7 @@
 - (void)sendMail:(NSString *)mail
 {
     self.sendMailView = nil;
+//    [CoreTFManagerVC uninstallManagerForVC:self];
     // 发送请求
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"email"] = mail;
@@ -432,7 +433,7 @@
     
     [super viewDidDisappear:animated];
     
-    [CoreTFManagerVC uninstallManagerForVC:self];
+//    [CoreTFManagerVC uninstallManagerForVC:self];
 }
 
 

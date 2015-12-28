@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YTSearchViewController : UITableViewController
+@interface YTSearchViewController : UIViewController
+
+/**
+ *  热门搜索
+ */
+@property (nonatomic, strong) NSArray *products;
 
 @end

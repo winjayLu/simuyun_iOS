@@ -131,6 +131,8 @@
 		9790F8CC1BDF140900965C7B /* YTAuthenticationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9790F8CA1BDF140900965C7B /* YTAuthenticationViewController.xib */; };
 		9790F8D01BDF1A2100965C7B /* YTAuthenticationStatusController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9790F8CE1BDF1A2100965C7B /* YTAuthenticationStatusController.m */; };
 		9790F8D11BDF1A2100965C7B /* YTAuthenticationStatusController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9790F8CF1BDF1A2100965C7B /* YTAuthenticationStatusController.xib */; };
+		9792D8721C30E4320097ED7E /* YTSearchProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9792D8701C30E4320097ED7E /* YTSearchProductCell.m */; };
+		9792D8731C30E4320097ED7E /* YTSearchProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9792D8711C30E4320097ED7E /* YTSearchProductCell.xib */; };
 		97973CDD1BC391BA00B7B4CB /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97973CDC1BC391BA00B7B4CB /* PushConfig.plist */; };
 		97973CE71BC3BE7000B7B4CB /* NSString+File.m in Sources */ = {isa = PBXBuildFile; fileRef = 97973CE41BC3BE7000B7B4CB /* NSString+File.m */; };
 		97973CE81BC3BE7000B7B4CB /* CoreArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 97973CE61BC3BE7000B7B4CB /* CoreArchive.m */; };
@@ -513,6 +515,9 @@
 		9790F8CD1BDF1A2100965C7B /* YTAuthenticationStatusController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAuthenticationStatusController.h; sourceTree = "<group>"; };
 		9790F8CE1BDF1A2100965C7B /* YTAuthenticationStatusController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAuthenticationStatusController.m; sourceTree = "<group>"; };
 		9790F8CF1BDF1A2100965C7B /* YTAuthenticationStatusController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTAuthenticationStatusController.xib; sourceTree = "<group>"; };
+		9792D86F1C30E4320097ED7E /* YTSearchProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSearchProductCell.h; sourceTree = "<group>"; };
+		9792D8701C30E4320097ED7E /* YTSearchProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSearchProductCell.m; sourceTree = "<group>"; };
+		9792D8711C30E4320097ED7E /* YTSearchProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTSearchProductCell.xib; sourceTree = "<group>"; };
 		97973CDC1BC391BA00B7B4CB /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		97973CE31BC3BE7000B7B4CB /* NSString+File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+File.h"; sourceTree = "<group>"; };
 		97973CE41BC3BE7000B7B4CB /* NSString+File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+File.m"; sourceTree = "<group>"; };
@@ -1112,6 +1117,9 @@
 				978C6FE41BCF8564003D183E /* YTProductCell.h */,
 				978C6FE51BCF8564003D183E /* YTProductCell.m */,
 				978C6FE61BCF8564003D183E /* YTProductCell.xib */,
+				9792D86F1C30E4320097ED7E /* YTSearchProductCell.h */,
+				9792D8701C30E4320097ED7E /* YTSearchProductCell.m */,
+				9792D8711C30E4320097ED7E /* YTSearchProductCell.xib */,
 				9754FA891C17D72900CC8091 /* YTLiquidationCell.h */,
 				9754FA8A1C17D72900CC8091 /* YTLiquidationCell.m */,
 				9754FA8B1C17D72900CC8091 /* YTLiquidationCell.xib */,
@@ -2269,6 +2277,7 @@
 				9714A6EE1BC7E0610018A14E /* FontAwesome.ttf in Resources */,
 				9769F9FA1BC9676B001B1F02 /* YTGroupCell.xib in Resources */,
 				9769F9F71BC9676B001B1F02 /* YTContentCell.xib in Resources */,
+				9792D8731C30E4320097ED7E /* YTSearchProductCell.xib in Resources */,
 				978F8CD51C10487F0041F661 /* YTLoginAuthenticationController.xib in Resources */,
 				972B880A1BFAD3D0002A7E9B /* LICENSE in Resources */,
 				97AD4E6D1C152DAA00541412 /* YTAutocompletionCell.xib in Resources */,
@@ -2533,6 +2542,7 @@
 				97C3CE6A1BC2BAEF00B7185D /* SVIndefiniteAnimatedView.m in Sources */,
 				978F4CAA1C16792800A36E0F /* PhotoAlbumManager.m in Sources */,
 				9714A6F61BC7E0610018A14E /* YUBottomPopSelctModel.m in Sources */,
+				9792D8721C30E4320097ED7E /* YTSearchProductCell.m in Sources */,
 				978F4CA91C16792800A36E0F /* JKUtil.m in Sources */,
 				97C6066B1BC2700600E555E8 /* UIImageView+SD.m in Sources */,
 				97C605D91BC2621F00E555E8 /* YTHomeViewController.m in Sources */,

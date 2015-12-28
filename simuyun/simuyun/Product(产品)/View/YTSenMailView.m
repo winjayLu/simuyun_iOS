@@ -8,7 +8,7 @@
 
 #import "YTSenMailView.h"
 #import "UIImage+Extend.h"
-#import "CoreTFManagerVC.h"
+//#import "CoreTFManagerVC.h"
 #import "SVProgressHUD.h"
 #import "YTUserInfoTool.h"
 
@@ -63,15 +63,17 @@
     shareMenuView = [[UIView alloc]initWithFrame:CGRectMake(0, DeviceHight, DeviceWidth, shareMenuViewH)];
     [self addSubview:shareMenuView];
     
-    [UIView animateWithDuration:0.4 animations:^{
-        if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
-            shareMenuView.frame =CGRectMake(0,DeviceHight - shareMenuViewH, DeviceWidth,shareMenuViewH);
-        } else {
+    [UIView animateWithDuration:0.3 animations:^{
+//        if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
+//            shareMenuView.frame =CGRectMake(0,DeviceHight - shareMenuViewH, DeviceWidth,shareMenuViewH);
+//        } else {
             shareMenuView.frame =CGRectMake(0,DeviceHight - shareMenuViewH - 256, DeviceWidth,shareMenuViewH);
-        }
+//        }
         
         mainGrayBg.alpha = 1.0;
+        
     } completion:^(BOOL finished) {
+//        [self.mailField becomeFirstResponder];
     }];
     _whiteBg = [[UIImageView alloc] initWithFrame:shareMenuView.bounds];
     [_whiteBg  setUserInteractionEnabled:YES];
@@ -110,10 +112,10 @@
     mailField.keyboardType = UIKeyboardTypeEmailAddress;
     [view addSubview:mailField];
     self.mailField = mailField;
-    [CoreTFManagerVC installManagerForVC:vc scrollView:nil tfModels:^NSArray *{
-        TFModel *tfm1=[TFModel modelWithTextFiled:mailField inputView:nil name:@"" insetBottom:140];
-        return @[tfm1];
-    }];
+//    [CoreTFManagerVC installManagerForVC:vc scrollView:nil tfModels:^NSArray *{
+//        TFModel *tfm1=[TFModel modelWithTextFiled:mailField inputView:nil name:@"" insetBottom:140];
+//        return @[tfm1];
+//    }];
     // 获取用户邮箱
     YTUserInfo *userInfo = [YTUserInfoTool userInfo];
     if (userInfo != nil && userInfo.email.length > 0) {

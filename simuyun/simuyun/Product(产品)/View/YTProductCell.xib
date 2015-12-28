@@ -40,7 +40,7 @@
                         <color key="textColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ga-uN-ZI0" userLabel="累计净值">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ga-uN-ZI0" userLabel="累计净值">
                         <rect key="frame" x="68" y="48" width="23" height="30"/>
                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                         <color key="textColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
@@ -52,8 +52,8 @@
                         <color key="textColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cuu-vd-jxu" userLabel="封闭期">
-                        <rect key="frame" x="154" y="91" width="19" height="16"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="---" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cuu-vd-jxu" userLabel="封闭期">
+                        <rect key="frame" x="154" y="91" width="116" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.41176470588235292" green="0.41176470588235292" blue="0.41176470588235292" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -188,6 +188,7 @@
                     <constraint firstAttribute="trailing" secondItem="CCS-HI-cjG" secondAttribute="trailing" constant="8" id="rL9-fg-nEH"/>
                     <constraint firstItem="ZdS-IY-Awt" firstAttribute="leading" secondItem="qer-pT-jbO" secondAttribute="trailing" constant="5" id="sG8-dn-UHi"/>
                     <constraint firstAttribute="bottom" secondItem="ZdS-IY-Awt" secondAttribute="bottom" id="tgL-eC-1rL"/>
+                    <constraint firstItem="ZdS-IY-Awt" firstAttribute="leading" secondItem="Cuu-vd-jxu" secondAttribute="trailing" constant="4" id="uQh-hU-e2O"/>
                     <constraint firstItem="Tz6-kU-KkF" firstAttribute="top" secondItem="FFh-4K-Ouu" secondAttribute="bottom" constant="19" id="vpz-sU-bkK"/>
                     <constraint firstItem="Tz6-kU-KkF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="wAN-VV-U78"/>
                     <constraint firstItem="CCS-HI-cjG" firstAttribute="bottom" secondItem="L03-Rj-AHN" secondAttribute="bottom" id="x2p-IJ-OdS"/>

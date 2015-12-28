@@ -22,6 +22,7 @@
 #import "JKAssets.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "YTUserInfoTool.h"
+#import "YTOrderCenterController.h"
 
 
 @interface YTReportViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UITextFieldDelegate>
@@ -295,11 +296,9 @@
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTReport];
     [mgr POST:newUrl parameters:dict
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
-          [SVProgressHUD showSuccessWithStatus:@"报备成功"];
-          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-              
-              [self.navigationController popToRootViewControllerAnimated:YES];
-          });
+          YTOrderCenterController *orderVc = [[YTOrderCenterController alloc] init];
+          orderVc.isOrder = YES;
+          [self.navigationController pushViewController:orderVc animated:YES];
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           if(operation.responseObject[@"message"] != nil)
           {
