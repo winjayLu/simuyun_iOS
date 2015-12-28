@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class YTProductModel;
+
 @interface YTSearchProductCell : UITableViewCell
+
+/**
+ *  产品模型
+ */
+@property (nonatomic, strong) YTProductModel *product;
+
++ (instancetype)productCell;
 
 @end

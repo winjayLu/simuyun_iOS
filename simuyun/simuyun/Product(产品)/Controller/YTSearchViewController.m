@@ -19,9 +19,10 @@
 #import "UIBarButtonItem+Extension.h"
 #import "NSDate+Extension.h"
 #import "YTLiquidationCell.h"
-//#import "UIView+Extension.h"
+#import "YTSearchProductCell.h"
+#import "SVProgressHUD.h"
 
-@interface YTSearchViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface YTSearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property (nonatomic, weak) UISearchBar *search;
 
@@ -58,6 +59,7 @@
     UISearchBar *search = [[UISearchBar alloc] init];
     search.frame = CGRectMake(0, 0, DeviceWidth, 44);
     search.placeholder = @"请输入产品名称";
+    search.delegate = self;
     self.navigationItem.titleView = search;
     self.search = search;
     
@@ -73,12 +75,6 @@
     barItem.customView = button;
     self.navigationItem.rightBarButtonItem = barItem;
 }
-
-- (void)blackClick
-{
-    [self dismissViewControllerAnimated:NO completion:nil];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -88,6 +84,52 @@
         [self updateTableViewFrame];
     }
 }
+
+/**
+ *  搜索按钮
+ *
+ */
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    // 退出键盘
+    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    
+    // 开始搜索
+    [self searchProductWithProductName:searchBar.text];
+    
+}
+
+//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+//{
+//    self.searchProducts = nil;
+//    [self.tableView reloadData];
+//}
+/**
+ *  按照产品名称搜索
+ *
+ */
+- (void)searchProductWithProductName:(NSString *)productName
+{
+    [SVProgressHUD showWithStatus:@"正在搜索" maskType:SVProgressHUDMaskTypeClear];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [SVProgressHUD dismiss];
+        self.searchProducts = self.products;
+        self.tableView.tableHeaderView = nil;
+        [self updateTableViewFrame];
+        [self.tableView reloadData];
+    });
+}
+
+
+/**
+ *  返回
+ */
+- (void)blackClick
+{
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+
 /**
  *  初始化tableview
  */
@@ -119,7 +161,8 @@
  */
 - (void)updateTableViewFrame
 {
-    self.tableView.frame = CGRectMake(0, 0, DeviceWidth, DeviceHight);
+    self.tableView.frame = CGRectMake(0, 0, DeviceWidth, DeviceHight - 64);
+//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 72, 0);
 }
 
 
@@ -133,11 +176,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     YTProductModel *product = self.products[indexPath.section];
     UITableViewCell *cell;
+    // 搜索出来的产品
     if (self.searchProducts.count == 0)
     {
-        
+        static NSString *identifier = @"searchCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+        if (cell==nil) {
+            cell =[YTSearchProductCell productCell];
+        }
+        ((YTSearchProductCell *)cell).product = product;
+        return cell;
     }
     
+    // 热门产品
     if (product.state == 30)
     {
         static NSString *identifier = @"liquidation";
@@ -168,7 +219,12 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 122;
+    if (self.searchProducts.count == 0)
+    {
+        return 40;
+    } else {
+        return 122;
+    }
 }
 
 // 设置section的数目，即是你有多少个cell
@@ -198,7 +254,12 @@
     // 退出键盘
     [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    YTProductModel *product = self.products[indexPath.section];
+    YTProductModel *product = nil;
+    if (self.searchProducts.count == 0) {
+        product = self.products[indexPath.section];
+    } else {
+        product = self.searchProducts[indexPath.section];
+    }
     NSString *url = nil;
     
     if (product.type_code == 1) {

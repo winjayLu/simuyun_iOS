@@ -7,8 +7,29 @@
 //
 
 #import "YTSearchProductCell.h"
+#import "YTProductModel.h"
+
+@interface YTSearchProductCell()
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLable;
+
+@end
 
 @implementation YTSearchProductCell
+
+
++ (instancetype)productCell
+{
+    return [[[NSBundle mainBundle] loadNibNamed:@"YTSearchProductCell" owner:nil options:nil] lastObject];
+}
+
+
+
+- (void)setProduct:(YTProductModel *)product
+{
+    _product = product;
+    self.titleLable.text = _product.pro_name;
+}
 
 - (void)awakeFromNib {
     // Initialization code

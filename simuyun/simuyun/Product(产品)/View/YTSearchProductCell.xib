@@ -11,9 +11,26 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oaW-tP-Fap">
+                        <rect key="frame" x="20" y="0.0" width="300" height="44"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.32549019607843138" green="0.32549019607843138" blue="0.32549019607843138" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="oaW-tP-Fap" secondAttribute="trailing" id="3Yf-am-0Ns"/>
+                    <constraint firstItem="oaW-tP-Fap" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="LUp-Vd-y1e"/>
+                    <constraint firstItem="oaW-tP-Fap" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Ql8-zA-d6l"/>
+                    <constraint firstAttribute="bottom" secondItem="oaW-tP-Fap" secondAttribute="bottom" id="Rpk-5b-vpQ"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="titleLable" destination="oaW-tP-Fap" id="4Un-p9-Chv"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

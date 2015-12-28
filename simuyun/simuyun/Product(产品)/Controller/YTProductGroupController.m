@@ -17,7 +17,6 @@
 #import "AFNetworking.h"
 
 
-
 #define TitleHeight 70
 #define ItemMagin 3
 #define ItemWidth (DeviceWidth * 0.5 - ItemMagin * 0.5)
