@@ -235,7 +235,8 @@
 // 设置cell之间headerview的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 0 && self.searchProducts.count == 0) {
+
+    if ((section == 0 && self.searchProducts.count == 0) || self.searchProducts.count == 0) {
         return 0;
     }
     return 8.0; // you can have your own choice, of course
