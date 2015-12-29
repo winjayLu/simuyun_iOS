@@ -16,11 +16,11 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DqC-eO-MqQ">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic" translatesAutoresizingMaskIntoConstraints="NO" id="v9L-9d-h0H">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic" translatesAutoresizingMaskIntoConstraints="NO" id="v9L-9d-h0H">
-                    <rect key="frame" x="0.0" y="500" width="600" height="100"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DqC-eO-MqQ">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="474"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -31,20 +31,19 @@
                 <constraint firstItem="v9L-9d-h0H" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="a9c-jr-qeQ"/>
                 <constraint firstAttribute="trailing" secondItem="DqC-eO-MqQ" secondAttribute="trailing" id="d2H-oa-n78"/>
                 <constraint firstAttribute="trailing" secondItem="v9L-9d-h0H" secondAttribute="trailing" id="l7F-iy-hEr"/>
-                <constraint firstAttribute="bottom" secondItem="DqC-eO-MqQ" secondAttribute="bottom" id="oV6-wG-2zY"/>
+                <constraint firstAttribute="bottom" secondItem="DqC-eO-MqQ" secondAttribute="bottom" constant="126" id="oV6-wG-2zY"/>
                 <constraint firstAttribute="bottom" secondItem="v9L-9d-h0H" secondAttribute="bottom" id="v3b-VD-R1j"/>
                 <constraint firstAttribute="bottom" secondItem="DqC-eO-MqQ" secondAttribute="bottom" id="ytN-u5-8Km"/>
             </constraints>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="ytN-u5-8Km"/>
-                    <exclude reference="a9c-jr-qeQ"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="204" y="362"/>
         </view>
     </objects>
     <resources>
-        <image name="pic" width="375" height="100"/>
+        <image name="pic" width="375" height="667"/>
     </resources>
 </document>
