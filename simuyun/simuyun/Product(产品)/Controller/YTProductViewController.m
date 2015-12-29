@@ -23,7 +23,12 @@
 @interface YTProductViewController ()
 
 
-@property (nonatomic, strong) NSArray *products;
+@property (nonatomic, strong) NSMutableArray *products;
+
+/**
+ *  数据状态提示
+ */
+@property (nonatomic, weak) YTDataHintView *hintView;
 
 @end
 
@@ -43,7 +48,23 @@
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadProduct)];
     // 马上进入刷新状态
     [self.tableView.header beginRefreshing];
+    // 上拉加载
+    self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreProduct)];
+    
+    // 初始化提醒视图
+    [self setupHintView];
 
+}
+
+/**
+ *  初始化提醒视图
+ */
+- (void)setupHintView
+{
+    YTDataHintView *hintView =[[YTDataHintView alloc] init];
+    CGPoint center = CGPointMake(self.tableView.centerX, self.tableView.centerY - 89);
+    [hintView showLoadingWithInView:self.tableView center:center];
+    self.hintView = hintView;
 }
 
 #pragma mark - Table view data source
@@ -131,11 +152,14 @@
 #pragma mark - 获取数据
 - (void)loadProduct
 {
+    [self.hintView switchContentTypeWIthType:contentTypeLoading];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
     if (self.series < 9) {
         param[@"series"] = @(self.series);
     }
+    param[@"offset"] = @"0";
+    param[@"limit"] = @"10";
     [YTHttpTool get:YTProductList params:param
     success:^(NSDictionary *responseObject) {
         self.products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
@@ -143,17 +167,44 @@
         [self.tableView reloadData];
         // 结束刷新状态
         [self.tableView.header endRefreshing];
+        [self.hintView changeContentTypeWith:self.products];
     } failure:^(NSError *error) {
         // 结束刷新状态
         [self.tableView.header endRefreshing];
+        [self.hintView ContentFailure];
+    }];
+}
+
+/**
+ *  加载更多产品
+ */
+- (void)loadMoreProduct
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"uid"] = [YTAccountTool account].userId;
+    if (self.series < 9) {
+        param[@"series"] = @(self.series);
+    }
+    param[@"offset"] = [NSString stringWithFormat:@"%zd", self.products.count];
+    param[@"limit"] = @"10";
+    [YTHttpTool get:YTProductList params:param success:^(id responseObject) {
+        [self.tableView.footer endRefreshing];
+        if([(NSArray *)responseObject count] == 0)
+        {
+            self.tableView.footer = nil;
+        }
+        [self.products addObjectsFromArray:[YTProductModel objectArrayWithKeyValuesArray:responseObject]];
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+        [self.tableView.footer endRefreshing];
     }];
 }
 
 #pragma mark - 懒加载
-- (NSArray *)products
+- (NSMutableArray *)products
 {
     if (!_products) {
-        _products = [[NSArray alloc] init];
+        _products = [[NSMutableArray alloc] init];
     }
     return _products;
 }

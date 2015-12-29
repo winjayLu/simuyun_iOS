@@ -29,7 +29,7 @@
 /**
  *  搜索到的产品列表
  */
-@property (nonatomic, strong) NSArray *searchProducts;
+@property (nonatomic, strong) NSMutableArray *searchProducts;
 
 
 @property (nonatomic, weak) UITableView *tableView;
@@ -80,8 +80,10 @@
     [super viewWillAppear:animated];
     if (self.searchProducts.count == 0) {
         [self.search becomeFirstResponder];
+        self.tableView.footer = nil;
     } else {
         [self updateTableViewFrame];
+        self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreProduct)];
     }
 }
 
@@ -92,18 +94,33 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+     [searchBar resignFirstResponder];
     
     // 开始搜索
     [self searchProductWithProductName:searchBar.text];
-    
 }
 
-//- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
-//{
-//    self.searchProducts = nil;
-//    [self.tableView reloadData];
-//}
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    if (searchBar.text.length == 0) {
+        self.searchProducts = nil;
+        [self createHotTitle];
+        self.tableView.footer = nil;
+        [self.tableView reloadData];
+    }
+}
+
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if (text.length == 0) {
+        self.searchProducts = nil;
+        [self createHotTitle];
+        self.tableView.footer = nil;
+        [self.tableView reloadData];
+    }
+    return YES;
+}
+
 /**
  *  按照产品名称搜索
  *
@@ -111,13 +128,57 @@
 - (void)searchProductWithProductName:(NSString *)productName
 {
     [SVProgressHUD showWithStatus:@"正在搜索" maskType:SVProgressHUDMaskTypeClear];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [SVProgressHUD dismiss];
-        self.searchProducts = self.products;
-        self.tableView.tableHeaderView = nil;
-        [self updateTableViewFrame];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"uid"] = [YTAccountTool account].userId;
+    param[@"proName"] = productName;
+    param[@"offset"] = @"0";
+    param[@"limit"] = @"10";
+    [YTHttpTool get:YTProductList params:param
+            success:^(NSDictionary *responseObject) {
+                NSArray *products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
+                if (products.count == 0) {
+                    [SVProgressHUD showInfoWithStatus:@"没有相关的产品"];
+                    return;
+                }
+                [SVProgressHUD dismiss];
+                // 上拉加载
+                self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreProduct)];
+                self.searchProducts = [NSMutableArray arrayWithArray:products];
+                self.tableView.tableHeaderView = nil;
+                [self updateTableViewFrame];
+                // 刷新表格
+                [self.tableView reloadData];
+            } failure:^(NSError *error) {
+
+                if(error.userInfo[@"NSLocalizedDescription"] != nil)
+                {
+                    [SVProgressHUD showInfoWithStatus:@"网络链接失败\n请稍候再试"];
+                } else {
+                    [SVProgressHUD dismiss];
+                }
+            }];
+}
+
+/**
+ *  加载更多产品
+ */
+- (void)loadMoreProduct
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"uid"] = [YTAccountTool account].userId;
+    param[@"offset"] = [NSString stringWithFormat:@"%zd", self.searchProducts.count];
+    param[@"limit"] = @"10";
+    [YTHttpTool get:YTProductList params:param success:^(id responseObject) {
+        [self.tableView.footer endRefreshing];
+        if([(NSArray *)responseObject count] == 0)
+        {
+            self.tableView.footer = nil;
+        }
+        [self.searchProducts addObjectsFromArray:[YTProductModel objectArrayWithKeyValuesArray:responseObject]];
         [self.tableView reloadData];
-    });
+    } failure:^(NSError *error) {
+        [self.tableView.footer endRefreshing];
+    }];
 }
 
 
@@ -127,6 +188,9 @@
 - (void)blackClick
 {
     [self dismissViewControllerAnimated:NO completion:nil];
+    self.searchProducts = nil;
+    self.tableView.footer = nil;
+    [self.tableView reloadData];
 }
 
 
@@ -145,7 +209,14 @@
     // 去掉下划线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 8, 0);
-    
+    [self createHotTitle];
+}
+
+/**
+ *  创建热门搜索标题
+ */
+- (void)createHotTitle
+{
     UIView *hotSearch = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 40)];
     hotSearch.backgroundColor = [UIColor clearColor];
     UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, DeviceWidth, 40)];
@@ -162,7 +233,6 @@
 - (void)updateTableViewFrame
 {
     self.tableView.frame = CGRectMake(0, 0, DeviceWidth, DeviceHight - 64);
-//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 72, 0);
 }
 
 
@@ -174,7 +244,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    YTProductModel *product = self.products[indexPath.section];
+   
+    YTProductModel *product = nil;
+    if (self.searchProducts.count > 0) {
+        product = self.searchProducts[indexPath.section];
+    } else {
+        product = self.products[indexPath.section];
+    }
     UITableViewCell *cell;
     // 搜索出来的产品
     if (self.searchProducts.count == 0)
@@ -230,7 +306,11 @@
 // 设置section的数目，即是你有多少个cell
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.products.count;
+    if (self.searchProducts.count > 0) {
+        return self.searchProducts.count;
+    } else {
+        return self.products.count;
+    }
 }
 // 设置cell之间headerview的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -287,10 +367,10 @@
     return _products;
 }
 
-- (NSArray *)searchProducts
+- (NSMutableArray *)searchProducts
 {
     if (!_searchProducts) {
-        _searchProducts = [[NSArray alloc] init];
+        _searchProducts = [[NSMutableArray alloc] init];
     }
     return _searchProducts;
 }
