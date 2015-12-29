@@ -51,7 +51,7 @@
     [self.tableView.header beginRefreshing];
     
     // 下拉刷新
-    self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreChat)];
+    self.tableView.footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreChat)];
     
 }
 
