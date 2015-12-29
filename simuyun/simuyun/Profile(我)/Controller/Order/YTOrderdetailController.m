@@ -14,6 +14,7 @@
 #import "YTNormalWebController.h"
 #import "YTUserInfoTool.h"
 #import "YTProductdetailController.h"
+#import "YTAccountTool.h"
 
 
 @interface YTOrderdetailController () <UIWebViewDelegate>
@@ -23,6 +24,12 @@
  *  进度条代理
  */
 @property (nonatomic, strong) YHWebViewProgress *progressProxy;
+
+/**
+ *  产品详情控制器
+ */
+@property (nonatomic, strong) YTProductdetailController *proDetail;
+
 @end
 
 @implementation YTOrderdetailController
@@ -56,6 +63,24 @@
     
     // 加载网页
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
+    
+    // 获取对应的产品详情
+    [self loadProduct];
+}
+
+
+- (void)loadProduct
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"uid"] = [YTAccountTool account].userId;
+    param[@"proId"] = self.order.product_id;
+    [YTHttpTool get:YTProductList params:param success:^(id responseObject) {
+        NSArray *products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
+        if (products.count > 0) {
+            self.proDetail.product = products[0];
+        }
+    } failure:^(NSError *error) {
+    }];
 }
 
 /**
@@ -109,10 +134,8 @@
                 [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"报备", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             } else if ([command isEqualToString:@"openpage"])
             {
-                YTProductdetailController *proDetail = [[YTProductdetailController alloc] init];
-                proDetail.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
-                proDetail.isOrder = YES;
-                [self.navigationController pushViewController:proDetail animated:YES];
+                self.proDetail.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
+                [self.navigationController pushViewController:self.proDetail animated:YES];
             }
         }
         return NO;
@@ -128,6 +151,14 @@
         _progressProxy = [[YHWebViewProgress alloc] init];
     }
     return _progressProxy;
+}
+
+- (YTProductdetailController *)proDetail
+{
+    if (!_proDetail) {
+        _proDetail = [[YTProductdetailController alloc] init];
+    }
+    return _proDetail;
 }
 
 /**

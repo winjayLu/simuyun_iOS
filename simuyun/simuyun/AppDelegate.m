@@ -23,6 +23,7 @@
 #import "YTNormalWebController.h"
 #import "YTNavigationController.h"
 #import "YTJpushTool.h"
+#import "YTAuthenticationErrorController.h"
 
 @interface AppDelegate ()
 @end
@@ -164,22 +165,19 @@
 {
     if ([YTJpushTool jpush]) return;
     YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:userInfo];
-    if (jpush == nil || jpush.jumpUrl == nil || jpush.jumpUrl.length == 0) return;
-    HHAlertView *alert = [HHAlertView shared];
-    [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"查看详情" block:^(HHAlertButton buttonindex) {
-        if(buttonindex == HHAlertButtonOk)
-        {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                // 需要跳转的控制器
-                YTNormalWebController *webVc = [YTNormalWebController webWithTitle:jpush.title url:[NSString stringWithFormat:@"%@%@",YTH5Server, jpush.jumpUrl]];
-                webVc.isDate = YES;
-                webVc.hidesBottomBarWhenPushed = YES;
-                // 获取当前控制器
-                YTNavigationController *keyVc = [self keyViewController];
-                [keyVc pushViewController:webVc animated:YES];
-            });
-        }
-    }];
+    if (jpush == nil) return;
+
+    if (jpush.type == 5)    // 认证成功
+    {
+        [self authenticationSuccess:jpush];
+    } else if (jpush.type == 6) // 认证失败
+    {
+        [self authenticationError:jpush];
+    } else {    // h5页面跳转
+        [self jumpToHtml:jpush];
+    }
+    
+
 }
 
 /**
@@ -210,6 +208,75 @@
 
     // 2.清除图片缓存(内存缓存)
     [[SDWebImageManager sharedManager].imageCache clearMemory];
+}
+
+#pragma mark - 推送通知处理
+/**
+ *  理财师认证成功
+ */
+- (void)authenticationSuccess:(YTJpushModel *)jpush
+{
+    HHAlertView *alert = [HHAlertView shared];
+    NSString *cancelButton = @"知道了";
+    NSString *okButton = @"认购产品";
+    UIViewController *rootVc =  [UIApplication sharedApplication].keyWindow.rootViewController;
+    if ([rootVc isKindOfClass:[YTTabBarController class]]) {
+        cancelButton = nil;
+        okButton = @"知道了";
+    }
+    [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:cancelButton Okbutton:okButton block:^(HHAlertButton buttonindex) {
+        if(buttonindex == HHAlertButtonOk)
+        {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                if ([okButton isEqualToString:@"认购产品"]) {
+                    ((YTTabBarController *)rootVc).selectedIndex = 1;
+                }
+            });
+        }
+    }];
+}
+
+/**
+ *  理财师认证失败
+ */
+- (void)authenticationError:(YTJpushModel *)jpush
+{
+    HHAlertView *alert = [HHAlertView shared];
+    [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"重新认证" block:^(HHAlertButton buttonindex) {
+        if(buttonindex == HHAlertButtonOk)
+        {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                // 需要跳转的控制器
+                YTNormalWebController *webVc = [YTNormalWebController webWithTitle:jpush.title url:[NSString stringWithFormat:@"%@%@",YTH5Server, jpush.jumpUrl]];
+                webVc.isDate = YES;
+                webVc.hidesBottomBarWhenPushed = YES;
+                // 获取当前控制器
+                YTNavigationController *keyVc = [self keyViewController];
+                [keyVc pushViewController:webVc animated:YES];
+            });
+        }
+    }];
+}
+/**
+ *  h5页面跳转
+ */
+- (void)jumpToHtml:(YTJpushModel *)jpush
+{
+    HHAlertView *alert = [HHAlertView shared];
+    [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"查看详情" block:^(HHAlertButton buttonindex) {
+        if(buttonindex == HHAlertButtonOk)
+        {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                // 需要跳转的控制器
+                YTNormalWebController *webVc = [YTNormalWebController webWithTitle:jpush.title url:[NSString stringWithFormat:@"%@%@",YTH5Server, jpush.jumpUrl]];
+                webVc.isDate = YES;
+                webVc.hidesBottomBarWhenPushed = YES;
+                // 获取当前控制器
+                YTNavigationController *keyVc = [self keyViewController];
+                [keyVc pushViewController:webVc animated:YES];
+            });
+        }
+    }];
 }
 
 @end

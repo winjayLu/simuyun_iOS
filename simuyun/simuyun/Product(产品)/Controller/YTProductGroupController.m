@@ -105,7 +105,7 @@
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
     // 2.发送一个GET请求
-
+    
     [mgr GET:@"http://www.simuyun.com/peyunupload/label/hotproduct.json" parameters:nil
      success:^(AFHTTPRequestOperation *operation, id responseObject) {
          self.searchVc.products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];

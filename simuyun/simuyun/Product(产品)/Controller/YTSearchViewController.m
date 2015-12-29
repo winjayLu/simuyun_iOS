@@ -190,6 +190,7 @@
     [self dismissViewControllerAnimated:NO completion:nil];
     self.searchProducts = nil;
     self.tableView.footer = nil;
+    [self createHotTitle];
     [self.tableView reloadData];
 }
 
@@ -358,14 +359,12 @@
 
 
 
-#pragma mark - 懒加载
-- (NSArray *)products
+- (void)setProducts:(NSArray *)products
 {
-    if (!_products) {
-        _products = [[NSArray alloc] init];
-    }
-    return _products;
+    _products = products;
+    [self.tableView reloadData];
 }
+#pragma mark - 懒加载
 
 - (NSMutableArray *)searchProducts
 {

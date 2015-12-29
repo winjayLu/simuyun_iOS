@@ -22,6 +22,13 @@
 
 
 /**
+ *  产品id
+ */
+@property (nonatomic, copy) NSString *product_id;
+
+
+
+/**
  *  产品名称
  */
 @property (nonatomic, copy) NSString *product_name;

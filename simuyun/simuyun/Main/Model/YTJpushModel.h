@@ -15,7 +15,8 @@
 /**
  *  推送类型
  */
-@property (nonatomic, copy) NSString *type;
+@property (nonatomic, assign) int type;
+
 
 /**
  *  推送标题
