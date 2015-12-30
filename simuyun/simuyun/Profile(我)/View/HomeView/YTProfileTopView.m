@@ -305,7 +305,6 @@
 
 	    // 签到按钮
     if (userInfo.isSingIn) { // 已经签到
-        [self.qiaoDaoBtn setBackgroundImage:[UIImage imageNamed:@"yiqiandao"] forState:UIControlStateNormal];
         self.qiaoDaoBtn.enabled = NO;
         self.qiaoDaoBtn.hidden = YES;
     } else {    // 未签到

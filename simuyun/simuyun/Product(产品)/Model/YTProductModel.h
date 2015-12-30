@@ -88,11 +88,6 @@
  */
 @property (nonatomic, copy) NSString *term;
 
-/**
- *  是否可以购买
- *  0不可以，1可以
- */
-@property (nonatomic, assign) int canBuy;
 
 
 /**

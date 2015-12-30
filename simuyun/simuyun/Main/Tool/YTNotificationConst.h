@@ -13,3 +13,8 @@ extern NSString *const YTStopRequest;
 extern NSString *const YTUpdateChatContent;
 extern NSString *const YTSelectedCustomer;
 extern NSString *const YTCancelCustomer;
+
+// 资源信息加载成功
+extern NSString *const YTResourcesSuccess;
+// 资源信息加载失败
+extern NSString *const YTResourcesError;

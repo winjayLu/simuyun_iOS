@@ -200,8 +200,8 @@ ALAssetsFilter * ALAssetsFilterFromJKImagePickerControllerFilterType(JKImagePick
 {
     // Load assets from URLs
     __block NSMutableArray *assets = [NSMutableArray array];
-    
-    for (JKAssets *jka in self.selectedAssetArray) {
+    for (NSInteger i = self.selectedAssetArray.count - 1; i > -1; i--) {
+        JKAssets *jka = self.selectedAssetArray[i];
         __weak typeof(self) weakSelf = self;
         [self.assetsLibrary assetForURL:jka.assetPropertyURL
                             resultBlock:^(ALAsset *asset) {
@@ -212,9 +212,25 @@ ALAssetsFilter * ALAssetsFilterFromJKImagePickerControllerFilterType(JKImagePick
                                     [weakSelf browerPhotoes:assets page:0 isShow:YES];
                                 }
                             } failureBlock:^(NSError *error) {
-
+                                
                             }];
+
     }
+//    
+//    for (JKAssets *jka in self.selectedAssetArray) {
+//        __weak typeof(self) weakSelf = self;
+//        [self.assetsLibrary assetForURL:jka.assetPropertyURL
+//                            resultBlock:^(ALAsset *asset) {
+//                                // Add asset
+//                                [assets addObject:asset];
+//                                // Check if the loading finished
+//                                if (assets.count == weakSelf.selectedAssetArray.count) {
+//                                    [weakSelf browerPhotoes:assets page:0 isShow:YES];
+//                                }
+//                            } failureBlock:^(NSError *error) {
+//
+//                            }];
+//    }
 }
 
 
