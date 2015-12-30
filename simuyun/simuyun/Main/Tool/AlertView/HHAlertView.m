@@ -16,7 +16,7 @@
 #define txtColor [UIColor colorWithRed:50/255.0 green:50/255.0 blue:50/255.0 alpha:1]
 
 
-#define  HHAlertview_SIZE_WIDTH  (DeviceWidth - 100)
+#define HHAlertview_SIZE_WIDTH  (DeviceWidth - 100)
 #define HHAlertview_SIZE_HEIGHT  250
 NSInteger const Simble_SIZE = 30;
 NSInteger const Simble_TOP = 0;
@@ -92,12 +92,7 @@ static UIWindow *_window;
     
     [self configtext:title detail:detail];
     
-    
-//    if (HHAlertStyle == HHAlertStyleDefault) {
-//        [self configButton:cancel Okbutton:ok];
-//    } else {
-        [self jpushConfigButton:cancel Okbutton:ok];
-//    }
+    [self jpushConfigButton:cancel Okbutton:ok];
     
     _window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     _window.backgroundColor = YTRGBA(0, 0, 0, 0.1);

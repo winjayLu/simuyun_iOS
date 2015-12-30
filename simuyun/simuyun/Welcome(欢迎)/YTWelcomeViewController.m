@@ -29,6 +29,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // 4s特殊处理
+    if (iPhone4) {
+        self.bannerImage.contentMode = UIViewContentModeScaleAspectFill;
+    }
     
     YTResources *resources = [YTResourcesTool resources];
     if (resources != nil) { // 预加载成功
@@ -45,7 +49,6 @@
     [YTCenter addObserver:self selector:@selector(loadSuccess) name:YTResourcesSuccess object:nil];
     [YTCenter addObserver:self selector:@selector(loadError) name:YTResourcesError object:nil];
 }
-
 /**
  *  加载成功
  */

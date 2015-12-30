@@ -124,6 +124,16 @@
         case 35:
             categoryStr = @"认证通知";
             break;
+        case 41:
+            categoryStr = @"运营通知";
+            break;
+        case 42:
+            categoryStr = @"运营喜报";
+            break;
+        default:
+            categoryStr = @"公告详情";
+            break;
+            
     }
     return categoryStr;
 }

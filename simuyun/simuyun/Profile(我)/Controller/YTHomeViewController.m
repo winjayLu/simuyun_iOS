@@ -323,6 +323,7 @@
 {
     YTUserInfo *userInfo = [YTUserInfoTool userInfo];
     self.groupCell.title = @"认证理财师";
+    // 0 已认证， 1 未认证， 2 认证中， 3 驳回
     switch (userInfo.adviserStatus) {
         case 0:
             if (self.groupCell != nil) {

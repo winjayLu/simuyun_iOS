@@ -73,7 +73,6 @@
 - (void)loadView
 {
     UIScrollView *mainView = [[UIScrollView alloc] initWithFrame:DeviceBounds];
-//    mainView.bounces = NO;
     mainView.showsVerticalScrollIndicator = NO;
     mainView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     self.view = mainView;

@@ -182,8 +182,6 @@
     } else {    // h5页面跳转
         [self jumpToHtml:jpush];
     }
-    
-
 }
 
 /**
@@ -223,21 +221,20 @@
 - (void)authenticationSuccess:(YTJpushModel *)jpush
 {
     HHAlertView *alert = [HHAlertView shared];
-    NSString *cancelButton = @"知道了";
-    NSString *okButton = @"认购产品";
+    NSString *cancelButton = nil;
+    NSString *okButton = @"知道了";
     UIViewController *rootVc =  [UIApplication sharedApplication].keyWindow.rootViewController;
-    if ([rootVc isKindOfClass:[YTTabBarController class]]) {
-        cancelButton = nil;
-        okButton = @"知道了";
+    YTNavigationController *keyVc = [self keyViewController];
+    if (keyVc.viewControllers.count == 1) {
+        cancelButton = @"知道了";
+        okButton = @"认购产品";
     }
     [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:cancelButton Okbutton:okButton block:^(HHAlertButton buttonindex) {
         if(buttonindex == HHAlertButtonOk)
         {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                if ([okButton isEqualToString:@"认购产品"]) {
-                    ((YTTabBarController *)rootVc).selectedIndex = 1;
-                }
-            });
+            if ([okButton isEqualToString:@"认购产品"]) {
+                ((YTTabBarController *)rootVc).selectedIndex = 1;
+            }
         }
     }];
 }
@@ -247,19 +244,16 @@
  */
 - (void)authenticationError:(YTJpushModel *)jpush
 {
+    // 获取当前控制器
+    YTNavigationController *keyVc = [self keyViewController];
     HHAlertView *alert = [HHAlertView shared];
     [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"重新认证" block:^(HHAlertButton buttonindex) {
         if(buttonindex == HHAlertButtonOk)
         {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                // 需要跳转的控制器
-                YTNormalWebController *webVc = [YTNormalWebController webWithTitle:jpush.title url:[NSString stringWithFormat:@"%@%@",YTH5Server, jpush.jumpUrl]];
-                webVc.isDate = YES;
-                webVc.hidesBottomBarWhenPushed = YES;
-                // 获取当前控制器
-                YTNavigationController *keyVc = [self keyViewController];
-                [keyVc pushViewController:webVc animated:YES];
-            });
+            // 需要跳转的控制器
+            YTAuthenticationErrorController *authenError = [[YTAuthenticationErrorController alloc] init];
+            authenError.hidesBottomBarWhenPushed = YES;
+            [keyVc pushViewController:authenError animated:YES];
         }
     }];
 }
@@ -268,19 +262,17 @@
  */
 - (void)jumpToHtml:(YTJpushModel *)jpush
 {
+    // 获取当前控制器
+    YTNavigationController *keyVc = [self keyViewController];
     HHAlertView *alert = [HHAlertView shared];
     [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"查看详情" block:^(HHAlertButton buttonindex) {
         if(buttonindex == HHAlertButtonOk)
         {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                // 需要跳转的控制器
-                YTNormalWebController *webVc = [YTNormalWebController webWithTitle:jpush.title url:[NSString stringWithFormat:@"%@%@",YTH5Server, jpush.jumpUrl]];
-                webVc.isDate = YES;
-                webVc.hidesBottomBarWhenPushed = YES;
-                // 获取当前控制器
-                YTNavigationController *keyVc = [self keyViewController];
-                [keyVc pushViewController:webVc animated:YES];
-            });
+            // 需要跳转的控制器
+            YTNormalWebController *webVc = [YTNormalWebController webWithTitle:jpush.title url:[NSString stringWithFormat:@"%@%@",YTH5Server, jpush.jumpUrl]];
+            webVc.isDate = YES;
+            webVc.hidesBottomBarWhenPushed = YES;
+            [keyVc pushViewController:webVc animated:YES];
         }
     }];
 }

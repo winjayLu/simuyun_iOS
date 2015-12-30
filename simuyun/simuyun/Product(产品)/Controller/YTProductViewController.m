@@ -159,10 +159,14 @@
         param[@"series"] = @(self.series);
     }
     param[@"offset"] = @"0";
-    param[@"limit"] = @"10";
+    param[@"limit"] = @"20";
     [YTHttpTool get:YTProductList params:param
     success:^(NSDictionary *responseObject) {
         self.products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
+        if([ self.products count] < 20)
+        {
+            self.tableView.footer = nil;
+        }
         // 刷新表格
         [self.tableView reloadData];
         // 结束刷新状态
@@ -186,7 +190,7 @@
         param[@"series"] = @(self.series);
     }
     param[@"offset"] = [NSString stringWithFormat:@"%zd", self.products.count];
-    param[@"limit"] = @"10";
+    param[@"limit"] = @"20";
     [YTHttpTool get:YTProductList params:param success:^(id responseObject) {
         [self.tableView.footer endRefreshing];
         if([(NSArray *)responseObject count] == 0)

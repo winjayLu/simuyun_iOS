@@ -109,6 +109,7 @@
                 YTViewPdfViewController *viewPdf = [[YTViewPdfViewController alloc] init];
                 viewPdf.url = urlComps[2];
                 viewPdf.shareTitle = urlComps[3];
+                
                 [self.navigationController pushViewController:viewPdf animated:YES];
             }
         }
@@ -116,7 +117,6 @@
     }
     return YES;
 }
-
 
 // 修改密码
 - (void)changPasswordWithOld:(NSString *)oldPassword newPassword:(NSString *)newPassword

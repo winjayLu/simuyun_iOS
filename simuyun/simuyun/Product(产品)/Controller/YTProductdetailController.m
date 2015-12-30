@@ -137,7 +137,7 @@
             if ([command isEqualToString:@"buynow"])    // 认购
             {
                 // 判断是否认证
-                if (![self isAuthentication]) return YES;
+                if (![self isAuthentication]) return NO;
                 // 认购
                 [self buyNow];
             } else if ([command isEqualToString:@"closepage"])  // 关闭页面

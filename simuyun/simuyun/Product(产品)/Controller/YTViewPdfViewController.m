@@ -49,7 +49,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"产品简版";
+    // 去除标题中的pdf
+    NSRange range = [self.shareTitle rangeOfString:@".pdf"];
+    if (range.location != NSNotFound) {
+        self.shareTitle = [self.shareTitle substringToIndex:range.location];
+    }
+    
+    self.title = self.shareTitle;
     self.webView.scalesPageToFit = YES;
     
     // 加载网页
