@@ -38,5 +38,16 @@
 + (void)loadNewUserInfo:(void (^)(BOOL finally))finally;
 
 
+#pragma mark - 本地存储
+/**
+ *  本地存储用户信息
+ */
++ (void)localsave:(YTUserInfo *)userInfo;
+
+/**
+ *  获取本地用户信息
+ */
++ (YTUserInfo *)localUserInfo;
+
 
 @end

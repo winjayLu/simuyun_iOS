@@ -156,7 +156,7 @@
 - (IBAction)tuiChuClick:(UIButton *)sender {
     [self senderNotification:sender];
     [MobClick event:@"drawer_click" attributes:@{@"按钮" : @"退出", @"机构" : [YTUserInfoTool userInfo].organizationName}];
-    
+
     // 获取程序主窗口
     UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
     mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
@@ -166,6 +166,8 @@
     [YTUserInfoTool clearUserInfo];
     // 清除数字提醒
     [YTMessageNumTool save:nil];
+    // 清楚本地用户信息
+    [YTUserInfoTool localsave:nil];
 }
 /**
  *  拨打电话

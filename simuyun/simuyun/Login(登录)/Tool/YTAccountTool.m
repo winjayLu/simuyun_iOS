@@ -47,8 +47,7 @@
 
 
 /**
- *  向服务器发起登录,获取token
- *
+ *  向服务器发起登录,获取token,并获取用户信息
  */
 + (void)loginAccount:(YTAccount *)account result:(void (^)(BOOL result))result
 {
@@ -60,8 +59,6 @@
     
     // 2.发送一个POST请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTSession];
-    NSLog(@"%@", newUrl);
-    NSLog(@"%@", params);
     [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           // 保存账户信息
@@ -71,11 +68,19 @@
           [self save:account];
           [APService setAlias:account.userId callbackSelector:nil object:nil];
           
-          [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
-              if (finally) {
-                  result(YES);
-              }
-          }];
+          // 判断本地是否有用户信息
+          YTUserInfo *userInfo = [YTUserInfoTool localUserInfo];
+          if (userInfo != nil) {
+              // 将用户信息写入内容中
+              [YTUserInfoTool saveUserInfo:userInfo];
+              result(YES);
+          } else {
+              [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
+                  if (finally) {
+                      result(YES);
+                  }
+              }];
+          }
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           if(operation.responseObject[@"message"] != nil)
           {
@@ -93,7 +98,6 @@
           result(NO);
       }];
 }
-
 
 
 

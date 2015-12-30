@@ -11,6 +11,7 @@
 #import "YTUserInfoTool.h"
 #import "YTAccountTool.h"
 
+#define YTUserInfoPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"userInfo.data"]
 
 @implementation YTUserInfoTool
 
@@ -57,11 +58,31 @@ static YTUserInfo *_userInfo;
     dict[@"advisersId"] = [YTAccountTool account].userId;
     
     [YTHttpTool get:YTUser params:dict success:^(id responseObject) {
-        [self saveUserInfo:[YTUserInfo objectWithKeyValues:responseObject]];
+        YTUserInfo *userInfo = [YTUserInfo objectWithKeyValues:responseObject];
+        [self saveUserInfo:userInfo];
+        [self localsave:userInfo];
         finally(YES);
     } failure:^(NSError *error) {
         finally(NO);
     }];
+}
+
+#pragma mark - 本地存储
+/**
+ *  本地存储用户信息
+ */
++ (void)localsave:(YTUserInfo *)userInfo
+{
+    [NSKeyedArchiver archiveRootObject:userInfo toFile:YTUserInfoPath];
+}
+
+/**
+ *  获取本地用户信息
+ */
++ (YTUserInfo *)localUserInfo
+{
+    YTUserInfo *userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:YTUserInfoPath];
+    return userInfo;
 }
 
 

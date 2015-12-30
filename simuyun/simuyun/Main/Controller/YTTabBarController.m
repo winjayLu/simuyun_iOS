@@ -218,24 +218,18 @@
  */
 - (void)setupChildVc
 {
-    NSDate *activityDate = [@"2015-12-25 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *today = [NSDate date];
-    NSComparisonResult result = [activityDate compare:today];
-    if (result <= 0) {
-        self.message = (YTMessageViewController *)[self addOneChildVcClass:[YTMessageViewController class] title:@"消息" image:@"christmass" selectedImage:@"christmassanxia"];
-        self.product = (YTProductGroupController *)[self addOneChildVcClass:[YTProductGroupController class] title:@"产品" image:@"christmasi" selectedImage:@"christmasianxia"];
-        self.profile = (YTProfileViewController *)[self addOneChildVcClass:[YTProfileViewController class] title:nil image:nil selectedImage:nil];
-        self.discover = (YTDiscoverViewController *)[self addOneChildVcClass:[YTDiscoverViewController class] title:@"发现" image:@"christmasm" selectedImage:@"christmasmanxia"];
-        self.school = (YTSchoolViewController *)[self addOneChildVcClass:[YTSchoolViewController class] title:@"学院" image:@"christmasu" selectedImage:@"christmasuanxia"];
-    } else {
-        self.message = (YTMessageViewController *)[self addOneChildVcClass:[YTMessageViewController class] title:@"消息" image:@"xiaoxi" selectedImage:@"xiaoxianxia"];
-        self.product = (YTProductGroupController *)[self addOneChildVcClass:[YTProductGroupController class] title:@"产品" image:@"chanpin" selectedImage:@"chanpinanxia"];
-        self.profile = (YTProfileViewController *)[self addOneChildVcClass:[YTProfileViewController class] title:nil image:nil selectedImage:nil];
-        self.discover = (YTDiscoverViewController *)[self addOneChildVcClass:[YTDiscoverViewController class] title:@"发现" image:@"faxian" selectedImage:@"faxiananxia"];
-        self.school = (YTSchoolViewController *)[self addOneChildVcClass:[YTSchoolViewController class] title:@"学院" image:@"shangxueyuan" selectedImage:@"shangxueyuananxia"];
-    }
+    self.message = (YTMessageViewController *)[self addOneChildVcClass:[YTMessageViewController class] title:@"消息" image:@"christmass" selectedImage:@"christmassanxia"];
+    self.product = (YTProductGroupController *)[self addOneChildVcClass:[YTProductGroupController class] title:@"产品" image:@"christmasi" selectedImage:@"christmasianxia"];
+    self.profile = (YTProfileViewController *)[self addOneChildVcClass:[YTProfileViewController class] title:nil image:nil selectedImage:nil];
+    self.discover = (YTDiscoverViewController *)[self addOneChildVcClass:[YTDiscoverViewController class] title:@"发现" image:@"christmasm" selectedImage:@"christmasmanxia"];
+    self.school = (YTSchoolViewController *)[self addOneChildVcClass:[YTSchoolViewController class] title:@"学院" image:@"christmasu" selectedImage:@"christmasuanxia"];
+    // 日期判断
+//    NSDate *activityDate = [@"2015-12-25 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
+//    NSDate *today = [NSDate date];
+//    NSComparisonResult result = [activityDate compare:today];
+//    if (result <= 0) {
+//    }
 }
-
 /**
  *  初始化tabBar的样式
  */

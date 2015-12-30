@@ -136,7 +136,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    // 加载待办事项
+    [self loadTodos];
     if (!self.firstLoad) {
         // 加载用户信息
         self.topView.userInfo = [YTUserInfoTool userInfo];
@@ -154,9 +155,6 @@
             }
         }];
     }
-    
-    // 加载待办事项
-    [self loadTodos];
 }
 
 
