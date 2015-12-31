@@ -99,16 +99,16 @@
     [self loadProduct];
 }
 
-#pragma mark - 获取热门产品数据
+#pragma mark - 获取热门搜索标题
 - (void)loadProduct
 {
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
     // 2.发送一个GET请求
     
-    [mgr GET:@"http://www.simuyun.com/peyunupload/label/hotproduct.json" parameters:nil
+    [mgr GET:@"http://www.simuyun.com/peyunupload/label/hotproducttitle.json" parameters:nil
      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-         self.searchVc.products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
+         self.searchVc.searchTitles = [NSString objectArrayWithKeyValuesArray:responseObject];
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
      }];
 }

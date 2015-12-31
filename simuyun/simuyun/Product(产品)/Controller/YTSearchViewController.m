@@ -83,7 +83,6 @@
         self.tableView.footer = nil;
     } else {
         [self updateTableViewFrame];
-        self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreProduct)];
     }
 }
 
@@ -251,25 +250,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
     YTProductModel *product = nil;
+    UITableViewCell *cell;
     if (self.searchProducts.count > 0) {
         product = self.searchProducts[indexPath.section];
-    } else {
-        product = self.products[indexPath.section];
-    }
-    UITableViewCell *cell;
-    // 搜索出来的产品
-    if (self.searchProducts.count == 0)
-    {
+    } else {    // 热门搜索
         static NSString *identifier = @"searchCell";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell==nil) {
             cell =[YTSearchProductCell productCell];
         }
-        ((YTSearchProductCell *)cell).product = product;
+        ((YTSearchProductCell *)cell).searchTitle = self.searchTitles[indexPath.section];
         return cell;
     }
     
-    // 热门产品
+    // 搜索出来的产品
     if (product.state == 30)
     {
         static NSString *identifier = @"liquidation";
@@ -314,7 +308,7 @@
     if (self.searchProducts.count > 0) {
         return self.searchProducts.count;
     } else {
-        return self.products.count;
+        return self.searchTitles.count;
     }
 }
 // 设置cell之间headerview的高度
@@ -342,10 +336,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YTProductModel *product = nil;
     if (self.searchProducts.count == 0) {
-        product = self.products[indexPath.section];
-    } else {
-        product = self.searchProducts[indexPath.section];
+        [self searchProductWithProductName:self.searchTitles[indexPath.section]];
+        return;
     }
+    product = self.searchProducts[indexPath.section];
     NSString *url = nil;
     
     if (product.type_code == 1) {
@@ -362,12 +356,12 @@
 }
 
 
-
-- (void)setProducts:(NSArray *)products
+- (void)setSearchTitles:(NSArray *)searchTitles
 {
-    _products = products;
+    _searchTitles = searchTitles;
     [self.tableView reloadData];
 }
+
 #pragma mark - 懒加载
 
 - (NSMutableArray *)searchProducts

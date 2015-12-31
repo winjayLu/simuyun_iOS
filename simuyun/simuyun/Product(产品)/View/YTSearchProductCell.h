@@ -12,10 +12,13 @@
 
 @interface YTSearchProductCell : UITableViewCell
 
+
 /**
- *  产品模型
+ *  搜索标题
+ *
  */
-@property (nonatomic, strong) YTProductModel *product;
+@property (nonatomic, copy) NSString *searchTitle;
+
 
 + (instancetype)productCell;
 

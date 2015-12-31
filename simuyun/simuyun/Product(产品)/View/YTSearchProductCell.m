@@ -25,10 +25,10 @@
 
 
 
-- (void)setProduct:(YTProductModel *)product
+- (void)setSearchTitle:(NSString *)searchTitle
 {
-    _product = product;
-    self.titleLable.text = _product.pro_name;
+    _searchTitle = searchTitle;
+    self.titleLable.text = searchTitle;
 }
 
 - (void)awakeFromNib {

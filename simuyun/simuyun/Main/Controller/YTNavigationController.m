@@ -37,8 +37,7 @@
     UIBarButtonItem *barItem =[UIBarButtonItem appearance];
     // 设置背景
 //    [barItem setBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background.png"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-//    [barItem setBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background_pushed.png"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
-//    [barItem setBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background_disable.png"] forState:UIControlStateDisabled barMetrics:UIBarMetricsDefault];
+
     // 设置item的文字属性
     NSDictionary *barItemTextAttr = @{
                                       NSForegroundColorAttributeName : YTNavTextColor
