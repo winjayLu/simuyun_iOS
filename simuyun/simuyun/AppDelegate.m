@@ -32,6 +32,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
     // 清空数字
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     

@@ -132,7 +132,7 @@
     param[@"uid"] = [YTAccountTool account].userId;
     param[@"proName"] = productName;
     param[@"offset"] = @"0";
-    param[@"limit"] = @"10";
+    param[@"limit"] = @"20";
     [YTHttpTool get:YTProductList params:param
             success:^(NSDictionary *responseObject) {
                 NSArray *products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
@@ -142,7 +142,9 @@
                 }
                 [SVProgressHUD dismiss];
                 // 上拉加载
-                self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreProduct)];
+                if (products.count == 20) {
+                    self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreProduct)];
+                }
                 self.searchProducts = [NSMutableArray arrayWithArray:products];
                 self.tableView.tableHeaderView = nil;
                 [self updateTableViewFrame];
@@ -167,7 +169,8 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
     param[@"offset"] = [NSString stringWithFormat:@"%zd", self.searchProducts.count];
-    param[@"limit"] = @"10";
+    param[@"limit"] = @"20";
+    param[@"proName"] = self.search.text;
     [YTHttpTool get:YTProductList params:param success:^(id responseObject) {
         [self.tableView.footer endRefreshing];
         if([(NSArray *)responseObject count] == 0)
@@ -188,6 +191,7 @@
 - (void)blackClick
 {
     [self dismissViewControllerAnimated:NO completion:nil];
+    self.search.text = nil;
     self.searchProducts = nil;
     self.tableView.footer = nil;
     [self createHotTitle];
@@ -353,7 +357,7 @@
     YTProductdetailController *web = [[YTProductdetailController alloc] init];
     web.url = url;
     web.hidesBottomBarWhenPushed = YES;
-    web.product = self.products[indexPath.section];
+    web.product = product;
     [self.navigationController pushViewController:web animated:YES];
 }
 
