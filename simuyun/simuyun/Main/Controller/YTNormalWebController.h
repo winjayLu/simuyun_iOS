@@ -24,6 +24,8 @@
 // 是否加时间戳
 @property (nonatomic, assign) BOOL isDate;
 
+// 是否显示进度条
+@property (nonatomic, assign) BOOL isProgress;
 
 
 + (instancetype)webWithTitle:(NSString *)title url:(NSString *)url;

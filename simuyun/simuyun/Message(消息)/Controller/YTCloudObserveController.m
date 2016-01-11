@@ -150,6 +150,7 @@
     self.superVc.tabBarItem.badgeValue = nil;
 
     YTNormalWebController *normal = [YTNormalWebController webWithTitle:@"平台客服" url:[NSString stringWithFormat:@"%@/livehelp%@",YTH5Server, [NSDate stringDate]]];
+    normal.isProgress = YES;
     normal.isDate = YES;
     normal.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:normal animated:YES];

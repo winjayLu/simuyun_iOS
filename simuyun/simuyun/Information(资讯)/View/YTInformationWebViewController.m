@@ -14,6 +14,8 @@
 #import "SVProgressHUD.h"
 #import "YTNormalWebController.h"
 #import "YTUserInfoTool.h"
+#import "YHWebViewProgress.h"
+#import "YHWebViewProgressView.h"
 
 
 @interface YTInformationWebViewController () <UIWebViewDelegate, shareCustomDelegate>
@@ -29,6 +31,10 @@
  */
 @property (nonatomic, weak) ShareCustomView *customView;
 
+/**
+ *  进度条代理
+ */
+@property (nonatomic, strong) YHWebViewProgress *progressProxy;
 
 @end
 
@@ -66,9 +72,51 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = self.toTitle;
     [self setupRightMenu];
+    
+    self.title = @"正在加载";
+    [self setupProgress];
 }
+
+/**
+ *  初始化进度条
+ */
+- (void)setupProgress
+{
+    // 创建进度条
+    YHWebViewProgressView *progressView = [[YHWebViewProgressView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 2)];
+    progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleBottomMargin;
+    progressView.barAnimationDuration = 0.5;
+    progressView.progressBarColor = YTRGBA(0, 0, 0, 0.7);
+    // 设置进度条
+    self.progressProxy.progressView = progressView;
+    // 将UIWebView代理指向YHWebViq   ewProgress
+    ((UIWebView *)self.view).delegate = self.progressProxy;
+    // 设置webview代理转发到self
+    self.progressProxy.webViewProxy = self;
+    // 添加到视图
+    [self.view addSubview:progressView];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self.progressProxy.progressView setProgress:1.0f animated:NO];
+    
+    self.title = self.toTitle;
+    // 禁用用户选择
+    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
+    
+    // 禁用长按弹出框
+    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
+{
+    self.progressProxy.progressView.hidden = YES;
+    self.title = @"加载失败";
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -247,7 +295,13 @@
 
 
 
-
+- (YHWebViewProgress *)progressProxy
+{
+    if (!_progressProxy) {
+        _progressProxy = [[YHWebViewProgress alloc] init];
+    }
+    return _progressProxy;
+}
 
 /**
  *  清理webView缓存

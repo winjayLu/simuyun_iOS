@@ -500,6 +500,7 @@
     // 判断点击了哪个按钮
     if ([btnTitle isEqualToString:@"用户资料"]) {
         vc = [YTNormalWebController webWithTitle:@"用户资料" url:[NSString stringWithFormat:@"%@/my/profile/", YTH5Server]];
+        ((YTNormalWebController *)vc).isProgress = YES;
     } else if([btnTitle isEqualToString:@"关联微信"] || [btnTitle isEqualToString:@"已关联微信"]){
          [self relationWeChat];
     } else if([btnTitle isEqualToString:@"推荐私募云给好友"]){

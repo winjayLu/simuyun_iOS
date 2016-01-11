@@ -23,6 +23,7 @@
 #import "NSString+Password.h"
 #import "YTUserInfoTool.h"
 #import "CoreArchive.h"
+#import "HHAlertView.h"
 
 
 // 登录
@@ -118,6 +119,17 @@
  */
 - (IBAction)weChatClick:(id)sender {
     
+    [MobClick event:@"logReg_click" attributes: @{@"按钮" : @"微信登录"}];
+    
+    // 发起登录
+    [self loginWeChat];
+}
+
+/**
+ *  微信登录
+ */
+- (void)loginWeChat
+{
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     
     //  友盟微信登录
@@ -125,51 +137,16 @@
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
         
         if (response.responseCode == UMSResponseCodeSuccess) {
-            
             UMSocialAccountEntity *account = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
             param[@"nickname"] = account.userName;
             param[@"unionid"] = account.unionId;
             param[@"openid"] = account.openId;
             param[@"headimgurl"] = account.iconURL;
-            [YTHttpTool post:YTWeChatLogin params:param success:^(id responseObject) {
-                AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-                NSMutableDictionary *params = [NSMutableDictionary dictionary];
-                YTAccount *acc = [[YTAccount alloc] init];
-                acc.userName = responseObject[@"username"];
-                acc.password = responseObject[@"password"];
-                params[@"username"] = acc.userName;
-                params[@"password"] = acc.password;
-                
-                // 2.发送一个POST请求
-                NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTSession];
-                [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
-                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                      // 保存账户信息
-                      acc.userId = responseObject[@"userId"];
-                      acc.token = responseObject[@"token"];
-                      [YTAccountTool save:acc];
-                      [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
-                          if (finally) {
-                              [self transitionTabBarVC];
-                          }
-                      }];
-                      [APService setAlias:responseObject[@"userId"] callbackSelector:nil object:nil];
-                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                      if(operation.responseObject[@"message"] != nil)
-                      {
-                          if ([operation.responseObject[@"message"] isEqualToString:@"tokenError"]) {
-                              [YTHttpTool tokenError];
-                          } else {
-                              [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
-                          }
-                      } else if(error.userInfo[@"NSLocalizedDescription"] != nil)
-                      {
-                          [SVProgressHUD showInfoWithStatus:@"网络链接失败\n请稍候再试"];
-                      }
-                  }];
-            } failure:^(NSError *error) {
 
-            }];
+            // 查询unid是否存在
+            [self selectWeChatUnid:param];
+        } else {
+            [SVProgressHUD showWithStatus:@"授权失败"];
         }
     });
     
@@ -178,9 +155,95 @@
         param[@"sex"] = response.data[@"gender"];
         param[@"address"] = response.data[@"location"];
     }];
-    [MobClick event:@"logReg_click" attributes: @{@"按钮" : @"微信登录"}];
-    
 }
+
+/**
+ *  查询unid是否存在
+ */
+- (void)selectWeChatUnid:(NSMutableDictionary *)dict
+{
+    [SVProgressHUD showWithStatus:@"正在授权" maskType:SVProgressHUDMaskTypeClear];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"unionid"] = dict[@"unionid"];
+    [YTHttpTool get:YTWeChatUnionId params:param success:^(id responseObject) {
+        [SVProgressHUD dismiss];
+        // "0":该unionId不存在     "1":该unionId存在
+        if ([responseObject[@"isExist"] isEqualToString:@"0"]) {
+            [self confirmWeChat:dict];
+        } else {
+            [self sendWeChatLogin:dict];
+        }
+    } failure:^(NSError *error) {
+    }];
+}
+/**
+ *  二次确认是否使用微信登录
+ *
+ */
+- (void)confirmWeChat:(NSMutableDictionary *)param
+{
+    HHAlertView *alert = [HHAlertView shared];
+    [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"微信登录" detail:[NSString stringWithFormat:@"您将使用微信号：%@创建一个新的私募云账号", param[@"nickname"]] cancelButton:@"取消" Okbutton:@"确认" block:^(HHAlertButton buttonindex) {
+        if(buttonindex == HHAlertButtonOk)
+        {
+            [self sendWeChatLogin:param];
+        } else {
+            [SVProgressHUD showInfoWithStatus:@"授权取消"];
+        }
+    }];
+}
+
+
+/**
+ *  发起微信登录
+ */
+- (void)sendWeChatLogin:(NSMutableDictionary *)param
+{
+    [SVProgressHUD showWithStatus:@"正在登录" maskType:SVProgressHUDMaskTypeClear];
+    [YTHttpTool post:YTWeChatLogin params:param success:^(id responseObject) {
+        AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        YTAccount *acc = [[YTAccount alloc] init];
+        acc.userName = responseObject[@"username"];
+        acc.password = responseObject[@"password"];
+        params[@"username"] = acc.userName;
+        params[@"password"] = acc.password;
+        
+        // 2.发送一个POST请求
+        NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTSession];
+        [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              // 保存账户信息
+              acc.userId = responseObject[@"userId"];
+              acc.token = responseObject[@"token"];
+              [YTAccountTool save:acc];
+              [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
+                  if (finally) {
+                      [SVProgressHUD dismiss];
+                      [self transitionTabBarVC];
+                  }
+              }];
+              [APService setAlias:responseObject[@"userId"] callbackSelector:nil object:nil];
+          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              if(operation.responseObject[@"message"] != nil)
+              {
+                  if ([operation.responseObject[@"message"] isEqualToString:@"tokenError"]) {
+                      [YTHttpTool tokenError];
+                  } else {
+                      [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+                  }
+              } else if(error.userInfo[@"NSLocalizedDescription"] != nil)
+              {
+                  [SVProgressHUD showInfoWithStatus:@"网络链接失败\n请稍候再试"];
+              } else {
+                  [SVProgressHUD dismiss];
+              }
+          }];
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {

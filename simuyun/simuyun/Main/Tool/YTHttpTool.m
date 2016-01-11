@@ -80,6 +80,8 @@
               } else {
                   [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
               }
+          } else {
+              [SVProgressHUD dismiss];
           }
           if (failure) {
               failure(error);

@@ -155,7 +155,7 @@
     [self.hintView switchContentTypeWIthType:contentTypeLoading];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
-    if (self.series < 9) {
+    if (self.series > 0) {
         param[@"series"] = @(self.series);
     }
     param[@"offset"] = @"0";
@@ -186,7 +186,7 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
-    if (self.series < 9) {
+    if (self.series > 0) {
         param[@"series"] = @(self.series);
     }
     param[@"offset"] = [NSString stringWithFormat:@"%zd", self.products.count];
