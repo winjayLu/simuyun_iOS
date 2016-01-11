@@ -15,7 +15,6 @@
 #import "ShareManage.h"
 #import "SVProgressHUD.h"
 #import "YTSenMailView.h"
-//#import "CoreTFManagerVC.h"
 #import "YTBuyProductController.h"
 #import "NSDate+Extension.h"
 #import "YTReportContentController.h"
@@ -140,6 +139,7 @@
                 if (![self isAuthentication]) return NO;
                 // 认购
                 [self buyNow];
+                [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"认购", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             } else if ([command isEqualToString:@"closepage"])  // 关闭页面
             {
                 [self.navigationController popViewControllerAnimated:YES];
@@ -167,9 +167,10 @@
             } else if ([command isEqualToString:@"cantbuy"])
             {
                 // 判断是否认证
-                if (![self isAuthentication]) return YES;
+                if (![self isAuthentication]) return NO;
                 // 认购
                 [self buyNow];
+                [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"认购", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             } else if ([command isEqualToString:@"mobclick"])   // 事件统计
             {
                 [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : urlComps[2], @"机构" : [YTUserInfoTool userInfo].organizationName}];
@@ -403,7 +404,6 @@
 - (void)sendMail:(NSString *)mail
 {
     self.sendMailView = nil;
-//    [CoreTFManagerVC uninstallManagerForVC:self];
     // 发送请求
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"email"] = mail;
@@ -415,15 +415,6 @@
     }];
     [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"获取详细资料", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
-
-
--(void)viewDidDisappear:(BOOL)animated{
-    
-    [super viewDidDisappear:animated];
-    
-//    [CoreTFManagerVC uninstallManagerForVC:self];
-}
-
 
 
 /**

@@ -81,6 +81,7 @@
     if (self.isOrder)
     {
         [SVProgressHUD showSuccessWithStatus:@"报备成功"];
+        self.isOrder = NO;
     }
 }
 

@@ -49,6 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
     // 去除标题中的pdf
     NSRange range = [self.shareTitle rangeOfString:@".pdf"];
     if (range.location != NSNotFound) {
@@ -57,7 +58,6 @@
     
     self.title = self.shareTitle;
     self.webView.scalesPageToFit = YES;
-    
     // 加载网页
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
     
@@ -77,6 +77,17 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [SVProgressHUD dismiss];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
+{
+    [SVProgressHUD showErrorWithStatus:@"加载失败"];
+}
+
 /**
  *  右侧菜单点击
  */

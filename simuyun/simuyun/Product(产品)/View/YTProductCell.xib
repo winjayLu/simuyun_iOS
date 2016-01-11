@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="122"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="121.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="122"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFh-4K-Ouu" userLabel="分割线">
@@ -80,7 +80,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iYo-61-01u" userLabel="title">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="37"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="productIcon1" translatesAutoresizingMaskIntoConstraints="NO" id="7ia-XA-YDc">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7ia-XA-YDc">
                                 <rect key="frame" x="8" y="13" width="25" height="13"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="13" id="Acr-nt-iP9"/>
@@ -239,6 +239,5 @@
     </objects>
     <resources>
         <image name="logobackground" width="95" height="74"/>
-        <image name="productIcon1" width="24" height="12"/>
     </resources>
 </document>
