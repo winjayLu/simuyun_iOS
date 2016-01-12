@@ -218,17 +218,28 @@
  */
 - (void)setupChildVc
 {
-    self.message = (YTMessageViewController *)[self addOneChildVcClass:[YTMessageViewController class] title:@"消息" image:@"christmass" selectedImage:@"christmassanxia"];
-    self.product = (YTProductGroupController *)[self addOneChildVcClass:[YTProductGroupController class] title:@"产品" image:@"christmasi" selectedImage:@"christmasianxia"];
+#pragma mark - 日期判断
+    // 春节
+    NSDate *chunJieDate = [@"2016-2-7 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
+    // 正月十五
+    NSDate *shiWuDate = [@"2016-2-23 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *today = [NSDate date];
+    NSComparisonResult ChunjieResult = [chunJieDate compare:today];
+    NSComparisonResult shiWuResult = [shiWuDate compare:today];
+    
+    // 图片名
+    NSString *message = @"messageIcon";
+    NSString *product = @"productIcon";
+    NSString *discover = @"discoverIcon";
+    NSString *school = @"schoolIcon";
+    if (ChunjieResult <= 0 && shiWuResult > 0) {
+        
+    }
+    self.message = (YTMessageViewController *)[self addOneChildVcClass:[YTMessageViewController class] title:@"消息" image:message selectedImage:[NSString stringWithFormat:@"%@Selected", message]];
+    self.product = (YTProductGroupController *)[self addOneChildVcClass:[YTProductGroupController class] title:@"产品" image:product selectedImage:[NSString stringWithFormat:@"%@Selected", product]];
     self.profile = (YTProfileViewController *)[self addOneChildVcClass:[YTProfileViewController class] title:nil image:nil selectedImage:nil];
-    self.discover = (YTDiscoverViewController *)[self addOneChildVcClass:[YTDiscoverViewController class] title:@"发现" image:@"christmasm" selectedImage:@"christmasmanxia"];
-    self.school = (YTSchoolViewController *)[self addOneChildVcClass:[YTSchoolViewController class] title:@"学院" image:@"christmasu" selectedImage:@"christmasuanxia"];
-    // 日期判断
-//    NSDate *activityDate = [@"2015-12-25 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
-//    NSDate *today = [NSDate date];
-//    NSComparisonResult result = [activityDate compare:today];
-//    if (result <= 0) {
-//    }
+    self.discover = (YTDiscoverViewController *)[self addOneChildVcClass:[YTDiscoverViewController class] title:@"发现" image:discover selectedImage:[NSString stringWithFormat:@"%@Selected", discover]];
+    self.school = (YTSchoolViewController *)[self addOneChildVcClass:[YTSchoolViewController class] title:@"学院" image:school selectedImage:[NSString stringWithFormat:@"%@Selected", school]];
 }
 /**
  *  初始化tabBar的样式

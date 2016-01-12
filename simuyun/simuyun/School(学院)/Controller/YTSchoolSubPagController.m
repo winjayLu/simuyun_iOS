@@ -102,9 +102,6 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    CGSize oldSzie = ((UIWebView *)self.view).scrollView.contentSize;
-    [((UIWebView *)self.view).scrollView setContentSize:CGSizeMake(oldSzie.width, oldSzie.height - 120)];
-
     self.title = self.titleData;
     [self.progressProxy.progressView setProgress:1.0f animated:NO];
     self.view.userInteractionEnabled = YES;

@@ -102,6 +102,11 @@
  */
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *fenbiqiLeftConstraint;
 
+/**
+ *  已募集金额底部约束
+ */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *yimujiBottomConstraint;
+
 @end
 
 
@@ -211,6 +216,7 @@
     {
         self.fenbiqiLeftConstraint.constant = 4.0;
         self.yimujiLable.font = [UIFont systemFontOfSize:18];
+        self.yimujiBottomConstraint.constant = 2;
     }
 }
 

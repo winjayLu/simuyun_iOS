@@ -16,6 +16,7 @@
 #import "YTViewPdfViewController.h"
 #import "YHWebViewProgress.h"
 #import "YHWebViewProgressView.h"
+#import "YTOrderdetailController.h"
 
 
 @interface YTNormalWebController () <UIWebViewDelegate>
@@ -141,10 +142,10 @@
                 normal.isDate = YES;
                 normal.toTitle = urlComps[3];
                 [self.navigationController pushViewController:normal animated:YES];
-            } else if ([command isEqualToString:@"closepage"])
+            } else if ([command isEqualToString:@"closepage"])  // 关闭页面
             {
                 [self.navigationController popViewControllerAnimated:YES];
-            } else if([command isEqualToString:@"changepassword"])
+            } else if([command isEqualToString:@"changepassword"])  // 修改密码
             {
                 [self changPasswordWithOld:urlComps[2] newPassword:urlComps[3]];
             } else if ([command isEqualToString:@"filingdata"]) // 报备
@@ -158,7 +159,7 @@
                 product.pro_name = urlComps[6];
                 report.prouctModel = product;
                 [self.navigationController pushViewController:report animated:YES];
-            } else if ([command isEqualToString:@"viewpdf"])
+            } else if ([command isEqualToString:@"viewpdf"])    // pdf浏览
             {
                 YTViewPdfViewController *viewPdf = [[YTViewPdfViewController alloc] init];
                 viewPdf.url = urlComps[2];
@@ -166,6 +167,7 @@
                 
                 [self.navigationController pushViewController:viewPdf animated:YES];
             }
+
         }
         return NO;
     }

@@ -49,7 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD showWithStatus:@"正在加载"];
     // 去除标题中的pdf
     NSRange range = [self.shareTitle rangeOfString:@".pdf"];
     if (range.location != NSNotFound) {
@@ -215,7 +215,11 @@
     }
     [MobClick event:@"share_click" attributes:@{@"内容类别" : @"pdf文档", @"分享途径" : @(tag) ,@"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
-
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [SVProgressHUD dismiss];
+}
 
 
 

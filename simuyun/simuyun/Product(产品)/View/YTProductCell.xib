@@ -247,6 +247,7 @@
                 <outlet property="timeUnitLable" destination="moP-yM-HQx" id="eVe-1U-9VY"/>
                 <outlet property="titleLable" destination="2j8-c5-xkr" id="sKm-fL-cMB"/>
                 <outlet property="titleLeftConstraint" destination="Kxh-Dd-2jD" id="SXz-BM-jOm"/>
+                <outlet property="yimujiBottomConstraint" destination="xqj-tz-RF6" id="eDu-gs-uOc"/>
                 <outlet property="yimujiLable" destination="dN4-O6-Sxf" id="r9C-RA-JvG"/>
             </connections>
             <point key="canvasLocation" x="308.5" y="381"/>

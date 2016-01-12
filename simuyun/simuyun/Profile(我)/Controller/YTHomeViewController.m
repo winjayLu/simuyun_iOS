@@ -88,7 +88,7 @@
 @property (nonatomic, weak) YTGroupCell *groupCell;
 
 // 第一次加载
-@property (nonatomic, assign) BOOL firstLoad;
+//@property (nonatomic, assign) BOOL firstLoad;
 
 @end
 
@@ -138,23 +138,21 @@
     [super viewWillAppear:animated];
     // 加载待办事项
     [self loadTodos];
-    if (!self.firstLoad) {
-        // 加载用户信息
-        self.topView.userInfo = [YTUserInfoTool userInfo];
-        [YTCenter postNotificationName:YTUpdateIconImage object:nil];
-        self.firstLoad = YES;
-    } else {
-        // 重新加载用户信息
-        [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
-            if (finally) {
-                self.topView.userInfo = [YTUserInfoTool userInfo];
-                [YTCenter postNotificationName:YTUpdateIconImage object:nil];
-                [self updateAuthentication];
-                // 更换待报备订单数量
-                [self.bottom reloadData];
-            }
-        }];
-    }
+
+    // 加载本地用户信息
+    self.topView.userInfo = [YTUserInfoTool userInfo];
+    [YTCenter postNotificationName:YTUpdateIconImage object:nil];
+    
+    // 从服务器获取用户信息
+    [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
+        if (finally) {
+            self.topView.userInfo = [YTUserInfoTool userInfo];
+            [YTCenter postNotificationName:YTUpdateIconImage object:nil];
+            [self updateAuthentication];
+            // 更换待报备订单数量
+            [self.bottom reloadData];
+        }
+    }];
 }
 
 

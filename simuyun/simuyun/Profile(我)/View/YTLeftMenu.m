@@ -199,6 +199,9 @@
     if (_userInfo == nil) return;
     // 设置头像
     if (_userInfo.iconImage != nil){
+        self.iconImage.layer.masksToBounds = YES;
+        self.iconImage.layer.cornerRadius = self.iconImage.frame.size.width * 0.5;
+        self.iconImage.clipsToBounds = YES;
         self.iconImage.image = [YTUserInfoTool userInfo].iconImage;
     } else {
         [self setIconImageWithImageUrl:userInfo.headImgUrl];

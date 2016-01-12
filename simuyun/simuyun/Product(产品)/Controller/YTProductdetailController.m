@@ -158,20 +158,20 @@
                 viewPdf.shareTitle = urlComps[3];
                 [self.navigationController pushViewController:viewPdf animated:YES];
                 [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"pdf简版", @"机构" : [YTUserInfoTool userInfo].organizationName}];
-            } else if([command isEqualToString:@"copytoclipboard"])
+            } else if([command isEqualToString:@"copytoclipboard"]) // copy字符串
             {
                 UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
                 pasteboard.string = urlComps[2];
                 [SVProgressHUD showSuccessWithStatus:@"复制成功"];
                 [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"复制打款帐号", @"机构" : [YTUserInfoTool userInfo].organizationName}];
-            } else if ([command isEqualToString:@"cantbuy"])
+            } else if ([command isEqualToString:@"cantbuy"])    // 不可认购状态
             {
                 // 判断是否认证
                 if (![self isAuthentication]) return NO;
                 // 认购
                 [self buyNow];
                 [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"认购", @"机构" : [YTUserInfoTool userInfo].organizationName}];
-            } else if ([command isEqualToString:@"mobclick"])   // 事件统计
+            } else if ([command isEqualToString:@"mobclick"])   // h5事件统计
             {
                 [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : urlComps[2], @"机构" : [YTUserInfoTool userInfo].organizationName}];
             }
