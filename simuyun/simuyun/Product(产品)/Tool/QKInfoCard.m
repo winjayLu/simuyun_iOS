@@ -264,7 +264,12 @@
     _dimBackground = YES;
     _minHorizontalPadding = 5.0f;
     _minVertalPadding = 10.f;
-    _proportion = 3.0/4.0f;
+//    _proportion = 3.0/4.0f;
+//
+//    // iphone6以下屏幕特殊处理
+//    if (DeviceWidth < 375) {
+        _proportion = 0.690;
+//    }
     
     _containerView = [[QKInfoCardContainerView alloc] init];
     
@@ -401,26 +406,14 @@
 
 - (void)layoutSubviews {
     CGFloat kWidthPadding = _minHorizontalPadding;
-    CGFloat kHeightPadding = _minVertalPadding;
-
-    CGFloat kProportion = _proportion;
-    
     _containerView.containerBackgroundColor = _cardBackgroundColor;
     _containerView.closeButtonBackgroundColor = _closeButtonBackgroundColor;
     _containerView.closeButtonTintColor = _closeButtonTintColor;
     _containerView.cornerRadius = _cornerRadius;
     
-    if (CGRectGetWidth(self.bounds) > CGRectGetHeight(self.bounds)) {
-        
-        CGFloat containerHeight = CGRectGetHeight(self.bounds) - kHeightPadding * 2.0;
-        
-        _containerView.bounds = CGRectMake(0, 0, containerHeight * kProportion, containerHeight);
-    } else {
-        
-        CGFloat containerWidth = CGRectGetWidth(self.bounds) - kWidthPadding * 2.0;
-        
-        _containerView.bounds = CGRectMake(0, 0, containerWidth, containerWidth / kProportion);
-    }
+    CGFloat containerWidth = CGRectGetWidth(self.bounds) - kWidthPadding * 2.0;// 365
+    
+    _containerView.bounds = CGRectMake(0, 0, containerWidth, 490);
     
     _containerView.center = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
 }

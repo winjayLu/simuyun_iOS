@@ -15,7 +15,7 @@
  */
 typedef enum {
     ProductItemTypeTaiShan = 1,   //  泰山
-    ProductItemTypeHuangShan = 2,   // 黄山
+    ProductItemTypeHuangShan = 2,   // 黄山 // 修改为昆仑山
     ProductItemTypeHenShan = 3,     // 衡山
     ProductItemTypeSongShan = 4,    // 嵩山
     ProductItemTypeChangJiang = 5,  // 长江

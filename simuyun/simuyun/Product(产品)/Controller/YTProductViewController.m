@@ -162,10 +162,11 @@
     param[@"limit"] = @"20";
     [YTHttpTool get:YTProductList params:param
     success:^(NSDictionary *responseObject) {
+        [self.tableView.footer resetNoMoreData];
         self.products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
         if([ self.products count] < 20)
         {
-            self.tableView.footer = nil;
+            [self.tableView.footer noticeNoMoreData];
         }
         // 刷新表格
         [self.tableView reloadData];
@@ -195,8 +196,8 @@
         [self.tableView.footer endRefreshing];
         if([(NSArray *)responseObject count] == 0)
         {
-            self.tableView.footer = nil;
-        }
+            [self.tableView.footer noticeNoMoreData];
+        } 
         [self.products addObjectsFromArray:[YTProductModel objectArrayWithKeyValuesArray:responseObject]];
         [self.tableView reloadData];
     } failure:^(NSError *error) {

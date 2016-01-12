@@ -102,7 +102,7 @@
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewOrder)];
     // 马上进入刷新状态
     [self.tableView.header beginRefreshing];
-    self.tableView.footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreOrder)];
+    self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreOrder)];
 }
 
 /**
@@ -188,7 +188,12 @@
     self.pageno = 1;
     dict[@"pageno"] = @(self.pageno);
     [YTHttpTool get:YTOrders params:dict success:^(id responseObject) {
+        [self.tableView.footer resetNoMoreData];
         self.orders = [YTOrderCenterModel objectArrayWithKeyValuesArray:responseObject];
+        if([ self.orders count] < 20)
+        {
+            [self.tableView.footer noticeNoMoreData];
+        }
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
         [self.hintView changeContentTypeWith:self.orders];
@@ -217,7 +222,7 @@
         [self.tableView.footer endRefreshing];
         if([(NSArray *)responseObject count] == 0)
         {
-            self.tableView.footer = nil;
+            [self.tableView.footer noticeNoMoreData];
         }
         [self.orders addObjectsFromArray:[YTOrderCenterModel objectArrayWithKeyValuesArray:responseObject]];
         [self.tableView reloadData];

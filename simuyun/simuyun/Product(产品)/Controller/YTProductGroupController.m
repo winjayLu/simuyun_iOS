@@ -187,6 +187,9 @@
 {
     YTProductViewController *productList = [[YTProductViewController alloc] init];
     productList.series = (int)button.tag;
+    if (button.tag == 2) {  // 黄山修改为昆仑山
+        productList.series = 9;
+    }
     productList.title = [self titleWithItemType:(int)button.tag];
     productList.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:productList animated:YES];
@@ -203,8 +206,8 @@
             [MobClick event:@"proRecommand_click" attributes:@{@"类型" : @"泰山", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
         case ProductItemTypeHuangShan:
-            title = @"黄山系列";
-            [MobClick event:@"proRecommand_click" attributes:@{@"类型" : @"黄山", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+            title = @"昆仑山系列";
+            [MobClick event:@"proRecommand_click" attributes:@{@"类型" : @"昆仑山", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
         case ProductItemTypeSongShan:
             title = @"嵩山系列";

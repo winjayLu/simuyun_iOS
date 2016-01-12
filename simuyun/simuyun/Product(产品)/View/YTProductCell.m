@@ -97,6 +97,10 @@
  */
 @property (weak, nonatomic) IBOutlet UILabel *endtimeTitleLable;
 
+/**
+ *  封闭期左侧约束
+ */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fenbiqiLeftConstraint;
 
 @end
 
@@ -126,23 +130,20 @@
  */
 - (void)setProduct:(YTProductModel *)product
 {
+
     _product = product;
     
     // 设置icon图片
     if (_product.series != 0) {
-        self.iconWidthConstraint.constant = 25;
+        self.iconWidthConstraint.constant = 33;
         self.titleLeftConstraint.constant = 8;
         self.iconImage.hidden = NO;
          [self.iconImage imageWithUrlStr:product.icon_url phImage:nil];
-        // 调整icon的宽度
-        if (_product.series > 6) {
-            self.iconWidthConstraint.constant = 33;
-        }
     } else
     {
         self.iconWidthConstraint.constant = 0;
         self.iconImage.hidden = YES;
-        self.titleLeftConstraint.constant = -0.5;
+        self.titleLeftConstraint.constant = 0;
     }
 
     // 设置标题
@@ -204,6 +205,12 @@
             self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.minute];
             self.timeUnitLable.text = @"分钟";
         }
+    }
+    // iphone 6 以下屏幕特殊适配
+    if (DeviceWidth < 375)
+    {
+        self.fenbiqiLeftConstraint.constant = 4.0;
+        self.yimujiLable.font = [UIFont systemFontOfSize:18];
     }
 }
 
