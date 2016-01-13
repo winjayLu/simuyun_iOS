@@ -26,9 +26,9 @@
  *  成交量
  */
 @property (nonatomic, assign) double volume;
-///**
-// *  成交额
-// */
+/**
+ *  成交额
+ */
 //@property (nonatomic, assign) double turnover;
 
 /**

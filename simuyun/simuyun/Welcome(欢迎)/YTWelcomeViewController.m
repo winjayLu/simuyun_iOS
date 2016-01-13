@@ -21,18 +21,23 @@
 
 @interface YTWelcomeViewController ()
 
+/**
+ *  banner图片
+ */
 @property (weak, nonatomic) IBOutlet UIImageView *bannerImage;
-
+/**
+ *  底部图片
+ */
+@property (weak, nonatomic) IBOutlet UIImageView *bottomImageView;
 @end
 
 @implementation YTWelcomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // 4s特殊处理
-    if (iPhone4) {
-        self.bannerImage.contentMode = UIViewContentModeScaleAspectFill;
-    }
+
+    self.bannerImage.contentMode = UIViewContentModeScaleAspectFill;
+    self.bottomImageView.contentMode = UIViewContentModeScaleAspectFill;
     
     YTResources *resources = [YTResourcesTool resources];
     if (resources != nil) { // 预加载成功

@@ -41,6 +41,7 @@
 		97187A8F1BC666E200C64609 /* YTWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97187A8D1BC666E200C64609 /* YTWebViewController.xib */; };
 		9719F7D81C04696E009849B8 /* YTReportTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9719F7D71C04696E009849B8 /* YTReportTopView.m */; };
 		9719F7DA1C04697C009849B8 /* YTReportTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9719F7D91C04697C009849B8 /* YTReportTopView.xib */; };
+		97238CA11C45E88E00F68EEA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97238CA01C45E88E00F68EEA /* LaunchScreen.xib */; };
 		972B88011BFAD3D0002A7E9B /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87DA1BFAD3D0002A7E9B /* AFHTTPRequestOperation.m */; };
 		972B88021BFAD3D0002A7E9B /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87DC1BFAD3D0002A7E9B /* AFHTTPRequestOperationManager.m */; };
 		972B88031BFAD3D0002A7E9B /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87DE1BFAD3D0002A7E9B /* AFHTTPSessionManager.m */; };
@@ -353,6 +354,7 @@
 		9719F7D61C04696E009849B8 /* YTReportTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTReportTopView.h; sourceTree = "<group>"; };
 		9719F7D71C04696E009849B8 /* YTReportTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTReportTopView.m; sourceTree = "<group>"; };
 		9719F7D91C04697C009849B8 /* YTReportTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTReportTopView.xib; sourceTree = "<group>"; };
+		97238CA01C45E88E00F68EEA /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		972B87D91BFAD3D0002A7E9B /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		972B87DA1BFAD3D0002A7E9B /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		972B87DB1BFAD3D0002A7E9B /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -1409,6 +1411,7 @@
 		97B08A881BC2472B007EBD24 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				97238CA01C45E88E00F68EEA /* LaunchScreen.xib */,
 				975F78031BCFCD3D00589D22 /* Assets.xcassets */,
 				97B08A991BC2472B007EBD24 /* Info.plist */,
 				97B08A891BC2472B007EBD24 /* main.m */,
@@ -2278,6 +2281,7 @@
 				9769F9FA1BC9676B001B1F02 /* YTGroupCell.xib in Resources */,
 				9769F9F71BC9676B001B1F02 /* YTContentCell.xib in Resources */,
 				9792D8731C30E4320097ED7E /* YTSearchProductCell.xib in Resources */,
+				97238CA11C45E88E00F68EEA /* LaunchScreen.xib in Resources */,
 				978F8CD51C10487F0041F661 /* YTLoginAuthenticationController.xib in Resources */,
 				972B880A1BFAD3D0002A7E9B /* LICENSE in Resources */,
 				97AD4E6D1C152DAA00541412 /* YTAutocompletionCell.xib in Resources */,
@@ -2689,7 +2693,6 @@
 			baseConfigurationReference = 13F661A7FA831186EC92CFB7 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				COPY_PHASE_STRIP = NO;
@@ -2719,7 +2722,6 @@
 			baseConfigurationReference = EE4C2D6D5E8167BC60D82A90 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				COPY_PHASE_STRIP = YES;
