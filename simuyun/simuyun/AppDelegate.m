@@ -26,6 +26,12 @@
 #import "YTAuthenticationErrorController.h"
 
 @interface AppDelegate ()
+
+/**
+ *  当前显示的控制器
+ */
+@property (nonatomic, strong) YTNavigationController *keyVc;
+
 @end
 
 @implementation AppDelegate
@@ -189,14 +195,15 @@
  *  获取当前正在显示的控制器
  *
  */
-- (YTNavigationController *)keyViewController
+- (void)keyViewController
 {
     UIViewController *appRootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
     if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
         UIViewController *keyVc = ((UITabBarController *)appRootVC).selectedViewController;
-        return (YTNavigationController *)keyVc;
+        if (keyVc != nil) {
+            self.keyVc = (YTNavigationController *)keyVc;
+        }
     }
-    return nil;
 }
 
 
@@ -225,8 +232,9 @@
     NSString *cancelButton = nil;
     NSString *okButton = @"知道了";
     UIViewController *rootVc =  [UIApplication sharedApplication].keyWindow.rootViewController;
-    YTNavigationController *keyVc = [self keyViewController];
-    if (keyVc.viewControllers.count == 1) {
+    // 获取正在显示的控制器
+    [self keyViewController];
+    if (self.keyVc.viewControllers.count == 1) {
         cancelButton = @"知道了";
         okButton = @"认购产品";
     }
@@ -246,7 +254,8 @@
 - (void)authenticationError:(YTJpushModel *)jpush
 {
     // 获取当前控制器
-    YTNavigationController *keyVc = [self keyViewController];
+    // 获取正在显示的控制器
+    [self keyViewController];
     HHAlertView *alert = [HHAlertView shared];
     [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"重新认证" block:^(HHAlertButton buttonindex) {
         if(buttonindex == HHAlertButtonOk)
@@ -254,7 +263,7 @@
             // 需要跳转的控制器
             YTAuthenticationErrorController *authenError = [[YTAuthenticationErrorController alloc] init];
             authenError.hidesBottomBarWhenPushed = YES;
-            [keyVc pushViewController:authenError animated:YES];
+            [self.keyVc pushViewController:authenError animated:YES];
         }
     }];
 }
@@ -263,8 +272,8 @@
  */
 - (void)jumpToHtml:(YTJpushModel *)jpush
 {
-    // 获取当前控制器
-    YTNavigationController *keyVc = [self keyViewController];
+    // 获取正在显示的控制器
+    [self keyViewController];
     HHAlertView *alert = [HHAlertView shared];
     [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"查看详情" block:^(HHAlertButton buttonindex) {
         if(buttonindex == HHAlertButtonOk)
@@ -273,7 +282,7 @@
             YTNormalWebController *webVc = [YTNormalWebController webWithTitle:jpush.title url:[NSString stringWithFormat:@"%@%@",YTH5Server, jpush.jumpUrl]];
             webVc.isDate = YES;
             webVc.hidesBottomBarWhenPushed = YES;
-            [keyVc pushViewController:webVc animated:YES];
+            [self.keyVc pushViewController:webVc animated:YES];
         }
     }];
 }

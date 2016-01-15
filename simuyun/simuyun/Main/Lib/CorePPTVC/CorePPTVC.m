@@ -152,6 +152,7 @@
     
     [super viewDidAppear:animated];
     
+    if (self.count == 0) return;
     //设置布局
     self.clv.collectionViewLayout = [PPTLayout layout:self.view.bounds.size];
 }
@@ -289,6 +290,8 @@
  *  定时器工作内容
  */
 -(void)timerRunAction{
+    
+    if (self.count == 0) return;
     
     // 1.马上显示回最中间那组的数据
     NSIndexPath *currentIndexPathReset = [self resetIndexPath];

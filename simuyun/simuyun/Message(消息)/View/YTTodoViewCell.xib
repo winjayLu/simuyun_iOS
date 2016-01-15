@@ -78,6 +78,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="message" width="375" height="120"/>
+        <image name="message" width="90" height="90"/>
     </resources>
 </document>

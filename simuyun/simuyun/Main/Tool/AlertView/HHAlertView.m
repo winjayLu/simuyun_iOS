@@ -62,6 +62,7 @@ NSInteger const HHAlertview_SIZE_DETAIL_FONT = 14;
 
 + (instancetype)shared
 {
+    
     static dispatch_once_t once = 0;
     static HHAlertView *alert;
     dispatch_once(&once, ^{
@@ -84,7 +85,7 @@ NSInteger const HHAlertview_SIZE_DETAIL_FONT = 14;
 static UIWindow *_window;
 - (void)showAlertWithStyle:(HHAlertStyle)HHAlertStyle imageName:(NSString *)imagename Title:(NSString *)title detail:(NSString *)detail cancelButton:(NSString *)cancel Okbutton:(NSString *)ok block:(selectButton)block
 {
- 
+    [self hide];
     [self uiStyle];
     _secletBlock = block;
     
@@ -227,10 +228,13 @@ static UIWindow *_window;
     
     [_OkButton removeFromSuperview];
     [_cancelButton removeFromSuperview];
+    [_titleLabel removeFromSuperview];
+    [_detailLabel removeFromSuperview];
     _OkButton=nil;
+    _titleLabel = nil;
+    _detailLabel = nil;
     _cancelButton = nil;
     _secletBlock=nil;
-    [self removeFromSuperview];
     _window.hidden = YES;
     _window = nil;
 }

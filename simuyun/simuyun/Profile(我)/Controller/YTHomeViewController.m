@@ -649,6 +649,11 @@
  */
 - (void)signIn
 {
+    if ([YTUserInfoTool userInfo].isSingIn == 1) {
+        [SVProgressHUD showInfoWithStatus:@"今日已签到"];
+        return;
+    }
+    
     if(self.blackAlert != nil) return;
     // 发送请求
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
