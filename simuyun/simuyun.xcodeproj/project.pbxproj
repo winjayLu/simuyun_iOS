@@ -2644,7 +2644,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "59489eb2-495f-4911-bfbd-88a62f520546";
+				PROVISIONING_PROFILE = "0841cec0-9d20-41c9-9973-6089a38a60b5";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2682,7 +2682,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "59489eb2-495f-4911-bfbd-88a62f520546";
+				PROVISIONING_PROFILE = "0841cec0-9d20-41c9-9973-6089a38a60b5";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2693,6 +2693,7 @@
 			baseConfigurationReference = 13F661A7FA831186EC92CFB7 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
 				COPY_PHASE_STRIP = NO;
@@ -2711,7 +2712,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "59489eb2-495f-4911-bfbd-88a62f520546";
+				PROVISIONING_PROFILE = "0841cec0-9d20-41c9-9973-6089a38a60b5";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -2722,6 +2723,7 @@
 			baseConfigurationReference = EE4C2D6D5E8167BC60D82A90 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
 				COPY_PHASE_STRIP = YES;
@@ -2739,7 +2741,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "59489eb2-495f-4911-bfbd-88a62f520546";
+				PROVISIONING_PROFILE = "0841cec0-9d20-41c9-9973-6089a38a60b5";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
