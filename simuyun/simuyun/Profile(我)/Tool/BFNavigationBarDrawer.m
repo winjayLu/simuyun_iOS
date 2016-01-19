@@ -233,12 +233,10 @@ typedef NS_ENUM(NSInteger, BFNavigationBarDrawerState) {
 - (void)hideAnimated:(BOOL)animated {
 	
 	if (state == BFNavigationBarDrawerStateHiding || state == BFNavigationBarDrawerStateHidden) {
-		NSLog(@"BFNavigationBarDrawer: Inconsistency warning. Drawer is already hiding or is hidden.");
 		return;
 	}
 	
 	if (!parentBar) {
-		NSLog(@"BFNavigationBarDrawer: Navigation bar should not be released while drawer is visible.");
 		return;
 	}
 	

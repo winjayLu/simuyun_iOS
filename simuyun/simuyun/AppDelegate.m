@@ -178,7 +178,8 @@
 {
     if ([YTJpushTool jpush]) return;
     YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:userInfo];
-    if (jpush == nil) return;
+    // 过滤旧版本推送消息
+    if (jpush == nil || jpush.title.length == 0 || jpush.detail.length == 0) return;
 
     if (jpush.type == 5)    // 认证成功
     {

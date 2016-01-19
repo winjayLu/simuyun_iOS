@@ -106,12 +106,12 @@ static ShareManage *shareManage;
         self.mailVc = mailPicker;
         //设置主题
         [mailPicker setSubject:self.share_title];
-        // 添加一张图片
-        UIImage *addPic = [UIImage imageNamed: @"maillogo"];
-        NSData *imageData = UIImagePNGRepresentation(addPic);
-        [mailPicker addAttachmentData: imageData mimeType: @"image/png" fileName: @"Icon.png"];
+//        // 添加一张图片
+//        UIImage *addPic = [UIImage imageNamed: @"maillogo"];
+//        NSData *imageData = UIImagePNGRepresentation(addPic);
+//        [mailPicker addAttachmentData: imageData mimeType: @"image/png" fileName: @"Icon.png"];
         // 设置正文
-        NSString *emailBody =[NSString stringWithFormat:@"%@",self.share_content];
+        NSString *emailBody =[NSString stringWithFormat:@"%@\n%@",self.share_title, self.share_url];
         [mailPicker setMessageBody:emailBody isHTML:YES];
         [_viewC presentViewController:mailPicker animated:YES completion:nil];
     }
@@ -160,7 +160,7 @@ static ShareManage *shareManage;
     MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
     picker.messageComposeDelegate = self;
     picker.navigationBar.tintColor = [UIColor blackColor];
-    picker.body = self.share_content;
+    picker.body = [NSString stringWithFormat:@"%@\n%@",self.share_title,self.share_url];
     [_viewC presentViewController:picker animated:YES completion:nil];
 }
 

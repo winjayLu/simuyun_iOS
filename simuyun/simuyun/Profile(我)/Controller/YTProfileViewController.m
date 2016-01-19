@@ -62,14 +62,12 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
     // 设置menu的view
     YTMenuViewController *menuVc = [[YTMenuViewController alloc] init];
     menuVc.view.frame = self.view.frame;
-//    menuVc.view.center = CGPointMake(0, menuVc.view.center.y);
     [self addChildViewController:menuVc];
     [self.view addSubview:menuVc.view];
     self.menuVc = menuVc;
     
     [self addChildViewController:homeVc];
     [self.view addSubview:homeVc.view];
-//    self.nav.interactivePopGestureRecognizer.enabled = NO;
     
     // 初始化手势
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
@@ -82,8 +80,6 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
 {
     return YES;
 }
-
-
 
 
 /**
@@ -117,31 +113,6 @@ static const CGFloat viewSlideHorizonRatio = 0.642;
         [self showMenu];
         return;
     }
-
-    
-//    CGFloat dis = self.distance + x;
-//    
-//    if (recognizer.state == UIGestureRecognizerStateCancelled) {
-//        [self showHome];
-//        return;
-//    }
-//    
-//    // 当手势停止时执行操作
-//    if (recognizer.state == UIGestureRecognizerStateEnded) {
-//        if (dis >= 241 * 0.5) {
-//            [self showMenu];
-//        } else {
-//            [self showHome];
-//        }
-//        return;
-//    }
-//    YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-//    CGPoint old = appRootVC.tabBar.center;
-//    self.homeVc.view.center = CGPointMake(self.view.center.x + dis, self.view.center.y);
-//    CGFloat menuCenterMove = dis * (self.menuCenterXEnd - self.menuCenterXStart) / self.leftDistance;
-//    self.menuVc.view.center = CGPointMake(self.menuCenterXStart + menuCenterMove, self.view.center.y);
-//
-//    appRootVC.tabBar.center = CGPointMake(self.view.center.x + dis, old.y);
 }
 
 

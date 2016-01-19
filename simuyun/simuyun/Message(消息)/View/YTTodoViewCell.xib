@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="314" height="84.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message" translatesAutoresizingMaskIntoConstraints="NO" id="orf-so-ElO">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="orf-so-ElO">
                         <rect key="frame" x="8" y="11" width="50" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="0oo-91-fZl"/>
@@ -77,7 +77,4 @@
             <point key="canvasLocation" x="218" y="359"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="message" width="90" height="90"/>
-    </resources>
 </document>
