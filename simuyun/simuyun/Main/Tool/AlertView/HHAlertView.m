@@ -96,7 +96,7 @@ static UIWindow *_window;
     [self jpushConfigButton:cancel Okbutton:ok];
     
     _window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
-    _window.backgroundColor = YTRGBA(0, 0, 0, 0.1);
+    _window.backgroundColor = YTRGBA(0, 0, 0, 0.3);
     _window.alpha = 1;
     _window.windowLevel = UIWindowLevelStatusBar ;
     _window.hidden = NO;

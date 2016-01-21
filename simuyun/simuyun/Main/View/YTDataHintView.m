@@ -80,6 +80,7 @@
  */
 - (void)switchContentTypeWIthType:(contentType)type
 {
+    self.hidden = NO;
     // 删除所有子控件
     for (UIView *subView in self.subviews) {
         [subView removeFromSuperview];
@@ -100,6 +101,8 @@
             self.nullDataView = nil;
             if (!self.isRemove) {
                 [self removeFromSuperview];
+            } else {
+                self.hidden = YES;
             }
             break;
     }

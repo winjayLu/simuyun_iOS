@@ -54,6 +54,8 @@
     [YTCenter addObserver:self selector:@selector(loadSuccess) name:YTResourcesSuccess object:nil];
     [YTCenter addObserver:self selector:@selector(loadError) name:YTResourcesError object:nil];
 }
+
+
 /**
  *  加载成功
  */
