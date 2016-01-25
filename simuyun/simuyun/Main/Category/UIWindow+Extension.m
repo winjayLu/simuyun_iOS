@@ -56,10 +56,11 @@
                 [SVProgressHUD showWithStatus:@"正在登录" maskType:SVProgressHUDMaskTypeClear];
                 if ([YTAccountTool account]) {
                     [YTAccountTool loginAccount:[YTAccountTool account] result:^(BOOL result) {
-                        [SVProgressHUD dismiss];
                         if (result) {
+                            [SVProgressHUD dismiss];
                             self.rootViewController = [[YTTabBarController alloc] init];
                         } else {
+                            [SVProgressHUD showErrorWithStatus:@"登录失败"];
                             self.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
                         }
                         [self.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];

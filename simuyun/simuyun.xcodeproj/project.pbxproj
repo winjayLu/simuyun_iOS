@@ -41,6 +41,8 @@
 		97187A8F1BC666E200C64609 /* YTWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97187A8D1BC666E200C64609 /* YTWebViewController.xib */; };
 		9719F7D81C04696E009849B8 /* YTReportTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9719F7D71C04696E009849B8 /* YTReportTopView.m */; };
 		9719F7DA1C04697C009849B8 /* YTReportTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9719F7D91C04697C009849B8 /* YTReportTopView.xib */; };
+		971A44621C55FBF3007469F4 /* libTCCloudPlayerSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 971A44591C55FBF3007469F4 /* libTCCloudPlayerSDK.a */; };
+		971A44641C55FCB4007469F4 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971A44631C55FCB4007469F4 /* CoreMedia.framework */; };
 		97238CA11C45E88E00F68EEA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97238CA01C45E88E00F68EEA /* LaunchScreen.xib */; };
 		972B88011BFAD3D0002A7E9B /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87DA1BFAD3D0002A7E9B /* AFHTTPRequestOperation.m */; };
 		972B88021BFAD3D0002A7E9B /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87DC1BFAD3D0002A7E9B /* AFHTTPRequestOperationManager.m */; };
@@ -354,6 +356,15 @@
 		9719F7D61C04696E009849B8 /* YTReportTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTReportTopView.h; sourceTree = "<group>"; };
 		9719F7D71C04696E009849B8 /* YTReportTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTReportTopView.m; sourceTree = "<group>"; };
 		9719F7D91C04697C009849B8 /* YTReportTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTReportTopView.xib; sourceTree = "<group>"; };
+		971A44591C55FBF3007469F4 /* libTCCloudPlayerSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTCCloudPlayerSDK.a; sourceTree = "<group>"; };
+		971A445B1C55FBF3007469F4 /* TCCloudPlayerRorateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCloudPlayerRorateViewController.h; sourceTree = "<group>"; };
+		971A445C1C55FBF3007469F4 /* TCCloudPlayerSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCloudPlayerSDK.h; sourceTree = "<group>"; };
+		971A445D1C55FBF3007469F4 /* TCCloudPlayerShowAbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCloudPlayerShowAbleView.h; sourceTree = "<group>"; };
+		971A445E1C55FBF3007469F4 /* TCCloudPlayerVideoUrlInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCloudPlayerVideoUrlInfo.h; sourceTree = "<group>"; };
+		971A445F1C55FBF3007469F4 /* TCCloudPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCloudPlayerView.h; sourceTree = "<group>"; };
+		971A44601C55FBF3007469F4 /* TCCloudPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCloudPlayerViewController.h; sourceTree = "<group>"; };
+		971A44611C55FBF3007469F4 /* TCReportEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCReportEngine.h; sourceTree = "<group>"; };
+		971A44631C55FCB4007469F4 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		97238CA01C45E88E00F68EEA /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		972B87D91BFAD3D0002A7E9B /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		972B87DA1BFAD3D0002A7E9B /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -799,10 +810,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97973D0A1BC3E84900B7B4CB /* AVFoundation.framework in Frameworks */,
+				971A44641C55FCB4007469F4 /* CoreMedia.framework in Frameworks */,
 				97C606C91BC29DA500E555E8 /* libz.tbd in Frameworks */,
 				97C606BD1BC29D5000E555E8 /* Security.framework in Frameworks */,
 				971034A61BFD65FF00EE22A4 /* UIKit.framework in Frameworks */,
 				971034A41BFD65F600EE22A4 /* Foundation.framework in Frameworks */,
+				971A44621C55FBF3007469F4 /* libTCCloudPlayerSDK.a in Frameworks */,
 				97C606C11BC29D7400E555E8 /* CoreGraphics.framework in Frameworks */,
 				97C606B31BC298BA00E555E8 /* SystemConfiguration.framework in Frameworks */,
 				97C606C51BC29D8E00E555E8 /* CoreTelephony.framework in Frameworks */,
@@ -812,7 +826,6 @@
 				97DD72C51BC421F40082C69F /* libstdc++.dylib in Frameworks */,
 				97DD72C31BC421E60082C69F /* libz.dylib in Frameworks */,
 				97DD72C11BC421D90082C69F /* libsqlite3.dylib in Frameworks */,
-				97973D0A1BC3E84900B7B4CB /* AVFoundation.framework in Frameworks */,
 				97C606C71BC29D9B00E555E8 /* libstdc++.tbd in Frameworks */,
 				97C606C31BC29D8000E555E8 /* libsqlite3.tbd in Frameworks */,
 				97C606BF1BC29D6100E555E8 /* libiconv.tbd in Frameworks */,
@@ -853,6 +866,7 @@
 		6B0AB9E4169D53B6CA397CD8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				971A44631C55FCB4007469F4 /* CoreMedia.framework */,
 				971034A51BFD65FF00EE22A4 /* UIKit.framework */,
 				971034A31BFD65F600EE22A4 /* Foundation.framework */,
 				971034A11BFD65CA00EE22A4 /* CoreFoundation.framework */,
@@ -989,6 +1003,29 @@
 				971503A31BC75E78007E27D0 /* PPTCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		971A44581C55FBF3007469F4 /* TencentPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				971A44591C55FBF3007469F4 /* libTCCloudPlayerSDK.a */,
+				971A445A1C55FBF3007469F4 /* public */,
+			);
+			path = TencentPlayer;
+			sourceTree = "<group>";
+		};
+		971A445A1C55FBF3007469F4 /* public */ = {
+			isa = PBXGroup;
+			children = (
+				971A445B1C55FBF3007469F4 /* TCCloudPlayerRorateViewController.h */,
+				971A445C1C55FBF3007469F4 /* TCCloudPlayerSDK.h */,
+				971A445D1C55FBF3007469F4 /* TCCloudPlayerShowAbleView.h */,
+				971A445E1C55FBF3007469F4 /* TCCloudPlayerVideoUrlInfo.h */,
+				971A445F1C55FBF3007469F4 /* TCCloudPlayerView.h */,
+				971A44601C55FBF3007469F4 /* TCCloudPlayerViewController.h */,
+				971A44611C55FBF3007469F4 /* TCReportEngine.h */,
+			);
+			path = public;
 			sourceTree = "<group>";
 		};
 		972B87D71BFAD3D0002A7E9B /* AFNetworking */ = {
@@ -1612,6 +1649,7 @@
 		97C6059B1BC260A400E555E8 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				971A44581C55FBF3007469F4 /* TencentPlayer */,
 				972B87D71BFAD3D0002A7E9B /* AFNetworking */,
 				97DE83021BD0FB5300E3C5CA /* CoreTFManagerVC */,
 				9714A6D61BC7E0610018A14E /* YUScreentPoper */,
@@ -2621,8 +2659,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2644,7 +2682,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "efc89723-e472-4686-aa23-e9d91a62c6de";
+				PROVISIONING_PROFILE = "0841cec0-9d20-41c9-9973-6089a38a60b5";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2666,8 +2704,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2682,7 +2720,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "efc89723-e472-4686-aa23-e9d91a62c6de";
+				PROVISIONING_PROFILE = "0841cec0-9d20-41c9-9973-6089a38a60b5";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2694,8 +2732,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
@@ -2709,12 +2747,13 @@
 					"$(PROJECT_DIR)/simuyun/Main/Lib/Umeng/UMSocial_Sdk_4.2.5",
 					"$(PROJECT_DIR)/simuyun/Main/Lib/Umeng/Wechat",
 					"$(PROJECT_DIR)/simuyun/Main/Lib/JPush",
+					"$(PROJECT_DIR)/simuyun/Main/Lib/TencentPlayer",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "efc89723-e472-4686-aa23-e9d91a62c6de";
+				PROVISIONING_PROFILE = "0841cec0-9d20-41c9-9973-6089a38a60b5";
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = simuyun/TencentPlayer/public;
 			};
 			name = Debug;
 		};
@@ -2724,8 +2763,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing Intime Wealth Cloud E-commerce Co., Ltd. (H38DYSL82Z)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
@@ -2738,12 +2777,13 @@
 					"$(PROJECT_DIR)/simuyun/Main/Lib/Umeng/UMSocial_Sdk_4.2.5",
 					"$(PROJECT_DIR)/simuyun/Main/Lib/Umeng/Wechat",
 					"$(PROJECT_DIR)/simuyun/Main/Lib/JPush",
+					"$(PROJECT_DIR)/simuyun/Main/Lib/TencentPlayer",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "efc89723-e472-4686-aa23-e9d91a62c6de";
+				PROVISIONING_PROFILE = "0841cec0-9d20-41c9-9973-6089a38a60b5";
 				TARGETED_DEVICE_FAMILY = 1;
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = simuyun/TencentPlayer/public;
 			};
 			name = Release;
 		};
