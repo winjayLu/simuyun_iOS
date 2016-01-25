@@ -126,7 +126,6 @@
         return;
     }
     // 判断剩余额度
-    YTLog(@"%d", self.product.remaining_amt);
     if([self.buyMoney.text intValue] > self.product.remaining_amt)
     {
         [SVProgressHUD showErrorWithStatus:@"额度不足,请重新选择额度"];

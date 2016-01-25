@@ -16,8 +16,8 @@
 
 - (NSString *)organizationName
 {
-    if (_organizationName == nil) {
-        return @"";
+    if (_organizationName == nil || _organizationName.length == 0) {
+        return @"路人甲";
     }
     return _organizationName;
 }

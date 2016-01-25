@@ -129,28 +129,26 @@ static UIWindow *_window;
     [self addSubview:_titleLabel];
     
     if (_detailLabel == nil) {
-        _detailLabel  = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_titleLabel.frame) + 10, [self getSelfSize].width - 15, HHAlertview_SIZE_TITLE_FONT)];
-        [_detailLabel setNumberOfLines:0];
-    }
-    if (detail != nil && detail.length > 0) {
-        
-        NSMutableAttributedString * attributedString1 = [[NSMutableAttributedString alloc] initWithString:detail];
-        NSMutableParagraphStyle * paragraphStyle1 = [[NSMutableParagraphStyle alloc] init];
-        [paragraphStyle1 setLineSpacing:10];
-        [attributedString1 addAttribute:NSParagraphStyleAttributeName value:paragraphStyle1 range:NSMakeRange(0, [detail length])];
-        [_detailLabel setAttributedText:attributedString1];
-        [_detailLabel sizeToFit];
+        _detailLabel  = [[UILabel alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_titleLabel.frame) + 10, [self getSelfSize].width - 30, HHAlertview_SIZE_DETAIL_FONT)];
         _detailLabel.textColor = [UIColor grayColor];
         [_detailLabel setNumberOfLines:0];
         [_detailLabel setFont:[UIFont systemFontOfSize:HHAlertview_SIZE_DETAIL_FONT]];
-        [_detailLabel setTextAlignment:NSTextAlignmentLeft];
+    }
+    if (detail != nil && detail.length > 0) {
+        
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:detail];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        
+        [paragraphStyle setLineSpacing:10];//调整行间距
+        
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [detail length])];
+        _detailLabel.attributedText = attributedString;
         
         [_detailLabel sizeToFit];
-        [_detailLabel setFrame:CGRectMake(15, CGRectGetMaxY(_titleLabel.frame) + 10, [self getSelfSize].width - 30, _detailLabel.frame.size.height)];
+        [_detailLabel setFrame:CGRectMake(15, CGRectGetMaxY(_titleLabel.frame) + 10, [self getSelfSize].width - 30, _detailLabel.frame.size.height + HHAlertview_SIZE_DETAIL_FONT)];
         [_detailLabel setTextColor:txtColor];
         [self addSubview:_detailLabel];
     }
-    
     
 }
 

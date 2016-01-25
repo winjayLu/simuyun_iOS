@@ -72,6 +72,11 @@
     return YES;
 }
 
+//- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
+//    NSLog(@"%@", url);
+//    return YES;
+//}
+
 #pragma mark - 友盟社会化组件
 /**
  *  初始化友盟推送-微信登录
