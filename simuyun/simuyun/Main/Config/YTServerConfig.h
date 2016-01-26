@@ -13,20 +13,20 @@
 //#ifdef DEBUG
 //#else
 // 生产环境
-//#define YTServer @"https://intime.simuyun.com/api/app/"
-//#define YTH5Server @"http://www.simuyun.com"
+#define YTServer @"https://intime.simuyun.com/api/app/"
+#define YTH5Server @"http://www.simuyun.com"
 //#define UmengAppKey @"5514ed3cfd98c5bca4000872"
 //#endif
 
 // 开发环境213
 //#define YTServer @"http://192.168.17.213:8080/api/app/"
 //#define YTH5Server @"http://192.168.17.213"
-//#define UmengAppKey @"545867defd98c5f23a0021da"
+#define UmengAppKey @"545867defd98c5f23a0021da"
 
 // 测试环境212
-#define YTServer @"http://192.168.17.212:6060/api/app/"
-#define YTH5Server @"http://192.168.17.212"
-#define UmengAppKey @"545867defd98c5f23a0021"
+//#define YTServer @"http://192.168.17.212:6060/api/app/"
+//#define YTH5Server @"http://192.168.17.212"
+//#define UmengAppKey @"545867defd98c5f23a0021"
 
 // 开发环境外网地址
 //#define YTServer @"http://218.241.181.229:8080/api/app/"

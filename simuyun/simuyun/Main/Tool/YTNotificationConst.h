@@ -18,3 +18,6 @@ extern NSString *const YTCancelCustomer;
 extern NSString *const YTResourcesSuccess;
 // 资源信息加载失败
 extern NSString *const YTResourcesError;
+
+// 视频播放器屏幕发生改变
+extern NSString *const YTPlayerScreenChange;

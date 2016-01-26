@@ -114,7 +114,7 @@ typedef void(^onPlaybackPauseBlock)(UIImage* curVideoImg, TCCloudPlayerPauseReas
  * @param startTimeInSeconds : 从startTimeInSeconds处播放
  */
 -(BOOL)setUrls:(NSArray*)videoUrls defaultPlayIndex:(NSInteger)defaultPlayIndex startTime:(Float64)startTimeInSeconds;
-
+#warning 设置显示模式
 //设置视频的填充方式.默认值AVLayerVideoGravityResizeAspectFill
 -(void)setVideoFillMode:(NSString *)fillMode;
 

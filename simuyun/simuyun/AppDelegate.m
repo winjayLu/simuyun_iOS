@@ -203,7 +203,18 @@
  */
 - (void)keyViewController
 {
-    UIViewController *appRootVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+    // 获取根控制器
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    // 如果获取不到直接返回
+    if (keyWindow == nil) return;
+    
+    UIViewController *appRootVC = keyWindow.rootViewController;
     if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
         UIViewController *keyVc = ((UITabBarController *)appRootVC).selectedViewController;
         if (keyVc != nil) {
@@ -237,7 +248,7 @@
     HHAlertView *alert = [HHAlertView shared];
     NSString *cancelButton = nil;
     NSString *okButton = @"知道了";
-    UIViewController *rootVc =  [UIApplication sharedApplication].keyWindow.rootViewController;
+//    UIViewController *rootVc =  [UIApplication sharedApplication].keyWindow.rootViewController;
     // 获取正在显示的控制器
     [self keyViewController];
     if (self.keyVc.viewControllers.count == 1) {
@@ -248,7 +259,21 @@
         if(buttonindex == HHAlertButtonOk)
         {
             if ([okButton isEqualToString:@"认购产品"]) {
-                ((YTTabBarController *)rootVc).selectedIndex = 1;
+                // 获取根控制器
+                UIWindow *keyWindow = nil;
+                for (UIWindow *window in [UIApplication sharedApplication].windows) {
+                    if (window.windowLevel == 0) {
+                        keyWindow = window;
+                        break;
+                    }
+                }
+                // 如果获取不到直接返回
+                if (keyWindow == nil) return;
+                
+                UIViewController *appRootVC = keyWindow.rootViewController;
+                if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+                    ((YTTabBarController *)appRootVC).selectedIndex = 1;
+                }
             }
         }
     }];
