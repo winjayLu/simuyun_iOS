@@ -13,6 +13,7 @@
 #import "UINavigationBar+BackgroundColor.h"
 #import "UIImage+Extend.h"
 #import "YTTabBarController.h"
+#import "CustomMaskViewController.h"
 
 
 typedef enum state {
@@ -149,7 +150,18 @@ static UIWindow *_window;
     __block CGFloat navCenterX;
     
     [UIView animateWithDuration:0.3 animations:^{
-        YTTabBarController *appRootVC = (YTTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+        // 获取根控制器
+        UIWindow *keyWindow = nil;
+        for (UIWindow *window in [UIApplication sharedApplication].windows) {
+            if (window.windowLevel == 0) {
+                keyWindow = window;
+                break;
+            }
+        }
+        // 如果获取不到直接返回
+        if (keyWindow == nil) return;
+        
+        YTTabBarController *appRootVC = (YTTabBarController *)keyWindow.rootViewController;
         CGPoint old = appRootVC.tabBar.center;
         if (proportion == 1) {
             menuCenterX = 0;
@@ -219,7 +231,7 @@ static UIWindow *_window;
 - (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
 
     // 如果进入的是首页视图控制器
-    if ([viewController isKindOfClass:[YTProfileViewController class]]) {
+    if ([viewController isKindOfClass:[YTProfileViewController class]] || [viewController isKindOfClass:[CustomMaskViewController class]]) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
 
     } else {

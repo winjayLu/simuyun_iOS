@@ -15,6 +15,7 @@
 #import "YTSearchViewController.h"
 #import "YTProductModel.h"
 #import "AFNetworking.h"
+#import "YTTabBarController.h"
 
 
 #define TitleHeight 70
@@ -86,7 +87,18 @@
 #pragma mark - SearchBarDelegate
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    UIViewController *appRootVC = keyWindow.rootViewController;
+    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+        tabBar.floatView.boardWindow.hidden = YES;
+    }
     YTNavigationController *nav = [[YTNavigationController alloc] initWithRootViewController:self.searchVc];
     [self presentViewController:nav animated:NO completion:nil];
     [MobClick event:@"proSearch_click" attributes:@{@"按钮" : @"搜索框", @"机构" : [YTUserInfoTool userInfo].organizationName}];

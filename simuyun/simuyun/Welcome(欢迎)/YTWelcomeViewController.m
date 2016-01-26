@@ -103,9 +103,18 @@
 {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 获取程序主窗口
-        UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
-        mainWindow.rootViewController = vc;
-        [mainWindow.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];
+        // 获取根控制器
+        UIWindow *keyWindow = nil;
+        for (UIWindow *window in [UIApplication sharedApplication].windows) {
+            if (window.windowLevel == 0) {
+                keyWindow = window;
+                break;
+            }
+        }
+        // 如果获取不到直接返回
+        if (keyWindow == nil) return;
+        keyWindow.rootViewController = vc;
+        [keyWindow.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];
     });
 }
 

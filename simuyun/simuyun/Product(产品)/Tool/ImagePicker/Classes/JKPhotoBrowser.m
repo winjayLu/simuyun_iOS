@@ -70,9 +70,16 @@ static NSString *kJKPhotoBrowserCellIdentifier = @"kJKPhotoBrowserCellIdentifier
 
 - (void)show:(BOOL)animated
 {
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
     if (animated){
         self.top = [UIScreen mainScreen].bounds.size.height;
-        [[UIApplication sharedApplication].keyWindow addSubview:self];
+        [keyWindow addSubview:self];
         [UIView animateWithDuration:0.3f
                          animations:^{
                              self.top = 0;
@@ -81,7 +88,7 @@ static NSString *kJKPhotoBrowserCellIdentifier = @"kJKPhotoBrowserCellIdentifier
                          }];
         
     }else{
-        [[UIApplication sharedApplication].keyWindow addSubview:self];
+        [keyWindow addSubview:self];
     }
 }
 

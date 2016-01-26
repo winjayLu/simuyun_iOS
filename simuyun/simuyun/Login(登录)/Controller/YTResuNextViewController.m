@@ -132,9 +132,18 @@
  */
 - (void)transitionTabBarVC
 {
-    UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
-    mainWindow.rootViewController = [[YTTabBarController alloc] init];
-    [mainWindow.layer transitionWithAnimType:TransitionAnimTypeCube subType:TransitionSubtypesFromRight curve:TransitionCurveEaseOut duration:0.75f];
+    // 获取根控制器
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    // 如果获取不到直接返回
+    if (keyWindow == nil) return;
+    keyWindow.rootViewController = [[YTTabBarController alloc] init];
+    [keyWindow.layer transitionWithAnimType:TransitionAnimTypeCube subType:TransitionSubtypesFromRight curve:TransitionCurveEaseOut duration:0.75f];
 }
 
 #pragma mark - NavigationController

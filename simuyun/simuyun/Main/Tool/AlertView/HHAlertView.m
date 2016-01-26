@@ -98,7 +98,7 @@ static UIWindow *_window;
     _window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     _window.backgroundColor = YTRGBA(0, 0, 0, 0.3);
     _window.alpha = 1;
-    _window.windowLevel = UIWindowLevelStatusBar ;
+    _window.windowLevel = 4000;
     _window.hidden = NO;
     [_window makeKeyAndVisible];
     

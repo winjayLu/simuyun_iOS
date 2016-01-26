@@ -540,7 +540,18 @@
     } else {
         YTMessageModel *message = self.todos[row];
         if (message.messageId.length == 0) {
-           UIViewController *rootVc =  [UIApplication sharedApplication].keyWindow.rootViewController;
+            // 获取根控制器
+            UIWindow *keyWindow = nil;
+            for (UIWindow *window in [UIApplication sharedApplication].windows) {
+                if (window.windowLevel == 0) {
+                    keyWindow = window;
+                    break;
+                }
+            }
+            // 如果获取不到直接返回
+            if (keyWindow == nil) return;
+            
+           UIViewController *rootVc =  keyWindow.rootViewController;
             if ([rootVc isKindOfClass:[YTTabBarController class]]) {
                 ((YTTabBarController *)rootVc).selectedIndex = 1;
             }

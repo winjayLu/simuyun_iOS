@@ -14,6 +14,8 @@
 #import "YTResourcesTool.h"
 #import "YTNavigationController.h"
 #import "YTMessageNumTool.h"
+#import "YTTabBarController.h"
+#import "FloatView.h"
 
 @interface YTLeftMenu()
 
@@ -156,10 +158,29 @@
 - (IBAction)tuiChuClick:(UIButton *)sender {
     [self senderNotification:sender];
     [MobClick event:@"drawer_click" attributes:@{@"按钮" : @"退出", @"机构" : [YTUserInfoTool userInfo].organizationName}];
-
     // 获取程序主窗口
-    UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
-    mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    // 干掉悬浮按钮，及正在播放的视频
+    UIViewController *appRootVC = keyWindow.rootViewController;
+    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+        FloatView *floatView = tabBar.floatView;
+        UIViewController *keyVc = ((UITabBarController *)appRootVC).selectedViewController;
+        if (keyVc != nil) {
+            [floatView removeFloatView];
+            tabBar.playerVc = nil;
+            tabBar.floatView = nil;
+        }
+    }
+
+
+    keyWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
     // 清除保存的账户信息
     [YTAccountTool save:nil];
     // 清除用户信息
@@ -168,6 +189,8 @@
     [YTMessageNumTool save:nil];
     // 清楚本地用户信息
     [YTUserInfoTool localsave:nil];
+    
+
 }
 /**
  *  拨打电话

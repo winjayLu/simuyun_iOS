@@ -27,7 +27,6 @@ static FloatView *__floatView = nil;
 
 @interface FloatView ()
 {
-    UIWindow        *_boardWindow;               //底部window
     UIView          *_boardView;                 //底部view
     UIImageView     *_floatImageView;            //漂浮的menu按钮
 
@@ -42,6 +41,15 @@ static FloatView *__floatView = nil;
 @end
 
 @implementation FloatView
+
+- (void)removeFloatView
+{
+    [_boardView removeFromSuperview];
+    [_floatImageView removeFromSuperview];
+    _boardView = nil;
+    _floatImageView = nil;
+    _boardWindow = nil;
+}
 
 - (void)dealloc
 {
@@ -63,7 +71,7 @@ static FloatView *__floatView = nil;
         _locationTag = kLocationTag_left;
         
         //初始化背景window
-        _boardWindow = [[UIWindow alloc] initWithFrame:CGRectMake(0,0, 60, 60)];
+        _boardWindow = [[UIWindow alloc] initWithFrame:CGRectMake(DeviceWidth - 60,DeviceHight - 120, 60, 60)];
         _boardWindow.backgroundColor = [UIColor clearColor];
         _boardWindow.windowLevel = 3000;
         _boardWindow.clipsToBounds = YES;
@@ -199,14 +207,15 @@ static FloatView *__floatView = nil;
     }
     UIViewController *appRootVC = keyWindow.rootViewController;
     if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
-        CustomMaskViewController *player = ((YTTabBarController *)appRootVC).playerVc;
+        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+        CustomMaskViewController *player = tabBar.playerVc;
         UIViewController *keyVc = ((UITabBarController *)appRootVC).selectedViewController;
         if (keyVc != nil) {
             [((YTNavigationController *)keyVc) pushViewController:player animated:YES];
-            
+            [self removeFloatView];
+            tabBar.floatView = nil;
         }
     }
-    NSLog(@"惦记了按钮");
 }
 
 
@@ -239,7 +248,11 @@ static FloatView *__floatView = nil;
 {
     _showKeyBoard = NO;
     [UIView animateWithDuration:kAnimationDuration animations:^{
-        [_boardWindow setFrame:_showKeyBoardWindowRect];
+        if (_showKeyBoardWindowRect.origin.x != 0 && _showKeyBoardWindowRect.origin.y !=0) {
+            [_boardWindow setFrame:_showKeyBoardWindowRect];
+        } else {
+            [_boardWindow setFrame:CGRectMake(0, 0, 60, 60)];
+        }
     }];
 }
 @end

@@ -151,7 +151,16 @@ ALAssetsFilter * ALAssetsFilterFromJKImagePickerControllerFilterType(JKImagePick
 
 - (void)showAssetsGroupView
 {
-    [[UIApplication sharedApplication].keyWindow addSubview:self.touchButton];
+#warning 报备图片上传有问题
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    if (keyWindow == nil) return;
+    [keyWindow addSubview:self.touchButton];
     
     self.overlayView.alpha = 0.0f;
     [UIView animateWithDuration:0.3f

@@ -94,7 +94,14 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
     
     static SVProgressHUD *sharedView;
 #if !defined(SV_APP_EXTENSIONS)
-    dispatch_once(&once, ^{ sharedView = [[self alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.bounds]; });
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    dispatch_once(&once, ^{ sharedView = [[self alloc] initWithFrame:keyWindow.bounds]; });
 #else
     dispatch_once(&once, ^{ sharedView = [[self alloc] initWithFrame:[[UIScreen mainScreen] bounds]]; });
 #endif
@@ -591,7 +598,14 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
     double animationDuration = 0.0;
     
 #if !defined(SV_APP_EXTENSIONS)
-    self.frame = [UIApplication sharedApplication].keyWindow.bounds;
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    self.frame = keyWindow.bounds;
     UIInterfaceOrientation orientation = UIApplication.sharedApplication.statusBarOrientation;
 #else
     self.frame = UIScreen.mainScreen.bounds;
@@ -723,17 +737,27 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
 - (void)showProgress:(float)progress status:(NSString*)string{
     if(!self.overlayView.superview){
 #if !defined(SV_APP_EXTENSIONS)
-        NSEnumerator *frontToBackWindows = [UIApplication.sharedApplication.windows reverseObjectEnumerator];
-        for (UIWindow *window in frontToBackWindows){
+//        NSEnumerator *frontToBackWindows = [UIApplication.sharedApplication.windows reverseObjectEnumerator];
+//        UIWindow *keyWindow = nil;
+        for (UIWindow *window in [UIApplication sharedApplication].windows) {
             BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
             BOOL windowIsVisible = !window.hidden && window.alpha > 0;
-            BOOL windowLevelNormal = window.windowLevel == UIWindowLevelNormal;
-            
-            if(windowOnMainScreen && windowIsVisible && windowLevelNormal){
+//            BOOL windowLevelNormal = window.windowLevel == UIWindowLevelNormal;
+            if (window.windowLevel == 0 && windowOnMainScreen && windowIsVisible) {
                 [window addSubview:self.overlayView];
                 break;
             }
         }
+//        for (UIWindow *window in frontToBackWindows){
+//            BOOL windowOnMainScreen = window.screen == UIScreen.mainScreen;
+//            BOOL windowIsVisible = !window.hidden && window.alpha > 0;
+//            BOOL windowLevelNormal = window.windowLevel == UIWindowLevelNormal;
+//            
+//            if(){
+//                [window addSubview:self.overlayView];
+//                break;
+//            }
+//        }
 #else
         if(SVProgressHUDExtensionView){
             [SVProgressHUDExtensionView addSubview:self.overlayView];
@@ -932,14 +956,19 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
                                  
                                  // Tell the rootViewController to update the StatusBar appearance
 #if !defined(SV_APP_EXTENSIONS)
-                                 UIViewController *rootController = [[UIApplication sharedApplication] keyWindow].rootViewController;
+                                 
+                                 UIWindow *keyWindow = nil;
+                                 for (UIWindow *window in [UIApplication sharedApplication].windows) {
+                                     if (window.windowLevel == 0) {
+                                         keyWindow = window;
+                                         break;
+                                     }
+                                 }
+                                 UIViewController *rootController = keyWindow.rootViewController;
                                  if([rootController respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]){
                                      [rootController setNeedsStatusBarAppearanceUpdate];
                                  }
 #endif
-                                 // uncomment to make sure UIWindow is gone from app.windows
-                                 //NSLog(@"%@", [UIApplication sharedApplication].windows);
-                                 //NSLog(@"keyWindow = %@", [UIApplication sharedApplication].keyWindow);
                              }
                          }
                      }];
@@ -1090,7 +1119,14 @@ static const CGFloat SVProgressHUDUndefinedProgress = -1;
 - (UIControl*)overlayView{
     if(!_overlayView){
 #if !defined(SV_APP_EXTENSIONS)
-        CGRect windowBounds = [UIApplication sharedApplication].keyWindow.bounds;
+        UIWindow *keyWindow = nil;
+        for (UIWindow *window in [UIApplication sharedApplication].windows) {
+            if (window.windowLevel == 0) {
+                keyWindow = window;
+                break;
+            }
+        }
+        CGRect windowBounds = keyWindow.bounds;
         _overlayView = [[UIControl alloc] initWithFrame:windowBounds];
 #else
         _overlayView = [[UIControl alloc] initWithFrame:[UIScreen mainScreen].bounds];

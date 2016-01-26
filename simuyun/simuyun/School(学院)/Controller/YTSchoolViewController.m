@@ -19,6 +19,7 @@
 #import "TCCloudPlayerSDK.h"
 #import "TCCloudPlayerRorateViewController.h"
 #import "CustomMaskViewController.h"
+#import "YTTabBarController.h"
 
 
 
@@ -73,39 +74,29 @@
         
         // 跳转的地址和标题
         if (arrFucnameAndParameter.count) {
-//            NSString *url = [arrFucnameAndParameter[0] substringFromIndex:4];
-//            NSString *title = [arrFucnameAndParameter[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-//            YTSchoolSubPagController *school = [[YTSchoolSubPagController alloc] init];
-//            school.url = [self appendingUrl:url];
-//            school.titleData = title;
-//            school.hidesBottomBarWhenPushed = YES;
-//            [self.navigationController pushViewController:school animated:YES];
+
 #warning 测试
-//            YTPlayerViewController *playerVc = [[YTPlayerViewController alloc] init];
-//            [self presentViewController:playerVc animated:YES completion:nil];
-//            NSMutableArray* mutlArray = [NSMutableArray array];
-//            TCCloudPlayerVideoUrlInfo* info = [[TCCloudPlayerVideoUrlInfo alloc]init];
-//            info.videoUrlTypeName = @"原始";
-//            info.videoUrl = [NSURL URLWithString:@"http://2527.vod.myqcloud.com/2527_2d3121ca4c9611e5b8dc613186ea171e.f30.mp4?sign=c189fc9739c5f54fec6fdd5f1b14a995&t=55efe8aa"];
-//            [mutlArray addObject:info];
-//            
-//            TCCloudPlayerVideoUrlInfo* info1 = [[TCCloudPlayerVideoUrlInfo alloc]init];
-//            info1.videoUrlTypeName = @"标清";
-//            info1.videoUrl = [NSURL URLWithString:@"http://2527.vod.myqcloud.com/2527_2d3121ca4c9611e5b8dc613186ea171e.f40.mp4?sign=f70b5c3ba732683a997a8e16540a780c&t=55efe8c6"];
-//            [mutlArray addObject:info1];
-//            
-////            [TCCloudPlayerSDK pushPlayVideo:@"testAppID"
-////                                videoFileID:@"testVideoFileID"
-////                                  videoName:@"侏罗纪"
-////                                  videoUrls:mutlArray
-////                             limitedSeconds:0
-////                       defaultPlayUrlsIndex:0
-////                         fromViewController:self
-////                       withCustomController:[YTPlayerViewController class]
-////                            inPortraitFrame:CGRectMake(0,20, DeviceWidth, DeviceWidth * 0.5625)];
-////            YTPlayerViewController *player = [[YTPlayerViewController alloc] init];
-////            [self.navigationController pushViewController:player animated:YES];
-//            [TCCloudPlayerSDK playVideo:@"test" videoFileID:@"t" videoName:@"侏罗纪" videoUrls:mutlArray limitedSeconds:0 defaultPlayUrlsIndex:0 inViewController:self];
+
+            UIWindow *keyWindow = nil;
+            for (UIWindow *window in [UIApplication sharedApplication].windows) {
+                if (window.windowLevel == 0) {
+                    keyWindow = window;
+                    break;
+                }
+            }
+            
+            
+            UIViewController *appRootVC = keyWindow.rootViewController;
+            if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+                YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+                FloatView *floatView = tabBar.floatView;
+                UIViewController *keyVc = ((UITabBarController *)appRootVC).selectedViewController;
+                if (keyVc != nil) {
+                    [floatView removeFloatView];
+                    tabBar.playerVc = nil;
+                    tabBar.floatView = nil;
+                }
+            }
             
             CustomMaskViewController *test = [[CustomMaskViewController alloc] init];
             test.hidesBottomBarWhenPushed = YES;

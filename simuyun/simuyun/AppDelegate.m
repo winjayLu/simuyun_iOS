@@ -248,7 +248,6 @@
     HHAlertView *alert = [HHAlertView shared];
     NSString *cancelButton = nil;
     NSString *okButton = @"知道了";
-//    UIViewController *rootVc =  [UIApplication sharedApplication].keyWindow.rootViewController;
     // 获取正在显示的控制器
     [self keyViewController];
     if (self.keyVc.viewControllers.count == 1) {

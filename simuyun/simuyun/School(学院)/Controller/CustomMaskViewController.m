@@ -51,10 +51,25 @@
 
 - (void)closeClick
 {
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
     [self.navigationController popViewControllerAnimated:YES];
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    UIViewController *appRootVC = keyWindow.rootViewController;
+    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+        tabBar.playerVc = nil;
+    }
 }
 - (void)hiddenClick
 {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
     // 获取根控制器
     UIWindow *keyWindow = nil;
     for (UIWindow *window in [UIApplication sharedApplication].windows) {
@@ -73,11 +88,15 @@
     }
     //初始化
     
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
     [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:0] animated:YES];
+    
 }
 
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+}
 
 
 - (void)playVideo

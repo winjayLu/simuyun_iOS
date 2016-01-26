@@ -141,8 +141,17 @@
         [YTUserInfoTool clearUserInfo];
         // 获取程序主窗口
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            UIWindow *mainWindow = [UIApplication sharedApplication].keyWindow;
-            mainWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
+            // 获取根控制器
+            UIWindow *keyWindow = nil;
+            for (UIWindow *window in [UIApplication sharedApplication].windows) {
+                if (window.windowLevel == 0) {
+                    keyWindow = window;
+                    break;
+                }
+            }
+            // 如果获取不到直接返回
+            if (keyWindow == nil) return;
+            keyWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
         });
     }];
 }

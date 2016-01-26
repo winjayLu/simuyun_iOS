@@ -11,6 +11,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "YTPhotoCell.h"
 #import "JKAssets.h"
+#import "YTTabBarController.h"
 
 
 @interface YTPhotoViewController ()<JKImagePickerControllerDelegate,UICollectionViewDataSource,UICollectionViewDelegate>
@@ -47,6 +48,7 @@
 
 - (void)composePicAdd
 {
+    [self changePlayerStatus:YES];
     JKImagePickerController *imagePickerController = [[JKImagePickerController alloc] init];
     imagePickerController.delegate = self;
     imagePickerController.showsCancelButton = YES;
@@ -62,24 +64,42 @@
 - (void)imagePickerController:(JKImagePickerController *)imagePicker didSelectAsset:(JKAssets *)asset isSource:(BOOL)source
 {
     [imagePicker dismissViewControllerAnimated:YES completion:^{
+        [self changePlayerStatus:NO];
     }];
 }
 
 - (void)imagePickerController:(JKImagePickerController *)imagePicker didSelectAssets:(NSArray *)assets isSource:(BOOL)source
 {
     self.assetsArray = [NSMutableArray arrayWithArray:assets];
-    
     [imagePicker dismissViewControllerAnimated:YES completion:^{
         [self.selectedPhoto removeAllObjects];
         [self.collectionView reloadData];
+        [self changePlayerStatus:NO];
     }];
 }
 
 - (void)imagePickerControllerDidCancel:(JKImagePickerController *)imagePicker
 {
     [imagePicker dismissViewControllerAnimated:YES completion:^{
+        [self changePlayerStatus:NO];
         
     }];
+}
+
+- (void)changePlayerStatus:(BOOL)isHidden
+{
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    UIViewController *appRootVC = keyWindow.rootViewController;
+    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+        tabBar.floatView.boardWindow.hidden = isHidden;
+    }
 }
 
 static NSString *kPhotoCellIdentifier = @"kPhotoCellIdentifier";

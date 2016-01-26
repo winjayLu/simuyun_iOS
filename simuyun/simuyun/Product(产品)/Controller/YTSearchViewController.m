@@ -22,6 +22,9 @@
 #import "YTSearchProductCell.h"
 #import "SVProgressHUD.h"
 #import "YTUserInfoTool.h"
+#import "YTTabBarController.h"
+
+
 
 
 @interface YTSearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
@@ -192,6 +195,18 @@
  */
 - (void)blackClick
 {
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    UIViewController *appRootVC = keyWindow.rootViewController;
+    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+        tabBar.floatView.boardWindow.hidden = NO;
+    }
     [self dismissViewControllerAnimated:NO completion:nil];
     self.search.text = nil;
     self.searchProducts = nil;

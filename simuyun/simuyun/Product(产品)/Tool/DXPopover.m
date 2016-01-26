@@ -266,9 +266,17 @@
 }
 
 - (void)showAtView:(UIView *)atView withContentView:(UIView *)contentView {
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    if (keyWindow == nil) return;
     [self showAtView:atView
         withContentView:contentView
-                 inView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+                 inView:keyWindow.rootViewController.view];
 }
 
 - (void)show {
@@ -319,9 +327,17 @@
 }
 
 - (void)showAtView:(UIView *)atView withText:(NSAttributedString *)abs {
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    if (keyWindow == nil) return;
     [self showAtView:atView
             withText:abs
-              inView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+              inView:keyWindow.rootViewController.view];
 }
 
 - (void)showAtView:(UIView *)atView withText:(NSAttributedString *)abs inView:(UIView *)container {

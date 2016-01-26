@@ -14,6 +14,7 @@
 #import "YTAccountTool.h"
 #import "AFNetworking.h"
 #import "SVProgressHUD.h"
+#import "YTTabBarController.h"
 
 @interface YTProfileTopView() <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -150,7 +151,20 @@
     if (sourceType == UIImagePickerControllerSourceTypeCamera) {
         imagePicker.cameraDevice = UIImagePickerControllerCameraDeviceFront;
     }
-    // 调用代理方法
+
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    UIViewController *appRootVC = keyWindow.rootViewController;
+    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+        tabBar.floatView.boardWindow.hidden = YES;
+    }
+        // 调用代理方法
     [self.delegate addPicker:imagePicker];
     
 }
@@ -159,6 +173,19 @@
  *  拍照成功
  */
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    UIViewController *appRootVC = keyWindow.rootViewController;
+    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+        tabBar.floatView.boardWindow.hidden = NO;
+    }
     
     // 关闭相册界面
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -177,6 +204,23 @@
     
     // 上传图片
     [self uploadImage:image];
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    UIViewController *appRootVC = keyWindow.rootViewController;
+    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+        tabBar.floatView.boardWindow.hidden = NO;
+    }
+    // 关闭相册界面
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - 设置数据
