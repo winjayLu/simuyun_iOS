@@ -11,7 +11,7 @@
 #import "YTMessageViewController.h"
 #import "YTProductGroupController.h"
 #import "YTProfileViewController.h"
-#import "YTSchoolViewController.h"
+#import "YTSchoolHomeViewController.h"
 #import "YTDiscoverViewController.h"
 #import "YTNavigationController.h"
 #import "YTLogoView.h"
@@ -42,7 +42,7 @@
 /**
  *  学院 控制器
  */
-@property (nonatomic, strong) YTSchoolViewController *school;
+@property (nonatomic, strong) YTSchoolHomeViewController *school;
 /**
  *  发现 控制器
  */
@@ -242,7 +242,7 @@
     self.product = (YTProductGroupController *)[self addOneChildVcClass:[YTProductGroupController class] title:@"产品" image:product selectedImage:[NSString stringWithFormat:@"%@Selected", product]];
     self.profile = (YTProfileViewController *)[self addOneChildVcClass:[YTProfileViewController class] title:nil image:nil selectedImage:nil];
     self.discover = (YTDiscoverViewController *)[self addOneChildVcClass:[YTDiscoverViewController class] title:@"发现" image:discover selectedImage:[NSString stringWithFormat:@"%@Selected", discover]];
-    self.school = (YTSchoolViewController *)[self addOneChildVcClass:[YTSchoolViewController class] title:@"学院" image:school selectedImage:[NSString stringWithFormat:@"%@Selected", school]];
+    self.school = (YTSchoolHomeViewController *)[self addOneChildVcClass:[YTSchoolHomeViewController class] title:@"学院" image:school selectedImage:[NSString stringWithFormat:@"%@Selected", school]];
 }
 /**
  *  初始化tabBar的样式

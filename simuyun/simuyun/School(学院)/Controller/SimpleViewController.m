@@ -28,10 +28,10 @@
     return !UIInterfaceOrientationIsPortrait(ort);
 }
 
-//- (CGRect)playViewFrame
-//{
-//    return CGRectMake(0 , 20, DeviceWidth, DeviceWidth * 0.5625);
-//}
+- (CGRect)playViewFrame
+{
+    return CGRectMake(0 , 20, DeviceWidth, DeviceWidth * 0.5625);
+}
 
 - (void)addPlayerView
 {
