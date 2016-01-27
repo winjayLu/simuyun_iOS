@@ -1,14 +1,16 @@
 //
-//  YTPlayerViewController.h
-//  simuyun
+//  CustomMaskViewController.h
+//  TCCloudPlayerSDKTest
 //
-//  Created by Luwinjay on 16/1/25.
-//  Copyright © 2016年 YTWealth. All rights reserved.
+//  Created by AlexiChen on 15/8/19.
+//  Copyright (c) 2015年 tencent. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "TCCloudPlayerRorateViewController.h"
 
-@interface YTPlayerViewController : TCCloudPlayerRorateViewController
+#import "SimpleViewController.h"
+
+@interface YTPlayerViewController : SimpleViewController
+
 
 @end

@@ -18,12 +18,12 @@
 #import "YTPlayerViewController.h"
 #import "TCCloudPlayerSDK.h"
 #import "TCCloudPlayerRorateViewController.h"
-#import "CustomMaskViewController.h"
+#import "YTPlayerViewController.h"
 #import "YTTabBarController.h"
 
 
 
-@interface YTSchoolViewController () <UIWebViewDelegate, UINavigationControllerDelegate>
+@interface YTSchoolViewController () <UIWebViewDelegate>
 
 
 @end
@@ -98,9 +98,10 @@
                 }
             }
             
-            CustomMaskViewController *test = [[CustomMaskViewController alloc] init];
-            test.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:test animated:YES];
+            YTPlayerViewController *test = [[YTPlayerViewController alloc] init];
+            [self presentViewController:test animated:YES completion:nil];
+//            test.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:test animated:YES];
         }
         return NO;
     }
@@ -153,17 +154,6 @@
 
 
 
-- (void) navigationController:(UINavigationController *)navigationController willShowViewController:(nonnull UIViewController *)viewController animated:(BOOL)animated{
-    
-    // 如果进入的是首页视图控制器
-    if ([viewController isKindOfClass:[YTSchoolViewController class]]) {
-//        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
-        [self.navigationController setNavigationBarHidden:NO animated:NO];
-    } else {
-//        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:YES];
-        [self.navigationController setNavigationBarHidden:YES animated:YES];
-    }
-}
 
 
 

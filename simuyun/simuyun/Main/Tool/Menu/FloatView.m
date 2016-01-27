@@ -8,7 +8,7 @@
 
 #import "FloatView.h"
 #import "YTTabBarController.h"
-#import "CustomMaskViewController.h"
+#import "YTPlayerViewController.h"
 #import "YTNavigationController.h"
 
 #define  windowWidth ([UIScreen mainScreen].bounds.size.width)
@@ -208,12 +208,11 @@ static FloatView *__floatView = nil;
     UIViewController *appRootVC = keyWindow.rootViewController;
     if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
         YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
-        CustomMaskViewController *player = tabBar.playerVc;
+        YTPlayerViewController *player = tabBar.playerVc;
         UIViewController *keyVc = ((UITabBarController *)appRootVC).selectedViewController;
         if (keyVc != nil) {
-            [((YTNavigationController *)keyVc) pushViewController:player animated:YES];
-            [self removeFloatView];
-            tabBar.floatView = nil;
+            [((YTNavigationController *)keyVc).topViewController presentViewController:player animated:YES completion:nil];
+            self.boardWindow.hidden = YES;
         }
     }
 }
@@ -251,7 +250,7 @@ static FloatView *__floatView = nil;
         if (_showKeyBoardWindowRect.origin.x != 0 && _showKeyBoardWindowRect.origin.y !=0) {
             [_boardWindow setFrame:_showKeyBoardWindowRect];
         } else {
-            [_boardWindow setFrame:CGRectMake(0, 0, 60, 60)];
+            [_boardWindow setFrame:CGRectMake(DeviceWidth - 60,DeviceHight - 120, 60, 60)];
         }
     }];
 }

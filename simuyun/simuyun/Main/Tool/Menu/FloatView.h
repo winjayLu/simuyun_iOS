@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface FloatView : NSObject
-//{
-//    UIWindow        *_boardWindow;
-//}
+
 //底部window
 @property (nonatomic, strong) UIWindow *boardWindow;
 + (FloatView *)defaultFloatViewWithButton;
 
+/**
+ *  删除悬浮窗
+ */
 - (void)removeFloatView;
 @end

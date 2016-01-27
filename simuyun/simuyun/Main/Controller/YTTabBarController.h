@@ -8,7 +8,7 @@
 //  主控制器
 
 #import <UIKit/UIKit.h>
-#import "CustomMaskViewController.h"
+#import "YTPlayerViewController.h"
 #import "FloatView.h"
 
 @interface YTTabBarController : UITabBarController
@@ -16,7 +16,7 @@
 /**
  *  视频控制器
  */
-@property (nonatomic, strong) CustomMaskViewController *playerVc;
+@property (nonatomic, strong) YTPlayerViewController *playerVc;
 
 /**
  *  浮动的按钮

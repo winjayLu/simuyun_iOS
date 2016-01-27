@@ -43,7 +43,6 @@
 		9719F7DA1C04697C009849B8 /* YTReportTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9719F7D91C04697C009849B8 /* YTReportTopView.xib */; };
 		971A44621C55FBF3007469F4 /* libTCCloudPlayerSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 971A44591C55FBF3007469F4 /* libTCCloudPlayerSDK.a */; };
 		971A44641C55FCB4007469F4 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971A44631C55FCB4007469F4 /* CoreMedia.framework */; };
-		971A44671C560033007469F4 /* YTPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 971A44661C560033007469F4 /* YTPlayerViewController.m */; };
 		97238CA11C45E88E00F68EEA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97238CA01C45E88E00F68EEA /* LaunchScreen.xib */; };
 		972B88011BFAD3D0002A7E9B /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87DA1BFAD3D0002A7E9B /* AFHTTPRequestOperation.m */; };
 		972B88021BFAD3D0002A7E9B /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87DC1BFAD3D0002A7E9B /* AFHTTPRequestOperationManager.m */; };
@@ -64,7 +63,7 @@
 		972B88111BFAD3D0002A7E9B /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87FC1BFAD3D0002A7E9B /* UIProgressView+AFNetworking.m */; };
 		972B88121BFAD3D0002A7E9B /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B87FE1BFAD3D0002A7E9B /* UIRefreshControl+AFNetworking.m */; };
 		972B88131BFAD3D0002A7E9B /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 972B88001BFAD3D0002A7E9B /* UIWebView+AFNetworking.m */; };
-		9735F2E51C57162D00AE799A /* CustomMaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735F2E21C57162D00AE799A /* CustomMaskViewController.m */; };
+		9735F2E51C57162D00AE799A /* YTPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735F2E21C57162D00AE799A /* YTPlayerViewController.m */; };
 		9735F2E61C57162D00AE799A /* SimpleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735F2E41C57162D00AE799A /* SimpleViewController.m */; };
 		9735F2ED1C574CEF00AE799A /* FloatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9735F2EC1C574CEF00AE799A /* FloatView.m */; };
 		973D3DC11C0D76AE006D6B0C /* YTAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 973D3DBF1C0D76AE006D6B0C /* YTAboutViewController.m */; };
@@ -369,8 +368,6 @@
 		971A44601C55FBF3007469F4 /* TCCloudPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCCloudPlayerViewController.h; sourceTree = "<group>"; };
 		971A44611C55FBF3007469F4 /* TCReportEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCReportEngine.h; sourceTree = "<group>"; };
 		971A44631C55FCB4007469F4 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		971A44651C560033007469F4 /* YTPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPlayerViewController.h; sourceTree = "<group>"; };
-		971A44661C560033007469F4 /* YTPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTPlayerViewController.m; sourceTree = "<group>"; };
 		97238CA01C45E88E00F68EEA /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		972B87D91BFAD3D0002A7E9B /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		972B87DA1BFAD3D0002A7E9B /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -411,8 +408,8 @@
 		972B87FE1BFAD3D0002A7E9B /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		972B87FF1BFAD3D0002A7E9B /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		972B88001BFAD3D0002A7E9B /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
-		9735F2E11C57162D00AE799A /* CustomMaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomMaskViewController.h; sourceTree = "<group>"; };
-		9735F2E21C57162D00AE799A /* CustomMaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomMaskViewController.m; sourceTree = "<group>"; };
+		9735F2E11C57162D00AE799A /* YTPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPlayerViewController.h; sourceTree = "<group>"; };
+		9735F2E21C57162D00AE799A /* YTPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTPlayerViewController.m; sourceTree = "<group>"; };
 		9735F2E31C57162D00AE799A /* SimpleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleViewController.h; sourceTree = "<group>"; };
 		9735F2E41C57162D00AE799A /* SimpleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleViewController.m; sourceTree = "<group>"; };
 		9735F2EB1C574CEF00AE799A /* FloatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloatView.h; sourceTree = "<group>"; };
@@ -1841,16 +1838,14 @@
 		97C605D51BC2621F00E555E8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				9735F2E11C57162D00AE799A /* CustomMaskViewController.h */,
-				9735F2E21C57162D00AE799A /* CustomMaskViewController.m */,
+				9735F2E11C57162D00AE799A /* YTPlayerViewController.h */,
+				9735F2E21C57162D00AE799A /* YTPlayerViewController.m */,
 				9735F2E31C57162D00AE799A /* SimpleViewController.h */,
 				9735F2E41C57162D00AE799A /* SimpleViewController.m */,
 				97C605D61BC2621F00E555E8 /* YTSchoolViewController.h */,
 				97C605D71BC2621F00E555E8 /* YTSchoolViewController.m */,
 				976084221BD8F89E0037A4F7 /* YTSchoolSubPagController.h */,
 				976084231BD8F89E0037A4F7 /* YTSchoolSubPagController.m */,
-				971A44651C560033007469F4 /* YTPlayerViewController.h */,
-				971A44661C560033007469F4 /* YTPlayerViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2532,7 +2527,7 @@
 				976530951C1968B900F9D7F1 /* QKInfoCard.m in Sources */,
 				97DE830B1BD0FB5300E3C5CA /* CoreTFManagerVC.m in Sources */,
 				97973CE81BC3BE7000B7B4CB /* CoreArchive.m in Sources */,
-				9735F2E51C57162D00AE799A /* CustomMaskViewController.m in Sources */,
+				9735F2E51C57162D00AE799A /* YTPlayerViewController.m in Sources */,
 				97C606481BC269CC00E555E8 /* UIImage+Extend.m in Sources */,
 				978F4CA11C16792800A36E0F /* JKAssetsGroupCell.m in Sources */,
 				971503A91BC75E78007E27D0 /* PPTLayout.m in Sources */,
@@ -2583,7 +2578,6 @@
 				9790F8CB1BDF140900965C7B /* YTAuthenticationViewController.m in Sources */,
 				9714A6D01BC7B9BB0018A14E /* HHAlertView.m in Sources */,
 				97C6065B1BC26F1100E555E8 /* Foundation+Log.m in Sources */,
-				971A44671C560033007469F4 /* YTPlayerViewController.m in Sources */,
 				972B880F1BFAD3D0002A7E9B /* UIButton+AFNetworking.m in Sources */,
 				978F4CA01C16792800A36E0F /* JKAssetsCollectionFooterView.m in Sources */,
 				97ABCB721BDDE3E20056C1A1 /* YTInformationController.m in Sources */,

@@ -13,7 +13,7 @@
 #import "UINavigationBar+BackgroundColor.h"
 #import "UIImage+Extend.h"
 #import "YTTabBarController.h"
-#import "CustomMaskViewController.h"
+#import "YTPlayerViewController.h"
 
 
 typedef enum state {
@@ -231,26 +231,14 @@ static UIWindow *_window;
 - (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
 
     // 如果进入的是首页视图控制器
-    if ([viewController isKindOfClass:[YTProfileViewController class]] || [viewController isKindOfClass:[CustomMaskViewController class]]) {
+    if ([viewController isKindOfClass:[YTProfileViewController class]]) {
         [self.navigationController setNavigationBarHidden:YES animated:YES];
 
     } else {
         [self.navigationController setNavigationBarHidden:NO animated:YES];
     }
 }
-//- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated{
-//    // 如果进入的是首页视图控制器
-//    if ([viewController isKindOfClass:[YTHomeViewController class]]) {
-//        
-//        // 添加手势
-//        [self.navigationController.view addGestureRecognizer:self.panRecongnizer];
-//
-//    } else {
-//        // 删除手势
-//        [self.navigationController.view removeGestureRecognizer:self.panRecongnizer];
-//    }
-//
-//}
+
 
 
 
