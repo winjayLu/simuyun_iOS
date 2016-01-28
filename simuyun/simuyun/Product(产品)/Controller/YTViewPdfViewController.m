@@ -15,6 +15,7 @@
 #import "SVProgressHUD.h"
 #import "YHWebViewProgress.h"
 #import "YHWebViewProgressView.h"
+#import "YTTabBarController.h"
 
 @interface YTViewPdfViewController () <shareCustomDelegate, UIWebViewDelegate>
 @property (nonatomic, weak) UIWebView *webView;
@@ -241,6 +242,18 @@
             UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
             pasteboard.string = share.share_url;
             [SVProgressHUD showSuccessWithStatus:@"复制成功"];
+            UIWindow *keyWindow = nil;
+            for (UIWindow *window in [UIApplication sharedApplication].windows) {
+                if (window.windowLevel == 0) {
+                    keyWindow = window;
+                    break;
+                }
+            }
+            UIViewController *appRootVC = keyWindow.rootViewController;
+            if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+                YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+                tabBar.floatView.boardWindow.hidden = NO;
+            }
         }
             break;
     }

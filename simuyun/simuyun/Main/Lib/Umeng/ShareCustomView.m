@@ -11,6 +11,7 @@
 #import "UIImage+Extend.h"
 #import "YTResourcesTool.h"
 
+
 #define menuBtnWidth    50  //按钮宽度
 #define menuBtnHeight   50  //按钮高度
 #define btnxDistance    60 //按钮之间x的距离
@@ -78,6 +79,7 @@
         }
         //  创建子控件
         [self creatMainShareView];
+        
     }
     return self;
 
@@ -191,8 +193,8 @@
     if (_shareDelegate  &&[_shareDelegate   respondsToSelector:@selector(shareBtnClickWithIndex:)]) {
         [_shareDelegate  shareBtnClickWithIndex:sender.tag];
     }
+    
 }
-
 #pragma mark 取消分享
 - (void)cancelBtnClick:(UIImageView *)sender
 {

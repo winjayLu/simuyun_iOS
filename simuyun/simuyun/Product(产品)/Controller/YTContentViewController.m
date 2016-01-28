@@ -84,6 +84,8 @@
 
 - (void)blackClick
 {
+    
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

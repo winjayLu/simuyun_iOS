@@ -13,6 +13,7 @@
 #import "UMSocialWechatHandler.h"
 #import "WXApi.h"
 #import <MessageUI/MessageUI.h>
+#import "YTTabBarController.h"
 
 
 @interface ShareManage() <MFMailComposeViewControllerDelegate, UINavigationControllerDelegate, MFMessageComposeViewControllerDelegate, UMSocialUIDelegate>
@@ -56,6 +57,7 @@ static ShareManage *shareManage;
 #pragma mark 注册友盟分享微信
 - (void)shareConfig
 {
+    [self hiddenFloatMenu];
     //设置友盟社会化组件appkey
     [UMSocialData setAppKey:UmengAppKey];
     [UMSocialData openLog:NO];
@@ -79,6 +81,39 @@ static ShareManage *shareManage;
     //  设置url
     [UMSocialWechatHandler setWXAppId:WXAppID appSecret:WXAppSecret url:self.share_url];
     [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession].snsClickHandler(viewC,[UMSocialControllerService defaultControllerService],YES);
+}
+
+- (void)hiddenFloatMenu
+{
+    // 隐藏悬浮按钮
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    UIViewController *appRootVC = keyWindow.rootViewController;
+    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+        tabBar.floatView.boardWindow.hidden = YES;
+    }
+}
+
+- (void)showFloatMenu
+{
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    UIViewController *appRootVC = keyWindow.rootViewController;
+    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+        tabBar.floatView.boardWindow.hidden = NO;
+    }
 }
 
 #pragma mark 微信朋友圈分享
@@ -122,6 +157,7 @@ static ShareManage *shareManage;
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     //关闭邮件发送窗口
+    [self showFloatMenu];
     [controller dismissViewControllerAnimated:YES completion:nil];
     NSString *msg;
     switch (result) {
@@ -166,6 +202,7 @@ static ShareManage *shareManage;
 
 #pragma mark 短信的代理方法
 - (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result{
+    [self showFloatMenu];
     [_viewC dismissViewControllerAnimated:YES completion:nil];
     switch (result)
     {
@@ -185,6 +222,7 @@ static ShareManage *shareManage;
  */
 -(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
 {
+        [self showFloatMenu];
 //    if (response.responseCode == UMSResponseCodeSuccess) {
 //        [MBProgressHUD showSuccess:@"分享成功"];
 //        

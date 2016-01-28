@@ -8,15 +8,15 @@
 
 #import "YTProductViewController.h"
 #import "YTProductCell.h"
-#import "MJRefresh.h"
 #import "YTProductModel.h"
-#import "MJExtension.h"
+#import "MJRefresh.h"
 #import "YTBuyProductController.h"
-#import "YTAccountTool.h"
 #import "DXPopover.h"
 #import "YTProductdetailController.h"
 #import "UIBarButtonItem+Extension.h"
 #import "NSDate+Extension.h"
+#import "MJExtension.h"
+#import "YTAccountTool.h"
 #import "YTDataHintView.h"
 #import "YTLiquidationCell.h"
 

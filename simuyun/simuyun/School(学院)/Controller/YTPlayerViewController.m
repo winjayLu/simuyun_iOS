@@ -17,7 +17,17 @@
 /**
  *  内容容器
  */
-@property (nonatomic, strong) UIView *ContentView;
+@property (nonatomic, weak) UIScrollView *ContentView;
+
+/**
+ *  关闭按钮
+ */
+@property (nonatomic, weak) UIButton *closeBtn;
+
+/**
+ *  最小化按钮
+ */
+@property (nonatomic, weak) UIButton *hiddenBtn;
 
 
 @end
@@ -26,31 +36,149 @@
 
 - (CGRect)playViewFrame
 {
-    return CGRectMake(0 , 20, DeviceWidth, DeviceWidth * 0.5625);
+    return CGRectMake(0 , 0, DeviceWidth, DeviceWidth * 0.5625);
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self playVideo];
-    
-    UIButton *button = [[UIButton alloc] init];
-    [button setTitle:@"关闭" forState:UIControlStateNormal];
-    [button addTarget:self action:@selector(closeClick) forControlEvents:UIControlEventTouchUpInside];
-    [button setBackgroundColor:[UIColor blackColor]];
-    button.frame = CGRectMake(40, 150, 40, 40);
-    [self.ContentView addSubview:button];
-    
-    UIButton *button2 = [[UIButton alloc] init];
-    [button2 setTitle:@"隐藏" forState:UIControlStateNormal];
-    [button2 addTarget:self action:@selector(hiddenClick) forControlEvents:UIControlEventTouchUpInside];
-    [button2 setBackgroundColor:[UIColor blackColor]];
-    button2.frame = CGRectMake(DeviceWidth - 80, 150, 40, 40);
-    [self.ContentView addSubview:button2];
+    // 初始化按钮
+    [self setupBtn];
+    // 初始化内容视图
+    [self setupContent];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // 隐藏状态栏
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:YES];
+}
+
+/**
+ *  初始化按钮
+ */
+- (void)setupBtn
+{
+    UIButton *closeBtn = [[UIButton alloc] init];
+    [closeBtn setBackgroundImage:[UIImage imageNamed:@"schoolFanhui"] forState:UIControlStateNormal];
+    [closeBtn setBackgroundImage:[UIImage imageNamed:@"schoolFanhuianxia"] forState:UIControlStateHighlighted];
+    [closeBtn addTarget:self action:@selector(closeClick) forControlEvents:UIControlEventTouchUpInside];
+    closeBtn.frame = CGRectMake(10, 27, closeBtn.currentBackgroundImage.size.width, closeBtn.currentBackgroundImage.size.height);
+    [self.view addSubview:closeBtn];
+    self.closeBtn = closeBtn;
+    
+    UIButton *hiddenBtn = [[UIButton alloc] init];
+    [hiddenBtn setBackgroundImage:[UIImage imageNamed:@"zuixiaohua"] forState:UIControlStateNormal];
+    [hiddenBtn setBackgroundImage:[UIImage imageNamed:@"zuixiaohuaanxia"] forState:UIControlStateHighlighted];
+    [hiddenBtn addTarget:self action:@selector(hiddenClick) forControlEvents:UIControlEventTouchUpInside];
+    hiddenBtn.frame = CGRectMake(DeviceWidth - 10 - hiddenBtn.currentBackgroundImage.size.width, 27, hiddenBtn.currentBackgroundImage.size.width, hiddenBtn.currentBackgroundImage.size.height);
+    [self.view addSubview:hiddenBtn];
+    self.hiddenBtn = hiddenBtn;
+}
+
+/**
+ *  初始化内容视图
+ */
+- (void)setupContent
+{
+   
+}
+
+/**
+ *  设置数据
+ */
+- (void)setVedio:(YTVedioModel *)vedio
+{
+    _vedio = vedio;
+    
+    // 创建容器
+    UIScrollView * ContentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, DeviceWidth * 0.562, DeviceWidth, DeviceHight - DeviceWidth * 0.562)];
+    [self.view addSubview:ContentView];
+    self.ContentView = ContentView;
+    
+    // 点赞按钮
+    UIButton *likeBtn = [[UIButton alloc] init];
+    // 是否点过赞
+    if (vedio.isLiked == 0) {
+        [likeBtn setImage:[UIImage imageNamed:@"Like"] forState:UIControlStateNormal];
+    } else {
+        [likeBtn setImage:[UIImage imageNamed:@"Likeanxia"] forState:UIControlStateNormal];
+    }
+    if (vedio.likes > 0) {   // 点赞数量
+        [likeBtn setTitle:[NSString stringWithFormat:@"%d", vedio.likes] forState:UIControlStateNormal];
+    }
+    [likeBtn setTitleColor:YTNavBackground forState:UIControlStateNormal];
+    [likeBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
+    [likeBtn addTarget:self action:@selector(likeClick) forControlEvents:UIControlEventTouchUpInside];
+    [likeBtn sizeToFit];
+    likeBtn.frame = CGRectMake(DeviceWidth - likeBtn.width - 10, 15, likeBtn.width, likeBtn.height);
+    [self.ContentView addSubview:likeBtn];
+    
+    // 视频标题
+    UILabel *title = [[UILabel alloc] init];
+    title.text = vedio.videoName;
+    title.textColor = YTColor(51, 51, 51);
+    title.font = [UIFont systemFontOfSize:15];
+    [title sizeToFit];
+    title.frame = CGRectMake(10, 15, CGRectGetMinX(likeBtn.frame) - 20, title.height);
+    [self.ContentView addSubview:title];
+    
+    // 视频简介
+    UILabel *shorName = [[UILabel alloc] init];
+    shorName.text = @"产品简介";
+    shorName.textColor = YTColor(102, 102, 102);
+    shorName.font = [UIFont systemFontOfSize:13];
+    [shorName sizeToFit];
+    shorName.origin = CGPointMake(10, CGRectGetMaxY(title.frame) + 20);
+    [self.ContentView addSubview:shorName];
+    
+    // 视频简介
+    UILabel *detail = [[UILabel alloc] init];
+    detail.text = vedio.videoSummary;
+    detail.font = [UIFont systemFontOfSize:13];
+    detail.textColor = YTColor(102, 102, 102);
+    detail.numberOfLines = 0;
+    detail.width = DeviceWidth - 20;
+    [detail sizeToFit];
+    detail.origin = CGPointMake(10, CGRectGetMaxY(shorName.frame) + 5);
+    [self.ContentView addSubview:detail];
+    
+    self.ContentView.contentSize = CGSizeMake(DeviceWidth, CGRectGetMaxY(detail.frame));
+}
+
+/**
+ *  播放视频
+ */
+- (void)playVideo
+{
+    
+    NSMutableArray* mutlArray = [NSMutableArray array];
+    TCCloudPlayerVideoUrlInfo* info = [[TCCloudPlayerVideoUrlInfo alloc]init];
+    info.videoUrlTypeName = @"原始";
+    info.videoUrl = [NSURL URLWithString:self.vedio.SDVideoUrl];
+    [mutlArray addObject:info];
+    
+    TCCloudPlayerVideoUrlInfo* info1 = [[TCCloudPlayerVideoUrlInfo alloc]init];
+    info1.videoUrlTypeName = @"标清";
+    info1.videoUrl = [NSURL URLWithString:self.vedio.HDVideoUrl];
+    [mutlArray addObject:info1];
+    
+    [self loadVideoPlaybackView:mutlArray defaultPlayIndex:0 startTime:0];
+}
+
+
+
+#pragma mark - buttonClick
+
+/**
+ *  关闭
+ */
 - (void)closeClick
 {
+    // 显示状态栏
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
     UIWindow *keyWindow = nil;
     for (UIWindow *window in [UIApplication sharedApplication].windows) {
@@ -65,6 +193,10 @@
         tabBar.playerVc = nil;
     }
 }
+
+/**
+ *  隐藏
+ */
 - (void)hiddenClick
 {
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
@@ -83,62 +215,35 @@
     UIViewController *appRootVC = keyWindow.rootViewController;
     if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
         ((YTTabBarController *)appRootVC).playerVc = self;
-        FloatView *floatView = ((YTTabBarController *)appRootVC).floatView;
-        if (floatView == nil)
+        if (((YTTabBarController *)appRootVC).floatView == nil)
         {
             ( (YTTabBarController *)appRootVC).floatView = [FloatView defaultFloatViewWithButton];
         } else {
-            floatView.boardWindow.hidden = NO;
+            ((YTTabBarController *)appRootVC).floatView.boardWindow.hidden = NO;
         }
     }
-    //初始化
     
-//    [self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:0] animated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 
-- (void)viewWillAppear:(BOOL)animated
+/**
+ *  点赞
+ */
+- (void)likeClick
 {
-    [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    NSLog(@"点赞");
 }
 
-
-- (void)playVideo
-{
-    NSMutableArray* mutlArray = [NSMutableArray array];
-    TCCloudPlayerVideoUrlInfo* info = [[TCCloudPlayerVideoUrlInfo alloc]init];
-    info.videoUrlTypeName = @"原始";
-    info.videoUrl = [NSURL URLWithString:@"http://2527.vod.myqcloud.com/2527_117134a2343111e5b8f5bdca6cb9f38c.f20.mp4"];
-    [mutlArray addObject:info];
-    
-    TCCloudPlayerVideoUrlInfo* info1 = [[TCCloudPlayerVideoUrlInfo alloc]init];
-    info1.videoUrlTypeName = @"标清";
-    info1.videoUrl = [NSURL URLWithString:@"http://2527.vod.myqcloud.com/2527_117134a2343111e5b8f5bdca6cb9f38c.f30.mp4"];
-    [mutlArray addObject:info1];
-    
-    [self loadVideoPlaybackView:mutlArray defaultPlayIndex:0 startTime:0];
-}
-
+/**
+ *  横屏隐藏界面
+ *
+ */
 - (void)changeContentView:(BOOL)isShow
 {
     self.ContentView.hidden = isShow;
+    self.hiddenBtn.hidden = isShow;
+    self.closeBtn.hidden = isShow;
 }
-
-- (UIView *)ContentView
-{
-    if (!_ContentView) {
-        // 获取视频播放器最大宽度
-        CGFloat playerMaxY = CGRectGetMaxY(_playerView.frame);
-        _ContentView = [[UIView alloc] initWithFrame:CGRectMake(0, playerMaxY, DeviceWidth, DeviceHight - playerMaxY)];
-        [self.view addSubview:_ContentView];
-    }
-    return _ContentView;
-}
-
-
-
-
 
 @end

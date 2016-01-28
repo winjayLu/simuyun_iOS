@@ -58,38 +58,35 @@
         [ws playbackPauseBlock:curImg pauseReason:reason];
     };
     
-    _playerView.singleClickblock = ^ (BOOL isInFullScreen) {
-
-        if (isInFullScreen) {
-//            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
-        }
-
-    };
-    
-    _playerView.clickPlaybackViewblock = ^ (BOOL isFullScreen) {
-        if (isFullScreen)
-        {
-            NSLog(@"当前是全屏");
-        }
-        else
-        {
-            NSLog(@"当前不是全屏");
-        }
-    };
+//    _playerView.singleClickblock = ^ (BOOL isInFullScreen) {
+//
+//        if (isInFullScreen) {
+////            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
+//        }
+//
+//    };
+//    
+//    _playerView.clickPlaybackViewblock = ^ (BOOL isFullScreen) {
+//        if (isFullScreen)
+//        {
+//            NSLog(@"当前是全屏");
+//        }
+//        else
+//        {
+//            NSLog(@"当前不是全屏");
+//        }
+//    };
     
     _playerView.enterExitFullScreenBlock = ^ (BOOL enterFullScreen) {
-        if (ws.navigationController.topViewController == ws)
-        {
-            if (enterFullScreen) {
-                // 隐藏视频介绍
-                [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:NO];
-                [ws changeContentView:YES];
-                NSLog(@"进入全屏");
-            } else {
-                // 显示视频介绍
-                [ws changeContentView:NO];
-                NSLog(@"退出全屏");
-            }
+
+        if (enterFullScreen) {
+            // 隐藏视频介绍
+            [ws changeContentView:YES];
+            NSLog(@"进入全屏");
+        } else {
+            // 显示视频介绍
+            [ws changeContentView:NO];
+            NSLog(@"退出全屏");
         }
     };
 }

@@ -9,6 +9,7 @@
 #import "YTGroomVedioView.h"
 #import "YTVedioModel.h"
 #import "UIImageView+SD.h"
+#import "YTSchoolCollectionCell.h"
 
 @interface YTGroomVedioView()
 
@@ -28,7 +29,7 @@
 {
     self = [self init];
     if (self) {
-        self.vedios = vedios;
+        _vedios = vedios;
         [self setup];
     }
     return self;
@@ -43,16 +44,35 @@
     self.backgroundColor = [UIColor whiteColor];
     UIView *titleView =[self setupTitleViewWithTitle:@"推荐视频" tag:20];
     titleView.frame = CGRectMake(0, 0, DeviceWidth, 35);
-    
-    // 创建推荐视频
-    [self groomVedioWithVedioArray:@[@"1", @"1", @"1", @"1", @"1",]];
+
+    // 创建视频模块
+    [self groomVedios];
     
     // 创建其它视频标题
     UIView *otherView =[self setupTitleViewWithTitle:@"其他视频" tag:21];
     otherView.frame = CGRectMake(0, self.vedioMaxY, DeviceWidth, 35);
 }
 
-- (void)groomVedioWithVedioArray:(NSArray *)array
+- (void)setVedios:(NSArray *)vedios
+{
+    _vedios = vedios;
+    YTSchoolCollectionCell *vedioView = nil;
+    for (UIView *view in self.subviews) {
+        switch (view.tag) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+                vedioView = (YTSchoolCollectionCell *)view;
+                vedioView.vedio = vedios[view.tag];
+                break;
+            default:
+                continue;
+        }
+    }
+}
+
+- (void)groomVedios
 {
     CGFloat vedioWidth = (DeviceWidth - 32) * 0.5;
     CGFloat vedioHeight = 146;
@@ -60,22 +80,9 @@
     CGFloat vedioX = DeviceWidth - 8 - vedioWidth;
     // 第二行的vedioY
     CGFloat vedioY = CGRectGetMaxY(self.groomView.frame) + 25 + vedioHeight;
-    for (int i = 0; i < array.count; i++) {
+    for (int i = 0; i < self.vedios.count; i++) {
         if(i == 0) continue;
-        UIView *vedioView = nil;
-        // 从现有的视图中取
-        for (UIView *view in self.subviews) {
-            if (view.tag == i) {
-                vedioView = view;
-            }
-        }
-        if (vedioView) {
-            vedioView =
-            continue;
-        } else {
-            vedioView = [self createVedioViewWithVedio:self.vedios[i]];
-        }
-        vedioView.tag = i;
+        YTSchoolCollectionCell *vedioView = [self createVedioViewWithVedio:self.vedios[i] tag:i];
         switch (i) {
             case 1:
                 vedioView.frame = CGRectMake(10, CGRectGetMaxY(self.groomView.frame) + 10, vedioWidth, vedioHeight);
@@ -94,45 +101,23 @@
     }
 }
 
-- (UIView *)createVedioViewWithVedio:(YTVedioModel *)vedio
+- (YTSchoolCollectionCell *)createVedioViewWithVedio:(YTVedioModel *)vedio tag:(int)tag
 {
-    CGFloat vedioWidth = (DeviceWidth - 32) * 0.5;
-    // 容器
-    UIView *vedioView = [[UIView alloc] init];
-    
-    // 图片
-    UIImageView *imageView = [[UIImageView alloc] init];
-    if (vedio.image) {
-        imageView.image = vedio.image;
-    } else {
-        [imageView imageWithUrlStr:vedio.coverImageUrl phImage:[UIImage imageNamed:@"SchoolBanner"]];
-    }
-    imageView.layer.cornerRadius = 5;
-    imageView.layer.masksToBounds = YES;
-    imageView.layer.borderWidth = 1.0f;
-    imageView.layer.borderColor = YTColor(208, 208, 208).CGColor;
-    imageView.frame = CGRectMake(0, 0, vedioWidth, 96);
-    [vedioView addSubview:imageView];
-    // 标题
-    UILabel *titleLable = [[UILabel alloc] init];
-    titleLable.text = vedio.videoName;
-    titleLable.textColor = YTColor(51, 51, 51);
-    titleLable.font = [UIFont systemFontOfSize:13];
-    [titleLable sizeToFit];
-    titleLable.frame = CGRectMake(0, CGRectGetMaxY(imageView.frame) + 5, titleLable.width, titleLable.height);
-    [vedioView addSubview:titleLable];
-    // 子标题
-    UILabel *detailLable = [[UILabel alloc] init];
-    detailLable.text = vedio.shortName;
-    detailLable.textColor = YTColor(102, 102, 102);
-    detailLable.font = [UIFont systemFontOfSize:12];
-    detailLable.width = vedioWidth;
-    detailLable.numberOfLines = 2;
-    [detailLable sizeToFit];
-    detailLable.frame = CGRectMake(0, CGRectGetMaxY(titleLable.frame) + 5, detailLable.width, detailLable.height);
-    [vedioView addSubview:detailLable];
+    YTSchoolCollectionCell *vedioView = [[YTSchoolCollectionCell alloc] init];
+    UITapGestureRecognizer * tapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(vedioClick:)];
+    [vedioView addGestureRecognizer:tapGestureRecognizer];
+    vedioView.vedio = vedio;
+    vedioView.tag = tag;
     [self addSubview:vedioView];
     return vedioView;
+
+}
+
+- (void)vedioClick:(UITapGestureRecognizer*)tapGestureRecognizer
+{
+    if ([self.groomDelegate respondsToSelector:@selector(playVedioWithVedio:)]) {
+        [self.groomDelegate playVedioWithVedio:self.vedios[tapGestureRecognizer.view.tag]];
+    }
 }
 
 /**
@@ -166,7 +151,7 @@
     [content addSubview:title];
     
     [self addSubview:titleView];
-    
+
     if (tag == 21) { // 其他视频
         // 更多
         UIButton *more = [[UIButton alloc] init];
@@ -191,7 +176,12 @@
  */
 - (void)moreClcik
 {
-    NSLog(@"更多");
+    if ([self.groomDelegate respondsToSelector:@selector(plusList)]) {
+        [self.groomDelegate plusList];
+    }
 }
 
+
 @end
+
+

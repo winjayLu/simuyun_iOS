@@ -8,18 +8,36 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YTGroomVedioView : UIView
+@class YTVedioModel;
+
+@protocol groomViewDelegate <NSObject>
 
 /**
- *  自身高度
+ *  播放视频
  */
-@property (nonatomic, assign) CGFloat selfHeight;
+- (void)playVedioWithVedio:(YTVedioModel *)vedio;
+
+/**
+ *  打开列表页
+ */
+- (void)plusList;
+
+@end
+
+@interface YTGroomVedioView : UIView
+
 
 /**
  *  视频数组
  */
 @property (nonatomic, strong) NSArray *vedios;
 
+
+
+/**
+ *  代理
+ */
+@property (nonatomic, weak) id<groomViewDelegate> groomDelegate;
 
 - (instancetype)initWithVedios:(NSArray *)vedios;
 

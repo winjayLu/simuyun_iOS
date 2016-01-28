@@ -12,7 +12,6 @@
 #import "YTProfileTopView.h"
 #import "YTAccountTool.h"
 #import "NSDate+Extension.h"
-#import "YTSchoolSubPagController.h"
 #import "MJRefresh.h"
 #import "NSDate+Extension.h"
 #import "YTPlayerViewController.h"

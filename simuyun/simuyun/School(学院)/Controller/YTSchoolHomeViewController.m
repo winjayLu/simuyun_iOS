@@ -13,9 +13,13 @@
 #import "YTSchoolCollectionCell.h"
 #import "YTAccountTool.h"
 #import "YTVedioModel.h"
+#import "YTPlayerViewController.h"
+#import "YTTabBarController.h"
+#import "YTSchoolViewController.h"
+#import "YTSchoolListController.h"
 
 
-@interface YTSchoolHomeViewController ()
+@interface YTSchoolHomeViewController () <headerViewDelegate, groomViewDelegate>
 /**
  *  推荐视频数组
  */
@@ -53,7 +57,7 @@ static NSString * const headerIdentifier = @"headerCell";
 {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.itemSize = CGSizeMake((DeviceWidth - 32) * 0.5, 146);
-    layout.sectionInset = UIEdgeInsetsMake(0, 8, 15, 8);
+    layout.sectionInset = UIEdgeInsetsMake(0, 8, 20, 8);
     return [self initWithCollectionViewLayout:layout];
 }
 
@@ -184,12 +188,14 @@ static NSString * const headerIdentifier = @"headerCell";
             YTSchoolHeaderView *header = [[YTSchoolHeaderView alloc] init];
             header.frame = CGRectMake(0, 0, DeviceWidth, headerHeight);
             header.vedio = self.groomVedios[0];
+            header.headerDelegate = self;
             [reusableView addSubview:header];
             self.headerView = header;
             // 初始化推荐视频
             YTGroomVedioView *groomView = [[YTGroomVedioView alloc] initWithVedios:self.groomVedios];
-            groomView.frame = CGRectMake(0, CGRectGetMaxY(header.frame), DeviceWidth, groomView.selfHeight);
+            groomView.frame = CGRectMake(0, CGRectGetMaxY(header.frame), DeviceWidth, 410);
             [reusableView addSubview:groomView];
+            groomView.groomDelegate = self;
             self.groomView = groomView;
             self.reusableView = reusableView;
             return reusableView;
@@ -207,34 +213,75 @@ static NSString * const headerIdentifier = @"headerCell";
 }
 #pragma mark <UICollectionViewDelegate>
 
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
-}
-*/
-
-/*
-// Uncomment this method to specify if the specified item should be selected
 - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    YTVedioModel *vedio = self.otherVedios[indexPath.row];
+    [self playVedio:vedio];
     return YES;
 }
-*/
 
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
+
+#pragma mark - subViewDelegate
+/**
+ *  播放视频
+ */
+- (void)playVedio:(YTVedioModel *)vedio
+{
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    UIViewController *appRootVC = keyWindow.rootViewController;
+    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+        if (tabBar != nil) {
+            FloatView *floatView = tabBar.floatView;
+            YTPlayerViewController *player = tabBar.playerVc;
+            if (player != nil && [player.vedio.videoId isEqualToString:vedio.videoId] ) {
+                tabBar.floatView.boardWindow.hidden = YES;
+                 [self presentViewController:player animated:YES completion:nil];
+            } else {
+                [floatView removeFloatView];
+                tabBar.playerVc = nil;
+                tabBar.floatView = nil;
+                YTPlayerViewController *player = [[YTPlayerViewController alloc] init];
+                player.vedio = vedio;
+                [self presentViewController:player animated:YES completion:nil];
+                
+            }
+        }
+    }
 }
 
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
+
+/**
+ *  打开列表页
+ */
+- (void)plusVedioList:(NSString *)type
+{
+    YTSchoolListController *list = [[YTSchoolListController alloc] init];
+    list.type = type;
+    list.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:list animated:YES];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
+/**
+ *  播放视频
+ */
+- (void)playVedioWithVedio:(YTVedioModel *)vedio
+{
+    [self playVedio:vedio];
 }
-*/
+
+/**
+ *  查看更多视频
+ */
+- (void)plusList
+{
+    [self plusVedioList:nil];
+}
 
 
 #pragma mark - lazy
