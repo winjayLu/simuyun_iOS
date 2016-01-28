@@ -43,7 +43,7 @@
     // 顶部推荐视频
     UIButton *hotVideo = [[UIButton alloc] init];
     hotVideo.frame = CGRectMake(0, 0, DeviceWidth,  DeviceWidth * 0.5625);
-//    [hotVideo setBackgroundImage:[UIImage imageNamed:@"SchoolBanner"] forState:UIControlStateNormal];
+    [hotVideo addTarget:self action:@selector(topVedioClick) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:hotVideo];
     self.bannerBtn = hotVideo;
     
@@ -120,7 +120,19 @@
  */
 - (void)categoryClick:(UIButton *)btn
 {
-    NSLog(@"%zd", btn.tag);
+    if ([self.headerDelegate respondsToSelector:@selector(plusVedioList:)]) {
+        [self.headerDelegate plusVedioList:btn.titleLabel.text];
+    }
+}
+
+/**
+ *  顶部视频点击
+ */
+- (void)topVedioClick
+{
+    if ([self.headerDelegate respondsToSelector:@selector(playVedio:)]) {
+        [self.headerDelegate playVedio:self.vedio];
+    }
 }
 
 

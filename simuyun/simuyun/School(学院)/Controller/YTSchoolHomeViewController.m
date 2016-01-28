@@ -17,9 +17,14 @@
 
 @interface YTSchoolHomeViewController ()
 /**
- *  视频数组
+ *  推荐视频数组
  */
-@property (nonatomic, strong) NSMutableArray *vedios;
+@property (nonatomic, strong) NSMutableArray *groomVedios;
+
+/**
+ *  推荐视频数组
+ */
+@property (nonatomic, strong) NSMutableArray *otherVedios;
 
 /**
  *  顶部视图的容器
@@ -47,12 +52,8 @@ static NSString * const headerIdentifier = @"headerCell";
 - (instancetype)init
 {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-//    CGFloat vedioWidth = (DeviceWidth - 32) * 0.5;
-//    CGFloat vedioHeight = 146;
     layout.itemSize = CGSizeMake((DeviceWidth - 32) * 0.5, 146);
     layout.sectionInset = UIEdgeInsetsMake(0, 8, 15, 8);
-//    layout.minimumInteritemSpacing = 15;
-//    layout.minimumLineSpacing = 8;
     return [self initWithCollectionViewLayout:layout];
 }
 
@@ -63,25 +64,50 @@ static NSString * const headerIdentifier = @"headerCell";
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
     // 设置下拉刷新上拉加载
-    // 设置下拉刷新
-    self.collectionView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadGroomVedio)];
+    self.collectionView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadVedio)];
     // 上拉加载
-    self.collectionView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadOtherVedio)];
+    self.collectionView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreVedio)];
+}
 
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self loadVedio];
 }
 
 #pragma mark - 加载数据
 /**
- *  加载热门视频
+ *  加载视频
  */
-- (void)loadGroomVedio
+- (void)loadVedio
 {
+    // 加载推荐视频
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
     [YTHttpTool get:YTRecommended params:param
             success:^(NSDictionary *responseObject) {
-                self.vedios = [YTVedioModel objectArrayWithKeyValuesArray:responseObject];
+                self.groomVedios = [YTVedioModel objectArrayWithKeyValuesArray:responseObject];
+                // 加载其他视频
+                [self loadOtherVedio];
+            } failure:^(NSError *error) {
+                // 结束刷新状态
+                [self.collectionView.header endRefreshing];
+            }];
+}
+/**
+ *  加载其他视频
+ */
+- (void)loadOtherVedio
+{
+    // 加载推荐视频
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"uid"] = [YTAccountTool account].userId;
+    param[@"offset"] = @"0";
+    param[@"limit"] = @"8";
+    [YTHttpTool get:YTVideos params:param
+            success:^(NSDictionary *responseObject) {
+                self.otherVedios = [YTVedioModel objectArrayWithKeyValuesArray:responseObject];
                 // 结束刷新状态
                 [self.collectionView reloadData];
                 [self.collectionView.header endRefreshing];
@@ -90,19 +116,33 @@ static NSString * const headerIdentifier = @"headerCell";
                 [self.collectionView.header endRefreshing];
             }];
 }
+
 /**
- *  加载其他视频
+ *  加载更多视频
  *
  */
-- (void)loadOtherVedio
+- (void)loadMoreVedio
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        for (int i = 0; i < 5; i++) {
-            [self.vedios addObject:@""];
-        }
-        [self.collectionView reloadData];
-        [self.collectionView.footer endRefreshing];
-    });
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"uid"] = [YTAccountTool account].userId;
+    param[@"offset"] = [NSString stringWithFormat:@"%zd", self.otherVedios.count];
+    param[@"limit"] = @"8";
+    [YTHttpTool get:YTVideos params:param
+            success:^(NSDictionary *responseObject) {
+                NSArray *result = [YTVedioModel objectArrayWithKeyValuesArray:responseObject];
+                if(result.count == 0)
+                {
+                    [self.collectionView.footer noticeNoMoreData];
+                    return;
+                }
+                [self.otherVedios addObjectsFromArray:result];
+                // 结束刷新状态
+                [self.collectionView reloadData];
+                [self.collectionView.footer endRefreshing];
+            } failure:^(NSError *error) {
+                // 结束刷新状态
+                [self.collectionView.footer endRefreshing];
+            }];
 }
 
 
@@ -115,14 +155,12 @@ static NSString * const headerIdentifier = @"headerCell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.vedios.count;
+    return self.otherVedios.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     YTSchoolCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-
-//    cell.backgroundColor = [UIColor blueColor];
+    cell.vedio = self.otherVedios[indexPath.row];
     return cell;
 }
 
@@ -136,8 +174,8 @@ static NSString * const headerIdentifier = @"headerCell";
     {
         if (self.reusableView)
         {
-            self.headerView.vedio = self.vedios[0];
-            self.groomView.vedios = self.vedios;
+            self.headerView.vedio = self.groomVedios[0];
+            self.groomView.vedios = self.groomVedios;
             return self.reusableView;
         } else {
             UICollectionReusableView *reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier forIndexPath:indexPath];
@@ -145,13 +183,12 @@ static NSString * const headerIdentifier = @"headerCell";
             CGFloat headerHeight = DeviceWidth * 0.5625 + (DeviceWidth - 35) * 0.25 - 10;
             YTSchoolHeaderView *header = [[YTSchoolHeaderView alloc] init];
             header.frame = CGRectMake(0, 0, DeviceWidth, headerHeight);
-            header.vedio = self.vedios[0];
+            header.vedio = self.groomVedios[0];
             [reusableView addSubview:header];
             self.headerView = header;
             // 初始化推荐视频
-            YTGroomVedioView *groomView = [[YTGroomVedioView alloc] initWithVedios:self.vedios];
+            YTGroomVedioView *groomView = [[YTGroomVedioView alloc] initWithVedios:self.groomVedios];
             groomView.frame = CGRectMake(0, CGRectGetMaxY(header.frame), DeviceWidth, groomView.selfHeight);
-            groomView.vedios = self.vedios;
             [reusableView addSubview:groomView];
             self.groomView = groomView;
             self.reusableView = reusableView;
@@ -202,17 +239,26 @@ static NSString * const headerIdentifier = @"headerCell";
 
 #pragma mark - lazy
 
-- (NSMutableArray *)vedios
+- (NSMutableArray *)groomVedios
 {
-    if (!_vedios) {
-        _vedios = [[NSMutableArray alloc] init];
+    if (!_groomVedios) {
+        _groomVedios = [[NSMutableArray alloc] init];
         for (int i = 0; i < 5; i++) {
             YTVedioModel *vedio = [[YTVedioModel alloc] initWithTitle:@"sss" image:@"SchoolBanner" shortName:@"我是子标题我是子标题我是子标题我是子标题我是子标题"];
-            [_vedios addObject:vedio];
+            [_groomVedios addObject:vedio];
         }
     }
-    return _vedios;
+    return _groomVedios;
 }
+
+- (NSMutableArray *)otherVedios
+{
+    if (!_otherVedios) {
+        _otherVedios = [[NSMutableArray alloc] init];
+    }
+    return _otherVedios;
+}
+
 
 
 @end

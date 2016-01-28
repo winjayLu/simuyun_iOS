@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YTVedioModel.h"
 
 @interface YTSchoolCollectionCell : UICollectionViewCell
+
+/**
+ *  视频模型
+ */
+@property (nonatomic, strong) YTVedioModel *vedio;
 
 @end
