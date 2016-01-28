@@ -143,6 +143,7 @@
 		9790F8D11BDF1A2100965C7B /* YTAuthenticationStatusController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9790F8CF1BDF1A2100965C7B /* YTAuthenticationStatusController.xib */; };
 		9792D8721C30E4320097ED7E /* YTSearchProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9792D8701C30E4320097ED7E /* YTSearchProductCell.m */; };
 		9792D8731C30E4320097ED7E /* YTSearchProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9792D8711C30E4320097ED7E /* YTSearchProductCell.xib */; };
+		9792DD1A1C59A19A001D1BE0 /* YTSchoolCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9792DD191C59A19A001D1BE0 /* YTSchoolCollectionCell.m */; };
 		97973CDD1BC391BA00B7B4CB /* PushConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97973CDC1BC391BA00B7B4CB /* PushConfig.plist */; };
 		97973CE71BC3BE7000B7B4CB /* NSString+File.m in Sources */ = {isa = PBXBuildFile; fileRef = 97973CE41BC3BE7000B7B4CB /* NSString+File.m */; };
 		97973CE81BC3BE7000B7B4CB /* CoreArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 97973CE61BC3BE7000B7B4CB /* CoreArchive.m */; };
@@ -552,6 +553,8 @@
 		9792D86F1C30E4320097ED7E /* YTSearchProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSearchProductCell.h; sourceTree = "<group>"; };
 		9792D8701C30E4320097ED7E /* YTSearchProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSearchProductCell.m; sourceTree = "<group>"; };
 		9792D8711C30E4320097ED7E /* YTSearchProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTSearchProductCell.xib; sourceTree = "<group>"; };
+		9792DD181C59A19A001D1BE0 /* YTSchoolCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSchoolCollectionCell.h; sourceTree = "<group>"; };
+		9792DD191C59A19A001D1BE0 /* YTSchoolCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSchoolCollectionCell.m; sourceTree = "<group>"; };
 		97973CDC1BC391BA00B7B4CB /* PushConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PushConfig.plist; sourceTree = "<group>"; };
 		97973CE31BC3BE7000B7B4CB /* NSString+File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+File.h"; sourceTree = "<group>"; };
 		97973CE41BC3BE7000B7B4CB /* NSString+File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+File.m"; sourceTree = "<group>"; };
@@ -1172,6 +1175,8 @@
 				978258D41C586332005705AB /* YTSchoolHeaderView.m */,
 				978258DB1C5896B2005705AB /* YTGroomVedioView.h */,
 				978258DC1C5896B2005705AB /* YTGroomVedioView.m */,
+				9792DD181C59A19A001D1BE0 /* YTSchoolCollectionCell.h */,
+				9792DD191C59A19A001D1BE0 /* YTSchoolCollectionCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -2569,6 +2574,7 @@
 				97973CE81BC3BE7000B7B4CB /* CoreArchive.m in Sources */,
 				9735F2E51C57162D00AE799A /* YTPlayerViewController.m in Sources */,
 				97C606481BC269CC00E555E8 /* UIImage+Extend.m in Sources */,
+				9792DD1A1C59A19A001D1BE0 /* YTSchoolCollectionCell.m in Sources */,
 				978F4CA11C16792800A36E0F /* JKAssetsGroupCell.m in Sources */,
 				971503A91BC75E78007E27D0 /* PPTLayout.m in Sources */,
 				97C605AD1BC260A400E555E8 /* YTTabBarController.m in Sources */,

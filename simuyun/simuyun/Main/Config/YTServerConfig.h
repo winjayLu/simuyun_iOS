@@ -13,14 +13,14 @@
 //#ifdef DEBUG
 //#else
 // 生产环境
-#define YTServer @"https://intime.simuyun.com/api/app/"
-#define YTH5Server @"http://www.simuyun.com"
+//#define YTServer @"https://intime.simuyun.com/api/app/"
+//#define YTH5Server @"http://www.simuyun.com"
 //#define UmengAppKey @"5514ed3cfd98c5bca4000872"
 //#endif
 
 // 开发环境213
-//#define YTServer @"http://192.168.17.213:8080/api/app/"
-//#define YTH5Server @"http://192.168.17.213"
+#define YTServer @"http://192.168.17.213:8080/api/app/"
+#define YTH5Server @"http://192.168.17.213"
 #define UmengAppKey @"545867defd98c5f23a0021da"
 
 // 测试环境212
@@ -103,5 +103,10 @@
 #define YTMarquee @"marquee"
 // 微信登录-验证unionid是否已存在
 #define YTWeChatUnionId @"weChatUnionId"
+// 推荐视频
+#define YTRecommended @"academy/recommended"
+// 其他视频
+#define YTVideos @"academy/videos"
+
 
 #endif /* YTServerConfig_h */

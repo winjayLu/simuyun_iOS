@@ -7,6 +7,21 @@
 //
 
 #import "YTSchoolHeaderView.h"
+#import "UIButton+SD.h"
+
+
+@interface YTSchoolHeaderView()
+
+/**
+ *  顶部视频banner
+ */
+@property (nonatomic, weak) UIButton *bannerBtn;
+/**
+ *  标题lable
+ */
+@property (nonatomic, weak) UILabel *titleLable;
+
+@end
 
 @implementation YTSchoolHeaderView
 
@@ -28,8 +43,9 @@
     // 顶部推荐视频
     UIButton *hotVideo = [[UIButton alloc] init];
     hotVideo.frame = CGRectMake(0, 0, DeviceWidth,  DeviceWidth * 0.5625);
-    [hotVideo setBackgroundImage:[UIImage imageNamed:@"SchoolBanner"] forState:UIControlStateNormal];
+//    [hotVideo setBackgroundImage:[UIImage imageNamed:@"SchoolBanner"] forState:UIControlStateNormal];
     [self addSubview:hotVideo];
+    self.bannerBtn = hotVideo;
     
     // 推荐视频标题容器
     UIView *titleContent = [[UIView alloc] init];
@@ -44,6 +60,7 @@
     title.textColor = [UIColor whiteColor];
     title.font = [UIFont systemFontOfSize:14];
     [titleContent addSubview:title];
+    self.titleLable = title;
     
     // 创建分类按钮
     CGFloat categoryBtnW = (DeviceWidth - 35) * 0.25;
@@ -86,6 +103,16 @@
     button.titleEdgeInsets = UIEdgeInsetsMake(65, -button.currentImage.size.width, 0, 0);
     [self addSubview:button];
     return button;
+}
+
+- (void)setVedio:(YTVedioModel *)vedio
+{
+    self.titleLable.text = vedio.shortName;
+    if (vedio.image) {
+        [self.bannerBtn setImage:vedio.image forState:UIControlStateNormal];
+        return;
+    }
+    [self.bannerBtn imageWithUrlStr:vedio.coverImageUrl phImage:[UIImage imageNamed:@"SchoolBanner"]];
 }
 
 /**

@@ -15,4 +15,12 @@
  */
 @property (nonatomic, assign) CGFloat selfHeight;
 
+/**
+ *  视频数组
+ */
+@property (nonatomic, strong) NSArray *vedios;
+
+
+- (instancetype)initWithVedios:(NSArray *)vedios;
+
 @end

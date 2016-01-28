@@ -10,4 +10,15 @@
 
 @implementation YTVedioModel
 
+- (instancetype)initWithTitle:(NSString *)title image:(NSString *)image shortName:(NSString *)shortName
+{
+    self = [super init];
+    if (self != nil) {
+        self.videoName = title;
+        self.image = [UIImage imageNamed:@"SchoolBanner"];
+        self.shortName = shortName;
+    }
+    return self;
+}
+
 @end

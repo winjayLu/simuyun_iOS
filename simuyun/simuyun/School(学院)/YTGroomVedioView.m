@@ -8,13 +8,13 @@
 
 #import "YTGroomVedioView.h"
 #import "YTVedioModel.h"
+#import "UIImageView+SD.h"
 
 @interface YTGroomVedioView()
 
 /**
  *  推荐视频标题栏
  */
-//@property (nonatomic, weak) UILabel *titleLable;
 @property (nonatomic, weak) UIView *groomView;
 
 @property (nonatomic, assign) CGFloat vedioMaxY;
@@ -23,10 +23,12 @@
 
 @implementation YTGroomVedioView
 
-- (id)initWithFrame:(CGRect)frame
+
+- (instancetype)initWithVedios:(NSArray *)vedios
 {
-    self = [super initWithFrame:frame];
+    self = [self init];
     if (self) {
+        self.vedios = vedios;
         [self setup];
     }
     return self;
@@ -39,14 +41,14 @@
 - (void)setup
 {
     self.backgroundColor = [UIColor whiteColor];
-    UIView *titleView =[self setupTitleViewWithTitle:@"推荐视频" tag:1];
+    UIView *titleView =[self setupTitleViewWithTitle:@"推荐视频" tag:20];
     titleView.frame = CGRectMake(0, 0, DeviceWidth, 35);
     
     // 创建推荐视频
     [self groomVedioWithVedioArray:@[@"1", @"1", @"1", @"1", @"1",]];
     
     // 创建其它视频标题
-    UIView *otherView =[self setupTitleViewWithTitle:@"其他视频" tag:2];
+    UIView *otherView =[self setupTitleViewWithTitle:@"其他视频" tag:21];
     otherView.frame = CGRectMake(0, self.vedioMaxY, DeviceWidth, 35);
 }
 
@@ -60,7 +62,20 @@
     CGFloat vedioY = CGRectGetMaxY(self.groomView.frame) + 25 + vedioHeight;
     for (int i = 0; i < array.count; i++) {
         if(i == 0) continue;
-        UIView *vedioView = [self createVedioViewWithVedio:[[YTVedioModel alloc] init]];
+        UIView *vedioView = nil;
+        // 从现有的视图中取
+        for (UIView *view in self.subviews) {
+            if (view.tag == i) {
+                vedioView = view;
+            }
+        }
+        if (vedioView) {
+            vedioView =
+            continue;
+        } else {
+            vedioView = [self createVedioViewWithVedio:self.vedios[i]];
+        }
+        vedioView.tag = i;
         switch (i) {
             case 1:
                 vedioView.frame = CGRectMake(10, CGRectGetMaxY(self.groomView.frame) + 10, vedioWidth, vedioHeight);
@@ -87,7 +102,11 @@
     
     // 图片
     UIImageView *imageView = [[UIImageView alloc] init];
-    imageView.image = [UIImage imageNamed:@"SchoolBanner"];
+    if (vedio.image) {
+        imageView.image = vedio.image;
+    } else {
+        [imageView imageWithUrlStr:vedio.coverImageUrl phImage:[UIImage imageNamed:@"SchoolBanner"]];
+    }
     imageView.layer.cornerRadius = 5;
     imageView.layer.masksToBounds = YES;
     imageView.layer.borderWidth = 1.0f;
@@ -96,7 +115,7 @@
     [vedioView addSubview:imageView];
     // 标题
     UILabel *titleLable = [[UILabel alloc] init];
-    titleLable.text = @"我是标题";
+    titleLable.text = vedio.videoName;
     titleLable.textColor = YTColor(51, 51, 51);
     titleLable.font = [UIFont systemFontOfSize:13];
     [titleLable sizeToFit];
@@ -104,7 +123,7 @@
     [vedioView addSubview:titleLable];
     // 子标题
     UILabel *detailLable = [[UILabel alloc] init];
-    detailLable.text = @"聚合财富管理力量！聚合财富管理力量！聚合财富管理力量！聚合财富管理力量！聚合财富管理力量！聚合财富管理力量！聚合财富管理力量！聚合财富管理力量！聚合财富管理力量！聚合财富管理力量！聚合财富管理力量！";
+    detailLable.text = vedio.shortName;
     detailLable.textColor = YTColor(102, 102, 102);
     detailLable.font = [UIFont systemFontOfSize:12];
     detailLable.width = vedioWidth;
@@ -138,27 +157,29 @@
     [content addSubview:imagView];
     // 标题
     UILabel *title = [[UILabel alloc] init];
-    title.text = @"推荐视频";
+    title.text = titleText;
     title.font = [UIFont systemFontOfSize:15];
     title.textColor = YTColor(51, 51, 51);
     [title sizeToFit];
     title.origin = CGPointMake(CGRectGetMaxX(imagView.frame) + 5, imagView.y);
     title.center = CGPointMake(title.center.x, imagView.center.y);
     [content addSubview:title];
-    // 更多
-    UIButton *more = [[UIButton alloc] init];
-    [more setTitle:@"更多" forState:UIControlStateNormal];
-    [more.titleLabel setFont:[UIFont systemFontOfSize:13]];
-    [more setTitleColor:YTColor(102, 102, 102) forState:UIControlStateNormal];
-    [more addTarget:self action:@selector(moreClcik) forControlEvents:UIControlEventTouchUpInside];
-    more.tag = tag;
-    CGFloat moreW = 40;
-    more.frame = CGRectMake(DeviceWidth - magin - moreW, imagView.y, moreW, title.height);
-    more.center = CGPointMake(more.center.x, title.center.y);
-    [content addSubview:more];
+    
     [self addSubview:titleView];
     
-    if (tag == 1) { // 推荐视频
+    if (tag == 21) { // 其他视频
+        // 更多
+        UIButton *more = [[UIButton alloc] init];
+        [more setTitle:@"更多" forState:UIControlStateNormal];
+        [more.titleLabel setFont:[UIFont systemFontOfSize:13]];
+        [more setTitleColor:YTColor(102, 102, 102) forState:UIControlStateNormal];
+        [more addTarget:self action:@selector(moreClcik) forControlEvents:UIControlEventTouchUpInside];
+        more.tag = tag;
+        CGFloat moreW = 40;
+        more.frame = CGRectMake(DeviceWidth - magin - moreW, imagView.y, moreW, title.height);
+        more.center = CGPointMake(more.center.x, title.center.y);
+        [content addSubview:more];
+    } else {
         self.groomView = titleView;
     }
     return titleView;

@@ -10,12 +10,21 @@
 #import "YTSchoolHeaderView.h"
 #import "YTGroomVedioView.h"
 #import "MJRefresh.h"
+#import "YTSchoolCollectionCell.h"
+#import "YTAccountTool.h"
+#import "YTVedioModel.h"
+
 
 @interface YTSchoolHomeViewController ()
 /**
  *  视频数组
  */
 @property (nonatomic, strong) NSMutableArray *vedios;
+
+/**
+ *  顶部视图的容器
+ */
+@property (nonatomic, weak) UICollectionReusableView *reusableView;
 
 /**
  *  初始化推荐视频
@@ -25,7 +34,7 @@
 /**
  *  初始化推荐视频
  */
-@property (nonatomic, weak) YTSchoolHeaderView *header;
+@property (nonatomic, weak) YTSchoolHeaderView *headerView;
 
 @end
 
@@ -49,16 +58,52 @@ static NSString * const headerIdentifier = @"headerCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
+    [self.collectionView registerClass:[YTSchoolCollectionCell class] forCellWithReuseIdentifier:reuseIdentifier];
      [self.collectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier];
     self.collectionView.backgroundColor = [UIColor whiteColor];
     
+    // 设置下拉刷新上拉加载
+    // 设置下拉刷新
+    self.collectionView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadGroomVedio)];
+    // 上拉加载
+    self.collectionView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadOtherVedio)];
 
 
 }
 
-#pragma mark - 初始化方法
-
+#pragma mark - 加载数据
+/**
+ *  加载热门视频
+ */
+- (void)loadGroomVedio
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"uid"] = [YTAccountTool account].userId;
+    [YTHttpTool get:YTRecommended params:param
+            success:^(NSDictionary *responseObject) {
+                self.vedios = [YTVedioModel objectArrayWithKeyValuesArray:responseObject];
+                // 结束刷新状态
+                [self.collectionView reloadData];
+                [self.collectionView.header endRefreshing];
+            } failure:^(NSError *error) {
+                // 结束刷新状态
+                [self.collectionView.header endRefreshing];
+            }];
+}
+/**
+ *  加载其他视频
+ *
+ */
+- (void)loadOtherVedio
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        for (int i = 0; i < 5; i++) {
+            [self.vedios addObject:@""];
+        }
+        [self.collectionView reloadData];
+        [self.collectionView.footer endRefreshing];
+    });
+}
 
 
 
@@ -74,29 +119,44 @@ static NSString * const headerIdentifier = @"headerCell";
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    YTSchoolCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    
 
-    cell.backgroundColor = [UIColor blueColor];
+//    cell.backgroundColor = [UIColor blueColor];
     return cell;
 }
+
+/**
+ *  初始化headerView
+ */
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     
     if (kind == UICollectionElementKindSectionHeader)
     {
-        UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier forIndexPath:indexPath];
-        // 初始化顶部视图
-        CGFloat headerHeight = DeviceWidth * 0.5625 + (DeviceWidth - 35) * 0.25 - 10;
-        YTSchoolHeaderView *header = [[YTSchoolHeaderView alloc] init];
-        header.frame = CGRectMake(0, 0, DeviceWidth, headerHeight);
-        [headerView addSubview:header];
-        self.header = header;
-        // 初始化推荐视频
-        YTGroomVedioView *groomView = [[YTGroomVedioView alloc] init];
-        groomView.frame = CGRectMake(0, CGRectGetMaxY(header.frame), DeviceWidth, groomView.selfHeight);
-        [headerView addSubview:groomView];
-        self.groomView = groomView;
-        return headerView;
+        if (self.reusableView)
+        {
+            self.headerView.vedio = self.vedios[0];
+            self.groomView.vedios = self.vedios;
+            return self.reusableView;
+        } else {
+            UICollectionReusableView *reusableView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerIdentifier forIndexPath:indexPath];
+            // 初始化顶部视图
+            CGFloat headerHeight = DeviceWidth * 0.5625 + (DeviceWidth - 35) * 0.25 - 10;
+            YTSchoolHeaderView *header = [[YTSchoolHeaderView alloc] init];
+            header.frame = CGRectMake(0, 0, DeviceWidth, headerHeight);
+            header.vedio = self.vedios[0];
+            [reusableView addSubview:header];
+            self.headerView = header;
+            // 初始化推荐视频
+            YTGroomVedioView *groomView = [[YTGroomVedioView alloc] initWithVedios:self.vedios];
+            groomView.frame = CGRectMake(0, CGRectGetMaxY(header.frame), DeviceWidth, groomView.selfHeight);
+            groomView.vedios = self.vedios;
+            [reusableView addSubview:groomView];
+            self.groomView = groomView;
+            self.reusableView = reusableView;
+            return reusableView;
+        }
     }
     
     return nil;
@@ -147,7 +207,8 @@ static NSString * const headerIdentifier = @"headerCell";
     if (!_vedios) {
         _vedios = [[NSMutableArray alloc] init];
         for (int i = 0; i < 5; i++) {
-            [_vedios addObject:@"ss"];
+            YTVedioModel *vedio = [[YTVedioModel alloc] initWithTitle:@"sss" image:@"SchoolBanner" shortName:@"我是子标题我是子标题我是子标题我是子标题我是子标题"];
+            [_vedios addObject:vedio];
         }
     }
     return _vedios;
