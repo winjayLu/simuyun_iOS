@@ -8,11 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+
+
+
 @interface YTSchoolListController : UITableViewController
 
 /**
  *  列表类型
  */
 @property (nonatomic, copy) NSString *type;
+
+
 
 @end

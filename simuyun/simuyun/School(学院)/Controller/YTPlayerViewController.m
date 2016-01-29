@@ -10,6 +10,7 @@
 #import "TCCloudPlayerVideoUrlInfo.h"
 #import "YTSchoolViewController.h"
 #import "YTTabBarController.h"
+#import "YTAccountTool.h"
 
 
 @interface YTPlayerViewController ()
@@ -103,15 +104,17 @@
     // 是否点过赞
     if (vedio.isLiked == 0) {
         [likeBtn setImage:[UIImage imageNamed:@"Like"] forState:UIControlStateNormal];
+        likeBtn.enabled = YES;
     } else {
         [likeBtn setImage:[UIImage imageNamed:@"Likeanxia"] forState:UIControlStateNormal];
+        likeBtn.enabled = NO;
     }
     if (vedio.likes > 0) {   // 点赞数量
         [likeBtn setTitle:[NSString stringWithFormat:@"%d", vedio.likes] forState:UIControlStateNormal];
     }
     [likeBtn setTitleColor:YTNavBackground forState:UIControlStateNormal];
     [likeBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
-    [likeBtn addTarget:self action:@selector(likeClick) forControlEvents:UIControlEventTouchUpInside];
+    [likeBtn addTarget:self action:@selector(likeClick:) forControlEvents:UIControlEventTouchUpInside];
     [likeBtn sizeToFit];
     likeBtn.frame = CGRectMake(DeviceWidth - likeBtn.width - 10, 15, likeBtn.width, likeBtn.height);
     [self.ContentView addSubview:likeBtn];
@@ -230,9 +233,26 @@
 /**
  *  点赞
  */
-- (void)likeClick
+- (void)likeClick:(UIButton *)likeBtn
 {
-    NSLog(@"点赞");
+    // 改变按钮状态
+    [likeBtn setImage:[UIImage imageNamed:@"Likeanxia"] forState:UIControlStateNormal];
+    [likeBtn setTitle:[NSString stringWithFormat:@"%d", self.vedio.likes + 1] forState:UIControlStateNormal];
+    [likeBtn sizeToFit];
+    likeBtn.enabled = NO;
+    
+    // 改变列表原数据
+    if ([self.delegate respondsToSelector:@selector(likeChangData)]) {
+        [self.delegate likeChangData];
+    }
+    
+    // 发送请求
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"uid"] = [YTAccountTool account].userId;
+    param[@"videoId"] = self.vedio.videoId;
+    [YTHttpTool post:YTVideoLike params:param success:^(id responseObject) {
+    } failure:^(NSError *error) {
+    }];
 }
 
 /**

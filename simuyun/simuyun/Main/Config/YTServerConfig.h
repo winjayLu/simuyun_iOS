@@ -107,6 +107,7 @@
 #define YTRecommended @"academy/recommended"
 // 其他视频
 #define YTVideos @"academy/videos"
-
+// 点赞
+#define YTVideoLike @"academy/videos/like"
 
 #endif /* YTServerConfig_h */

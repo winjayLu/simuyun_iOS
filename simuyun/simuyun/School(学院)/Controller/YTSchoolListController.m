@@ -15,7 +15,7 @@
 #import "YTVedioModel.h"
 #import "YTTabBarController.h"
 
-@interface YTSchoolListController ()
+@interface YTSchoolListController () <vedioLikeDelegate>
 
 @property (nonatomic, strong) NSMutableArray *vedios;
 
@@ -23,6 +23,11 @@
  *  数据状态提示
  */
 @property (nonatomic, weak) YTDataHintView *hintView;
+
+/**
+ *  选中的video
+ */
+@property (nonatomic, assign) NSUInteger selectedIndex;
 
 @end
 
@@ -92,6 +97,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self playVedio:self.vedios[indexPath.row]];
+    self.selectedIndex = indexPath.row;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 93;
@@ -122,12 +128,23 @@
                 tabBar.playerVc = nil;
                 tabBar.floatView = nil;
                 YTPlayerViewController *player = [[YTPlayerViewController alloc] init];
+                player.delegate = self;
                 player.vedio = vedio;
                 [self presentViewController:player animated:YES completion:nil];
                 
             }
         }
     }
+}
+
+/**
+ *  点赞后更新列表数据
+ */
+- (void)likeChangData
+{
+    ((YTVedioModel *)(self.vedios[self.selectedIndex])).isLiked = 1;
+    ((YTVedioModel *)(self.vedios[self.selectedIndex])).likes += 1;
+    [self.tableView reloadData];
 }
 
 

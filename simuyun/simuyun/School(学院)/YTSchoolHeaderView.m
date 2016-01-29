@@ -107,6 +107,7 @@
 
 - (void)setVedio:(YTVedioModel *)vedio
 {
+    _vedio = vedio;
     self.titleLable.text = vedio.shortName;
     if (vedio.image) {
         [self.bannerBtn setImage:vedio.image forState:UIControlStateNormal];
