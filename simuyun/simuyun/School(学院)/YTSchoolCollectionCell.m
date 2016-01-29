@@ -45,8 +45,8 @@
     imageView.layer.masksToBounds = YES;
     imageView.layer.borderWidth = 1.0f;
     imageView.layer.borderColor = YTColor(208, 208, 208).CGColor;
-    
-    imageView.frame = CGRectMake(0, 0, (DeviceWidth - 32) * 0.5, 96);
+    CGFloat vedioHeight = (DeviceWidth - 32) * 0.5 * 0.849;
+    imageView.frame = CGRectMake(0, 0, (DeviceWidth - 32) * 0.5, vedioHeight * 0.658);
     [self addSubview:imageView];
     self.imageView = imageView;
     // 标题

@@ -58,8 +58,13 @@ static NSString * const headerIdentifier = @"headerCell";
 - (instancetype)init
 {
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.itemSize = CGSizeMake((DeviceWidth - 32) * 0.5, 146);
-    layout.sectionInset = UIEdgeInsetsMake(0, 8, 20, 8);
+    CGFloat vedioWidth = (DeviceWidth - 32) * 0.5;
+    if (DeviceWidth < 375.0f) {
+        layout.itemSize = CGSizeMake(vedioWidth, vedioWidth * 0.849 + 10);
+    } else {
+        layout.itemSize = CGSizeMake(vedioWidth, vedioWidth * 0.849 + 4);
+    }
+    layout.sectionInset = UIEdgeInsetsMake(0, 8, 0, 8);
     return [self initWithCollectionViewLayout:layout];
 }
 
@@ -79,7 +84,7 @@ static NSString * const headerIdentifier = @"headerCell";
 {
     [super viewWillAppear:animated];
     
-//    [self loadVedio];
+    [self loadVedio];
 }
 
 #pragma mark - 加载数据
@@ -201,7 +206,7 @@ static NSString * const headerIdentifier = @"headerCell";
             self.headerView = header;
             // 初始化推荐视频
             YTGroomVedioView *groomView = [[YTGroomVedioView alloc] initWithVedios:self.groomVedios];
-            groomView.frame = CGRectMake(0, CGRectGetMaxY(header.frame), DeviceWidth, 410);
+            groomView.frame = CGRectMake(0, CGRectGetMaxY(header.frame), DeviceWidth, [self groomHeight]);
             [reusableView addSubview:groomView];
             groomView.groomDelegate = self;
             self.groomView = groomView;
@@ -212,12 +217,25 @@ static NSString * const headerIdentifier = @"headerCell";
     
     return nil;
 }
+- (CGFloat)groomHeight
+{
+    CGFloat aspectRatio = 0.0;
+    if (iPhone4 || iPhone5) {
+        aspectRatio = 1.164;
+    } else if(iPhone6)
+    {
+        aspectRatio = 1.10;
+    } else {
+        aspectRatio = 1.08;
+    }
+    return aspectRatio * DeviceWidth;
+}
+
 
 -(CGSize)collectionView:(UICollectionView*)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     CGFloat headerHeight = DeviceWidth * 0.5625 + (DeviceWidth - 35) * 0.25 - 10;
-    CGFloat groomHeight = 410;
-    return CGSizeMake(DeviceWidth, headerHeight + groomHeight);
+    return CGSizeMake(DeviceWidth, headerHeight + [self groomHeight]);
 }
 #pragma mark <UICollectionViewDelegate>
 

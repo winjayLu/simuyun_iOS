@@ -78,7 +78,9 @@
     // 宽高系数
     CGFloat aspectRatio = 0.849;
     CGFloat vedioHeight = vedioWidth * aspectRatio;
-//    CGFloat vedioHeight = 146;
+    if (DeviceWidth < 375.0f) {
+        vedioHeight = vedioWidth * aspectRatio + 5;
+    }
     // 右侧的vedioX
     CGFloat vedioX = DeviceWidth - 8 - vedioWidth;
     // 第二行的vedioY
