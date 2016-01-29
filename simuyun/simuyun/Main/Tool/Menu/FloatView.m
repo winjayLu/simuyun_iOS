@@ -38,6 +38,7 @@ static FloatView *__floatView = nil;
     CGRect          _showKeyBoardWindowRect;     //键盘展开后的window.frame
     CGSize          _keyBoardSize;               //键盘的尺寸
 }
+
 @end
 
 @implementation FloatView
@@ -54,8 +55,6 @@ static FloatView *__floatView = nil;
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    _buttonArray = nil;
-//    _buttonImgArray = nil;
     _boardWindow = nil;
     _boardView = nil;
     _floatImageView = nil;
@@ -222,10 +221,26 @@ static FloatView *__floatView = nil;
 - (void)setImgaeNameWithMove:(BOOL)isMove
 {
     if (isMove) {
-        [_floatImageView setImage:[UIImage imageNamed:@"weixinlogin"]];
+        if (self.isPlayer) {
+            [_floatImageView setImage:[UIImage imageNamed:@"xckbf2zt1"]];
+        } else {
+            [_floatImageView setImage:[UIImage imageNamed:@"xckbf1"]];
+        }
     }else
     {
-        [_floatImageView setImage:[UIImage imageNamed:@"yunjian"]];
+        if (self.isPlayer) {
+            [_floatImageView setImage:[UIImage imageNamed:@"xckbf2zt2"]];
+        } else {
+            [_floatImageView setImage:[UIImage imageNamed:@"xckbf2"]];
+        }
+    }
+}
+
+- (void)setIsPlayer:(BOOL)isPlayer
+{
+    _isPlayer = isPlayer;
+    if (_isPlayer == YES) {
+        [_floatImageView setImage:[UIImage imageNamed:@"xckbf2zt2"]];
     }
 }
 

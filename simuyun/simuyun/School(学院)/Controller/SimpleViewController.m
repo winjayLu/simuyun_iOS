@@ -134,6 +134,7 @@
     }
     
 }
+//- setenab
 
 //注意，退后台进入前台也会进入这个函数
 - (void)playbackReadyBlock

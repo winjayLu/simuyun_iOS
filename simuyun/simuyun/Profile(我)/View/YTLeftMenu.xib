@@ -337,6 +337,10 @@
             </connections>
             <point key="canvasLocation" x="251.5" y="387.5"/>
         </view>
+        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="bX1-y1-8WH">
+            <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+        </activityIndicatorView>
     </objects>
     <resources>
         <image name="backgroundcebian.jpg" width="241" height="667"/>

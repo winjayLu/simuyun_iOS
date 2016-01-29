@@ -15,6 +15,11 @@
 + (FloatView *)defaultFloatViewWithButton;
 
 /**
+ *  当前视频状态
+ */
+@property (nonatomic, assign) BOOL isPlayer;
+
+/**
  *  删除悬浮窗
  */
 - (void)removeFloatView;

@@ -24,6 +24,7 @@
 #import "NSDictionary+Extension.h"
 #import "NSDate+Extension.h"
 #import "NSString+Extend.h"
+#import "TCCloudPlayerSDK.h"
 
 
 @interface YTTabBarController () <YTLogoViewDelegate>
@@ -81,6 +82,29 @@
     [self loadMessageCount];
     
     [YTCenter addObserver:self selector:@selector(timerOff) name:YTStopRequest object:nil];
+    
+    //注册视频播放的监听
+    [YTCenter addObserver:self selector:@selector(changeFloatMenu:) name:TCCloudPlayStateChangeNotification object:nil];
+}
+
+/**
+ *  改变按钮状态
+ */
+- (void)changeFloatMenu:(NSNotification *)note
+{
+    // 获取当前播放状态
+    int playerState = (int)note.userInfo[kTCCloudPlayState];
+    // (0-停止,1-播放,2-暂停)
+    if (playerState == 1) {
+        if (self.floatView != nil) {
+            self.floatView.isPlayer = NO;
+        }
+    } else {
+        if (self.floatView != nil) {
+            self.floatView.isPlayer = YES;
+        }
+    }
+    
 }
 
 /**

@@ -11,6 +11,8 @@
 #import "YTSchoolViewController.h"
 #import "YTTabBarController.h"
 #import "YTAccountTool.h"
+#import "UIImageView+SD.h"
+#import "TCCloudPlayerSDK.h"
 
 
 @interface YTPlayerViewController ()
@@ -30,6 +32,11 @@
  */
 @property (nonatomic, weak) UIButton *hiddenBtn;
 
+/**
+ *  蒙板
+ */
+@property (nonatomic, weak) UIView *ableView;
+
 
 @end
 
@@ -44,11 +51,14 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self playVideo];
-    // 初始化按钮
-    [self setupBtn];
-    // 初始化内容视图
-    [self setupContent];
+    
+    // 开启缓存
+    [TCCloudPlayerView setEnableCache:YES];
+    
+    // 监听播放状态
+    [YTCenter addObserver:self selector:@selector(hiddenAbleView:) name:TCCloudPlayStateChangeNotification object:nil];
 }
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -79,13 +89,7 @@
     self.hiddenBtn = hiddenBtn;
 }
 
-/**
- *  初始化内容视图
- */
-- (void)setupContent
-{
-   
-}
+
 
 /**
  *  设置数据
@@ -93,6 +97,14 @@
 - (void)setVedio:(YTVedioModel *)vedio
 {
     _vedio = vedio;
+    
+    //初始化蒙板
+    [self setupAbleView];
+    
+    // 初始化按钮
+    [self setupBtn];
+    
+    
     
     // 创建容器
     UIScrollView * ContentView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, DeviceWidth * 0.562, DeviceWidth, DeviceHight - DeviceWidth * 0.562)];
@@ -150,6 +162,41 @@
     
     self.ContentView.contentSize = CGSizeMake(DeviceWidth, CGRectGetMaxY(detail.frame));
 }
+
+/**
+ *  初始化蒙板
+ */
+- (void)setupAbleView
+{
+    // 容器
+    UIView *content = [[UIView alloc] init];
+    content.frame = [self playViewFrame];
+    [self.view addSubview:content];
+    self.ableView = content;
+    
+    // 背景图片
+    UIImageView *imageV = [[UIImageView alloc] init];
+    imageV.frame = [self playViewFrame];
+    [imageV imageWithUrlStr:self.vedio.coverImageUrl phImage:[UIImage imageNamed:@"SchoolBanner"]];
+    [content addSubview:imageV];
+    
+    // 菊花
+    UIActivityIndicatorView *activity = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activity.center = content.center;
+    [content addSubview:activity];
+    [activity startAnimating];
+}
+
+/**
+ *  隐藏蒙板
+ */
+- (void)hiddenAbleView:(NSNotification *)note
+{
+    [self.ableView removeFromSuperview];
+    self.ableView = nil;
+}
+
+
 
 /**
  *  播放视频
