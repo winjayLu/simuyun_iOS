@@ -13,6 +13,7 @@
 #import "YTAccountTool.h"
 #import "UIImageView+SD.h"
 #import "TCCloudPlayerSDK.h"
+#import "CoreArchive.h"
 
 
 @interface YTPlayerViewController ()
@@ -113,6 +114,7 @@
     
     // 点赞按钮
     UIButton *likeBtn = [[UIButton alloc] init];
+    [likeBtn setAdjustsImageWhenDisabled:NO];
     // 是否点过赞
     if (vedio.isLiked == 0) {
         [likeBtn setImage:[UIImage imageNamed:@"Like"] forState:UIControlStateNormal];
@@ -137,8 +139,15 @@
     title.textColor = YTColor(51, 51, 51);
     title.font = [UIFont systemFontOfSize:15];
     [title sizeToFit];
+    CGFloat titleWidth = title.width;
     title.frame = CGRectMake(10, 15, CGRectGetMinX(likeBtn.frame) - 20, title.height);
     [self.ContentView addSubview:title];
+    
+    // 标题分割线
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = YTColor(208, 208, 208);
+    lineView.frame = CGRectMake(10, CGRectGetMaxY(title.frame) + 10, titleWidth - 35, 1);
+    [self.ContentView addSubview:lineView];
     
     // 视频简介
     UILabel *shorName = [[UILabel alloc] init];
@@ -146,7 +155,7 @@
     shorName.textColor = YTColor(102, 102, 102);
     shorName.font = [UIFont systemFontOfSize:13];
     [shorName sizeToFit];
-    shorName.origin = CGPointMake(10, CGRectGetMaxY(title.frame) + 20);
+    shorName.origin = CGPointMake(10, CGRectGetMaxY(lineView.frame) + 10);
     [self.ContentView addSubview:shorName];
     
     // 视频简介
@@ -161,6 +170,26 @@
     [self.ContentView addSubview:detail];
     
     self.ContentView.contentSize = CGSizeMake(DeviceWidth, CGRectGetMaxY(detail.frame));
+    
+    // 第一次加载FAQ
+    NSString *firstSchool = [CoreArchive strForKey:@"firstSchool"];
+    if (firstSchool == nil) {
+        UIButton *firstSchoolBtn = [[UIButton alloc] init];
+        firstSchoolBtn.backgroundColor = [UIColor clearColor];
+        [firstSchoolBtn setBackgroundImage:[UIImage imageNamed:@"zhitingbukan"] forState:UIControlStateNormal];
+        firstSchoolBtn.frame = CGRectMake(0, 0, DeviceWidth, DeviceHight);
+        [firstSchoolBtn addTarget:self action:@selector(firstSchoolClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:firstSchoolBtn];
+    }
+}
+
+/**
+ *  faq点击
+ */
+- (void)firstSchoolClick:(UIButton *)btn
+{
+    [btn removeFromSuperview];
+    [CoreArchive setStr:@"FAQ" key:@"firstSchool"];
 }
 
 /**
@@ -207,12 +236,14 @@
     NSMutableArray* mutlArray = [NSMutableArray array];
     TCCloudPlayerVideoUrlInfo* info = [[TCCloudPlayerVideoUrlInfo alloc]init];
     info.videoUrlTypeName = @"原始";
-    info.videoUrl = [NSURL URLWithString:self.vedio.SDVideoUrl];
+//    info.videoUrl = [NSURL URLWithString:self.vedio.SDVideoUrl];
+    info.videoUrl = [NSURL URLWithString:@"http://2527.vod.myqcloud.com/2527_117134a2343111e5b8f5bdca6cb9f38c.f20.mp4"];
     [mutlArray addObject:info];
     
     TCCloudPlayerVideoUrlInfo* info1 = [[TCCloudPlayerVideoUrlInfo alloc]init];
     info1.videoUrlTypeName = @"标清";
-    info1.videoUrl = [NSURL URLWithString:self.vedio.HDVideoUrl];
+//    info1.videoUrl = [NSURL URLWithString:self.vedio.HDVideoUrl];
+    info1.videoUrl = [NSURL URLWithString:@"http://2527.vod.myqcloud.com/2527_117134a2343111e5b8f5bdca6cb9f38c.f30.mp4"];
     [mutlArray addObject:info1];
     
     [self loadVideoPlaybackView:mutlArray defaultPlayIndex:0 startTime:0];
@@ -241,6 +272,7 @@
     if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
         YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
         tabBar.playerVc = nil;
+        tabBar.floatView = nil;
     }
 }
 
@@ -311,6 +343,7 @@
     self.ContentView.hidden = isShow;
     self.hiddenBtn.hidden = isShow;
     self.closeBtn.hidden = isShow;
+    [self hiddenAbleView:nil];
 }
 
 @end

@@ -38,7 +38,7 @@
     
     _playerView = [[TCCloudPlayerView alloc] initWithNotFullFrame:[self playViewFrame]];
     [self.view addSubview:_playerView];
-    [_playerView changeBottomFullImage:[UIImage imageNamed:@"jiahao"] notFullImage:[UIImage imageNamed:@"guanyu"]];
+    [_playerView changeBottomFullImage:[UIImage imageNamed:@"schoolExpand"] notFullImage:[UIImage imageNamed:@"schoolMinimize"]];
     
     __weak typeof(self) ws = self;
     //    _playerView.playbackReadyBlock = ^(void){

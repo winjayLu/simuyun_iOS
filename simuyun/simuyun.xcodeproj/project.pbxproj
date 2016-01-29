@@ -18,6 +18,9 @@
 		971034A41BFD65F600EE22A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971034A31BFD65F600EE22A4 /* Foundation.framework */; };
 		971034A61BFD65FF00EE22A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971034A51BFD65FF00EE22A4 /* UIKit.framework */; };
 		971034A91BFD72A700EE22A4 /* YTDataHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 971034A81BFD72A700EE22A4 /* YTDataHintView.m */; };
+		97114EED1C5B380F008BECDF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97114EEC1C5B380F008BECDF /* AppDelegate.m */; };
+		97114EF41C5B3BDC008BECDF /* NSString+JsonCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 97114EF31C5B3BDC008BECDF /* NSString+JsonCategory.m */; };
+		97114EF71C5B3E52008BECDF /* NSObject+JsonCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 97114EF61C5B3E52008BECDF /* NSObject+JsonCategory.m */; };
 		9714A6D01BC7B9BB0018A14E /* HHAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6CF1BC7B9BB0018A14E /* HHAlertView.m */; };
 		9714A6EE1BC7E0610018A14E /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9714A6D81BC7E0610018A14E /* FontAwesome.ttf */; };
 		9714A6EF1BC7E0610018A14E /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714A6DA1BC7E0610018A14E /* NSString+FontAwesome.m */; };
@@ -182,7 +185,6 @@
 		97AD4E6C1C152DAA00541412 /* YTAutocompletionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97AD4E6A1C152DAA00541412 /* YTAutocompletionCell.m */; };
 		97AD4E6D1C152DAA00541412 /* YTAutocompletionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97AD4E6B1C152DAA00541412 /* YTAutocompletionCell.xib */; };
 		97B08A8A1BC2472B007EBD24 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08A891BC2472B007EBD24 /* main.m */; };
-		97B08A8D1BC2472B007EBD24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08A8C1BC2472B007EBD24 /* AppDelegate.m */; };
 		97B08AA31BC2472B007EBD24 /* simuyunTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08AA21BC2472B007EBD24 /* simuyunTests.m */; };
 		97B08AAE1BC2472B007EBD24 /* simuyunUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08AAD1BC2472B007EBD24 /* simuyunUITests.m */; };
 		97B4B12A1C07F31500A0FF3A /* TimerLoopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B4B1291C07F31500A0FF3A /* TimerLoopView.m */; };
@@ -325,6 +327,12 @@
 		971034A51BFD65FF00EE22A4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		971034A71BFD72A700EE22A4 /* YTDataHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTDataHintView.h; sourceTree = "<group>"; };
 		971034A81BFD72A700EE22A4 /* YTDataHintView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTDataHintView.m; sourceTree = "<group>"; };
+		97114EEB1C5B380F008BECDF /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		97114EEC1C5B380F008BECDF /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		97114EF21C5B3BDC008BECDF /* NSString+JsonCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+JsonCategory.h"; sourceTree = "<group>"; };
+		97114EF31C5B3BDC008BECDF /* NSString+JsonCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+JsonCategory.m"; sourceTree = "<group>"; };
+		97114EF51C5B3E52008BECDF /* NSObject+JsonCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+JsonCategory.h"; sourceTree = "<group>"; };
+		97114EF61C5B3E52008BECDF /* NSObject+JsonCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+JsonCategory.m"; sourceTree = "<group>"; };
 		9714A6CE1BC7B9BB0018A14E /* HHAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHAlertView.h; sourceTree = "<group>"; };
 		9714A6CF1BC7B9BB0018A14E /* HHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHAlertView.m; sourceTree = "<group>"; };
 		9714A6D81BC7E0610018A14E /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
@@ -626,8 +634,6 @@
 		97AD4E6B1C152DAA00541412 /* YTAutocompletionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTAutocompletionCell.xib; sourceTree = "<group>"; };
 		97B08A851BC2472B007EBD24 /* simuyun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simuyun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97B08A891BC2472B007EBD24 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		97B08A8B1BC2472B007EBD24 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../../AppDelegate.h; sourceTree = "<group>"; };
-		97B08A8C1BC2472B007EBD24 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../../AppDelegate.m; sourceTree = "<group>"; };
 		97B08A991BC2472B007EBD24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97B08A9E1BC2472B007EBD24 /* simuyunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = simuyunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		97B08AA21BC2472B007EBD24 /* simuyunTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = simuyunTests.m; sourceTree = "<group>"; };
@@ -1662,13 +1668,14 @@
 		97C6058B1BC260A400E555E8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				97114EEB1C5B380F008BECDF /* AppDelegate.h */,
+				97114EEC1C5B380F008BECDF /* AppDelegate.m */,
 				97BF5BF81BD7BE6A00053BD0 /* Model */,
 				97973D041BC3D88E00B7B4CB /* View */,
 				97C606801BC2739100E555E8 /* Config */,
 				97C605961BC260A400E555E8 /* Controller */,
 				97C6058C1BC260A400E555E8 /* Category */,
 				97C6059B1BC260A400E555E8 /* Lib */,
-				97C6059C1BC260A400E555E8 /* Other */,
 				97C6059D1BC260A400E555E8 /* Tool */,
 			);
 			path = Main;
@@ -1726,15 +1733,6 @@
 				97C6065D1BC2700600E555E8 /* SDWebImage */,
 			);
 			path = Lib;
-			sourceTree = "<group>";
-		};
-		97C6059C1BC260A400E555E8 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				97B08A8B1BC2472B007EBD24 /* AppDelegate.h */,
-				97B08A8C1BC2472B007EBD24 /* AppDelegate.m */,
-			);
-			path = Other;
 			sourceTree = "<group>";
 		};
 		97C6059D1BC260A400E555E8 /* Tool */ = {
@@ -2089,6 +2087,10 @@
 				97C606581BC26F1100E555E8 /* Foundation+Log.m */,
 				97C606591BC26F1100E555E8 /* NSDictionary+Extension.h */,
 				97C6065A1BC26F1100E555E8 /* NSDictionary+Extension.m */,
+				97114EF21C5B3BDC008BECDF /* NSString+JsonCategory.h */,
+				97114EF31C5B3BDC008BECDF /* NSString+JsonCategory.m */,
+				97114EF51C5B3E52008BECDF /* NSObject+JsonCategory.h */,
+				97114EF61C5B3E52008BECDF /* NSObject+JsonCategory.m */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -2486,9 +2488,11 @@
 				978F8CD41C10487F0041F661 /* YTLoginAuthenticationController.m in Sources */,
 				97C605F61BC2622E00E555E8 /* YTAccount.m in Sources */,
 				97C3CE6C1BC2BAEF00B7185D /* SVProgressHUD.m in Sources */,
+				97114EF41C5B3BDC008BECDF /* NSString+JsonCategory.m in Sources */,
 				97BC99781BD4DB610090BDE8 /* CorePageModel.m in Sources */,
 				97C6061B1BC266A900E555E8 /* CALayer+Transition.m in Sources */,
 				97C981CB1BE796C0005FDE2F /* YTMessageNumTool.m in Sources */,
+				97114EED1C5B380F008BECDF /* AppDelegate.m in Sources */,
 				9765309D1C196A9200F9D7F1 /* YTCusomerModel.m in Sources */,
 				978F4CA61C16792800A36E0F /* JKPhotoBrowser.m in Sources */,
 				97A2F8191C27F1300025A187 /* YTSearchViewController.m in Sources */,
@@ -2566,7 +2570,6 @@
 				9714A6F01BC7E0610018A14E /* UIButton+Bootstrap.m in Sources */,
 				972B880D1BFAD3D0002A7E9B /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				97BF5BFE1BD7BF0B00053BD0 /* YTResources.m in Sources */,
-				97B08A8D1BC2472B007EBD24 /* AppDelegate.m in Sources */,
 				9798E20C1BD9E15100B235AE /* YTOrderCenterCell.m in Sources */,
 				973D3DC11C0D76AE006D6B0C /* YTAboutViewController.m in Sources */,
 				972B88101BFAD3D0002A7E9B /* UIImageView+AFNetworking.m in Sources */,
@@ -2623,6 +2626,7 @@
 				97C605DA1BC2621F00E555E8 /* YTMenuViewController.m in Sources */,
 				97C606711BC270CC00E555E8 /* UIImage+ReMake.m in Sources */,
 				972B88061BFAD3D0002A7E9B /* AFURLConnectionOperation.m in Sources */,
+				97114EF71C5B3E52008BECDF /* NSObject+JsonCategory.m in Sources */,
 				972B88011BFAD3D0002A7E9B /* AFHTTPRequestOperation.m in Sources */,
 				97973CFB1BC3C11500B7B4CB /* UIApplication+Extend.m in Sources */,
 				97BC99791BD4DB610090BDE8 /* CorePagesBarBtn.m in Sources */,

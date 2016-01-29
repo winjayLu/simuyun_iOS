@@ -57,12 +57,11 @@
     self.coverImageView.layer.borderColor = YTColor(208, 208, 208).CGColor;
     [self.coverImageView imageWithUrlStr:vedio.coverImageUrl phImage:[UIImage imageNamed:@"SchoolBanner"]];
     
+    [self.likeBtn setImage:[UIImage imageNamed:@"Likeanxia"] forState:UIControlStateNormal];
     // 设置点赞数量
     if (vedio.isLiked == 0) {
-        [self.likeBtn setImage:[UIImage imageNamed:@"Like"] forState:UIControlStateNormal];
         [self.likeBtn setTitle:@"" forState:UIControlStateNormal];
     } else {
-        [self.likeBtn setImage:[UIImage imageNamed:@"Likeanxia"] forState:UIControlStateNormal];
         [self.likeBtn setTitle:[NSString stringWithFormat:@"%d", vedio.likes] forState:UIControlStateNormal];
     }
     [self.likeBtn sizeToFit];

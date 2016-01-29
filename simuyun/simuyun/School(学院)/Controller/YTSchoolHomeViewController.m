@@ -17,6 +17,9 @@
 #import "YTTabBarController.h"
 #import "YTSchoolViewController.h"
 #import "YTSchoolListController.h"
+#import "NSString+JsonCategory.h"
+#import "NSObject+JsonCategory.h"
+#import "CoreArchive.h"
 
 
 @interface YTSchoolHomeViewController () <headerViewDelegate, groomViewDelegate>
@@ -77,7 +80,7 @@ static NSString * const headerIdentifier = @"headerCell";
 {
     [super viewWillAppear:animated];
     
-    [self loadVedio];
+//    [self loadVedio];
 }
 
 #pragma mark - 加载数据
@@ -92,6 +95,9 @@ static NSString * const headerIdentifier = @"headerCell";
     [YTHttpTool get:YTRecommended params:param
             success:^(NSDictionary *responseObject) {
                 self.groomVedios = [YTVedioModel objectArrayWithKeyValuesArray:responseObject];
+                // 存储获取到的数据
+                NSString *oldScrollGroom = [responseObject JsonToString];
+                [CoreArchive setStr:oldScrollGroom key:@"oldScrollGroom"];
                 // 加载其他视频
                 [self loadOtherVedio];
             } failure:^(NSError *error) {
@@ -112,6 +118,9 @@ static NSString * const headerIdentifier = @"headerCell";
     [YTHttpTool get:YTVideos params:param
             success:^(NSDictionary *responseObject) {
                 self.otherVedios = [YTVedioModel objectArrayWithKeyValuesArray:responseObject];
+                // 存储获取到的数据
+                NSString *oldScrollOther = [responseObject JsonToString];
+                [CoreArchive setStr:oldScrollOther key:@"oldScrollOther"];
                 // 结束刷新状态
                 [self.collectionView reloadData];
                 [self.collectionView.header endRefreshing];
@@ -289,10 +298,16 @@ static NSString * const headerIdentifier = @"headerCell";
 - (NSMutableArray *)groomVedios
 {
     if (!_groomVedios) {
-        _groomVedios = [[NSMutableArray alloc] init];
-        for (int i = 0; i < 5; i++) {
-            YTVedioModel *vedio = [[YTVedioModel alloc] initWithTitle:@"sss" image:@"SchoolBanner" shortName:@"我是子标题我是子标题我是子标题我是子标题我是子标题"];
-            [_groomVedios addObject:vedio];
+        // 获取历史数据
+        NSString *oldScrollGroom = [CoreArchive strForKey:@"oldScrollGroom"];
+        if (oldScrollGroom != nil) {
+            _groomVedios = [YTVedioModel objectArrayWithKeyValuesArray:[oldScrollGroom JsonToValue]];
+        } else {
+            _groomVedios = [[NSMutableArray alloc] init];
+            for (int i = 0; i < 5; i++) {
+                YTVedioModel *vedio = [[YTVedioModel alloc] initWithTitle:@"正在加载" image:@"SchoolBanner" shortName:@"正在加载中..."];
+                [_groomVedios addObject:vedio];
+            }
         }
     }
     return _groomVedios;
@@ -301,7 +316,13 @@ static NSString * const headerIdentifier = @"headerCell";
 - (NSMutableArray *)otherVedios
 {
     if (!_otherVedios) {
-        _otherVedios = [[NSMutableArray alloc] init];
+        // 获取历史数据
+        NSString *oldScrollOther = [CoreArchive strForKey:@"oldScrollOther"];
+        if (oldScrollOther != nil) {
+            _otherVedios = [YTVedioModel objectArrayWithKeyValuesArray:[oldScrollOther JsonToValue]];
+        } else {
+            _otherVedios = [[NSMutableArray alloc] init];
+        }
     }
     return _otherVedios;
 }

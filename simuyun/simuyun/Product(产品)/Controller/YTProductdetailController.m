@@ -162,7 +162,7 @@
             } else if([command isEqualToString:@"copytoclipboard"]) // copy字符串
             {
                 UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-                pasteboard.string = urlComps[2];
+                pasteboard.string = [NSString stringWithFormat:@"%@\n%@",self.product.pro_name, urlComps[2]];
                 [SVProgressHUD showSuccessWithStatus:@"复制成功"];
                 [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"复制打款帐号", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             } else if ([command isEqualToString:@"cantbuy"])    // 不可认购状态

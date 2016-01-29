@@ -40,7 +40,7 @@
     if (self.type){
         self.title = self.type;
     } else {
-        self.title = @"其他视频";
+        self.title = @"视频列表";
     }
     // 设置颜色
     self.tableView.backgroundColor = [UIColor whiteColor];

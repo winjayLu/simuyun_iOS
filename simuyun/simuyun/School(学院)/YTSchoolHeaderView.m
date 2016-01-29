@@ -49,9 +49,9 @@
     
     // 推荐视频标题容器
     UIView *titleContent = [[UIView alloc] init];
-    CGFloat contentHeight = 20;
+    CGFloat contentHeight = 35;
     titleContent.frame = CGRectMake(0, hotVideo.height - contentHeight, DeviceWidth, contentHeight);
-    titleContent.backgroundColor = YTRGBA(0, 0, 0, 0.4);
+    titleContent.backgroundColor = YTRGBA(0, 0, 0, 0.6);
     [self addSubview:titleContent];
     
     // 推荐视频标题
@@ -71,10 +71,10 @@
     UIButton *wealth = [self createCategoryButtonWithTitle:@"财富前沿" imageName:@"xyld" highliImage:@"xyldanxia" tag:1 width:categoryBtnW];
     wealth.origin = CGPointMake(CGRectGetMaxX(produt.frame) + 5, produt.y);
     // 管理培训
-    UIButton *sale = [self createCategoryButtonWithTitle:@"管理培训" imageName:@"xsjq" highliImage:@"xsjqanxia" tag:2 width:categoryBtnW];
+    UIButton *sale = [self createCategoryButtonWithTitle:@"管理培训" imageName:@"glpx" highliImage:@"glpxanxia" tag:2 width:categoryBtnW];
     sale.origin = CGPointMake(CGRectGetMaxX(wealth.frame) + 5, produt.y);
     // 金融知识
-    UIButton *know = [self createCategoryButtonWithTitle:@"管理培训" imageName:@"glpx" highliImage:@"glpxanxia" tag:3 width:categoryBtnW];
+    UIButton *know = [self createCategoryButtonWithTitle:@"金融知识" imageName:@"xsjq" highliImage:@"xsjqanxia" tag:3 width:categoryBtnW];
     know.origin = CGPointMake(CGRectGetMaxX(sale.frame) + 5, produt.y);
     
 }

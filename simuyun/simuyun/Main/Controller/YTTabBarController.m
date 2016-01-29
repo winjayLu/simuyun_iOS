@@ -93,9 +93,8 @@
 - (void)changeFloatMenu:(NSNotification *)note
 {
     // 获取当前播放状态
-    int playerState = (int)note.userInfo[kTCCloudPlayState];
-    // (0-停止,1-播放,2-暂停)
-    if (playerState == 1) {
+    NSString *playerState = note.userInfo[kTCCloudPlayState];
+    if ([playerState intValue] == 1) {
         if (self.floatView != nil) {
             self.floatView.isPlayer = NO;
         }

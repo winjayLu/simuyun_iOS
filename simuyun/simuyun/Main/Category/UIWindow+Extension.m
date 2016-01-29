@@ -43,11 +43,9 @@
         NewFeatureModel *m1 = [NewFeatureModel model:[UIImage imageNamed:[NSString stringWithFormat:@"%@1.jpg",imageName]]];
         NewFeatureModel *m2 = [NewFeatureModel model:[UIImage imageNamed:[NSString stringWithFormat:@"%@2.jpg",imageName]]];
         NewFeatureModel *m3 = [NewFeatureModel model:[UIImage imageNamed:[NSString stringWithFormat:@"%@3.jpg",imageName]]];
-        NewFeatureModel *m4 = [NewFeatureModel model:[UIImage imageNamed:[NSString stringWithFormat:@"%@4.jpg",imageName]]];
-        NewFeatureModel *m5 = [NewFeatureModel model:[UIImage imageNamed:[NSString stringWithFormat:@"%@5.jpg",imageName]]];
         
         // 新特性控制器
-        self.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m1,m2,m3,m4,m5] enterBlock:^{
+        self.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m1,m2,m3] enterBlock:^{
            
             
             // 判断是否有登录过的账户

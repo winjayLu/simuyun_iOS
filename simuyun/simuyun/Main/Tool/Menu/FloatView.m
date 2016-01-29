@@ -220,27 +220,29 @@ static FloatView *__floatView = nil;
 #pragma mark - 移动和停止menu图片
 - (void)setImgaeNameWithMove:(BOOL)isMove
 {
-    if (isMove) {
-        if (self.isPlayer) {
+    if (self.isPlayer) {
+        if (isMove) {
+            [_floatImageView setImage:[UIImage imageNamed:@"xckbf2zt2"]];
+        } else {
             [_floatImageView setImage:[UIImage imageNamed:@"xckbf2zt1"]];
+        }
+    } else {
+        if (isMove) {
+            [_floatImageView setImage:[UIImage imageNamed:@"xckbf2"]];
         } else {
             [_floatImageView setImage:[UIImage imageNamed:@"xckbf1"]];
         }
-    }else
-    {
-        if (self.isPlayer) {
-            [_floatImageView setImage:[UIImage imageNamed:@"xckbf2zt2"]];
-        } else {
-            [_floatImageView setImage:[UIImage imageNamed:@"xckbf2"]];
-        }
     }
+    
 }
 
 - (void)setIsPlayer:(BOOL)isPlayer
 {
     _isPlayer = isPlayer;
     if (_isPlayer == YES) {
-        [_floatImageView setImage:[UIImage imageNamed:@"xckbf2zt2"]];
+        [_floatImageView setImage:[UIImage imageNamed:@"xckbf2zt1"]];
+    } else {
+        [_floatImageView setImage:[UIImage imageNamed:@"xckbf1"]];
     }
 }
 
