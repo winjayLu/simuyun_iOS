@@ -8,7 +8,6 @@
 
 #import "YTPlayerViewController.h"
 #import "TCCloudPlayerVideoUrlInfo.h"
-#import "YTSchoolViewController.h"
 #import "YTTabBarController.h"
 #import "YTAccountTool.h"
 #import "UIImageView+SD.h"

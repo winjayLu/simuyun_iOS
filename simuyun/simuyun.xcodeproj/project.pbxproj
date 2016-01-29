@@ -222,7 +222,6 @@
 		97C605D91BC2621F00E555E8 /* YTHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605C61BC2621F00E555E8 /* YTHomeViewController.m */; };
 		97C605DA1BC2621F00E555E8 /* YTMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605C81BC2621F00E555E8 /* YTMenuViewController.m */; };
 		97C605DD1BC2621F00E555E8 /* YTProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605CD1BC2621F00E555E8 /* YTProfileViewController.m */; };
-		97C605DF1BC2621F00E555E8 /* YTSchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605D71BC2621F00E555E8 /* YTSchoolViewController.m */; };
 		97C605F31BC2622E00E555E8 /* YTDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605E31BC2622E00E555E8 /* YTDiscoverViewController.m */; };
 		97C605F41BC2622E00E555E8 /* YTLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C605E71BC2622E00E555E8 /* YTLoginViewController.m */; };
 		97C605F51BC2622E00E555E8 /* YTLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C605E81BC2622E00E555E8 /* YTLoginViewController.xib */; };
@@ -708,8 +707,6 @@
 		97C605C81BC2621F00E555E8 /* YTMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMenuViewController.m; sourceTree = "<group>"; };
 		97C605CC1BC2621F00E555E8 /* YTProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTProfileViewController.h; sourceTree = "<group>"; };
 		97C605CD1BC2621F00E555E8 /* YTProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTProfileViewController.m; sourceTree = "<group>"; };
-		97C605D61BC2621F00E555E8 /* YTSchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSchoolViewController.h; sourceTree = "<group>"; };
-		97C605D71BC2621F00E555E8 /* YTSchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSchoolViewController.m; sourceTree = "<group>"; };
 		97C605E21BC2622E00E555E8 /* YTDiscoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTDiscoverViewController.h; sourceTree = "<group>"; };
 		97C605E31BC2622E00E555E8 /* YTDiscoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTDiscoverViewController.m; sourceTree = "<group>"; };
 		97C605E61BC2622E00E555E8 /* YTLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTLoginViewController.h; sourceTree = "<group>"; };
@@ -1885,8 +1882,6 @@
 			children = (
 				9735F2E31C57162D00AE799A /* SimpleViewController.h */,
 				9735F2E41C57162D00AE799A /* SimpleViewController.m */,
-				97C605D61BC2621F00E555E8 /* YTSchoolViewController.h */,
-				97C605D71BC2621F00E555E8 /* YTSchoolViewController.m */,
 				978258E81C58A6E0005705AB /* YTSchoolHomeViewController.h */,
 				978258E91C58A6E0005705AB /* YTSchoolHomeViewController.m */,
 				9792DD211C5A0D8D001D1BE0 /* YTSchoolListController.h */,
@@ -2644,7 +2639,6 @@
 				97ABCB7B1BDDE5140056C1A1 /* YTOpinionController.m in Sources */,
 				97ABCB821BDE01660056C1A1 /* YTInformationTableViewCell.m in Sources */,
 				9790F8D01BDF1A2100965C7B /* YTAuthenticationStatusController.m in Sources */,
-				97C605DF1BC2621F00E555E8 /* YTSchoolViewController.m in Sources */,
 				978C6FE11BCF8193003D183E /* YTProductViewController.m in Sources */,
 				972B88021BFAD3D0002A7E9B /* AFHTTPRequestOperationManager.m in Sources */,
 				97C6066A1BC2700600E555E8 /* UIButton+SD.m in Sources */,

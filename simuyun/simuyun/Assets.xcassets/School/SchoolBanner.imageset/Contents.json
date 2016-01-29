@@ -5,11 +5,39 @@
       "scale" : "1x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 210,
+          "top" : 209,
+          "right" : 375,
+          "left" : 374
+        }
+      },
       "idiom" : "universal",
       "filename" : "SchoolBanner@2x.png",
       "scale" : "2x"
     },
     {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 315,
+          "top" : 314,
+          "right" : 562,
+          "left" : 562
+        }
+      },
       "idiom" : "universal",
       "filename" : "SchoolBanner@3x.png",
       "scale" : "3x"

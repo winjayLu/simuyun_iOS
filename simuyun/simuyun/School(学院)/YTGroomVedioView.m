@@ -75,7 +75,10 @@
 - (void)groomVedios
 {
     CGFloat vedioWidth = (DeviceWidth - 32) * 0.5;
-    CGFloat vedioHeight = 146;
+    // 宽高系数
+    CGFloat aspectRatio = 0.849;
+    CGFloat vedioHeight = vedioWidth * aspectRatio;
+//    CGFloat vedioHeight = 146;
     // 右侧的vedioX
     CGFloat vedioX = DeviceWidth - 8 - vedioWidth;
     // 第二行的vedioY

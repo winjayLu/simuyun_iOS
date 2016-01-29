@@ -15,7 +15,6 @@
 #import "YTVedioModel.h"
 #import "YTPlayerViewController.h"
 #import "YTTabBarController.h"
-#import "YTSchoolViewController.h"
 #import "YTSchoolListController.h"
 #import "NSString+JsonCategory.h"
 #import "NSObject+JsonCategory.h"
@@ -305,7 +304,7 @@ static NSString * const headerIdentifier = @"headerCell";
         } else {
             _groomVedios = [[NSMutableArray alloc] init];
             for (int i = 0; i < 5; i++) {
-                YTVedioModel *vedio = [[YTVedioModel alloc] initWithTitle:@"正在加载" image:@"SchoolBanner" shortName:@"正在加载中..."];
+                YTVedioModel *vedio = [[YTVedioModel alloc] initWithTitle:@"正在加载" image:nil shortName:@"正在加载中..."];
                 [_groomVedios addObject:vedio];
             }
         }

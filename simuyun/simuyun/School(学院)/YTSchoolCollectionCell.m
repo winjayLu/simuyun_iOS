@@ -39,13 +39,13 @@
  */
 - (void)setup
 {
-//    CGFloat vedioWidth = ;
     // 图片
     UIImageView *imageView = [[UIImageView alloc] init];
     imageView.layer.cornerRadius = 5;
     imageView.layer.masksToBounds = YES;
     imageView.layer.borderWidth = 1.0f;
     imageView.layer.borderColor = YTColor(208, 208, 208).CGColor;
+    
     imageView.frame = CGRectMake(0, 0, (DeviceWidth - 32) * 0.5, 96);
     [self addSubview:imageView];
     self.imageView = imageView;

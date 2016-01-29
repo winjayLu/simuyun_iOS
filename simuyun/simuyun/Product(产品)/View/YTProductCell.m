@@ -185,7 +185,7 @@
     if (_product.state == 20)    // 产品状态
     {
         // 暂停募集
-        self.timeUnitLable.text = @"暂停募集";
+        self.timeUnitLable.text = @"募集结束";
         self.endTimeLabel.hidden = YES;
         self.endtimeTitleLable.hidden = YES;
         self.bgImageView.image = [UIImage imageNamed:@"huimogu"];

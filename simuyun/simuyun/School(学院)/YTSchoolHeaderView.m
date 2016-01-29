@@ -110,7 +110,7 @@
     _vedio = vedio;
     self.titleLable.text = vedio.shortName;
     if (vedio.image) {
-        [self.bannerBtn setImage:vedio.image forState:UIControlStateNormal];
+        [self.bannerBtn setBackgroundImage:vedio.image forState:UIControlStateNormal];
         return;
     }
     [self.bannerBtn imageWithUrlStr:vedio.coverImageUrl phImage:[UIImage imageNamed:@"SchoolBanner"]];
