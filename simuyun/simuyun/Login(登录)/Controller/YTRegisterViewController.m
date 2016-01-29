@@ -83,7 +83,12 @@
  */
 - (IBAction)sendClick:(JKCountDownButton *)sender {
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     // 本地验证
     if ([self checkTextWith:NO]) return;
     // 设置倒计时时长
@@ -109,7 +114,13 @@
  */
 - (IBAction)registerClick:(UIButton *)sender {
 
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    // 退出键盘
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     if ([self checkTextWith:YES]) return;
     
     // 帐号模型
@@ -149,7 +160,12 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
 }
 
 
@@ -189,7 +205,13 @@
  */
 - (void)backView
 {
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    // 退出键盘
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

@@ -57,7 +57,12 @@
 
 - (IBAction)sendYanzheng:(JKCountDownButton *)sender {
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     // 本地验证
     if (self.phoneField.text.length == 0) {
         [SVProgressHUD showErrorWithStatus:@"请输入手机号"];
@@ -100,7 +105,12 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
 }
 
 

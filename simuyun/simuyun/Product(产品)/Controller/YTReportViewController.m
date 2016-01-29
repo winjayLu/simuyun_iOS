@@ -430,7 +430,13 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     NSString *selectedType = self.types[row];
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    // 退出键盘
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     // 判断是否是其他类型
     if ([selectedType isEqualToString:@"其它"]) {
         self.CertificatesNumberConstr.constant = 78;
@@ -509,7 +515,13 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    // 退出键盘
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
 }
 -(void)viewDidAppear:(BOOL)animated{
     

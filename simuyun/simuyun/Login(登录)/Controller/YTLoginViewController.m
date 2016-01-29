@@ -248,7 +248,12 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     
 }
 
@@ -258,7 +263,12 @@
  */
 - (IBAction)loginClick:(UIButton *)sender {
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
 
     // 本地验证
     if ([self checkText]) return;
@@ -296,7 +306,12 @@
  */
 - (IBAction)registerClick:(UIButton *)sender {
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     YTRegisterViewController *registerVc = [[YTRegisterViewController alloc] init];
     [self.navigationController pushViewController:registerVc animated:YES];
     [MobClick event:@"logReg_click" attributes: @{@"按钮" : @"注册"}];
@@ -307,7 +322,12 @@
  */
 - (IBAction)ForgetClick:(UIButton *)sender {
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     YTResultPasswordViewController *resultVc = [[YTResultPasswordViewController alloc] init];
     [self.navigationController pushViewController:resultVc animated:YES];
     [MobClick event:@"logReg_click" attributes: @{@"按钮" : @"忘记密码"}];

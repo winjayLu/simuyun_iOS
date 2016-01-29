@@ -70,7 +70,13 @@
 #pragma mark - 键盘处理
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    // 退出键盘
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     self.keyboardIsVisible = NO;
 }
 
@@ -91,7 +97,13 @@
  */
 - (IBAction)buyNumber:(UIButton *)sender {
     if (self.keyboardIsVisible) {
-        [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+        // 退出键盘
+        for (UIWindow *window in [UIApplication sharedApplication].windows) {
+            if (window.windowLevel == 0) {
+                [window endEditing:YES];
+                break;
+            }
+        }
         self.keyboardIsVisible = NO;
         return;
     }

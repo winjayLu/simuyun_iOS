@@ -55,7 +55,12 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
 }
 /**
  *  点击确认按钮
@@ -166,7 +171,13 @@
  */
 - (void)backView
 {
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    // 退出键盘
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

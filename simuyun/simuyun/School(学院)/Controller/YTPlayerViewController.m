@@ -234,13 +234,13 @@
     
     NSMutableArray* mutlArray = [NSMutableArray array];
     TCCloudPlayerVideoUrlInfo* info = [[TCCloudPlayerVideoUrlInfo alloc]init];
-    info.videoUrlTypeName = @"原始";
+    info.videoUrlTypeName = @"标清";
 //    info.videoUrl = [NSURL URLWithString:self.vedio.SDVideoUrl];
     info.videoUrl = [NSURL URLWithString:@"http://2527.vod.myqcloud.com/2527_117134a2343111e5b8f5bdca6cb9f38c.f20.mp4"];
     [mutlArray addObject:info];
     
     TCCloudPlayerVideoUrlInfo* info1 = [[TCCloudPlayerVideoUrlInfo alloc]init];
-    info1.videoUrlTypeName = @"标清";
+    info1.videoUrlTypeName = @"高清";
 //    info1.videoUrl = [NSURL URLWithString:self.vedio.HDVideoUrl];
     info1.videoUrl = [NSURL URLWithString:@"http://2527.vod.myqcloud.com/2527_117134a2343111e5b8f5bdca6cb9f38c.f30.mp4"];
     [mutlArray addObject:info1];

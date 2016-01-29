@@ -352,7 +352,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YTProductModel *product = nil;
     if (self.searchProducts.count == 0) {

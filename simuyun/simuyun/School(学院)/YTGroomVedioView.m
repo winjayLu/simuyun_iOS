@@ -163,6 +163,7 @@
         [more setTitle:@"更多" forState:UIControlStateNormal];
         [more.titleLabel setFont:[UIFont systemFontOfSize:13]];
         [more setTitleColor:YTColor(102, 102, 102) forState:UIControlStateNormal];
+        [more setTitleColor:YTNavBackground forState:UIControlStateHighlighted];
         [more addTarget:self action:@selector(moreClcik) forControlEvents:UIControlEventTouchUpInside];
         more.tag = tag;
         CGFloat moreW = 40;

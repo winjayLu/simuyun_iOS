@@ -93,6 +93,7 @@
     button.titleLabel.font = [UIFont systemFontOfSize:11];//title字体大小
     button.titleLabel.textAlignment = NSTextAlignmentCenter;//设置title的字体居中
     [button setTitleColor:YTColor(102, 102, 102) forState:UIControlStateNormal];
+    [button setTitleColor:YTNavBackground forState:UIControlStateHighlighted];
     [button addTarget:self action:@selector(categoryClick:) forControlEvents:UIControlEventTouchUpInside];
     
     button.size = CGSizeMake(width, width - 10);

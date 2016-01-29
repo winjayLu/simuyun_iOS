@@ -105,7 +105,12 @@
          if (self.customers.count > 0)
          {
              // 退出键盘
-             [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+             for (UIWindow *window in [UIApplication sharedApplication].windows) {
+                 if (window.windowLevel == 0) {
+                     [window endEditing:YES];
+                     break;
+                 }
+             }
              QKInfoCard *infoCard = [[QKInfoCard alloc] initWithView:self.view];
              NSMutableArray *array = [[NSMutableArray alloc] init];
              for (YTCusomerModel *cusomer in self.customers) {

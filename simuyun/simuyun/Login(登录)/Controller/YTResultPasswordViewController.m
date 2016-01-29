@@ -63,12 +63,22 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
 }
 
 - (IBAction)sendClick:(JKCountDownButton *)sender {
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     // 本地验证
     if ([self checkTextWith:NO]) return;
     // 设置倒计时时长
@@ -93,7 +103,12 @@
 
 - (IBAction)nextBtnClick:(UIButton *)sender {
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     if ([self checkTextWith:YES]) return;
     YTResuNextViewController *next = [[YTResuNextViewController alloc] init];
     next.username = self.userName.text;
@@ -138,7 +153,13 @@
  */
 - (void)backView
 {
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    // 退出键盘
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     [self.navigationController popViewControllerAnimated:YES];
 }
 

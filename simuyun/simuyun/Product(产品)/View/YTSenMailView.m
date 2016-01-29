@@ -141,7 +141,12 @@
         return;
     }
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     [self.sendDelegate sendMail:self.mailField.text];
     [self cancelBtnClick:nil];
 }
@@ -150,8 +155,12 @@
 - (void)cancelBtnClick:(UIImageView *)sender
 {
     // 退出键盘
-    [[[UIApplication sharedApplication] keyWindow]endEditing:YES];
-//    if (self.mailField.text.length > 0) return;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     
     [UIView animateWithDuration:0.4 animations:^{
         shareMenuView.frame =CGRectMake(0, DeviceHight - 20, DeviceHight, 150);
