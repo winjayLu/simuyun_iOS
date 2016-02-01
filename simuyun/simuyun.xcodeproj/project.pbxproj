@@ -106,7 +106,6 @@
 		978258D51C586332005705AB /* YTSchoolHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 978258D41C586332005705AB /* YTSchoolHeaderView.m */; };
 		978258E01C589FF0005705AB /* YTVedioModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 978258DF1C589FF0005705AB /* YTVedioModel.m */; };
 		978258EA1C58A6E0005705AB /* YTSchoolHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 978258E91C58A6E0005705AB /* YTSchoolHomeViewController.m */; };
-		9787750E1BE85A9E002A8B42 /* YTProductGroupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9787750D1BE85A9E002A8B42 /* YTProductGroupController.m */; };
 		978775141BE8A200002A8B42 /* YTBindingPhoneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 978775121BE8A200002A8B42 /* YTBindingPhoneController.m */; };
 		978775151BE8A200002A8B42 /* YTBindingPhoneController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 978775131BE8A200002A8B42 /* YTBindingPhoneController.xib */; };
 		978C62681BE4A3CE00FE2C72 /* YTTodoListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 978C62671BE4A3CE00FE2C72 /* YTTodoListViewController.m */; };
@@ -490,8 +489,6 @@
 		978258DF1C589FF0005705AB /* YTVedioModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTVedioModel.m; sourceTree = "<group>"; };
 		978258E81C58A6E0005705AB /* YTSchoolHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSchoolHomeViewController.h; sourceTree = "<group>"; };
 		978258E91C58A6E0005705AB /* YTSchoolHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSchoolHomeViewController.m; sourceTree = "<group>"; };
-		9787750C1BE85A9E002A8B42 /* YTProductGroupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTProductGroupController.h; sourceTree = "<group>"; };
-		9787750D1BE85A9E002A8B42 /* YTProductGroupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTProductGroupController.m; sourceTree = "<group>"; };
 		978775111BE8A200002A8B42 /* YTBindingPhoneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTBindingPhoneController.h; sourceTree = "<group>"; };
 		978775121BE8A200002A8B42 /* YTBindingPhoneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTBindingPhoneController.m; sourceTree = "<group>"; };
 		978775131BE8A200002A8B42 /* YTBindingPhoneController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTBindingPhoneController.xib; sourceTree = "<group>"; };
@@ -1767,8 +1764,6 @@
 		97C605C01BC2621F00E555E8 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				9787750C1BE85A9E002A8B42 /* YTProductGroupController.h */,
-				9787750D1BE85A9E002A8B42 /* YTProductGroupController.m */,
 				978C6FDF1BCF8193003D183E /* YTProductViewController.h */,
 				978C6FE01BCF8193003D183E /* YTProductViewController.m */,
 				97ED0CD11BE2460200E95750 /* YTProductdetailController.h */,
@@ -2657,7 +2652,6 @@
 				975149541BDCB87A0017B6E8 /* YTBlackAlertView.m in Sources */,
 				97E783DF1BE5FB2500B98A9C /* YTTokenView.m in Sources */,
 				97C6065C1BC26F1100E555E8 /* NSDictionary+Extension.m in Sources */,
-				9787750E1BE85A9E002A8B42 /* YTProductGroupController.m in Sources */,
 				97F17F5B1BE0CB63006E6DA8 /* YTSlipModel.m in Sources */,
 				97973D081BC3D8AB00B7B4CB /* YTLogoView.m in Sources */,
 				97973CF91BC3C11500B7B4CB /* NewFeatureModel.m in Sources */,

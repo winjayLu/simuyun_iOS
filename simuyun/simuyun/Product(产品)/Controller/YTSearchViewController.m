@@ -23,7 +23,10 @@
 #import "SVProgressHUD.h"
 #import "YTUserInfoTool.h"
 #import "YTTabBarController.h"
-
+#import "AFNetworking.h"
+#import "NSString+JsonCategory.h"
+#import "NSObject+JsonCategory.h"
+#import "CoreArchive.h"
 
 
 
@@ -35,6 +38,11 @@
  *  搜索到的产品列表
  */
 @property (nonatomic, strong) NSMutableArray *searchProducts;
+
+/**
+ *  搜索标题
+ */
+@property (nonatomic, strong) NSArray *searchTitles;
 
 
 @property (nonatomic, weak) UITableView *tableView;
@@ -54,7 +62,9 @@
     
     // 设置NavgationBar
     [self setupNavgationBar];
-    [self.tableView reloadData];
+
+    // 获取数据
+    [self loadProduct];
 }
 
 
@@ -241,14 +251,130 @@
  */
 - (void)createHotTitle
 {
-    UIView *hotSearch = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 40)];
+    
+
+    
+    // 容器
+    UIView *continer = [[UIView alloc] init];
+    continer.frame = CGRectMake(0, 0, DeviceWidth, 145);
+    CGFloat magin = 10;
+    CGFloat btnW = (DeviceWidth - magin * 5) * 0.25;
+    CGFloat btnH = 33;
+    // 分类按钮
+    for (int i = 0; i < 8; i++) {
+        UIButton *button = [[UIButton alloc] init];
+        [button setBackgroundImage:[UIImage imageNamed:@"searchanniuzc"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"searchanniuax"] forState:UIControlStateHighlighted];
+        [button.titleLabel setFont:[UIFont systemFontOfSize:15]];
+        [button setTitleColor:YTColor(102, 102, 102) forState:UIControlStateNormal];
+        [button setTitleColor:YTNavBackground forState:UIControlStateHighlighted];
+        [button addTarget:self action:@selector(categoryClick:) forControlEvents:UIControlEventTouchUpInside];
+        switch (i) {
+            case 0:
+                button.frame = CGRectMake(magin, magin, btnW, btnH);
+                [button setTitle:@"泰山" forState:UIControlStateNormal];
+                button.tag = 1;
+                break;
+            case 1:
+                button.frame = CGRectMake(btnW + magin * 2, magin, btnW, btnH);
+                [button setTitle:@"衡山" forState:UIControlStateNormal];
+                button.tag = 3;
+                break;
+            case 2:
+                button.frame = CGRectMake(btnW * 2 + magin * 3, magin, btnW, btnH);
+                [button setTitle:@"嵩山" forState:UIControlStateNormal];
+                button.tag = 4;
+                break;
+            case 3:
+                button.frame = CGRectMake(btnW * 3 + magin * 4, magin, btnW, btnH);
+                [button setTitle:@"昆仑山" forState:UIControlStateNormal];
+                button.tag = 9;
+                break;
+            case 4:
+                button.frame = CGRectMake(magin, magin * 2 + btnH, btnW, btnH);
+                [button setTitle:@"黄河" forState:UIControlStateNormal];
+                button.tag = 6;
+                break;
+            case 5:
+                button.frame = CGRectMake(btnW + magin * 2, magin * 2 + btnH, btnW, btnH);
+                [button setTitle:@"长江" forState:UIControlStateNormal];
+                button.tag = 5;
+                break;
+            case 6:
+                button.frame = CGRectMake(btnW * 2 + magin * 3, magin * 2 + btnH, btnW, btnH);
+                [button setTitle:@"澜沧江" forState:UIControlStateNormal];
+                button.tag = 7;
+                break;
+            case 7:
+                button.frame = CGRectMake(btnW * 3 + magin * 4, magin * 2 + btnH, btnW, btnH);
+                [button setTitle:@"亚马逊" forState:UIControlStateNormal];
+                button.tag = 8;
+                break;
+        }
+        [continer addSubview:button];
+        
+    }
+    // 分割区域
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = YTColor(223, 223, 223);
+    lineView.frame = CGRectMake(0, magin * 3 + btnH * 2, DeviceWidth, 10);
+    [continer addSubview:lineView];
+    
+    // 热门搜索
+    UIView *hotSearch = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(lineView.frame), DeviceWidth, 30)];
     hotSearch.backgroundColor = [UIColor clearColor];
     UILabel *lable = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, DeviceWidth, 40)];
     lable.text = @"热门搜索";
     lable.textColor = YTColor(102, 102, 102);
     lable.font = [UIFont systemFontOfSize:13];
     [hotSearch addSubview:lable];
-    self.tableView.tableHeaderView = hotSearch;
+    // 分割线
+    UIView *shortLine = [[UIView alloc] init];
+    shortLine.backgroundColor = YTColor(208, 208, 208);
+    shortLine.frame = CGRectMake(20, 39, DeviceWidth - 40, 1);
+    [hotSearch addSubview:shortLine];
+    [continer addSubview:hotSearch];
+    
+    
+    self.tableView.tableHeaderView = continer;
+}
+
+/**
+ *  分类按钮点击
+ *
+ */
+- (void)categoryClick:(UIButton *)btn
+{
+    // 退出键盘
+    [self.search resignFirstResponder];
+    [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"uid"] = [YTAccountTool account].userId;
+    param[@"series"] = @(btn.tag);
+    param[@"offset"] = @"0";
+    param[@"limit"] = @"20";
+    [YTHttpTool get:YTProductList params:param
+            success:^(NSDictionary *responseObject) {
+                [SVProgressHUD dismiss];
+                NSArray *products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
+                // 上拉加载
+                if (products.count == 20) {
+                    self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreProduct)];
+                }
+                self.searchProducts = [NSMutableArray arrayWithArray:products];
+                self.tableView.tableHeaderView = nil;
+                [self updateTableViewFrame];
+                // 刷新表格
+                [self.tableView reloadData];
+            } failure:^(NSError *error) {
+                
+                if(error.userInfo[@"NSLocalizedDescription"] != nil)
+                {
+                    [SVProgressHUD showInfoWithStatus:@"网络链接失败\n请稍候再试"];
+                } else {
+                    [SVProgressHUD dismiss];
+                }
+            }];
 }
 
 /**
@@ -382,12 +508,24 @@
     [self.navigationController pushViewController:web animated:YES];
 }
 
-
-- (void)setSearchTitles:(NSArray *)searchTitles
+#pragma mark - 获取热门搜索标题
+- (void)loadProduct
 {
-    _searchTitles = searchTitles;
-    [self.tableView reloadData];
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    // 2.发送一个GET请求
+    
+    [mgr GET:@"http://www.simuyun.com/peyunupload/label/hotproducttitle.json" parameters:nil
+     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+         self.searchTitles = [NSString objectArrayWithKeyValuesArray:responseObject];
+         [self.tableView reloadData];
+         // 存储获取到的数据
+         NSString *oldSearchProduct = [responseObject JsonToString];
+         [CoreArchive setStr:oldSearchProduct key:@"oldSearchProduct"];
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+     }];
 }
+
 
 #pragma mark - 懒加载
 
@@ -397,6 +535,21 @@
         _searchProducts = [[NSMutableArray alloc] init];
     }
     return _searchProducts;
+}
+
+
+- (NSArray *)searchTitles
+{
+    if (!_searchTitles) {
+        // 获取历史数据
+        NSString *oldProducts = [CoreArchive strForKey:@"oldSearchProduct"];
+        if (oldProducts != nil) {
+            _searchTitles = [NSString objectArrayWithKeyValuesArray:[oldProducts JsonToValue]];
+        } else {
+            _searchTitles = [[NSMutableArray alloc] init];
+        }
+    }
+    return _searchTitles;
 }
 
 @end

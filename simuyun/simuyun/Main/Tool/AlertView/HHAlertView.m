@@ -8,6 +8,8 @@
 
 #import "HHAlertView.h"
 #import "UIImage+Extend.h"
+#import "NSDate+Extension.h"
+#import "NSString+Extend.h"
 
 
 #define OKBUTTON_BACKGROUND_COLOR [UIColor colorWithRed:210/255.0 green:35/255.0 blue:21/255.0 alpha:1]
@@ -273,7 +275,22 @@ static UIWindow *_window;
 {
     [_logoView removeFromSuperview];
     
-    UIImage *image = [UIImage imageNamed:imagename];
+    // 春节
+    NSDate *chunJieDate = [@"2016-2-1 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
+    // 正月十五
+    NSDate *shiWuDate = [@"2016-2-23 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *today = [NSDate date];
+    NSComparisonResult ChunjieResult = [chunJieDate compare:today];
+    NSComparisonResult shiWuResult = [shiWuDate compare:today];
+    
+    // 图片名
+    NSString *dogImage = @"pushIconDock";
+    if (ChunjieResult <= 0 && shiWuResult > 0) {
+        dogImage = @"labuladuo";
+    }
+    
+    
+    UIImage *image = [UIImage imageNamed:dogImage];
     
     
     _logoView = [[UIImageView alloc] initWithImage:image];

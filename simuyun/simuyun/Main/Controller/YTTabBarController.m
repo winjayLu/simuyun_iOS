@@ -9,7 +9,7 @@
 
 #import "YTTabBarController.h"
 #import "YTMessageViewController.h"
-#import "YTProductGroupController.h"
+#import "YTProductViewController.h"
 #import "YTProfileViewController.h"
 #import "YTSchoolHomeViewController.h"
 #import "YTDiscoverViewController.h"
@@ -35,7 +35,7 @@
 /**
  *  产品 控制器
  */
-@property (nonatomic, strong) YTProductGroupController *product;
+@property (nonatomic, strong) YTProductViewController *product;
 /**
  *  我 控制器
  */
@@ -262,7 +262,7 @@
         school = @"schoolIconNew";
     }
     self.message = (YTMessageViewController *)[self addOneChildVcClass:[YTMessageViewController class] title:@"消息" image:message selectedImage:[NSString stringWithFormat:@"%@Selected", message]];
-    self.product = (YTProductGroupController *)[self addOneChildVcClass:[YTProductGroupController class] title:@"产品" image:product selectedImage:[NSString stringWithFormat:@"%@Selected", product]];
+    self.product = (YTProductViewController *)[self addOneChildVcClass:[YTProductViewController class] title:@"产品" image:product selectedImage:[NSString stringWithFormat:@"%@Selected", product]];
     self.profile = (YTProfileViewController *)[self addOneChildVcClass:[YTProfileViewController class] title:nil image:nil selectedImage:nil];
     self.discover = (YTDiscoverViewController *)[self addOneChildVcClass:[YTDiscoverViewController class] title:@"发现" image:discover selectedImage:[NSString stringWithFormat:@"%@Selected", discover]];
     self.school = (YTSchoolHomeViewController *)[self addOneChildVcClass:[YTSchoolHomeViewController class] title:@"学院" image:school selectedImage:[NSString stringWithFormat:@"%@Selected", school]];

@@ -57,7 +57,6 @@ static ShareManage *shareManage;
 #pragma mark 注册友盟分享微信
 - (void)shareConfig
 {
-    [self hiddenFloatMenu];
     //设置友盟社会化组件appkey
     [UMSocialData setAppKey:UmengAppKey];
     [UMSocialData openLog:NO];
@@ -133,7 +132,7 @@ static ShareManage *shareManage;
 #pragma mark 邮件分享
 - (void)displayEmailComposerSheet:(UIViewController *)vc
 {
-    
+    [self hiddenFloatMenu];
     _viewC = vc;
     MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
     if ([MFMailComposeViewController canSendMail]) {
@@ -193,6 +192,7 @@ static ShareManage *shareManage;
 }
 - (void)displaySMSComposerSheet
 {
+    [self hiddenFloatMenu];
     MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
     picker.messageComposeDelegate = self;
     picker.navigationBar.tintColor = [UIColor blackColor];

@@ -19,16 +19,25 @@
 #import "YTAccountTool.h"
 #import "YTDataHintView.h"
 #import "YTLiquidationCell.h"
+#import "YTTabBarController.h"
+#import "YTNavigationController.h"
+#import "YTUserInfoTool.h"
+#import "YTSearchViewController.h"
+#import "NSString+JsonCategory.h"
+#import "NSObject+JsonCategory.h"
+#import "CoreArchive.h"
 
-@interface YTProductViewController ()
+
+@interface YTProductViewController () <UISearchBarDelegate>
 
 
 @property (nonatomic, strong) NSMutableArray *products;
 
+
 /**
- *  数据状态提示
+ *  搜索框
  */
-@property (nonatomic, weak) YTDataHintView *hintView;
+@property (nonatomic, weak) UISearchBar *search;
 
 @end
 
@@ -46,26 +55,50 @@
     
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadProduct)];
-    // 马上进入刷新状态
-    [self.tableView.header beginRefreshing];
     // 上拉加载
     self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreProduct)];
     
-    // 初始化提醒视图
-    [self setupHintView];
+    
+    UISearchBar *search = [[UISearchBar alloc] init];
+    search.frame = CGRectMake(0, 0, DeviceWidth, 44);
+    search.placeholder = @"产品搜索";
+    search.delegate = self;
+    self.tableView.tableHeaderView = search;
+    self.search = search;
 
 }
 
-/**
- *  初始化提醒视图
- */
-- (void)setupHintView
+- (void)viewWillAppear:(BOOL)animated
 {
-    YTDataHintView *hintView =[[YTDataHintView alloc] init];
-    CGPoint center = CGPointMake(self.tableView.centerX, self.tableView.centerY - 89);
-    [hintView showLoadingWithInView:self.tableView center:center];
-    self.hintView = hintView;
+    [super viewWillAppear:animated];
+    // 获取数据
+    [self loadProduct];
 }
+
+#pragma mark - SearchBarDelegate
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+    // 隐藏悬浮按钮
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    UIViewController *appRootVC = keyWindow.rootViewController;
+    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+        tabBar.floatView.boardWindow.hidden = YES;
+    }
+    YTSearchViewController *searchVc = [[YTSearchViewController alloc] init];
+    YTNavigationController *nav = [[YTNavigationController alloc] initWithRootViewController:searchVc];
+    [self presentViewController:nav animated:NO completion:nil];
+    [MobClick event:@"proSearch_click" attributes:@{@"按钮" : @"搜索框", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+    return NO;
+}
+
+
 
 #pragma mark - Table view data source
 
@@ -152,12 +185,8 @@
 #pragma mark - 获取数据
 - (void)loadProduct
 {
-    [self.hintView switchContentTypeWIthType:contentTypeLoading];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
-    if (self.series > 0) {
-        param[@"series"] = @(self.series);
-    }
     param[@"offset"] = @"0";
     param[@"limit"] = @"20";
     [YTHttpTool get:YTProductList params:param
@@ -168,15 +197,16 @@
         {
             [self.tableView.footer noticeNoMoreData];
         }
+        // 存储获取到的数据
+        NSString *oldProducts = [responseObject JsonToString];
+        [CoreArchive setStr:oldProducts key:@"oldProducts"];
         // 刷新表格
         [self.tableView reloadData];
         // 结束刷新状态
         [self.tableView.header endRefreshing];
-        [self.hintView changeContentTypeWith:self.products];
     } failure:^(NSError *error) {
         // 结束刷新状态
         [self.tableView.header endRefreshing];
-        [self.hintView ContentFailure];
     }];
 }
 
@@ -187,9 +217,6 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
-    if (self.series > 0) {
-        param[@"series"] = @(self.series);
-    }
     param[@"offset"] = [NSString stringWithFormat:@"%zd", self.products.count];
     param[@"limit"] = @"20";
     [YTHttpTool get:YTProductList params:param success:^(id responseObject) {
@@ -210,7 +237,13 @@
 - (NSMutableArray *)products
 {
     if (!_products) {
-        _products = [[NSMutableArray alloc] init];
+        // 获取历史数据
+        NSString *oldProducts = [CoreArchive strForKey:@"oldProducts"];
+        if (oldProducts != nil) {
+            _products = [YTProductModel objectArrayWithKeyValuesArray:[oldProducts JsonToValue]];
+        } else {
+            _products = [[NSMutableArray alloc] init];
+        }
     }
     return _products;
 }

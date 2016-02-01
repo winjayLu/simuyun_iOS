@@ -19,11 +19,6 @@
 @interface YTSearchViewController : UIViewController
 
 /**
- *  搜索标题
- */
-@property (nonatomic, strong) NSArray *searchTitles;
-
-/**
  *  代理
  */
 @property (nonatomic, weak) id searchDelegate;

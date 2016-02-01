@@ -48,7 +48,7 @@
     self.indexLable.text = [NSString stringWithFormat:@"%.2f",stockModel.index];
     self.gainLable.text = [NSString stringWithFormat:@"%.2f", stockModel.gain];
     self.rateLable.text = [NSString stringWithFormat:@"%.2f%%", stockModel.rate];
-    if (stockModel.gain > 0) {
+    if (stockModel.gain >= 0) {
         self.indexLable.textColor = YTColor(200,22,29);
         self.gainLable.textColor = YTColor(200,22,29);
         self.rateLable.textColor = YTColor(200,22,29);
