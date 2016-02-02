@@ -253,6 +253,7 @@
 - (void)closeClick
 {
     // 显示状态栏
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
     UIWindow *keyWindow = nil;
@@ -275,6 +276,7 @@
  */
 - (void)hiddenClick
 {
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
     // 获取根控制器
