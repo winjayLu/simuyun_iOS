@@ -245,7 +245,13 @@ static UIWindow *_window;
 
 - (void)show
 {
-    
+    // 退出键盘
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     [UIView animateWithDuration:0.5 animations:^{
         self.alpha=1;
         self.layer.cornerRadius = 5;

@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="241" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundcebian.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="3DC-4S-XPf">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundcebian" translatesAutoresizingMaskIntoConstraints="NO" id="3DC-4S-XPf">
                     <rect key="frame" x="0.0" y="0.0" width="241" height="667"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="242" id="kyk-cp-uY4"/>
@@ -343,7 +343,7 @@
         </activityIndicatorView>
     </objects>
     <resources>
-        <image name="backgroundcebian.jpg" width="241" height="667"/>
+        <image name="backgroundcebian" width="241" height="667"/>
         <image name="bangzhu" width="22" height="22"/>
         <image name="bangzhuanxia" width="22" height="22"/>
         <image name="dianhau" width="37" height="37"/>
@@ -351,8 +351,8 @@
         <image name="guanlianweixinanxia" width="22" height="22"/>
         <image name="guanyu" width="22" height="22"/>
         <image name="guanyuanxia" width="22" height="22"/>
-        <image name="leftanniubeijing" width="50" height="33"/>
-        <image name="leftanniubeijinganxia" width="145" height="33"/>
+        <image name="leftanniubeijing" width="241" height="33"/>
+        <image name="leftanniubeijinganxia" width="241" height="33"/>
         <image name="quan" width="126" height="126"/>
         <image name="tuiChuBtn" width="145" height="33"/>
         <image name="tuijian" width="22" height="22"/>
