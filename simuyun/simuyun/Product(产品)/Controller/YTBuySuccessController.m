@@ -138,8 +138,10 @@
     if (!_shareManage) {
         ShareManage *share = [ShareManage shareManage];
         share.share_title = @"打款信息";
-
-        share.share_content = [NSString stringWithFormat:@"客户姓名：%@\n认购:%d万%@\n开户名：%@\n募集银行：%@\n募集帐号：%@\n打款备注：%@认购%@", self.prouctModel.customerName, self.prouctModel.buyMoney, self.prouctModel.pro_name, self.accountNameLable.text, self.accountBankLable.text, self.accountLable.text, self.prouctModel.customerName, self.prouctModel.pro_name];
+        
+        NSString *bankContent = [NSString stringWithFormat:@"客户姓名：%@\n认购:%d万%@\n开户名：%@\n募集银行：%@\n募集帐号：%@\n打款备注：%@认购%@", self.prouctModel.customerName, self.prouctModel.buyMoney, self.prouctModel.pro_name, self.accountNameLable.text, self.accountBankLable.text, self.accountLable.text, self.prouctModel.customerName, self.prouctModel.pro_name];
+        share.share_content = bankContent;
+        share.bankNumber = [NSString stringWithFormat:@"打款信息\n%@",bankContent];
         share.share_url = nil;
         _shareManage = share;
     }

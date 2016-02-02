@@ -145,7 +145,12 @@ static ShareManage *shareManage;
 //        NSData *imageData = UIImagePNGRepresentation(addPic);
 //        [mailPicker addAttachmentData: imageData mimeType: @"image/png" fileName: @"Icon.png"];
         // 设置正文
-        NSString *emailBody =[NSString stringWithFormat:@"%@\n%@",self.share_title, self.share_url];
+        NSString *emailBody = nil;
+        if (self.bankNumber.length > 0) {
+            emailBody = self.bankNumber;
+        } else {
+            emailBody =[NSString stringWithFormat:@"%@\n%@",self.share_title, self.share_url];
+        }
         [mailPicker setMessageBody:emailBody isHTML:YES];
         [_viewC presentViewController:mailPicker animated:YES completion:nil];
     }
@@ -196,7 +201,11 @@ static ShareManage *shareManage;
     MFMessageComposeViewController *picker = [[MFMessageComposeViewController alloc] init];
     picker.messageComposeDelegate = self;
     picker.navigationBar.tintColor = [UIColor blackColor];
-    picker.body = [NSString stringWithFormat:@"%@\n%@",self.share_title,self.share_url];
+    if (self.bankNumber.length > 0) {
+        picker.body = self.bankNumber;
+    } else {
+        picker.body = [NSString stringWithFormat:@"%@\n%@",self.share_title,self.share_url];
+    }
     [_viewC presentViewController:picker animated:YES completion:nil];
 }
 

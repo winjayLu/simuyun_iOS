@@ -78,22 +78,25 @@
 #pragma mark - SearchBarDelegate
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    // 隐藏悬浮按钮
-    UIWindow *keyWindow = nil;
-    for (UIWindow *window in [UIApplication sharedApplication].windows) {
-        if (window.windowLevel == 0) {
-            keyWindow = window;
-            break;
-        }
-    }
-    UIViewController *appRootVC = keyWindow.rootViewController;
-    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
-        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
-        tabBar.floatView.boardWindow.hidden = YES;
-    }
+//    // 隐藏悬浮按钮
+//    UIWindow *keyWindow = nil;
+//    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+//        if (window.windowLevel == 0) {
+//            keyWindow = window;
+//            break;
+//        }
+//    }
+//    UIViewController *appRootVC = keyWindow.rootViewController;
+//    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+//        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+//        tabBar.floatView.boardWindow.hidden = YES;
+//    }
     YTSearchViewController *searchVc = [[YTSearchViewController alloc] init];
-    YTNavigationController *nav = [[YTNavigationController alloc] initWithRootViewController:searchVc];
-    [self presentViewController:nav animated:NO completion:nil];
+    searchVc.navigationItem.hidesBackButton = YES;
+    searchVc.hidesBottomBarWhenPushed = YES;
+//    YTNavigationController *nav = [[YTNavigationController alloc] initWithRootViewController:searchVc];
+//    [self presentViewController:nav animated:NO completion:nil];
+    [self.navigationController pushViewController:searchVc animated:NO];
     [MobClick event:@"proSearch_click" attributes:@{@"按钮" : @"搜索框", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     return NO;
 }

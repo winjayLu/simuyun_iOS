@@ -341,9 +341,14 @@
 {
     _userInfo = userInfo;
     if (_userInfo == nil) return;
+    
     // 设置头像
-    if (self.isChang == NO) {
-
+    if (_userInfo.iconImage != nil){
+        self.iconImage.layer.masksToBounds = YES;
+        self.iconImage.layer.cornerRadius = self.iconImage.frame.size.width * 0.5;
+        self.iconImage.clipsToBounds = YES;
+        self.iconImage.image = [YTUserInfoTool userInfo].iconImage;
+    } else {
         [self.iconImage imageWithUrlStr:userInfo.headImgUrl phImage:[UIImage imageNamed:@"avatar_default_big"]];
     }
 

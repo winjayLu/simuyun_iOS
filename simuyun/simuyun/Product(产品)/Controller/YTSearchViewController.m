@@ -54,14 +54,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // 设置NavgationBar
+    [self setupNavgationBar];
     
     self.view.backgroundColor = YTGrayBackground;
     
     // 初始化tableview
     [self setupTableView];
     
-    // 设置NavgationBar
-    [self setupNavgationBar];
 
     // 获取数据
     [self loadProduct];
@@ -70,9 +70,22 @@
 
 - (void)setupNavgationBar
 {
+    // 左侧占位符
+    UIView *view = [[UIView alloc] init];
+    view.backgroundColor = [UIColor clearColor];
+    view.frame = CGRectMake(0, 0, 0, 44);
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] init];
+    leftItem.customView = view;
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                       target:nil action:nil];
+    negativeSpacer.width = -5;
+    self.navigationItem.leftBarButtonItems = [NSArray arrayWithObjects:negativeSpacer, leftItem, nil];
+
+    
     // 搜索框
     UISearchBar *search = [[UISearchBar alloc] init];
-    search.frame = CGRectMake(0, 0, DeviceWidth, 44);
+    search.frame = CGRectMake(100, 0, DeviceWidth, 44);
     search.placeholder = @"请输入产品名称";
     search.delegate = self;
     self.navigationItem.titleView = search;
@@ -205,21 +218,9 @@
  */
 - (void)blackClick
 {
-    UIWindow *keyWindow = nil;
-    for (UIWindow *window in [UIApplication sharedApplication].windows) {
-        if (window.windowLevel == 0) {
-            keyWindow = window;
-            break;
-        }
-    }
-    UIViewController *appRootVC = keyWindow.rootViewController;
-    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
-        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
-        tabBar.floatView.boardWindow.hidden = NO;
-    }
-    
-    
-    [self dismissViewControllerAnimated:NO completion:nil];
+    // 退出键盘
+    [self.search resignFirstResponder];
+    [self.navigationController popToRootViewControllerAnimated:NO];
     self.search.text = nil;
     self.searchProducts = nil;
     self.tableView.footer = nil;
@@ -251,13 +252,11 @@
  */
 - (void)createHotTitle
 {
-    
-
-    
     // 容器
     UIView *continer = [[UIView alloc] init];
     continer.frame = CGRectMake(0, 0, DeviceWidth, 145);
-    CGFloat magin = 10;
+    CGFloat magin = 15;
+    CGFloat maginY = 10;
     CGFloat btnW = (DeviceWidth - magin * 5) * 0.25;
     CGFloat btnH = 33;
     // 分类按钮
@@ -271,42 +270,42 @@
         [button addTarget:self action:@selector(categoryClick:) forControlEvents:UIControlEventTouchUpInside];
         switch (i) {
             case 0:
-                button.frame = CGRectMake(magin, magin, btnW, btnH);
+                button.frame = CGRectMake(magin, maginY, btnW, btnH);
                 [button setTitle:@"泰山" forState:UIControlStateNormal];
                 button.tag = 1;
                 break;
             case 1:
-                button.frame = CGRectMake(btnW + magin * 2, magin, btnW, btnH);
-                [button setTitle:@"衡山" forState:UIControlStateNormal];
+                button.frame = CGRectMake(btnW + magin * 2, maginY, btnW, btnH);
+                [button setTitle:@"恒山" forState:UIControlStateNormal];
                 button.tag = 3;
                 break;
             case 2:
-                button.frame = CGRectMake(btnW * 2 + magin * 3, magin, btnW, btnH);
+                button.frame = CGRectMake(btnW * 2 + magin * 3, maginY, btnW, btnH);
                 [button setTitle:@"嵩山" forState:UIControlStateNormal];
                 button.tag = 4;
                 break;
             case 3:
-                button.frame = CGRectMake(btnW * 3 + magin * 4, magin, btnW, btnH);
+                button.frame = CGRectMake(btnW * 3 + magin * 4, maginY, btnW, btnH);
                 [button setTitle:@"昆仑山" forState:UIControlStateNormal];
                 button.tag = 9;
                 break;
             case 4:
-                button.frame = CGRectMake(magin, magin * 2 + btnH, btnW, btnH);
+                button.frame = CGRectMake(magin, maginY * 2 + btnH, btnW, btnH);
                 [button setTitle:@"黄河" forState:UIControlStateNormal];
                 button.tag = 6;
                 break;
             case 5:
-                button.frame = CGRectMake(btnW + magin * 2, magin * 2 + btnH, btnW, btnH);
+                button.frame = CGRectMake(btnW + magin * 2, maginY * 2 + btnH, btnW, btnH);
                 [button setTitle:@"长江" forState:UIControlStateNormal];
                 button.tag = 5;
                 break;
             case 6:
-                button.frame = CGRectMake(btnW * 2 + magin * 3, magin * 2 + btnH, btnW, btnH);
+                button.frame = CGRectMake(btnW * 2 + magin * 3, maginY * 2 + btnH, btnW, btnH);
                 [button setTitle:@"澜沧江" forState:UIControlStateNormal];
                 button.tag = 7;
                 break;
             case 7:
-                button.frame = CGRectMake(btnW * 3 + magin * 4, magin * 2 + btnH, btnW, btnH);
+                button.frame = CGRectMake(btnW * 3 + magin * 4, maginY * 2 + btnH, btnW, btnH);
                 [button setTitle:@"亚马逊" forState:UIControlStateNormal];
                 button.tag = 8;
                 break;
@@ -317,7 +316,7 @@
     // 分割区域
     UIView *lineView = [[UIView alloc] init];
     lineView.backgroundColor = YTColor(223, 223, 223);
-    lineView.frame = CGRectMake(0, magin * 3 + btnH * 2, DeviceWidth, 10);
+    lineView.frame = CGRectMake(0, maginY * 3 + btnH * 2, DeviceWidth, 10);
     [continer addSubview:lineView];
     
     // 热门搜索

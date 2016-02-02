@@ -35,6 +35,11 @@
  */
 @property (nonatomic, strong) UIImage *share_image;
 
+/**
+ *  打款帐号
+ */
+@property (nonatomic, copy) NSString *bankNumber;
+
 /**新浪微博分享**/
 /**
  *  下个版本考虑
