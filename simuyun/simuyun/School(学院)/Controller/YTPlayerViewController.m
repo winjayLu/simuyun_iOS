@@ -13,6 +13,7 @@
 #import "UIImageView+SD.h"
 #import "TCCloudPlayerSDK.h"
 #import "CoreArchive.h"
+#import "TCReportEngine.h"
 
 
 @interface YTPlayerViewController ()
@@ -129,7 +130,7 @@
     [likeBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
     [likeBtn addTarget:self action:@selector(likeClick:) forControlEvents:UIControlEventTouchUpInside];
     [likeBtn sizeToFit];
-    likeBtn.frame = CGRectMake(DeviceWidth - likeBtn.width - 10, 15, likeBtn.width, likeBtn.height);
+    likeBtn.frame = CGRectMake(DeviceWidth - likeBtn.width - 10, 14, likeBtn.width, likeBtn.height);
     [self.ContentView addSubview:likeBtn];
     
     // 视频标题
@@ -137,6 +138,8 @@
     title.text = vedio.videoName;
     title.textColor = YTColor(51, 51, 51);
     title.font = [UIFont systemFontOfSize:15];
+    title.width = CGRectGetMinX(likeBtn.frame) - 30;
+    title.numberOfLines = 2;
     [title sizeToFit];
     CGFloat titleWidth = title.width;
     title.frame = CGRectMake(10, 15, CGRectGetMinX(likeBtn.frame) - 20, title.height);
@@ -222,21 +225,22 @@
  */
 - (void)playVideo
 {
-    
+    //  测试地址  [NSURL URLWithString:@"http://2527.vod.myqcloud.com/2527_117134a2343111e5b8f5bdca6cb9f38c.f20.mp4"];
     NSMutableArray* mutlArray = [NSMutableArray array];
     TCCloudPlayerVideoUrlInfo* info = [[TCCloudPlayerVideoUrlInfo alloc]init];
     info.videoUrlTypeName = @"标清";
     info.videoUrl = [NSURL URLWithString:self.vedio.SDVideoUrl];
-//    info.videoUrl = [NSURL URLWithString:@"http://2527.vod.myqcloud.com/2527_117134a2343111e5b8f5bdca6cb9f38c.f20.mp4"];
     [mutlArray addObject:info];
-    
     TCCloudPlayerVideoUrlInfo* info1 = [[TCCloudPlayerVideoUrlInfo alloc]init];
     info1.videoUrlTypeName = @"高清";
     info1.videoUrl = [NSURL URLWithString:self.vedio.HDVideoUrl];
-//    info1.videoUrl = [NSURL URLWithString:@"http://2527.vod.myqcloud.com/2527_117134a2343111e5b8f5bdca6cb9f38c.f30.mp4"];
     [mutlArray addObject:info1];
-    
     [self loadVideoPlaybackView:mutlArray defaultPlayIndex:0 startTime:0];
+    
+    // 上报事件
+    TCReportItem *reportItem = [[TCReportItem alloc] init];
+    [reportItem configStepWith:TCREVENT_Play paramInfo:self.vedio.videoName];
+    [[TCReportEngine sharedEngine] postReport:reportItem];
 }
 
 

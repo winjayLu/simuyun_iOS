@@ -24,6 +24,7 @@
 #import "YTNavigationController.h"
 #import "YTJpushTool.h"
 #import "YTAuthenticationErrorController.h"
+#import "TCReportEngine.h"
 
 @interface AppDelegate ()
 
@@ -59,6 +60,10 @@
 
     // 集成极光推送
     [self setupJpush:launchOptions];
+    
+    // 开启腾讯云事件统计
+    [[TCReportEngine sharedEngine] configAppId:TXAppKey];
+    [[TCReportEngine sharedEngine] setEnv:NO];
     
     // 创建窗口
     self.window = [[UIWindow alloc] init];

@@ -16,22 +16,26 @@
 //#define YTServer @"https://intime.simuyun.com/api/app/"
 //#define YTH5Server @"http://www.simuyun.com"
 //#define UmengAppKey @"5514ed3cfd98c5bca4000872"
+//#define TXAppKey @"1251892263"
 //#endif
 
 // 开发环境213
 //#define YTServer @"http://192.168.17.213:8080/api/app/"
 //#define YTH5Server @"http://192.168.17.213"
 //#define UmengAppKey @"545867defd98c5f23a0021da"
+//#define TXAppKey @"125189226"
 
 // 测试环境212
 #define YTServer @"http://192.168.17.212:6060/api/app/"
 #define YTH5Server @"http://192.168.17.212"
 #define UmengAppKey @"545867defd98c5f23a0021"
+#define TXAppKey @"125189226"
 
 // 开发环境外网地址
 //#define YTServer @"http://218.241.181.229:8080/api/app/"
 //#define YTH5Server @"http://218.241.181.229:9090"
 //#define UmengAppKey @"545867defd98c5f23a0021da"
+//#define TXAppKey @"125189226"
 
 //  微信
 #define WXAppID @"wx7259d65d4382e566"
