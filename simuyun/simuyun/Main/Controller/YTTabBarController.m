@@ -220,7 +220,7 @@
 {
 #pragma mark - 日期判断
     // 春节
-    NSDate *chunJieDate = [@"2016-2-7 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *chunJieDate = [@"2016-2-1 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
     // 正月十五
     NSDate *shiWuDate = [@"2016-2-23 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *today = [NSDate date];
@@ -233,7 +233,10 @@
     NSString *discover = @"discoverIcon";
     NSString *school = @"schoolIcon";
     if (ChunjieResult <= 0 && shiWuResult > 0) {
-        
+        message = @"messageIconNew";
+        product = @"productIconNew";
+        discover = @"discoverIconNew";
+        school = @"schoolIconNew";
     }
     self.message = (YTMessageViewController *)[self addOneChildVcClass:[YTMessageViewController class] title:@"消息" image:message selectedImage:[NSString stringWithFormat:@"%@Selected", message]];
     self.product = (YTProductGroupController *)[self addOneChildVcClass:[YTProductGroupController class] title:@"产品" image:product selectedImage:[NSString stringWithFormat:@"%@Selected", product]];
@@ -255,7 +258,6 @@
     UIGraphicsEndImageContext();
     [self.tabBar setBackgroundImage:img];
     [self.tabBar setShadowImage:img];
-
     [self.tabBar setBackgroundImage:[UIImage imageNamed:@"dibubackgroud"]];
 }
 
