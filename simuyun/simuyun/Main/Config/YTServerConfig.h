@@ -15,7 +15,7 @@
 //  生产环境
 #define YTServer @"https://intime.simuyun.com/api/app/"
 #define YTH5Server @"http://www.simuyun.com"
-//#define UmengAppKey @"5514ed3cfd98c5bca4000872"
+#define UmengAppKey @"5514ed3cfd98c5bca4000872"
 //#endif
 
 //  开发环境
@@ -25,7 +25,7 @@
 ////  212
 //#define YTServer @"http://192.168.17.212:6060/api/app/"
 //#define YTH5Server @"http://192.168.17.212"
-#define UmengAppKey @"545867defd98c5f23a0021"
+//#define UmengAppKey @"545867defd98c5f23a0021"
 //  微信
 #define WXAppID @"wx7259d65d4382e566"
 #define WXAppSecret @"6e1deaa7b9a8c1380bd69e3de47fcc21"

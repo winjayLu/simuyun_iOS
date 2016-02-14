@@ -21,6 +21,8 @@
 #import "YTLiquidationCell.h"
 #import "YTSearchProductCell.h"
 #import "SVProgressHUD.h"
+#import "YTUserInfoTool.h"
+
 
 @interface YTSearchViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
@@ -97,6 +99,7 @@
     
     // 开始搜索
     [self searchProductWithProductName:searchBar.text];
+    [MobClick event:@"proSearch_click" attributes:@{@"搜索内容" : searchBar.text, @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
@@ -336,7 +339,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YTProductModel *product = nil;
     if (self.searchProducts.count == 0) {
-        [self searchProductWithProductName:self.searchTitles[indexPath.section]];
+        NSString *searchProName = self.searchTitles[indexPath.section];
+        [self searchProductWithProductName:searchProName];
+        [MobClick event:@"proSearch_click" attributes:@{@"搜索内容" : [NSString stringWithFormat:@"位置:%zd;快捷内容:%@",indexPath.section, searchProName], @"机构" : [YTUserInfoTool userInfo].organizationName}];
         return;
     }
     product = self.searchProducts[indexPath.section];

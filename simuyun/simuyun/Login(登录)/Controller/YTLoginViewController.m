@@ -146,7 +146,7 @@
             // 查询unid是否存在
             [self selectWeChatUnid:param];
         } else {
-            [SVProgressHUD showWithStatus:@"授权失败"];
+            [SVProgressHUD showErrorWithStatus:@"授权失败"];
         }
     });
     

@@ -197,6 +197,7 @@
         if([(NSArray *)responseObject count] == 0)
         {
             [self.tableView.footer noticeNoMoreData];
+            return;
         } 
         [self.products addObjectsFromArray:[YTProductModel objectArrayWithKeyValuesArray:responseObject]];
         [self.tableView reloadData];

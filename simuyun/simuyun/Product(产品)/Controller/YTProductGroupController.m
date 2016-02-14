@@ -89,7 +89,7 @@
     
     YTNavigationController *nav = [[YTNavigationController alloc] initWithRootViewController:self.searchVc];
     [self presentViewController:nav animated:NO completion:nil];
-    [MobClick event:@"proRecommand_click" attributes:@{@"类型" : @"产品搜索", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+    [MobClick event:@"proSearch_click" attributes:@{@"按钮" : @"搜索框", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     return NO;
 }
 
