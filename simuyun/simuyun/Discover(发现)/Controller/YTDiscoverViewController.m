@@ -263,6 +263,7 @@
     if(newest == nil)
     {
         vc = [[YTInformationController alloc] init];
+        [MobClick event:@"discover_click" attributes:@{@"类型" : @"资讯中心点击", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     } else {
         if (newest.infoId == nil || newest.infoId.length == 0) {
             return;

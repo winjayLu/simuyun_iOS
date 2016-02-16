@@ -65,6 +65,12 @@
     [YTCenter addObserver:self selector:@selector(cancelCustomer) name:YTCancelCustomer object:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick event:@"orderReg_click" attributes:@{@"类型" : @"报备", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+}
+
 /**
  *  选中了客户
  */

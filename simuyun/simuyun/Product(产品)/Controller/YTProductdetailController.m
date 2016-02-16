@@ -348,11 +348,14 @@
     ShareManage *share = [ShareManage shareManage];
     //  设置分享内容
     [share shareConfig];
+    // 分享标题  传  产品名称
     share.share_title = self.product.pro_name;
+    // 分享内容  传  分享子标题 share_summary
     share.share_content = self.product.share_summary;
     share.share_image = [UIImage imageNamed:@"maillogo"];
     if(self.product.type_code == 1)
     {
+        // 分享地址
          share.share_url = [NSString stringWithFormat:@"http://www.simuyun.com/product/floating_shared.html?id=%@",self.product.pro_id];
     } else {
         share.share_url = [NSString stringWithFormat:@"http://www.simuyun.com/product/fixed_shared.html?id=%@",self.product.pro_id];

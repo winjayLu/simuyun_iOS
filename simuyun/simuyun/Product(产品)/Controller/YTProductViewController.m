@@ -172,9 +172,11 @@
 
     if (product.type_code == 1) {
         url = [NSString stringWithFormat:@"%@/product/floating.html%@&id=%@", YTH5Server , [NSDate stringDate],product.pro_id];
+        [MobClick event:@"productList_click" attributes:@{@"类型" : @"浮收产品", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     } else {
         // fixed.html
         url = [NSString stringWithFormat:@"%@/product/fixed.html%@&id=%@", YTH5Server , [NSDate stringDate],product.pro_id];
+        [MobClick event:@"productList_click" attributes:@{@"类型" : @"固收产品", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     }
     YTProductdetailController *web = [[YTProductdetailController alloc] init];
     web.url = url;

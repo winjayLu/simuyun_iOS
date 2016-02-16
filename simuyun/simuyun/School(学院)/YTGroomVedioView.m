@@ -49,7 +49,7 @@
     [self groomVedios];
     
     // 创建其它视频标题
-    UIView *otherView =[self setupTitleViewWithTitle:@"其他视频" tag:21];
+    UIView *otherView =[self setupTitleViewWithTitle:@"其它视频" tag:21];
     otherView.frame = CGRectMake(0, self.vedioMaxY, DeviceWidth, 35);
 }
 

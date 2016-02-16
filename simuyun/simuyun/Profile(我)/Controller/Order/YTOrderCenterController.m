@@ -83,6 +83,7 @@
         [SVProgressHUD showSuccessWithStatus:@"报备成功"];
         self.isOrder = NO;
     }
+    [MobClick event:@"orderList_click" attributes:@{@"按钮" : @"订单列表", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 /**
