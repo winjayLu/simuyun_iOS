@@ -25,6 +25,9 @@
 #import "YTJpushTool.h"
 #import "YTAuthenticationErrorController.h"
 #import "TCReportEngine.h"
+#import "YTLoginViewController.h"
+#import "YTRegisterViewController.h"
+#import "YTResultPasswordViewController.h"
 
 @interface AppDelegate ()
 
@@ -206,7 +209,7 @@
  *  获取当前正在显示的控制器
  *
  */
-- (void)keyViewController
+- (void)keyViewController:(YTJpushModel *)jpush
 {
     // 获取根控制器
     UIWindow *keyWindow = nil;
@@ -222,6 +225,18 @@
     UIViewController *appRootVC = keyWindow.rootViewController;
     if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
         UIViewController *keyVc = ((UITabBarController *)appRootVC).selectedViewController;
+        // 欢迎/登录/注册  不弹出推送弹出框
+        if ([keyVc isKindOfClass:[YTNavigationController class]])
+        {
+            UIViewController *rootVc = ((YTNavigationController *)keyVc).topViewController;
+            if ([rootVc isKindOfClass:[YTWelcomeViewController class]]|| [rootVc isKindOfClass:[YTLoginViewController class]] || [rootVc isKindOfClass:[YTRegisterViewController class]] || [rootVc isKindOfClass:[YTResultPasswordViewController class]])
+            {
+                self.keyVc = nil;
+                [YTJpushTool saveJpush:jpush];
+                return;
+            }
+        }
+        
         if (keyVc != nil) {
             self.keyVc = (YTNavigationController *)keyVc;
         }
@@ -229,7 +244,9 @@
 }
 
 
-
+#import "YTLoginViewController.h"
+#import "YTRegisterViewController.h"
+#import "YTResultPasswordViewController.h"
 
 /**
  *  接受到内存警告
@@ -254,7 +271,7 @@
     NSString *cancelButton = nil;
     NSString *okButton = @"知道了";
     // 获取正在显示的控制器
-    [self keyViewController];
+    [self keyViewController:jpush];
     if (self.keyVc.viewControllers.count == 1) {
         cancelButton = @"知道了";
         okButton = @"认购产品";
@@ -290,7 +307,7 @@
 {
     // 获取当前控制器
     // 获取正在显示的控制器
-    [self keyViewController];
+    [self keyViewController:jpush];
     HHAlertView *alert = [HHAlertView shared];
     [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"重新认证" block:^(HHAlertButton buttonindex) {
         if(buttonindex == HHAlertButtonOk)
@@ -308,7 +325,7 @@
 - (void)jumpToHtml:(YTJpushModel *)jpush
 {
     // 获取正在显示的控制器
-    [self keyViewController];
+    [self keyViewController:jpush];
     HHAlertView *alert = [HHAlertView shared];
     [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"查看详情" block:^(HHAlertButton buttonindex) {
         if(buttonindex == HHAlertButtonOk)

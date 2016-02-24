@@ -97,6 +97,9 @@
         case 12:
             categoryStr = @"报备提醒";
             break;
+        case 13:
+            categoryStr = @"赎回提醒 ";
+            break;
         case 21:
             categoryStr = @"产品成立";
             break;
@@ -108,6 +111,12 @@
             break;
         case 24:
             categoryStr = @"产品上线";
+            break;
+        case 25:
+            categoryStr = @"赎回通知";
+            break;
+        case 26:
+            categoryStr = @"截止赎回";
             break;
         case 31:
             categoryStr = @"系统公告";

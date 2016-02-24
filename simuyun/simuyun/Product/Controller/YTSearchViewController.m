@@ -47,6 +47,10 @@
 
 @property (nonatomic, weak) UITableView *tableView;
 
+/**
+ *  类型
+ */
+@property (nonatomic, assign) NSInteger series;
 
 @end
 
@@ -198,7 +202,11 @@
     param[@"uid"] = [YTAccountTool account].userId;
     param[@"offset"] = [NSString stringWithFormat:@"%zd", self.searchProducts.count];
     param[@"limit"] = @"20";
-    param[@"proName"] = self.search.text;
+    if (self.search.text.length == 0) {
+        param[@"series"] = @(self.series);
+    } else {
+        param[@"proName"] = self.search.text;
+    }
     [YTHttpTool get:YTProductList params:param success:^(id responseObject) {
         [self.tableView.footer endRefreshing];
         if([(NSArray *)responseObject count] == 0)
@@ -350,6 +358,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
     param[@"series"] = @(btn.tag);
+    self.series = btn.tag;
     param[@"offset"] = @"0";
     param[@"limit"] = @"20";
     [YTHttpTool get:YTProductList params:param

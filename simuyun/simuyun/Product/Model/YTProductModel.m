@@ -66,5 +66,27 @@
 }
 
 
+/**
+ *  打款帐号
+ *
+ *  @param raise_account
+ */
+- (void)setRaise_account:(NSString *)raise_account
+{
+    NSInteger count = raise_account.length;
+    NSMutableString *string = [NSMutableString stringWithString:raise_account];
+    NSMutableString *newstring = [NSMutableString string];
+    while (count > 4) {
+        count -= 4;
+        NSRange rang = NSMakeRange(0, 4);
+        NSString *str = [string substringWithRange:rang];
+        [newstring insertString:str atIndex:newstring.length];
+        [newstring insertString:@" " atIndex:newstring.length];
+        [string deleteCharactersInRange:rang];
+    }
+    [newstring insertString:string atIndex:newstring.length];
+    _raise_account = newstring;
+}
+
 
 @end

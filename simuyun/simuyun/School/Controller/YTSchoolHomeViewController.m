@@ -104,6 +104,7 @@ static NSString * const headerIdentifier = @"headerCell";
                 [CoreArchive setStr:oldScrollGroom key:@"oldScrollGroom"];
                 // 加载其他视频
                 [self loadOtherVedio];
+                [self.collectionView.footer resetNoMoreData];
             } failure:^(NSError *error) {
                 // 结束刷新状态
                 [self.collectionView.header endRefreshing];

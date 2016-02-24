@@ -23,10 +23,13 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "YTUserInfoTool.h"
 #import "YTOrderCenterController.h"
+#import "YTCustomPickerView.h"
 
 
-@interface YTReportViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, UITextFieldDelegate>
-
+@interface YTReportViewController ()
+// UIPickerViewDelegate
+// UIPickerViewDataSource
+// UITextFieldDelegate
 
 /**
  *  证件类型
@@ -62,16 +65,6 @@
  *
  */
 - (IBAction)ReportClick:(UIButton *)sender;
-
-/**
- *  证件选择器
- */
-@property (nonatomic, weak) UIPickerView *picker;
-
-/**
- *  证件类型
- */
-@property (nonatomic, strong) NSArray *types;
 
 /**
  *  打款凭条title
@@ -123,6 +116,7 @@
  */
 @property (nonatomic, weak) UITextField *catesViewTypeName;
 
+- (IBAction)typeBtnClick:(id)sender;
 
 @end
 
@@ -133,7 +127,7 @@
     // 初始化图片选择器
     [self setupPhotoView];
     self.view.backgroundColor = YTGrayBackground;
-    self.typeField.delegate = self;
+    self.typeField.userInteractionEnabled = NO;
 }
 
 
@@ -410,59 +404,6 @@
         self.bankHangField.text = [NSString getBankFromCardNumber:sender.text];
     }
 }
-
-
-
-#pragma mark - pickerDelegate
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return 5;
-}
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return self.types[row];
-}
-- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
-{
-    NSString *selectedType = self.types[row];
-    // 退出键盘
-    for (UIWindow *window in [UIApplication sharedApplication].windows) {
-        if (window.windowLevel == 0) {
-            [window endEditing:YES];
-            break;
-        }
-    }
-    // 判断是否是其他类型
-    if ([selectedType isEqualToString:@"其它"]) {
-        self.CertificatesNumberConstr.constant = 78;
-        if (self.certificatesView == nil) {
-            [self createCertificatesName];
-            self.photo.view.y = self.titleLable.y - 15 + 53;
-            self.informationPhoto.view.y = self.informationLable.y - 15 + 53;
-            // 更新键盘位置
-            [self updateKeyboardPosition:NO];
-        }
-
-    } else {
-        self.CertificatesNumberConstr.constant = 25;
-        if (self.certificatesView != nil) {
-            [self.certificatesView removeFromSuperview];
-            self.certificatesView = nil;
-            self.photo.view.y = self.titleLable.y - 15 - 53;
-            self.informationPhoto.view.y = self.informationLable.y - 15 - 53;
-            // 更新键盘位置
-            [self updateKeyboardPosition:YES];
-        }
-    }
-    self.typeField.text = selectedType;
-    [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"选择证件类型", @"机构" : [YTUserInfoTool userInfo].organizationName}];
-}
-
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
     if (action == @selector(paste:))
@@ -528,16 +469,12 @@
     [super viewDidAppear:animated];
     
     [CoreTFManagerVC installManagerForVC:self scrollView:self.scroll tfModels:^NSArray *{
-        UIPickerView *picker = [[UIPickerView alloc] init];
-        picker.delegate = self;
-        
-        TFModel *tfm1=[TFModel modelWithTextFiled:self.typeField inputView:picker name:@"" insetBottom:11];
         TFModel *tfm2=[TFModel modelWithTextFiled:self.numberField inputView:nil name:@"" insetBottom:65];
         TFModel *tfm3=[TFModel modelWithTextFiled:self.bankField inputView:nil name:@"" insetBottom:65];
         TFModel *tfm4=[TFModel modelWithTextFiled:self.bankHangField inputView:nil name:@"" insetBottom:65];
         TFModel *tfm5=[TFModel modelWithTextFiled:self.branchField inputView:nil name:@"" insetBottom:11];
         
-        return @[tfm1,tfm2,tfm3,tfm4,tfm5];
+        return @[tfm2,tfm3,tfm4,tfm5];
         
     }];
     
@@ -549,15 +486,12 @@
     if (isIncrease) {   // 选择了身份证或护照
         [CoreTFManagerVC uninstallManagerForVC:self];
         [CoreTFManagerVC installManagerForVC:self scrollView:self.scroll tfModels:^NSArray *{
-//            UIPickerView *picker = [[UIPickerView alloc] init];
-//            picker.delegate = self;
-            TFModel *tfm1=[TFModel modelWithTextFiled:self.typeField inputView:nil name:@"" insetBottom:11];
             TFModel *tfm2=[TFModel modelWithTextFiled:self.numberField inputView:nil name:@"" insetBottom:11];
             TFModel *tfm3=[TFModel modelWithTextFiled:self.bankField inputView:nil name:@"" insetBottom:11];
             TFModel *tfm4=[TFModel modelWithTextFiled:self.bankHangField inputView:nil name:@"" insetBottom:11];
             TFModel *tfm5=[TFModel modelWithTextFiled:self.branchField inputView:nil name:@"" insetBottom:-43];
             
-            return @[tfm1,tfm2,tfm3,tfm4,tfm5];
+            return @[tfm2,tfm3,tfm4,tfm5];
             
         }];
         self.scroll.contentSize = CGSizeMake(DeviceWidth, self.view.height);
@@ -566,15 +500,13 @@
     //   选择了其他
     [CoreTFManagerVC uninstallManagerForVC:self];
     [CoreTFManagerVC installManagerForVC:self scrollView:self.scroll tfModels:^NSArray *{
-
-        TFModel *tfm1=[TFModel modelWithTextFiled:self.typeField inputView:nil name:@"" insetBottom:11];
         TFModel *tfm6 = [TFModel modelWithTextFiled:self.catesViewTypeName inputView:nil name:@"" insetBottom:65];
         TFModel *tfm2=[TFModel modelWithTextFiled:self.numberField inputView:nil name:@"" insetBottom:119];
         TFModel *tfm3=[TFModel modelWithTextFiled:self.bankField inputView:nil name:@"" insetBottom:119];
         TFModel *tfm4=[TFModel modelWithTextFiled:self.bankHangField inputView:nil name:@"" insetBottom:119];
         TFModel *tfm5=[TFModel modelWithTextFiled:self.branchField inputView:nil name:@"" insetBottom:65];
         
-        return @[tfm1, tfm6,tfm2,tfm3,tfm4,tfm5];
+        return @[tfm6,tfm2,tfm3,tfm4,tfm5];
         
     }];
     self.scroll.contentSize = CGSizeMake(DeviceWidth, self.view.height + 53);
@@ -595,13 +527,6 @@
 
 #pragma mark - lazy
 
-- (NSArray *)types
-{
-    if (!_types) {
-        _types = [NSArray arrayWithObjects:@"身份证",@"护照",@"港澳通行证", @"营业执照", @"其它", nil];
-    }
-    return _types;
-}
 
 - (NSArray *)Slips
 {
@@ -628,4 +553,35 @@
 
 
 
+- (IBAction)typeBtnClick:(id)sender {
+    
+    YTCustomPickerView *addressPickerView = [[YTCustomPickerView alloc]init];
+    addressPickerView.block = ^(YTCustomPickerView *view,UIButton *btn,NSString *selectType){
+        self.typeField.text = selectType;
+        // 判断是否是其他类型
+        if ([selectType isEqualToString:@"其它"]) {
+            self.CertificatesNumberConstr.constant = 78;
+            if (self.certificatesView == nil) {
+                [self createCertificatesName];
+                self.photo.view.y = self.titleLable.y - 15 + 53;
+                self.informationPhoto.view.y = self.informationLable.y - 15 + 53;
+                // 更新键盘位置
+                [self updateKeyboardPosition:NO];
+            }
+            
+        } else {
+            self.CertificatesNumberConstr.constant = 25;
+            if (self.certificatesView != nil) {
+                [self.certificatesView removeFromSuperview];
+                self.certificatesView = nil;
+                self.photo.view.y = self.titleLable.y - 15 - 53;
+                self.informationPhoto.view.y = self.informationLable.y - 15 - 53;
+                // 更新键盘位置
+                [self updateKeyboardPosition:YES];
+            }
+        }
+        [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"选择证件类型", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+    };
+    [addressPickerView showWithSlectedType:self.typeField.text];
+}
 @end

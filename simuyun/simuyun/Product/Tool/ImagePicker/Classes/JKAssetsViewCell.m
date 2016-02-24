@@ -106,6 +106,7 @@
         [_photoButton setImage:img forState:UIControlStateNormal];
         [_photoButton setImage:imgH forState:UIControlStateHighlighted];
         [_photoButton addTarget:self action:@selector(photo) forControlEvents:UIControlEventTouchUpInside];
+        [_photoButton setBackgroundColor:YTColor(65, 65, 65)];
         _photoButton.exclusiveTouch = YES;
         
         [self.contentView addSubview:_photoButton];
