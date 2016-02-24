@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "YTOrderCenterModel.h"
+#import "SWTableViewCell.h"
 
-@interface YTOrderCenterCell : UITableViewCell
+@interface YTOrderCenterCell : SWTableViewCell
 + (instancetype)orderCenterCell;
 @property (nonatomic, strong) YTOrderCenterModel *order;
 @end

@@ -28,8 +28,8 @@
     
     // 2.发送一个POST请求
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, url];
-    NSLog(@"%@", newUrl);
-    NSLog(@"%@", [NSDictionary httpWithDictionary:params]);
+//    NSLog(@"%@", newUrl);
+//    NSLog(@"%@", [NSDictionary httpWithDictionary:params]);
     [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           

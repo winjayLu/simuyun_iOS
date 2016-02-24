@@ -20,7 +20,8 @@
 #import "SVProgressHUD.h"
 
 
-@interface YTOrderCenterController () <UITableViewDataSource, UITableViewDelegate, BarDrawerDelegate>
+
+@interface YTOrderCenterController () <UITableViewDataSource, UITableViewDelegate, BarDrawerDelegate, SWTableViewCellDelegate, UIAlertViewDelegate>
 
 /**
  *  记录当前页码
@@ -42,6 +43,12 @@
  *  数据状态提示
  */
 @property (nonatomic, weak) YTDataHintView *hintView;
+
+
+/**
+ *  选中的订单索引
+ */
+@property (nonatomic, strong) NSIndexPath *selectedIndex;
 
 @end
 
@@ -240,20 +247,85 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    static NSString *identifier = @"OrderCenterCell";
-    YTOrderCenterCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-    if (cell==nil) {
-        cell =[YTOrderCenterCell orderCenterCell];
-        cell.layer.cornerRadius = 5;
-        cell.layer.masksToBounds = YES;
-        cell.layer.borderWidth = 1.0f;
-        cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    YTOrderCenterCell *cell = nil;
+    YTOrderCenterModel *order = self.orders[indexPath.section];
+    if (order.status == 20 || order.status == 60) {
+        static NSString *deleteCell = @"deleteOrderCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:deleteCell];
+        if (cell==nil) {
+            cell =[YTOrderCenterCell orderCenterCell];
+            cell.layer.cornerRadius = 5;
+            cell.layer.masksToBounds = YES;
+            cell.layer.borderWidth = 1.0f;
+            cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+            cell.rightUtilityButtons = [self deleteButton];
+            cell.delegate = self;
+        }
+    } else {    // 不可删除的Cell
+        static NSString *detailCell = @"detailOrderCell";
+        cell = [tableView dequeueReusableCellWithIdentifier:detailCell];
+        if (cell==nil) {
+            cell =[YTOrderCenterCell orderCenterCell];
+            cell.layer.cornerRadius = 5;
+            cell.layer.masksToBounds = YES;
+            cell.layer.borderWidth = 1.0f;
+            cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+            cell.rightUtilityButtons = [self detailButton];
+            cell.delegate = self;
+        }
     }
-    cell.order = self.orders[indexPath.section];
+    
+    cell.order = order;
     return cell;
 }
+/**
+ *  删除按钮
+ */
+- (NSArray *)deleteButton
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:YTNavBackground icon:[UIImage imageNamed:@"deletetodo"] title:@"删除"];
+    
+    return rightUtilityButtons;
+}
+/**
+ *  删除按钮
+ */
+- (NSArray *)detailButton
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:YTColor(208, 208, 208) icon:nil title:@"查看详情"];
+    
+    return rightUtilityButtons;
+}
+
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
+{
+    NSLog(@"%zd", index);
+    // 要删除的行
+    NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+    // 获订单模型
+    YTOrderCenterModel *order = self.orders[cellIndexPath.section];
+    if (order.status == 20 || order.status == 60) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"确定要删除此订单么？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        [alert show];
+        self.selectedIndex = cellIndexPath;
+    } else {
+        [self tableView:self.tableView didSelectRowAtIndexPath:cellIndexPath];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // 删除订单
+    if (buttonIndex == 1) {
+        [self deleteOrder];
+    }
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     YTOrderCenterModel *orderModel = self.orders[indexPath.section];
@@ -292,6 +364,21 @@
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
     [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"查看订单详情", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+}
+
+// 发送请求删除订单
+- (void)deleteOrder
+{
+    YTOrderCenterModel *order = self.orders[self.selectedIndex.section];
+    [self.orders removeObjectAtIndex:self.selectedIndex.section];
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:self.selectedIndex.section];
+    [self.tableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"adviser_id"] = [YTAccountTool account].userId;
+    param[@"order_id"] = order.order_id;
+    [YTHttpTool post:YTdeleteOrder params:param success:^(id responseObject) {
+    } failure:^(NSError *error) {
+    }];
 }
 
 #pragma mark - lazy

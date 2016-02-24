@@ -6,11 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "UMShareToEmail@2x.png",
+      "filename" : "e-mail@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "e-mail@3x.png",
       "scale" : "3x"
     }
   ],

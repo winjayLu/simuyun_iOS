@@ -1114,19 +1114,11 @@
 				97270C211C7BF47400C92888 /* BFNavigationBarDrawer.m */,
 				97270C221C7BF47400C92888 /* TimerLoopView.h */,
 				97270C231C7BF47400C92888 /* TimerLoopView.m */,
-				97270C241C7BF47400C92888 /* VPImageCropper */,
 				97270C251C7BF47400C92888 /* YTAutocompletionCell.h */,
 				97270C261C7BF47400C92888 /* YTAutocompletionCell.m */,
 				97270C271C7BF47400C92888 /* YTAutocompletionCell.xib */,
 			);
 			path = Tool;
-			sourceTree = "<group>";
-		};
-		97270C241C7BF47400C92888 /* VPImageCropper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = VPImageCropper;
 			sourceTree = "<group>";
 		};
 		97270C281C7BF47400C92888 /* View */ = {
