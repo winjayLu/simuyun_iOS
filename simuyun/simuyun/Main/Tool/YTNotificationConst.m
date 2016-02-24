@@ -15,7 +15,5 @@ NSString *const YTCancelCustomer = @"YTCancelCustomer";
 
 // 资源信息加载成功
 NSString *const YTResourcesSuccess = @"YTResourcesSuccess";
-// 资源信息加载失败
-NSString *const YTResourcesError = @"YTResourcesError";
 // 视频播放器屏幕发生改变
 NSString *const YTPlayerScreenChange = @"YTPlayerScreenChange";

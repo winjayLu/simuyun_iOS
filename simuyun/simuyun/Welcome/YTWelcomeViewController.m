@@ -29,6 +29,12 @@
  *  底部图片
  */
 @property (weak, nonatomic) IBOutlet UIImageView *bottomImageView;
+
+/** 定时器 */
+@property (nonatomic,strong) NSTimer *timer;
+
+/** 旧的启动图片地址 */
+@property (nonatomic,copy) NSString *oldWelcome;
 @end
 
 @implementation YTWelcomeViewController
@@ -38,21 +44,21 @@
 
     self.bannerImage.contentMode = UIViewContentModeScaleAspectFill;
     self.bottomImageView.contentMode = UIViewContentModeScaleAspectFill;
+     // 先显示上次的图片
+    self.oldWelcome = [CoreArchive strForKey:@"welcomeImage"];
+    if (self.oldWelcome != nil && self.oldWelcome.length != 0) {
+        [self.bannerImage imageWithUrlStr:self.oldWelcome phImage:nil];
+    }
     
     YTResources *resources = [YTResourcesTool resources];
     if (resources != nil) { // 预加载成功
         [self.bannerImage imageWithUrlStr:resources.appWelcomeImg phImage:nil];
-        [self switchViewControllerDuration:3.0];
-    } else {    // 先显示上次的图片
-        NSString *welcomeImage = [CoreArchive strForKey:@"welcomeImage"];
-        if (welcomeImage != nil && welcomeImage.length != 0) {
-            [self.bannerImage imageWithUrlStr:welcomeImage phImage:nil];
-        }
     }
     
     // 注册监听数据加载情况
     [YTCenter addObserver:self selector:@selector(loadSuccess) name:YTResourcesSuccess object:nil];
-    [YTCenter addObserver:self selector:@selector(loadError) name:YTResourcesError object:nil];
+    
+    [self timerOn];
 }
 
 
@@ -63,60 +69,72 @@
 {
     // 下载新的banner图片
     YTResources *resources = [YTResourcesTool resources];
-    [self.bannerImage imageWithUrlStr:resources.appWelcomeImg phImage:nil];
-    [self switchViewControllerDuration:0.5];
-    
+    if (![self.oldWelcome isEqualToString:resources.appWelcomeImg]) {
+        [self.bannerImage imageWithUrlStr:resources.appWelcomeImg phImage:nil];
+    }
     // 保存当前图片地址下次使用
     [CoreArchive setStr:resources.appWelcomeImg key:@"welcomeImage"];
 }
 
-/**
- *  加载失败
- */
-- (void)loadError
-{
-    [self transitionMainVC:[[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]] duration:0.5];
-}
-
-/**
- *  选择控制器
- */
-- (void)switchViewControllerDuration:(double)duration
-{
-    if ([YTAccountTool account]) {
-        [YTAccountTool loginAccount:[YTAccountTool account] result:^(BOOL result) {
-            if (result) {
-                [self transitionMainVC:[[YTTabBarController alloc] init] duration:duration];
-            } else {
-                [self transitionMainVC:[[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]] duration:duration];
-            }
-        }];
-    } else {
-        [self transitionMainVC:[[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]] duration:duration];
-    }
-}
 
 /**
  *  转场
  */
-- (void)transitionMainVC:(UIViewController *)vc duration:(double)duration
+- (void)transitionVC
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        // 获取程序主窗口
-        // 获取根控制器
-        UIWindow *keyWindow = nil;
-        for (UIWindow *window in [UIApplication sharedApplication].windows) {
-            if (window.windowLevel == 0) {
-                keyWindow = window;
-                break;
-            }
+
+    UIViewController *vc = nil;
+    
+    // 判断是否登录过
+    if ([YTAccountTool account]) {
+        vc = [[YTTabBarController alloc] init];
+    } else {
+        vc = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
+    }
+    
+    
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
         }
-        // 如果获取不到直接返回
-        if (keyWindow == nil) return;
-        keyWindow.rootViewController = vc;
-        [keyWindow.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];
-    });
+    }
+    // 如果获取不到直接返回
+    if (keyWindow == nil) return;
+    keyWindow.rootViewController = vc;
+    [keyWindow.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];
+    // 关闭定时器
+    [self timerOff];
 }
+
+/*
+ *  新开一个定时器
+ */
+-(void)timerOn{
+    
+    [self timerOff];
+    
+    if(self.timer!=nil) return;
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(transitionVC) userInfo:nil repeats:YES];
+    
+    //记录
+    self.timer = timer;
+}
+
+/*
+ *  关闭定时器
+ */
+-(void)timerOff{
+    
+    //关闭定时器
+    [self.timer invalidate];
+    
+    //清空属性
+    self.timer = nil;
+}
+
 
 #pragma mark - 准备数据
 - (UIStatusBarStyle)preferredStatusBarStyle

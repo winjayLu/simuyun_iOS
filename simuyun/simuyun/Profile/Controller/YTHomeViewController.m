@@ -104,6 +104,8 @@
     
     // 初始化顶部视图
     [self setupTopView];
+    // 加载本地用户信息
+    self.topView.userInfo = [YTUserInfoTool localUserInfo];
     
     // 初始化底部ScrollView
     [self setupScrollView];
@@ -139,8 +141,6 @@
     // 加载待办事项
     [self loadTodos];
 
-    // 加载本地用户信息
-    self.topView.userInfo = [YTUserInfoTool userInfo];
     [YTCenter postNotificationName:YTUpdateIconImage object:nil];
     
     // 从服务器获取用户信息

@@ -26,6 +26,7 @@
 #import "YTAuthenticationErrorController.h"
 #import "HHAlertView.h"
 #import "YTTabBarController.h"
+#import "CoreArchive.h"
 
 
 
@@ -419,14 +420,18 @@
 
 - (void)sendMail:(NSString *)mail
 {
-    self.sendMailView = nil;
     // 发送请求
+    [SVProgressHUD showWithStatus:@"正在发送" maskType:SVProgressHUDMaskTypeClear];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"email"] = mail;
     params[@"proId"] = self.product.pro_id;
     [YTHttpTool get:YTEmailsharing params:params success:^(id responseObject) {
         YTLog(@"%@", responseObject);
         [SVProgressHUD showSuccessWithStatus:@"发送成功"];
+        // 保存发送成功的Email
+        [CoreArchive setStr:mail key:@"mail"];
+        [self.sendMailView sendSuccess:YES];
+        self.sendMailView = nil;
     } failure:^(NSError *error) {
     }];
     [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"获取详细资料", @"机构" : [YTUserInfoTool userInfo].organizationName}];

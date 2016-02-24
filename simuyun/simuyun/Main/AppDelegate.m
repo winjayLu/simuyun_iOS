@@ -50,10 +50,9 @@
     [YTResourcesTool loadResourcesWithresult:^(BOOL result) {
         if (result == YES) {
             [YTCenter postNotificationName:YTResourcesSuccess object:nil];
-        } else {
-            [YTCenter postNotificationName:YTResourcesError object:nil];
         }
     }];
+    
     
     // 检测是否有推送消息
     [self checkNotification:launchOptions];

@@ -25,4 +25,7 @@
 
 - (instancetype)initWithViewController:(UIViewController *)vc;
 
+- (void)sendSuccess:(BOOL)success;
+
+
 @end

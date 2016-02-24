@@ -8,9 +8,9 @@
 
 #import "YTSenMailView.h"
 #import "UIImage+Extend.h"
-//#import "CoreTFManagerVC.h"
 #import "SVProgressHUD.h"
 #import "YTUserInfoTool.h"
+#import "CoreArchive.h"
 
 @interface YTSenMailView()
 {
@@ -40,9 +40,45 @@
     if (self) {
         //  创建子控件
         [self creatMainShareView:vc];
+        //增加监听，当键盘出现或改变时收出消息
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillShow:)
+                                                     name:UIKeyboardWillShowNotification
+                                                   object:nil];
+        
+        //增加监听，当键退出时收出消息
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillHide:)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
         [self.mailField becomeFirstResponder];
     }
     return self;
+}
+
+//当键盘出现或改变时调用
+- (void)keyboardWillShow:(NSNotification *)aNotification
+{
+    //获取键盘的高度
+    NSDictionary *userInfo = [aNotification userInfo];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    CGFloat shareMenuViewH = keyboardRect.size.height;
+    [UIView animateWithDuration:0.3 animations:^{
+        mainGrayBg.alpha = 1.0;
+        shareMenuView.y = DeviceHight - shareMenuViewH - 263;
+    }];
+}
+#warning 删除无用代码
+//当键退出时调用
+- (void)keyboardWillHide:(NSNotification *)aNotification
+{
+    [UIView animateWithDuration:0.4 animations:^{
+        mainGrayBg.alpha = 0.0;
+        shareMenuView.y = DeviceHight;
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
 }
 
 - (void)creatMainShareView:(UIViewController *)vc
@@ -51,30 +87,15 @@
     [mainGrayBg setImage:[UIImage imageWithColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.2]]];
     
     [mainGrayBg  setUserInteractionEnabled:YES];
-    mainGrayBg.alpha = 0.0;
+    
     [self addSubview:mainGrayBg];
     
     UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(cancelBtnClick:)];
     
     [mainGrayBg  addGestureRecognizer:tapGR];
-    
-    CGFloat shareMenuViewH = 263;
-    
-    shareMenuView = [[UIView alloc]initWithFrame:CGRectMake(0, DeviceHight, DeviceWidth, shareMenuViewH)];
+    shareMenuView = [[UIView alloc]initWithFrame:CGRectMake(0, DeviceHight - 263, DeviceWidth, 263)];
     [self addSubview:shareMenuView];
-    
-    [UIView animateWithDuration:0.3 animations:^{
-//        if ([[UIDevice currentDevice].systemVersion floatValue] >= 9.0) {
-//            shareMenuView.frame =CGRectMake(0,DeviceHight - shareMenuViewH, DeviceWidth,shareMenuViewH);
-//        } else {
-            shareMenuView.frame =CGRectMake(0,DeviceHight - shareMenuViewH - 256, DeviceWidth,shareMenuViewH);
-//        }
-        
-        mainGrayBg.alpha = 1.0;
-        
-    } completion:^(BOOL finished) {
-//        [self.mailField becomeFirstResponder];
-    }];
+
     _whiteBg = [[UIImageView alloc] initWithFrame:shareMenuView.bounds];
     [_whiteBg  setUserInteractionEnabled:YES];
     _whiteBg.backgroundColor = YTColor(246, 246, 246);
@@ -112,14 +133,15 @@
     mailField.keyboardType = UIKeyboardTypeEmailAddress;
     [view addSubview:mailField];
     self.mailField = mailField;
-//    [CoreTFManagerVC installManagerForVC:vc scrollView:nil tfModels:^NSArray *{
-//        TFModel *tfm1=[TFModel modelWithTextFiled:mailField inputView:nil name:@"" insetBottom:140];
-//        return @[tfm1];
-//    }];
     // 获取用户邮箱
-    YTUserInfo *userInfo = [YTUserInfoTool userInfo];
-    if (userInfo != nil && userInfo.email.length > 0) {
-        mailField.text = userInfo.email;
+    NSString *mail = [CoreArchive strForKey:@"mail"];
+    if (mail.length != 0) {
+        mailField.text = mail;
+    } else {
+        YTUserInfo *userInfo = [YTUserInfoTool userInfo];
+        if (userInfo != nil && userInfo.email.length > 0) {
+            mailField.text = userInfo.email;
+        }
     }
     
     // 按钮
@@ -140,15 +162,21 @@
         [SVProgressHUD showErrorWithStatus:@"请输入邮箱地址"];
         return;
     }
-    // 退出键盘
-    for (UIWindow *window in [UIApplication sharedApplication].windows) {
-        if (window.windowLevel == 0) {
-            [window endEditing:YES];
-            break;
-        }
-    }
+
     [self.sendDelegate sendMail:self.mailField.text];
-    [self cancelBtnClick:nil];
+    
+}
+- (void)sendSuccess:(BOOL)success
+{
+    if (success) {
+        [self cancelBtnClick:nil];
+    }
+}
+
+
+- (void)dealloc
+{
+    [YTCenter removeObserver:self];
 }
 
 #pragma mark 取消分享
@@ -161,13 +189,6 @@
             break;
         }
     }
-    
-    [UIView animateWithDuration:0.4 animations:^{
-        shareMenuView.frame =CGRectMake(0, DeviceHight - 20, DeviceHight, 150);
-        mainGrayBg.alpha = 0.0;
-    } completion:^(BOOL finished) {
-        [self removeFromSuperview];
-    }];
 }
 
 
