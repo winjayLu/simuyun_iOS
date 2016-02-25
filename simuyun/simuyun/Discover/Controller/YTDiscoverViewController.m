@@ -170,7 +170,9 @@
     [YTHttpTool get:YTBanner params:params success:^(id responseObject) {
         self.banners = [PPTModel objectArrayWithKeyValuesArray:responseObject];
         // 给banner设置图片
-        self.pptVC.pptModels = self.banners;
+        if (self.banners.count > 0) {
+            self.pptVC.pptModels = self.banners;
+        }
     } failure:^(NSError *error) {
     }];
     

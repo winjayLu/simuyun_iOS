@@ -32,4 +32,11 @@
  */
 @property (nonatomic, weak) id<vedioLikeDelegate> delegate;
 
+
+/**
+ *  视频id
+ *  从产品页播放
+ */
+@property (nonatomic, copy) NSString *videoId;
+
 @end

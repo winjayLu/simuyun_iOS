@@ -27,6 +27,7 @@
 #import "HHAlertView.h"
 #import "YTTabBarController.h"
 #import "CoreArchive.h"
+#import "YTPlayerViewController.h"
 
 
 
@@ -176,12 +177,51 @@
             } else if ([command isEqualToString:@"mobclick"])   // h5事件统计
             {
                 [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : urlComps[2], @"机构" : [YTUserInfoTool userInfo].organizationName}];
+            } else if ([command isEqualToString:@"playVideo"])   // h5事件统计
+            {
+                [self playVedio:urlComps[2]];
+                [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"产品详情播放视频", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             }
         }
         return NO;
     }
     return YES;
 }
+
+/**
+ *  播放视频
+ */
+- (void)playVedio:(NSString *)videoId
+{
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    UIViewController *appRootVC = keyWindow.rootViewController;
+    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+        if (tabBar != nil) {
+            FloatView *floatView = tabBar.floatView;
+            YTPlayerViewController *player = tabBar.playerVc;
+            if (player != nil && [player.vedio.videoId isEqualToString:videoId] ) {
+                tabBar.floatView.boardWindow.hidden = YES;
+                [self presentViewController:player animated:YES completion:nil];
+            } else {
+                [floatView removeFloatView];
+                tabBar.playerVc = nil;
+                tabBar.floatView = nil;
+                YTPlayerViewController *player = [[YTPlayerViewController alloc] init];
+                player.videoId = videoId;
+                [self presentViewController:player animated:YES completion:nil];
+                
+            }
+        }
+    }
+}
+
 
 
 /**
@@ -259,6 +299,7 @@
     }
     [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"认购", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
+
 
 
 
@@ -399,6 +440,8 @@
     }
     [MobClick event:@"share_click" attributes:@{@"内容类别" : @"产品", @"分享途径" : @(tag) ,@"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
+
+
 
 // 获取详细资料
 - (void)DetailClick

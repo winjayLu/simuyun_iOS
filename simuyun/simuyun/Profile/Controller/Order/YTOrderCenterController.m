@@ -318,7 +318,16 @@
         [alert show];
         self.selectedIndex = cellIndexPath;
     } else {
-        [self tableView:self.tableView didSelectRowAtIndexPath:cellIndexPath];
+        [self.selectedCell hideUtilityButtonsAnimated:YES];
+        self.selectedCell.isShow = NO;
+        [self.tableView deselectRowAtIndexPath:cellIndexPath animated:YES];
+        YTOrderCenterModel *order = self.orders[cellIndexPath.section];
+        YTOrderdetailController *detail = [[YTOrderdetailController alloc] init];
+        detail.url = [NSString stringWithFormat:@"%@/order%@&id=%@", YTH5Server, [NSDate stringDate], order.order_id];
+        detail.order = self.orders[cellIndexPath.section];
+        detail.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detail animated:YES];
+        [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"查看订单详情", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     }
 }
 - (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
