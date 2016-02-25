@@ -1172,6 +1172,10 @@
 		97270C661C7BF47E00C92888 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				97270C711C7BF47E00C92888 /* YTProductViewController.h */,
+				97270C721C7BF47E00C92888 /* YTProductViewController.m */,
+				97270C6F1C7BF47E00C92888 /* YTProductdetailController.h */,
+				97270C701C7BF47E00C92888 /* YTProductdetailController.m */,
 				97270C671C7BF47E00C92888 /* YTBuyProductController.h */,
 				97270C681C7BF47E00C92888 /* YTBuyProductController.m */,
 				97270C691C7BF47E00C92888 /* YTBuyProductController.xib */,
@@ -1180,10 +1184,6 @@
 				97270C6C1C7BF47E00C92888 /* YTBuySuccessController.xib */,
 				97270C6D1C7BF47E00C92888 /* YTContentViewController.h */,
 				97270C6E1C7BF47E00C92888 /* YTContentViewController.m */,
-				97270C6F1C7BF47E00C92888 /* YTProductdetailController.h */,
-				97270C701C7BF47E00C92888 /* YTProductdetailController.m */,
-				97270C711C7BF47E00C92888 /* YTProductViewController.h */,
-				97270C721C7BF47E00C92888 /* YTProductViewController.m */,
 				97270C731C7BF47E00C92888 /* YTReportContentController.h */,
 				97270C741C7BF47E00C92888 /* YTReportContentController.m */,
 				97270C751C7BF47E00C92888 /* YTReportViewController.h */,

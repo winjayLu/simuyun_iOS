@@ -26,18 +26,43 @@
 #import "NSString+JsonCategory.h"
 #import "NSObject+JsonCategory.h"
 #import "CoreArchive.h"
+#import "CorePagesView.h"
+#import "CorePageModel.h"
+#import "AFNetworking.h"
+#import "CAAnimation+PagesViewBarShake.h"
 
 
-@interface YTProductViewController () <UISearchBarDelegate>
+@interface YTProductViewController ()
 
 
 @property (nonatomic, strong) NSMutableArray *products;
 
+/**
+ *  所有产品类型
+ */
+@property (nonatomic, strong) NSArray *proTypes;
+
 
 /**
- *  搜索框
+ *  选中的按钮
  */
-@property (nonatomic, weak) UISearchBar *search;
+@property (nonatomic, weak) UIButton *selectedButton;
+
+/**
+ *  滚动视图
+ */
+@property (nonatomic, weak) UIScrollView *scroll;
+
+/**
+ *  滚动线条
+ */
+@property (nonatomic, weak) UIView *lineView;
+
+/**
+ *  类型
+ */
+@property (nonatomic, assign) NSInteger series;
+
 
 @end
 
@@ -58,15 +83,137 @@
     // 上拉加载
     self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreProduct)];
     
+    // 加载产品分类
+    [self loadProductTypes];
     
-    UISearchBar *search = [[UISearchBar alloc] init];
-    search.frame = CGRectMake(0, 0, DeviceWidth, 44);
-    search.placeholder = @"产品搜索";
-    search.delegate = self;
-    self.tableView.tableHeaderView = search;
-    self.search = search;
+    // 初始化顶部菜单
+    [self setupTopView];
 
 }
+/**
+ *  初始化顶部菜单
+ *
+ */
+- (void)setupTopView
+{
+    CGFloat topH = 35;
+    // 顶部视图
+    UIView *topView = [[UIView alloc] init];
+    topView.frame = CGRectMake(0, 0, DeviceWidth, topH);
+    topView.backgroundColor = [UIColor whiteColor];
+    self.tableView.tableHeaderView = topView;
+    
+    // 滑动产品分类
+    UIScrollView *scroll = [[UIScrollView alloc] init];
+    scroll.frame = CGRectMake(0, 0, DeviceWidth - 41, topH);
+    scroll.backgroundColor = [UIColor clearColor];
+    [scroll setShowsHorizontalScrollIndicator:NO];
+    [topView addSubview:scroll];
+    self.scroll = scroll;
+    
+    // 产品分类按钮
+    CGFloat btnW = 51;
+    for (int i = 0; i < self.proTypes.count; i++) {
+        UIButton *button = [[UIButton alloc] init];
+        button.tag = i;
+        button.backgroundColor = [UIColor clearColor];
+        [button.titleLabel setFont:[UIFont systemFontOfSize:13]];
+        [button setTitleColor:YTColor(102, 102, 102) forState:UIControlStateNormal];
+        [button setTitleColor:YTNavBackground forState:UIControlStateSelected];
+        button.frame = CGRectMake(btnW * i, 0, btnW, topH);
+        [button addTarget:self action:@selector(typeClick:) forControlEvents:UIControlEventTouchUpInside];
+        [button setTitle:self.proTypes[i] forState:UIControlStateNormal];
+        if (i == 0) {
+            button.selected = YES;
+            self.selectedButton = button;
+        }
+        [scroll addSubview:button];
+    }
+    scroll.contentSize = CGSizeMake(btnW * self.proTypes.count, topH);
+    
+    // 滚动线条
+    UIView *lineView = [[UIView alloc] init];
+    lineView.backgroundColor = YTNavBackground;
+    lineView.frame = CGRectMake(0, topH - 2, btnW, 2);
+    [scroll addSubview:lineView];
+    self.lineView = lineView;
+    
+    // 分割线
+    CGFloat lineH = 25;
+    UIImageView *line = [[UIImageView alloc] init];
+    line.image = [UIImage imageNamed:@"proshuxian"];
+    line.frame = CGRectMake(CGRectGetMaxX(scroll.frame), (topH - lineH) * 0.5, 1, lineH);
+    [topView addSubview:line];
+    
+    // 搜索按钮
+    UIButton *button = [[UIButton alloc] init];
+    button.frame = CGRectMake(CGRectGetMaxX(line.frame), 0, 40, topH);
+    [button setBackgroundImage:[UIImage imageNamed:@"prosearch1"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(searchClick) forControlEvents:UIControlEventTouchUpInside];
+    [topView addSubview:button];
+}
+
+- (void)typeClick:(UIButton *)button
+{
+    // 改变按钮状态
+    self.selectedButton.selected = NO;
+    [self.selectedButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
+    button.selected = YES;
+    [button.titleLabel setFont:[UIFont systemFontOfSize:16]];
+    self.selectedButton = button;
+    // 调整按钮位置
+    [self scrollViewFitContentOffsetWithBtnSelected:button];
+    
+    // 获取新数据
+    [self loadNewDataWithType:button.titleLabel.text];
+}
+
+/**
+ *  调整选中按钮的位置
+ */
+-(void)scrollViewFitContentOffsetWithBtnSelected:(UIButton *)button{
+    //取出当前btn的中点
+    CGFloat centerX = button.center.x;
+    
+    //计算最左侧的x值
+    CGFloat leftX=centerX - self.scroll.width * 0.5f;
+    
+    //最左侧处理
+    if(leftX<0) leftX=0;
+    
+    //最右侧处理
+    CGFloat maxOffsetX=self.scroll.contentSize.width - self.scroll.width;
+    if(leftX>=maxOffsetX) leftX=maxOffsetX;
+    //构建contentOffset
+    CGPoint offset=CGPointMake(leftX, 0);
+    
+    // 调整滚动条位置
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        self.scroll.contentOffset=offset;
+        self.lineView.x = 51 * button.tag;
+    } completion:^(BOOL finished) {
+        [self.lineView.layer addAnimation:[CAAnimation shake] forKey:@"shake"];
+    }];
+}
+
+
+- (void)loadProductTypes
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    // 2.发送一个GET请求
+    
+    [mgr GET:@"http://www.simuyun.com/peyunupload/label/productTypes.json" parameters:nil
+     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+         self.proTypes = [NSString objectArrayWithKeyValuesArray:responseObject];
+         // 存储获取到的数据
+         NSString *oldSearchProduct = [responseObject JsonToString];
+         [CoreArchive setStr:oldSearchProduct key:@"proTypes"];
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+     }];
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -75,32 +222,16 @@
     [self loadProduct];
 }
 
-#pragma mark - SearchBarDelegate
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+#pragma mark - Search
+
+- (void)searchClick
 {
-//    // 隐藏悬浮按钮
-//    UIWindow *keyWindow = nil;
-//    for (UIWindow *window in [UIApplication sharedApplication].windows) {
-//        if (window.windowLevel == 0) {
-//            keyWindow = window;
-//            break;
-//        }
-//    }
-//    UIViewController *appRootVC = keyWindow.rootViewController;
-//    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
-//        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
-//        tabBar.floatView.boardWindow.hidden = YES;
-//    }
     YTSearchViewController *searchVc = [[YTSearchViewController alloc] init];
     searchVc.navigationItem.hidesBackButton = YES;
     searchVc.hidesBottomBarWhenPushed = YES;
-//    YTNavigationController *nav = [[YTNavigationController alloc] initWithRootViewController:searchVc];
-//    [self presentViewController:nav animated:NO completion:nil];
     [self.navigationController pushViewController:searchVc animated:NO];
     [MobClick event:@"proSearch_click" attributes:@{@"按钮" : @"搜索框", @"机构" : [YTUserInfoTool userInfo].organizationName}];
-    return NO;
 }
-
 
 
 #pragma mark - Table view data source
@@ -188,12 +319,39 @@
 
 
 #pragma mark - 获取数据
+- (void)loadNewDataWithType:(NSString *)type
+{
+    if ([type isEqualToString:@"泰山"]) {
+        self.series = 1;
+    } else if ([type isEqualToString:@"恒山"]){
+        self.series = 3;
+    } else if ([type isEqualToString:@"嵩山"]){
+        self.series = 4;
+    } else if ([type isEqualToString:@"昆仑山"]){
+        self.series = 9;
+    } else if ([type isEqualToString:@"黄河"]){
+        self.series = 6;
+    } else if ([type isEqualToString:@"长江"]){
+        self.series = 5;
+    } else if ([type isEqualToString:@"澜沧江"]){
+        self.series = 7;
+    } else if ([type isEqualToString:@"亚马逊"]){
+        self.series = 8;
+    } else if ([type isEqualToString:@"全部"]){
+        self.series = 0;
+    }
+    [self loadProduct];
+}
+
 - (void)loadProduct
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
     param[@"offset"] = @"0";
     param[@"limit"] = @"20";
+    if (self.series != 0) {
+        param[@"series"] = @(self.series);
+    }
     [YTHttpTool get:YTProductList params:param
     success:^(NSDictionary *responseObject) {
         [self.tableView.footer resetNoMoreData];
@@ -203,8 +361,11 @@
             [self.tableView.footer noticeNoMoreData];
         }
         // 存储获取到的数据
-        NSString *oldProducts = [responseObject JsonToString];
-        [CoreArchive setStr:oldProducts key:@"oldProducts"];
+        if (self.series == 0)
+        {
+            NSString *oldProducts = [responseObject JsonToString];
+            [CoreArchive setStr:oldProducts key:@"oldProducts"];
+        }
         // 刷新表格
         [self.tableView reloadData];
         // 结束刷新状态
@@ -224,6 +385,9 @@
     param[@"uid"] = [YTAccountTool account].userId;
     param[@"offset"] = [NSString stringWithFormat:@"%zd", self.products.count];
     param[@"limit"] = @"20";
+    if (self.series != 0) {
+        param[@"series"] = @(self.series);
+    }
     [YTHttpTool get:YTProductList params:param success:^(id responseObject) {
         [self.tableView.footer endRefreshing];
         if([(NSArray *)responseObject count] == 0)
@@ -251,6 +415,21 @@
         }
     }
     return _products;
+}
+
+
+- (NSArray *)proTypes
+{
+    if (!_proTypes) {
+        // 获取历史数据
+        NSString *oldProducts = [CoreArchive strForKey:@"proTypes"];
+        if (oldProducts != nil) {
+            _proTypes = [NSString objectArrayWithKeyValuesArray:[oldProducts JsonToValue]];
+        } else {
+            _proTypes = [NSArray arrayWithObjects:@"全部", @"黄河", @"嵩山", @"泰山", @"恒山", @"长江", @"亚马逊", @"昆仑山", @"澜沧江", nil];
+        }
+    }
+    return _proTypes;
 }
 
 

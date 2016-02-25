@@ -20,16 +20,16 @@
 //#endif
 
 // 开发环境213
-//#define YTServer @"http://192.168.17.213:8080/api/app/"
-//#define YTH5Server @"http://192.168.17.213"
-//#define UmengAppKey @"545867defd98c5f23a0021da"
-//#define TXAppKey @"125189226"
+#define YTServer @"http://192.168.17.213:8080/api/app/"
+#define YTH5Server @"http://192.168.17.213"
+#define UmengAppKey @"545867defd98c5f23a0021da"
+#define TXAppKey @"125189226"
 
 // 测试环境212
-#define YTServer @"http://192.168.17.212:6060/api/app/"
-#define YTH5Server @"http://192.168.17.212"
-#define UmengAppKey @"545867defd98c5f23a0021"
-#define TXAppKey @"125189226"
+//#define YTServer @"http://192.168.17.212:6060/api/app/"
+//#define YTH5Server @"http://192.168.17.212"
+//#define UmengAppKey @"545867defd98c5f23a0021"
+//#define TXAppKey @"125189226"
 
 // 开发环境外网地址
 //212端口号18080
