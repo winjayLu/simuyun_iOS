@@ -20,7 +20,6 @@
 #import "SVProgressHUD.h"
 
 
-
 @interface YTOrderCenterController () <UITableViewDataSource, UITableViewDelegate, BarDrawerDelegate, SWTableViewCellDelegate, UIAlertViewDelegate>
 
 /**
@@ -49,6 +48,11 @@
  *  选中的订单索引
  */
 @property (nonatomic, strong) NSIndexPath *selectedIndex;
+
+/**
+ *  保存上次侧滑的Cell
+ */
+@property (nonatomic, weak) SWTableViewCell *selectedCell;
 
 @end
 
@@ -317,6 +321,20 @@
         [self tableView:self.tableView didSelectRowAtIndexPath:cellIndexPath];
     }
 }
+- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
+{
+
+    return YES;
+}
+
+- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
+{
+    if (!self.selectedCell.isShow && self.selectedCell != cell) {
+        self.selectedCell = cell;
+        self.selectedCell.isShow = YES;
+    }
+    return YES;
+}
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -356,6 +374,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.selectedCell.isShow) {
+        [self.selectedCell hideUtilityButtonsAnimated:YES];
+        self.selectedCell.isShow = NO;
+        return;
+    }
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YTOrderCenterModel *order = self.orders[indexPath.section];
     YTOrderdetailController *detail = [[YTOrderdetailController alloc] init];

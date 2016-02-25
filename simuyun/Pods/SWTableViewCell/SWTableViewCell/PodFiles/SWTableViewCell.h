@@ -36,8 +36,12 @@ typedef NS_ENUM(NSInteger, SWCellState)
 
 @interface SWTableViewCell : UITableViewCell
 
+
+
 @property (nonatomic, copy) NSArray *leftUtilityButtons;
 @property (nonatomic, copy) NSArray *rightUtilityButtons;
+
+@property (nonatomic, assign) BOOL isShow;
 
 @property (nonatomic, weak) id <SWTableViewCellDelegate> delegate;
 

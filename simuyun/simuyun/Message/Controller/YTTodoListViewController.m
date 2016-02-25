@@ -30,6 +30,11 @@
  */
 @property (nonatomic, weak) YTDataHintView *hintView;
 
+/**
+ *  保存上次侧滑的Cell
+ */
+@property (nonatomic, weak) SWTableViewCell *selectedCell;
+
 @end
 
 @implementation YTTodoListViewController
@@ -164,6 +169,11 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.selectedCell.isShow) {
+        [self.selectedCell hideUtilityButtonsAnimated:YES];
+        self.selectedCell.isShow = NO;
+        return;
+    }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YTMessageModel *message = self.messages[indexPath.section];
     YTNormalWebController *normal = [YTNormalWebController webWithTitle:[NSString titleWithCategoryCode:message.category2Code] url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
@@ -180,6 +190,21 @@
     [rightUtilityButtons sw_addUtilityButtonWithColor:YTNavBackground icon:[UIImage imageNamed:@"deletetodo"] title:@"删除"];
     
     return rightUtilityButtons;
+}
+
+- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
+{
+    
+    return YES;
+}
+
+- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
+{
+    if (!self.selectedCell.isShow && self.selectedCell != cell) {
+        self.selectedCell = cell;
+        self.selectedCell.isShow = YES;
+    }
+    return YES;
 }
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index

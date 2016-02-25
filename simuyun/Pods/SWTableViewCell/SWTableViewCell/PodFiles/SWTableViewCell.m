@@ -347,13 +347,13 @@ static NSString * const kTableViewPanState = @"state";
 {
     // Work around stupid background-destroying override magic that UITableView seems to perform on contained buttons.
     
-    [self.leftUtilityButtonsView pushBackgroundColors];
+//    [self.leftUtilityButtonsView pushBackgroundColors];
     [self.rightUtilityButtonsView pushBackgroundColors];
     
-    [super setSelected:selected animated:animated];
-    
-    [self.leftUtilityButtonsView popBackgroundColors];
-    [self.rightUtilityButtonsView popBackgroundColors];
+//    [super setSelected:selected animated:animated];
+//    
+//    [self.leftUtilityButtonsView popBackgroundColors];
+//    [self.rightUtilityButtonsView popBackgroundColors];
 }
 
 - (void)didTransitionToState:(UITableViewCellStateMask)state {
