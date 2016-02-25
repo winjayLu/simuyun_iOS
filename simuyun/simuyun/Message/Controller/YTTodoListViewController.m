@@ -216,8 +216,6 @@
     YTMessageModel *message =  self.messages[cellIndexPath.section];
     NSString *messageId = message.messageId;
     [_messages removeObjectAtIndex:cellIndexPath.section];
-//    [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath]
-//                withRowAnimation:UITableViewRowAnimationAutomatic];
     NSIndexSet *s = [NSIndexSet indexSetWithIndex:cellIndexPath.section];
     [self.tableView deleteSections:s withRowAnimation:UITableViewRowAnimationAutomatic];
     

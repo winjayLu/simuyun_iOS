@@ -20,6 +20,9 @@
 #import "YTInformation.h"
 #import "YTNormalWebController.h"
 #import "YTUserInfoTool.h"
+#import "NSString+JsonCategory.h"
+#import "NSObject+JsonCategory.h"
+#import "CoreArchive.h"
 
 
 
@@ -89,6 +92,9 @@
     [self setupStock];
     // 初始化咨讯
     [self setupConsult];
+    // 设置数据
+    self.consult.newests = self.newests;
+    [self updateNewsFrame];
     
 }
 
@@ -219,18 +225,29 @@
     [self loadStock];
     [YTHttpTool get:YTNewes params:nil success:^(id responseObject) {
         self.newests = [YTInformation objectArrayWithKeyValuesArray:responseObject];
+        // 存储历史数据
+        if (self.newests.count > 0) {
+            NSString *oldInformations = [responseObject JsonToString];
+            [CoreArchive setStr:oldInformations key:@"oldInformations"];
+        }
         // 设置数据
         self.consult.newests = self.newests;
-        // 调整高度
-        CGFloat headerH = 33;
-        CGFloat cellH = 93;
-        CGFloat consultH = headerH + cellH * self.newests.count;
-        self.consult.height = consultH;
-        [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.consult.frame) + maginWidth * 2)];
+        [self updateNewsFrame];
         [((UIScrollView *)self.view).header endRefreshing];
     } failure:^(NSError *error) {
         [((UIScrollView *)self.view).header endRefreshing];
     }];
+}
+
+// 更新frame
+- (void)updateNewsFrame
+{
+    // 调整高度
+    CGFloat headerH = 33;
+    CGFloat cellH = 93;
+    CGFloat consultH = headerH + cellH * self.newests.count;
+    self.consult.height = consultH;
+    [(UIScrollView *)self.view setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.consult.frame) + maginWidth * 2)];
 }
 
 /**
@@ -332,15 +349,13 @@
 - (NSArray *)newests
 {
     if (!_newests) {
-        NSMutableArray *temp = [NSMutableArray array];
-        for (int i = 0; i < 2; i++) {
-            YTInformation *information = [[YTInformation alloc] init];
-            information.title = @"欢迎来到盈泰财富云";
-            information.summary = @"我们坚持B2B模式，服务于财富管理机构和资产管理机构。我们坚持从金融走向互联网，专注于“互联网+”财富管理。我们坚持以市场化的机制，提供体制化、平台化的强力支撑。";
-            information.date = @"今天";
-            [temp addObject:information];
+        // 获取历史数据
+        NSString *oldInformations = [CoreArchive strForKey:@"oldInformations"];
+        if (oldInformations != nil) {
+            _newests = [YTInformation objectArrayWithKeyValuesArray:[oldInformations JsonToValue]];
+        } else {
+            _newests = [NSArray array];
         }
-        _newests = [NSArray arrayWithArray:temp];
     }
     return _newests;
 }

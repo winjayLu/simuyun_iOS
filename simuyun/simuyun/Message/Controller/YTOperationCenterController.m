@@ -17,6 +17,10 @@
 #import "YTUserInfoTool.h"
 #import "NSString+Extend.h"
 #import "YTDataHintView.h"
+#import "NSString+JsonCategory.h"
+#import "NSObject+JsonCategory.h"
+
+// 运营公告
 
 @interface YTOperationCenterController ()
 
@@ -37,9 +41,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 初始化提醒视图
-    [self setupHintView];
-    
     self.tableView.backgroundColor = YTGrayBackground;
     self.tableView.contentInset = UIEdgeInsetsMake(-34, 0, 55, 0);
     
@@ -47,6 +48,11 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewChat)];
+    
+    // 刷新表格
+    [self.tableView reloadData];
+    
+    
     // 马上进入刷新状态
     [self.tableView.header beginRefreshing];
     
@@ -86,7 +92,13 @@
     param[@"pageNo"] = @(self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         self.messages = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
+        // 存储时间
         [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"timestampCategory4"];
+        // 存储获取到的数据
+        if (self.messages.count >0) {
+            NSString *oldOperation = [responseObject JsonToString];
+            [CoreArchive setStr:oldOperation key:@"oldOperation"];
+        }
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
         [self.hintView changeContentTypeWith:self.messages];
@@ -177,7 +189,16 @@
 - (NSMutableArray *)messages
 {
     if (!_messages) {
-        _messages = [[NSMutableArray alloc] init];
+        // 获取历史数据
+        NSString *oldOperation = [CoreArchive strForKey:@"oldOperation"];
+        if (oldOperation != nil) {
+            ;
+            _messages = [YTMessageModel objectArrayWithKeyValuesArray:[oldOperation JsonToValue][@"messageList"]];
+        } else {
+            _messages = [[NSMutableArray alloc] init];
+            // 初始化提醒视图
+            [self setupHintView];
+        }
     }
     return _messages;
 }

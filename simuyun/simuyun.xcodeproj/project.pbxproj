@@ -509,8 +509,8 @@
 		97270CFC1C7BF49500C92888 /* YTProductNewsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTProductNewsController.m; sourceTree = "<group>"; };
 		97270CFD1C7BF49500C92888 /* YTSystemCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSystemCenterController.h; sourceTree = "<group>"; };
 		97270CFE1C7BF49500C92888 /* YTSystemCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSystemCenterController.m; sourceTree = "<group>"; };
-		97270CFF1C7BF49500C92888 /* YTTodoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTTodoListViewController.h; sourceTree = "<group>"; };
-		97270D001C7BF49500C92888 /* YTTodoListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTTodoListViewController.m; sourceTree = "<group>"; };
+		97270CFF1C7BF49500C92888 /* YTTodoListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YTTodoListViewController.h; path = ../../../Message/Controller/YTTodoListViewController.h; sourceTree = "<group>"; };
+		97270D001C7BF49500C92888 /* YTTodoListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YTTodoListViewController.m; path = ../../../Message/Controller/YTTodoListViewController.m; sourceTree = "<group>"; };
 		97270D021C7BF49500C92888 /* YTMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTMessageModel.h; sourceTree = "<group>"; };
 		97270D031C7BF49500C92888 /* YTMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMessageModel.m; sourceTree = "<group>"; };
 		97270D041C7BF49500C92888 /* YTServiceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTServiceModel.h; sourceTree = "<group>"; };
@@ -1085,6 +1085,8 @@
 		97270C0C1C7BF47400C92888 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				97270CFF1C7BF49500C92888 /* YTTodoListViewController.h */,
+				97270D001C7BF49500C92888 /* YTTodoListViewController.m */,
 				97270C0D1C7BF47400C92888 /* YTAboutViewController.h */,
 				97270C0E1C7BF47400C92888 /* YTAboutViewController.m */,
 				97270C0F1C7BF47400C92888 /* YTAboutViewController.xib */,
@@ -1321,18 +1323,16 @@
 		97270CF41C7BF49500C92888 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				97270CF51C7BF49500C92888 /* YTCloudObserveController.h */,
-				97270CF61C7BF49500C92888 /* YTCloudObserveController.m */,
 				97270CF71C7BF49500C92888 /* YTMessageViewController.h */,
 				97270CF81C7BF49500C92888 /* YTMessageViewController.m */,
+				97270CF51C7BF49500C92888 /* YTCloudObserveController.h */,
+				97270CF61C7BF49500C92888 /* YTCloudObserveController.m */,
 				97270CF91C7BF49500C92888 /* YTOperationCenterController.h */,
 				97270CFA1C7BF49500C92888 /* YTOperationCenterController.m */,
 				97270CFB1C7BF49500C92888 /* YTProductNewsController.h */,
 				97270CFC1C7BF49500C92888 /* YTProductNewsController.m */,
 				97270CFD1C7BF49500C92888 /* YTSystemCenterController.h */,
 				97270CFE1C7BF49500C92888 /* YTSystemCenterController.m */,
-				97270CFF1C7BF49500C92888 /* YTTodoListViewController.h */,
-				97270D001C7BF49500C92888 /* YTTodoListViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

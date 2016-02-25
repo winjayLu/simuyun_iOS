@@ -17,6 +17,10 @@
 #import "YTUserInfoTool.h"
 #import "NSString+Extend.h"
 #import "YTDataHintView.h"
+#import "NSString+JsonCategory.h"
+#import "NSObject+JsonCategory.h"
+
+// 产品动态
 
 @interface YTProductNewsController ()
 
@@ -37,8 +41,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 初始化提醒视图
-    [self setupHintView];
     
     self.tableView.backgroundColor = YTGrayBackground;
     self.tableView.contentInset = UIEdgeInsetsMake(-34, 0, 55, 0);
@@ -47,6 +49,11 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewChat)];
+    
+    // 刷新表格
+    [self.tableView reloadData];
+    
+    
     // 马上进入刷新状态
     [self.tableView.header beginRefreshing];
     
@@ -77,7 +84,7 @@
 // 加载新数据
 - (void)loadNewChat
 {
-    [self.hintView switchContentTypeWIthType:contentTypeLoading];
+//    [self.hintView switchContentTypeWIthType:contentTypeLoading];
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
         param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"category"] = @2;
@@ -86,7 +93,13 @@
     param[@"pageNo"] = @(self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         self.messages = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
+        // 存储时间
         [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"timestampCategory2"];
+        // 存储获取到的数据
+        if (self.messages.count >0) {
+            NSString *oldProductNews = [responseObject JsonToString];
+            [CoreArchive setStr:oldProductNews key:@"oldProductNews"];
+        }
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
         [self.hintView changeContentTypeWith:self.messages];
@@ -174,7 +187,15 @@
 - (NSMutableArray *)messages
 {
     if (!_messages) {
-        _messages = [[NSMutableArray alloc] init];
+        // 获取历史数据
+        NSString *oldProductNews = [CoreArchive strForKey:@"oldProductNews"];
+        if (oldProductNews != nil) {
+            _messages = [YTMessageModel objectArrayWithKeyValuesArray:[oldProductNews JsonToValue][@"messageList"]];
+        } else {
+            _messages = [[NSMutableArray alloc] init];
+            // 初始化提醒视图
+            [self setupHintView];
+        }
     }
     return _messages;
 }

@@ -6,7 +6,7 @@
 //  Copyright © 2015年 YTWealth. All rights reserved.
 //
 
-// 消息
+// 客服消息
 
 #import "YTCloudObserveController.h"
 #import "YTCustomerServiceCell.h"
@@ -19,6 +19,8 @@
 #import "YTUserInfoTool.h"
 #import "YTDataHintView.h"
 #import "MJRefresh.h"
+#import "NSString+JsonCategory.h"
+#import "NSObject+JsonCategory.h"
 
 
 @interface YTCloudObserveController ()
@@ -45,12 +47,15 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 禁用tableView滚动
     self.tableView.scrollEnabled =NO;
+    
+    // 刷新表格
+    [self.tableView reloadData];
+    
     [self loadNewChat];
     
     // 监听客服消息数字变化
     [YTCenter addObserver:self selector:@selector(loadNewChat) name:YTUpdateChatContent object:nil];
-    // 初始化提醒视图
-    [self setupHintView];
+
     
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewChat)];
     
@@ -80,6 +85,10 @@
         YTServiceModel * service =[YTServiceModel objectWithKeyValues:responseObject];
         [self.services removeAllObjects];
         [self.services addObject:service];
+        // 存储获取到的数据
+        NSString *oldServices = [responseObject JsonToString];
+        [CoreArchive setStr:oldServices key:@"oldServices"];
+        // 存储时间
         [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"timestampCategory0"];
         [self.tableView reloadData];
         [self.hintView changeContentTypeWith:self.services];
@@ -169,16 +178,24 @@
 }
 
 
-
-
 #pragma mark - lazy
 
 - (NSMutableArray *)services
 {
     if (!_services) {
-        _services = [[NSMutableArray alloc] init];
+        // 获取历史数据
+        NSString *oldServices = [CoreArchive strForKey:@"oldServices"];
+        if (oldServices != nil) {
+            _services = [[NSMutableArray alloc] init];
+            [_services addObject:[YTServiceModel objectWithKeyValues:[oldServices JsonToValue]]];
+        } else {
+            _services = [[NSMutableArray alloc] init];
+            // 初始化提醒视图
+            [self setupHintView];
+        }
     }
     return _services;
 }
+
 
 @end

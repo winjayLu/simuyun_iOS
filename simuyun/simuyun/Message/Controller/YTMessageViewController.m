@@ -101,12 +101,10 @@
         YTProductNewsController *tvc3 = [[YTProductNewsController alloc] init];
         YTSystemCenterController *tvc4 = [[YTSystemCenterController alloc] init];
         
-        
-        CorePageModel *model1=[CorePageModel model:tvc1 pageBarName:@"消息"];
-        CorePageModel *model2=[CorePageModel model:tvc2 pageBarName:@"运营公告"];
-        CorePageModel *model3=[CorePageModel model:tvc3 pageBarName:@"产品动态"];
-        CorePageModel *model4=[CorePageModel model:tvc4 pageBarName:@"系统通知"];
-        
+        CorePageModel *model1=[CorePageModel model:tvc2 pageBarName:@"运营公告"];
+        CorePageModel *model2=[CorePageModel model:tvc3 pageBarName:@"产品动态"];
+        CorePageModel *model3=[CorePageModel model:tvc4 pageBarName:@"运营喜报"];
+        CorePageModel *model4=[CorePageModel model:tvc1 pageBarName:@"客服消息"];
         NSArray *pageModels=@[model1, model2, model3,model4];
         
         

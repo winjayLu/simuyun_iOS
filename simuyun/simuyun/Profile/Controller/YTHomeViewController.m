@@ -45,6 +45,9 @@
 #import "YTAuthenticationViewController.h"
 #import "YTAuthenticationStatusController.h"
 #import "YTAuthenticationErrorController.h"
+#import "NSString+JsonCategory.h"
+#import "NSObject+JsonCategory.h"
+#import "CoreArchive.h"
 
 #define magin 3
 
@@ -437,6 +440,8 @@
         if (array.count > 0) {
             self.todos = array;
             [self updateTodos];
+            NSString *oldHomeTodo = [responseObject JsonToString];
+            [CoreArchive setStr:oldHomeTodo key:@"oldHomeTodo"];
         }
     } failure:^(NSError *error) {
     }];
@@ -847,10 +852,17 @@
 - (NSMutableArray *)todos
 {
     if (!_todos) {
-        _todos = [[NSMutableArray alloc] init];
-        YTMessageModel *message = [[YTMessageModel alloc] init];
-        message.summary = @"您还没有待办事项，快去认购产品吧！";
-        [_todos addObject:message];
+        // 获取历史数据
+        NSString *oldHomeTodo = [CoreArchive strForKey:@"oldHomeTodo"];
+        if (oldHomeTodo != nil) {
+            _todos = [YTMessageModel objectArrayWithKeyValuesArray:[oldHomeTodo JsonToValue][@"messageList"]];
+            [self updateTodos];
+        } else {
+            _todos = [[NSMutableArray alloc] init];
+            YTMessageModel *message = [[YTMessageModel alloc] init];
+            message.summary = @"您还没有待办事项，快去认购产品吧！";
+            [_todos addObject:message];
+        }
     }
     return _todos;
 }
