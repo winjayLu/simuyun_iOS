@@ -348,7 +348,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
     param[@"offset"] = @"0";
-    param[@"limit"] = @"20";
+    param[@"limit"] = @"8";
     if (self.series != 0) {
         param[@"series"] = @(self.series);
     }
@@ -356,7 +356,7 @@
     success:^(NSDictionary *responseObject) {
         [self.tableView.footer resetNoMoreData];
         self.products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
-        if([ self.products count] < 20)
+        if([ self.products count] < 8)
         {
             [self.tableView.footer noticeNoMoreData];
         }
@@ -384,7 +384,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
     param[@"offset"] = [NSString stringWithFormat:@"%zd", self.products.count];
-    param[@"limit"] = @"20";
+    param[@"limit"] = @"8";
     if (self.series != 0) {
         param[@"series"] = @(self.series);
     }

@@ -67,7 +67,7 @@
 - (void)setTodoNum{
     // 消息数量
     YTMessageNum *messageNum = [YTMessageNumTool messageNum];
-    int todoNum = messageNum.TODO_LIST;
+    int todoNum = messageNum.unreadTodoNum;
     if (todoNum > 0) {
         self.todoNumBtn.hidden = NO;
         if (todoNum > 99) {
@@ -236,7 +236,7 @@
     
     // 修改todo数量
     YTMessageNum *messageNum = [YTMessageNumTool messageNum];
-    messageNum.TODO_LIST -= 1;
+    messageNum.unreadTodoNum -= 1;
     [YTMessageNumTool save:messageNum];
     [self setTodoNum];
 }

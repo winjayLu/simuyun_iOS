@@ -75,7 +75,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"category"] = @"2";
     params[@"offset"] = @"0";
-    params[@"limit"] = @"20";
+    params[@"limit"] = @"8";
     
     [YTHttpTool get:YTInformations params:params success:^(id responseObject) {
         self.informations = [YTInformation objectArrayWithKeyValuesArray:responseObject];
@@ -93,7 +93,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"category"] = @"2";
     params[@"offset"] = @(self.informations.count);
-    params[@"limit"] = @"20";
+    params[@"limit"] = @"8";
     
     [YTHttpTool get:YTInformations params:params success:^(id responseObject) {
         [self.informations addObjectsFromArray: [YTInformation objectArrayWithKeyValuesArray:responseObject]];

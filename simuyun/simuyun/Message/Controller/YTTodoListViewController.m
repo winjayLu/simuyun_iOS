@@ -237,7 +237,7 @@
     }];
     // 修改todo数量
     YTMessageNum *messageNum = [YTMessageNumTool messageNum];
-    messageNum.TODO_LIST -= 1;
+    messageNum.unreadTodoNum -= 1;
     [YTMessageNumTool save:messageNum];
 }
 

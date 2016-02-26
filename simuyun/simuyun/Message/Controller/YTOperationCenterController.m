@@ -87,7 +87,7 @@
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
     param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"category"] = @4;
-    param[@"pagesize"] = @20;
+    param[@"pagesize"] = @8;
     self.pageNo = 1;
     param[@"pageNo"] = @(self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
@@ -114,7 +114,7 @@
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
     param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"category"] = @4;
-    param[@"pagesize"] = @20;
+    param[@"pagesize"] = @8;
     param[@"pageNo"] = @(++self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         [self.messages addObjectsFromArray:[YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]]];

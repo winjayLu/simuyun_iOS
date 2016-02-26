@@ -166,7 +166,8 @@
     
     
     YTMessageNum *num = [YTMessageNumTool messageNum];
-    num.CHAT_CONTENT = 0;
+    num.unreadTalkNum = 0;
+    [YTMessageNumTool save:num];
     [self.tableView reloadData];
     
 }

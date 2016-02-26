@@ -55,11 +55,6 @@
 @property (nonatomic, strong) NSArray *stocks;
 
 /**
- *  banner轮播图
- */
-@property (nonatomic, strong) NSArray *banners;
-
-/**
  *  资讯视图
  */
 @property (nonatomic, weak) YTConsultView *consult;
@@ -174,10 +169,12 @@
 {
     NSDictionary *params = @{@"os" : @"ios-appstore"};
     [YTHttpTool get:YTBanner params:params success:^(id responseObject) {
-        self.banners = [PPTModel objectArrayWithKeyValuesArray:responseObject];
+        NSArray *array = [PPTModel objectArrayWithKeyValuesArray:responseObject];
         // 给banner设置图片
-        if (self.banners.count > 0) {
-            self.pptVC.pptModels = self.banners;
+        if (array.count > 0) {
+            self.pptVC.pptModels = array;
+            NSString *oldBanners = [responseObject JsonToString];
+            [CoreArchive setStr:oldBanners key:@"oldBanners"];
         }
     } failure:^(NSError *error) {
     }];
@@ -303,10 +300,15 @@
 - (NSArray *)ppts
 {
     if (!_ppts) {
-        // 初始化假数据
-        PPTModel *ppt = [[PPTModel alloc] init];
-        ppt.image = [UIImage imageNamed:@"tuxiangzhanwei"];
-        _ppts = [NSArray arrayWithObjects:ppt, nil];
+        // 获取历史数据
+        NSString *oldBanners = [CoreArchive strForKey:@"oldBanners"];
+        if (oldBanners != nil) {
+            _ppts = [PPTModel objectArrayWithKeyValuesArray:[oldBanners JsonToValue]];
+        } else {
+            PPTModel *ppt = [[PPTModel alloc] init];
+            ppt.image = [UIImage imageNamed:@"tuxiangzhanwei"];
+            _ppts = [NSArray arrayWithObjects:ppt, nil];
+        }
     }
     return _ppts;
 }

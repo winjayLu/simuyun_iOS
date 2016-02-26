@@ -58,7 +58,7 @@
     // 消息数量
     YTMessageNum *messageNum = [YTMessageNumTool messageNum];
     
-    self.status = @[@(messageNum.CHAT_CONTENT), @(messageNum.TODO_LIST), @(messageNum.PRODUCT_NEWS), @(messageNum.SYSTEM_NOTICE)];
+    self.status = @[@(messageNum.unreadNoticeNum), @(messageNum.unreadProductNum), @(messageNum.unreadGoodNewsNum), @(messageNum.unreadTalkNum)];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
@@ -103,7 +103,7 @@
         
         CorePageModel *model1=[CorePageModel model:tvc2 pageBarName:@"运营公告"];
         CorePageModel *model2=[CorePageModel model:tvc3 pageBarName:@"产品动态"];
-        CorePageModel *model3=[CorePageModel model:tvc4 pageBarName:@"运营喜报"];
+        CorePageModel *model3=[CorePageModel model:tvc4 pageBarName:@"营销喜报"];
         CorePageModel *model4=[CorePageModel model:tvc1 pageBarName:@"客服消息"];
         NSArray *pageModels=@[model1, model2, model3,model4];
         

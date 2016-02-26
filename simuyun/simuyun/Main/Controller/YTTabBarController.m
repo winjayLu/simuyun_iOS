@@ -169,36 +169,42 @@
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"adviserId"] = [YTAccountTool account].userId;
+    // 平台客服0
     NSString *timestampCategory0 = [CoreArchive strForKey:@"timestampCategory0"];
-    NSString *timestampCategory2 = [CoreArchive strForKey:@"timestampCategory2"];
-    NSString *timestampCategory3 = [CoreArchive strForKey:@"timestampCategory3"];
-    NSString *timestampCategory4 = [CoreArchive strForKey:@"timestampCategory4"];
     if (timestampCategory0 == nil || timestampCategory0.length == 0) {
         timestampCategory0 = @"2013-01-01 00:00:00";
     }
+    // 产品动态2
+    NSString *timestampCategory2 = [CoreArchive strForKey:@"timestampCategory2"];
     if (timestampCategory2 == nil || timestampCategory2.length == 0) {
         timestampCategory2 = @"2013-01-01 00:00:00";
     }
-    if (timestampCategory3 == nil || timestampCategory3.length == 0) {
-        timestampCategory3 = @"2013-01-01 00:00:00";
-    }
+    // 运营公告4
+    NSString *timestampCategory4 = [CoreArchive strForKey:@"timestampCategory4"];
     // 运营公告
     if (timestampCategory4 == nil || timestampCategory4.length == 0) {
         timestampCategory4 = @"2013-01-01 00:00:00";
     }
+    // 营销喜报6
+    NSString *timestampCategory6 = [CoreArchive strForKey:@"timestampCategory6"];
+    if (timestampCategory6 == nil || timestampCategory6.length == 0) {
+        timestampCategory6 = @"2013-01-01 00:00:00";
+    }
     params[@"timestampCategory0"] = timestampCategory0;
     params[@"timestampCategory2"] = timestampCategory2;
-    params[@"timestampCategory3"] = timestampCategory3;
+    params[@"timestampCategory6"] = timestampCategory6;
     params[@"timestampCategory4"] = timestampCategory4;
+    // 待办事项1
+    params[@"timestampCategory1"] = @"2013-01-01 00:00:00";
     [YTHttpTool get:YTMessageCount params:params success:^(id responseObject) {
         YTMessageNum *oldMessage = [YTMessageNumTool messageNum];
         [YTMessageNumTool save:[YTMessageNum objectWithKeyValues:responseObject]];
         YTMessageNum *newMessageNum = [YTMessageNumTool messageNum];
-        if (oldMessage != nil && (newMessageNum.TODO_LIST != oldMessage.TODO_LIST)) {
+        if (oldMessage != nil && (newMessageNum.unreadTodoNum != oldMessage.unreadTodoNum)) {
             [YTCenter postNotificationName:YTUpdateTodoFrame object:nil];
         }
-        if (newMessageNum.CHAT_CONTENT > 0) {
-            self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", newMessageNum.CHAT_CONTENT];
+        if (newMessageNum.unreadTalkNum > 0) {
+            self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", newMessageNum.unreadTalkNum];
             [YTCenter postNotificationName:YTUpdateChatContent object:nil];
         }
     } failure:^(NSError *error) {

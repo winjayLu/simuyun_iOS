@@ -20,7 +20,7 @@
 #import "NSString+JsonCategory.h"
 #import "NSObject+JsonCategory.h"
 
-// 运营喜报
+// 营销喜报
 
 @interface YTSystemCenterController ()
 
@@ -81,13 +81,13 @@
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
         param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"category"] = @6;
-    param[@"pagesize"] = @20;
+    param[@"pagesize"] = @8;
     self.pageNo = 1;
     param[@"pageNo"] = @(self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         self.messages = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
         // 存储时间
-        [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"timestampCategory3"];
+        [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"timestampCategory6"];
         // 存储获取到的数据
         if (self.messages.count >0) {
             NSString *oldSystemCenter = [responseObject JsonToString];
@@ -109,7 +109,7 @@
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
         param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"category"] = @6;
-    param[@"pagesize"] = @20;
+    param[@"pagesize"] = @8;
     param[@"pageNo"] = @(++self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         YTLog(@"%@", responseObject);

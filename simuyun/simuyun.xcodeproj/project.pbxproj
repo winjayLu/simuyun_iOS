@@ -2179,10 +2179,10 @@
 		97270EF61C7BF50600C92888 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				97270EF71C7BF50600C92888 /* YTIndustryViewController.h */,
-				97270EF81C7BF50600C92888 /* YTIndustryViewController.m */,
 				97270EF91C7BF50600C92888 /* YTInformationController.h */,
 				97270EFA1C7BF50600C92888 /* YTInformationController.m */,
+				97270EF71C7BF50600C92888 /* YTIndustryViewController.h */,
+				97270EF81C7BF50600C92888 /* YTIndustryViewController.m */,
 				97270EFB1C7BF50600C92888 /* YTKnowController.h */,
 				97270EFC1C7BF50600C92888 /* YTKnowController.m */,
 				97270EFD1C7BF50600C92888 /* YTObservationController.h */,

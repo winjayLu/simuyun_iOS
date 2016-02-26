@@ -216,9 +216,7 @@
 
 
 -(void)btnClick:(CorePagesBarBtn *)btn{
-    
-    [btn isShow:NO];
-    
+
     if(self.selectedBtn == btn) return;
     
     self.selectedBtn=btn;
@@ -238,26 +236,26 @@
 
 -(void)setSelectedBtn:(CorePagesBarBtn *)selectedBtn{
     
-    
-    
     if(_selectedBtn == selectedBtn) return;
-    
     if(_selectedBtn != nil) _selectedBtn.selected=NO;
-    [selectedBtn isShow:NO];
-    
-    // 待办事项特殊处理
-    NSString *btnTitle = selectedBtn.currentTitle;
-    if ([btnTitle isEqualToString:@"待办事项"]) {
-        // 消息数量
-        YTMessageNum *messageNum = [YTMessageNumTool messageNum];
-        int todoNum = messageNum.TODO_LIST;
-        if (todoNum > 0) {
-            [selectedBtn isShow:YES];
-        } else {
-            [selectedBtn isShow:NO];
-        }
+    NSString *title = selectedBtn.titleLabel.text;
+    // 消息数量
+    YTMessageNum *messageNum = [YTMessageNumTool messageNum];
+    if ([title isEqualToString:@"运营公告"]) {
+        [selectedBtn isShow:NO];
+        messageNum.unreadNoticeNum = 0;
+        [YTMessageNumTool save:messageNum];
+    } else if ([title isEqualToString:@"产品动态"])
+    {
+        [selectedBtn isShow:NO];
+        messageNum.unreadProductNum = 0;
+        [YTMessageNumTool save:messageNum];
+    } else if ([title isEqualToString:@"营销喜报"])
+    {
+        [selectedBtn isShow:NO];
+        messageNum.unreadGoodNewsNum = 0;
+        [YTMessageNumTool save:messageNum];
     }
-    
     
     selectedBtn.selected=YES;
     
