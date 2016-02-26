@@ -14,6 +14,7 @@
 #import "TCCloudPlayerSDK.h"
 #import "CoreArchive.h"
 #import "TCReportEngine.h"
+#import "SVProgressHUD.h"
 
 
 @interface YTPlayerViewController ()
@@ -51,13 +52,38 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self playVideo];
     
     // 开启缓存
     [TCCloudPlayerView setEnableCache:YES];
     
     // 监听播放状态
     [YTCenter addObserver:self selector:@selector(hiddenAbleView:) name:TCCloudPlayStateChangeNotification object:nil];
+    
+    // 从产品页面过来
+    if (self.videoId != nil)
+    {
+        // 加载视频信息
+        [self loadVideoData];
+    }
+}
+/**
+ *  加载视频信息
+ */
+- (void)loadVideoData
+{
+    [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"uid"] = [YTAccountTool account].userId;
+    param[@"videoId"] = self.videoId;
+    [YTHttpTool get:YTSelectVideo params:param success:^(id responseObject) {
+        [SVProgressHUD dismiss];
+        self.vedio = [YTVedioModel objectWithKeyValues:responseObject];
+    } failure:^(NSError *error) {
+        [SVProgressHUD showErrorWithStatus:@"加载失败"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self closeClick];
+        });
+    }];
 }
 
 
@@ -174,6 +200,7 @@
         [firstSchoolBtn addTarget:self action:@selector(firstSchoolClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:firstSchoolBtn];
     }
+    [self playVideo];
 }
 
 /**

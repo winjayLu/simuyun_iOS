@@ -64,7 +64,11 @@
     if (information.url == nil || information.url.length == 0) {
         self.iconImage.image = [UIImage imageNamed:@"yunguandian"];
     } else {
-        [self.iconImage imageWithUrlStr:[NSString stringWithFormat:@"http://%@",information.url]phImage:nil];
+        NSString *url = information.url;
+        if (![url hasPrefix:@"http://"]) {
+            url = [NSString stringWithFormat:@"http://%@",information.url];
+        }
+        [self.iconImage imageWithUrlStr:url phImage:nil];
     }
 }
 

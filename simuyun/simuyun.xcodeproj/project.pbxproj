@@ -1447,12 +1447,12 @@
 		97270D351C7BF4AF00C92888 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				97270D361C7BF4AF00C92888 /* YTLoginAuthenticationController.h */,
-				97270D371C7BF4AF00C92888 /* YTLoginAuthenticationController.m */,
-				97270D381C7BF4AF00C92888 /* YTLoginAuthenticationController.xib */,
 				97270D391C7BF4AF00C92888 /* YTLoginViewController.h */,
 				97270D3A1C7BF4AF00C92888 /* YTLoginViewController.m */,
 				97270D3B1C7BF4AF00C92888 /* YTLoginViewController.xib */,
+				97270D361C7BF4AF00C92888 /* YTLoginAuthenticationController.h */,
+				97270D371C7BF4AF00C92888 /* YTLoginAuthenticationController.m */,
+				97270D381C7BF4AF00C92888 /* YTLoginAuthenticationController.xib */,
 				97270D3C1C7BF4AF00C92888 /* YTRegisterViewController.h */,
 				97270D3D1C7BF4AF00C92888 /* YTRegisterViewController.m */,
 				97270D3E1C7BF4AF00C92888 /* YTRegisterViewController.xib */,

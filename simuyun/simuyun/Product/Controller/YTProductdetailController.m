@@ -177,7 +177,7 @@
             } else if ([command isEqualToString:@"mobclick"])   // h5事件统计
             {
                 [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : urlComps[2], @"机构" : [YTUserInfoTool userInfo].organizationName}];
-            } else if ([command isEqualToString:@"playVideo"])   // h5事件统计
+            } else if ([command isEqualToString:@"playVideo"])   // 视频播放
             {
                 [self playVedio:urlComps[2]];
                 [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"产品详情播放视频", @"机构" : [YTUserInfoTool userInfo].organizationName}];
