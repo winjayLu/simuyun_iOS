@@ -19,10 +19,8 @@
 
 @interface YTProductCell()
 
-/**
- *  爆款icon
- */
-@property (weak, nonatomic) IBOutlet UIImageView *iconImage;
+@property (weak, nonatomic) IBOutlet UIImageView *proImageView;
+
 /**
  *  产品标题
  */
@@ -66,25 +64,28 @@
  */
 @property (weak, nonatomic) IBOutlet UILabel *danWeiLable;
 
+/**
+ *  项目总募集
+ */
+@property (weak, nonatomic) IBOutlet UILabel *totalAmtLable;
+
 
 /**
- *  title左边的约束
+ *  单位Lable,默认为万
  */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLeftConstraint;
-/**
- *  icon的宽度约束
- */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconWidthConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *totalDanWeiLable;
+
 
 /**
  *  截止打款时间
  */
 @property (weak, nonatomic) IBOutlet UILabel *endTimeLabel;
 
+
 /**
- *  时间单位
+ *  截止打款时间
  */
-@property (weak, nonatomic) IBOutlet UILabel *timeUnitLable;
+@property (weak, nonatomic) IBOutlet UILabel *sumMoneyLable;
 
 
 /**
@@ -138,18 +139,6 @@
 
     _product = product;
     
-    // 设置icon图片
-    if (_product.series != 0) {
-        self.iconWidthConstraint.constant = 33;
-        self.titleLeftConstraint.constant = 8;
-        self.iconImage.hidden = NO;
-         [self.iconImage imageWithUrlStr:product.icon_url phImage:nil];
-    } else
-    {
-        self.iconWidthConstraint.constant = 0;
-        self.iconImage.hidden = YES;
-        self.titleLeftConstraint.constant = 0;
-    }
 
     // 设置标题
     self.titleLable.text = _product.pro_name;
@@ -166,7 +155,7 @@
         self.jzContent.text = _product.cumulative_net;
     } else
     {
-        self.fbTitle.text = @"投资期限";
+        self.fbTitle.text = @"期限";
         self.fbContent.text = _product.term;
         self.jzTitle.text = @"预期收益";
         self.jzContent.text = _product.expected_yield;
@@ -174,43 +163,52 @@
     
     // 设置已经募集金额
     if (_product.raised_amt > 10000) {
-        _product.raised_amt = _product.raised_amt / 10000;
         self.danWeiLable.text = @"亿";
-        self.yimujiLable.text = [NSString stringWithFormat:@"%.2f",_product.raised_amt];
+        self.yimujiLable.text = [NSString stringWithFormat:@"%.2f",_product.raised_amt / 10000];
     } else {
         self.danWeiLable.text = @"万";
         self.yimujiLable.text = [NSString stringWithFormat:@"%.0f",_product.raised_amt];
     }
+    // 设置总募集金额
+    if (_product.totalAmt > 10000) {
+        self.totalDanWeiLable.text = @"亿";
+        self.totalAmtLable.text = [NSString stringWithFormat:@"%.2f",_product.totalAmt / 10000];
+    } else {
+        self.totalDanWeiLable.text = @"万";
+        self.totalAmtLable.text = [NSString stringWithFormat:@"%.0f",_product.totalAmt];
+    }
+    
     
     if (_product.state == 20)    // 产品状态
     {
         // 暂停募集
-        self.timeUnitLable.text = @"募集结束";
         self.endTimeLabel.hidden = YES;
-        self.endtimeTitleLable.hidden = YES;
+        self.yimujiLable.textColor = YTColor(102, 102, 102);
         self.bgImageView.image = [UIImage imageNamed:@"huimogu"];
+        self.proImageView.image = [UIImage imageNamed:@"proHuiseLable"];
     } else {
+        self.proImageView.image = [UIImage imageNamed:@"proLanseLable"];
         self.endTimeLabel.hidden = NO;
-        self.endtimeTitleLable.hidden = NO;
+        self.yimujiLable.textColor = YTColor(215, 58, 46);
         self.bgImageView.image = [UIImage imageNamed:@"logobackground"];
         
         // 设置截止打款时间
         if (_product.componentsDate.day > 0) {
             if (_product.componentsDate.hour > 17)
             {
-                self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.day + 1];
+                self.endTimeLabel.text = [NSString stringWithFormat:@"%zd天", _product.componentsDate.day + 1];
             } else {
-                self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.day];
+                self.endTimeLabel.text = [NSString stringWithFormat:@"%zd天", _product.componentsDate.day];
             }
-            self.timeUnitLable.text = @"天";
         } else if (_product.componentsDate.hour > 0) {
-            self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.hour];
-            self.timeUnitLable.text = @"小时";
+            self.endTimeLabel.text = [NSString stringWithFormat:@"%zd小时", _product.componentsDate.hour];
         } else if (_product.componentsDate.minute > 0) {
-            self.endTimeLabel.text = [NSString stringWithFormat:@"%zd", _product.componentsDate.minute];
-            self.timeUnitLable.text = @"分钟";
+            self.endTimeLabel.text = [NSString stringWithFormat:@"%zd分钟", _product.componentsDate.minute];
         }
+        // 旋转lable
+        self.endTimeLabel.transform = CGAffineTransformMakeRotation(M_PI_4);
     }
+    
     // iphone 6 以下屏幕特殊适配
     if (DeviceWidth < 375)
     {

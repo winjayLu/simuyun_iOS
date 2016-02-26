@@ -15,10 +15,7 @@
 
 @interface YTLiquidationCell()
 
-/**
- *  爆款icon
- */
-@property (weak, nonatomic) IBOutlet UIImageView *iconImage;
+
 /**
  *  产品标题
  */
@@ -63,15 +60,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *danWeiLable;
 
 
-/**
- *  title左边的约束
- */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLeftConstraint;
-/**
- *  icon的宽度约束
- */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *iconWidthConstraint;
-
 
 @end
 
@@ -102,23 +90,6 @@
 {
     _product = product;
     
-    // 设置icon图片
-    if (_product.series != 0) {
-        self.iconWidthConstraint.constant = 25;
-        self.titleLeftConstraint.constant = 8;
-        self.iconImage.hidden = NO;
-        [self.iconImage imageWithUrlStr:product.icon_url phImage:nil];
-        // 调整icon的宽度
-        if (_product.series > 6) {
-            self.iconWidthConstraint.constant = 33;
-        }
-    } else
-    {
-        self.iconWidthConstraint.constant = 0;
-        self.iconImage.hidden = YES;
-        self.titleLeftConstraint.constant = -0.5;
-    }
-    
     // 设置标题
     self.titleLable.text = _product.pro_name;
     
@@ -140,13 +111,12 @@
     }
     
     // 设置已经募集金额
-    if (_product.raised_amt > 10000) {
-        _product.raised_amt = _product.raised_amt / 10000;
+    if (_product.totalAmt > 10000) {
         self.danWeiLable.text = @"亿";
-        self.yimujiLable.text = [NSString stringWithFormat:@"%.2f",_product.raised_amt];
+        self.yimujiLable.text = [NSString stringWithFormat:@"%.2f",_product.totalAmt / 10000];
     } else {
         self.danWeiLable.text = @"万";
-        self.yimujiLable.text = [NSString stringWithFormat:@"%.0f",_product.raised_amt];
+        self.yimujiLable.text = [NSString stringWithFormat:@"%.0f",_product.totalAmt];
     }
 }
 

@@ -30,6 +30,7 @@
 #import "CorePageModel.h"
 #import "AFNetworking.h"
 #import "CAAnimation+PagesViewBarShake.h"
+#import "YTHotProductCell.h"
 
 
 @interface YTProductViewController ()
@@ -242,37 +243,59 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     YTProductModel *product = self.products[indexPath.section];
+//    if (product.pro_name.length > 10) {
+//        product.isHotProduct = YES;
+//    }
     UITableViewCell *cell;
-    if (product.state == 30)
-    {
-        static NSString *identifier = @"liquidation";
+#warning 修改
+    if (product.isHotProduct == YES) {  // 热推产品
+        static NSString *identifier = @"hotProductCell";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell==nil) {
-            cell =[YTLiquidationCell productCell];
+            cell =[YTHotProductCell hotProductCell];
             cell.layer.cornerRadius = 5;
             cell.layer.masksToBounds = YES;
             cell.layer.borderWidth = 1.0f;
             cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
         }
-        ((YTLiquidationCell *)cell).product = product;
+        ((YTHotProductCell *)cell).product = product;
     } else {
-        static NSString *identifier = @"productCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:identifier];
-        if (cell==nil) {
-            cell =[YTProductCell productCell];
-            cell.layer.cornerRadius = 5;
-            cell.layer.masksToBounds = YES;
-            cell.layer.borderWidth = 1.0f;
-            cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
-            cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        if (product.state == 30)
+        {
+            static NSString *identifier = @"liquidation";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            if (cell==nil) {
+                cell =[YTLiquidationCell productCell];
+                cell.layer.cornerRadius = 5;
+                cell.layer.masksToBounds = YES;
+                cell.layer.borderWidth = 1.0f;
+                cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+            }
+            ((YTLiquidationCell *)cell).product = product;
+        } else {
+            static NSString *identifier = @"productCell";
+            cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            if (cell==nil) {
+                cell =[YTProductCell productCell];
+                cell.layer.cornerRadius = 5;
+                cell.layer.masksToBounds = YES;
+                cell.layer.borderWidth = 1.0f;
+                cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+            }
+            ((YTProductCell *)cell).product = product;
         }
-        ((YTProductCell *)cell).product = product;
     }
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    YTProductModel *product = self.products[indexPath.section];
+//    if (product.isHotProduct == YES) {
+//        return 193;
+//    }
     return 122;
 }
 

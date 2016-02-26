@@ -16,11 +16,5 @@
 @property (nonatomic, copy) NSString *url;
 
 
-
-///**
-// *  页面标题
-// */
-//@property (nonatomic, copy) NSString *toTitle;
-
 @property (nonatomic, strong) YTProductModel *product;
 @end

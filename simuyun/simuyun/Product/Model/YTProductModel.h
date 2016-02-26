@@ -28,10 +28,6 @@
  */
 @property (nonatomic, assign) int series;
 
-/**
- *  icon图片地址
- */
-@property (nonatomic, copy) NSString *icon_url;
 
 /**
  *  产品名称
@@ -40,15 +36,14 @@
 
 
 /**
- *  星星等级
- */
-@property (nonatomic, assign) int level;
-
-
-/**
  *  投资起点
  */
 @property (nonatomic, copy) NSString *buy_start;
+
+/**
+ *  项目总募集金额
+ */
+@property (nonatomic, assign) double totalAmt;
 
 /**
  *  已募集金额
@@ -109,6 +104,19 @@
  *  距离现在的时间
  */
 @property (nonatomic, strong) NSDateComponents *componentsDate;
+
+#pragma mark - 新增
+/**
+ *  是否是热门产品
+ *  0 不是
+ *  1 是   后台置顶，并且正在发行中
+ */
+@property (nonatomic, assign) BOOL isHotProduct;
+
+// 营销图片地址
+@property (nonatomic, copy) NSString *marketingImageUrl;
+// 热门产品营销话术
+@property (nonatomic, copy) NSString *hotName;
 
 #pragma mark - 订单字段
 /**

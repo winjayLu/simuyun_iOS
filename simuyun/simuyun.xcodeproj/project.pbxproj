@@ -285,6 +285,10 @@
 		97C606C91BC29DA500E555E8 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C606C81BC29DA500E555E8 /* libz.tbd */; };
 		97C718F41C7FF45200BC43D7 /* YTMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C718F31C7FF45200BC43D7 /* YTMessageDetailController.m */; };
 		97C718F71C7FF45D00BC43D7 /* YTNormalWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C718F61C7FF45D00BC43D7 /* YTNormalWebController.m */; };
+		97C718FB1C80323A00BC43D7 /* YTTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C718F91C80323A00BC43D7 /* YTTableViewCell.m */; };
+		97C718FC1C80323A00BC43D7 /* YTTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C718FA1C80323A00BC43D7 /* YTTableViewCell.xib */; };
+		97C719011C80411400BC43D7 /* YTHotProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C718FF1C80411400BC43D7 /* YTHotProductCell.m */; };
+		97C719021C80411400BC43D7 /* YTHotProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C719001C80411400BC43D7 /* YTHotProductCell.xib */; };
 		97DD72C11BC421D90082C69F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C01BC421D90082C69F /* libsqlite3.dylib */; };
 		97DD72C31BC421E60082C69F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C21BC421E60082C69F /* libz.dylib */; };
 		97DD72C51BC421F40082C69F /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C41BC421F40082C69F /* libstdc++.dylib */; };
@@ -835,6 +839,12 @@
 		97C718F31C7FF45200BC43D7 /* YTMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMessageDetailController.m; sourceTree = "<group>"; };
 		97C718F51C7FF45D00BC43D7 /* YTNormalWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTNormalWebController.h; sourceTree = "<group>"; };
 		97C718F61C7FF45D00BC43D7 /* YTNormalWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTNormalWebController.m; sourceTree = "<group>"; };
+		97C718F81C80323A00BC43D7 /* YTTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTTableViewCell.h; sourceTree = "<group>"; };
+		97C718F91C80323A00BC43D7 /* YTTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTTableViewCell.m; sourceTree = "<group>"; };
+		97C718FA1C80323A00BC43D7 /* YTTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTTableViewCell.xib; sourceTree = "<group>"; };
+		97C718FE1C80411400BC43D7 /* YTHotProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTHotProductCell.h; sourceTree = "<group>"; };
+		97C718FF1C80411400BC43D7 /* YTHotProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTHotProductCell.m; sourceTree = "<group>"; };
+		97C719001C80411400BC43D7 /* YTHotProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTHotProductCell.xib; sourceTree = "<group>"; };
 		97DD72C01BC421D90082C69F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		97DD72C21BC421E60082C69F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		97DD72C41BC421F40082C69F /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
@@ -1291,15 +1301,21 @@
 		97270CB11C7BF47E00C92888 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				97270CB21C7BF47E00C92888 /* YTCustomerView.h */,
-				97270CB31C7BF47E00C92888 /* YTCustomerView.m */,
-				97270CB41C7BF47E00C92888 /* YTCustomerView.xib */,
 				97270CB51C7BF47E00C92888 /* YTLiquidationCell.h */,
 				97270CB61C7BF47E00C92888 /* YTLiquidationCell.m */,
 				97270CB71C7BF47E00C92888 /* YTLiquidationCell.xib */,
 				97270CB81C7BF47E00C92888 /* YTProductCell.h */,
 				97270CB91C7BF47E00C92888 /* YTProductCell.m */,
 				97270CBA1C7BF47E00C92888 /* YTProductCell.xib */,
+				97C718FE1C80411400BC43D7 /* YTHotProductCell.h */,
+				97C718FF1C80411400BC43D7 /* YTHotProductCell.m */,
+				97C719001C80411400BC43D7 /* YTHotProductCell.xib */,
+				97C718F81C80323A00BC43D7 /* YTTableViewCell.h */,
+				97C718F91C80323A00BC43D7 /* YTTableViewCell.m */,
+				97C718FA1C80323A00BC43D7 /* YTTableViewCell.xib */,
+				97270CB21C7BF47E00C92888 /* YTCustomerView.h */,
+				97270CB31C7BF47E00C92888 /* YTCustomerView.m */,
+				97270CB41C7BF47E00C92888 /* YTCustomerView.xib */,
 				97270CBB1C7BF47E00C92888 /* YTReportTopView.h */,
 				97270CBC1C7BF47E00C92888 /* YTReportTopView.m */,
 				97270CBD1C7BF47E00C92888 /* YTReportTopView.xib */,
@@ -2407,6 +2423,7 @@
 				97270EC01C7BF4D500C92888 /* PPTCell.xib in Resources */,
 				97270C601C7BF47400C92888 /* YTLeftMenu.xib in Resources */,
 				97270CC61C7BF47E00C92888 /* YTBuySuccessController.xib in Resources */,
+				97C718FC1C80323A00BC43D7 /* YTTableViewCell.xib in Resources */,
 				97270D311C7BF49500C92888 /* YTCustomerServiceCell.xib in Resources */,
 				97270C431C7BF47400C92888 /* YTAuthenticationStatusController.xib in Resources */,
 				97270CEF1C7BF47E00C92888 /* YTReportTopView.xib in Resources */,
@@ -2440,6 +2457,7 @@
 				97270C411C7BF47400C92888 /* YTAuthenticationErrorController.xib in Resources */,
 				97270CEB1C7BF47E00C92888 /* YTLiquidationCell.xib in Resources */,
 				97270D651C7BF4BC00C92888 /* YTWelcomeViewController.xib in Resources */,
+				97C719021C80411400BC43D7 /* YTHotProductCell.xib in Resources */,
 				97270C591C7BF47400C92888 /* YTContentCell.xib in Resources */,
 				97270D331C7BF49500C92888 /* YTTodoViewCell.xib in Resources */,
 				97270D5A1C7BF4AF00C92888 /* YTResuNextViewController.xib in Resources */,
@@ -2549,6 +2567,7 @@
 				97270BF11C7BF46800C92888 /* YTDiscoverViewController.m in Sources */,
 				97270E8B1C7BF4D500C92888 /* CALayer+Transition.m in Sources */,
 				97270E901C7BF4D500C92888 /* Foundation+Log.m in Sources */,
+				97C719011C80411400BC43D7 /* YTHotProductCell.m in Sources */,
 				97270EF21C7BF4D500C92888 /* YTDataHintView.m in Sources */,
 				97270CD91C7BF47E00C92888 /* JKAssetsThumbnailView.m in Sources */,
 				97270C551C7BF47400C92888 /* YTAutocompletionCell.m in Sources */,
@@ -2563,6 +2582,7 @@
 				97270EAF1C7BF4D500C92888 /* UIButton+AFNetworking.m in Sources */,
 				97270CDA1C7BF47E00C92888 /* JKAssetsViewCell.m in Sources */,
 				97270E9D1C7BF4D500C92888 /* YTNavigationController.m in Sources */,
+				97C718FB1C80323A00BC43D7 /* YTTableViewCell.m in Sources */,
 				97270E891C7BF4D500C92888 /* CoreArchive.m in Sources */,
 				97270ED41C7BF4D500C92888 /* ShareManage.m in Sources */,
 				97270EE71C7BF4D500C92888 /* YTMessageNum.m in Sources */,

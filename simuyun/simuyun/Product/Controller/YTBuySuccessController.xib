@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YTBuySuccessController">
@@ -198,13 +198,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.在App里填写客户身份证信息以及打款信息（包括打款凭条的照片或者扫描图片）进行报备" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p4f-JJ-LCL">
-                    <rect key="frame" x="10" y="320" width="365" height="31.5"/>
+                    <rect key="frame" x="10" y="320" width="365" height="32"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <color key="textColor" red="0.79607843140000001" green="0.14117647059999999" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4wn-Q5-T63">
-                    <rect key="frame" x="10" y="376.5" width="365" height="44"/>
+                    <rect key="frame" x="10" y="377" width="365" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="09H-dq-SU1"/>
                     </constraints>
@@ -217,7 +217,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xHK-3I-Mvy">
-                    <rect key="frame" x="10" y="430.5" width="365" height="44"/>
+                    <rect key="frame" x="10" y="431" width="365" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="Rvb-dQ-94r"/>
                     </constraints>
