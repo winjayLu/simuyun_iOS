@@ -169,12 +169,12 @@
         titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 12)];
         titleLabel.font = [UIFont systemFontOfSize:10];
         titleLabel.textAlignment = NSTextAlignmentCenter;
-        titleLabel.textColor = YTColor(223, 223, 223);
+        titleLabel.textColor = YTColor(102, 102, 102);
         titleLabel.backgroundColor = [UIColor clearColor];
         titleLabel.text = [self.titleArr objectAtIndex:i];
         [buttonsView addSubview:titleLabel];
         [titleLabel sizeToFit];
-        menuBtn.frame = CGRectMake((menuBtnWidth + 24) * i, 20, menuBtnWidth, menuBtnHeight);
+        menuBtn.frame = CGRectMake((menuBtnWidth + 24) * i, 15, menuBtnWidth, menuBtnHeight);
         titleLabel.center = CGPointMake(menuBtn.center.x, menuBtn.center.y + 30);
     }
     

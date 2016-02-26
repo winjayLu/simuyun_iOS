@@ -12,7 +12,7 @@
 #import "YTAccountTool.h"
 #import "YTMessageModel.h"
 #import "CoreArchive.h"
-#import "YTNormalWebController.h"
+#import "YTMessageDetailController.h"
 #import "NSDate+Extension.h"
 #import "YTUserInfoTool.h"
 #import "NSString+Extend.h"
@@ -176,11 +176,12 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YTMessageModel *message = self.messages[indexPath.section];
-    YTNormalWebController *normal = [YTNormalWebController webWithTitle:[NSString titleWithCategoryCode:message.category2Code] url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
-    normal.isDate = YES;
-    normal.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:normal animated:YES];
-    [MobClick event:@"msg_click" attributes:@{@"类型" : @"动态", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+    YTMessageDetailController *detail = [YTMessageDetailController webWithTitle:[NSString titleWithCategoryCode:message.category2Code] url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
+    detail.isDate = YES;
+    detail.shareImageName = @"shareProductDetail";
+    detail.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detail animated:YES];
+    [MobClick event:@"msg_click" attributes:@{@"类型" : @"产品动态详情", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 #pragma mark - lazy

@@ -175,7 +175,6 @@
 		97270E9B1C7BF4D500C92888 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270D9E1C7BF4D500C92888 /* UIView+Extension.m */; };
 		97270E9C1C7BF4D500C92888 /* UIWindow+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270DA01C7BF4D500C92888 /* UIWindow+Extension.m */; };
 		97270E9D1C7BF4D500C92888 /* YTNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270DA71C7BF4D500C92888 /* YTNavigationController.m */; };
-		97270E9E1C7BF4D500C92888 /* YTNormalWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270DA91C7BF4D500C92888 /* YTNormalWebController.m */; };
 		97270E9F1C7BF4D500C92888 /* YTTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270DAB1C7BF4D500C92888 /* YTTabBarController.m */; };
 		97270EA01C7BF4D500C92888 /* YTWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97270DAC1C7BF4D500C92888 /* YTWebViewController.xib */; };
 		97270EA11C7BF4D500C92888 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270DB11C7BF4D500C92888 /* AFHTTPRequestOperation.m */; };
@@ -284,6 +283,8 @@
 		97C606C51BC29D8E00E555E8 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C606C41BC29D8E00E555E8 /* CoreTelephony.framework */; };
 		97C606C71BC29D9B00E555E8 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C606C61BC29D9B00E555E8 /* libstdc++.tbd */; };
 		97C606C91BC29DA500E555E8 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 97C606C81BC29DA500E555E8 /* libz.tbd */; };
+		97C718F41C7FF45200BC43D7 /* YTMessageDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C718F31C7FF45200BC43D7 /* YTMessageDetailController.m */; };
+		97C718F71C7FF45D00BC43D7 /* YTNormalWebController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C718F61C7FF45D00BC43D7 /* YTNormalWebController.m */; };
 		97DD72C11BC421D90082C69F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C01BC421D90082C69F /* libsqlite3.dylib */; };
 		97DD72C31BC421E60082C69F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C21BC421E60082C69F /* libz.dylib */; };
 		97DD72C51BC421F40082C69F /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C41BC421F40082C69F /* libstdc++.dylib */; };
@@ -611,8 +612,6 @@
 		97270DA41C7BF4D500C92888 /* YTServerConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTServerConfig.h; sourceTree = "<group>"; };
 		97270DA61C7BF4D500C92888 /* YTNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTNavigationController.h; sourceTree = "<group>"; };
 		97270DA71C7BF4D500C92888 /* YTNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTNavigationController.m; sourceTree = "<group>"; };
-		97270DA81C7BF4D500C92888 /* YTNormalWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTNormalWebController.h; sourceTree = "<group>"; };
-		97270DA91C7BF4D500C92888 /* YTNormalWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTNormalWebController.m; sourceTree = "<group>"; };
 		97270DAA1C7BF4D500C92888 /* YTTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTTabBarController.h; sourceTree = "<group>"; };
 		97270DAB1C7BF4D500C92888 /* YTTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTTabBarController.m; sourceTree = "<group>"; };
 		97270DAC1C7BF4D500C92888 /* YTWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTWebViewController.xib; sourceTree = "<group>"; };
@@ -832,6 +831,10 @@
 		97C606C41BC29D8E00E555E8 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		97C606C61BC29D9B00E555E8 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		97C606C81BC29DA500E555E8 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		97C718F21C7FF45200BC43D7 /* YTMessageDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTMessageDetailController.h; sourceTree = "<group>"; };
+		97C718F31C7FF45200BC43D7 /* YTMessageDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMessageDetailController.m; sourceTree = "<group>"; };
+		97C718F51C7FF45D00BC43D7 /* YTNormalWebController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTNormalWebController.h; sourceTree = "<group>"; };
+		97C718F61C7FF45D00BC43D7 /* YTNormalWebController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTNormalWebController.m; sourceTree = "<group>"; };
 		97DD72C01BC421D90082C69F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		97DD72C21BC421E60082C69F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		97DD72C41BC421F40082C69F /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
@@ -1333,6 +1336,8 @@
 				97270CFC1C7BF49500C92888 /* YTProductNewsController.m */,
 				97270CFD1C7BF49500C92888 /* YTSystemCenterController.h */,
 				97270CFE1C7BF49500C92888 /* YTSystemCenterController.m */,
+				97C718F21C7FF45200BC43D7 /* YTMessageDetailController.h */,
+				97C718F31C7FF45200BC43D7 /* YTMessageDetailController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1677,10 +1682,10 @@
 		97270DA51C7BF4D500C92888 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				97C718F51C7FF45D00BC43D7 /* YTNormalWebController.h */,
+				97C718F61C7FF45D00BC43D7 /* YTNormalWebController.m */,
 				97270DA61C7BF4D500C92888 /* YTNavigationController.h */,
 				97270DA71C7BF4D500C92888 /* YTNavigationController.m */,
-				97270DA81C7BF4D500C92888 /* YTNormalWebController.h */,
-				97270DA91C7BF4D500C92888 /* YTNormalWebController.m */,
 				97270DAA1C7BF4D500C92888 /* YTTabBarController.h */,
 				97270DAB1C7BF4D500C92888 /* YTTabBarController.m */,
 				97270DAC1C7BF4D500C92888 /* YTWebViewController.xib */,
@@ -2502,6 +2507,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97C718F71C7FF45D00BC43D7 /* YTNormalWebController.m in Sources */,
 				97270EF31C7BF4D500C92888 /* YTLogoView.m in Sources */,
 				97270CD71C7BF47E00C92888 /* JKAssetsGroupCell.m in Sources */,
 				97270E921C7BF4D500C92888 /* NSObject+JsonCategory.m in Sources */,
@@ -2609,7 +2615,6 @@
 				97270EB91C7BF4D500C92888 /* CorePPTVC.m in Sources */,
 				97270EAE1C7BF4D500C92888 /* UIAlertView+AFNetworking.m in Sources */,
 				97270C581C7BF47400C92888 /* YTContentCell.m in Sources */,
-				97270E9E1C7BF4D500C92888 /* YTNormalWebController.m in Sources */,
 				97270D5B1C7BF4AF00C92888 /* YTAccount.m in Sources */,
 				97270D221C7BF49500C92888 /* YTMessageViewController.m in Sources */,
 				97270EE41C7BF4D500C92888 /* YUBottomPopSelctView.m in Sources */,
@@ -2679,6 +2684,7 @@
 				97270ED01C7BF4D500C92888 /* SVProgressHUD.m in Sources */,
 				97270CEE1C7BF47E00C92888 /* YTReportTopView.m in Sources */,
 				97270EB31C7BF4D500C92888 /* UIWebView+AFNetworking.m in Sources */,
+				97C718F41C7FF45200BC43D7 /* YTMessageDetailController.m in Sources */,
 				97270C421C7BF47400C92888 /* YTAuthenticationStatusController.m in Sources */,
 				97270D251C7BF49500C92888 /* YTSystemCenterController.m in Sources */,
 				97270CE81C7BF47E00C92888 /* YTCustomerView.m in Sources */,

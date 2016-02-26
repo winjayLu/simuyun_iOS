@@ -1,24 +1,32 @@
 //
-//  YTViewPdfViewController.m
+//  YTNormalWebController.m
 //  simuyun
 //
-//  Created by Luwinjay on 15/11/23.
+//  Created by Luwinjay on 15/10/29.
 //  Copyright © 2015年 YTWealth. All rights reserved.
 //
 
+#import "YTMessageDetailController.h"
+#import "YTAccountTool.h"
+#import "NSDate+Extension.h"
+#import "NSString+Password.h"
+#import "YTAccountTool.h"
+#import "YTReportContentController.h"
+#import "YTProductModel.h"
 #import "YTViewPdfViewController.h"
-#import "UIBarButtonItem+Extension.h"
+#import "YHWebViewProgress.h"
+#import "YHWebViewProgressView.h"
+#import "YTOrderdetailController.h"
 #import "DXPopover.h"
 #import "ShareCustomView.h"
 #import "ShareManage.h"
-#import "YTUserInfoTool.h"
 #import "SVProgressHUD.h"
-#import "YHWebViewProgress.h"
-#import "YHWebViewProgressView.h"
-#import "YTTabBarController.h"
+#import "YTUserInfoTool.h"
 
-@interface YTViewPdfViewController () <shareCustomDelegate, UIWebViewDelegate>
-@property (nonatomic, weak) UIWebView *webView;
+
+@interface YTMessageDetailController () <UIWebViewDelegate, shareCustomDelegate>
+
+
 
 // 弹出菜单
 @property (nonatomic, strong) DXPopover *popover;
@@ -38,52 +46,48 @@
 
 @end
 
-@implementation YTViewPdfViewController
+@implementation YTMessageDetailController
+
++ (instancetype)webWithTitle:(NSString *)title url:(NSString *)url
+{
+    YTMessageDetailController *normal = [[self alloc] init];
+    normal.toTitle = title;
+    normal.url = url;
+    return normal;
+}
+
 
 - (void)loadView
 {
     // 将控制器的View替换为webView
     UIWebView *mainView = [[UIWebView alloc] initWithFrame:DeviceBounds];
-    
-    mainView.scalesPageToFit = YES;
-    [mainView.scrollView setShowsVerticalScrollIndicator:NO];
-    mainView.opaque = NO;
-    mainView.delegate = self;
-    self.webView = mainView;
-    self.view = mainView;
-    self.view.backgroundColor = YTColor(231, 231, 231);
-}
+    // 加时间戳
+    if(self.isDate == NO)
+    {
+        NSMutableString *url = [NSMutableString string];
+        [url appendString:self.url];
+        [url appendString:[NSDate stringDate]];
+        [mainView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:url]]];
+    } else {
+        [mainView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
+    }
 
+    mainView.scalesPageToFit = YES;
+    mainView.delegate = self;
+    mainView.opaque = NO;
+    [mainView.scrollView setShowsVerticalScrollIndicator:NO];
+    self.view = mainView;
+    self.view.backgroundColor = YTGrayBackground;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [SVProgressHUD showWithStatus:@"正在加载"];
-    // 去除标题中的pdf
-    NSRange range = [self.shareTitle rangeOfString:@".pdf"];
-    if (range.location != NSNotFound) {
-        self.shareTitle = [self.shareTitle substringToIndex:range.location];
-    }
+    // 显示进度条
+    self.title = @"正在加载";
     [self setupProgress];
-    self.title = self.shareTitle;
-    self.webView.scalesPageToFit = YES;
-    // 加载网页
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
     
-    // 右侧菜单
     [self setupRightMenu];
-}
 
-/**
- *  右侧菜单
- */
-- (void)setupRightMenu
-{
-    UIButton *button = [[UIButton alloc] init];
-    button.frame = CGRectMake(0, 0, 22, 22);
-    [button addTarget:self action:@selector(rightClick:) forControlEvents:UIControlEventTouchUpInside];
-    [button setBackgroundImage:[UIImage imageNamed:@"jiahao"] forState:UIControlStateNormal];
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 }
 
 
@@ -107,25 +111,104 @@
     [self.view addSubview:progressView];
 }
 
-
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [self.progressProxy.progressView setProgress:1.0f animated:NO];
-    [SVProgressHUD dismiss];
+    
+    self.title = self.toTitle;
+    // 禁用用户选择
+    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitUserSelect='none';"];
+    
+    // 禁用长按弹出框
+    [webView stringByEvaluatingJavaScriptFromString:@"document.documentElement.style.webkitTouchCallout='none';"];
 }
-
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
 {
     self.progressProxy.progressView.hidden = YES;
-    [SVProgressHUD showErrorWithStatus:@"加载失败"];
+    self.title = @"加载失败";
 }
+
+
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - UIWebViewDelegate
+
+- (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    
+    NSString *urlString = [[request URL] absoluteString];
+    NSArray *result = [urlString componentsSeparatedByString:@":"];
+    NSMutableArray *urlComps = [[NSMutableArray alloc] init];
+    for (NSString *str in result) {
+        [urlComps addObject:[str stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"app"])
+    {
+        // 跳转的地址和标题
+        if (urlComps.count) {
+            NSString *command = urlComps[1];
+            if ([command isEqualToString:@"openpage"])
+            {
+                YTMessageDetailController *normal = [[YTMessageDetailController alloc] init];
+                normal.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
+                normal.isDate = YES;
+                normal.toTitle = urlComps[3];
+                [self.navigationController pushViewController:normal animated:YES];
+            } else if ([command isEqualToString:@"closepage"])  // 关闭页面
+            {
+                [self.navigationController popViewControllerAnimated:YES];
+            } else if ([command isEqualToString:@"filingdata"]) // 报备
+            {
+                YTReportContentController *report = [[YTReportContentController alloc] init];
+                YTProductModel *product = [[YTProductModel alloc] init];
+                product.order_id = urlComps[2];
+                product.order_code = urlComps[3];
+                product.customerName = urlComps[4];
+                product.buyMoney = [urlComps[5] intValue];
+                product.pro_name = urlComps[6];
+                report.prouctModel = product;
+                [self.navigationController pushViewController:report animated:YES];
+            } else if ([command isEqualToString:@"viewpdf"])    // pdf浏览
+            {
+                YTViewPdfViewController *viewPdf = [[YTViewPdfViewController alloc] init];
+                viewPdf.url = urlComps[2];
+                viewPdf.shareTitle = urlComps[3];
+                
+                [self.navigationController pushViewController:viewPdf animated:YES];
+            }
+        }
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark - 分享
+/**
+ *  右侧菜单
+ */
+- (void)setupRightMenu
+{
+    UIButton *button = [[UIButton alloc] init];
+    button.frame = CGRectMake(0, 0, 22, 22);
+    [button addTarget:self action:@selector(rightClick:) forControlEvents:UIControlEventTouchUpInside];
+    [button setBackgroundImage:[UIImage imageNamed:@"jiahao"] forState:UIControlStateNormal];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
 
 /**
  *  右侧菜单点击
  */
 - (void)rightClick:(UIButton *)button
 {
-    if (self.popover != nil || self.customView != nil){
+    if (self.popover != nil || self.customView != nil)
+    {
         [self.popover dismiss];
         return;
     }
@@ -143,7 +226,6 @@
         self.popover = nil;
     };
 }
-
 
 // 菜单内容
 - (UIView *)innerView
@@ -169,11 +251,12 @@
         share.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
         [share addTarget:self action:@selector(shareClcik) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:share];
-        _innerView = view;
         
+        _innerView = view;
     }
     return _innerView;
 }
+
 // 分享
 - (void)shareClcik
 {
@@ -183,8 +266,8 @@
     if (self.customView != nil) return;
     
     //  设置分享视图平台数据
-    NSArray *titleArr = [NSArray arrayWithObjects:@"微信好友",@"朋友圈", nil];
-    NSArray *imgArr = [NSArray arrayWithObjects:@"ShareButtonTypeWxShare",@"ShareButtonTypeWxPyq", nil];
+    NSArray *titleArr = [NSArray arrayWithObjects:@"微信好友",@"朋友圈",@"邮件",@"短信",@"复制链接", nil];
+    NSArray *imgArr = [NSArray arrayWithObjects:@"ShareButtonTypeWxShare",@"ShareButtonTypeWxPyq",@"ShareButtonTypeEmail",@"ShareButtonTypeSms",@"ShareButtonTypeCopy", nil];
     //  创建自定义分享视图
     ShareCustomView *customView = [[ShareCustomView alloc] initWithTitleArray:titleArr imageArray:imgArr];
     customView.frame = self.view.bounds;
@@ -208,19 +291,11 @@
     ShareManage *share = [ShareManage shareManage];
     //  设置分享内容
     [share shareConfig];
-    share.share_title = self.shareTitle;
-    // 如果有产品模型
-    if (self.product) {
-        if(self.product.type_code == 1)
-        {
-            share.share_content = [NSString stringWithFormat:@"私募云平台浮收项目%@开始募集，%@起投，%@封闭期", self.product.pro_name, self.product.buy_start, self.product.close_stage];
-        } else {
-            share.share_content = [NSString stringWithFormat:@"私募云平台固收项目%@开始募集，%@起投，%@投资期限", self.product.pro_name, self.product.buy_start, self.product.term];
-        }
-    }
-    share.share_image = [UIImage imageNamed:@"WeChatPDF"];
-    share.share_url = self.url;
-
+    share.share_title = self.message.title;
+    share.share_content = self.message.summary;
+    // 设置分享图片
+    share.share_image = [UIImage imageNamed:self.shareImageName];
+    share.share_url = [NSString stringWithFormat:@"http://www.simuyun.com/notice/shared.html?id=%@", self.message.messageId];
     switch (tag) {
         case ShareButtonTypeWxShare:
             //  微信分享
@@ -245,14 +320,20 @@
         }
             break;
     }
-    [MobClick event:@"share_click" attributes:@{@"内容类别" : @"pdf文档", @"分享途径" : @(tag) ,@"机构" : [YTUserInfoTool userInfo].organizationName}];
-}
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [SVProgressHUD dismiss];
+    [MobClick event:@"share_click" attributes:@{@"内容类别" : self.toTitle, @"分享途径" : @(tag) ,@"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
+
+
+/**
+ *  清理webView缓存
+ */
+- (void)dealloc
+{
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+}
+
+#pragma mark - lazy
 
 - (YHWebViewProgress *)progressProxy
 {
@@ -263,13 +344,6 @@
 }
 
 
-/**
- *  清理webView缓存
- */
-- (void)dealloc
-{
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
-}
 
 
 @end
