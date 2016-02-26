@@ -181,6 +181,7 @@
     YTMessageDetailController *detail = [YTMessageDetailController webWithTitle:[NSString titleWithCategoryCode:message.category2Code] url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
     detail.isDate = YES;
     detail.shareImageName = @"shareYunyinGonggao";
+    detail.message = message;
     detail.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detail animated:YES];
     [MobClick event:@"msg_click" attributes:@{@"类型" : @"运营公告详情", @"机构" : [YTUserInfoTool userInfo].organizationName}];

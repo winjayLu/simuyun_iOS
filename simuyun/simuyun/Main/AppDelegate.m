@@ -30,7 +30,9 @@
 #import "YTResultPasswordViewController.h"
 
 @interface AppDelegate ()
-
+{
+    NSTimer* _timer;
+}
 /**
  *  当前显示的控制器
  */
@@ -116,9 +118,35 @@
     return  [UMSocialSnsService handleOpenURL:url];
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application
+/**
+ *  常驻后台
+ *
+ */
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    if([YTResourcesTool isVersionFlag] == YES){
+        _timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(logAction) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
+        UIApplication*   app = [UIApplication sharedApplication];
+        __block    UIBackgroundTaskIdentifier bgTask;
+        bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (bgTask != UIBackgroundTaskInvalid){
+                    bgTask = UIBackgroundTaskInvalid;
+                }
+            });
+        }];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (bgTask != UIBackgroundTaskInvalid){
+                    bgTask = UIBackgroundTaskInvalid;
+                }
+            });
+        });
+    }
+}
+-(void)logAction
 {
-    [application beginBackgroundTaskWithExpirationHandler:nil];
+    NSLog(@"常驻后台打印------------------------");
 }
 
 
@@ -147,6 +175,8 @@
     [APService setupWithOption:launchOptions];
     [APService setLogOFF];
 }
+
+
 
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken

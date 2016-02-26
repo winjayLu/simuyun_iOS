@@ -234,16 +234,16 @@
 }
 
 // 跑马灯代理方法
-- (void)removeVIew
-{
-    [self.loopView removeFromSuperview];
-    self.loopView = nil;
-    [UIView animateWithDuration:0.5 animations:^{
-        self.mainView.y = 262;
-    }];
-    CGSize oldContent = self.mainView.contentSize;
-    self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height - 48);
-}
+//- (void)removeVIew
+//{
+//    [self.loopView removeFromSuperview];
+//    self.loopView = nil;
+//    [UIView animateWithDuration:0.5 animations:^{
+//        self.mainView.y = 262;
+//    }];
+//    CGSize oldContent = self.mainView.contentSize;
+//    self.mainView.contentSize = CGSizeMake(oldContent.width, oldContent.height - 48);
+//}
 
 - (void)pushView:(LoopObj *)loopObj
 {

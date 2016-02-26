@@ -188,10 +188,10 @@
     /**
      *  判断是否全部轮播三册
      */
-    if (self.repeatCount > _itemarray.count * repeat) {
-        [self releaseTimer];
-        [self.loopDelegate removeVIew];
-    }
+//    if (self.repeatCount > _itemarray.count * repeat) {
+//        [self releaseTimer];
+//        [self.loopDelegate removeVIew];
+//    }
     
     //起始位置
     UIView *topLabel = (UIView *)[abstractScrollview viewWithTag:10];

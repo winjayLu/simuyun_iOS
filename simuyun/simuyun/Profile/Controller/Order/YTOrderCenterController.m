@@ -253,7 +253,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     YTOrderCenterCell *cell = nil;
     YTOrderCenterModel *order = self.orders[indexPath.section];
-    if (order.status == 20 || order.status == 60) {
+    if (order.status == 20 || order.status == 60 || order.status == 90) {
         static NSString *deleteCell = @"deleteOrderCell";
         cell = [tableView dequeueReusableCellWithIdentifier:deleteCell];
         if (cell==nil) {
@@ -313,7 +313,7 @@
     NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
     // 获订单模型
     YTOrderCenterModel *order = self.orders[cellIndexPath.section];
-    if (order.status == 20 || order.status == 60) {
+    if (order.status == 20 || order.status == 60 || order.status == 90) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"确定要删除此订单么？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
         [alert show];
         self.selectedIndex = cellIndexPath;

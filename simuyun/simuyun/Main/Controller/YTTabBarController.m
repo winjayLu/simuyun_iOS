@@ -111,7 +111,6 @@
  */
 - (void)timingDetection
 {
-    
     if ([YTAccountTool account].userId == nil || [YTAccountTool account].userId.length == 0) {
         return;
     }
