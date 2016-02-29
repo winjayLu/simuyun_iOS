@@ -139,6 +139,9 @@
         case 42:
             categoryStr = @"运营喜报";
             break;
+        case 61:
+            categoryStr = @"营销喜报";
+            break;
         default:
             categoryStr = @"公告详情";
             break;

@@ -147,7 +147,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 85;
+    return 99;
 }
 
 // 设置section的数目，即是你有多少个cell

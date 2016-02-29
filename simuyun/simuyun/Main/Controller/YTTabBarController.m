@@ -199,7 +199,7 @@
         YTMessageNum *oldMessage = [YTMessageNumTool messageNum];
         [YTMessageNumTool save:[YTMessageNum objectWithKeyValues:responseObject]];
         YTMessageNum *newMessageNum = [YTMessageNumTool messageNum];
-        if (oldMessage != nil && (newMessageNum.unreadTodoNum != oldMessage.unreadTodoNum)) {
+        if (oldMessage == nil || (newMessageNum.unreadTodoNum != oldMessage.unreadTodoNum)) {
             [YTCenter postNotificationName:YTUpdateTodoFrame object:nil];
         }
         if (newMessageNum.unreadTalkNum > 0) {

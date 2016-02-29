@@ -9,6 +9,7 @@
 
 #import "YTTodoViewCell.h"
 #import "UIImageView+SD.h"
+#import "NSString+Extend.h"
 
 // 左右间距
 #define maginWidth 7
@@ -26,6 +27,9 @@
 
 // 摘要
 @property (weak, nonatomic) IBOutlet UILabel *detailLable;
+
+// 类型
+@property (weak, nonatomic) IBOutlet UILabel *categoryLable;
 
 @end
 
@@ -54,11 +58,12 @@
     _message = message;
     
     // 设置图片
-    [self.iconImage imageWithUrlStr:_message.iconUrl phImage:[UIImage imageNamed:@"messagePl"]];
+    [self.iconImage imageWithUrlStr:_message.imageUrl phImage:[UIImage imageNamed:@"messageCellPL"]];
     
     self.titleLable.text = _message.title;
     self.detailLable.text = _message.summary;
-    self.dateLable.text = _message.createDate;
+    self.dateLable.text = [_message.createDate substringFromIndex:5];
+    self.categoryLable.text = [NSString titleWithCategoryCode:_message.category2Code];
 }
 
 - (void)awakeFromNib {
