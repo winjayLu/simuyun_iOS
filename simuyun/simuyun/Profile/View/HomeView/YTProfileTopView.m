@@ -15,6 +15,7 @@
 #import "AFNetworking.h"
 #import "SVProgressHUD.h"
 #import "YTTabBarController.h"
+#import "CoreArchive.h"
 
 @interface YTProfileTopView() <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -33,10 +34,10 @@
  */
 - (IBAction)iconClick:(UITapGestureRecognizer *)sender;
 
-/**
- *  认证按钮
- */
-@property (weak, nonatomic) IBOutlet UIButton *renZhenBtn;
+///**
+// *  认证按钮
+// */
+//@property (weak, nonatomic) IBOutlet UIButton *renZhenBtn;
 /**
  *  签到按钮
  */
@@ -106,6 +107,9 @@
 
 // 是否修改了头像
 @property (nonatomic, assign) BOOL isChang;
+
+// 首页背景图片
+@property (weak, nonatomic) IBOutlet UIImageView *homeImageView;
 
 
 @end
@@ -342,6 +346,17 @@
     _userInfo = userInfo;
     if (_userInfo == nil) return;
     
+    // 设置背景图片
+    NSString *homeImageUrl = nil;
+    if (DeviceWidth > 375) {   // 使用3X图片
+        homeImageUrl = [CoreArchive strForKey:@"home3x"];
+    } else {
+        homeImageUrl = [CoreArchive strForKey:@"home2x"];
+    }
+    if (homeImageUrl != nil) {
+        [self.homeImageView imageWithUrlStr:homeImageUrl phImage:[UIImage imageNamed:@"backgroundpicture"]];
+    }
+    
     // 设置头像
     if (_userInfo.iconImage != nil){
         self.iconImage.layer.masksToBounds = YES;
@@ -365,19 +380,14 @@
     [self.yunDouBtn setTitle:[NSString stringWithFormat:@"%d", userInfo.myPoint] forState:UIControlStateNormal];
 
     if (userInfo.adviserStatus == 1 || userInfo.adviserStatus == 3) {
-        self.renZhenBtn.hidden = NO;
-        [self.renZhenBtn setBackgroundImage:[UIImage imageNamed:@"weirenzheng"] forState:UIControlStateNormal];
         // 设置昵称
         self.nameLable.text = userInfo.nickName;
     } else if (userInfo.adviserStatus == 2)
     {
-        self.renZhenBtn.hidden = NO;
-        [self.renZhenBtn setBackgroundImage:[UIImage imageNamed:@"renzhengzhong"] forState:UIControlStateNormal];
         // 设置昵称
         self.nameLable.text = userInfo.nickName;
     
     } else {
-        self.renZhenBtn.hidden = YES;
         // 设置昵称
         if (userInfo.nickName) {
             self.nameLable.text = [NSString stringWithFormat:@"%@ | %@",userInfo.organizationName, userInfo.nickName];

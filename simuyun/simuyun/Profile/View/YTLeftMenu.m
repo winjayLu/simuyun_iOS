@@ -16,6 +16,7 @@
 #import "YTMessageNumTool.h"
 #import "YTTabBarController.h"
 #import "FloatView.h"
+#import "CoreArchive.h"
 
 @interface YTLeftMenu()
 
@@ -91,6 +92,9 @@
  *  推荐私募云给好友顶部约束
  */
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tuijianTopConstraint;
+
+@property (weak, nonatomic) IBOutlet UIImageView *leftImageView;
+
 
 @end
 
@@ -212,6 +216,17 @@
 - (void)setUserInfo:(YTUserInfo *)userInfo
 {
     _userInfo = userInfo;
+    
+    // 设置背景图片
+    NSString *homeImageUrl = nil;
+    if (DeviceWidth > 375) {   // 使用3X图片
+        homeImageUrl = [CoreArchive strForKey:@"left3x"];
+    } else {
+        homeImageUrl = [CoreArchive strForKey:@"left2x"];
+    }
+    if (homeImageUrl != nil) {
+        [self.leftImageView imageWithUrlStr:homeImageUrl phImage:[UIImage imageNamed:@"backgroundcebian"]];
+    }
     
     // 隐藏关联 微信
     if ([YTResourcesTool isVersionFlag] == NO) {

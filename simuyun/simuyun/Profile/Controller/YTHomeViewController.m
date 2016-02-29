@@ -48,6 +48,8 @@
 #import "NSString+JsonCategory.h"
 #import "NSObject+JsonCategory.h"
 #import "CoreArchive.h"
+#import "AFNetworking.h"
+
 
 #define magin 3
 
@@ -134,6 +136,9 @@
     
     // 检查更新
     [self updateData];
+    
+    // 获取首页图片地址
+    [self loadImageUrl];
 }
 
 
@@ -833,6 +838,25 @@
     [webView stringByEvaluatingJavaScriptFromString:js];
 }
 
+#pragma mark - 获取首页图片地址
+- (void)loadImageUrl
+{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    // 2.发送一个GET请求
+    [mgr GET:@"http://www.simuyun.com/peyunupload/label/homeImageUrl.json" parameters:nil
+     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+         NSArray *array = [NSString objectArrayWithKeyValuesArray:responseObject];
+         // 存储获取到的数据
+         [CoreArchive setStr:array[0] key:@"home2x"];
+         [CoreArchive setStr:array[1] key:@"home3x"];
+         [CoreArchive setStr:array[2] key:@"left2x"];
+         [CoreArchive setStr:array[3] key:@"left3x"];
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         NSLog(@"%@", error);
+     }];
+    
+}
 #pragma mark - 推送跳转
 - (void)pushNotificationWithJump
 {

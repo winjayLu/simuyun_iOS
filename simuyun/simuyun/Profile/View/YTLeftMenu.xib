@@ -332,6 +332,7 @@
                 <outlet property="guanLianRightBtn" destination="2VW-dw-6hO" id="5vI-PD-OqE"/>
                 <outlet property="huangGuanImage" destination="WUT-UR-MWe" id="aKe-IC-nwW"/>
                 <outlet property="iconImage" destination="Kyw-oe-x8Q" id="Zph-sE-7En"/>
+                <outlet property="leftImageView" destination="3DC-4S-XPf" id="8bw-j6-n1E"/>
                 <outlet property="nameLable" destination="ig5-0y-fq5" id="ho6-c2-QLA"/>
                 <outlet property="tuijianTopConstraint" destination="Yoe-FK-805" id="aIL-xx-m9W"/>
             </connections>
