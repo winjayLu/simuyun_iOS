@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface YTProductViewController : UITableViewController
+@interface YTProductViewController : UIViewController
 
 
 @end

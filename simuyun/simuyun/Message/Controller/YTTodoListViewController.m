@@ -49,12 +49,12 @@
     // 去掉下划线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -34, 0);
+//    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, -34, 0);
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewChat)];
     
     // 下拉刷新
-    self.tableView.footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreChat)];
+    self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreChat)];
    
     // 初始化提醒视图
     [self setupHintView];
@@ -88,11 +88,16 @@
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
     param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"category"] = @1;
-    param[@"pagesize"] = @20;
+    param[@"pagesize"] = @8;
     self.pageNo = 1;
     param[@"pageNo"] = @(self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         self.messages = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
+        [self.tableView.footer resetNoMoreData];
+        if([self.messages count] < 8)
+        {
+            [self.tableView.footer noticeNoMoreData];
+        }
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
         [self.hintView changeContentTypeWith:self.messages];
@@ -109,10 +114,16 @@
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
     param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"category"] = @1;
-    param[@"pagesize"] = @20;
+    param[@"pagesize"] = @8;
     param[@"pageNo"] = @(++self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
-        [self.messages addObjectsFromArray:[YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]]];
+        NSArray *temp = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
+        if(temp.count == 0)
+        {
+            [self.tableView.footer noticeNoMoreData];
+            return;
+        }
+        [self.messages addObjectsFromArray:temp];
         [self.tableView reloadData];
         [self.tableView.footer endRefreshing];
     } failure:^(NSError *error) {

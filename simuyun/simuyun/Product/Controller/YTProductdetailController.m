@@ -47,6 +47,7 @@
 
 // 发送邮件视图
 @property (nonatomic, weak) YTSenMailView *sendMailView;
+
 @end
 
 @implementation YTProductdetailController
@@ -70,15 +71,15 @@
     [super viewDidLoad];
     self.title = @"产品详情";
     self.webView.scalesPageToFit = YES;
-    
+
     // 加载网页
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
     
     // 右侧菜单
     [self setupRightMenu];
     
+    
 }
-
 
 /**
  *  右侧菜单
@@ -121,6 +122,18 @@
 
 
 #pragma mark - UIWebViewDelegate
+
+//- (void)webViewDidFinishLoad:(UIWebView *)webView
+//{
+//    [self.progressProxy.progressView setProgress:1.0f animated:NO];
+//    [SVProgressHUD dismiss];
+//}
+//
+//- (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
+//{
+//    self.progressProxy.progressView.hidden = YES;
+//    [SVProgressHUD showErrorWithStatus:@"加载失败"];
+//}
 
 - (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
 {

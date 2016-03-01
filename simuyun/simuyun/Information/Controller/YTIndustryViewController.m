@@ -37,14 +37,14 @@
     [super viewDidLoad];
     
     self.tableView.backgroundColor = YTGrayBackground;
-    self.tableView.contentInset = UIEdgeInsetsMake(-32, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(-32, 0, 35, 0);
     // 去掉下划线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 
     // 设置下拉刷新
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadInformations)];
     [self.tableView.header beginRefreshing];
-    self.tableView.footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreInformations)];
+    self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreInformations)];
     // 初始化提醒视图
     [self setupHintView];
 }
@@ -81,6 +81,11 @@
     
     [YTHttpTool get:YTInformations params:params success:^(id responseObject) {
         self.informations = [YTInformation objectArrayWithKeyValuesArray:responseObject];
+        [self.tableView.footer resetNoMoreData];
+        if([self.informations count] < 8)
+        {
+            [self.tableView.footer noticeNoMoreData];
+        }
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
         [self.hintView changeContentTypeWith:self.informations];
@@ -98,7 +103,13 @@
     params[@"limit"] = @"8";
     
     [YTHttpTool get:YTInformations params:params success:^(id responseObject) {
-        [self.informations addObjectsFromArray: [YTInformation objectArrayWithKeyValuesArray:responseObject]];
+        NSArray *temp = [YTInformation objectArrayWithKeyValuesArray:responseObject];
+        if(temp.count == 0)
+        {
+            [self.tableView.footer noticeNoMoreData];
+            return;
+        }
+        [self.informations addObjectsFromArray: temp];
         [self.tableView reloadData];
         [self.tableView.footer endRefreshing];
     } failure:^(NSError *error) {

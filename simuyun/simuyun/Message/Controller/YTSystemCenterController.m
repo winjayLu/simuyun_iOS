@@ -39,7 +39,7 @@
     [super viewDidLoad];
 
     self.tableView.backgroundColor = YTGrayBackground;
-    self.tableView.contentInset = UIEdgeInsetsMake(-34, 0, 55, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(-34, 0, 88, 0);
 
     // 去掉下划线
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -53,7 +53,7 @@
     [self.tableView.header beginRefreshing];
     
     // 下拉刷新
-    self.tableView.footer = [MJRefreshAutoFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreChat)];
+    self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreChat)];
 }
 
 /**
@@ -86,6 +86,11 @@
     param[@"pageNo"] = @(self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         self.messages = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
+        [self.tableView.footer resetNoMoreData];
+        if([self.messages count] < 8)
+        {
+            [self.tableView.footer noticeNoMoreData];
+        }
         // 存储时间
         [CoreArchive setStr:responseObject[@"lastTimestamp"] key:@"timestampCategory6"];
         // 存储获取到的数据
@@ -112,8 +117,13 @@
     param[@"pagesize"] = @8;
     param[@"pageNo"] = @(++self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
-        YTLog(@"%@", responseObject);
-        [self.messages addObjectsFromArray:[YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]]];
+        NSArray *temp = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
+        if(temp.count == 0)
+        {
+            [self.tableView.footer noticeNoMoreData];
+            return;
+        }
+        [self.messages addObjectsFromArray:temp];
         [self.tableView reloadData];
         [self.tableView.footer endRefreshing];
     } failure:^(NSError *error) {

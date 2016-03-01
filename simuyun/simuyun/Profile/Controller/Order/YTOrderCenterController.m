@@ -196,13 +196,13 @@
     } else {
         dict[@"status"] = self.status;
     }
-    dict[@"pagesize"] = @20;
+    dict[@"pagesize"] = @8;
     self.pageno = 1;
     dict[@"pageno"] = @(self.pageno);
     [YTHttpTool get:YTOrders params:dict success:^(id responseObject) {
         [self.tableView.footer resetNoMoreData];
         self.orders = [YTOrderCenterModel objectArrayWithKeyValuesArray:responseObject];
-        if([ self.orders count] < 20)
+        if([ self.orders count] < 8)
         {
             [self.tableView.footer noticeNoMoreData];
         }
@@ -228,7 +228,7 @@
     } else {
         dict[@"status"] = self.status;
     }
-    dict[@"pagesize"] = @20;
+    dict[@"pagesize"] = @8;
     dict[@"pageno"] = @(++self.pageno);
     [YTHttpTool get:YTOrders params:dict success:^(id responseObject) {
         [self.tableView.footer endRefreshing];

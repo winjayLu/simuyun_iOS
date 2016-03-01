@@ -31,9 +31,10 @@
 #import "AFNetworking.h"
 #import "CAAnimation+PagesViewBarShake.h"
 #import "YTHotProductCell.h"
+#import "SVProgressHUD.h"
 
 
-@interface YTProductViewController ()
+@interface YTProductViewController () <UITableViewDataSource, UITableViewDelegate>
 
 
 @property (nonatomic, strong) NSMutableArray *products;
@@ -64,25 +65,38 @@
  */
 @property (nonatomic, assign) NSInteger series;
 
+/**
+ *  列表
+ */
+@property (nonatomic, weak) UITableView *tableView;
+
 
 @end
 
 @implementation YTProductViewController
 
+- (void)loadView
+{
+    UIView *view = [[UIView alloc] initWithFrame:DeviceBounds];
+    self.view = view;
+    // 初始化顶部菜单
+    [self setupTopView];
+    
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 35, DeviceWidth, DeviceHight - 145)];
+    tableView.backgroundColor = YTGrayBackground;
+    // 去掉下划线
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.contentInset = UIEdgeInsetsMake(0, 0, 8, 0);
+    tableView.delegate = self;
+    tableView.dataSource = self;
+    // 上拉加载
+    tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreProduct)];
+    [self.view addSubview:tableView];
+    self.tableView = tableView;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    // 设置颜色
-    self.tableView.backgroundColor = YTGrayBackground;
-    // 去掉下划线
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 8, 0);
-    
-    
-    // 设置下拉刷新
-    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadProduct)];
-    // 上拉加载
-    self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreProduct)];
     
     // 加载产品分类
     [self loadProductTypes];
@@ -102,7 +116,7 @@
     UIView *topView = [[UIView alloc] init];
     topView.frame = CGRectMake(0, 0, DeviceWidth, topH);
     topView.backgroundColor = [UIColor whiteColor];
-    self.tableView.tableHeaderView = topView;
+    [self.view addSubview:topView];
     
     // 滑动产品分类
     UIScrollView *scroll = [[UIScrollView alloc] init];
@@ -243,11 +257,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     YTProductModel *product = self.products[indexPath.section];
-//    if (product.pro_name.length > 10) {
-//        product.isHotProduct = YES;
-//    }
     UITableViewCell *cell;
-#warning 修改
     if (product.isHotProduct == YES) {  // 热推产品
         static NSString *identifier = @"hotProductCell";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
@@ -292,10 +302,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    YTProductModel *product = self.products[indexPath.section];
-//    if (product.isHotProduct == YES) {
-//        return 193;
-//    }
+    YTProductModel *product = self.products[indexPath.section];
+    if (product.isHotProduct == YES) {
+        return 193;
+    }
     return 122;
 }
 
@@ -364,6 +374,7 @@
         self.series = 0;
     }
     [self loadProduct];
+    [SVProgressHUD showWithStatus:@"正在加载"];
 }
 
 - (void)loadProduct
@@ -377,6 +388,7 @@
     }
     [YTHttpTool get:YTProductList params:param
     success:^(NSDictionary *responseObject) {
+        [SVProgressHUD dismiss];
         [self.tableView.footer resetNoMoreData];
         self.products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
         if([ self.products count] < 8)
@@ -392,10 +404,10 @@
         // 刷新表格
         [self.tableView reloadData];
         // 结束刷新状态
-        [self.tableView.header endRefreshing];
+//        [self.tableView.header endRefreshing];
     } failure:^(NSError *error) {
         // 结束刷新状态
-        [self.tableView.header endRefreshing];
+//        [self.tableView.header endRefreshing];
     }];
 }
 
