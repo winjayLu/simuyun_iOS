@@ -69,7 +69,6 @@
         shareMenuView.y = DeviceHight - shareMenuViewH - 263;
     }];
 }
-#warning 删除无用代码
 //当键退出时调用
 - (void)keyboardWillHide:(NSNotification *)aNotification
 {

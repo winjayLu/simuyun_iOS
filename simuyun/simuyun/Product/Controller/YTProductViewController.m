@@ -170,6 +170,7 @@
 
 - (void)typeClick:(UIButton *)button
 {
+    if (self.selectedButton == button) return;
     // 改变按钮状态
     self.selectedButton.selected = NO;
     [self.selectedButton.titleLabel setFont:[UIFont systemFontOfSize:13]];
@@ -263,7 +264,7 @@
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];
         if (cell==nil) {
             cell =[YTHotProductCell hotProductCell];
-            cell.layer.cornerRadius = 5;
+            cell.layer.cornerRadius = 10;
             cell.layer.masksToBounds = YES;
             cell.layer.borderWidth = 1.0f;
             cell.layer.borderColor = YTColor(208, 208, 208).CGColor;

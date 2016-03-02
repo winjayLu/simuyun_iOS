@@ -164,7 +164,7 @@
     param[@"uid"] = [YTAccountTool account].userId;
     param[@"proName"] = productName;
     param[@"offset"] = @"0";
-    param[@"limit"] = @"20";
+    param[@"limit"] = @"8";
     [YTHttpTool get:YTProductList params:param
             success:^(NSDictionary *responseObject) {
                 NSArray *products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
@@ -174,7 +174,7 @@
                 }
                 [SVProgressHUD dismiss];
                 // 上拉加载
-                if (products.count == 20) {
+                if (products.count == 8) {
                     self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreProduct)];
                 }
                 self.searchProducts = [NSMutableArray arrayWithArray:products];
@@ -360,13 +360,13 @@
     param[@"series"] = @(btn.tag);
     self.series = btn.tag;
     param[@"offset"] = @"0";
-    param[@"limit"] = @"20";
+    param[@"limit"] = @"8";
     [YTHttpTool get:YTProductList params:param
             success:^(NSDictionary *responseObject) {
                 [SVProgressHUD dismiss];
                 NSArray *products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
                 // 上拉加载
-                if (products.count == 20) {
+                if (products.count == 8) {
                     self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreProduct)];
                 }
                 self.searchProducts = [NSMutableArray arrayWithArray:products];

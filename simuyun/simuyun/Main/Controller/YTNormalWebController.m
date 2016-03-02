@@ -129,7 +129,6 @@
     for (NSString *str in result) {
         [urlComps addObject:[str stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     }
-    
     if([urlComps count] && [[urlComps objectAtIndex:0] isEqualToString:@"app"])
     {
         // 跳转的地址和标题

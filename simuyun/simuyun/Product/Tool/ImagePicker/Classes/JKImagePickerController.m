@@ -151,7 +151,6 @@ ALAssetsFilter * ALAssetsFilterFromJKImagePickerControllerFilterType(JKImagePick
 
 - (void)showAssetsGroupView
 {
-#warning 报备图片上传有问题
     UIWindow *keyWindow = nil;
     for (UIWindow *window in [UIApplication sharedApplication].windows) {
         if (window.windowLevel == 0) {

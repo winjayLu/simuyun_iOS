@@ -120,11 +120,15 @@ static ShareManage *shareManage;
 {
     _viewC = viewC;
     //  设置内容和图片
-    [[UMSocialControllerService defaultControllerService] setShareText:self.share_content shareImage:self.share_image socialUIDelegate:self];
+    if (self.share_image != nil) {
+        [[UMSocialControllerService defaultControllerService] setShareText:self.share_content shareImage:self.share_image socialUIDelegate:self];
+    }
     //  设置标题
     [UMSocialData defaultData].extConfig.wechatTimelineData.title = self.share_title;
     //  设置url
-    [UMSocialWechatHandler setWXAppId:WXAppID appSecret:WXAppSecret url:self.share_url];
+    if (self.share_url != nil) {
+        [UMSocialWechatHandler setWXAppId:WXAppID appSecret:WXAppSecret url:self.share_url];
+    }
     [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatTimeline].snsClickHandler(viewC,[UMSocialControllerService defaultControllerService],YES);
 }
 
