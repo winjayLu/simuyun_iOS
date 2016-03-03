@@ -16,6 +16,7 @@
 #import "YTAccountTool.h"
 #import "YTMessageNumTool.h"
 #import "YTOperationCenterController.h"
+#import "CoreArchive.h"
 
 
 @interface YTMessageViewController ()
@@ -33,13 +34,38 @@
 {
     self.view = self.pagesView;
 }
-
+static UIWindow *_window;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = YTGrayBackground;
     // 监听客服消息数字变化
     [YTCenter addObserver:self selector:@selector(loadNewStatus) name:YTUpdateChatContent object:nil];
     [MobClick event:@"nav_click" attributes:@{@"按钮" : @"消息"}];
+    
+    // 新手指引
+    if ([CoreArchive strForKey:@"firstMessage"] == nil && [CoreArchive strForKey:@"firstMessage"].length == 0) {
+        _window = [[UIWindow alloc] initWithFrame:DeviceBounds];
+        _window.backgroundColor = [UIColor clearColor];
+        [_window makeKeyAndVisible];
+        
+        [CoreArchive setStr:@"firstMessage" key:@"firstMessage"];
+        UIButton *newGuidelines = [[UIButton alloc] initWithFrame:_window.bounds];
+        newGuidelines.backgroundColor = [UIColor clearColor];
+        [newGuidelines setBackgroundImage:[UIImage imageNamed:@"xiaoxizhiyin"] forState:UIControlStateNormal];
+        [newGuidelines addTarget:self action:@selector(newGuidelinesClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_window addSubview:newGuidelines];
+    }
+    
+}
+/**
+ *  新特性指引
+ *
+ */
+- (void)newGuidelinesClick:(UIButton *)newGuidelines
+{
+    [newGuidelines removeFromSuperview];
+    _window.hidden = YES;
+    _window = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated

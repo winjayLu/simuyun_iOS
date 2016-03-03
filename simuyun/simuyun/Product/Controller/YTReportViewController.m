@@ -554,7 +554,13 @@
 
 
 - (IBAction)typeBtnClick:(id)sender {
-    
+    // 退出键盘
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
     YTCustomPickerView *addressPickerView = [[YTCustomPickerView alloc]init];
     addressPickerView.block = ^(YTCustomPickerView *view,UIButton *btn,NSString *selectType){
         self.typeField.text = selectType;

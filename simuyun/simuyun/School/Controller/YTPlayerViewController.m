@@ -72,10 +72,15 @@
 - (void)loadVideoData
 {
     [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
+    UIImageView *imageV = [[UIImageView alloc] init];
+    imageV.frame = [self playViewFrame];
+    imageV.image = [UIImage imageNamed:@"SchoolBanner"];
+    [self.view addSubview:imageV];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
     param[@"videoId"] = self.videoId;
     [YTHttpTool get:YTSelectVideo params:param success:^(id responseObject) {
+        [imageV removeFromSuperview];
         [SVProgressHUD dismiss];
         self.vedio = [YTVedioModel objectWithKeyValues:responseObject];
     } failure:^(NSError *error) {

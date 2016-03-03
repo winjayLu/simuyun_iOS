@@ -196,13 +196,13 @@
     } else {
         dict[@"status"] = self.status;
     }
-    dict[@"pagesize"] = @8;
+    dict[@"pagesize"] = @10;
     self.pageno = 1;
     dict[@"pageno"] = @(self.pageno);
     [YTHttpTool get:YTOrders params:dict success:^(id responseObject) {
         [self.tableView.footer resetNoMoreData];
         self.orders = [YTOrderCenterModel objectArrayWithKeyValuesArray:responseObject];
-        if([ self.orders count] < 8)
+        if([ self.orders count] < 10)
         {
             [self.tableView.footer noticeNoMoreData];
         }
@@ -228,7 +228,7 @@
     } else {
         dict[@"status"] = self.status;
     }
-    dict[@"pagesize"] = @8;
+    dict[@"pagesize"] = @10;
     dict[@"pageno"] = @(++self.pageno);
     [YTHttpTool get:YTOrders params:dict success:^(id responseObject) {
         [self.tableView.footer endRefreshing];
@@ -308,7 +308,6 @@
 
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
 {
-    NSLog(@"%zd", index);
     // 要删除的行
     NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
     // 获订单模型
@@ -388,7 +387,7 @@
         self.selectedCell.isShow = NO;
         return;
     }
-    
+    self.selectedCell = nil;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YTOrderCenterModel *order = self.orders[indexPath.section];
     YTOrderdetailController *detail = [[YTOrderdetailController alloc] init];
@@ -406,10 +405,15 @@
     [self.orders removeObjectAtIndex:self.selectedIndex.section];
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:self.selectedIndex.section];
     [self.tableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    self.selectedCell = nil;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"adviser_id"] = [YTAccountTool account].userId;
     param[@"order_id"] = order.order_id;
     [YTHttpTool post:YTdeleteOrder params:param success:^(id responseObject) {
+        if (self.orders.count < 8)
+        {
+            [self.tableView.footer beginRefreshing];
+        }
     } failure:^(NSError *error) {
     }];
 }

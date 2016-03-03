@@ -94,7 +94,7 @@
     [self.view addSubview:tableView];
     self.tableView = tableView;
 }
-
+static UIWindow *_window;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -103,7 +103,31 @@
     
     // 初始化顶部菜单
     [self setupTopView];
+    
+    // 新手指引
+    if ([CoreArchive strForKey:@"firstProduct"] == nil && [CoreArchive strForKey:@"firstProduct"].length == 0) {
+        _window = [[UIWindow alloc] initWithFrame:DeviceBounds];
+        _window.backgroundColor = [UIColor clearColor];
+        [_window makeKeyAndVisible];
+        
+        [CoreArchive setStr:@"firstProduct" key:@"firstProduct"];
+        UIButton *newGuidelines = [[UIButton alloc] initWithFrame:_window.bounds];
+        newGuidelines.backgroundColor = [UIColor clearColor];
+        [newGuidelines setBackgroundImage:[UIImage imageNamed:@"chanpinzhiyin"] forState:UIControlStateNormal];
+        [newGuidelines addTarget:self action:@selector(newGuidelinesClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_window addSubview:newGuidelines];
+    }
 
+}
+/**
+ *  新特性指引
+ *
+ */
+- (void)newGuidelinesClick:(UIButton *)newGuidelines
+{
+    [newGuidelines removeFromSuperview];
+    _window.hidden = YES;
+    _window = nil;
 }
 /**
  *  初始化顶部菜单

@@ -88,13 +88,13 @@
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
     param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"category"] = @1;
-    param[@"pagesize"] = @8;
+    param[@"pagesize"] = @10;
     self.pageNo = 1;
     param[@"pageNo"] = @(self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         self.messages = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
         [self.tableView.footer resetNoMoreData];
-        if([self.messages count] < 8)
+        if([self.messages count] < 10)
         {
             [self.tableView.footer noticeNoMoreData];
         }
@@ -114,7 +114,7 @@
     NSMutableDictionary *param =[NSMutableDictionary dictionary];
     param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"category"] = @1;
-    param[@"pagesize"] = @8;
+    param[@"pagesize"] = @10;
     param[@"pageNo"] = @(++self.pageNo);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         NSArray *temp = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
@@ -229,7 +229,7 @@
     [_messages removeObjectAtIndex:cellIndexPath.section];
     NSIndexSet *s = [NSIndexSet indexSetWithIndex:cellIndexPath.section];
     [self.tableView deleteSections:s withRowAnimation:UITableViewRowAnimationAutomatic];
-    
+    self.selectedCell = nil;
     // 删除服务器数据
     
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
@@ -240,6 +240,10 @@
     param[@"adviserId"] = [YTAccountTool account].userId;
     param[@"messageId"] = messageId;
     [mgr DELETE:newUrl parameters:[NSDictionary httpWithDictionary:param] success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if (self.messages.count < 8)
+        {
+            [self.tableView.footer beginRefreshing];
+        }
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         if(error.userInfo[@"NSLocalizedDescription"] != nil)
         {
