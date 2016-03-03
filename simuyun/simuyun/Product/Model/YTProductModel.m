@@ -67,14 +67,12 @@
 
 
 /**
- *  打款帐号
- *
- *  @param raise_account
+ *  打款帐号分割
  */
-- (void)setRaise_account:(NSString *)raise_account
+- (NSString *)raise_account
 {
-    NSInteger count = raise_account.length;
-    NSMutableString *string = [NSMutableString stringWithString:raise_account];
+    NSInteger count = _raise_account.length;
+    NSMutableString *string = [NSMutableString stringWithString:_raise_account];
     NSMutableString *newstring = [NSMutableString string];
     while (count > 4) {
         count -= 4;
@@ -85,7 +83,7 @@
         [string deleteCharactersInRange:rang];
     }
     [newstring insertString:string atIndex:newstring.length];
-    _raise_account = newstring;
+    return newstring;
 }
 
 

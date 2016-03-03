@@ -72,7 +72,7 @@
     _product = product;
     
     // 设置图片
-    [self.bgView imageWithUrlStr:product.hotName phImage:[UIImage imageNamed:@"tuxiangzhanwei"]];
+    [self.bgView imageWithUrlStr:product.marketingImageUrl phImage:[UIImage imageNamed:@"tuxiangzhanwei"]];
     
     // 设置标题
     self.proNameLable.text = _product.pro_name;

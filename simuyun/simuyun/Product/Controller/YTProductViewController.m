@@ -89,6 +89,8 @@
     tableView.contentInset = UIEdgeInsetsMake(0, 0, 8, 0);
     tableView.delegate = self;
     tableView.dataSource = self;
+    // 设置下拉刷新
+    tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadProduct)];
     // 上拉加载
     tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreProduct)];
     [self.view addSubview:tableView];
@@ -103,6 +105,8 @@ static UIWindow *_window;
     
     // 初始化顶部菜单
     [self setupTopView];
+    // 获取数据
+    [self.tableView.header beginRefreshing];
     
     // 新手指引
     if ([CoreArchive strForKey:@"firstProduct"] == nil && [CoreArchive strForKey:@"firstProduct"].length == 0) {
@@ -254,13 +258,6 @@ static UIWindow *_window;
      }];
 }
 
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    // 获取数据
-    [self loadProduct];
-}
 
 #pragma mark - Search
 
@@ -429,10 +426,10 @@ static UIWindow *_window;
         // 刷新表格
         [self.tableView reloadData];
         // 结束刷新状态
-//        [self.tableView.header endRefreshing];
+        [self.tableView.header endRefreshing];
     } failure:^(NSError *error) {
         // 结束刷新状态
-//        [self.tableView.header endRefreshing];
+        [self.tableView.header endRefreshing];
     }];
 }
 
