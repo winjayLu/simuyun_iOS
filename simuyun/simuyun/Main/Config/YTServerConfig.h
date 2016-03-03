@@ -22,7 +22,7 @@
 // 开发环境213
 //#define YTServer @"http://192.168.17.213:8080/api/app/"
 //#define YTH5Server @"http://192.168.17.213"
-//#define UmengAppKey @"545867defd98c5f23a0021da"
+//#define UmengAppKey @"545867defd98c5f23a0021"
 //#define TXAppKey @"125189226"
 
 // 测试环境212
@@ -35,7 +35,7 @@
 //212端口号18080
 //#define YTServer @"http://218.241.181.229:8080/api/app/"
 //#define YTH5Server @"http://218.241.181.229:8080"
-//#define UmengAppKey @"545867defd98c5f23a0021da"
+//#define UmengAppKey @"545867defd98c5f23a0021"
 //#define TXAppKey @"125189226"
 
 //  微信

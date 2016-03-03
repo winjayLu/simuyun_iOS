@@ -134,26 +134,26 @@
  */
 + (void)tokenError
 {
-    [YTCenter postNotificationName:YTStopRequest object:nil];
-    HHAlertView *alert = [HHAlertView shared];
-    [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:YTTokenError detail:YTTokenErrorContent cancelButton:nil Okbutton:@"知道了" block:^(HHAlertButton buttonindex) {
-        // 清除用户信息
-        [YTUserInfoTool clearUserInfo];
-        // 获取程序主窗口
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            // 获取根控制器
-            UIWindow *keyWindow = nil;
-            for (UIWindow *window in [UIApplication sharedApplication].windows) {
-                if (window.windowLevel == 0) {
-                    keyWindow = window;
-                    break;
-                }
-            }
-            // 如果获取不到直接返回
-            if (keyWindow == nil) return;
-            keyWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
-        });
-    }];
+//    [YTCenter postNotificationName:YTStopRequest object:nil];
+//    HHAlertView *alert = [HHAlertView shared];
+//    [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:YTTokenError detail:YTTokenErrorContent cancelButton:nil Okbutton:@"知道了" block:^(HHAlertButton buttonindex) {
+//        // 清除用户信息
+//        [YTUserInfoTool clearUserInfo];
+//        // 获取程序主窗口
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            // 获取根控制器
+//            UIWindow *keyWindow = nil;
+//            for (UIWindow *window in [UIApplication sharedApplication].windows) {
+//                if (window.windowLevel == 0) {
+//                    keyWindow = window;
+//                    break;
+//                }
+//            }
+//            // 如果获取不到直接返回
+//            if (keyWindow == nil) return;
+//            keyWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
+//        });
+//    }];
 }
 
 

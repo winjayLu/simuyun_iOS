@@ -81,7 +81,7 @@
     // 获取是否有新消息
     [self loadMessageCount];
     
-    [YTCenter addObserver:self selector:@selector(timerOff) name:YTStopRequest object:nil];
+//    [YTCenter addObserver:self selector:@selector(timerOff) name:YTStopRequest object:nil];
     
     //注册视频播放的监听
     [YTCenter addObserver:self selector:@selector(changeFloatMenu:) name:TCCloudPlayStateChangeNotification object:nil];
@@ -247,25 +247,25 @@
 - (void)setupChildVc
 {
 #pragma mark - 日期判断
-    // 春节
-    NSDate *chunJieDate = [@"2016-2-1 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
-    // 正月十五
-    NSDate *shiWuDate = [@"2016-2-23 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *today = [NSDate date];
-    NSComparisonResult ChunjieResult = [chunJieDate compare:today];
-    NSComparisonResult shiWuResult = [shiWuDate compare:today];
+//    // 春节
+//    NSDate *chunJieDate = [@"2016-2-1 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
+//    // 正月十五
+//    NSDate *shiWuDate = [@"2016-2-23 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
+//    NSDate *today = [NSDate date];
+//    NSComparisonResult ChunjieResult = [chunJieDate compare:today];
+//    NSComparisonResult shiWuResult = [shiWuDate compare:today];
     
     // 图片名
     NSString *message = @"messageIcon";
     NSString *product = @"productIcon";
     NSString *discover = @"discoverIcon";
     NSString *school = @"schoolIcon";
-    if (ChunjieResult <= 0 && shiWuResult > 0) {
-        message = @"messageIconNew";
-        product = @"productIconNew";
-        discover = @"discoverIconNew";
-        school = @"schoolIconNew";
-    }
+//    if (ChunjieResult <= 0 && shiWuResult > 0) {
+//        message = @"messageIconNew";
+//        product = @"productIconNew";
+//        discover = @"discoverIconNew";
+//        school = @"schoolIconNew";
+//    }
     self.message = (YTMessageViewController *)[self addOneChildVcClass:[YTMessageViewController class] title:@"消息" image:message selectedImage:[NSString stringWithFormat:@"%@Selected", message]];
     self.product = (YTProductViewController *)[self addOneChildVcClass:[YTProductViewController class] title:@"产品" image:product selectedImage:[NSString stringWithFormat:@"%@Selected", product]];
     self.profile = (YTProfileViewController *)[self addOneChildVcClass:[YTProfileViewController class] title:nil image:nil selectedImage:nil];

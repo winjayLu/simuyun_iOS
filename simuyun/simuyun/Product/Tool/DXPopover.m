@@ -152,7 +152,7 @@
     CGFloat contentHeight = CGRectGetHeight(contentView.bounds);
     CGFloat containerWidth = CGRectGetWidth(containerView.bounds);
     CGFloat containerHeight = CGRectGetHeight(containerView.bounds);
-
+    
     NSAssert(contentWidth > 0 && contentHeight > 0,
              @"DXPopover contentView bounds.size should not be zero");
     NSAssert(containerWidth > 0 && containerHeight > 0,

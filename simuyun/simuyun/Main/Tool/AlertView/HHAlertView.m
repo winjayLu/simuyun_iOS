@@ -281,19 +281,19 @@ static UIWindow *_window;
 {
     [_logoView removeFromSuperview];
     
-    // 春节
-    NSDate *chunJieDate = [@"2016-2-1 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
-    // 正月十五
-    NSDate *shiWuDate = [@"2016-2-23 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *today = [NSDate date];
-    NSComparisonResult ChunjieResult = [chunJieDate compare:today];
-    NSComparisonResult shiWuResult = [shiWuDate compare:today];
+//    // 春节
+//    NSDate *chunJieDate = [@"2016-2-1 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
+//    // 正月十五
+//    NSDate *shiWuDate = [@"2016-2-23 00:00:00" stringWithDate:@"yyyy-MM-dd HH:mm:ss"];
+//    NSDate *today = [NSDate date];
+//    NSComparisonResult ChunjieResult = [chunJieDate compare:today];
+//    NSComparisonResult shiWuResult = [shiWuDate compare:today];
     
     // 图片名
     NSString *dogImage = @"pushIconDock";
-    if (ChunjieResult <= 0 && shiWuResult > 0) {
-        dogImage = @"labuladuo";
-    }
+//    if (ChunjieResult <= 0 && shiWuResult > 0) {
+//        dogImage = @"labuladuo";
+//    }
     
     
     UIImage *image = [UIImage imageNamed:dogImage];
