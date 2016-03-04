@@ -29,6 +29,11 @@
 #import "YTRegisterViewController.h"
 #import "YTResultPasswordViewController.h"
 #import "YTProductdetailController.h"
+#import "YTLoginViewController.h"
+#import "YTRegisterViewController.h"
+#import "YTResultPasswordViewController.h"
+
+
 
 @interface AppDelegate ()
 {
@@ -208,9 +213,7 @@
     NSDictionary* remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:remoteNotification];
     [YTJpushTool saveJpush:jpush];
-    if (remoteNotification) {
-        [YTJpushTool saveTest:remoteNotification];
-    }
+
 }
 
 /**
@@ -256,30 +259,24 @@
     if (keyWindow == nil) return;
     
     UIViewController *appRootVC = keyWindow.rootViewController;
-    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
-        UIViewController *keyVc = ((UITabBarController *)appRootVC).selectedViewController;
-        // 欢迎/登录/注册  不弹出推送弹出框
-        if ([keyVc isKindOfClass:[YTNavigationController class]])
+    // 欢迎/登录/注册  不弹出推送弹出框
+    if ([appRootVC isKindOfClass:[YTNavigationController class]])
+    {
+        UIViewController *rootVc = ((YTNavigationController *)appRootVC).topViewController;
+        if ([rootVc isKindOfClass:[YTWelcomeViewController class]]|| [rootVc isKindOfClass:[YTLoginViewController class]] || [rootVc isKindOfClass:[YTRegisterViewController class]] || [rootVc isKindOfClass:[YTResultPasswordViewController class]])
         {
-            UIViewController *rootVc = ((YTNavigationController *)keyVc).topViewController;
-            if ([rootVc isKindOfClass:[YTWelcomeViewController class]]|| [rootVc isKindOfClass:[YTLoginViewController class]] || [rootVc isKindOfClass:[YTRegisterViewController class]] || [rootVc isKindOfClass:[YTResultPasswordViewController class]])
-            {
-                self.keyVc = nil;
-                [YTJpushTool saveJpush:jpush];
-                return;
-            }
+            self.keyVc = nil;
+            [YTJpushTool saveJpush:jpush];
+            return;
         }
-        
+    } else if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        UIViewController *keyVc = ((UITabBarController *)appRootVC).selectedViewController;
         if (keyVc != nil) {
             self.keyVc = (YTNavigationController *)keyVc;
         }
     }
 }
 
-
-#import "YTLoginViewController.h"
-#import "YTRegisterViewController.h"
-#import "YTResultPasswordViewController.h"
 
 /**
  *  接受到内存警告
@@ -305,6 +302,7 @@
     NSString *okButton = @"知道了";
     // 获取正在显示的控制器
     [self keyViewController:jpush];
+    if (self.keyVc == nil) return;
     if (self.keyVc.viewControllers.count == 1) {
         cancelButton = @"知道了";
         okButton = @"认购产品";
@@ -329,6 +327,9 @@
                     ((YTTabBarController *)appRootVC).selectedIndex = 1;
                 }
             }
+            [YTJpushTool saveJpush:nil];
+        } else {
+            [YTJpushTool saveJpush:nil];
         }
     }];
 }
@@ -341,6 +342,7 @@
     // 获取当前控制器
     // 获取正在显示的控制器
     [self keyViewController:jpush];
+    if (self.keyVc == nil) return;
     HHAlertView *alert = [HHAlertView shared];
     [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"重新认证" block:^(HHAlertButton buttonindex) {
         if(buttonindex == HHAlertButtonOk)
@@ -349,10 +351,13 @@
             YTAuthenticationErrorController *authenError = [[YTAuthenticationErrorController alloc] init];
             authenError.hidesBottomBarWhenPushed = YES;
             [self.keyVc pushViewController:authenError animated:YES];
+            [YTJpushTool saveJpush:nil];
+        } else {
+            [YTJpushTool saveJpush:nil];
         }
     }];
 }
-#warning 待办事项----订单---产品
+
 /**
  *  新产品发行
  */
@@ -360,6 +365,7 @@
 {
     // 获取正在显示的控制器
     [self keyViewController:jpush];
+    if (self.keyVc == nil) return;
     HHAlertView *alert = [HHAlertView shared];
     [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"查看详情" block:^(HHAlertButton buttonindex) {
         if(buttonindex == HHAlertButtonOk)
@@ -371,6 +377,9 @@
             web.proId = [jpush.jumpUrl substringFromIndex:range.location + range.length];
             web.hidesBottomBarWhenPushed = YES;
             [self.keyVc pushViewController:web animated:YES];
+            [YTJpushTool saveJpush:nil];
+        } else {
+            [YTJpushTool saveJpush:nil];
         }
     }];
 }
@@ -381,6 +390,7 @@
 {
     // 获取正在显示的控制器
     [self keyViewController:jpush];
+    if (self.keyVc == nil) return;
     HHAlertView *alert = [HHAlertView shared];
     [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"查看详情" block:^(HHAlertButton buttonindex) {
         if(buttonindex == HHAlertButtonOk)
@@ -390,6 +400,9 @@
             webVc.isDate = YES;
             webVc.hidesBottomBarWhenPushed = YES;
             [self.keyVc pushViewController:webVc animated:YES];
+            [YTJpushTool saveJpush:nil];
+        } else {
+            [YTJpushTool saveJpush:nil];
         }
     }];
 }

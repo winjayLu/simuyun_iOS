@@ -187,7 +187,6 @@
         self.bgImageView.image = [UIImage imageNamed:@"huimogu"];
         self.proImageView.image = [UIImage imageNamed:@"proHuiseLable"];
     } else {
-        self.proImageView.image = [UIImage imageNamed:@"proLanseLable"];
         self.endTimeLabel.hidden = NO;
         self.yimujiLable.textColor = YTColor(215, 58, 46);
         self.bgImageView.image = [UIImage imageNamed:@"logobackground"];
@@ -200,10 +199,16 @@
             } else {
                 self.endTimeLabel.text = [NSString stringWithFormat:@"%zd天", _product.componentsDate.day];
             }
+            self.proImageView.image = [UIImage imageNamed:@"proLanseLable"];
+            self.endTimeLabel.textColor = YTColor(255, 240, 1);
         } else if (_product.componentsDate.hour > 0) {
             self.endTimeLabel.text = [NSString stringWithFormat:@"%zd小时", _product.componentsDate.hour];
+            self.proImageView.image = [UIImage imageNamed:@"proHongseLable"];
+            self.endTimeLabel.textColor = [UIColor whiteColor];
         } else if (_product.componentsDate.minute > 0) {
             self.endTimeLabel.text = [NSString stringWithFormat:@"%zd分钟", _product.componentsDate.minute];
+            self.proImageView.image = [UIImage imageNamed:@"proHongseLable"];
+            self.endTimeLabel.textColor = [UIColor whiteColor];
         }
         // 旋转lable
         self.endTimeLabel.transform = CGAffineTransformMakeRotation(M_PI_4);
