@@ -17,4 +17,10 @@
 
 
 @property (nonatomic, strong) YTProductModel *product;
+
+
+/**
+ *  产品id
+ */
+@property (nonatomic, copy) NSString *proId;
 @end

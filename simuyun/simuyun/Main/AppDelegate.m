@@ -28,6 +28,7 @@
 #import "YTLoginViewController.h"
 #import "YTRegisterViewController.h"
 #import "YTResultPasswordViewController.h"
+#import "YTProductdetailController.h"
 
 @interface AppDelegate ()
 {
@@ -229,7 +230,10 @@
     } else if (jpush.type == 6) // 认证失败
     {
         [self authenticationError:jpush];
-    } else {    // h5页面跳转
+    } else if (jpush.type == 4) // 产品发行
+    {
+        [self newProduct:jpush];
+    }  else {    // h5页面跳转
         [self jumpToHtml:jpush];
     }
 }
@@ -345,6 +349,28 @@
             YTAuthenticationErrorController *authenError = [[YTAuthenticationErrorController alloc] init];
             authenError.hidesBottomBarWhenPushed = YES;
             [self.keyVc pushViewController:authenError animated:YES];
+        }
+    }];
+}
+#warning 待办事项----订单---产品
+/**
+ *  新产品发行
+ */
+- (void)newProduct:(YTJpushModel *)jpush
+{
+    // 获取正在显示的控制器
+    [self keyViewController:jpush];
+    HHAlertView *alert = [HHAlertView shared];
+    [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"查看详情" block:^(HHAlertButton buttonindex) {
+        if(buttonindex == HHAlertButtonOk)
+        {
+            YTProductdetailController *web = [[YTProductdetailController alloc] init];
+            web.url = [NSString stringWithFormat:@"%@%@", YTH5Server, jpush.jumpUrl];
+            // 获取产品id
+            NSRange range = [jpush.jumpUrl rangeOfString:@"id="];
+            web.proId = [jpush.jumpUrl substringFromIndex:range.location + range.length];
+            web.hidesBottomBarWhenPushed = YES;
+            [self.keyVc pushViewController:web animated:YES];
         }
     }];
 }

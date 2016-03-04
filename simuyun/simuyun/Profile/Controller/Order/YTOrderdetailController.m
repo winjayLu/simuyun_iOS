@@ -7,8 +7,6 @@
 //
 
 #import "YTOrderdetailController.h"
-//#import "YHWebViewProgress.h"
-//#import "YHWebViewProgressView.h"
 #import "YTReportContentController.h"
 #import "YTProductModel.h"
 #import "YTNormalWebController.h"
@@ -19,12 +17,6 @@
 
 @interface YTOrderdetailController () <UIWebViewDelegate>
 @property (nonatomic, weak) UIWebView *webView;
-
-
-/**
- *  产品详情控制器
- */
-@property (nonatomic, strong) YTProductdetailController *proDetail;
 
 @end
 
@@ -55,26 +47,7 @@
     
     // 加载网页
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
-    
-    // 获取对应的产品详情
-    [self loadProduct];
 }
-
-
-- (void)loadProduct
-{
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"uid"] = [YTAccountTool account].userId;
-    param[@"proId"] = self.order.product_id;
-    [YTHttpTool get:YTProductList params:param success:^(id responseObject) {
-        NSArray *products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
-        if (products.count > 0) {
-            self.proDetail.product = products[0];
-        }
-    } failure:^(NSError *error) {
-    }];
-}
-
 
 
 #pragma mark - UIWebViewDelegate
@@ -108,10 +81,13 @@
                 [self.navigationController pushViewController:report animated:YES];
                 
                 [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"报备", @"机构" : [YTUserInfoTool userInfo].organizationName}];
-            } else if ([command isEqualToString:@"openpage"])
+            } else if ([command isEqualToString:@"jumpProduct"])
             {
-                self.proDetail.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
-                [self.navigationController pushViewController:self.proDetail animated:YES];
+                YTProductdetailController *web = [[YTProductdetailController alloc] init];
+                web.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
+                web.proId = urlComps[3];
+                web.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:web animated:YES];
             }
         }
         return NO;
@@ -121,14 +97,6 @@
 
 
 #pragma mark - lazy
-
-- (YTProductdetailController *)proDetail
-{
-    if (!_proDetail) {
-        _proDetail = [[YTProductdetailController alloc] init];
-    }
-    return _proDetail;
-}
 
 /**
  *  清理webView缓存

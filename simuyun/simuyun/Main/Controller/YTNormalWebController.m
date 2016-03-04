@@ -17,6 +17,7 @@
 #import "YHWebViewProgress.h"
 #import "YHWebViewProgressView.h"
 #import "YTOrderdetailController.h"
+#import "YTProductdetailController.h"
 
 
 @interface YTNormalWebController () <UIWebViewDelegate>
@@ -165,6 +166,13 @@
                 viewPdf.shareTitle = urlComps[3];
                 
                 [self.navigationController pushViewController:viewPdf animated:YES];
+            } else if ([command isEqualToString:@"jumpProduct"])
+            {
+                YTProductdetailController *web = [[YTProductdetailController alloc] init];
+                web.url = [NSString stringWithFormat:@"%@%@", YTH5Server, urlComps[2]];
+                web.proId = urlComps[3];
+                web.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:web animated:YES];
             }
 
         }
@@ -172,7 +180,6 @@
     }
     return YES;
 }
-
 // 修改密码
 - (void)changPasswordWithOld:(NSString *)oldPassword newPassword:(NSString *)newPassword
 {

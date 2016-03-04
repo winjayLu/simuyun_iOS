@@ -49,6 +49,7 @@
 #import "NSObject+JsonCategory.h"
 #import "CoreArchive.h"
 #import "AFNetworking.h"
+#import "YTProductdetailController.h"
 
 
 #define magin 3
@@ -863,12 +864,41 @@
     // 检测是否有推送消息
     YTJpushModel *jpush = [YTJpushTool jpush];
     if (jpush != nil && jpush.jumpUrl != nil && jpush.jumpUrl.length > 0) {
-        YTNormalWebController *webView =[YTNormalWebController webWithTitle:jpush.title url:[NSString stringWithFormat:@"%@%@",YTH5Server, jpush.jumpUrl]];;
-        webView.isDate = YES;
-        webView.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:webView animated:NO];
-        [YTJpushTool saveJpush:nil];
+        if (jpush.type == 4) // 产品发行
+        {
+            [self jumpToProduct:jpush];
+        } else {
+            [self jumpToNormalWeb:jpush];
+        }
+        
     }
+}
+/**
+ *  跳转普通网页
+ *
+ */
+- (void)jumpToNormalWeb:(YTJpushModel *)jpush
+{
+    YTNormalWebController *webView =[YTNormalWebController webWithTitle:jpush.title url:[NSString stringWithFormat:@"%@%@",YTH5Server, jpush.jumpUrl]];;
+    webView.isDate = YES;
+    webView.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:webView animated:NO];
+    [YTJpushTool saveJpush:nil];
+}
+/**
+ *  跳转产品页
+ *
+ */
+- (void)jumpToProduct:(YTJpushModel *)jpush
+{
+    YTProductdetailController *web = [[YTProductdetailController alloc] init];
+    web.url = [NSString stringWithFormat:@"%@%@", YTH5Server, jpush.jumpUrl];
+    // 获取产品id
+    NSRange range = [jpush.jumpUrl rangeOfString:@"id="];
+    web.proId = [jpush.jumpUrl substringFromIndex:range.location + range.length];
+    web.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:web animated:NO];
+    [YTJpushTool saveJpush:nil];
 }
 
 

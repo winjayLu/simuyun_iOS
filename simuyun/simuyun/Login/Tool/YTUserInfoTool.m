@@ -82,6 +82,7 @@ static YTUserInfo *_userInfo;
 + (YTUserInfo *)localUserInfo
 {
     YTUserInfo *userInfo = [NSKeyedUnarchiver unarchiveObjectWithFile:YTUserInfoPath];
+    userInfo.isSingIn = 1;
     _userInfo = userInfo;
     return userInfo;
 }

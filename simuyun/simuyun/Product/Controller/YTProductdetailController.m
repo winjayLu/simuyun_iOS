@@ -28,6 +28,7 @@
 #import "YTTabBarController.h"
 #import "CoreArchive.h"
 #import "YTPlayerViewController.h"
+#import "YTAccountTool.h"
 
 
 
@@ -83,7 +84,31 @@
     // 右侧菜单
     [self setupRightMenu];
     
+    // 加载进度条
     [self setupProgress];
+    
+    if (self.proId != nil && self.proId.length > 0) {
+        [self loadProductWithId];
+    }
+}
+
+
+/**
+ *  加载产品列表
+ */
+- (void)loadProductWithId
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"uid"] = [YTAccountTool account].userId;
+    param[@"proId"] = self.proId;
+    [YTHttpTool get:YTProductList params:param success:^(id responseObject) {
+        NSArray *products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
+        if (products.count > 0) {
+            self.product = products[0];
+        }
+    } failure:^(NSError *error) {
+    }];
+    self.proId = nil;
 }
 
 /**
@@ -298,6 +323,7 @@
 // 认购
 - (void)buyNow
 {
+    if (self.product == nil) return;
     HHAlertView *alert = [HHAlertView shared];
     if (self.product.state == 10)   // 可以购买
     {
