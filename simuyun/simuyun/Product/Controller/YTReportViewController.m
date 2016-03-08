@@ -26,7 +26,7 @@
 #import "YTCustomPickerView.h"
 
 
-@interface YTReportViewController ()
+@interface YTReportViewController () <UITextFieldDelegate>
 // UIPickerViewDelegate
 // UIPickerViewDataSource
 // UITextFieldDelegate
@@ -162,7 +162,8 @@
     self.numberField.text = cusomerModel.credentialsnumber;
     
     // 银行卡号
-    self.bankField.text = cusomerModel.cust_bank_acct;
+    // 拼接空格
+    self.bankField.text = [self stringAppendNull:cusomerModel.cust_bank_acct];
     
     // 开户行
     self.bankHangField.text = cusomerModel.cust_bank;
@@ -170,7 +171,6 @@
     // 分行
     self.branchField.text = cusomerModel.cust_bank_detail;
 
-    
 }
 
 
@@ -282,7 +282,7 @@
         cust_id = self.cusomerModel.cust_id;
     }
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"param"] = [NSString stringWithFormat:@"{\"cust_id\" : \"%@\",\"advisers_id\" : \"%@\", \"order_id\" : \"%@\", \"cust_name\" : \"%@\", \"cust_bank\" : \"%@\", \"cust_bank_detail\" : \"%@\", \"cust_bank_acct\" : \"%@\", \"credentialsname\" : \"%@\", \"credentialsnumber\" : \"%@\", \"annex\" : %@}",cust_id ,[YTAccountTool account].userId, self.prouctModel.order_id, self.prouctModel.customerName, self.bankHangField.text, self.branchField.text, self.bankField.text, typeName,self.numberField.text,[self annexWithSlps]];
+    dict[@"param"] = [NSString stringWithFormat:@"{\"cust_id\" : \"%@\",\"advisers_id\" : \"%@\", \"order_id\" : \"%@\", \"cust_name\" : \"%@\", \"cust_bank\" : \"%@\", \"cust_bank_detail\" : \"%@\", \"cust_bank_acct\" : \"%@\", \"credentialsname\" : \"%@\", \"credentialsnumber\" : \"%@\", \"annex\" : %@}",cust_id ,[YTAccountTool account].userId, self.prouctModel.order_id, self.prouctModel.customerName, self.bankHangField.text, self.branchField.text, [self nullStringWithString:self.bankField.text], typeName,self.numberField.text,[self annexWithSlps]];
     // 1.创建一个请求管理者
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     
@@ -363,10 +363,6 @@
     {
         [SVProgressHUD showErrorWithStatus:@"请输入开户行"];
         return YES;
-    } else if(self.bankField.text.length == 0)
-    {
-        [SVProgressHUD showErrorWithStatus:@"请输入银行卡号"];
-        return YES;
     } else if(self.branchField.text.length == 0)
     {
         [SVProgressHUD showErrorWithStatus:@"请输入分行支行"];
@@ -400,10 +396,66 @@
  *
  */
 - (IBAction)endBankNumber:(UITextField *)sender {
-    if (sender.text.length == 6) {
-        self.bankHangField.text = [NSString getBankFromCardNumber:sender.text];
+    sender.delegate = self;
+    if (sender.text.length == 8) {
+        self.bankHangField.text = [NSString getBankFromCardNumber:[self nullStringWithString:sender.text]];
     }
 }
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField.text.length == 1) {
+        textField.text = [NSString stringWithFormat:@" %@",textField.text];
+    }
+    if ([string isEqualToString:@""]) { // 删除字符
+        if ((textField.text.length - 2) % 5 == 0) {
+            textField.text = [textField.text substringToIndex:textField.text.length - 1];
+        }
+        return YES;
+    } else
+    {
+        if (textField.text.length % 5 == 0) {
+            textField.text = [NSString stringWithFormat:@"%@ ", textField.text];
+        }
+    }
+        return YES;
+}
+
+/**
+ *  去除字符串中的空格
+ *
+ */
+- (NSString *)nullStringWithString:(NSString *)str
+{
+    NSCharacterSet *whitespaces = [NSCharacterSet whitespaceCharacterSet];
+    NSPredicate *noEmptyStrings = [NSPredicate predicateWithFormat:@"SELF != ''"];
+    
+    NSArray *parts = [str componentsSeparatedByCharactersInSet:whitespaces];
+    NSArray *filteredArray = [parts filteredArrayUsingPredicate:noEmptyStrings];
+    return [filteredArray componentsJoinedByString:@""];
+}
+/**
+ *  按格式拼接空格
+ *
+ */
+- (NSString *)stringAppendNull:(NSString *)str
+{
+    NSInteger count = str.length;
+    if(count == 0) return @"";
+    NSMutableString *string = [NSMutableString stringWithString:str];
+    NSMutableString *newstring = [NSMutableString string];
+    while (count > 4) {
+        count -= 4;
+        NSRange rang = NSMakeRange(0, 4);
+        NSString *str = [string substringWithRange:rang];
+        [newstring insertString:str atIndex:newstring.length];
+        [newstring insertString:@" " atIndex:newstring.length];
+        [string deleteCharactersInRange:rang];
+    }
+    [newstring insertString:string atIndex:newstring.length];
+    return [NSString stringWithFormat:@" %@",newstring];
+}
+
 - (BOOL)canPerformAction:(SEL)action withSender:(id)sender
 {
     if (action == @selector(paste:))

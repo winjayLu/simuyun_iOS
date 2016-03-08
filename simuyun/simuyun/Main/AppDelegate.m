@@ -155,6 +155,12 @@
     NSLog(@"常驻后台打印------------------------");
 }
 
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    [_timer invalidate];
+    _timer = nil;
+}
+
 
 
 #pragma mark - 极光推送
