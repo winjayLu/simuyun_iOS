@@ -247,7 +247,7 @@ static UIWindow *_window;
     [self addSubview:yunDouLable];
     
     CGFloat btnMaginTop = 25;
-    CGFloat btnW = 40;
+    CGFloat btnW = 44;
     UIButton *cancle = [[UIButton alloc] init];
     [cancle setBackgroundImage:[UIImage imageNamed:@"guanbi"] forState:UIControlStateNormal];
     [cancle setBackgroundImage:[UIImage imageNamed:@"guanbianxia"] forState:UIControlStateHighlighted];

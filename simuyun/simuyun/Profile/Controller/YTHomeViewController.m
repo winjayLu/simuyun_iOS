@@ -184,8 +184,6 @@
                 if (buttonindex == HHAlertButtonOk) {
                     
                     [[UIApplication sharedApplication] openURL:updateUrl];
-                } else {
-                    [alert hide];
                 }
             }];
         }

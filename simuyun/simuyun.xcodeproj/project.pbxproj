@@ -778,8 +778,8 @@
 		97270E701C7BF4D500C92888 /* HHAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHAlertView.m; sourceTree = "<group>"; };
 		97270E711C7BF4D500C92888 /* YTBlackAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTBlackAlertView.h; sourceTree = "<group>"; };
 		97270E721C7BF4D500C92888 /* YTBlackAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTBlackAlertView.m; sourceTree = "<group>"; };
-		97270E731C7BF4D500C92888 /* YTJpushTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTJpushTool.h; sourceTree = "<group>"; };
-		97270E741C7BF4D500C92888 /* YTJpushTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTJpushTool.m; sourceTree = "<group>"; };
+		97270E731C7BF4D500C92888 /* YTJpushTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YTJpushTool.h; path = AlertView/YTJpushTool.h; sourceTree = "<group>"; };
+		97270E741C7BF4D500C92888 /* YTJpushTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YTJpushTool.m; path = AlertView/YTJpushTool.m; sourceTree = "<group>"; };
 		97270E761C7BF4D500C92888 /* FloatView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FloatView.h; sourceTree = "<group>"; };
 		97270E771C7BF4D500C92888 /* FloatView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FloatView.m; sourceTree = "<group>"; };
 		97270E781C7BF4D500C92888 /* YTHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTHttpTool.h; sourceTree = "<group>"; };
@@ -2145,6 +2145,8 @@
 				97270E7D1C7BF4D500C92888 /* YTProductTool.m */,
 				97270E7E1C7BF4D500C92888 /* YTResourcesTool.h */,
 				97270E7F1C7BF4D500C92888 /* YTResourcesTool.m */,
+				97270E731C7BF4D500C92888 /* YTJpushTool.h */,
+				97270E741C7BF4D500C92888 /* YTJpushTool.m */,
 			);
 			path = Tool;
 			sourceTree = "<group>";
@@ -2156,8 +2158,6 @@
 				97270E701C7BF4D500C92888 /* HHAlertView.m */,
 				97270E711C7BF4D500C92888 /* YTBlackAlertView.h */,
 				97270E721C7BF4D500C92888 /* YTBlackAlertView.m */,
-				97270E731C7BF4D500C92888 /* YTJpushTool.h */,
-				97270E741C7BF4D500C92888 /* YTJpushTool.m */,
 			);
 			path = AlertView;
 			sourceTree = "<group>";
@@ -2373,7 +2373,7 @@
 				TargetAttributes = {
 					97B08A841BC2472B007EBD24 = {
 						CreatedOnToolsVersion = 7.0;
-						DevelopmentTeam = H38DYSL82Z;
+						DevelopmentTeam = TZE6A43RJ4;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2820,7 +2820,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "efc89723-e472-4686-aa23-e9d91a62c6de";
+				PROVISIONING_PROFILE = "4bb686c7-73c9-42a8-921b-d4a20b68c4b4";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2858,7 +2858,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "efc89723-e472-4686-aa23-e9d91a62c6de";
+				PROVISIONING_PROFILE = "4bb686c7-73c9-42a8-921b-d4a20b68c4b4";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2889,7 +2889,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "efc89723-e472-4686-aa23-e9d91a62c6de";
+				PROVISIONING_PROFILE = "4bb686c7-73c9-42a8-921b-d4a20b68c4b4";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = simuyun/TencentPlayer/public;
 			};
@@ -2902,7 +2902,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = simuyun/PrefixHeader.pch;
@@ -2919,7 +2919,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.longde.simuyun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "efc89723-e472-4686-aa23-e9d91a62c6de";
+				PROVISIONING_PROFILE = "4bb686c7-73c9-42a8-921b-d4a20b68c4b4";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = simuyun/TencentPlayer/public;
 			};

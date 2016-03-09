@@ -48,11 +48,6 @@ typedef void (^selectButton)(HHAlertButton buttonindex);
  */
 + (instancetype)shared;
 
-/**
- *  dismiss the alertview
- */
-- (void)hide;
-
 
 
 /**
@@ -70,6 +65,11 @@ typedef void (^selectButton)(HHAlertButton buttonindex);
                      Title:(NSString *)title
                     detail:(NSString *)detail
               cancelButton:(NSString *)cancel
+                  Okbutton:(NSString *)ok
+                     block:(selectButton)block;
+
+- (void)showAlertWidtTitle:(NSString *)title
+                    detail:(NSString *)detail
                   Okbutton:(NSString *)ok
                      block:(selectButton)block;
 

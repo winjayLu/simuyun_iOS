@@ -52,7 +52,7 @@
 {
     
     // 清空数字
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     
     // 获取程序启动信息
     [YTResourcesTool loadResourcesWithresult:^(BOOL result) {
@@ -73,7 +73,6 @@
     
     // 开启腾讯云事件统计
     [[TCReportEngine sharedEngine] configAppId:TXAppKey];
-    [[TCReportEngine sharedEngine] setEnv:NO];
     
     // 创建窗口
     self.window = [[UIWindow alloc] init];
@@ -219,7 +218,7 @@
     NSDictionary* remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:remoteNotification];
     [YTJpushTool saveJpush:jpush];
-
+    [YTJpushTool makeBadge];
 }
 
 /**
@@ -232,7 +231,7 @@
     YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:userInfo];
     // 过滤旧版本推送消息
     if (jpush == nil || jpush.title.length == 0 || jpush.detail.length == 0) return;
-
+    [YTJpushTool makeBadge];
     if (jpush.type == 5)    // 认证成功
     {
         [self authenticationSuccess:jpush];

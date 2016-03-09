@@ -16,7 +16,7 @@
  *  修改BadgeNumber   减一
  *
  */
-- (void)makeBadge
++ (void)makeBadge
 {
     NSInteger oldNumber = [UIApplication sharedApplication].applicationIconBadgeNumber;
     NSInteger newNumber = oldNumber--;

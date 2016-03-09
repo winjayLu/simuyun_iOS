@@ -16,7 +16,7 @@
  *  修改BadgeNumber   减一
  *
  */
-- (void)makeBadge;
++ (void)makeBadge;
 /**
  *  存储启动信息
  */
