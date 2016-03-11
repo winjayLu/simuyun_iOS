@@ -18,12 +18,12 @@
  */
 + (void)makeBadge
 {
-    NSInteger oldNumber = [UIApplication sharedApplication].applicationIconBadgeNumber;
-    NSInteger newNumber = oldNumber--;
-    if (newNumber < 0) return;
+//    NSInteger oldNumber = [UIApplication sharedApplication].applicationIconBadgeNumber;
+//    NSInteger newNumber = oldNumber--;
+//    if (newNumber < 0) return;
     // 修改Jpush缓存区的数据
-    [APService setBadge:newNumber];
-    [UIApplication sharedApplication].applicationIconBadgeNumber = newNumber;
+    [APService resetBadge];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }
 
 

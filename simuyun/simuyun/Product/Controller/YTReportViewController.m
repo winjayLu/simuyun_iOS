@@ -116,6 +116,11 @@
  */
 @property (nonatomic, weak) UITextField *catesViewTypeName;
 
+/**
+ *  身份证二次验证
+ */
+@property (nonatomic, copy) NSString *numberValidation;
+
 - (IBAction)typeBtnClick:(id)sender;
 
 @end
@@ -275,6 +280,11 @@
     } else {
         typeName = self.typeField.text;
     }
+    // 身份证是否做修改
+    if (self.numberValidation.length > 0 && [self.numberValidation isEqualToString:self.numberField.text]) {
+        [SVProgressHUD showInfoWithStatus:@"身份证号码与姓名不匹配，请修改后提交。"];
+        return;
+    }
     
     NSString *cust_id = @"";
     if (self.cusomerModel != nil)
@@ -299,7 +309,12 @@
               if ([operation.responseObject[@"message"] isEqualToString:@"tokenError"]) {
                   [YTHttpTool tokenError];
               } else {
-                  [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+                  NSString *errorStr = operation.responseObject[@"message"];
+                  [SVProgressHUD showErrorWithStatus:errorStr];
+                  if ([errorStr isEqualToString:@"身份证号码与姓名不匹配，请修改后提交。"])
+                  {
+                      self.numberValidation = self.numberField.text;
+                  }
               }
           } else if(error.userInfo[@"NSLocalizedDescription"] != nil)
           {

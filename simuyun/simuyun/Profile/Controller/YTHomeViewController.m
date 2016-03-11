@@ -441,11 +441,11 @@
     param[@"pageNo"] = @(1);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         NSMutableArray *array = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
+        NSString *oldHomeTodo = [responseObject JsonToString];
+        [CoreArchive setStr:oldHomeTodo key:@"oldHomeTodo"];
         if (array.count > 0) {
             self.todos = array;
             [self updateTodos];
-            NSString *oldHomeTodo = [responseObject JsonToString];
-            [CoreArchive setStr:oldHomeTodo key:@"oldHomeTodo"];
         }
     } failure:^(NSError *error) {
     }];
@@ -908,6 +908,11 @@
         NSString *oldHomeTodo = [CoreArchive strForKey:@"oldHomeTodo"];
         if (oldHomeTodo != nil) {
             _todos = [YTMessageModel objectArrayWithKeyValuesArray:[oldHomeTodo JsonToValue][@"messageList"]];
+            if (_todos.count == 0) {
+                YTMessageModel *message = [[YTMessageModel alloc] init];
+                message.summary = @"您还没有待办事项，快去认购产品吧！";
+                [_todos addObject:message];
+            }
             [self updateTodos];
         } else {
             _todos = [[NSMutableArray alloc] init];

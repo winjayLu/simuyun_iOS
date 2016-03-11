@@ -51,9 +51,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    // 清空数字
-//    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    
     // 获取程序启动信息
     [YTResourcesTool loadResourcesWithresult:^(BOOL result) {
         if (result == YES) {
@@ -79,17 +76,16 @@
     self.window.frame = DeviceBounds;
     // 设置窗口根控制器
     [self.window chooseRootviewController];
+    [self.window makeKeyAndVisible];
     // 设置状态栏
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
-    [self.window makeKeyAndVisible];
+    
+    // 清除提醒数字
+    [YTJpushTool makeBadge];
     
     return YES;
 }
 
-//- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options{
-//    NSLog(@"%@", url);
-//    return YES;
-//}
 
 #pragma mark - 友盟社会化组件
 /**
@@ -218,7 +214,6 @@
     NSDictionary* remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:remoteNotification];
     [YTJpushTool saveJpush:jpush];
-    [YTJpushTool makeBadge];
 }
 
 /**

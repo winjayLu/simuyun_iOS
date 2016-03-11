@@ -59,11 +59,7 @@
     
     [self.likeBtn setImage:[UIImage imageNamed:@"Likeanxia"] forState:UIControlStateNormal];
     // 设置点赞数量
-    if (vedio.likes == 0) {
-        [self.likeBtn setTitle:@"" forState:UIControlStateNormal];
-    } else {
-        [self.likeBtn setTitle:[NSString stringWithFormat:@"%d", vedio.likes] forState:UIControlStateNormal];
-    }
+    [self.likeBtn setTitle:[NSString stringWithFormat:@"%d", vedio.likes] forState:UIControlStateNormal];
     [self.likeBtn sizeToFit];
     
     CGFloat titleW = DeviceWidth - 165 - self.likeBtn.width;
