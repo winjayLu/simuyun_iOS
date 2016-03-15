@@ -20,6 +20,8 @@
 #import "UIBarButtonItem+Extension.h"
 #import "YTTabBarController.h"
 #import "CALayer+Transition.h"
+#import "YTFatherModel.h"
+#import "YTCustomPickerView.h"
 
 #define maginTop 64
 
@@ -62,6 +64,24 @@
 
 - (IBAction)pushMainClick;
 
+- (IBAction)tuijianrenClick:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *tuijianrenField;
+
+/**
+ *  推荐人模型数组
+ *
+ */@property (nonatomic, strong) NSArray *fathers;
+
+/**
+ *  推荐人姓名数组
+ *
+ */
+@property (nonatomic, strong) NSMutableArray *fatherNames;
+
+@property (weak, nonatomic) IBOutlet UIImageView *lineView;
+
+/** 定时器 */
+@property (nonatomic,strong) NSTimer *timer;
 
 @end
 
@@ -78,8 +98,25 @@
     // 修改textField占位文字颜色
     [self.userNameLable setValue:YTColor(204, 204, 204) forKeyPath:@"_placeholderLabel.textColor"];
     [self.mechanismNameLable setValue:YTColor(204, 204, 204) forKeyPath:@"_placeholderLabel.textColor"];
+    [self.tuijianrenField setValue:YTColor(204, 204, 204) forKeyPath:@"_placeholderLabel.textColor"];
     [self loadOrgnazations];
+    
+    // 开启定时器
+    [self timerOn];
 }
+
+// 动画
+- (void)animationLine
+{
+    [UIView animateWithDuration:1.5 animations:^{
+        self.lineView.hidden = NO;
+        self.lineView.y += 88;
+    } completion:^(BOOL finished) {
+        self.lineView.hidden = YES;
+        self.lineView.y = 3;
+    }];
+}
+
 
 /**
  *  加载机构信息
@@ -87,14 +124,15 @@
  */
 - (void)loadOrgnazations
 {
+    [SVProgressHUD showWithStatus:@"正在加载机构信息" maskType:SVProgressHUDMaskTypeClear];
     [YTHttpTool get:YTOrgnazations params:nil success:^(id responseObject) {
         self.orgnazations = [YTOrgnazationModel objectArrayWithKeyValuesArray:responseObject];
         // 遍历json
         for (NSDictionary *dict in responseObject) {
             [self.orgnaNames addObject:dict[@"party_name"]];
         }
+        [SVProgressHUD dismiss];
     } failure:^(NSError *error) {
-        
     }];
 }
 
@@ -113,11 +151,25 @@
         [SVProgressHUD showErrorWithStatus:@"请选择正确的机构"];
         return;
     }
+    // 判断是否输入推荐人
+    YTFatherModel *selectedFather = nil;
+    if (self.tuijianrenField.text.length > 0) {
+        for (YTFatherModel *father in self.fathers) {
+            if ([father.name isEqualToString:self.tuijianrenField.text]) {
+                selectedFather = father;
+            }
+        }
+    }
+    
     [SVProgressHUD showWithStatus:@"正在认证" maskType:SVProgressHUDMaskTypeClear];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"advisersId"] = [YTAccountTool account].userId;
     dict[@"realName"] = self.userNameLable.text;
     dict[@"orgId"] = selectedOrgna.party_id;
+    if (selectedFather != nil) {
+        dict[@"fatherId"] = selectedFather.adviserId;
+    }
+    dict[@"authenticationType"] = @"0";
     [YTHttpTool post:YTAuthAdviser params:dict success:^(id responseObject) {
         [SVProgressHUD dismiss];
         [YTUserInfoTool userInfo].adviserStatus = 2;
@@ -179,7 +231,33 @@
             break;
         }
     }
+    // 获取推荐人列表
+    [self loadfather:self.mechanismNameLable.text];
 }
+
+// 加载推荐人
+- (void)loadfather:(NSString *)orgName
+{
+    [SVProgressHUD showWithStatus:@"正在加载推荐人信息" maskType:SVProgressHUDMaskTypeClear];
+    YTOrgnazationModel *selectedOrgna = nil;
+    for (YTOrgnazationModel *orgna in self.orgnazations) {
+        if ([orgna.party_name isEqualToString:self.mechanismNameLable.text]) {
+            selectedOrgna = orgna;
+        }
+    }
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"orgId"] = selectedOrgna.party_id;
+    [YTHttpTool get:YTReferee params:param success:^(id responseObject) {
+        self.fathers = [YTFatherModel objectArrayWithKeyValuesArray:responseObject];
+        // 遍历json
+        for (NSDictionary *dict in responseObject) {
+            [self.fatherNames addObject:dict[@"name"]];
+        }
+        [SVProgressHUD dismiss];
+    } failure:^(NSError *error) {
+    }];
+}
+
 
 #pragma mark - 键盘与文本框的处理
 
@@ -219,9 +297,45 @@
     }
     return _orgnaNames;
 }
+- (NSArray *)fathers
+{
+    if (!_fathers) {
+        _fathers = [[NSArray alloc] init];
+    }
+    return _fathers;
+}
+
+- (NSMutableArray *)fatherNames
+{
+    if (!_fatherNames) {
+        _fatherNames = [[NSMutableArray alloc] init];
+    }
+    return _fatherNames;
+}
 
 - (IBAction)pushMainClick {
     [self transitionTabBarVC];
+    
+}
+
+- (IBAction)tuijianrenClick:(id)sender {
+    // 退出键盘
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
+    YTCustomPickerView *addressPickerView = [[YTCustomPickerView alloc]init];
+    addressPickerView.types = self.fatherNames;
+    addressPickerView.block = ^(YTCustomPickerView *view,UIButton *btn,NSString *selectType){
+        self.tuijianrenField.text = selectType;
+    };
+    NSString *type = self.tuijianrenField.text;
+    if (type.length == 0) {
+        type = nil;
+    }
+    [addressPickerView showWithSlectedType:type];
     
 }
 
@@ -253,7 +367,33 @@
     }
 }
 
+/*
+ *  新开一个定时器
+ */
+-(void)timerOn{
+    
+    [self timerOff];
+    
+    if(self.timer!=nil) return;
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.7 target:self selector:@selector(animationLine) userInfo:nil repeats:YES];
+    
+    //记录
+    self.timer = timer;
+    
+}
 
+/*
+ *  关闭定时器
+ */
+-(void)timerOff{
+    
+    //关闭定时器
+    [self.timer invalidate];
+    
+    //清空属性
+    self.timer = nil;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
