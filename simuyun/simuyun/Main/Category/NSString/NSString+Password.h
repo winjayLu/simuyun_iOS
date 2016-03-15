@@ -18,7 +18,9 @@
  */
 +(NSString *)md5:(NSString *)password;
 
++ (NSString*)decrypt:(NSString*)encryptText;
 
++ (NSString*)encrypt:(NSString*)plainText;
 
 /**
  *  SHA1加密
