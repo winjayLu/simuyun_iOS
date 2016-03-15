@@ -12,8 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentViewHegithCons;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickView;
-//证件类型数组
-@property (strong, nonatomic) NSArray *types;
+
 
 @property (copy, nonatomic) NSString *selectedType;
 @end
@@ -26,7 +25,6 @@
         self.frame = [UIScreen mainScreen].bounds;
         self.pickView.delegate = self;
         self.pickView.dataSource = self;
-        self.types = @[@"身份证",@"护照",@"港澳通行证", @"营业执照", @"其它"];
 
         [self customView];
     }
@@ -65,11 +63,13 @@
         self.contentViewHegithCons.constant = 215;
         [self layoutIfNeeded];
     }completion:^(BOOL finished) {
-        for (int i = 0; i < self.types.count; i++) {
-            if ([self.types[i] isEqualToString:type]) {
-                [self.pickView selectRow:i inComponent:0 animated:YES];
-                self.selectedType = self.types[i];
-                break;
+        if (type != nil) {            
+            for (int i = 0; i < self.types.count; i++) {
+                if ([self.types[i] isEqualToString:type]) {
+                    [self.pickView selectRow:i inComponent:0 animated:YES];
+                    self.selectedType = self.types[i];
+                    break;
+                }
             }
         }
         

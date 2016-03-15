@@ -12,6 +12,9 @@ typedef void (^AddressChoicePickerViewBlock)(YTCustomPickerView *view,UIButton *
 @interface YTCustomPickerView : UIView
 
 @property (copy, nonatomic)AddressChoicePickerViewBlock block;
+//证件类型数组
+@property (strong, nonatomic) NSArray *types;
+
 
 - (void)showWithSlectedType:(NSString *)type;
 @end

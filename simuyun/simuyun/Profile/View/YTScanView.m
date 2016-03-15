@@ -24,6 +24,15 @@
  *  截止日期
  */
 @property (weak, nonatomic) UILabel *endDate;
+
+@property (weak, nonatomic) UIImageView *imageV;
+@property (weak, nonatomic) UILabel *nickNameLable;
+
+@property (weak, nonatomic) UILabel *jigou;
+@property (weak, nonatomic) UIImageView *photo;
+
+@property (weak, nonatomic) UIImageView *logo;
+@property (weak, nonatomic) UILabel *tishi;
 @end
 
 
@@ -90,6 +99,7 @@ static UIWindow *_window;
     imageV.clipsToBounds = YES;
     [imageV imageWithUrlStr:userInfo.headImgUrl phImage:[UIImage imageNamed:@"avatar_default_big"]];
     [self addSubview:imageV];
+    self.imageV = imageV;
     
     // 昵称
     CGFloat nickLableX = CGRectGetMaxX(imageV.frame) + 10;
@@ -102,6 +112,7 @@ static UIWindow *_window;
     nickNameLable.x = nickLableX;
     nickNameLable.y = 20;
     [self addSubview:nickNameLable];
+    self.nickNameLable = nickNameLable;
     
     // 机构
     UILabel *jigou = [[UILabel alloc] init];
@@ -113,12 +124,14 @@ static UIWindow *_window;
     jigou.x = nickLableX;
     jigou.y = CGRectGetMaxY(nickNameLable.frame) + 8;
     [self addSubview:jigou];
+    self.jigou = jigou;
     
     // 二维码
     UIImageView *photo = [[UIImageView alloc] init];
     CGFloat photoWH = 187;
     photo.frame = CGRectMake((scanWidth - photoWH) * 0.5, CGRectGetMaxY(imageV.frame) + 20, photoWH, photoWH);
     [self addSubview:photo];
+    self.photo = photo;
     
     // 截止日期
     NSDate *date = [NSDate date];
@@ -134,6 +147,7 @@ static UIWindow *_window;
     logo.size = CGSizeMake(38, 38);
     logo.center = photo.center;
     [self addSubview:logo];
+    self.logo = logo;
     
     // 提示语
     UILabel *tishi = [[UILabel alloc] init];
@@ -146,6 +160,7 @@ static UIWindow *_window;
     tishi.x = (scanWidth - photoWH) * 0.5;
     tishi.y = CGRectGetMaxY(photo.frame) + 20;
     [self addSubview:tishi];
+    self.tishi = tishi;
 
     
 }
@@ -200,8 +215,21 @@ static UIWindow *_window;
     self.layer.shadowOffset = CGSizeMake(0, 5);
     self.layer.shadowOpacity = 0.3f;
     self.layer.shadowRadius = 20.0f;
-    [self.endDate removeFromSuperview];
+    [self.imageV removeFromSuperview];
+    self.imageV = nil;
+    [self.nickNameLable removeFromSuperview];
+    self.nickNameLable = nil;
+    [self.jigou removeFromSuperview];
+    self.jigou = nil;
+    [self.photo removeFromSuperview];
+    self.photo = nil;
+    [self.logo removeFromSuperview];
+    self.logo = nil;
+    [self.tishi removeFromSuperview];
+    self.tishi = nil;
+    
     [self removeFromSuperview];
+    [self.endDate removeFromSuperview];
     _window.hidden = YES;
     _window = nil;
 }

@@ -16,6 +16,8 @@
 #import "YTAuthenticationStatusController.h"
 #import "YTUserInfoTool.h"
 #import "UIBarButtonItem+Extension.h"
+#import "YTFatherModel.h"
+#import "YTCustomPickerView.h"
 
 
 #define maginTop 64
@@ -63,6 +65,23 @@
  */
 @property (nonatomic, strong) NSMutableArray *orgnaNames;
 
+/**
+ *  推荐人模型数组
+ *
+ */@property (nonatomic, strong) NSArray *fathers;
+
+/**
+ *  推荐人姓名数组
+ *
+ */
+@property (nonatomic, strong) NSMutableArray *fatherNames;
+
+/**
+ *  推荐人点击
+ *
+ */
+- (IBAction)tuijianrenClick:(id)sender;
+
 @end
 
 @implementation YTAuthenticationViewController
@@ -73,14 +92,8 @@
     // 获取机构信息
     [self loadOrgnazations];
     self.view.frame = CGRectMake(0, maginTop, DeviceWidth, DeviceHight - maginTop);
-    // 初始化左侧返回按钮
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithBg:@"fanhui" target:self action:@selector(blackClick)];
 }
 
-- (void)blackClick
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
-}
 
 /**
  *  加载机构信息
@@ -88,17 +101,17 @@
  */
 - (void)loadOrgnazations
 {
+    [SVProgressHUD showWithStatus:@"正在加载机构信息" maskType:SVProgressHUDMaskTypeClear];
     [YTHttpTool get:YTOrgnazations params:nil success:^(id responseObject) {
         self.orgnazations = [YTOrgnazationModel objectArrayWithKeyValuesArray:responseObject];
         // 遍历json
         for (NSDictionary *dict in responseObject) {
             [self.orgnaNames addObject:dict[@"party_name"]];
         }
+        [SVProgressHUD dismiss];
     } failure:^(NSError *error) {
-        
     }];
 }
-
 - (IBAction)applyClick:(UIButton *)sender {
     if (self.userNameLable.text.length == 0) {
         [SVProgressHUD showErrorWithStatus:@"请输入姓名"];
@@ -114,12 +127,25 @@
         [SVProgressHUD showErrorWithStatus:@"请选择正确的机构"];
         return;
     }
+    
+    // 判断是否输入推荐人
+    YTFatherModel *selectedFather = nil;
+    if (self.tuijianLabel.text.length > 0) {
+        for (YTFatherModel *father in self.fathers) {
+            if ([father.name isEqualToString:self.tuijianLabel.text]) {
+                selectedFather = father;
+            }
+        }
+    }
+    
     [SVProgressHUD showWithStatus:@"正在认证" maskType:SVProgressHUDMaskTypeClear];
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"advisersId"] = [YTAccountTool account].userId;
     dict[@"realName"] = self.userNameLable.text;
     dict[@"orgId"] = selectedOrgna.party_id;
-    dict[@"fatherId"] = self.tuijianLabel.text;
+    if (selectedFather != nil) {
+        dict[@"fatherId"] = selectedFather.adviserId;
+    }
     dict[@"authenticationType"] = @"0";
     [YTHttpTool post:YTAuthAdviser params:dict success:^(id responseObject) {
         [SVProgressHUD dismiss];
@@ -152,8 +178,7 @@
 #pragma mark - AutoCompleteTableViewDelegate
 
 - (NSArray*) autoCompletion:(AutocompletionTableView*) completer suggestionsFor:(NSString*) string{
-
-
+    
     return self.orgnaNames;
 }
 
@@ -165,7 +190,55 @@
             break;
         }
     }
+    // 获取推荐人列表
+    [self loadfather:self.mechanismNameLable.text];
 }
+
+// 加载推荐人
+- (void)loadfather:(NSString *)orgName
+{
+    [SVProgressHUD showWithStatus:@"正在加载推荐人信息" maskType:SVProgressHUDMaskTypeClear];
+    YTOrgnazationModel *selectedOrgna = nil;
+    for (YTOrgnazationModel *orgna in self.orgnazations) {
+        if ([orgna.party_name isEqualToString:self.mechanismNameLable.text]) {
+            selectedOrgna = orgna;
+        }
+    }
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"orgId"] = selectedOrgna.party_id;
+    [YTHttpTool get:YTReferee params:param success:^(id responseObject) {
+        self.fathers = [YTFatherModel objectArrayWithKeyValuesArray:responseObject];
+        // 遍历json
+        for (NSDictionary *dict in responseObject) {
+            [self.fatherNames addObject:dict[@"name"]];
+        }
+        [SVProgressHUD dismiss];
+    } failure:^(NSError *error) {
+    }];
+}
+
+
+- (IBAction)tuijianrenClick:(id)sender {
+    
+    // 退出键盘
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
+    YTCustomPickerView *addressPickerView = [[YTCustomPickerView alloc]init];
+    addressPickerView.types = self.fatherNames;
+    addressPickerView.block = ^(YTCustomPickerView *view,UIButton *btn,NSString *selectType){
+        self.tuijianLabel.text = selectType;
+    };
+    NSString *type = self.tuijianLabel.text;
+    if (type.length == 0) {
+        type = nil;
+    }
+    [addressPickerView showWithSlectedType:type];
+}
+
 
 #pragma mark - 键盘与文本框的处理
 
@@ -176,8 +249,10 @@
     
     [CoreTFManagerVC installManagerForVC:self scrollView:nil tfModels:^NSArray *{
         TFModel *tfm1=[TFModel modelWithTextFiled:self.userNameLable inputView:nil name:@"" insetBottom:20];
-        TFModel *tfm2=[TFModel modelWithTextFiled:self.mechanismNameLable inputView:nil name:@"" insetBottom:140];
-        return @[tfm1, tfm2];
+        TFModel *tfm2=[TFModel modelWithTextFiled:self.mechanismNameLable inputView:nil name:@"" insetBottom:130];
+        TFModel *tfm3=[TFModel modelWithTextFiled:self.tuijianLabel inputView:nil name:@"" insetBottom:20];
+        
+        return @[tfm1, tfm2, tfm3];
     }];
 }
 -(void)viewDidDisappear:(BOOL)animated{
@@ -213,6 +288,22 @@
         _orgnaNames = [[NSMutableArray alloc] init];
     }
     return _orgnaNames;
+}
+
+- (NSArray *)fathers
+{
+    if (!_fathers) {
+        _fathers = [[NSArray alloc] init];
+    }
+    return _fathers;
+}
+
+- (NSMutableArray *)fatherNames
+{
+    if (!_fatherNames) {
+        _fatherNames = [[NSMutableArray alloc] init];
+    }
+    return _fatherNames;
 }
 
 - (AutocompletionTableView *)autoCompleter

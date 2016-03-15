@@ -629,6 +629,7 @@
         }
     }
     YTCustomPickerView *addressPickerView = [[YTCustomPickerView alloc]init];
+    addressPickerView.types = @[@"身份证",@"护照",@"港澳通行证", @"营业执照", @"其它"];
     addressPickerView.block = ^(YTCustomPickerView *view,UIButton *btn,NSString *selectType){
         self.typeField.text = selectType;
         // 判断是否是其他类型

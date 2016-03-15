@@ -32,6 +32,7 @@
     [[NSRunLoop currentRunLoop]addTimer:_timer forMode:NSRunLoopCommonModes];
 }
 -(void)timerStart:(NSTimer *)theTimer {
+    
      double deltaTime = [[NSDate date] timeIntervalSinceDate:_startDate];
     
      _second = _totalSecond - (int)(deltaTime+0.5) ;
@@ -46,7 +47,6 @@
         {
             [self setTitle:_didChangeBlock(self,_second) forState:UIControlStateNormal];
             [self setTitle:_didChangeBlock(self,_second) forState:UIControlStateDisabled];
-
         }
         else
         {

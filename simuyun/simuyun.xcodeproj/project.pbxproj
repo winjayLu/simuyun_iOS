@@ -293,6 +293,7 @@
 		97A4DDF91C97A53500079AFC /* LBXZXCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A4DDED1C97A53500079AFC /* LBXZXCapture.m */; };
 		97A4DDFA1C97A53500079AFC /* ZXingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A4DDF01C97A53500079AFC /* ZXingWrapper.m */; };
 		97A4DE061C97E5B000079AFC /* YTScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A4DE051C97E5B000079AFC /* YTScanView.m */; };
+		97A4DE091C982D2B00079AFC /* YTFatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A4DE081C982D2B00079AFC /* YTFatherModel.m */; };
 		97B08A8A1BC2472B007EBD24 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08A891BC2472B007EBD24 /* main.m */; };
 		97B08AA31BC2472B007EBD24 /* simuyunTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08AA21BC2472B007EBD24 /* simuyunTests.m */; };
 		97B08AAE1BC2472B007EBD24 /* simuyunUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08AAD1BC2472B007EBD24 /* simuyunUITests.m */; };
@@ -880,6 +881,8 @@
 		97A4DDF01C97A53500079AFC /* ZXingWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXingWrapper.m; sourceTree = "<group>"; };
 		97A4DE041C97E5B000079AFC /* YTScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTScanView.h; sourceTree = "<group>"; };
 		97A4DE051C97E5B000079AFC /* YTScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTScanView.m; sourceTree = "<group>"; };
+		97A4DE071C982D2B00079AFC /* YTFatherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTFatherModel.h; sourceTree = "<group>"; };
+		97A4DE081C982D2B00079AFC /* YTFatherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTFatherModel.m; sourceTree = "<group>"; };
 		97B08A851BC2472B007EBD24 /* simuyun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simuyun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97B08A891BC2472B007EBD24 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		97B08A991BC2472B007EBD24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1179,6 +1182,8 @@
 				97270C1A1C7BF47400C92888 /* YTOrderCenterModel.m */,
 				97270C1B1C7BF47400C92888 /* YTOrgnazationModel.h */,
 				97270C1C1C7BF47400C92888 /* YTOrgnazationModel.m */,
+				97A4DE071C982D2B00079AFC /* YTFatherModel.h */,
+				97A4DE081C982D2B00079AFC /* YTFatherModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2796,6 +2801,7 @@
 				97270D5F1C7BF4AF00C92888 /* YTUserInfoTool.m in Sources */,
 				97270BF41C7BF46800C92888 /* YTConsultView.m in Sources */,
 				97270EB81C7BF4D500C92888 /* UIApplication+Extend.m in Sources */,
+				97A4DE091C982D2B00079AFC /* YTFatherModel.m in Sources */,
 				97270EA41C7BF4D500C92888 /* AFNetworkReachabilityManager.m in Sources */,
 				97270EB91C7BF4D500C92888 /* CorePPTVC.m in Sources */,
 				97270EAE1C7BF4D500C92888 /* UIAlertView+AFNetworking.m in Sources */,

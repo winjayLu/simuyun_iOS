@@ -135,14 +135,24 @@
                             <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u8b-ry-ALq">
+                            <rect key="frame" x="105" y="0.0" width="260" height="53"/>
+                            <connections>
+                                <action selector="tuijianrenClick:" destination="-1" eventType="touchUpInside" id="MYj-Eb-M33"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="hLH-Vv-zgF" firstAttribute="leading" secondItem="SKs-sD-xlX" secondAttribute="leading" id="24R-WE-yg4"/>
                         <constraint firstItem="Rb8-nq-v4U" firstAttribute="leading" secondItem="SKs-sD-xlX" secondAttribute="leading" constant="105" id="2aU-ht-yRf"/>
                         <constraint firstItem="yfR-Sj-wik" firstAttribute="leading" secondItem="SKs-sD-xlX" secondAttribute="leading" constant="10" id="6R2-HT-Ycx"/>
+                        <constraint firstItem="u8b-ry-ALq" firstAttribute="trailing" secondItem="Rb8-nq-v4U" secondAttribute="trailing" id="AzV-Ar-Vei"/>
+                        <constraint firstItem="u8b-ry-ALq" firstAttribute="top" secondItem="Rb8-nq-v4U" secondAttribute="top" id="Ez9-NB-LGO"/>
                         <constraint firstAttribute="bottom" secondItem="yfR-Sj-wik" secondAttribute="bottom" id="Oo5-dJ-Ua5"/>
                         <constraint firstAttribute="bottom" secondItem="hLH-Vv-zgF" secondAttribute="bottom" id="hAl-oT-p3J"/>
+                        <constraint firstItem="u8b-ry-ALq" firstAttribute="height" secondItem="Rb8-nq-v4U" secondAttribute="height" id="hGu-zv-hCo"/>
+                        <constraint firstItem="u8b-ry-ALq" firstAttribute="width" secondItem="Rb8-nq-v4U" secondAttribute="width" id="jzz-VH-D1N"/>
                         <constraint firstItem="Rb8-nq-v4U" firstAttribute="top" secondItem="SKs-sD-xlX" secondAttribute="top" id="k2C-iW-fhu"/>
                         <constraint firstItem="yfR-Sj-wik" firstAttribute="top" secondItem="SKs-sD-xlX" secondAttribute="top" id="kbu-d5-V74"/>
                         <constraint firstAttribute="trailing" secondItem="hLH-Vv-zgF" secondAttribute="trailing" id="o3F-8q-dKw"/>

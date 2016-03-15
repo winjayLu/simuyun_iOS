@@ -151,7 +151,7 @@
                                 <constraint firstAttribute="height" constant="1" id="4GD-hm-iFi"/>
                             </constraints>
                         </view>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="可不填" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LY1-E0-gTG">
+                        <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="可不填" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LY1-E0-gTG">
                             <rect key="frame" x="105" y="0.0" width="260" height="53"/>
                             <color key="tintColor" red="0.52941176469999995" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -163,11 +163,20 @@
                             <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NSl-Jb-fi7">
+                            <rect key="frame" x="105" y="0.0" width="260" height="53"/>
+                            <connections>
+                                <action selector="tuijianrenClick:" destination="-1" eventType="touchUpInside" id="o7D-ML-dhh"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="LY1-E0-gTG" firstAttribute="leading" secondItem="Juw-jq-3gH" secondAttribute="leading" constant="105" id="8Mq-0l-bTU"/>
+                        <constraint firstItem="NSl-Jb-fi7" firstAttribute="leading" secondItem="LY1-E0-gTG" secondAttribute="leading" id="8Xa-o3-S1V"/>
                         <constraint firstAttribute="height" constant="54" id="BHD-if-DdW"/>
+                        <constraint firstItem="NSl-Jb-fi7" firstAttribute="top" secondItem="LY1-E0-gTG" secondAttribute="top" id="Sl4-b2-uta"/>
+                        <constraint firstItem="NSl-Jb-fi7" firstAttribute="width" secondItem="LY1-E0-gTG" secondAttribute="width" id="TdP-Ty-cZK"/>
                         <constraint firstAttribute="trailing" secondItem="Wlb-QN-Jes" secondAttribute="trailing" id="VID-yF-QAP"/>
                         <constraint firstItem="7ve-Kb-uXF" firstAttribute="top" secondItem="Juw-jq-3gH" secondAttribute="top" id="VRb-e7-Mce"/>
                         <constraint firstAttribute="trailing" secondItem="LY1-E0-gTG" secondAttribute="trailing" constant="10" id="YTO-dX-hJx"/>
@@ -176,6 +185,7 @@
                         <constraint firstItem="7ve-Kb-uXF" firstAttribute="leading" secondItem="Juw-jq-3gH" secondAttribute="leading" constant="10" id="as0-wR-PBh"/>
                         <constraint firstItem="LY1-E0-gTG" firstAttribute="top" secondItem="Juw-jq-3gH" secondAttribute="top" id="fOq-N3-uA0"/>
                         <constraint firstItem="Wlb-QN-Jes" firstAttribute="top" secondItem="7ve-Kb-uXF" secondAttribute="bottom" id="fXq-1r-uaR"/>
+                        <constraint firstItem="NSl-Jb-fi7" firstAttribute="height" secondItem="LY1-E0-gTG" secondAttribute="height" id="fbK-Xy-wqo"/>
                         <constraint firstItem="Wlb-QN-Jes" firstAttribute="top" secondItem="LY1-E0-gTG" secondAttribute="bottom" id="o2V-bA-ZD3"/>
                     </constraints>
                 </view>
@@ -220,14 +230,16 @@
                             <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vvU-bM-gfo" customClass="JKCountDownButton">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vvU-bM-gfo" customClass="JKCountDownButton">
                             <rect key="frame" x="250" y="10" width="115" height="33"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="33" id="Bub-Vp-RIW"/>
                                 <constraint firstAttribute="width" constant="115" id="rYd-yM-bZF"/>
                             </constraints>
                             <color key="tintColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" backgroundImage="fansongyanzhnegmazc"/>
+                            <state key="normal" title="获取验证码">
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
                             <state key="disabled" backgroundImage="yanzhengmakuang">
                                 <color key="titleColor" red="0.75686274509999996" green="0.75686274509999996" blue="0.75686274509999996" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -252,12 +264,18 @@
                         <constraint firstItem="vvU-bM-gfo" firstAttribute="centerY" secondItem="Nh3-EU-iP7" secondAttribute="centerY" id="TSG-n9-SaB"/>
                         <constraint firstItem="o6j-xP-SbH" firstAttribute="top" secondItem="mob-Lj-YUF" secondAttribute="bottom" id="VIt-JJ-I09"/>
                         <constraint firstItem="mob-Lj-YUF" firstAttribute="centerX" secondItem="Nh3-EU-iP7" secondAttribute="centerX" id="YGg-qW-fNn"/>
+                        <constraint firstItem="G0U-GJ-7xW" firstAttribute="centerY" secondItem="Nh3-EU-iP7" secondAttribute="centerY" id="bav-4O-VBH"/>
+                        <constraint firstItem="mob-Lj-YUF" firstAttribute="centerY" secondItem="Nh3-EU-iP7" secondAttribute="centerY" id="oFc-j5-vlU"/>
                         <constraint firstItem="G0U-GJ-7xW" firstAttribute="top" secondItem="Nh3-EU-iP7" secondAttribute="top" id="pW7-n2-iBE"/>
+                        <constraint firstAttribute="bottom" secondItem="o6j-xP-SbH" secondAttribute="bottom" id="rmt-o1-ag8"/>
                         <constraint firstAttribute="trailing" secondItem="o6j-xP-SbH" secondAttribute="trailing" constant="10" id="rxR-bN-Aju"/>
                         <constraint firstAttribute="trailing" secondItem="vvU-bM-gfo" secondAttribute="trailing" constant="10" id="vfG-cN-qeh"/>
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
+                            <exclude reference="Kcc-aL-tlx"/>
+                            <exclude reference="RlS-q2-eSF"/>
+                            <exclude reference="VIt-JJ-I09"/>
                             <exclude reference="OvU-vo-1TY"/>
                             <exclude reference="QeA-kq-SX0"/>
                         </mask>
@@ -296,7 +314,6 @@
         </view>
     </objects>
     <resources>
-        <image name="fansongyanzhnegmazc" width="115" height="33"/>
         <image name="hongseanniu" width="355" height="44"/>
         <image name="lcsrzbanner" width="375" height="120"/>
         <image name="yanzhengmakuang" width="115" height="33"/>
