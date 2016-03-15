@@ -278,7 +278,6 @@
 		97A4DDD31C97A4C200079AFC /* UIActionSheet+LBXAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A4DDC31C97A4C200079AFC /* UIActionSheet+LBXAlertAction.m */; };
 		97A4DDD41C97A4C200079AFC /* UIAlertView+LBXAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A4DDC51C97A4C200079AFC /* UIAlertView+LBXAlertAction.m */; };
 		97A4DDD51C97A4C200079AFC /* LBXAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A4DDC71C97A4C200079AFC /* LBXAlertAction.m */; };
-		97A4DDD61C97A4C200079AFC /* logo.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 97A4DDC81C97A4C200079AFC /* logo.JPG */; };
 		97A4DDD71C97A4C200079AFC /* MyQRViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A4DDCA1C97A4C200079AFC /* MyQRViewController.m */; };
 		97A4DDD81C97A4C200079AFC /* ScanResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A4DDCC1C97A4C200079AFC /* ScanResultViewController.m */; };
 		97A4DDD91C97A4C200079AFC /* ScanResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97A4DDCD1C97A4C200079AFC /* ScanResultViewController.xib */; };
@@ -293,6 +292,7 @@
 		97A4DDF81C97A53500079AFC /* LBXScanWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A4DDEB1C97A53500079AFC /* LBXScanWrapper.m */; };
 		97A4DDF91C97A53500079AFC /* LBXZXCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A4DDED1C97A53500079AFC /* LBXZXCapture.m */; };
 		97A4DDFA1C97A53500079AFC /* ZXingWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A4DDF01C97A53500079AFC /* ZXingWrapper.m */; };
+		97A4DE061C97E5B000079AFC /* YTScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97A4DE051C97E5B000079AFC /* YTScanView.m */; };
 		97B08A8A1BC2472B007EBD24 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08A891BC2472B007EBD24 /* main.m */; };
 		97B08AA31BC2472B007EBD24 /* simuyunTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08AA21BC2472B007EBD24 /* simuyunTests.m */; };
 		97B08AAE1BC2472B007EBD24 /* simuyunUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B08AAD1BC2472B007EBD24 /* simuyunUITests.m */; };
@@ -850,7 +850,6 @@
 		97A4DDC51C97A4C200079AFC /* UIAlertView+LBXAlertAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+LBXAlertAction.m"; sourceTree = "<group>"; };
 		97A4DDC61C97A4C200079AFC /* LBXAlertAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBXAlertAction.h; sourceTree = "<group>"; };
 		97A4DDC71C97A4C200079AFC /* LBXAlertAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBXAlertAction.m; sourceTree = "<group>"; };
-		97A4DDC81C97A4C200079AFC /* logo.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = logo.JPG; sourceTree = "<group>"; };
 		97A4DDC91C97A4C200079AFC /* MyQRViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyQRViewController.h; sourceTree = "<group>"; };
 		97A4DDCA1C97A4C200079AFC /* MyQRViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQRViewController.m; sourceTree = "<group>"; };
 		97A4DDCB1C97A4C200079AFC /* ScanResultViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanResultViewController.h; sourceTree = "<group>"; };
@@ -879,6 +878,8 @@
 		97A4DDEE1C97A53500079AFC /* LBXZXCaptureDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBXZXCaptureDelegate.h; sourceTree = "<group>"; };
 		97A4DDEF1C97A53500079AFC /* ZXingWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXingWrapper.h; sourceTree = "<group>"; };
 		97A4DDF01C97A53500079AFC /* ZXingWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXingWrapper.m; sourceTree = "<group>"; };
+		97A4DE041C97E5B000079AFC /* YTScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTScanView.h; sourceTree = "<group>"; };
+		97A4DE051C97E5B000079AFC /* YTScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTScanView.m; sourceTree = "<group>"; };
 		97B08A851BC2472B007EBD24 /* simuyun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = simuyun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		97B08A891BC2472B007EBD24 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		97B08A991BC2472B007EBD24 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1211,6 +1212,8 @@
 				97270C3D1C7BF47400C92888 /* YTOrderNetValueCell.h */,
 				97270C3E1C7BF47400C92888 /* YTOrderNetValueCell.m */,
 				97270C3F1C7BF47400C92888 /* YTOrderNetValueCell.xib */,
+				97A4DE041C97E5B000079AFC /* YTScanView.h */,
+				97A4DE051C97E5B000079AFC /* YTScanView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2309,7 +2312,6 @@
 				97A4DDBE1C97A4C200079AFC /* FirstViewController.m */,
 				97A4DDBF1C97A4C200079AFC /* FirstViewController.xib */,
 				97A4DDC01C97A4C200079AFC /* LBXAlertAction */,
-				97A4DDC81C97A4C200079AFC /* logo.JPG */,
 				97A4DDC91C97A4C200079AFC /* MyQRViewController.h */,
 				97A4DDCA1C97A4C200079AFC /* MyQRViewController.m */,
 				97A4DDCB1C97A4C200079AFC /* ScanResultViewController.h */,
@@ -2576,7 +2578,6 @@
 				97270CED1C7BF47E00C92888 /* YTProductCell.xib in Resources */,
 				97270C451C7BF47400C92888 /* YTAuthenticationViewController.xib in Resources */,
 				97270CD41C7BF47E00C92888 /* ImagesPicker.xcassets in Resources */,
-				97A4DDD61C97A4C200079AFC /* logo.JPG in Resources */,
 				97270BF61C7BF46800C92888 /* YTStockItem.xib in Resources */,
 				97270D2C1C7BF49500C92888 /* CorePagesView.xib in Resources */,
 				97270C471C7BF47400C92888 /* YTBindingPhoneController.xib in Resources */,
@@ -2718,6 +2719,7 @@
 				97270BD21C7BF43C00C92888 /* YTSchoolHomeViewController.m in Sources */,
 				97270CEA1C7BF47E00C92888 /* YTLiquidationCell.m in Sources */,
 				97270EB71C7BF4D500C92888 /* NewFeatureScrollView.m in Sources */,
+				97A4DE061C97E5B000079AFC /* YTScanView.m in Sources */,
 				97270D551C7BF4AF00C92888 /* YTRegisterViewController.m in Sources */,
 				97270C521C7BF47400C92888 /* AutocompletionTableView.m in Sources */,
 				97270EC21C7BF4D500C92888 /* CoreTFKeyBoardToolBarView.m in Sources */,

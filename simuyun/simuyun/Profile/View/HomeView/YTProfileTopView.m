@@ -346,7 +346,8 @@
 }
 
 - (IBAction)myScanClick:(id)sender {
-    
+    [self sendDelegate:TopButtonTypeMyScan];
+    [MobClick event:@"main_click" attributes:@{@"按钮" : @"我的二维码", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 

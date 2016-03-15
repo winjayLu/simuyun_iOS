@@ -50,6 +50,7 @@
 #import "CoreArchive.h"
 #import "AFNetworking.h"
 #import "YTProductdetailController.h"
+#import "YTScanView.h"
 
 
 #define magin 3
@@ -93,11 +94,6 @@
 // 认证提醒
 @property (nonatomic, weak) YTGroupCell *groupCell;
 
-// 我的团队
-//@property (nonatomic, weak) YTGroupCell *myTeam;
-
-// 第一次加载
-//@property (nonatomic, assign) BOOL firstLoad;
 
 @end
 
@@ -124,9 +120,6 @@
     
     // 初始化待办事项
     [self setupTodoView];
-    
-    // 初始化我的团队
-    [self setupMyTeam];
     
     // 初始化底部菜单
     [self setupBottom];
@@ -340,13 +333,9 @@
     // 0 已认证， 1 未认证， 2 认证中， 3 驳回
     switch (userInfo.adviserStatus) {
         case 0:
-//            if (self.groupCell != nil) {
-//                [self.groupCell removeFromSuperview];
-//                self.groupCell = nil;
             self.groupCell.height = 0;
             self.groupCell.y = 0;
             [self updateTodos];
-//            }
             return;
         case 1:
             self.groupCell.detailTitle = @"";
@@ -371,13 +360,6 @@
         self.groupCell.pushVc = [YTBindingPhoneController class];
     }
     [self updateTodos];
-    
-//    // 更新团队数量
-//    if (userInfo.teamNumber > 0) {
-//        self.myTeam.title = [NSString stringWithFormat:@"我的团队（%d）", userInfo.teamNumber];
-//    } else {
-//        self.myTeam.title = @"我的团队";
-//    }
 
 }
 
@@ -420,30 +402,6 @@
     self.todoView = content;
     [YTCenter addObserver:self selector:@selector(updateTodoFrame) name:YTUpdateTodoFrame object:nil];
     [YTCenter addObserver:self selector:@selector(loadTodos) name:YTUpdateTodoData object:nil];
-}
-
-- (void)setupMyTeam
-{
-//    YTGroupCell *groupCell = [[[NSBundle mainBundle] loadNibNamed:@"YTGroupCell" owner:nil options:nil] lastObject];
-//    YTUserInfo *userInfo = [YTUserInfoTool userInfo];
-//    if (userInfo.teamNumber > 0) {
-//        groupCell.title = [NSString stringWithFormat:@"我的团队（%d）", userInfo.teamNumber];
-//    } else {
-//        groupCell.title = @"我的团队";
-//    }
-////    groupCell.pushVc = [YTNormalWebController webWithTitle:@"我的团队" url:[NSString stringWithFormat:@"%@/my/clients/",YTH5Server]];
-//
-//    groupCell.isShowLine = NO;
-//    groupCell.layer.cornerRadius = 5;
-//    groupCell.layer.masksToBounds = YES;
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(todoTitleClick)];
-//    [groupCell addGestureRecognizer:tap];
-//    // 计算groupCell的高度
-//    
-//    CGFloat groupCellHeight = 42;
-//    groupCell.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, groupCellHeight);
-//    [self.mainView addSubview:groupCell];
-//    self.myTeam = groupCell;
 }
 
 
@@ -526,11 +484,9 @@
     } else {
         todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
     }
-#warning 修改提醒理财师认证视图
+
     self.todoView.frame = CGRectMake(magin, CGRectGetMaxY(self.groupCell.frame) + 8, self.view.width - magin * 2, todoHeight);
-//    self.todoView.frame = CGRectMake(magin, 8, self.view.width - magin * 2, todoHeight);
-//    if (self.groupCell != nil) {
-//    }
+
     // 修改底部菜单frame
     self.bottom.y = CGRectGetMaxY(self.todoView.frame) + 8;
     if([YTResourcesTool isVersionFlag] == YES && [YTUserInfoTool userInfo].teamNumber > 0)
@@ -710,6 +666,9 @@
         case TopButtonTypeMenu:
             [self leftClick];
             break;
+        case TopButtonTypeMyScan:
+            [self showScanView];
+            break;
     }
     // 跳转对应控制器
     if (pushVc != nil) {
@@ -763,6 +722,15 @@
     } failure:^(NSError *error) {
         self.blackAlert = nil;
     }];
+}
+
+/**
+ *  展示二维码
+ */
+- (void)showScanView
+{
+    YTScanView *scanView = [YTScanView shared];
+    [scanView showScan];
 }
 
 

@@ -38,7 +38,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     YTUserInfo *userInfo = [YTUserInfoTool userInfo];
-    //
     if (userInfo.teamNumber > 0 && self.titles.count == 2) {
         [self.titles insertObject:@"我的团队" atIndex:0];
     }
