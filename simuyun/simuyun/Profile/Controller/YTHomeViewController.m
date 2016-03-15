@@ -93,6 +93,9 @@
 // 认证提醒
 @property (nonatomic, weak) YTGroupCell *groupCell;
 
+// 我的团队
+//@property (nonatomic, weak) YTGroupCell *myTeam;
+
 // 第一次加载
 //@property (nonatomic, assign) BOOL firstLoad;
 
@@ -121,6 +124,9 @@
     
     // 初始化待办事项
     [self setupTodoView];
+    
+    // 初始化我的团队
+    [self setupMyTeam];
     
     // 初始化底部菜单
     [self setupBottom];
@@ -290,9 +296,13 @@
     YTGroupCell *groupCell = [[[NSBundle mainBundle] loadNibNamed:@"YTGroupCell" owner:nil options:nil] lastObject];
     YTUserInfo *userInfo = [YTUserInfoTool userInfo];
     groupCell.title = @"认证理财师";
+    CGFloat groupCellHeight = 42;
+    CGFloat groupCellY = 8;
     switch (userInfo.adviserStatus) {
         case 0:
-            return;
+            groupCell = 0;
+            groupCellY = 8;
+            break;
         case 1:
             self.groupCell.detailTitle = @"";
             groupCell.pushVc = [YTAuthenticationViewController class];
@@ -315,9 +325,8 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(todoTitleClick)];
     [groupCell addGestureRecognizer:tap];
     // 计算groupCell的高度
+    groupCell.frame = CGRectMake(magin, groupCellY, self.view.width - magin * 2, groupCellHeight);
     
-    CGFloat groupCellHeight = 42;
-    groupCell.frame = CGRectMake(magin, 8, self.view.width - magin * 2, groupCellHeight);
     [self.mainView addSubview:groupCell];
     self.groupCell = groupCell;
 }
@@ -331,29 +340,45 @@
     // 0 已认证， 1 未认证， 2 认证中， 3 驳回
     switch (userInfo.adviserStatus) {
         case 0:
-            if (self.groupCell != nil) {
-                [self.groupCell removeFromSuperview];
-                self.groupCell = nil;
-                [self updateTodos];
-            }
+//            if (self.groupCell != nil) {
+//                [self.groupCell removeFromSuperview];
+//                self.groupCell = nil;
+            self.groupCell.height = 0;
+            self.groupCell.y = 0;
+            [self updateTodos];
+//            }
             return;
         case 1:
             self.groupCell.detailTitle = @"";
             self.groupCell.pushVc = [YTAuthenticationViewController class];
+            self.groupCell.height = 42;
+            self.groupCell.y = 8;
             break;
         case 2:
             self.groupCell.detailTitle = @"（审核中）";
             self.groupCell.pushVc = [YTAuthenticationStatusController class];
+            self.groupCell.height = 42;
+            self.groupCell.y = 8;
             break;
         case 3:
             self.groupCell.detailTitle = @"（未成功）";
             self.groupCell.pushVc = [YTAuthenticationErrorController class];
+            self.groupCell.height = 42;
+            self.groupCell.y = 8;
             break;
     }
     if ([YTUserInfoTool userInfo].phoneNumer == nil && [YTUserInfoTool userInfo].phoneNumer.length == 0) {
         self.groupCell.pushVc = [YTBindingPhoneController class];
     }
     [self updateTodos];
+    
+//    // 更新团队数量
+//    if (userInfo.teamNumber > 0) {
+//        self.myTeam.title = [NSString stringWithFormat:@"我的团队（%d）", userInfo.teamNumber];
+//    } else {
+//        self.myTeam.title = @"我的团队";
+//    }
+
 }
 
 
@@ -396,6 +421,32 @@
     [YTCenter addObserver:self selector:@selector(updateTodoFrame) name:YTUpdateTodoFrame object:nil];
     [YTCenter addObserver:self selector:@selector(loadTodos) name:YTUpdateTodoData object:nil];
 }
+
+- (void)setupMyTeam
+{
+//    YTGroupCell *groupCell = [[[NSBundle mainBundle] loadNibNamed:@"YTGroupCell" owner:nil options:nil] lastObject];
+//    YTUserInfo *userInfo = [YTUserInfoTool userInfo];
+//    if (userInfo.teamNumber > 0) {
+//        groupCell.title = [NSString stringWithFormat:@"我的团队（%d）", userInfo.teamNumber];
+//    } else {
+//        groupCell.title = @"我的团队";
+//    }
+////    groupCell.pushVc = [YTNormalWebController webWithTitle:@"我的团队" url:[NSString stringWithFormat:@"%@/my/clients/",YTH5Server]];
+//
+//    groupCell.isShowLine = NO;
+//    groupCell.layer.cornerRadius = 5;
+//    groupCell.layer.masksToBounds = YES;
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(todoTitleClick)];
+//    [groupCell addGestureRecognizer:tap];
+//    // 计算groupCell的高度
+//    
+//    CGFloat groupCellHeight = 42;
+//    groupCell.frame = CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, groupCellHeight);
+//    [self.mainView addSubview:groupCell];
+//    self.myTeam = groupCell;
+}
+
+
 /**
  *  初始化底部菜单
  */
@@ -404,10 +455,13 @@
     YTBottomView *bottom = [[YTBottomView alloc] initWithFrame:CGRectMake(magin, CGRectGetMaxY(self.todoView.frame) + 8, self.view.width - magin * 2, 42 * 3)];
     bottom.layer.cornerRadius = 5;
     bottom.layer.masksToBounds = YES;
-
+    YTUserInfo *userInfo = [YTUserInfoTool userInfo];
     if([YTResourcesTool isVersionFlag] == NO)
     {
         bottom.height = 42;
+    } else if (userInfo.teamNumber == 0)
+    {
+        bottom.height = 84;
     }
     bottom.BottomDelegate = self;
     [self.mainView addSubview:bottom];
@@ -472,12 +526,17 @@
     } else {
         todoHeight = groupCellHeight + self.todos.count * conetentCellHeight;
     }
-    self.todoView.frame = CGRectMake(magin, 8, self.view.width - magin * 2, todoHeight);
-    if (self.groupCell != nil) {
-        self.todoView.frame = CGRectMake(magin, CGRectGetMaxY(self.groupCell.frame) + 8, self.view.width - magin * 2, todoHeight);
-    }
+#warning 修改提醒理财师认证视图
+    self.todoView.frame = CGRectMake(magin, CGRectGetMaxY(self.groupCell.frame) + 8, self.view.width - magin * 2, todoHeight);
+//    self.todoView.frame = CGRectMake(magin, 8, self.view.width - magin * 2, todoHeight);
+//    if (self.groupCell != nil) {
+//    }
     // 修改底部菜单frame
     self.bottom.y = CGRectGetMaxY(self.todoView.frame) + 8;
+    if([YTResourcesTool isVersionFlag] == YES && [YTUserInfoTool userInfo].teamNumber > 0)
+    {
+        self.bottom.height = 126;
+    }
     
     // 设置滚动范围
     [self.mainView setContentSize:CGSizeMake(DeviceWidth, CGRectGetMaxY(self.bottom.frame) + 64)];
@@ -583,12 +642,12 @@
     UIViewController *vc = nil;
     switch (row) {
         case 0:
-            vc = [[YTOrderCenterController alloc] init];
-            [MobClick event:@"main_click" attributes:@{@"按钮" : @"全部订单", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+            vc = [YTNormalWebController webWithTitle:@"我的团队" url:[NSString stringWithFormat:@"%@/prizes%@", YTH5Server,[NSDate stringDate]]];
+            [MobClick event:@"main_click" attributes:@{@"按钮" : @"我的团队", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
         case 1:
-            vc = [YTNormalWebController webWithTitle:@"我的奖品" url:[NSString stringWithFormat:@"%@/prizes%@", YTH5Server,[NSDate stringDate]]];
-            [MobClick event:@"main_click" attributes:@{@"按钮" : @"我的奖品", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+            vc = [[YTOrderCenterController alloc] init];
+            [MobClick event:@"main_click" attributes:@{@"按钮" : @"全部订单", @"机构" : [YTUserInfoTool userInfo].organizationName}];
             break;
         case 2:
             vc = [YTNormalWebController webWithTitle:@"云豆银行" url:[NSString stringWithFormat:@"%@/mall%@", YTH5Server,[NSDate stringDate]]];

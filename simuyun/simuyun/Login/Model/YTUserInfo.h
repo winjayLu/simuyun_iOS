@@ -63,6 +63,10 @@
 // 待报备订单数量
 @property (nonatomic, assign) int preparedforNum;
 
+// 团队数量
+@property (nonatomic, assign) int teamNumber;
+// 是否有二维码
+@property (nonatomic, assign) BOOL isExtension;
 
 
 @end

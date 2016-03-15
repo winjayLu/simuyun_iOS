@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -175,6 +175,17 @@
                         <action selector="menuClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="BaK-Za-XZc"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ege-Bt-fN2">
+                    <rect key="frame" x="10" y="164" width="37" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="37" id="1O8-ri-HFx"/>
+                        <constraint firstAttribute="height" constant="37" id="i8j-rw-mew"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="erweima"/>
+                    <connections>
+                        <action selector="myScanClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="YC4-Hb-wnO"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -182,6 +193,7 @@
                 <constraint firstItem="F28-CY-hce" firstAttribute="leading" secondItem="xO5-bn-mkv" secondAttribute="leading" id="1Qq-3t-JHv"/>
                 <constraint firstItem="27e-HL-mxV" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="1k9-kE-PPM"/>
                 <constraint firstItem="98T-Fi-cUv" firstAttribute="leading" secondItem="xO5-bn-mkv" secondAttribute="leading" id="26A-ah-SzE"/>
+                <constraint firstItem="psv-5Z-FRq" firstAttribute="top" secondItem="Ege-Bt-fN2" secondAttribute="bottom" constant="15" id="2hc-bp-9vg"/>
                 <constraint firstItem="ZK9-mr-7Kc" firstAttribute="leading" secondItem="PXL-kS-EuD" secondAttribute="leading" id="2qU-da-Mbq"/>
                 <constraint firstItem="PXL-kS-EuD" firstAttribute="leading" secondItem="0EK-Rx-hhm" secondAttribute="trailing" constant="5" id="5AX-cd-nUA"/>
                 <constraint firstItem="71c-4s-gBb" firstAttribute="top" secondItem="0EK-Rx-hhm" secondAttribute="bottom" constant="14" id="6gd-om-VSw"/>
@@ -222,6 +234,7 @@
                 <constraint firstItem="ZK9-mr-7Kc" firstAttribute="leading" secondItem="PXL-kS-EuD" secondAttribute="leading" id="ejK-6d-8B0"/>
                 <constraint firstItem="ZK9-mr-7Kc" firstAttribute="top" secondItem="PXL-kS-EuD" secondAttribute="bottom" constant="2" id="enE-dN-goo"/>
                 <constraint firstItem="CrT-a4-ocu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="98" id="fUN-Oo-74n"/>
+                <constraint firstItem="psv-5Z-FRq" firstAttribute="leading" secondItem="Ege-Bt-fN2" secondAttribute="leading" id="fWE-vu-0ta"/>
                 <constraint firstItem="71c-4s-gBb" firstAttribute="bottom" secondItem="psv-5Z-FRq" secondAttribute="bottom" id="gEn-bX-Bny"/>
                 <constraint firstItem="ZK9-mr-7Kc" firstAttribute="width" secondItem="PXL-kS-EuD" secondAttribute="width" id="jPD-r2-IpY"/>
                 <constraint firstItem="xO5-bn-mkv" firstAttribute="top" secondItem="zM7-Sr-Sgp" secondAttribute="bottom" constant="15" id="lno-6f-Z0W"/>
@@ -263,9 +276,11 @@
                 <outlet property="huangGuanImage" destination="Z40-Md-MMW" id="gls-gG-hgf"/>
                 <outlet property="iconImage" destination="27e-HL-mxV" id="Oac-y8-Xky"/>
                 <outlet property="keHuLable" destination="uQ9-IY-0yg" id="Bfg-f1-VNw"/>
+                <outlet property="myScanBtn" destination="Ege-Bt-fN2" id="219-49-R2t"/>
                 <outlet property="nameLable" destination="0EK-Rx-hhm" id="CFa-aF-53t"/>
                 <outlet property="orderLable" destination="tbU-xM-BgG" id="cxd-4f-HdS"/>
                 <outlet property="qiaoDaoBtn" destination="psv-5Z-FRq" id="k4c-CY-w4g"/>
+                <outlet property="scanBottomConstraint" destination="2hc-bp-9vg" id="xpL-ig-eKb"/>
                 <outlet property="wanLable" destination="tma-5d-N7b" id="sW6-6v-LGx"/>
                 <outlet property="yeJiLable" destination="ZK9-mr-7Kc" id="sYF-za-YQ3"/>
                 <outlet property="yunDouBtn" destination="71c-4s-gBb" id="h8d-4c-h3Q"/>
@@ -282,6 +297,7 @@
         <image name="backgroundpicture" width="375" height="310"/>
         <image name="chouti" width="44" height="49"/>
         <image name="dikuang" width="87" height="53"/>
+        <image name="erweima" width="37" height="37"/>
         <image name="quan" width="126" height="126"/>
         <image name="weiqiandao" width="37" height="37"/>
         <image name="yundou" width="18" height="19"/>

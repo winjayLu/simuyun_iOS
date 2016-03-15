@@ -111,6 +111,14 @@
 // 首页背景图片
 @property (weak, nonatomic) IBOutlet UIImageView *homeImageView;
 
+// 二维码点击
+- (IBAction)myScanClick:(id)sender;
+
+// 二维码按钮
+@property (weak, nonatomic) IBOutlet UIButton *myScanBtn;
+
+// 二维码底部约束
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scanBottomConstraint;
 
 @end
 
@@ -280,8 +288,10 @@
  */
 - (IBAction)qiaoDaoClick:(UIButton *)sender {
     // 调用代理方法
-    sender.enabled = NO;
     sender.hidden = YES;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.scanBottomConstraint.constant = -37;
+    }];
     [self sendDelegate:TopButtonTypeQiandao];
     [MobClick event:@"main_click" attributes:@{@"按钮" : @"签到", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
@@ -335,6 +345,9 @@
     }
 }
 
+- (IBAction)myScanClick:(id)sender {
+    
+}
 
 
 /**
@@ -343,6 +356,7 @@
  */
 - (void)setUserInfo:(YTUserInfo *)userInfo
 {
+    userInfo.isExtension = 1;
     _userInfo = userInfo;
     if (_userInfo == nil) return;
     
@@ -369,12 +383,12 @@
 
 	    // 签到按钮
     if (userInfo.isSingIn) { // 已经签到
-        self.qiaoDaoBtn.enabled = NO;
         self.qiaoDaoBtn.hidden = YES;
+        self.scanBottomConstraint.constant = -37;
     } else {    // 未签到
         [self.qiaoDaoBtn setBackgroundImage:[UIImage imageNamed:@"weiqiandao"] forState:UIControlStateNormal];
-        self.qiaoDaoBtn.enabled = YES;
         self.qiaoDaoBtn.hidden = NO;
+        self.scanBottomConstraint.constant = 15;
     }
  	    // 云豆
     [self.yunDouBtn setTitle:[NSString stringWithFormat:@"%d", userInfo.myPoint] forState:UIControlStateNormal];
@@ -414,6 +428,13 @@
     
     // 理财师等级
     self.huangGuanImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"lv%d",userInfo.adviserLevel - 1]];
+    
+    // 是否显示二维码
+    if (userInfo.isExtension) {
+        self.myScanBtn.hidden = NO;
+    } else {
+        self.myScanBtn.hidden = YES;
+    }
 
 }
 
@@ -422,5 +443,6 @@
 {
     return [[[NSBundle mainBundle] loadNibNamed:@"YTProfileTopView" owner:nil options:nil] firstObject];
 }
+
 
 @end
