@@ -18,6 +18,15 @@
 #define scanWidth  285
 #define scanHeight  350
 
+@interface YTScanView()
+
+/**
+ *  截止日期
+ */
+@property (weak, nonatomic) UILabel *endDate;
+@end
+
+
 @implementation YTScanView
 
 
@@ -159,11 +168,8 @@ static UIWindow *_window;
     labele.x = (DeviceWidth - labele.width) * 0.5;
     labele.y = CGRectGetMaxY(self.frame) + 20;
     [_window addSubview:labele];
+    self.endDate = labele;
 }
-
-
-
-
 
 - (void)show
 {
@@ -186,9 +192,6 @@ static UIWindow *_window;
     
 }
 
-
-
-
 - (void)destroy
 {
     
@@ -197,16 +200,8 @@ static UIWindow *_window;
     self.layer.shadowOffset = CGSizeMake(0, 5);
     self.layer.shadowOpacity = 0.3f;
     self.layer.shadowRadius = 20.0f;
-    
-//    [_okButton removeFromSuperview];
-//    [_closeButton removeFromSuperview];
-//    [_titleLabel removeFromSuperview];
-//    [_detailView removeFromSuperview];
-//    _okButton = nil;
-//    _titleLabel = nil;
-//    _detailView = nil;
-//    _closeButton = nil;
-//    _secletBlock = nil;
+    [self.endDate removeFromSuperview];
+    [self removeFromSuperview];
     _window.hidden = YES;
     _window = nil;
 }

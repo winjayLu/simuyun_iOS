@@ -14,23 +14,54 @@
 #import "YTUserInfoTool.h"
 #import "NSString+Password.h"
 #import "CoreTFManagerVC.h"
+#import "YTAuthenticationModel.h"
+#import "YTAuthenticationStatusController.h"
+#import "AutocompletionTableView.h"
+
 
 @interface YTBindingPhoneController ()
 
+// 姓名
+@property (weak, nonatomic) IBOutlet UITextField *userNameLable;
+// 机构名称
+@property (weak, nonatomic) IBOutlet UITextField *mechanismNameLable;
+
+
+/**
+ *  申请认证
+ *
+ */
+- (IBAction)applyClick:(UIButton *)sender;
+
+/**
+ *  推荐人
+ *
+ */
+@property (weak, nonatomic) IBOutlet UITextField *tuijianLabel;
 // 手机号
 @property (weak, nonatomic) IBOutlet UITextField *phoneField;
-
 // 验证码
 @property (weak, nonatomic) IBOutlet UITextField *yanzhenField;
 
+/**
+ *  机构列表
+ *
+ */
+@property (nonatomic, strong) AutocompletionTableView *autoCompleter;
+/**
+ *  机构模型数组
+ *
+ */@property (nonatomic, strong) NSArray *orgnazations;
+
+/**
+ *  机构名称数组
+ *
+ */
+@property (nonatomic, strong) NSMutableArray *orgnaNames;
+
+
 // 发送验证码
 - (IBAction)sendYanzheng:(JKCountDownButton *)sender;
-
-// 密码
-@property (weak, nonatomic) IBOutlet UITextField *passwordField;
-
-// 下一步
-- (IBAction)nextClick:(UIButton *)sender;
 
 /**
  *  验证码
@@ -48,7 +79,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"关联手机";
+    self.title = @"认证理财师";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -90,6 +121,16 @@
 }
 
 /**
+ *  申请认证
+ *
+ */
+- (IBAction)applyClick:(UIButton *)sender
+{
+
+}
+
+
+/**
  *  发送验证码
  */
 - (void)sendRegisterNumber
@@ -124,37 +165,13 @@
     {
         [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
         return;
-    } else if(self.passwordField.text.length == 0)
-    {
-        [SVProgressHUD showErrorWithStatus:@"请输入密码"];
-        return;
     } else if(![self.captcha isEqualToString:self.yanzhenField.text])
     {
         [SVProgressHUD showErrorWithStatus:@"验证码不正确"];
         return;
     }
     
-    // 发送请求
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"adviserId"] = [YTAccountTool account].userId;
-    param[@"phoneNumber"] = self.phoneField.text;
-    param[@"password"] = [NSString md5:self.passwordField.text];
-    [SVProgressHUD showWithStatus:@"正在绑定" maskType:SVProgressHUDMaskTypeClear];
-    [YTHttpTool post:YTBindPhone params:param success:^(id responseObject) {
-        [SVProgressHUD dismiss];
-        // 修改本地存储的帐号信息
-        YTAccount *account = [YTAccountTool account];
-        account.userName = self.phoneField.text;
-        account.password = [NSString md5:self.passwordField.text];
-        [YTAccountTool save:account];
-        
-        YTAuthenticationViewController *authen = [[YTAuthenticationViewController alloc] init];
-        authen.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:authen animated:YES];
-        [self updateUserInfo];
-    } failure:^(NSError *error) {
 
-    }];
 }
 
 // 修改用户信息
@@ -176,8 +193,8 @@
         
         TFModel *tfm1=[TFModel modelWithTextFiled:self.phoneField inputView:nil name:@"" insetBottom:12];
         TFModel *tfm2=[TFModel modelWithTextFiled:self.yanzhenField inputView:nil name:@"" insetBottom:12];
-        TFModel *tfm3=[TFModel modelWithTextFiled:self.passwordField inputView:nil name:@"" insetBottom:12];
-        return @[tfm1, tfm2, tfm3];
+
+        return @[tfm1, tfm2];
     }];
 }
 -(void)viewDidDisappear:(BOOL)animated{

@@ -41,6 +41,13 @@
 - (IBAction)applyClick:(UIButton *)sender;
 
 /**
+ *  推荐人
+ *
+ */
+@property (weak, nonatomic) IBOutlet UITextField *tuijianLabel;
+
+
+/**
  *  机构列表
  *
  */
@@ -62,7 +69,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"理财师认证";
+    self.title = @"认证理财师";
     // 获取机构信息
     [self loadOrgnazations];
     self.view.frame = CGRectMake(0, maginTop, DeviceWidth, DeviceHight - maginTop);
@@ -112,6 +119,8 @@
     dict[@"advisersId"] = [YTAccountTool account].userId;
     dict[@"realName"] = self.userNameLable.text;
     dict[@"orgId"] = selectedOrgna.party_id;
+    dict[@"fatherId"] = self.tuijianLabel.text;
+    dict[@"authenticationType"] = @"0";
     [YTHttpTool post:YTAuthAdviser params:dict success:^(id responseObject) {
         [SVProgressHUD dismiss];
         YTAuthenticationModel *authen = [[YTAuthenticationModel alloc] init];
