@@ -6,8 +6,21 @@
 //  Copyright © 2015年 lbxia. All rights reserved.
 //
 
-#import "LBXAlertAction.h"
+
 #import "LBXScanViewController.h"
+
+
+@protocol YTScanDelegate <NSObject>
+
+
+@optional
+
+/**
+ *  关闭界面
+ */
+-(void)closePage;
+
+@end
 
 
 //继承LBXScanViewController,在界面上绘制想要的按钮，提示语等
@@ -37,7 +50,10 @@
 @property (nonatomic, strong) UIButton *btnMyQR;
 
 
-
+/**
+ *  代理
+ */
+@property (nonatomic, weak) id <YTScanDelegate> delegate;
 
 
 

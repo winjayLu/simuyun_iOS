@@ -593,22 +593,20 @@
  *  底部菜单选中
  *
  */
-- (void)didSelectedRow:(int)row
+- (void)didSelectedName:(NSString *)name
 {
     UIViewController *vc = nil;
-    switch (row) {
-        case 0:
-            vc = [YTNormalWebController webWithTitle:@"我的团队" url:[NSString stringWithFormat:@"%@/prizes%@", YTH5Server,[NSDate stringDate]]];
-            [MobClick event:@"main_click" attributes:@{@"按钮" : @"我的团队", @"机构" : [YTUserInfoTool userInfo].organizationName}];
-            break;
-        case 1:
-            vc = [[YTOrderCenterController alloc] init];
-            [MobClick event:@"main_click" attributes:@{@"按钮" : @"全部订单", @"机构" : [YTUserInfoTool userInfo].organizationName}];
-            break;
-        case 2:
-            vc = [YTNormalWebController webWithTitle:@"云豆银行" url:[NSString stringWithFormat:@"%@/mall%@", YTH5Server,[NSDate stringDate]]];
-            [MobClick event:@"main_click" attributes:@{@"按钮" : @"云豆银行", @"机构" : [YTUserInfoTool userInfo].organizationName}];
-            break;
+    if ([name isEqualToString:@"我的团队"]) {
+        vc = [YTNormalWebController webWithTitle:@"我的团队" url:[NSString stringWithFormat:@"%@/prizes%@", YTH5Server,[NSDate stringDate]]];
+        [MobClick event:@"main_click" attributes:@{@"按钮" : @"我的团队", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+    } else if([name isEqualToString:@"全部订单"])
+    {
+        vc = [[YTOrderCenterController alloc] init];
+        [MobClick event:@"main_click" attributes:@{@"按钮" : @"全部订单", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+    } else if([name isEqualToString:@"云豆银行"])
+    {
+        vc = [YTNormalWebController webWithTitle:@"云豆银行" url:[NSString stringWithFormat:@"%@/mall%@", YTH5Server,[NSDate stringDate]]];
+        [MobClick event:@"main_click" attributes:@{@"按钮" : @"云豆银行", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     }
     if (vc != nil) {
         vc.hidesBottomBarWhenPushed = YES;

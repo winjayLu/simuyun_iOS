@@ -134,6 +134,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abe-vk-FUP">
                             <rect key="frame" x="0.0" y="0.0" width="95" height="95"/>
                             <state key="normal" backgroundImage="scanSaomiao"/>
+                            <connections>
+                                <action selector="ScanClick:" destination="-1" eventType="touchUpInside" id="wdt-65-shf"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

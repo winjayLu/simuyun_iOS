@@ -76,8 +76,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if ([self.BottomDelegate respondsToSelector:@selector(didSelectedRow:)]) {
-        [self.BottomDelegate didSelectedRow:(int)indexPath.row];
+    if ([self.BottomDelegate respondsToSelector:@selector(didSelectedName:)]) {
+        [self.BottomDelegate didSelectedName:self.titles[indexPath.row]];
     }
 }
 

@@ -22,10 +22,11 @@
 #import "CALayer+Transition.h"
 #import "YTFatherModel.h"
 #import "YTCustomPickerView.h"
+#import "SubLBXScanViewController.h"
 
 #define maginTop 64
 
-@interface YTLoginAuthenticationController ()<AutocompletionTableViewDelegate>
+@interface YTLoginAuthenticationController ()<AutocompletionTableViewDelegate, YTScanDelegate>
 
 /**
  *  客户名称
@@ -83,6 +84,9 @@
 /** 定时器 */
 @property (nonatomic,strong) NSTimer *timer;
 
+
+- (IBAction)ScanClick:(id)sender;
+
 @end
 
 @implementation YTLoginAuthenticationController
@@ -124,7 +128,7 @@
  */
 - (void)loadOrgnazations
 {
-    [SVProgressHUD showWithStatus:@"正在加载机构信息" maskType:SVProgressHUDMaskTypeClear];
+//    [SVProgressHUD showWithStatus:@"正在加载机构信息" maskType:SVProgressHUDMaskTypeClear];
     [YTHttpTool get:YTOrgnazations params:nil success:^(id responseObject) {
         self.orgnazations = [YTOrgnazationModel objectArrayWithKeyValuesArray:responseObject];
         // 遍历json
@@ -400,5 +404,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (IBAction)ScanClick:(id)sender {
+
+    SubLBXScanViewController *vc = [SubLBXScanViewController new];
+    vc.isQQSimulator = YES;
+    vc.delegate = self;
+    [self presentViewController:vc animated:NO completion:nil];
+}
+
+- (void)closePage
+{
+    [self transitionTabBarVC];
+}
 
 @end

@@ -20,9 +20,11 @@
 #import "YTOrgnazationModel.h"
 #import "YTFatherModel.h"
 #import "YTCustomPickerView.h"
+#import "UIBarButtonItem+Extension.h"
+#import "SubLBXScanViewController.h"
 
 
-@interface YTBindingPhoneController () <AutocompletionTableViewDelegate>
+@interface YTBindingPhoneController () <AutocompletionTableViewDelegate, YTScanDelegate>
 
 // 姓名
 @property (weak, nonatomic) IBOutlet UITextField *userNameLable;
@@ -106,7 +108,23 @@
     [self.sendBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateDisabled];
     self.sendBtn.layer.cornerRadius = 5;
     self.sendBtn.layer.masksToBounds = YES;
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithBg:@"rightScan" target:self action:@selector(rightClick)];
 }
+
+- (void)rightClick
+{
+    SubLBXScanViewController *vc = [SubLBXScanViewController new];
+    vc.delegate = self;
+    vc.isQQSimulator = YES;
+    [self presentViewController:vc animated:NO completion:nil];
+}
+
+- (void)closePage
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

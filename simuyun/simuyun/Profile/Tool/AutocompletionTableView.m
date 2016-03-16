@@ -33,11 +33,9 @@
     if ([self.options[@"style"]  isEqual: @(2)])
     {
 #warning 待修改
-        frame = CGRectMake( 22 , 345, DeviceWidth - 44, 128);
+        frame = CGRectMake( 22 , 347, DeviceWidth - 44, 128);
     }
-//    CGRect frame = CGRectMake(textField.frame.origin.x, CGRectGetMaxY(textField.frame), textField.frame.size.width, 120);
-    
-    // save the font info to reuse in cells
+
     self.cellLabelFont = textField.font;
     
     self = [super initWithFrame:frame
@@ -57,13 +55,12 @@
     v.backgroundColor = [UIColor clearColor];
     if ([self.options[@"style"]  isEqual: @(2)])
     {
-        self.backgroundColor = YTColor(37, 37, 39);
+        self.backgroundColor = YTColor(30, 30, 30);
         v.hidden = YES;
         // 去掉下划线
-        self.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     [self setTableFooterView:v];
-    self.hidden = YES;  
+    self.hidden = YES;
     [parentViewController.view addSubview:self];
 
     return self;
@@ -112,10 +109,11 @@
 
     if ([self.options[@"style"]  isEqual: @(2)])
     {
-        cell.backgroundColor = YTRGBA(0, 0, 0, 0.2);
-        self.backgroundColor = [UIColor clearColor];
+        cell.backgroundColor = YTColor(30, 30, 30);
         cell.contentView.backgroundColor = [UIColor clearColor];
         cell.titleLable.textColor = YTColor(204, 204, 204);
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.isHidden = YES;
     }
     return cell;
 }

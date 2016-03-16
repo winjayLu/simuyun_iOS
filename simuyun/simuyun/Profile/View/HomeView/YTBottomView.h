@@ -10,7 +10,7 @@
 
 @protocol BottomViewDelegate <NSObject>
 
-- (void)didSelectedRow:(int)row;
+- (void)didSelectedName:(NSString *)name;
 
 @end
 

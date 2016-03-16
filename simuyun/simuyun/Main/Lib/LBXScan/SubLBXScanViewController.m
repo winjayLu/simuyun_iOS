@@ -7,11 +7,17 @@
 //
 
 #import "SubLBXScanViewController.h"
-#import "MyQRViewController.h"
-#import "ScanResultViewController.h"
 #import "LBXScanResult.h"
 #import "LBXScanWrapper.h"
-
+#import "UINavigationBar+BackgroundColor.h"
+#import "NSString+Password.h"
+#import "SVProgressHUD.h"
+#import "NSString+JsonCategory.h"
+#import "NSDate+Extension.h"
+#import "NSString+Extend.h"
+#import "YTHttpTool.h"
+#import "YTUserInfoTool.h"
+#import "YTAccountTool.h"
 
 @interface SubLBXScanViewController ()
 
@@ -20,9 +26,48 @@
 @implementation SubLBXScanViewController
 
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        //创建参数对象
+        LBXScanViewStyle *style = [[LBXScanViewStyle alloc]init];
+        
+        //矩形区域中心上移，默认中心点为屏幕中心点
+        style.centerUpOffset = 44;
+        
+        //扫码框周围4个角的类型,设置为外挂式
+        style.photoframeAngleStyle = LBXScanViewPhotoframeAngleStyle_Outer;
+        
+        //扫码框周围4个角绘制的线条宽度
+        style.photoframeLineW = 6;
+        
+        // 边线颜色
+        style.colorRetangleLine = [UIColor whiteColor];
+        
+        //扫码框周围4个角的宽度
+        style.photoframeAngleW = 24;
+        
+        //扫码框周围4个角的高度
+        style.photoframeAngleH = 24;
+        
+        style.photoframeLineW = 2;
+        
+        style.colorAngle = [UIColor whiteColor];
+        
+        //扫码框内 动画类型 --线条上下移动
+        style.anmiationStyle = LBXScanViewAnimationStyle_LineMove;
+        
+        //线条上下移动图片
+        style.animationImage = [UIImage imageNamed:@"CodeScan.bundle/qrcode_scan_light_green"];
+        self.style = style;
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
         
@@ -30,6 +75,7 @@
     }
     
     self.view.backgroundColor = [UIColor blackColor];
+    
 }
 
 
@@ -47,7 +93,36 @@
     else
         _topTitle.hidden = YES;
     
+    // 初始化titleView
+    [self setupTitleView];
    
+}
+
+
+- (void)setupTitleView
+{
+    //
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, 64)];
+    view.backgroundColor = YTRGBA(0, 0, 0, 0.7);
+    [self.view addSubview:view];
+    
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(0, 20, DeviceWidth, 44)];
+    title.text = @"扫描推荐人二维码";
+    title.textAlignment = NSTextAlignmentCenter;
+    title.textColor = [UIColor whiteColor];
+    title.font = [UIFont systemFontOfSize:20];
+    [view addSubview:title];
+    
+    UIButton *backBtn = [[UIButton alloc] init];
+    [backBtn setImage:[UIImage imageNamed:@"fanhui"] forState:UIControlStateNormal];
+    backBtn.frame = CGRectMake(0, 20, 44, 44);
+    [backBtn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:backBtn];
+}
+
+- (void)backClick
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 //绘制扫描区域
@@ -56,23 +131,19 @@
     if (!_topTitle)
     {
         
+        self.topTitle = [[UILabel alloc] init];
+
+        _topTitle.width = DeviceWidth;
         
-        self.topTitle = [[UILabel alloc]init];
-        _topTitle.bounds = CGRectMake(0, 0, 145, 60);
-        _topTitle.center = CGPointMake(CGRectGetWidth(self.view.frame)/2, 50);
-        
-        //3.5inch iphone
-        if ([UIScreen mainScreen].bounds.size.height <= 568 )
-        {
-            _topTitle.center = CGPointMake(CGRectGetWidth(self.view.frame)/2, 38);
-            _topTitle.font = [UIFont systemFontOfSize:14];
-        }
+        _topTitle.x = 0;
+        _topTitle.y = DeviceHight * 0.5 - (DeviceWidth - 60) * 0.5 - 50;
+        _topTitle.height = 14;
         
         
         _topTitle.textAlignment = NSTextAlignmentCenter;
-        _topTitle.numberOfLines = 0;
-        _topTitle.text = @"将取景框对准二维码即可自动扫描";
+        _topTitle.text = @"将取景器对准二维码即可自动扫描";
         _topTitle.textColor = [UIColor whiteColor];
+        _topTitle.font = [UIFont systemFontOfSize:14];
         [self.view addSubview:_topTitle];
     }
     
@@ -86,49 +157,35 @@
         return;
     }
     
-    self.bottomItemsView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.view.frame)-164,
+    self.bottomItemsView = [[UIView alloc]initWithFrame:CGRectMake(0, DeviceHight-100,
                                                                       CGRectGetWidth(self.view.frame), 100)];
     
-    _bottomItemsView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
+    _bottomItemsView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.7];
     
     [self.view addSubview:_bottomItemsView];
     
     CGSize size = CGSizeMake(65, 87);
     self.btnFlash = [[UIButton alloc]init];
     _btnFlash.bounds = CGRectMake(0, 0, size.width, size.height);
-    _btnFlash.center = CGPointMake(CGRectGetWidth(_bottomItemsView.frame)/2, CGRectGetHeight(_bottomItemsView.frame)/2);
+    _btnFlash.center = CGPointMake(CGRectGetWidth(_bottomItemsView.frame) * 0.5 - 70 , CGRectGetHeight(_bottomItemsView.frame)/2);
      [_btnFlash setImage:[UIImage imageNamed:@"CodeScan.bundle/qrcode_scan_btn_flash_nor"] forState:UIControlStateNormal];
     [_btnFlash addTarget:self action:@selector(openOrCloseFlash) forControlEvents:UIControlEventTouchUpInside];
     
     self.btnPhoto = [[UIButton alloc]init];
     _btnPhoto.bounds = _btnFlash.bounds;
-    _btnPhoto.center = CGPointMake(CGRectGetWidth(_bottomItemsView.frame)/4, CGRectGetHeight(_bottomItemsView.frame)/2);
+    _btnPhoto.center = CGPointMake(CGRectGetWidth(_bottomItemsView.frame) * 0.5 + 70, CGRectGetHeight(_bottomItemsView.frame)/2);
     [_btnPhoto setImage:[UIImage imageNamed:@"CodeScan.bundle/qrcode_scan_btn_photo_nor"] forState:UIControlStateNormal];
     [_btnPhoto setImage:[UIImage imageNamed:@"CodeScan.bundle/qrcode_scan_btn_photo_down"] forState:UIControlStateHighlighted];
     [_btnPhoto addTarget:self action:@selector(openPhoto) forControlEvents:UIControlEventTouchUpInside];
     
-    self.btnMyQR = [[UIButton alloc]init];
-    _btnMyQR.bounds = _btnFlash.bounds;
-    _btnMyQR.center = CGPointMake(CGRectGetWidth(_bottomItemsView.frame) * 3/4, CGRectGetHeight(_bottomItemsView.frame)/2);
-    [_btnMyQR setImage:[UIImage imageNamed:@"CodeScan.bundle/qrcode_scan_btn_myqrcode_nor"] forState:UIControlStateNormal];
-    [_btnMyQR setImage:[UIImage imageNamed:@"CodeScan.bundle/qrcode_scan_btn_myqrcode_down"] forState:UIControlStateHighlighted];
-    [_btnMyQR addTarget:self action:@selector(myQRCode) forControlEvents:UIControlEventTouchUpInside];
-    
     [_bottomItemsView addSubview:_btnFlash];
     [_bottomItemsView addSubview:_btnPhoto];
-    [_bottomItemsView addSubview:_btnMyQR];   
     
 }
 
-
-
-
-
-
-
 - (void)showError:(NSString*)str
 {
-    [LBXAlertAction showAlertWithTitle:@"提示" msg:str chooseBlock:nil buttonsStatement:@"知道了",nil];
+    [SVProgressHUD showErrorWithStatus:str];
 }
 
 
@@ -181,24 +238,65 @@
         strResult = @"识别失败";
     }
     
-    __weak __typeof(self) weakSelf = self;
-    [LBXAlertAction showAlertWithTitle:@"扫码内容" msg:strResult chooseBlock:^(NSInteger buttonIdx) {
-        
-        //点击完，继续扫码
-        [weakSelf reStartDevice];
-    } buttonsStatement:@"知道了",nil];
+//    __weak __typeof(self) weakSelf = self;
+//    [LBXAlertAction showAlertWithTitle:@"扫码内容" msg:strResult chooseBlock:^(NSInteger buttonIdx) {
+//        
+//        //点击完，继续扫码
+//        [weakSelf reStartDevice];
+//    } buttonsStatement:@"知道了",nil];
 }
 
 - (void)showNextVCWithScanResult:(LBXScanResult*)strResult
 {
-    ScanResultViewController *vc = [ScanResultViewController new];
-    vc.imgScan = strResult.imgScanned;
-    
-    vc.strScan = strResult.strScanned;
-    
-    vc.strCodeType = strResult.strBarCodeType;
-    
-    [self.navigationController pushViewController:vc animated:YES];
+    NSString *scan = strResult.strScanned;
+    // 截取加密文本
+    [SVProgressHUD showWithStatus:@"正在识别二维码" maskType:SVProgressHUDMaskTypeClear];
+    if ([scan hasPrefix:@"http://www.simuyun.com/"]) {
+        
+        NSRange range = [scan rangeOfString:@"?"];
+        NSString *coder = [scan substringFromIndex:range.location + range.length];
+        scan = [NSString decrypt:coder];
+        
+        // 判断日期
+        NSDictionary *dict = [scan JsonToValue];
+        NSDate *deadline = [dict[@"deadline"] stringWithDate:@"yyyy-MM-dd"];
+        NSDate *today = [NSDate date];
+        NSComparisonResult result = [deadline compare:today];
+        if (result <= 0) {
+            [SVProgressHUD showErrorWithStatus:@"二维码已失效"];
+            [self reStartDevice];
+        } else {
+            NSMutableDictionary *param = [NSMutableDictionary dictionary];
+            param[@"advisersId"] = [YTAccountTool account].userId;
+            param[@"orgId"] = dict[@"party_id"];
+            param[@"fatherId"] = dict[@"uid"];
+            param[@"authenticationType"] = @"1";
+            [YTHttpTool post:YTAuthAdviser params:param success:^(id responseObject) {
+                [SVProgressHUD showSuccessWithStatus: [NSString stringWithFormat:@"成功认证到%@，邀请人%@", dict[@"party_name"],dict[@"nickName"]]];
+                // 改变状态
+                [self updateUserInfo];
+                // 关闭控制器
+                [self dismissViewControllerAnimated:YES completion:^{
+                    // 调用代理方法
+                    if ([self.delegate respondsToSelector:@selector(closePage)]) {
+                        [self.delegate closePage];
+                    }
+                }];
+            } failure:^(NSError *error) {
+            }];
+        }
+    } else {
+        [SVProgressHUD showErrorWithStatus:@"不是有效的推荐人二维码"];
+    }
+}
+
+// 修改用户信息
+- (void)updateUserInfo
+{
+    [YTCenter postNotificationName:YTUpdateUserInfo object:nil];
+    YTUserInfo *userInfo =[YTUserInfoTool userInfo];
+    userInfo.adviserStatus = 0;
+    [YTUserInfoTool saveUserInfo:userInfo];
 }
 
 
@@ -230,14 +328,6 @@
 }
 
 
-#pragma mark -底部功能项
-
-
-- (void)myQRCode
-{
-    MyQRViewController *vc = [MyQRViewController new];
-    [self.navigationController pushViewController:vc animated:YES];
-}
 
 
 

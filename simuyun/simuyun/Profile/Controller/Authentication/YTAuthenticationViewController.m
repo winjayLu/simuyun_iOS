@@ -18,11 +18,12 @@
 #import "UIBarButtonItem+Extension.h"
 #import "YTFatherModel.h"
 #import "YTCustomPickerView.h"
+#import "SubLBXScanViewController.h"
 
 
 #define maginTop 64
 
-@interface YTAuthenticationViewController () <AutocompletionTableViewDelegate>
+@interface YTAuthenticationViewController () <AutocompletionTableViewDelegate, YTScanDelegate>
 
 /**
  *  客户名称
@@ -92,6 +93,21 @@
     // 获取机构信息
     [self loadOrgnazations];
     self.view.frame = CGRectMake(0, maginTop, DeviceWidth, DeviceHight - maginTop);
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithBg:@"rightScan" target:self action:@selector(rightClick)];
+}
+
+- (void)rightClick
+{
+    SubLBXScanViewController *vc = [SubLBXScanViewController new];
+    vc.isQQSimulator = YES;
+    vc.delegate = self;
+    [self presentViewController:vc animated:NO completion:nil];
+}
+
+- (void)closePage
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -156,7 +172,6 @@
         YTAuthenticationStatusController *authVc = [[YTAuthenticationStatusController alloc] init];
         authVc.authen = authen;
         [self updateUserInfo];
-        
         [self.navigationController pushViewController:authVc animated:YES];
         
     } failure:^(NSError *error) {

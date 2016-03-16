@@ -11,5 +11,7 @@
 @interface YTAutocompletionCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *titleLable;
 + (instancetype)autocompletionCell;
+@property (nonatomic, assign) BOOL isHidden;
+
 
 @end

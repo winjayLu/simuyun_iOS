@@ -254,18 +254,18 @@
 //    NSDate *today = [NSDate date];
 //    NSComparisonResult ChunjieResult = [chunJieDate compare:today];
 //    NSComparisonResult shiWuResult = [shiWuDate compare:today];
+    //    if (ChunjieResult <= 0 && shiWuResult > 0) {
+    //        message = @"messageIconNew";
+    //        product = @"productIconNew";
+    //        discover = @"discoverIconNew";
+    //        school = @"schoolIconNew";
+    //    }
     
     // 图片名
     NSString *message = @"messageIcon";
     NSString *product = @"productIcon";
     NSString *discover = @"discoverIcon";
     NSString *school = @"schoolIcon";
-//    if (ChunjieResult <= 0 && shiWuResult > 0) {
-//        message = @"messageIconNew";
-//        product = @"productIconNew";
-//        discover = @"discoverIconNew";
-//        school = @"schoolIconNew";
-//    }
     self.message = (YTMessageViewController *)[self addOneChildVcClass:[YTMessageViewController class] title:@"消息" image:message selectedImage:[NSString stringWithFormat:@"%@Selected", message]];
     self.product = (YTProductViewController *)[self addOneChildVcClass:[YTProductViewController class] title:@"产品" image:product selectedImage:[NSString stringWithFormat:@"%@Selected", product]];
     self.profile = (YTProfileViewController *)[self addOneChildVcClass:[YTProfileViewController class] title:nil image:nil selectedImage:nil];

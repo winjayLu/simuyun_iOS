@@ -357,7 +357,6 @@
  */
 - (void)setUserInfo:(YTUserInfo *)userInfo
 {
-    userInfo.isExtension = 1;
     _userInfo = userInfo;
     if (_userInfo == nil) return;
     

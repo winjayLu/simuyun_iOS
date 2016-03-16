@@ -10,9 +10,9 @@
 #import "YTUserInfoTool.h"
 #import "UIImageView+SD.h"
 #import "LBXScanWrapper.h"
-#import "LBXAlertAction.h"
 #import "NSString+Password.h"
 #import "NSDate+Extension.h"
+#import "YTAccountTool.h"
 
 
 #define scanWidth  285
@@ -134,9 +134,10 @@ static UIWindow *_window;
     self.photo = photo;
     
     // 截止日期
-    NSDate *date = [NSDate date];
-    NSString *dateStr = [date stringWithFormater:@"yyyy-MM-dd"];
-    NSString *appendStr = [NSString stringWithFormat:@"{\"party_id\":\"%@\",\"party_name\":\"%@\",\"uid\":\"%@\",\"endDate\":\"%@\"}", @"机构id", @"机构名称", @"用户id", dateStr];
+    NSDate *nextDate = [NSDate dateWithTimeInterval:24*60*60*7 sinceDate:[NSDate date]];
+    NSString *dateStr = [nextDate stringWithFormater:@"yyyy-MM-dd"];
+    
+    NSString *appendStr = [NSString stringWithFormat:@"{\"party_id\":\"%@\",\"party_name\":\"%@\",\"uid\":\"%@\",\"deadline\":\"%@\",\"nickName\":\"%@\"}", userInfo.organizationId, userInfo.organizationName, [YTAccountTool account].userId, dateStr, [YTUserInfoTool userInfo].nickName];
     NSString *content = [NSString stringWithFormat:@"http://www.simuyun.com/?%@", [NSString encrypt:appendStr]];
     // 设置图片
     photo.image = [LBXScanWrapper createQRWithString:content size:photo.size];
@@ -172,9 +173,9 @@ static UIWindow *_window;
     labele.font = [UIFont systemFontOfSize:11];
     
     // 当前日期加7天
-    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-    [inputFormatter setDateFormat:@"yyyy年MM月dd日"];
+//    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
+//    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+//    [inputFormatter setDateFormat:@"yyyy年MM月dd日"];
     NSDate *inputDate = [NSDate date];
     NSDate *nextDate = [NSDate dateWithTimeInterval:24*60*60*7 sinceDate:inputDate];
 

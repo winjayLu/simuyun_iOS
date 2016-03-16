@@ -10,6 +10,7 @@
 
 @interface YTAutocompletionCell()
 
+@property (weak, nonatomic) IBOutlet UIView *lineView;
 
 
 @end
@@ -33,6 +34,11 @@
 - (void)setTitle:(NSString *)title
 {
     self.titleLable.text = title;
+}
+
+- (void)setIsHidden:(BOOL)isHidden
+{
+    self.lineView.hidden = isHidden;
 }
 
 @end
