@@ -417,7 +417,7 @@
     if([YTResourcesTool isVersionFlag] == NO)
     {
         bottom.height = 42;
-    } else if (userInfo.teamNumber == 0)
+    } else if (userInfo.teamNum == 0)
     {
         bottom.height = 84;
     }
@@ -489,7 +489,7 @@
 
     // 修改底部菜单frame
     self.bottom.y = CGRectGetMaxY(self.todoView.frame) + 8;
-    if([YTResourcesTool isVersionFlag] == YES && [YTUserInfoTool userInfo].teamNumber > 0)
+    if([YTResourcesTool isVersionFlag] == YES && [YTUserInfoTool userInfo].teamNum > 0)
     {
         self.bottom.height = 126;
     }
@@ -597,7 +597,7 @@
 {
     UIViewController *vc = nil;
     if ([name isEqualToString:@"我的团队"]) {
-        vc = [YTNormalWebController webWithTitle:@"我的团队" url:[NSString stringWithFormat:@"%@/prizes%@", YTH5Server,[NSDate stringDate]]];
+        vc = [YTNormalWebController webWithTitle:@"我的团队" url:[NSString stringWithFormat:@"%@/my/team%@", YTH5Server,[NSDate stringDate]]];
         [MobClick event:@"main_click" attributes:@{@"按钮" : @"我的团队", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     } else if([name isEqualToString:@"全部订单"])
     {

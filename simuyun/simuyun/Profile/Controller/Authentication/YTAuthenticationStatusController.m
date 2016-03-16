@@ -9,6 +9,7 @@
 #import "YTAuthenticationStatusController.h"
 #import "YTAccountTool.h"
 #import "UIBarButtonItem+Extension.h"
+#import "SVProgressHUD.h"
 
 
 @interface YTAuthenticationStatusController ()
@@ -22,6 +23,8 @@
 // 提示信息
 @property (weak, nonatomic) IBOutlet UILabel *detailLable;
 
+// 推荐人姓名
+@property (weak, nonatomic) IBOutlet UILabel *fatherLable;
 
 @end
 
@@ -36,6 +39,7 @@
     } else {
         self.nameLable.text = self.authen.realName;
         self.organizationNameLable.text = self.authen.orgName;
+        self.fatherLable.text = self.authen.fatherName;
         if (self.authen.submitTime != nil) {
             self.detailLable.text = [NSString stringWithFormat:@"您于%@提交了资料，请联系您所在机构管理员在云台系统进行审核，如7日内没有审核通过，系统会自动驳回申请，对此有其他疑问，请致电400-188-8848或者在App中与平台客服直接联系。", self.authen.submitTime];
         } else
@@ -56,11 +60,11 @@
 // 加载认证信息
 - (void)loadAuthen
 {
-    
+    [SVProgressHUD showWithStatus:@"正在加载认证信息" maskType:SVProgressHUDMaskTypeClear];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"advisersId"] = [YTAccountTool account].userId;
     [YTHttpTool get:YTAuthAdviser params:params success:^(id responseObject) {
-        YTLog(@"%@", responseObject);
+        [SVProgressHUD dismiss];
         YTAuthenticationModel *authen = [YTAuthenticationModel objectWithKeyValues:responseObject];
         self.authen = authen;
     } failure:^(NSError *error) {
@@ -74,6 +78,7 @@
     _authen = authen;
     self.nameLable.text = authen.realName;
     self.organizationNameLable.text = authen.orgName;
+    self.fatherLable.text = authen.fatherName;
     self.detailLable.text = [NSString stringWithFormat:@"您于%@提交了资料，请联系您所在机构管理员在云台系统进行审核，如7日内没有审核通过，系统会自动驳回申请，对此有其他疑问，请致电400-188-8848或者在App中与平台客服直接联系。", authen.submitTime];
 }
 

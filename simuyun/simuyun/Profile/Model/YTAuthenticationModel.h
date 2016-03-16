@@ -19,6 +19,8 @@
 // 认证时间
 @property (nonatomic, copy) NSString *submitTime;
 
+// 推荐人姓名
+@property (nonatomic, copy) NSString *fatherName;
 
 
 @end

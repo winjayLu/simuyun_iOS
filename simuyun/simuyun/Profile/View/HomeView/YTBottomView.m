@@ -38,7 +38,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     YTUserInfo *userInfo = [YTUserInfoTool userInfo];
-    if (userInfo.teamNumber > 0 && self.titles.count == 2) {
+    if (userInfo.teamNum > 0 && self.titles.count == 2) {
         [self.titles insertObject:@"我的团队" atIndex:0];
     }
     return self.titles.count;
@@ -55,7 +55,7 @@
     YTUserInfo *userInfo = [YTUserInfoTool userInfo];
     cell.title = self.titles[indexPath.row];
     if ([cell.title isEqualToString:@"我的团队"]) {
-        cell.title = [NSString stringWithFormat:@"我的团队（%d）",userInfo.teamNumber];
+        cell.title = [NSString stringWithFormat:@"我的团队（%d）",userInfo.teamNum];
     } else if([cell.title isEqualToString:@"全部订单"]) {
         if (userInfo.preparedforNum == 0) {
             cell.detailTitle = @"";

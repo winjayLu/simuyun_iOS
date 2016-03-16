@@ -138,6 +138,7 @@ static UIWindow *_window;
     NSString *dateStr = [nextDate stringWithFormater:@"yyyy-MM-dd"];
     
     NSString *appendStr = [NSString stringWithFormat:@"{\"party_id\":\"%@\",\"party_name\":\"%@\",\"uid\":\"%@\",\"deadline\":\"%@\",\"nickName\":\"%@\"}", userInfo.organizationId, userInfo.organizationName, [YTAccountTool account].userId, dateStr, [YTUserInfoTool userInfo].nickName];
+
     NSString *content = [NSString stringWithFormat:@"http://www.simuyun.com/?%@", [NSString encrypt:appendStr]];
     // 设置图片
     photo.image = [LBXScanWrapper createQRWithString:content size:photo.size];

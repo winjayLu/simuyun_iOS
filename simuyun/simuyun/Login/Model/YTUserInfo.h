@@ -64,7 +64,7 @@
 @property (nonatomic, assign) int preparedforNum;
 
 // 团队数量
-@property (nonatomic, assign) int teamNumber;
+@property (nonatomic, assign) int teamNum;
 // 是否有二维码
 @property (nonatomic, assign) BOOL isExtension;
 

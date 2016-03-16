@@ -10,6 +10,8 @@
 #import "YTAuthenticationModel.h"
 #import "YTAccountTool.h"
 #import "YTAuthenticationViewController.h"
+#import "SVProgressHUD.h"
+
 
 @interface YTAuthenticationErrorController ()
 
@@ -22,6 +24,7 @@
 // 重新填写
 - (IBAction)registerAutenClick:(UIButton *)sender;
 
+@property (weak, nonatomic) IBOutlet UILabel *fatherLable;
 
 @end
 
@@ -37,9 +40,11 @@
 // 加载认证信息
 - (void)loadAuthen
 {
+    [SVProgressHUD showWithStatus:@"正在加载认证信息" maskType:SVProgressHUDMaskTypeClear];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"advisersId"] = [YTAccountTool account].userId;
     [YTHttpTool get:YTAuthAdviser params:params success:^(id responseObject) {
+        [SVProgressHUD dismiss];
         YTAuthenticationModel *authen = [YTAuthenticationModel objectWithKeyValues:responseObject];
         self.authen = authen;
     } failure:^(NSError *error) {
@@ -51,9 +56,9 @@
 // 设置数据
 - (void)setAuthen:(YTAuthenticationModel *)authen
 {
-    
     self.nameLable.text = authen.realName;
     self.organizationNameLable.text = authen.orgName;
+    self.fatherLable.text = authen.fatherName;
 }
 
 - (IBAction)registerAutenClick:(UIButton *)sender {

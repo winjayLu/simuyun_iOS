@@ -208,6 +208,7 @@
         authen.realName = self.userNameLable.text;
         authen.orgName = self.mechanismNameLable.text;
         authen.submitTime = responseObject[@"submitTime"];
+        authen.fatherName = selectedFather.name;
         YTAuthenticationStatusController *authVc = [[YTAuthenticationStatusController alloc] init];
         authVc.authen = authen;
         [self updateUserInfo];
