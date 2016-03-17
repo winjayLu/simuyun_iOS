@@ -22,6 +22,7 @@
 //    NSInteger newNumber = oldNumber--;
 //    if (newNumber < 0) return;
     // 修改Jpush缓存区的数据
+    [APService setBadge:0];
     [APService resetBadge];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 }

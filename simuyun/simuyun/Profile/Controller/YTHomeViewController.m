@@ -309,7 +309,7 @@
             groupCell.pushVc = [YTAuthenticationErrorController class];
             break;
     }
-    if ([YTUserInfoTool userInfo].phoneNumer == nil && [YTUserInfoTool userInfo].phoneNumer.length == 0) {
+    if (userInfo.phoneNumer == nil || userInfo.phoneNumer.length == 0) {
         groupCell.pushVc = [YTBindingPhoneController class];
     }
     groupCell.isShowLine = NO;
@@ -356,7 +356,7 @@
             self.groupCell.y = 8;
             break;
     }
-    if ([YTUserInfoTool userInfo].phoneNumer == nil && [YTUserInfoTool userInfo].phoneNumer.length == 0) {
+    if (userInfo.phoneNumer == nil || userInfo.phoneNumer.length == 0) {
         self.groupCell.pushVc = [YTBindingPhoneController class];
     }
     [self updateTodos];

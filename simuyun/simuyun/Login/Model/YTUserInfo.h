@@ -15,6 +15,11 @@
  */
 @property (nonatomic, copy) NSString *nickName;
 
+/**
+ *  真实姓名
+ */
+@property (nonatomic, copy) NSString *realName;
+
 // 理财师认证状态
 // 0 已认证， 1 未认证， 2 认证中， 3 驳回
 @property (nonatomic, assign) int adviserStatus;

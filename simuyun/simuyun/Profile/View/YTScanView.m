@@ -107,7 +107,7 @@ static UIWindow *_window;
     nickNameLable.width = self.width - nickLableX - 20;
     nickNameLable.font = [UIFont systemFontOfSize:18];
     nickNameLable.textColor = YTColor(51, 51, 51);
-    nickNameLable.text = userInfo.nickName;
+    nickNameLable.text = userInfo.realName;
     [nickNameLable sizeToFit];
     nickNameLable.x = nickLableX;
     nickNameLable.y = 20;
@@ -137,7 +137,7 @@ static UIWindow *_window;
     NSDate *nextDate = [NSDate dateWithTimeInterval:24*60*60*7 sinceDate:[NSDate date]];
     NSString *dateStr = [nextDate stringWithFormater:@"yyyy-MM-dd"];
     
-    NSString *appendStr = [NSString stringWithFormat:@"{\"party_id\":\"%@\",\"party_name\":\"%@\",\"uid\":\"%@\",\"deadline\":\"%@\",\"nickName\":\"%@\"}", userInfo.organizationId, userInfo.organizationName, [YTAccountTool account].userId, dateStr, [YTUserInfoTool userInfo].nickName];
+    NSString *appendStr = [NSString stringWithFormat:@"{\"party_id\":\"%@\",\"party_name\":\"%@\",\"uid\":\"%@\",\"deadline\":\"%@\",\"nickName\":\"%@\"}", userInfo.organizationId, userInfo.organizationName, [YTAccountTool account].userId, dateStr, [YTUserInfoTool userInfo].realName];
 
     NSString *content = [NSString stringWithFormat:@"http://www.simuyun.com/?%@", [NSString encrypt:appendStr]];
     // 设置图片

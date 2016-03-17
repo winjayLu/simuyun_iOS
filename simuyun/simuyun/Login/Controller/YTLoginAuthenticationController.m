@@ -224,7 +224,7 @@
 
 - (NSArray*) autoCompletion:(AutocompletionTableView*) completer suggestionsFor:(NSString*) string{
     
-    
+    self.tuijianrenField.text = nil;
     return self.orgnaNames;
 }
 

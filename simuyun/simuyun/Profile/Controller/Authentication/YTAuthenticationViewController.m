@@ -123,7 +123,7 @@
 
 
 
-- (void)rightClick
+- (IBAction)rightClick
 {
     SubLBXScanViewController *vc = [SubLBXScanViewController new];
     vc.isQQSimulator = YES;
@@ -218,7 +218,7 @@
 #pragma mark - AutoCompleteTableViewDelegate
 
 - (NSArray*) autoCompletion:(AutocompletionTableView*) completer suggestionsFor:(NSString*) string{
-    
+    self.tuijianLabel.text = nil;
     return self.orgnaNames;
 }
 

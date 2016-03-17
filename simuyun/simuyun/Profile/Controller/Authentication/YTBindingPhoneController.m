@@ -133,7 +133,7 @@
 }
 
 
-- (void)rightClick
+- (IBAction)rightClick
 {
     SubLBXScanViewController *vc = [SubLBXScanViewController new];
     vc.delegate = self;
@@ -175,6 +175,7 @@
     }];
     [sender didFinished:^NSString *(JKCountDownButton *countDownButton, int second) {
         countDownButton.enabled = YES;
+        self.sendBtn.backgroundColor = YTNavBackground;
         return @"重新获取";
     }];
     
@@ -336,7 +337,7 @@
 #pragma mark - AutoCompleteTableViewDelegate
 
 - (NSArray*) autoCompletion:(AutocompletionTableView*) completer suggestionsFor:(NSString*) string{
-
+    self.tuijianLabel.text = nil;
     return self.orgnaNames;
 }
 
