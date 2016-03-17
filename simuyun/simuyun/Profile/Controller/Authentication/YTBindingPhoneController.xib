@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YTBindingPhoneController">
             <connections>
+                <outlet property="biaozhuLable" destination="9GM-1B-dQs" id="3NW-Q9-U6o"/>
                 <outlet property="mechanismNameLable" destination="KMI-ig-XgM" id="bbl-yc-xCC"/>
                 <outlet property="phoneField" destination="9wu-GH-yw1" id="yrJ-5W-5gc"/>
                 <outlet property="sendBtn" destination="vvU-bM-gfo" id="e4v-jd-Arl"/>
@@ -189,7 +190,7 @@
                         <constraint firstItem="Wlb-QN-Jes" firstAttribute="top" secondItem="LY1-E0-gTG" secondAttribute="bottom" id="o2V-bA-ZD3"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注意：请输入机构简称进行检索选择，如您的机构还未在私募云平台注册，请致电400-188-8848或者在App中与平台客服直接联系。（机构自有员工可不填推荐人）" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9GM-1B-dQs">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9GM-1B-dQs">
                     <rect key="frame" x="10" y="409" width="355" height="51"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.32549019610000002" green="0.32549019610000002" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -222,7 +223,7 @@
                             <rect key="frame" x="105" y="0.0" width="135" height="53"/>
                             <color key="tintColor" red="0.52941176469999995" green="0.52941176469999995" blue="0.52941176469999995" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="验证码" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mob-Lj-YUF">
                             <rect key="frame" x="10" y="0.0" width="355" height="53"/>

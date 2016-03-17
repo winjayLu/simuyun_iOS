@@ -237,12 +237,12 @@
         
         strResult = @"识别失败";
     }
-    
+    [SVProgressHUD showErrorWithStatus:@"不是有效的推荐人二维码"];
+    [self reStartDevice];
 //    __weak __typeof(self) weakSelf = self;
 //    [LBXAlertAction showAlertWithTitle:@"扫码内容" msg:strResult chooseBlock:^(NSInteger buttonIdx) {
-//        
+//
 //        //点击完，继续扫码
-//        [weakSelf reStartDevice];
 //    } buttonsStatement:@"知道了",nil];
 }
 
@@ -287,6 +287,7 @@
         }
     } else {
         [SVProgressHUD showErrorWithStatus:@"不是有效的推荐人二维码"];
+         [self reStartDevice];
     }
 }
 

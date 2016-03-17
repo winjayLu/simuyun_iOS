@@ -26,7 +26,6 @@
 - (void)chooseRootviewController
 {
     BOOL canShow = [XZMCoreNewFeatureVC canShowNewFeature];
-    canShow = YES;
     // 判断显示新特性还是欢迎界面
     if (canShow)
     {
@@ -42,7 +41,7 @@
         }
         
         
-        self.rootViewController = [XZMCoreNewFeatureVC newFeatureVCWithImageNames:@[[NSString stringWithFormat:@"%@1.jpg",imageName],[NSString stringWithFormat:@"%@2.jpg",imageName]]
+        self.rootViewController = [XZMCoreNewFeatureVC newFeatureVCWithImageNames:@[[NSString stringWithFormat:@"%@1",imageName],[NSString stringWithFormat:@"%@2",imageName],[NSString stringWithFormat:@"%@3",imageName]]
         enterBlock:^{
             // 判断是否有登录过的账户
             if ([YTAccountTool account]) {
@@ -67,11 +66,12 @@
                 [self.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];
             }
             
-        } configuration:^(UIButton *enterButton) { // 配置进入按钮
-            [enterButton setBackgroundImage:[UIImage imageNamed:@"btn_nor"] forState:UIControlStateNormal];
-            [enterButton setBackgroundImage:[UIImage imageNamed:@"btn_pressed"] forState:UIControlStateHighlighted];
-            enterButton.bounds = CGRectMake(0, 0, 120, 40);
+        } configuration:^(UIButton *enterButton,UIImageView *image) { // 配置进入按钮
+        
+            enterButton.bounds = CGRectMake(0, 0, 138, 104);
             enterButton.center = CGPointMake(KScreenW * 0.5, KScreenH* 0.85);
+            enterButton.y = DeviceHight - 104;
+            image.frame = enterButton.frame;
         }];
 
     } else {

@@ -7,54 +7,14 @@
 //
 
 #import "XZMCoreNewFeatureVC.h"
+#import "CoreArchive.h"
 
 NSString *const NewFeatureVersionKey = @"NewFeatureVersionKey";
 
-@interface CoreArchive : NSObject
-/**
- *  保存普通字符串
- */
-+ (void)setStr:(NSString *)str key:(NSString *)key;
 
-/**
- *  读取
- */
-+ (NSString *)strForKey:(NSString *)key;
-
-@end
 
 
 @interface NewFeatureScrollView : UIScrollView
-
-@end
-
-@implementation CoreArchive
-// 保存普通对象
-+ (void)setStr:(NSString *)str key:(NSString *)key{
-    
-    // 获取preference
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    // 保存
-    [defaults setObject:str forKey:key];
-    
-    // 立即同步
-    [defaults synchronize];
-    
-}
-
-// 读取
-+ (NSString *)strForKey:(NSString *)key{
-    
-    //获取preference
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    
-    //读取
-    NSString *str=(NSString *)[defaults objectForKey:key];
-    
-    return str;
-    
-}
 
 @end
 
@@ -143,20 +103,25 @@ NSString *const NewFeatureVersionKey = @"NewFeatureVersionKey";
 @property (nonatomic, strong) AVPlayerLayer *playerLayer;
 
 @property (nonatomic,copy) void(^enterBlock)();
-
+/** 定时器 */
+@property (nonatomic,strong) NSTimer *timer;
 @end
 
 @implementation XZMCoreNewFeatureVC
 
 // 初始化滚动图片新特性界面
-+ (instancetype)newFeatureVCWithImageNames:(NSArray *)imageNames enterBlock:(void(^)())enterBlock configuration:(void (^)(UIButton *enterButton))configurationBlock
++ (instancetype)newFeatureVCWithImageNames:(NSArray *)imageNames enterBlock:(void(^)())enterBlock configuration:(void (^)(UIButton *enterButton, UIImageView *image))configurationBlock
 {
     XZMCoreNewFeatureVC *newFeatureVC = [[XZMCoreNewFeatureVC alloc] init];
     
     newFeatureVC.imageNames = imageNames;
     
     //控制器准备
-    configurationBlock([newFeatureVC vcPrepare]);
+    UIButton *button = [newFeatureVC vcPrepare];
+
+    configurationBlock(button,[newFeatureVC loadImageV]);
+    
+    [newFeatureVC timerOn];
     
     //显示了版本新特性，保存版本号
     [newFeatureVC saveVersion];
@@ -166,6 +131,17 @@ NSString *const NewFeatureVersionKey = @"NewFeatureVersionKey";
     
     return newFeatureVC;
 }
+
+
+- (UIImageView *)loadImageV
+{
+    return _imageV;
+}
+- (void)startan
+{
+    [_imageV startAnimating];
+}
+
 
 // 初始化视频新特性界面
 + (instancetype)newFeatureVCWithPlayerURL:(NSURL *)URL enterBlock:(void(^)())enterBlock configuration:(void (^)(AVPlayerLayer *playerLayer))configurationBlock
@@ -271,7 +247,7 @@ NSString *const NewFeatureVersionKey = @"NewFeatureVersionKey";
             
             // 添加按钮
             _enterButton = [self setUpEnterButton:imageV];
-            
+        
         }
         
     }];
@@ -286,6 +262,24 @@ NSString *const NewFeatureVersionKey = @"NewFeatureVersionKey";
     UIButton *enterButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [imageView addSubview:enterButton];
     [enterButton addTarget:self action:@selector(chickEnterButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    // 添加动画
+    // 背景图片
+    UIImageView *bgView = [[UIImageView alloc] init];
+    bgView.image = [UIImage imageNamed:@"newBtn3"];
+    NSMutableArray *dict = [NSMutableArray array];
+    for (int i = 1; i < 4; i++) {
+        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"newBtn%d", i]];
+        [dict addObject:image];
+    }
+    bgView.animationImages = dict;
+    bgView.animationRepeatCount = 1;
+    bgView.animationDuration = 1.4;
+
+    [imageView addSubview:bgView];
+    _imageV = bgView;
+    [_imageV startAnimating];
+
     return enterButton;
 }
 
@@ -301,6 +295,7 @@ NSString *const NewFeatureVersionKey = @"NewFeatureVersionKey";
 
 - (void)chickEnterButton
 {
+    [self timerOff];
     [self dismiss];
 }
 
@@ -329,6 +324,36 @@ NSString *const NewFeatureVersionKey = @"NewFeatureVersionKey";
         
         return YES;
     }
+}
+
+/*
+ *  新开一个定时器
+ */
+-(void)timerOn{
+    
+    [self timerOff];
+    
+    if(self.timer!=nil) return;
+    
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(startan) userInfo:nil repeats:YES];
+    
+    //记录
+    self.timer = timer;
+    
+    //加入主循环
+    //    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+}
+
+/*
+ *  关闭定时器
+ */
+-(void)timerOff{
+    
+    //关闭定时器
+    [self.timer invalidate];
+    
+    //清空属性
+    self.timer = nil;
 }
 
 @end

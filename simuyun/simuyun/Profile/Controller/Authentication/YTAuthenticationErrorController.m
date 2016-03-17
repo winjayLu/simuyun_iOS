@@ -25,6 +25,7 @@
 - (IBAction)registerAutenClick:(UIButton *)sender;
 
 @property (weak, nonatomic) IBOutlet UILabel *fatherLable;
+@property (weak, nonatomic) IBOutlet UILabel *biaozhuLable;
 
 @end
 
@@ -34,6 +35,27 @@
     [super viewDidLoad];
         self.title = @"认证失败";
     [self loadAuthen];
+    
+    //获取数据
+    NSString *text = @"您所提交的申请没有通过审核，请重新提交一次审核，对此有其他疑问，请致电400-188-8488或者在App中与平台客服直接联系。";
+  
+    //Label获取attStr式样
+    self.biaozhuLable.attributedText = [self attributedStringWithStr:text];
+}
+
+
+- (NSMutableAttributedString *)attributedStringWithStr:(NSString *)str
+{
+    //创建NSMutableAttributedString实例，并将text传入
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc]initWithString:str];
+    //创建NSMutableParagraphStyle实例
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc]init];
+    //设置行距
+    [style setLineSpacing:8.0f];
+    
+    //根据给定长度与style设置attStr式样]
+    [attStr addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, str.length)];
+    return attStr;
 }
 
 

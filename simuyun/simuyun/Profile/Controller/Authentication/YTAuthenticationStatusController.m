@@ -41,16 +41,33 @@
         self.organizationNameLable.text = self.authen.orgName;
         self.fatherLable.text = self.authen.fatherName;
         if (self.authen.submitTime != nil) {
-            self.detailLable.text = [NSString stringWithFormat:@"您于%@提交了资料，请联系您所在机构管理员在云台系统进行审核，如7日内没有审核通过，系统会自动驳回申请，对此有其他疑问，请致电400-188-8848或者在App中与平台客服直接联系。", self.authen.submitTime];
+            NSString *text = [NSString stringWithFormat:@"您于%@提交了资料，请联系您所在机构管理员在云台系统进行审核，如7日内没有审核通过，系统会自动驳回申请，对此有其他疑问，请致电400-188-8848或者在App中与平台客服直接联系。", self.authen.submitTime];
+            self.detailLable.attributedText = [self attributedStringWithStr:text];
         } else
         {
-            self.detailLable.text = @"您提交了资料，请联系您所在机构管理员在云台系统进行审核，如7日内没有审核通过，系统会自动驳回申请，对此有其他疑问，请致电400-188-8848或者在App中与平台客服直接联系。";
+            NSString *text = @"您提交了资料，请联系您所在机构管理员在云台系统进行审核，如7日内没有审核通过，系统会自动驳回申请，对此有其他疑问，请致电400-188-8848或者在App中与平台客服直接联系。";
+            self.detailLable.attributedText = [self attributedStringWithStr:text];
         }
     }
     
     // 初始化左侧返回按钮
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithBg:@"fanhui" target:self action:@selector(blackClick)];
 }
+
+- (NSMutableAttributedString *)attributedStringWithStr:(NSString *)str
+{
+    //创建NSMutableAttributedString实例，并将text传入
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc]initWithString:str];
+    //创建NSMutableParagraphStyle实例
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc]init];
+    //设置行距
+    [style setLineSpacing:8.0f];
+    
+    //根据给定长度与style设置attStr式样]
+    [attStr addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, str.length)];
+    return attStr;
+}
+
 
 - (void)blackClick
 {
@@ -79,7 +96,8 @@
     self.nameLable.text = authen.realName;
     self.organizationNameLable.text = authen.orgName;
     self.fatherLable.text = authen.fatherName;
-    self.detailLable.text = [NSString stringWithFormat:@"您于%@提交了资料，请联系您所在机构管理员在云台系统进行审核，如7日内没有审核通过，系统会自动驳回申请，对此有其他疑问，请致电400-188-8848或者在App中与平台客服直接联系。", authen.submitTime];
+    NSString *text = [NSString stringWithFormat:@"您于%@提交了资料，请联系您所在机构管理员在云台系统进行审核，如7日内没有审核通过，系统会自动驳回申请，对此有其他疑问，请致电400-188-8848或者在App中与平台客服直接联系。", authen.submitTime];
+    self.detailLable.attributedText = [self attributedStringWithStr:text];
 }
 
 - (void)didReceiveMemoryWarning {

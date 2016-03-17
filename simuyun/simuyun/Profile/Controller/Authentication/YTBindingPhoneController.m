@@ -92,6 +92,7 @@
  */
 - (IBAction)tuijianrenClick:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UILabel *biaozhuLable;
 
 @end
 
@@ -110,7 +111,27 @@
     self.sendBtn.layer.masksToBounds = YES;
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithBg:@"rightScan" target:self action:@selector(rightClick)];
+    NSString *text = @"注意：请输入机构简称进行检索选择，如您的机构还未在私募云平台注册，请致电400-188-8848或者在App中与平台客服直接联系。（机构自有员工可不填推荐人）";
+    
+    //Label获取attStr式样
+    self.biaozhuLable.attributedText = [self attributedStringWithStr:text];
+    
 }
+
+- (NSMutableAttributedString *)attributedStringWithStr:(NSString *)str
+{
+    //创建NSMutableAttributedString实例，并将text传入
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc]initWithString:str];
+    //创建NSMutableParagraphStyle实例
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc]init];
+    //设置行距
+    [style setLineSpacing:8.0f];
+    
+    //根据给定长度与style设置attStr式样]
+    [attStr addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, str.length)];
+    return attStr;
+}
+
 
 - (void)rightClick
 {

@@ -61,7 +61,7 @@
     
     [UIView animateWithDuration:0.3 animations:^{
         self.contentViewHegithCons.constant = 215;
-        [self layoutIfNeeded];
+//        [self layoutIfNeeded];
     }completion:^(BOOL finished) {
         if (type != nil) {            
             for (int i = 0; i < self.types.count; i++) {

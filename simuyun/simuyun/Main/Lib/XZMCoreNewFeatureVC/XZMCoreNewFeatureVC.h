@@ -16,12 +16,15 @@
 /** 进入首页按钮 */
 @property (nonatomic,weak) UIButton *enterButton;
 
+/** 动画图片 */
+@property (nonatomic,weak) UIImageView *imageV;
+
 /** 创建普通滚动图片新特性界面
  *  @param imageNames 图片名数组
  *  @param enterBlock 进入主页面的回调
  *  @param configurationBlock 配置回调
  */
-+ (instancetype)newFeatureVCWithImageNames:(NSArray *)imageNames enterBlock:(void(^)())enterBlock configuration:(void (^)(UIButton *enterButton))configurationBlock;
++ (instancetype)newFeatureVCWithImageNames:(NSArray *)imageNames enterBlock:(void(^)())enterBlock configuration:(void (^)(UIButton *enterButton, UIImageView *imageV))configurationBlock;
 
 
 /** 创建视频新特性界面
