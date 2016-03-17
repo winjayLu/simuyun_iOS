@@ -160,6 +160,7 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NSl-Jb-fi7">
                             <rect key="frame" x="105" y="0.0" width="260" height="53"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="tuijianrenClick:" destination="-1" eventType="touchUpInside" id="o7D-ML-dhh"/>
                             </connections>

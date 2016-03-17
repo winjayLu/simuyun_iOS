@@ -256,6 +256,7 @@
         self.fathers = [YTFatherModel objectArrayWithKeyValuesArray:responseObject];
         // 遍历json
         [self.fatherNames removeAllObjects];
+        [self.fatherNames addObject:@"无"];
         for (NSDictionary *dict in responseObject) {
             [self.fatherNames addObject:dict[@"name"]];
         }
@@ -314,7 +315,7 @@
 - (NSMutableArray *)fatherNames
 {
     if (!_fatherNames) {
-        _fatherNames = [NSMutableArray arrayWithObject:@"无"];
+        _fatherNames = [[NSMutableArray alloc] init];
     }
     return _fatherNames;
 }

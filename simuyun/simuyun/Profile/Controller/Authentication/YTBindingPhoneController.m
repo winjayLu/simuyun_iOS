@@ -212,6 +212,21 @@
             }
         }
     }
+    if (selectedFather == nil) {
+        if (self.phoneField.text.length == 0)
+        {
+            [SVProgressHUD showErrorWithStatus:@"请输入手机号"];
+            return;
+        } else if (self.yanzhenField.text.length == 0)
+        {
+            [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
+            return;
+        } else if(![self.captcha isEqualToString:self.yanzhenField.text])
+        {
+            [SVProgressHUD showErrorWithStatus:@"验证码不正确"];
+            return;
+        }
+    }
     
     
     [SVProgressHUD showWithStatus:@"正在认证" maskType:SVProgressHUDMaskTypeClear];
@@ -219,7 +234,9 @@
     dict[@"advisersId"] = [YTAccountTool account].userId;
     dict[@"realName"] = self.userNameLable.text;
     dict[@"orgId"] = selectedOrgna.party_id;
-    dict[@"phoneNum"] = self.phoneField.text;
+    if (self.phoneField.text.length > 0) {
+        dict[@"phoneNum"] = self.phoneField.text;
+    }
     if (selectedFather != nil) {
         dict[@"fatherId"] = selectedFather.adviserId;
     }
@@ -274,18 +291,6 @@
     } else if (self.mechanismNameLable.text.length == 0)
     {
         [SVProgressHUD showErrorWithStatus:@"请输入机构名称"];
-        return NO;
-    } else if (self.phoneField.text.length == 0)
-    {
-        [SVProgressHUD showErrorWithStatus:@"请输入手机号"];
-        return NO;
-    } else if (self.yanzhenField.text.length == 0)
-    {
-        [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
-        return NO;
-    } else if(![self.captcha isEqualToString:self.yanzhenField.text])
-    {
-        [SVProgressHUD showErrorWithStatus:@"验证码不正确"];
         return NO;
     }
     return YES;
@@ -369,6 +374,7 @@
         self.fathers = [YTFatherModel objectArrayWithKeyValuesArray:responseObject];
         // 遍历json
         [self.fatherNames removeAllObjects];
+        [self.fatherNames addObject:@"无"];
         for (NSDictionary *dict in responseObject) {
             [self.fatherNames addObject:dict[@"name"]];
         }
@@ -407,7 +413,7 @@
 - (NSMutableArray *)fatherNames
 {
     if (!_fatherNames) {
-        _fatherNames = [NSMutableArray arrayWithObject:@"无"];
+        _fatherNames = [[NSMutableArray alloc] init];
     }
     return _fatherNames;
 }

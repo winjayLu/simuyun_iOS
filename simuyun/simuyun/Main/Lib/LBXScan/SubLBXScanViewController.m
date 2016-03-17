@@ -283,6 +283,7 @@
                     }
                 }];
             } failure:^(NSError *error) {
+                [self reStartDevice];
             }];
         }
     } else {

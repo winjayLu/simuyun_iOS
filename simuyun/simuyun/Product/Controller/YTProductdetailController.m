@@ -29,6 +29,7 @@
 #import "CoreArchive.h"
 #import "YTPlayerViewController.h"
 #import "YTAccountTool.h"
+#import "YTBindingPhoneController.h"
 
 
 
@@ -310,6 +311,9 @@
             vc = [[YTAuthenticationErrorController alloc] init];
             result = NO;
             break;
+    }
+    if (userInfo.phoneNumer == nil || userInfo.phoneNumer.length == 0) {
+        vc = [[YTBindingPhoneController alloc] init];
     }
     HHAlertView *alert = [HHAlertView shared];
     [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"没有操作权限" detail:@"您还未认证为理财师，无法进行此操作" cancelButton:@"返回" Okbutton:@"立即认证" block:^(HHAlertButton buttonindex) {

@@ -55,15 +55,21 @@
 #pragma  mark - function
 
 - (void)showWithSlectedType:(NSString *)type{
-    UIWindow *win = [[UIApplication sharedApplication] keyWindow];
-    UIView *topView = [win.subviews firstObject];
-    [topView addSubview:self];
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    
+    [keyWindow addSubview:self];
     
     [UIView animateWithDuration:0.3 animations:^{
         self.contentViewHegithCons.constant = 215;
-//        [self layoutIfNeeded];
+        [self layoutIfNeeded];
     }completion:^(BOOL finished) {
-        if (type != nil) {            
+        if (type != nil && ![type isEqualToString:@"无"]) {
             for (int i = 0; i < self.types.count; i++) {
                 if ([self.types[i] isEqualToString:type]) {
                     [self.pickView selectRow:i inComponent:0 animated:YES];

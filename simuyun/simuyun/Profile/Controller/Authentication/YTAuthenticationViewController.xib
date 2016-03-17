@@ -108,8 +108,8 @@
                         <action selector="applyClick:" destination="-1" eventType="touchUpInside" id="0CX-m3-QRP"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SKs-sD-xlX">
-                    <rect key="frame" x="0.0" y="227" width="375" height="54"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKs-sD-xlX">
+                    <rect key="frame" x="0.0" y="228" width="375" height="54"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hLH-Vv-zgF">
                             <rect key="frame" x="0.0" y="53" width="375" height="1"/>
@@ -141,10 +141,14 @@
                     <constraints>
                         <constraint firstItem="hLH-Vv-zgF" firstAttribute="leading" secondItem="SKs-sD-xlX" secondAttribute="leading" id="24R-WE-yg4"/>
                         <constraint firstItem="Rb8-nq-v4U" firstAttribute="leading" secondItem="SKs-sD-xlX" secondAttribute="leading" constant="105" id="2aU-ht-yRf"/>
+                        <constraint firstAttribute="trailing" secondItem="u8b-ry-ALq" secondAttribute="trailing" constant="10" id="34I-Dq-OQa"/>
+                        <constraint firstItem="u8b-ry-ALq" firstAttribute="leading" secondItem="SKs-sD-xlX" secondAttribute="leading" constant="105" id="37o-Rf-lNM"/>
                         <constraint firstItem="yfR-Sj-wik" firstAttribute="leading" secondItem="SKs-sD-xlX" secondAttribute="leading" constant="10" id="6R2-HT-Ycx"/>
                         <constraint firstItem="u8b-ry-ALq" firstAttribute="trailing" secondItem="Rb8-nq-v4U" secondAttribute="trailing" id="AzV-Ar-Vei"/>
                         <constraint firstItem="u8b-ry-ALq" firstAttribute="top" secondItem="Rb8-nq-v4U" secondAttribute="top" id="Ez9-NB-LGO"/>
+                        <constraint firstItem="u8b-ry-ALq" firstAttribute="top" secondItem="SKs-sD-xlX" secondAttribute="top" id="On2-Ok-ond"/>
                         <constraint firstAttribute="bottom" secondItem="yfR-Sj-wik" secondAttribute="bottom" id="Oo5-dJ-Ua5"/>
+                        <constraint firstItem="hLH-Vv-zgF" firstAttribute="top" secondItem="u8b-ry-ALq" secondAttribute="bottom" id="WVp-Fj-rff"/>
                         <constraint firstAttribute="bottom" secondItem="hLH-Vv-zgF" secondAttribute="bottom" id="hAl-oT-p3J"/>
                         <constraint firstItem="u8b-ry-ALq" firstAttribute="height" secondItem="Rb8-nq-v4U" secondAttribute="height" id="hGu-zv-hCo"/>
                         <constraint firstItem="u8b-ry-ALq" firstAttribute="width" secondItem="Rb8-nq-v4U" secondAttribute="width" id="jzz-VH-D1N"/>
@@ -155,6 +159,14 @@
                         <constraint firstAttribute="trailing" secondItem="Rb8-nq-v4U" secondAttribute="trailing" constant="10" id="sf4-EW-qwP"/>
                         <constraint firstAttribute="height" constant="54" id="vJc-9d-Rw0"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="AzV-Ar-Vei"/>
+                            <exclude reference="Ez9-NB-LGO"/>
+                            <exclude reference="hGu-zv-hCo"/>
+                            <exclude reference="jzz-VH-D1N"/>
+                        </mask>
+                    </variation>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRB-bJ-TgZ">
                     <rect key="frame" x="10" y="301" width="355" height="51"/>
