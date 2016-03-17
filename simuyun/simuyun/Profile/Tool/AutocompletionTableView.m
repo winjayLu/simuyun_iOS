@@ -32,7 +32,6 @@
     CGRect frame = CGRectMake(0, 227, DeviceWidth, 128);
     if ([self.options[@"style"]  isEqual: @(2)])
     {
-#warning 待修改
         frame = CGRectMake( 22 , 347, DeviceWidth - 44, 128);
     }
 

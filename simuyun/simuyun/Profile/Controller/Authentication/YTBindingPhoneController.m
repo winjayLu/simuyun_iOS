@@ -122,7 +122,7 @@
 
 - (void)closePage
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 
@@ -384,7 +384,7 @@
 - (NSMutableArray *)fatherNames
 {
     if (!_fatherNames) {
-        _fatherNames = [[NSMutableArray alloc] init];
+        _fatherNames = [NSMutableArray arrayWithObject:@"无"];
     }
     return _fatherNames;
 }
@@ -418,7 +418,6 @@
 
 
 - (IBAction)tuijianrenClick:(id)sender {
-    
     // 退出键盘
     for (UIWindow *window in [UIApplication sharedApplication].windows) {
         if (window.windowLevel == 0) {
@@ -426,10 +425,19 @@
             break;
         }
     }
+    if (self.fathers.count == 0 && self.mechanismNameLable.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请先输入机构"];
+        return;
+    }
+
     YTCustomPickerView *addressPickerView = [[YTCustomPickerView alloc]init];
     addressPickerView.types = self.fatherNames;
     addressPickerView.block = ^(YTCustomPickerView *view,UIButton *btn,NSString *selectType){
-        self.tuijianLabel.text = selectType;
+        if ([selectType isEqualToString:@"无"]) {
+            self.tuijianLabel.text = nil;
+        } else {
+            self.tuijianLabel.text = selectType;
+        }
     };
     NSString *type = self.tuijianLabel.text;
     if (type.length == 0) {

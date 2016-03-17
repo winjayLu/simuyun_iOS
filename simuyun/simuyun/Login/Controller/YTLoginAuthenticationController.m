@@ -105,6 +105,7 @@
     [self.tuijianrenField setValue:YTColor(204, 204, 204) forKeyPath:@"_placeholderLabel.textColor"];
     [self loadOrgnazations];
     
+    [self animationLine];
     // 开启定时器
     [self timerOn];
 }
@@ -128,7 +129,7 @@
  */
 - (void)loadOrgnazations
 {
-//    [SVProgressHUD showWithStatus:@"正在加载机构信息" maskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD showWithStatus:@"正在加载机构信息" maskType:SVProgressHUDMaskTypeClear];
     [YTHttpTool get:YTOrgnazations params:nil success:^(id responseObject) {
         self.orgnazations = [YTOrgnazationModel objectArrayWithKeyValuesArray:responseObject];
         // 遍历json
@@ -312,7 +313,7 @@
 - (NSMutableArray *)fatherNames
 {
     if (!_fatherNames) {
-        _fatherNames = [[NSMutableArray alloc] init];
+        _fatherNames = [NSMutableArray arrayWithObject:@"无"];
     }
     return _fatherNames;
 }
@@ -330,10 +331,20 @@
             break;
         }
     }
+
+    if (self.fathers.count == 0 && self.mechanismNameLable.text.length == 0) {
+        [SVProgressHUD showErrorWithStatus:@"请先输入机构"];
+        return;
+    }
+
     YTCustomPickerView *addressPickerView = [[YTCustomPickerView alloc]init];
     addressPickerView.types = self.fatherNames;
     addressPickerView.block = ^(YTCustomPickerView *view,UIButton *btn,NSString *selectType){
-        self.tuijianrenField.text = selectType;
+        if ([selectType isEqualToString:@"无"]) {
+            self.tuijianrenField.text = nil;
+        } else {
+            self.tuijianrenField.text = selectType;
+        }
     };
     NSString *type = self.tuijianrenField.text;
     if (type.length == 0) {

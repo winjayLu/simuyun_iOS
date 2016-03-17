@@ -114,38 +114,38 @@
  */
 - (IBAction)registerClick:(UIButton *)sender {
 
-//    // 退出键盘
-//    for (UIWindow *window in [UIApplication sharedApplication].windows) {
-//        if (window.windowLevel == 0) {
-//            [window endEditing:YES];
-//            break;
-//        }
-//    }
-//    if ([self checkTextWith:YES]) return;
-//    
-//    // 帐号模型
-//    YTAccount *account = [[YTAccount alloc] init];
-//    account.userName = self.userName.text;
-//    account.password = [NSString md5:self.password.text];
-//    
-//    // 请求参数
-//    NSDictionary *params = @{@"username" : account.userName, @"password" : account.password};
-//    [SVProgressHUD showWithStatus:@"正在注册" maskType:SVProgressHUDMaskTypeClear];
-//    [YTHttpTool post:YTRegister params:params success:^(id responseObject) {
-//        // 发起登录
-//        
-//        account.password = [NSString md5:self.password.text];
-//        [YTAccountTool loginAccount:account result:^(BOOL result) {
-//            [SVProgressHUD dismiss];
-//            if (result) {   // 登录成功
+    // 退出键盘
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            [window endEditing:YES];
+            break;
+        }
+    }
+    if ([self checkTextWith:YES]) return;
+    
+    // 帐号模型
+    YTAccount *account = [[YTAccount alloc] init];
+    account.userName = self.userName.text;
+    account.password = [NSString md5:self.password.text];
+    
+    // 请求参数
+    NSDictionary *params = @{@"username" : account.userName, @"password" : account.password};
+    [SVProgressHUD showWithStatus:@"正在注册" maskType:SVProgressHUDMaskTypeClear];
+    [YTHttpTool post:YTRegister params:params success:^(id responseObject) {
+        // 发起登录
+        
+        account.password = [NSString md5:self.password.text];
+        [YTAccountTool loginAccount:account result:^(BOOL result) {
+            [SVProgressHUD dismiss];
+            if (result) {   // 登录成功
                 [self transitionTabBarVC];
-//            } else {
-//                [self.navigationController popViewControllerAnimated:YES];
-//            }
-//        }];
-//    } failure:^(NSError *error) {
-//    }];
-//    [MobClick event:@"logReg_click" attributes: @{@"按钮" : @"注册"}];
+            } else {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }];
+    } failure:^(NSError *error) {
+    }];
+    [MobClick event:@"logReg_click" attributes: @{@"按钮" : @"注册"}];
 }
 /**
  *  转场到主界面
