@@ -153,18 +153,34 @@ static UIWindow *_window;
     
     // 提示语
     UILabel *tishi = [[UILabel alloc] init];
-    tishi.width = photoWH;
+    tishi.width = scanWidth - 60;
     tishi.textColor = YTColor(102, 102, 102);
     tishi.font = [UIFont systemFontOfSize:14];
-    tishi.numberOfLines = 0;
-    tishi.text = [NSString stringWithFormat:@"让你的小伙伴使用私募云App扫一扫该二维码加入%@", userInfo.organizationName];
+    tishi.numberOfLines = 2;
+    NSString *text = [NSString stringWithFormat:@"让你的小伙伴使用私募云App\n扫一扫该二维码加入%@", userInfo.organizationName];
+    tishi.attributedText = [self attributedStringWithStr:text];
+    tishi.textAlignment = NSTextAlignmentCenter;
     [tishi sizeToFit];
-    tishi.x = (scanWidth - photoWH) * 0.5;
+    tishi.x = (scanWidth - tishi.width) * 0.5;
     tishi.y = CGRectGetMaxY(photo.frame) + 20;
     [self addSubview:tishi];
     self.tishi = tishi;
 
     
+}
+
+- (NSMutableAttributedString *)attributedStringWithStr:(NSString *)str
+{
+    //创建NSMutableAttributedString实例，并将text传入
+    NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc]initWithString:str];
+    //创建NSMutableParagraphStyle实例
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc]init];
+    //设置行距
+    [style setLineSpacing:4.0f];
+    
+    //根据给定长度与style设置attStr式样]
+    [attStr addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, str.length)];
+    return attStr;
 }
 
 - (void)setupDate

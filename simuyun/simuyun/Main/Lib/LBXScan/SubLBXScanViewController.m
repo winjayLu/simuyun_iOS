@@ -287,7 +287,7 @@
         }
     } else {
         [SVProgressHUD showErrorWithStatus:@"不是有效的推荐人二维码"];
-         [self reStartDevice];
+        [self reStartDevice];
     }
 }
 

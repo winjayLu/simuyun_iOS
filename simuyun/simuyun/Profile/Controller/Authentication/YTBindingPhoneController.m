@@ -368,6 +368,7 @@
     [YTHttpTool get:YTReferee params:param success:^(id responseObject) {
         self.fathers = [YTFatherModel objectArrayWithKeyValuesArray:responseObject];
         // 遍历json
+        [self.fatherNames removeAllObjects];
         for (NSDictionary *dict in responseObject) {
             [self.fatherNames addObject:dict[@"name"]];
         }
