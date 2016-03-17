@@ -194,11 +194,6 @@
 		97270EB11C7BF4D500C92888 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270DD31C7BF4D500C92888 /* UIProgressView+AFNetworking.m */; };
 		97270EB21C7BF4D500C92888 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270DD51C7BF4D500C92888 /* UIRefreshControl+AFNetworking.m */; };
 		97270EB31C7BF4D500C92888 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270DD71C7BF4D500C92888 /* UIWebView+AFNetworking.m */; };
-		97270EB41C7BF4D500C92888 /* CoreNewFeatureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270DDA1C7BF4D500C92888 /* CoreNewFeatureVC.m */; };
-		97270EB51C7BF4D500C92888 /* NewFeatureImageV.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270DDC1C7BF4D500C92888 /* NewFeatureImageV.m */; };
-		97270EB61C7BF4D500C92888 /* NewFeatureModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270DDE1C7BF4D500C92888 /* NewFeatureModel.m */; };
-		97270EB71C7BF4D500C92888 /* NewFeatureScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270DE01C7BF4D500C92888 /* NewFeatureScrollView.m */; };
-		97270EB81C7BF4D500C92888 /* UIApplication+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270DE21C7BF4D500C92888 /* UIApplication+Extend.m */; };
 		97270EB91C7BF4D500C92888 /* CorePPTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270DE51C7BF4D500C92888 /* CorePPTVC.m */; };
 		97270EBA1C7BF4D500C92888 /* CorePPTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97270DE61C7BF4D500C92888 /* CorePPTVC.xib */; };
 		97270EBB1C7BF4D500C92888 /* PPTConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270DEA1C7BF4D500C92888 /* PPTConst.m */; };
@@ -268,6 +263,7 @@
 		97270F101C7BF50600C92888 /* YTInformationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270F061C7BF50600C92888 /* YTInformationTableViewCell.m */; };
 		97270F111C7BF50600C92888 /* YTInformationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97270F071C7BF50600C92888 /* YTInformationTableViewCell.xib */; };
 		97270F121C7BF50600C92888 /* YTInformationWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270F091C7BF50600C92888 /* YTInformationWebViewController.m */; };
+		97448CD11C9A680F00C43EC8 /* XZMCoreNewFeatureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97448CD01C9A680F00C43EC8 /* XZMCoreNewFeatureVC.m */; };
 		975F78041BCFCD3D00589D22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 975F78031BCFCD3D00589D22 /* Assets.xcassets */; };
 		97973D0A1BC3E84900B7B4CB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97973D091BC3E84900B7B4CB /* AVFoundation.framework */; };
 		979D87211C96A829004DD25C /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D871D1C96A829004DD25C /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -669,16 +665,6 @@
 		97270DD51C7BF4D500C92888 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		97270DD61C7BF4D500C92888 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		97270DD71C7BF4D500C92888 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
-		97270DD91C7BF4D500C92888 /* CoreNewFeatureVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreNewFeatureVC.h; sourceTree = "<group>"; };
-		97270DDA1C7BF4D500C92888 /* CoreNewFeatureVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreNewFeatureVC.m; sourceTree = "<group>"; };
-		97270DDB1C7BF4D500C92888 /* NewFeatureImageV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeatureImageV.h; sourceTree = "<group>"; };
-		97270DDC1C7BF4D500C92888 /* NewFeatureImageV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFeatureImageV.m; sourceTree = "<group>"; };
-		97270DDD1C7BF4D500C92888 /* NewFeatureModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeatureModel.h; sourceTree = "<group>"; };
-		97270DDE1C7BF4D500C92888 /* NewFeatureModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFeatureModel.m; sourceTree = "<group>"; };
-		97270DDF1C7BF4D500C92888 /* NewFeatureScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewFeatureScrollView.h; sourceTree = "<group>"; };
-		97270DE01C7BF4D500C92888 /* NewFeatureScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewFeatureScrollView.m; sourceTree = "<group>"; };
-		97270DE11C7BF4D500C92888 /* UIApplication+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+Extend.h"; sourceTree = "<group>"; };
-		97270DE21C7BF4D500C92888 /* UIApplication+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+Extend.m"; sourceTree = "<group>"; };
 		97270DE41C7BF4D500C92888 /* CorePPTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CorePPTVC.h; sourceTree = "<group>"; };
 		97270DE51C7BF4D500C92888 /* CorePPTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CorePPTVC.m; sourceTree = "<group>"; };
 		97270DE61C7BF4D500C92888 /* CorePPTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CorePPTVC.xib; sourceTree = "<group>"; };
@@ -826,6 +812,8 @@
 		97270F071C7BF50600C92888 /* YTInformationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTInformationTableViewCell.xib; sourceTree = "<group>"; };
 		97270F081C7BF50600C92888 /* YTInformationWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTInformationWebViewController.h; sourceTree = "<group>"; };
 		97270F091C7BF50600C92888 /* YTInformationWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTInformationWebViewController.m; sourceTree = "<group>"; };
+		97448CCF1C9A680F00C43EC8 /* XZMCoreNewFeatureVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XZMCoreNewFeatureVC.h; sourceTree = "<group>"; };
+		97448CD01C9A680F00C43EC8 /* XZMCoreNewFeatureVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XZMCoreNewFeatureVC.m; sourceTree = "<group>"; };
 		975F78031BCFCD3D00589D22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97973D091BC3E84900B7B4CB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		979D871C1C96A829004DD25C /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
@@ -1763,9 +1751,9 @@
 		97270DAD1C7BF4D500C92888 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				97448CCE1C9A680F00C43EC8 /* XZMCoreNewFeatureVC */,
 				97A4DDBB1C97A4C200079AFC /* LBXScan */,
 				97270DAE1C7BF4D500C92888 /* AFNetworking */,
-				97270DD81C7BF4D500C92888 /* CoreNewFeatureVC */,
 				97270DE31C7BF4D500C92888 /* CorePPTVC */,
 				97270DF71C7BF4D500C92888 /* CoreStatus */,
 				97270DFB1C7BF4D500C92888 /* CoreTFManagerVC */,
@@ -1840,23 +1828,6 @@
 				97270DD71C7BF4D500C92888 /* UIWebView+AFNetworking.m */,
 			);
 			path = "UIKit+AFNetworking";
-			sourceTree = "<group>";
-		};
-		97270DD81C7BF4D500C92888 /* CoreNewFeatureVC */ = {
-			isa = PBXGroup;
-			children = (
-				97270DD91C7BF4D500C92888 /* CoreNewFeatureVC.h */,
-				97270DDA1C7BF4D500C92888 /* CoreNewFeatureVC.m */,
-				97270DDB1C7BF4D500C92888 /* NewFeatureImageV.h */,
-				97270DDC1C7BF4D500C92888 /* NewFeatureImageV.m */,
-				97270DDD1C7BF4D500C92888 /* NewFeatureModel.h */,
-				97270DDE1C7BF4D500C92888 /* NewFeatureModel.m */,
-				97270DDF1C7BF4D500C92888 /* NewFeatureScrollView.h */,
-				97270DE01C7BF4D500C92888 /* NewFeatureScrollView.m */,
-				97270DE11C7BF4D500C92888 /* UIApplication+Extend.h */,
-				97270DE21C7BF4D500C92888 /* UIApplication+Extend.m */,
-			);
-			path = CoreNewFeatureVC;
 			sourceTree = "<group>";
 		};
 		97270DE31C7BF4D500C92888 /* CorePPTVC */ = {
@@ -2286,6 +2257,15 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		97448CCE1C9A680F00C43EC8 /* XZMCoreNewFeatureVC */ = {
+			isa = PBXGroup;
+			children = (
+				97448CCF1C9A680F00C43EC8 /* XZMCoreNewFeatureVC.h */,
+				97448CD01C9A680F00C43EC8 /* XZMCoreNewFeatureVC.m */,
+			);
+			path = XZMCoreNewFeatureVC;
+			sourceTree = "<group>";
+		};
 		97A4DDBB1C97A4C200079AFC /* LBXScan */ = {
 			isa = PBXGroup;
 			children = (
@@ -2638,7 +2618,6 @@
 				97270E921C7BF4D500C92888 /* NSObject+JsonCategory.m in Sources */,
 				97270D2B1C7BF49500C92888 /* CorePagesView.m in Sources */,
 				97270BD91C7BF43C00C92888 /* YTVedioModel.m in Sources */,
-				97270EB51C7BF4D500C92888 /* NewFeatureImageV.m in Sources */,
 				97270E9F1C7BF4D500C92888 /* YTTabBarController.m in Sources */,
 				97270EF11C7BF4D500C92888 /* YTResourcesTool.m in Sources */,
 				97270EE01C7BF4D500C92888 /* UIView+YUStyle.m in Sources */,
@@ -2651,10 +2630,8 @@
 				97270EDE1C7BF4D500C92888 /* YUDIVView.m in Sources */,
 				97270BD61C7BF43C00C92888 /* YTSchoolHeaderView.m in Sources */,
 				97270CD51C7BF47E00C92888 /* JKAssets.m in Sources */,
-				97270EB61C7BF4D500C92888 /* NewFeatureModel.m in Sources */,
 				97A4DDDA1C97A4C200079AFC /* SubLBXScanViewController.m in Sources */,
 				97270C541C7BF47400C92888 /* TimerLoopView.m in Sources */,
-				97270EB41C7BF4D500C92888 /* CoreNewFeatureVC.m in Sources */,
 				97270C511C7BF47400C92888 /* YTOrgnazationModel.m in Sources */,
 				97270C631C7BF47400C92888 /* YTOrderNetValueCell.m in Sources */,
 				97270E931C7BF4D500C92888 /* NSString+JsonCategory.m in Sources */,
@@ -2666,7 +2643,6 @@
 				97270C491C7BF47400C92888 /* YTOrderdetailController.m in Sources */,
 				97270BD21C7BF43C00C92888 /* YTSchoolHomeViewController.m in Sources */,
 				97270CEA1C7BF47E00C92888 /* YTLiquidationCell.m in Sources */,
-				97270EB71C7BF4D500C92888 /* NewFeatureScrollView.m in Sources */,
 				97A4DE061C97E5B000079AFC /* YTScanView.m in Sources */,
 				97270D551C7BF4AF00C92888 /* YTRegisterViewController.m in Sources */,
 				97270C521C7BF47400C92888 /* AutocompletionTableView.m in Sources */,
@@ -2697,6 +2673,7 @@
 				97C718FB1C80323A00BC43D7 /* YTTableViewCell.m in Sources */,
 				97270E891C7BF4D500C92888 /* CoreArchive.m in Sources */,
 				97270ED41C7BF4D500C92888 /* ShareManage.m in Sources */,
+				97448CD11C9A680F00C43EC8 /* XZMCoreNewFeatureVC.m in Sources */,
 				97270EE71C7BF4D500C92888 /* YTMessageNum.m in Sources */,
 				97270EE91C7BF4D500C92888 /* YTResources.m in Sources */,
 				97270EA91C7BF4D500C92888 /* AFURLSessionManager.m in Sources */,
@@ -2743,7 +2720,6 @@
 				97270ECC1C7BF4D500C92888 /* UIButton+SD.m in Sources */,
 				97270D5F1C7BF4AF00C92888 /* YTUserInfoTool.m in Sources */,
 				97270BF41C7BF46800C92888 /* YTConsultView.m in Sources */,
-				97270EB81C7BF4D500C92888 /* UIApplication+Extend.m in Sources */,
 				97A4DE091C982D2B00079AFC /* YTFatherModel.m in Sources */,
 				97270EA41C7BF4D500C92888 /* AFNetworkReachabilityManager.m in Sources */,
 				97270EB91C7BF4D500C92888 /* CorePPTVC.m in Sources */,

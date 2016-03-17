@@ -10,7 +10,7 @@
 #import "YTWelcomeViewController.h"
 #import "YTTabBarController.h"
 #import "YTLoginViewController.h"
-#import "CoreNewFeatureVC.h"
+#import "XZMCoreNewFeatureVC.h"
 #import "CALayer+Transition.h"
 #import "UIImage+Extend.h"
 #import "CoreArchive.h"
@@ -25,9 +25,10 @@
  */
 - (void)chooseRootviewController
 {
-
+    BOOL canShow = [XZMCoreNewFeatureVC canShowNewFeature];
+    canShow = YES;
     // 判断显示新特性还是欢迎界面
-    if ([CoreNewFeatureVC canShowNewFeature])
+    if (canShow)
     {
         // 重新打开AppStore开关
         [CoreArchive setStr:nil key:@"versionFlag"];
@@ -39,14 +40,10 @@
         {
             imageName = @"newFeatureiphone5";
         }
-        // 创建性特性模型
-        NewFeatureModel *m1 = [NewFeatureModel model:[UIImage imageNamed:[NSString stringWithFormat:@"%@1.jpg",imageName]]];
-        NewFeatureModel *m2 = [NewFeatureModel model:[UIImage imageNamed:[NSString stringWithFormat:@"%@2.jpg",imageName]]];
         
-        // 新特性控制器
-        self.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m1,m2] enterBlock:^{
-           
-            
+        
+        self.rootViewController = [XZMCoreNewFeatureVC newFeatureVCWithImageNames:@[[NSString stringWithFormat:@"%@1.jpg",imageName],[NSString stringWithFormat:@"%@2.jpg",imageName]]
+        enterBlock:^{
             // 判断是否有登录过的账户
             if ([YTAccountTool account]) {
                 // 发起登录
@@ -70,7 +67,13 @@
                 [self.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];
             }
             
+        } configuration:^(UIButton *enterButton) { // 配置进入按钮
+            [enterButton setBackgroundImage:[UIImage imageNamed:@"btn_nor"] forState:UIControlStateNormal];
+            [enterButton setBackgroundImage:[UIImage imageNamed:@"btn_pressed"] forState:UIControlStateHighlighted];
+            enterButton.bounds = CGRectMake(0, 0, 120, 40);
+            enterButton.center = CGPointMake(KScreenW * 0.5, KScreenH* 0.85);
         }];
+
     } else {
         // 欢迎控制器
         self.rootViewController = [[YTWelcomeViewController alloc] init];
