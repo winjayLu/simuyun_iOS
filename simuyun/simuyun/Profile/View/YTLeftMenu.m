@@ -194,6 +194,8 @@
     // 清楚本地用户信息
     [YTUserInfoTool localsave:nil];
     
+    // 清楚待办事项
+    [CoreArchive setStr:nil key:@"oldHomeTodo"];
 
 }
 /**
