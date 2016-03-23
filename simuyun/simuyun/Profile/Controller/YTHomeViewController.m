@@ -299,6 +299,9 @@
         case 1:
             self.groupCell.detailTitle = @"";
             groupCell.pushVc = [YTAuthenticationViewController class];
+            if (userInfo.phoneNumer == nil || userInfo.phoneNumer.length == 0) {
+                groupCell.pushVc = [YTBindingPhoneController class];
+            }
             break;
         case 2:
             groupCell.detailTitle = @"（审核中）";
@@ -308,9 +311,6 @@
             groupCell.detailTitle = @"（未成功）";
             groupCell.pushVc = [YTAuthenticationErrorController class];
             break;
-    }
-    if (userInfo.phoneNumer == nil || userInfo.phoneNumer.length == 0) {
-        groupCell.pushVc = [YTBindingPhoneController class];
     }
     groupCell.isShowLine = NO;
     groupCell.layer.cornerRadius = 5;
@@ -342,6 +342,9 @@
             self.groupCell.pushVc = [YTAuthenticationViewController class];
             self.groupCell.height = 42;
             self.groupCell.y = 8;
+            if (userInfo.phoneNumer == nil || userInfo.phoneNumer.length == 0) {
+                self.groupCell.pushVc = [YTBindingPhoneController class];
+            }
             break;
         case 2:
             self.groupCell.detailTitle = @"（审核中）";
@@ -355,9 +358,6 @@
             self.groupCell.height = 42;
             self.groupCell.y = 8;
             break;
-    }
-    if (userInfo.phoneNumer == nil || userInfo.phoneNumer.length == 0) {
-        self.groupCell.pushVc = [YTBindingPhoneController class];
     }
     [self updateTodos];
 

@@ -71,7 +71,9 @@
     if (!_imageView) {
         _imageView = [[UIImageView alloc] initWithFrame:self.contentView.bounds];
         _imageView.backgroundColor = [UIColor clearColor];
-        _imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//        _imageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _imageView.clipsToBounds = YES;
         _imageView.userInteractionEnabled = YES;
         [self.contentView addSubview:_imageView];
     }

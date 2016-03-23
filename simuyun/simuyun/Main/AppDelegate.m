@@ -303,30 +303,30 @@
     // 获取正在显示的控制器
     [self keyViewController:jpush];
     if (self.keyVc == nil) return;
-//    if (self.keyVc.viewControllers.count == 1) {
-//        cancelButton = @"知道了";
-//        okButton = @"认购产品";
-//    }
+    if (self.keyVc.viewControllers.count == 1) {
+        cancelButton = @"知道了";
+        okButton = @"产品中心";
+    }
     [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:cancelButton Okbutton:okButton block:^(HHAlertButton buttonindex) {
         if(buttonindex == HHAlertButtonOk)
         {
-//            if ([okButton isEqualToString:@"认购产品"]) {
-//                // 获取根控制器
-//                UIWindow *keyWindow = nil;
-//                for (UIWindow *window in [UIApplication sharedApplication].windows) {
-//                    if (window.windowLevel == 0) {
-//                        keyWindow = window;
-//                        break;
-//                    }
-//                }
-//                // 如果获取不到直接返回
-//                if (keyWindow == nil) return;
-//                
-//                UIViewController *appRootVC = keyWindow.rootViewController;
-//                if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
-//                    ((YTTabBarController *)appRootVC).selectedIndex = 1;
-//                }
-//            }
+            if ([okButton isEqualToString:@"产品中心"]) {
+                // 获取根控制器
+                UIWindow *keyWindow = nil;
+                for (UIWindow *window in [UIApplication sharedApplication].windows) {
+                    if (window.windowLevel == 0) {
+                        keyWindow = window;
+                        break;
+                    }
+                }
+                // 如果获取不到直接返回
+                if (keyWindow == nil) return;
+                
+                UIViewController *appRootVC = keyWindow.rootViewController;
+                if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+                    ((YTTabBarController *)appRootVC).selectedIndex = 1;
+                }
+            }
             [YTJpushTool saveJpush:nil];
         } else {
             [YTJpushTool saveJpush:nil];
