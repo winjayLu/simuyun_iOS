@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 #import "YTMessageViewController.h"
+#import "RongIMKit/RongIMKit.h"
 
 @interface YTCloudObserveController : UITableViewController
 

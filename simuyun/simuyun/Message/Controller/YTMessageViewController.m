@@ -17,6 +17,7 @@
 #import "YTMessageNumTool.h"
 #import "YTOperationCenterController.h"
 #import "CoreArchive.h"
+#import "YTRongCloudController.h"
 
 
 @interface YTMessageViewController ()
@@ -121,11 +122,11 @@ static UIWindow *_window;
     if(_pagesView==nil){
         
         YTCloudObserveController *tvc1 = [[YTCloudObserveController alloc] init];
+//        YTRongCloudController *tvc1 = [[YTRongCloudController alloc] init];
         tvc1.superVc = self;
         YTOperationCenterController *tvc2 = [[YTOperationCenterController alloc] init];
         YTProductNewsController *tvc3 = [[YTProductNewsController alloc] init];
         YTSystemCenterController *tvc4 = [[YTSystemCenterController alloc] init];
-        
         CorePageModel *model1=[CorePageModel model:tvc2 pageBarName:@"运营公告"];
         CorePageModel *model2=[CorePageModel model:tvc3 pageBarName:@"产品动态"];
         CorePageModel *model3=[CorePageModel model:tvc4 pageBarName:@"营销喜报"];

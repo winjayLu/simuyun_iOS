@@ -32,6 +32,7 @@
 #import "YTLoginViewController.h"
 #import "YTRegisterViewController.h"
 #import "YTResultPasswordViewController.h"
+#import <RongIMKit/RongIMKit.h>
 
 
 
@@ -183,27 +184,71 @@
     [APService setLogOFF];
 }
 
+/**
+ * 推送处理2
+ */
+//注册用户通知设置
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings {
+    // register to receive notifications
+    [application registerForRemoteNotifications];
+}
 
 
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     [APService registerDeviceToken:deviceToken];
+    NSString *token =
+    [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<"
+                                                           withString:@""]
+      stringByReplacingOccurrencesOfString:@">"
+      withString:@""]
+     stringByReplacingOccurrencesOfString:@" "
+     withString:@""];
+    
+    [[RCIMClient sharedRCIMClient] setDeviceToken:token];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    [self receivedPushNotification:userInfo];
-    [APService handleRemoteNotification:userInfo];
+    NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:userInfo];
+    if (pushServiceData) {
+        NSLog(@"该远程推送包含来自融云的推送服务");
+        for (id key in [pushServiceData allKeys]) {
+            NSLog(@"key = %@, value = %@", key, pushServiceData[key]);
+        }
+        
+        /**
+         * 统计推送打开率2
+         */
+        [[RCIMClient sharedRCIMClient] recordRemoteNotificationEvent:userInfo];
+    } else {
+        NSLog(@"该远程推送不包含来自融云的推送服务");
+        [self receivedPushNotification:userInfo];
+        [APService handleRemoteNotification:userInfo];
+    }
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
-{
-    [self receivedPushNotification:userInfo];
-    // iOS7
-    [APService handleRemoteNotification:userInfo];
-    completionHandler(UIBackgroundFetchResultNewData);
-}
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+//{
+//    NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:userInfo];
+//    if (pushServiceData) {
+//        NSLog(@"该远程推送包含来自融云的推送服务");
+//        for (id key in [pushServiceData allKeys]) {
+//            NSLog(@"key = %@, value = %@", key, pushServiceData[key]);
+//        }
+//        
+//        /**
+//         * 统计推送打开率2
+//         */
+//        [[RCIMClient sharedRCIMClient] recordRemoteNotificationEvent:userInfo];
+//    } else {
+//        [self receivedPushNotification:userInfo];
+//        // iOS7
+//        [APService handleRemoteNotification:userInfo];
+//    }
+//    completionHandler(UIBackgroundFetchResultNewData);
+//}
 
 /**
  *  检测是否有推送消息
@@ -211,9 +256,24 @@
  */
 - (void)checkNotification:(NSDictionary *)launchOptions
 {
-    NSDictionary* remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-    YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:remoteNotification];
-    [YTJpushTool saveJpush:jpush];
+    /**
+     * 获取融云推送服务扩展字段1
+     */
+    NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromLaunchOptions:launchOptions];
+    if (pushServiceData) {
+        NSLog(@"该启动事件包含来自融云的推送服务");
+        for (id key in [pushServiceData allKeys]) {
+            NSLog(@"%@", pushServiceData[key]);
+        }
+    } else {
+        NSLog(@"该启动事件不包含来自融云的推送服务");
+        NSDictionary* remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+        if(remoteNotification)
+        {
+            YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:remoteNotification];
+            [YTJpushTool saveJpush:jpush];
+        }
+    }
 }
 
 /**

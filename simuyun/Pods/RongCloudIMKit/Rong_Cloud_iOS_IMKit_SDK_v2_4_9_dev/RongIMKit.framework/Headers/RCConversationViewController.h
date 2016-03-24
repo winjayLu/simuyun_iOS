@@ -218,7 +218,7 @@
 - (void)setMessagePortraitSize:(CGSize)size;
 
 /*!
- 收到的消息是否显示发送者的名字
+ 收到的消息是否displayUserNameInCell
  
  @discussion 默认值为YES。
  您可以针对群聊、聊天室、单聊等不同场景，自己定制是否显示发送方的名字。
