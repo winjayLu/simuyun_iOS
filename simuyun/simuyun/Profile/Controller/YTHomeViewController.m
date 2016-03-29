@@ -51,11 +51,12 @@
 #import "AFNetworking.h"
 #import "YTProductdetailController.h"
 #import "YTScanView.h"
+#import <RongIMKit/RongIMKit.h>
 
 
 #define magin 3
 
-@interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate, UIScrollViewDelegate, shareCustomDelegate, UIWebViewDelegate, loopViewDelegate>
+@interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate, UIScrollViewDelegate, shareCustomDelegate, UIWebViewDelegate, loopViewDelegate, RCIMUserInfoDataSource>
 
 /**
  *  顶部视图
@@ -139,6 +140,9 @@
     
     // 获取首页图片地址
     [self loadImageUrl];
+    
+    // 登录融云
+    [self loginRongCloud];
 }
 
 
@@ -925,6 +929,44 @@
     web.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:web animated:NO];
     [YTJpushTool saveJpush:nil];
+}
+
+/**
+ *  登录融云
+ */
+- (void)loginRongCloud
+{
+    [[RCIM sharedRCIM] connectWithToken:[YTUserInfoTool userInfo].rongCloudToken success:^(NSString *userId) {
+        NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+        [[RCIM sharedRCIM] setUserInfoDataSource:self];
+    } error:^(RCConnectErrorCode status) {
+        NSLog(@"登陆的错误码为:%zd", status);
+    } tokenIncorrect:^{
+#warning 重新获取token
+        NSLog(@"token错误");
+    }];
+}
+
+/*!
+ 获取用户信息
+ 
+ @param userId      用户ID
+ @param completion  获取用户信息完成之后需要执行的Block [userInfo:该用户ID对应的用户信息]
+ 
+ @discussion SDK通过此方法获取用户信息并显示，请在completion中返回该用户ID对应的用户信息。
+ 在您设置了用户信息提供者之后，SDK在需要显示用户信息的时候，会调用此方法，向您请求用户信息用于显示。
+ */
+- (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion
+{
+    if ([userId isEqualToString:[YTAccountTool account].userId]) {
+        YTUserInfo *info = [YTUserInfoTool userInfo];
+        RCUserInfo *userInfo = [[RCUserInfo alloc] init];
+        userInfo.userId = userId;
+        userInfo.name = info.realName;
+        userInfo.portraitUri = info.headImgUrl;
+        return completion(userInfo);
+    }
+    return completion(nil);
 }
 
 

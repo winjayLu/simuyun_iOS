@@ -73,5 +73,8 @@
 // 是否有二维码
 @property (nonatomic, assign) BOOL isExtension;
 
+// 融云Token
+@property (nonatomic, copy) NSString *rongCloudToken;
+
 
 @end

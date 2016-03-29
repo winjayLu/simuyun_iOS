@@ -59,7 +59,6 @@
         }
     }];
     
-    
     // 检测是否有推送消息
     [self checkNotification:launchOptions];
 
@@ -71,6 +70,9 @@
     
     // 开启腾讯云事件统计
     [[TCReportEngine sharedEngine] configAppId:TXAppKey];
+    
+    // 初始化融云SDK
+    [[RCIM sharedRCIM] initWithAppKey:RongCloudKey];
     
     // 创建窗口
     self.window = [[UIWindow alloc] init];

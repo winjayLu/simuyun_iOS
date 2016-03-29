@@ -22,6 +22,20 @@
     return _organizationName;
 }
 
+- (NSString *)rongCloudToken
+{
+    return @"UO+YUszUvQiMmL1gfgTNR2iFZ82izPgGx/14T5ZrkrWPLqd87z1pDlKO9bw7WSlwR2P6hz6vxWe0H/UuHBgqOR0r57XbNOLOuDswa5xDazQZD5pfNhAW5Aj5ZYrWYvDs93zvldjQG7g=";
+}
+
+- (NSString *)realName
+{
+    // 没有真实姓名用昵称代替
+    if (_realName.length == 0) {
+        _realName = _nickName;
+    }
+    return _realName;
+}
+
 
 MJCodingImplementation
 @end
