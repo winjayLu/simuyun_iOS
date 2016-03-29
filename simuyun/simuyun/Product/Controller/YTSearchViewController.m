@@ -354,6 +354,8 @@
 {
     // 退出键盘
     [self.search resignFirstResponder];
+    // 清除搜索产品名称
+    self.search.text = nil;
     [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;

@@ -266,6 +266,7 @@
 		97270F121C7BF50600C92888 /* YTInformationWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270F091C7BF50600C92888 /* YTInformationWebViewController.m */; };
 		97448CD11C9A680F00C43EC8 /* XZMCoreNewFeatureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97448CD01C9A680F00C43EC8 /* XZMCoreNewFeatureVC.m */; };
 		974C40301CA38DB700EB432B /* YTRongCloudTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 974C402F1CA38DB700EB432B /* YTRongCloudTest.m */; };
+		97545A4D1CAA1C8C00F4E6C7 /* YTCloudListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97545A4C1CAA1C8C00F4E6C7 /* YTCloudListController.m */; };
 		975F78041BCFCD3D00589D22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 975F78031BCFCD3D00589D22 /* Assets.xcassets */; };
 		977132C41CA13B61001D0746 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 977132C31CA13B61001D0746 /* AssetsLibrary.framework */; };
 		977132C61CA13B68001D0746 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 977132C51CA13B68001D0746 /* AudioToolbox.framework */; };
@@ -832,6 +833,8 @@
 		97448CD01C9A680F00C43EC8 /* XZMCoreNewFeatureVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XZMCoreNewFeatureVC.m; sourceTree = "<group>"; };
 		974C402E1CA38DB700EB432B /* YTRongCloudTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTRongCloudTest.h; sourceTree = "<group>"; };
 		974C402F1CA38DB700EB432B /* YTRongCloudTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTRongCloudTest.m; sourceTree = "<group>"; };
+		97545A4B1CAA1C8C00F4E6C7 /* YTCloudListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTCloudListController.h; sourceTree = "<group>"; };
+		97545A4C1CAA1C8C00F4E6C7 /* YTCloudListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTCloudListController.m; sourceTree = "<group>"; };
 		975F78031BCFCD3D00589D22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		977132C31CA13B61001D0746 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		977132C51CA13B68001D0746 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -1448,6 +1451,8 @@
 				9718A03D1CA233FB00BC6A34 /* YTRongCloudController.m */,
 				974C402E1CA38DB700EB432B /* YTRongCloudTest.h */,
 				974C402F1CA38DB700EB432B /* YTRongCloudTest.m */,
+				97545A4B1CAA1C8C00F4E6C7 /* YTCloudListController.h */,
+				97545A4C1CAA1C8C00F4E6C7 /* YTCloudListController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2852,6 +2857,7 @@
 				97270EF41C7BF4D500C92888 /* YTTokenView.m in Sources */,
 				97270C481C7BF47400C92888 /* YTOrderCenterController.m in Sources */,
 				97270EDA1C7BF4D500C92888 /* YHWebViewProgressView.m in Sources */,
+				97545A4D1CAA1C8C00F4E6C7 /* YTCloudListController.m in Sources */,
 				97270E8D1C7BF4D500C92888 /* NSDate+Extension.m in Sources */,
 				97270D321C7BF49500C92888 /* YTTodoViewCell.m in Sources */,
 				97270E991C7BF4D500C92888 /* UIView+Masony.m in Sources */,
@@ -3030,6 +3036,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				COPY_PHASE_STRIP = NO;
@@ -3061,6 +3068,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Song Jin (3PBNV2QYKM)";
 				COPY_PHASE_STRIP = YES;

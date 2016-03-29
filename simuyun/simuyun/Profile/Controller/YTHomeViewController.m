@@ -453,11 +453,14 @@
     param[@"pageNo"] = @(1);
     [YTHttpTool get:YTChatContent params:param success:^(id responseObject) {
         NSMutableArray *array = [YTMessageModel objectArrayWithKeyValuesArray:responseObject[@"messageList"]];
-        NSString *oldHomeTodo = [responseObject JsonToString];
-        [CoreArchive setStr:oldHomeTodo key:@"oldHomeTodo"];
         if (array.count > 0) {
             self.todos = array;
             [self updateTodos];
+            NSString *oldHomeTodo = [responseObject JsonToString];
+            [CoreArchive setStr:oldHomeTodo key:@"oldHomeTodo"];
+        } else
+        {
+            [CoreArchive setStr:nil key:@"oldHomeTodo"];
         }
     } failure:^(NSError *error) {
     }];
