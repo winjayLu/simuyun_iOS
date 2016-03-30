@@ -17,3 +17,5 @@ NSString *const YTCancelCustomer = @"YTCancelCustomer";
 NSString *const YTResourcesSuccess = @"YTResourcesSuccess";
 // 视频播放器屏幕发生改变
 NSString *const YTPlayerScreenChange = @"YTPlayerScreenChange";
+// 更新未读消息数量
+NSString *const YTUpdateUnreadCount = @"YTUpdateUnreadCount";

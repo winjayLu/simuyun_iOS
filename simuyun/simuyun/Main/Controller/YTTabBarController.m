@@ -25,9 +25,10 @@
 #import "NSDate+Extension.h"
 #import "NSString+Extend.h"
 #import "TCCloudPlayerSDK.h"
+#import <RongIMKit/RongIMKit.h>
 
 
-@interface YTTabBarController () <YTLogoViewDelegate>
+@interface YTTabBarController () <YTLogoViewDelegate, RCIMReceiveMessageDelegate>
 /**
  *  消息 控制器
  */
@@ -85,7 +86,36 @@
     
     //注册视频播放的监听
     [YTCenter addObserver:self selector:@selector(changeFloatMenu:) name:TCCloudPlayStateChangeNotification object:nil];
+    // 监听未读消息数量
+    [YTCenter addObserver:self selector:@selector(updateUnreadCount) name:YTUpdateUnreadCount object:nil];
+    [RCIM sharedRCIM].receiveMessageDelegate = self;
 }
+
+- (void)onRCIMReceiveMessage:(RCMessage *)message
+                        left:(int)left
+{
+#warning 收到新消息，更新未读消息数量
+    if ([message.content isMemberOfClass:[RCInformationNotificationMessage class]]) {
+        RCInformationNotificationMessage *msg=(RCInformationNotificationMessage *)message.content;
+        //NSString *str = [NSString stringWithFormat:@"%@",msg.message];
+//        if ([msg.message rangeOfString:@"你已添加了"].location!=NSNotFound) {
+//            [RCDDataSource syncFriendList:^(NSMutableArray *friends) {
+//            }];
+//        }
+    }
+}
+-(BOOL)onRCIMCustomAlertSound:(RCMessage*)message
+{
+    [self updateUnreadCount];
+    return YES;
+}
+
+- (void)updateUnreadCount
+{
+    self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%zd", [[RCIMClient sharedRCIMClient] getTotalUnreadCount]];
+}
+
+
 
 /**
  *  改变按钮状态

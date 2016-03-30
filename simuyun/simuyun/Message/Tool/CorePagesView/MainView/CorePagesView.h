@@ -10,12 +10,13 @@
 #import "CorePageModel.h"
 #import "CorePagesViewConfig.h"
 #import "CorePagesBarView.h"
+#import "YTPageScrollView.h"
 
 
 
 @interface CorePagesView : UIView
 
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet YTPageScrollView *scrollView;
 
 
 /** 中转到指定页码 */

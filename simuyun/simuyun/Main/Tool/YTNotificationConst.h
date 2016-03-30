@@ -19,3 +19,6 @@ extern NSString *const YTResourcesSuccess;
 
 // 视频播放器屏幕发生改变
 extern NSString *const YTPlayerScreenChange;
+
+// 更新未读消息数量
+extern NSString *const YTUpdateUnreadCount;

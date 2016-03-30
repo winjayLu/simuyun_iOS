@@ -12,6 +12,10 @@
 #import "YTCloudListCell.h"
 #import "MJRefresh.h"
 #import <RongIMLib/RongIMLib.h>
+#import "YTConversationController.h"
+#import "YTAccountTool.h"
+#import "SVProgressHUD.h"
+
 
 @interface YTCloudListController ()
 /**
@@ -44,7 +48,19 @@
 }
 - (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource
 {
-    self.todos = dataSource;
+    [self.todos removeAllObjects];
+    for (RCConversationModel *model in dataSource) {
+        if ([model.conversationTitle hasPrefix:@"平台客服"]) {
+            model.isTop = YES;
+            [self.todos insertObject:model atIndex:0];
+        } else if([model.conversationTitle hasPrefix:@"机构经理"]){
+            [self.todos insertObject:model atIndex:1];
+            model.isTop = YES;
+        } else {
+            [self.todos addObject:model];
+        }
+        
+    }
     dispatch_sync(dispatch_get_main_queue(), ^{
         [self.conversationListTableView reloadData];
     });
@@ -62,7 +78,46 @@
  */
 - (void)didReceiveMessageNotification:(NSNotification *)notification
 {
-    [self refreshConversationTableViewIfNeeded];
+    
+    RCMessage *message = notification.object;
+    for (RCConversationModel *model in self.todos) {
+        if ([message.targetId isEqualToString:model.targetId]) {
+            [self refreshConversationTableViewIfNeeded];
+            [self notifyUpdateUnreadMessageCount];
+            return;
+        }
+    }
+    [self updateTableCellWithReceivedMessage:message];
+}
+
+
+- (void)updateTableCellWithReceivedMessage:(RCMessage *)receivedMessage {
+    
+    RCConversationModel *newReceivedConversationModel_ = nil;
+    //获取接受到会话
+    RCConversation *receivedConversation_ =
+    [[RCIMClient sharedRCIMClient] getConversation:receivedMessage.conversationType targetId:receivedMessage.targetId];
+    
+    if (!receivedConversation_) {
+        return;
+    }
+    RCConversationModelType modelType = RC_CONVERSATION_MODEL_TYPE_NORMAL;
+    if (receivedConversation_.conversationType == ConversationType_APPSERVICE ||
+        receivedConversation_.conversationType == ConversationType_PUBLICSERVICE) {
+        modelType = RC_CONVERSATION_MODEL_TYPE_PUBLIC_SERVICE;
+        RCPublicServiceProfile *serviceProfile = [[RCIMClient sharedRCIMClient] getPublicServiceProfile:(RCPublicServiceType)receivedMessage.conversationType publicServiceId:receivedMessage.targetId];
+        if ([serviceProfile.publicServiceId isEqualToString:@""] && serviceProfile.publicServiceType == 0) {
+            return;
+        }
+    }
+    
+    //转换新会话为新会话模型
+    newReceivedConversationModel_ =
+    [[RCConversationModel alloc] init:modelType conversation:receivedConversation_ extend:nil];
+    [self.todos insertObject:newReceivedConversationModel_ atIndex:0];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [self.conversationListTableView reloadData];
+    });
 }
 
 
@@ -84,6 +139,7 @@
         cell.layer.borderColor = YTColor(208, 208, 208).CGColor;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
+    
     cell.isShowNotificationNumber = YES;
     [cell setDataModel:self.todos[indexPath.section]];
 
@@ -118,7 +174,7 @@
 {
     RCConversationModel *model = self.todos[indexPath.section];
     //新建一个聊天会话View Controller对象
-    RCConversationViewController *chat = [[RCConversationViewController alloc]init];
+    YTConversationController *chat = [[YTConversationController alloc]init];
     //设置会话的类型，如单聊、讨论组、群聊、聊天室、客服、公众服务会话等
     chat.conversationType = ConversationType_PRIVATE;
     //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
@@ -129,11 +185,37 @@
     chat.displayUserNameInCell = NO;
     // 头像形状
     [chat setMessageAvatarStyle:RC_USER_AVATAR_CYCLE];
+    [chat setMessagePortraitSize:CGSizeMake(37, 37)];
     // 隐藏tabBar
     chat.hidesBottomBarWhenPushed = YES;
+    chat.userId = [YTAccountTool account].userId;
     //显示聊天会话界面
     [self.navigationController pushViewController:chat animated:YES];
+    [YTCenter postNotificationName:YTUpdateUnreadCount object:nil];
 }
+
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // 删除会话
+    RCConversationModel *model = self.todos[indexPath.section];
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:indexPath.section];
+    if ([model.conversationTitle hasPrefix:@"平台客服"] || [model.conversationTitle hasPrefix:@"机构经理"]) {
+        [SVProgressHUD showInfoWithStatus:[NSString stringWithFormat:@"%@\n不可以删除", model.conversationTitle]];
+        [self.conversationListTableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationNone];
+        return;
+    }
+    
+    
+    RCIMClient *client = [RCIMClient sharedRCIMClient];
+    [client clearMessages:ConversationType_PRIVATE targetId:model.targetId];
+    [self.todos removeObjectAtIndex:indexPath.section];
+    
+    [self.conversationListTableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+
+}
+
 
 
 

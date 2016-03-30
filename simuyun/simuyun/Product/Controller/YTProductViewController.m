@@ -396,7 +396,7 @@ static UIWindow *_window;
         self.series = 0;
     }
     [self loadProduct];
-    [SVProgressHUD showWithStatus:@"正在加载"];
+    [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
 }
 
 - (void)loadProduct

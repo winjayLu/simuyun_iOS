@@ -936,9 +936,12 @@
  */
 - (void)loginRongCloud
 {
-    [[RCIM sharedRCIM] connectWithToken:[YTUserInfoTool userInfo].rongCloudToken success:^(NSString *userId) {
+    [[RCIM sharedRCIM] connectWithToken:[YTUserInfoTool userInfo].rcToken success:^(NSString *userId) {
         NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
         [[RCIM sharedRCIM] setUserInfoDataSource:self];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [YTCenter postNotificationName:YTUpdateUnreadCount object:nil];
+        });
     } error:^(RCConnectErrorCode status) {
         NSLog(@"登陆的错误码为:%zd", status);
     } tokenIncorrect:^{

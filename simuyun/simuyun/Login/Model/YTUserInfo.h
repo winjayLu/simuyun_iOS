@@ -74,7 +74,7 @@
 @property (nonatomic, assign) BOOL isExtension;
 
 // 融云Token
-@property (nonatomic, copy) NSString *rongCloudToken;
+@property (nonatomic, copy) NSString *rcToken;
 
 
 @end

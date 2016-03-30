@@ -13,6 +13,8 @@
 		971034A61BFD65FF00EE22A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971034A51BFD65FF00EE22A4 /* UIKit.framework */; };
 		971A44641C55FCB4007469F4 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971A44631C55FCB4007469F4 /* CoreMedia.framework */; };
 		97238CA11C45E88E00F68EEA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97238CA01C45E88E00F68EEA /* LaunchScreen.xib */; };
+		9725A17B1CAB731900283054 /* YTConversationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9725A17A1CAB731900283054 /* YTConversationController.m */; };
+		9725A17E1CABBDAC00283054 /* YTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9725A17D1CABBDAC00283054 /* YTPageScrollView.m */; };
 		97270BD01C7BF43C00C92888 /* SimpleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270BBE1C7BF43C00C92888 /* SimpleViewController.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		97270BD11C7BF43C00C92888 /* YTPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270BC01C7BF43C00C92888 /* YTPlayerViewController.m */; };
 		97270BD21C7BF43C00C92888 /* YTSchoolHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270BC21C7BF43C00C92888 /* YTSchoolHomeViewController.m */; };
@@ -346,6 +348,10 @@
 		971034A51BFD65FF00EE22A4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		971A44631C55FCB4007469F4 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		97238CA01C45E88E00F68EEA /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		9725A1791CAB731900283054 /* YTConversationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTConversationController.h; sourceTree = "<group>"; };
+		9725A17A1CAB731900283054 /* YTConversationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTConversationController.m; sourceTree = "<group>"; };
+		9725A17C1CABBDAC00283054 /* YTPageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPageScrollView.h; sourceTree = "<group>"; };
+		9725A17D1CABBDAC00283054 /* YTPageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTPageScrollView.m; sourceTree = "<group>"; };
 		97270BBD1C7BF43C00C92888 /* SimpleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleViewController.h; sourceTree = "<group>"; };
 		97270BBE1C7BF43C00C92888 /* SimpleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleViewController.m; sourceTree = "<group>"; };
 		97270BBF1C7BF43C00C92888 /* YTPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPlayerViewController.h; sourceTree = "<group>"; };
@@ -1448,6 +1454,8 @@
 				97545A4C1CAA1C8C00F4E6C7 /* YTCloudListController.m */,
 				97545A4E1CAA685E00F4E6C7 /* YTCloudListCell.h */,
 				97545A4F1CAA685E00F4E6C7 /* YTCloudListCell.m */,
+				9725A1791CAB731900283054 /* YTConversationController.h */,
+				9725A17A1CAB731900283054 /* YTConversationController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1507,6 +1515,8 @@
 				97270D0F1C7BF49500C92888 /* CorePagesView.h */,
 				97270D101C7BF49500C92888 /* CorePagesView.m */,
 				97270D111C7BF49500C92888 /* CorePagesView.xib */,
+				9725A17C1CABBDAC00283054 /* YTPageScrollView.h */,
+				9725A17D1CABBDAC00283054 /* YTPageScrollView.m */,
 			);
 			path = MainView;
 			sourceTree = "<group>";
@@ -2671,6 +2681,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				97C718F71C7FF45D00BC43D7 /* YTNormalWebController.m in Sources */,
+				9725A17B1CAB731900283054 /* YTConversationController.m in Sources */,
 				97270EF31C7BF4D500C92888 /* YTLogoView.m in Sources */,
 				97270CD71C7BF47E00C92888 /* JKAssetsGroupCell.m in Sources */,
 				97270E921C7BF4D500C92888 /* NSObject+JsonCategory.m in Sources */,
@@ -2761,6 +2772,7 @@
 				97270BD41C7BF43C00C92888 /* YTGroomVedioView.m in Sources */,
 				97A4DDF81C97A53500079AFC /* LBXScanWrapper.m in Sources */,
 				97270EB21C7BF4D500C92888 /* UIRefreshControl+AFNetworking.m in Sources */,
+				9725A17E1CABBDAC00283054 /* YTPageScrollView.m in Sources */,
 				97270D5C1C7BF4AF00C92888 /* YTUserInfo.m in Sources */,
 				97270CE51C7BF47E00C92888 /* QKInfoCard.m in Sources */,
 				97270EA81C7BF4D500C92888 /* AFURLResponseSerialization.m in Sources */,

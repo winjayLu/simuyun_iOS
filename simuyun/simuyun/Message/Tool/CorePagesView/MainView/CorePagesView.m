@@ -9,6 +9,7 @@
 #import "CorePagesView.h"
 
 #import "UIImage+Extend.h"
+#import "YTCloudListController.h"
 
 
 @interface CorePagesView ()<UIScrollViewDelegate>{
@@ -146,6 +147,8 @@
     
     //隐藏水平滚动条
     self.scrollView.showsHorizontalScrollIndicator=NO;
+    
+    self.scrollView.bounces = NO;
     
     //高度修复
     _pagesBarViewHConstraint.constant =self.config.barViewH;
@@ -399,6 +402,15 @@
  */
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
+    if (scrollView == self.scrollView) {
+        
+        for (CorePageModel *pageModel in _pageModels) {
+            if ([pageModel.pageVC isKindOfClass:[UITableViewController class]]) {
+                ((UITableViewController *)pageModel.pageVC).tableView.scrollEnabled = NO;
+            }
+        }
+    }
+    
     CGFloat offsetX=scrollView.contentOffset.x;
     
     CGFloat width=self.width;
@@ -425,6 +437,15 @@
 
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    
+    if (scrollView == self.scrollView) {
+        
+        for (CorePageModel *pageModel in _pageModels) {
+            if ([pageModel.pageVC isKindOfClass:[UITableViewController class]]) {
+                ((UITableViewController *)pageModel.pageVC).tableView.scrollEnabled = YES;
+            }
+        }
+    }
     
     if(self.scrollView.isDragging) return;
     self.deceleratingPage=self.page;
@@ -467,9 +488,11 @@
 
 
 -(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    
+
     //页码处理并加载视图
     [self pageHandle:NO];
+
+    
 }
 
 
