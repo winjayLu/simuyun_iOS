@@ -46,6 +46,7 @@
     // 去掉下划线
     self.conversationListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [[RCIM sharedRCIM] setGlobalConversationAvatarStyle:RC_USER_AVATAR_CYCLE];
+//    [YTCenter addObserver:self selector:@selector(updateList) name:YTMessageListUpdate object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -54,8 +55,13 @@
     if (self.todos.count == 0) {
         [self refreshConversationTableViewIfNeeded];
     }
-
 }
+
+//- (void)updateList
+//{
+//    [self refreshConversationTableViewIfNeeded];
+////    [self.conversationListTableView reloadData];
+//}
 
 - (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource
 {
@@ -190,6 +196,7 @@
     chat.conversationType = ConversationType_PRIVATE;
     //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
     chat.targetId = model.targetId;
+//    chat.targetId = @"e3ffcc0a37c0463e9636bf997e606a70";
     //设置聊天会话界面要显示的标题
     chat.title = model.conversationTitle;
     // 显示发送方的名字

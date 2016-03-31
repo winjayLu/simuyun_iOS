@@ -25,3 +25,5 @@ extern NSString *const YTUpdateUnreadCount;
 
 // 选中消息控制器
 extern NSString *const YTSelectedMessageVc;
+// 更新消息列表
+extern NSString *const YTMessageListUpdate;

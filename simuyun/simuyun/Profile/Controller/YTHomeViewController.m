@@ -54,6 +54,7 @@
 #import <RongIMKit/RongIMKit.h>
 
 
+
 #define magin 3
 
 @interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate, UIScrollViewDelegate, shareCustomDelegate, UIWebViewDelegate, loopViewDelegate, RCIMUserInfoDataSource>
@@ -935,8 +936,7 @@
  */
 - (void)loginRongCloud
 {
-    [[RCIM sharedRCIM] connectWithToken:[YTUserInfoTool userInfo].rcToken success:^(NSString *userId) {
-        NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+    [[RCIM sharedRCIM] connectWithToken:[CoreArchive strForKey:@"rcToken"] success:^(NSString *userId) {
         [[RCIM sharedRCIM] setUserInfoDataSource:self];
         dispatch_sync(dispatch_get_main_queue(), ^{
             // 更新未读消息数量
@@ -953,8 +953,7 @@
     } error:^(RCConnectErrorCode status) {
         NSLog(@"登陆的错误码为:%zd", status);
     } tokenIncorrect:^{
-#warning 重新获取token
-        NSLog(@"token错误");
+        [self loadToken];
     }];
 }
 
@@ -970,14 +969,25 @@
 - (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion
 {
     if ([userId isEqualToString:[YTAccountTool account].userId]) {
-        YTUserInfo *info = [YTUserInfoTool userInfo];
-        RCUserInfo *userInfo = [[RCUserInfo alloc] init];
-        userInfo.userId = userId;
-        userInfo.name = info.realName;
-        userInfo.portraitUri = info.headImgUrl;
+        RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:userId name:@"逯文杰" portrait:@"http://www.simuyun.com/peyunupload//userHeadImage/c9a7b3925b2f43fe8b818b76af3b489a_1458700733228.jpg"];
+#warning 测试
+//        YTUserInfo *info = [YTUserInfoTool userInfo];
         return completion(userInfo);
     }
     return completion(nil);
+}
+
+- (void)loadToken{
+    // 获取融云Token
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"uid"] = [YTAccountTool account].userId;
+    param[@"tokenExpired"] = @(1);
+    [YTHttpTool get:YTToken params:param success:^(id responseObject) {
+        [CoreArchive setStr:responseObject[@"rcToken"] key:@"rcToken"];
+        [self loginRongCloud];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 

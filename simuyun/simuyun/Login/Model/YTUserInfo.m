@@ -22,10 +22,6 @@
     return _organizationName;
 }
 
-- (NSString *)rcToken
-{
-    return @"UO+YUszUvQiMmL1gfgTNR2iFZ82izPgGx/14T5ZrkrWPLqd87z1pDlKO9bw7WSlwR2P6hz6vxWe0H/UuHBgqOR0r57XbNOLOuDswa5xDazQZD5pfNhAW5Aj5ZYrWYvDs93zvldjQG7g=";
-}
 
 - (NSString *)realName
 {

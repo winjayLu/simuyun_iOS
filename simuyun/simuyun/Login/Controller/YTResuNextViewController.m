@@ -114,7 +114,7 @@
                   if (finally) {
                       [self transitionTabBarVC];
                   }
-              }];
+              } ];
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               if(operation.responseObject[@"message"] != nil)
               {

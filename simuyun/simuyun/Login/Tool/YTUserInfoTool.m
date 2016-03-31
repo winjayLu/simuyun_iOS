@@ -56,7 +56,6 @@ static YTUserInfo *_userInfo;
     // 去服务器获取
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     dict[@"advisersId"] = [YTAccountTool account].userId;
-    
     [YTHttpTool get:YTUser params:dict success:^(id responseObject) {
         YTUserInfo *userInfo = [YTUserInfo objectWithKeyValues:responseObject];
         [self saveUserInfo:userInfo];

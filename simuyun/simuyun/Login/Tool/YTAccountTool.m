@@ -61,26 +61,35 @@
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTSession];
     [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
-          // 保存账户信息
-          account.password = params[@"password"];
-          account.userId = responseObject[@"userId"];
-          account.token = responseObject[@"token"];
-          [self save:account];
-          [APService setAlias:account.userId callbackSelector:nil object:nil];
           
-          // 判断本地是否有用户信息
-          YTUserInfo *userInfo = [YTUserInfoTool localUserInfo];
-          if (userInfo != nil) {
-              // 将用户信息写入内容中
-              [YTUserInfoTool saveUserInfo:userInfo];
-              result(YES);
-          } else {
-              [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
-                  if (finally) {
-                      result(YES);
-                  }
-              }];
-          }
+          // 获取融云Token
+          NSMutableDictionary *param = [NSMutableDictionary dictionary];
+          param[@"uid"] = responseObject[@"userId"];
+          [YTHttpTool get:YTToken params:param success:^(id response) {
+              [CoreArchive setStr:response[@"rcToken"] key:@"rcToken"];
+              // 保存账户信息
+              account.password = params[@"password"];
+              account.userId = responseObject[@"userId"];
+              account.token = responseObject[@"token"];
+              [self save:account];
+              [APService setAlias:account.userId callbackSelector:nil object:nil];
+              
+              // 判断本地是否有用户信息
+              YTUserInfo *userInfo = [YTUserInfoTool localUserInfo];
+              if (userInfo != nil) {
+                  // 将用户信息写入内容中
+                  [YTUserInfoTool saveUserInfo:userInfo];
+                  result(YES);
+              } else {
+                  [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
+                      if (finally) {
+                          result(YES);
+                      }
+                  }];
+              }
+          } failure:^(NSError *error) {
+              result(NO);
+          }];
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           if(operation.responseObject[@"message"] != nil)
           {
@@ -97,6 +106,14 @@
           }
           result(NO);
       }];
+}
+
+- (void)loadToken
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    params[@"tokenExpired"] = @"1";
+
+    
 }
 
 

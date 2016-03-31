@@ -99,8 +99,16 @@
 - (void)onRCIMReceiveMessage:(RCMessage *)message
                         left:(int)left
 {
-
-    [self updateUnreadCountWithCount:1];
+    static int count = 0;
+    if (left == 0) {
+        int oldCount = [self.message.tabBarItem.badgeValue intValue];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%zd", oldCount + count + 1];
+        });
+        count = 0;
+    } else {
+        count++;
+    }
 }
 
 - (void)updateUnreadCount
@@ -113,13 +121,7 @@
     }
 }
 
-- (void)updateUnreadCountWithCount:(int)count
-{
-    int oldCount = [self.message.tabBarItem.badgeValue intValue];
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%zd", oldCount + count];
-    });
-}
+
 
 - (void)selectedMessageVc
 {

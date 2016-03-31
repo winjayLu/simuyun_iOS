@@ -34,6 +34,8 @@
 #import "YTResultPasswordViewController.h"
 #import <RongIMKit/RongIMKit.h>
 #import "YTUserInfoTool.h"
+#import "CoreArchive.h"
+#import "YTAccountTool.h"
 
 #warning 本地通知
 
@@ -466,17 +468,30 @@
  */
 - (void)loginRongCloud
 {
-    [[RCIM sharedRCIM] connectWithToken:[YTUserInfoTool userInfo].rcToken success:^(NSString *userId) {
-        NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+    [[RCIM sharedRCIM] connectWithToken:[CoreArchive strForKey:@"rcToken"] success:^(NSString *userId) {
+
         [[RCIM sharedRCIM] setUserInfoDataSource:self];
         dispatch_sync(dispatch_get_main_queue(), ^{
             [YTCenter postNotificationName:YTUpdateUnreadCount object:nil];
+#warning 从后台进入前台列表出错
+//            [YTCenter postNotificationName:YTMessageListUpdate object:nil];
         });
     } error:^(RCConnectErrorCode status) {
         NSLog(@"登陆的错误码为:%zd", status);
     } tokenIncorrect:^{
-#warning 重新获取token
-        NSLog(@"token错误");
+        [self loadToken];
+    }];
+}
+
+- (void)loadToken{
+    // 获取融云Token
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"uid"] = [YTAccountTool account].userId;
+    param[@"tokenExpired"] = @(1);
+    [YTHttpTool get:YTToken params:param success:^(id responseObject) {
+        [CoreArchive setStr:responseObject[@"rcToken"] key:@"rcToken"];
+        [self loginRongCloud];
+    } failure:^(NSError *error) {
     }];
 }
 

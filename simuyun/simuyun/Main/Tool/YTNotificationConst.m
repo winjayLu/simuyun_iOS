@@ -21,3 +21,5 @@ NSString *const YTPlayerScreenChange = @"YTPlayerScreenChange";
 NSString *const YTUpdateUnreadCount = @"YTUpdateUnreadCount";
 // 选中消息控制器
 NSString *const YTSelectedMessageVc = @"YTSelectedMessageVc";
+// 更新消息列表
+NSString *const YTMessageListUpdate = @"YTMessageListUpdate";
