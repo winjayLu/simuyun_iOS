@@ -191,7 +191,6 @@
     chat.userId = [YTAccountTool account].userId;
     //显示聊天会话界面
     [self.navigationController pushViewController:chat animated:YES];
-    [YTCenter postNotificationName:YTUpdateUnreadCount object:nil];
 }
 
 

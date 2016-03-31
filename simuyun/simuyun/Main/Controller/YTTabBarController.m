@@ -94,25 +94,21 @@
 - (void)onRCIMReceiveMessage:(RCMessage *)message
                         left:(int)left
 {
-#warning 收到新消息，更新未读消息数量
-    if ([message.content isMemberOfClass:[RCInformationNotificationMessage class]]) {
-        RCInformationNotificationMessage *msg=(RCInformationNotificationMessage *)message.content;
-        //NSString *str = [NSString stringWithFormat:@"%@",msg.message];
-//        if ([msg.message rangeOfString:@"你已添加了"].location!=NSNotFound) {
-//            [RCDDataSource syncFriendList:^(NSMutableArray *friends) {
-//            }];
-//        }
-    }
-}
--(BOOL)onRCIMCustomAlertSound:(RCMessage*)message
-{
-    [self updateUnreadCount];
-    return YES;
+
+    [self updateUnreadCountWithCount:1];
 }
 
 - (void)updateUnreadCount
 {
     self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%zd", [[RCIMClient sharedRCIMClient] getTotalUnreadCount]];
+}
+
+- (void)updateUnreadCountWithCount:(int)count
+{
+    int oldCount = [self.message.tabBarItem.badgeValue intValue];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%zd", oldCount + count];
+    });
 }
 
 

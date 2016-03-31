@@ -37,14 +37,19 @@
             textCell.textLabel.textColor=YTColor(51, 51, 51);
         }
         textCell.textLabel.attributeDictionary=@{
-                                               @(NSTextCheckingTypeLink) : @{NSForegroundColorAttributeName : [UIColor redColor]},
-                                               @(NSTextCheckingTypePhoneNumber) : @{NSForegroundColorAttributeName : [UIColor redColor]}
-                                               };
-        
+                                                 @(NSTextCheckingTypeLink) : @{NSForegroundColorAttributeName : YTColor(215, 58, 46)},
+                                                 @(NSTextCheckingTypePhoneNumber) : @{NSForegroundColorAttributeName : YTColor(215, 58, 46)}
+                                                 };
     }
-    
-
 }
+
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [YTCenter postNotificationName:YTUpdateUnreadCount object:nil];
+}
+
 
 
 - (void)didReceiveMemoryWarning {
