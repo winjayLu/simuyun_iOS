@@ -85,7 +85,7 @@ static UIWindow *_window;
     // 消息数量
     YTMessageNum *messageNum = [YTMessageNumTool messageNum];
     
-    self.status = @[@(messageNum.unreadNoticeNum), @(messageNum.unreadProductNum), @(messageNum.unreadGoodNewsNum), @(messageNum.unreadTalkNum)];
+    self.status = @[@(0),@(messageNum.unreadNoticeNum), @(messageNum.unreadProductNum), @(messageNum.unreadGoodNewsNum)];
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         
@@ -122,8 +122,7 @@ static UIWindow *_window;
     if(_pagesView==nil){
         
         YTCloudListController *tvc1 = [[YTCloudListController alloc] init];
-//        YTRongCloudController *tvc1 = [[YTRongCloudController alloc] init];
-//        tvc1.superVc = self;
+        
         YTOperationCenterController *tvc2 = [[YTOperationCenterController alloc] init];
         YTProductNewsController *tvc3 = [[YTProductNewsController alloc] init];
         YTSystemCenterController *tvc4 = [[YTSystemCenterController alloc] init];
@@ -131,7 +130,7 @@ static UIWindow *_window;
         CorePageModel *model2=[CorePageModel model:tvc3 pageBarName:@"产品动态"];
         CorePageModel *model3=[CorePageModel model:tvc4 pageBarName:@"营销喜报"];
         CorePageModel *model4=[CorePageModel model:tvc1 pageBarName:@"客服消息"];
-        NSArray *pageModels=@[model1, model2, model3,model4];
+        NSArray *pageModels=@[model4, model1, model2, model3];
         
         
         //自定义配置
@@ -148,6 +147,7 @@ static UIWindow *_window;
         
         
         _pagesView=[CorePagesView viewWithOwnerVC:self pageModels:pageModels config:config];
+        _pagesView.isOnePageNotScroll = YES;
     }
     
     return _pagesView;

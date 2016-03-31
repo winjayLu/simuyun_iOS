@@ -118,7 +118,6 @@
 		97270CF01C7BF47E00C92888 /* YTSearchProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270CBF1C7BF47E00C92888 /* YTSearchProductCell.m */; };
 		97270CF11C7BF47E00C92888 /* YTSearchProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97270CC01C7BF47E00C92888 /* YTSearchProductCell.xib */; };
 		97270CF21C7BF47E00C92888 /* YTSenMailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270CC21C7BF47E00C92888 /* YTSenMailView.m */; };
-		97270D211C7BF49500C92888 /* YTCloudObserveController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270CF61C7BF49500C92888 /* YTCloudObserveController.m */; };
 		97270D221C7BF49500C92888 /* YTMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270CF81C7BF49500C92888 /* YTMessageViewController.m */; };
 		97270D231C7BF49500C92888 /* YTOperationCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270CFA1C7BF49500C92888 /* YTOperationCenterController.m */; };
 		97270D241C7BF49500C92888 /* YTProductNewsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270CFC1C7BF49500C92888 /* YTProductNewsController.m */; };
@@ -133,8 +132,6 @@
 		97270D2D1C7BF49500C92888 /* CorePageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270D141C7BF49500C92888 /* CorePageModel.m */; };
 		97270D2E1C7BF49500C92888 /* CorePagesBarBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270D171C7BF49500C92888 /* CorePagesBarBtn.m */; };
 		97270D2F1C7BF49500C92888 /* CorePagesBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270D191C7BF49500C92888 /* CorePagesBarView.m */; settings = {COMPILER_FLAGS = "-w"; }; };
-		97270D301C7BF49500C92888 /* YTCustomerServiceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270D1C1C7BF49500C92888 /* YTCustomerServiceCell.m */; };
-		97270D311C7BF49500C92888 /* YTCustomerServiceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97270D1D1C7BF49500C92888 /* YTCustomerServiceCell.xib */; };
 		97270D321C7BF49500C92888 /* YTTodoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270D1F1C7BF49500C92888 /* YTTodoViewCell.m */; };
 		97270D331C7BF49500C92888 /* YTTodoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97270D201C7BF49500C92888 /* YTTodoViewCell.xib */; };
 		97270D511C7BF4AF00C92888 /* YTLoginAuthenticationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270D371C7BF4AF00C92888 /* YTLoginAuthenticationController.m */; };
@@ -534,8 +531,6 @@
 		97270CC01C7BF47E00C92888 /* YTSearchProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTSearchProductCell.xib; sourceTree = "<group>"; };
 		97270CC11C7BF47E00C92888 /* YTSenMailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSenMailView.h; sourceTree = "<group>"; };
 		97270CC21C7BF47E00C92888 /* YTSenMailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSenMailView.m; sourceTree = "<group>"; };
-		97270CF51C7BF49500C92888 /* YTCloudObserveController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTCloudObserveController.h; sourceTree = "<group>"; };
-		97270CF61C7BF49500C92888 /* YTCloudObserveController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTCloudObserveController.m; sourceTree = "<group>"; };
 		97270CF71C7BF49500C92888 /* YTMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTMessageViewController.h; sourceTree = "<group>"; };
 		97270CF81C7BF49500C92888 /* YTMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMessageViewController.m; sourceTree = "<group>"; };
 		97270CF91C7BF49500C92888 /* YTOperationCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTOperationCenterController.h; sourceTree = "<group>"; };
@@ -563,9 +558,6 @@
 		97270D171C7BF49500C92888 /* CorePagesBarBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CorePagesBarBtn.m; sourceTree = "<group>"; };
 		97270D181C7BF49500C92888 /* CorePagesBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CorePagesBarView.h; sourceTree = "<group>"; };
 		97270D191C7BF49500C92888 /* CorePagesBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CorePagesBarView.m; sourceTree = "<group>"; };
-		97270D1B1C7BF49500C92888 /* YTCustomerServiceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTCustomerServiceCell.h; sourceTree = "<group>"; };
-		97270D1C1C7BF49500C92888 /* YTCustomerServiceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTCustomerServiceCell.m; sourceTree = "<group>"; };
-		97270D1D1C7BF49500C92888 /* YTCustomerServiceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTCustomerServiceCell.xib; sourceTree = "<group>"; };
 		97270D1E1C7BF49500C92888 /* YTTodoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTTodoViewCell.h; sourceTree = "<group>"; };
 		97270D1F1C7BF49500C92888 /* YTTodoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTTodoViewCell.m; sourceTree = "<group>"; };
 		97270D201C7BF49500C92888 /* YTTodoViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTTodoViewCell.xib; sourceTree = "<group>"; };
@@ -1440,8 +1432,6 @@
 			children = (
 				97270CF71C7BF49500C92888 /* YTMessageViewController.h */,
 				97270CF81C7BF49500C92888 /* YTMessageViewController.m */,
-				97270CF51C7BF49500C92888 /* YTCloudObserveController.h */,
-				97270CF61C7BF49500C92888 /* YTCloudObserveController.m */,
 				97270CF91C7BF49500C92888 /* YTOperationCenterController.h */,
 				97270CFA1C7BF49500C92888 /* YTOperationCenterController.m */,
 				97270CFB1C7BF49500C92888 /* YTProductNewsController.h */,
@@ -1544,9 +1534,6 @@
 		97270D1A1C7BF49500C92888 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				97270D1B1C7BF49500C92888 /* YTCustomerServiceCell.h */,
-				97270D1C1C7BF49500C92888 /* YTCustomerServiceCell.m */,
-				97270D1D1C7BF49500C92888 /* YTCustomerServiceCell.xib */,
 				97270D1E1C7BF49500C92888 /* YTTodoViewCell.h */,
 				97270D1F1C7BF49500C92888 /* YTTodoViewCell.m */,
 				97270D201C7BF49500C92888 /* YTTodoViewCell.xib */,
@@ -2563,7 +2550,6 @@
 				97270C601C7BF47400C92888 /* YTLeftMenu.xib in Resources */,
 				97270CC61C7BF47E00C92888 /* YTBuySuccessController.xib in Resources */,
 				97C718FC1C80323A00BC43D7 /* YTTableViewCell.xib in Resources */,
-				97270D311C7BF49500C92888 /* YTCustomerServiceCell.xib in Resources */,
 				97270C431C7BF47400C92888 /* YTAuthenticationStatusController.xib in Resources */,
 				97270CEF1C7BF47E00C92888 /* YTReportTopView.xib in Resources */,
 				97270C561C7BF47400C92888 /* YTAutocompletionCell.xib in Resources */,
@@ -2693,7 +2679,6 @@
 				97A4DDF71C97A53500079AFC /* LBXScanViewStyle.m in Sources */,
 				97270D531C7BF4AF00C92888 /* YTLoginViewController.m in Sources */,
 				97270E911C7BF4D500C92888 /* NSDictionary+Extension.m in Sources */,
-				97270D301C7BF49500C92888 /* YTCustomerServiceCell.m in Sources */,
 				97270BD71C7BF43C00C92888 /* YTSchoolTableViewCell.m in Sources */,
 				97270F101C7BF50600C92888 /* YTInformationTableViewCell.m in Sources */,
 				97270EDE1C7BF4D500C92888 /* YUDIVView.m in Sources */,
@@ -2809,7 +2794,6 @@
 				97270D2F1C7BF49500C92888 /* CorePagesBarView.m in Sources */,
 				97270EB01C7BF4D500C92888 /* UIImageView+AFNetworking.m in Sources */,
 				97270CD31C7BF47E00C92888 /* DXPopover.m in Sources */,
-				97270D211C7BF49500C92888 /* YTCloudObserveController.m in Sources */,
 				97270EBE1C7BF4D500C92888 /* PPTPageControl.m in Sources */,
 				97270CC71C7BF47E00C92888 /* YTContentViewController.m in Sources */,
 				97270E8E1C7BF4D500C92888 /* NSString+Extend.m in Sources */,

@@ -22,3 +22,6 @@ extern NSString *const YTPlayerScreenChange;
 
 // 更新未读消息数量
 extern NSString *const YTUpdateUnreadCount;
+
+// 选中消息控制器
+extern NSString *const YTSelectedMessageVc;

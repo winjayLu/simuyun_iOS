@@ -18,6 +18,11 @@
 
 @property (strong, nonatomic) IBOutlet YTPageScrollView *scrollView;
 
+/**
+ *  第一页不可以可以滚动
+ */
+@property (assign, nonatomic) BOOL isOnePageNotScroll;
+
 
 /** 中转到指定页码 */
 -(void)jumpToPage:(NSUInteger)jumpPage;

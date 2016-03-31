@@ -13,7 +13,7 @@
 @interface YTMessageNum : NSObject
 
 // 客服消息
-@property (nonatomic, assign) int unreadTalkNum;
+//@property (nonatomic, assign) int unreadTalkNum;
 
 // 产品动态
 @property (nonatomic, assign) int unreadProductNum;

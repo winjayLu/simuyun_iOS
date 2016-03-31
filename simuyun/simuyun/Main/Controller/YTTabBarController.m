@@ -62,6 +62,8 @@
 
 
 
+
+
 @implementation YTTabBarController
 
 - (void)viewDidLoad {
@@ -89,6 +91,9 @@
     // 监听未读消息数量
     [YTCenter addObserver:self selector:@selector(updateUnreadCount) name:YTUpdateUnreadCount object:nil];
     [RCIM sharedRCIM].receiveMessageDelegate = self;
+    
+    // 消息推送点击
+    [YTCenter addObserver:self selector:@selector(selectedMessageVc) name:YTSelectedMessageVc object:nil];
 }
 
 - (void)onRCIMReceiveMessage:(RCMessage *)message
@@ -100,7 +105,12 @@
 
 - (void)updateUnreadCount
 {
-    self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%zd", [[RCIMClient sharedRCIMClient] getTotalUnreadCount]];
+    int count = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
+    if (count == 0) {
+        self.message.tabBarItem.badgeValue = nil;
+    } else {
+        self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%zd", [[RCIMClient sharedRCIMClient] getTotalUnreadCount]];
+    }
 }
 
 - (void)updateUnreadCountWithCount:(int)count
@@ -109,6 +119,11 @@
     dispatch_sync(dispatch_get_main_queue(), ^{
         self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%zd", oldCount + count];
     });
+}
+
+- (void)selectedMessageVc
+{
+    [self setSelectedIndex:0];
 }
 
 
@@ -227,10 +242,6 @@
         YTMessageNum *newMessageNum = [YTMessageNumTool messageNum];
         if (oldMessage == nil || (newMessageNum.unreadTodoNum != oldMessage.unreadTodoNum)) {
             [YTCenter postNotificationName:YTUpdateTodoFrame object:nil];
-        }
-        if (newMessageNum.unreadTalkNum > 0) {
-            self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", newMessageNum.unreadTalkNum];
-            [YTCenter postNotificationName:YTUpdateChatContent object:nil];
         }
     } failure:^(NSError *error) {
     }];

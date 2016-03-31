@@ -33,13 +33,17 @@
         RCMessageModel *model = textCell.model;
         if ([model.senderUserId isEqualToString:self.userId]) {
             textCell.textLabel.textColor=[UIColor whiteColor];
+            textCell.textLabel.attributeDictionary=@{
+                                                     @(NSTextCheckingTypeLink) : @{NSForegroundColorAttributeName : YTNavBackground},
+                                                     @(NSTextCheckingTypePhoneNumber) : @{NSForegroundColorAttributeName : YTNavBackground}
+                                                     };
         } else {
             textCell.textLabel.textColor=YTColor(51, 51, 51);
+            textCell.textLabel.attributeDictionary=@{
+                                                     @(NSTextCheckingTypeLink) : @{NSForegroundColorAttributeName : YTColor(255, 240, 1)},
+                                                     @(NSTextCheckingTypePhoneNumber) : @{NSForegroundColorAttributeName : YTColor(255, 240, 1)}
+                                                     };
         }
-        textCell.textLabel.attributeDictionary=@{
-                                                 @(NSTextCheckingTypeLink) : @{NSForegroundColorAttributeName : YTColor(215, 58, 46)},
-                                                 @(NSTextCheckingTypePhoneNumber) : @{NSForegroundColorAttributeName : YTColor(215, 58, 46)}
-                                                 };
     }
 }
 

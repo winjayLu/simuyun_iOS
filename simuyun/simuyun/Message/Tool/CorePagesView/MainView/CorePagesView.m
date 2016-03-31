@@ -385,6 +385,7 @@
  */
 -(void)scrollViewActionWithPage:(NSUInteger)page{
     
+    
     CGFloat x =self.width * page;
     
     CGPoint offset=CGPointMake(x, -self.config.barViewH);
@@ -409,6 +410,13 @@
                 ((UITableViewController *)pageModel.pageVC).tableView.scrollEnabled = NO;
             }
         }
+    }
+    
+    if (self.page == 0 && self.isOnePageNotScroll == YES) {
+        self.scrollView.scrollEnabled = NO;
+    } else {
+        self.scrollView.scrollEnabled = YES;
+
     }
     
     CGFloat offsetX=scrollView.contentOffset.x;
@@ -442,7 +450,7 @@
         
         for (CorePageModel *pageModel in _pageModels) {
             if ([pageModel.pageVC isKindOfClass:[UITableViewController class]]) {
-                ((UITableViewController *)pageModel.pageVC).tableView.scrollEnabled = YES;
+                    ((UITableViewController *)pageModel.pageVC).tableView.scrollEnabled = YES;
             }
         }
     }

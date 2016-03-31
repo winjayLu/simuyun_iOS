@@ -38,6 +38,7 @@
 
 
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.conversationListTableView.contentInset = UIEdgeInsetsMake(0, 0, 64, 0);
@@ -46,6 +47,16 @@
     self.conversationListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [[RCIM sharedRCIM] setGlobalConversationAvatarStyle:RC_USER_AVATAR_CYCLE];
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (self.todos.count == 0) {
+        [self refreshConversationTableViewIfNeeded];
+    }
+
+}
+
 - (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource
 {
     [self.todos removeAllObjects];
@@ -206,12 +217,13 @@
         return;
     }
     
-    
     RCIMClient *client = [RCIMClient sharedRCIMClient];
+    [client removeConversation:ConversationType_PRIVATE targetId:model.targetId];
     [client clearMessages:ConversationType_PRIVATE targetId:model.targetId];
     [self.todos removeObjectAtIndex:indexPath.section];
     
     [self.conversationListTableView deleteSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    [YTCenter postNotificationName:YTUpdateUnreadCount object:nil];
 
 }
 

@@ -39,4 +39,12 @@
  */
 @property (nonatomic, copy) NSString *jumpUrl;
 
+
+
+#pragma mark - 融云字段
+/**
+ *  消息发送者id
+ */
+@property (nonatomic, copy) NSString *cType;
+
 @end

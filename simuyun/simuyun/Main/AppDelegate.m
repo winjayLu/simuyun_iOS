@@ -33,8 +33,9 @@
 #import "YTRegisterViewController.h"
 #import "YTResultPasswordViewController.h"
 #import <RongIMKit/RongIMKit.h>
+#import "YTUserInfoTool.h"
 
-
+#warning 本地通知
 
 @interface AppDelegate ()
 {
@@ -90,77 +91,6 @@
 }
 
 
-#pragma mark - 友盟社会化组件
-/**
- *  初始化友盟推送-微信登录
- *
- */
-- (void)setupUmeng
-{
-    // 设置友盟社会化组件appkey
-    [UMSocialData setAppKey:UmengAppKey];
-    // 设置微信AppId，设置分享url，默认使用友盟的网址
-    [UMSocialWechatHandler setWXAppId:WXAppID appSecret:WXAppSecret url:@"http://www.umeng.com/social"];
-    
-    // 友盟统计
-    [MobClick startWithAppkey:UmengAppKey reportPolicy:BATCH  channelId:nil];
-    // 获取版本号
-    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
-    [MobClick setAppVersion:version];
-}
-
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
-{
-    return  [UMSocialSnsService handleOpenURL:url];
-}
-
-- (BOOL)application:(UIApplication *)application
-            openURL:(NSURL *)url
-  sourceApplication:(NSString *)sourceApplication
-         annotation:(id)annotation
-{
-    return  [UMSocialSnsService handleOpenURL:url];
-}
-
-/**
- *  常驻后台
- *
- */
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    if([YTResourcesTool isVersionFlag] == YES){
-        _timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(logAction) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
-        UIApplication*   app = [UIApplication sharedApplication];
-        __block    UIBackgroundTaskIdentifier bgTask;
-        bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (bgTask != UIBackgroundTaskInvalid){
-                    bgTask = UIBackgroundTaskInvalid;
-                }
-            });
-        }];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (bgTask != UIBackgroundTaskInvalid){
-                    bgTask = UIBackgroundTaskInvalid;
-                }
-            });
-        });
-    }
-}
--(void)logAction
-{
-    NSLog(@"常驻后台打印------------------------");
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    [_timer invalidate];
-    _timer = nil;
-}
-
-
-
 #pragma mark - 极光推送
 /**
  *  初始化极光推送
@@ -199,39 +129,15 @@
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
+    // 设置极光Token
     [APService registerDeviceToken:deviceToken];
-    NSString *token =
-    [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<"
-                                                           withString:@""]
-      stringByReplacingOccurrencesOfString:@">"
-      withString:@""]
-     stringByReplacingOccurrencesOfString:@" "
-     withString:@""];
     
+    // 设置融云Token
+    NSString *token = [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""] stringByReplacingOccurrencesOfString:@">" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
     [[RCIMClient sharedRCIMClient] setDeviceToken:token];
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:userInfo];
-    if (pushServiceData) {
-        NSLog(@"该远程推送包含来自融云的推送服务");
-        for (id key in [pushServiceData allKeys]) {
-            NSLog(@"key = %@, value = %@", key, pushServiceData[key]);
-        }
-        
-        /**
-         * 统计推送打开率2
-         */
-        [[RCIMClient sharedRCIMClient] recordRemoteNotificationEvent:userInfo];
-    } else {
-        NSLog(@"该远程推送不包含来自融云的推送服务");
-        [self receivedPushNotification:userInfo];
-        [APService handleRemoteNotification:userInfo];
-    }
-}
-
-//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 //{
 //    NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:userInfo];
 //    if (pushServiceData) {
@@ -239,18 +145,30 @@
 //        for (id key in [pushServiceData allKeys]) {
 //            NSLog(@"key = %@, value = %@", key, pushServiceData[key]);
 //        }
-//        
+//
 //        /**
 //         * 统计推送打开率2
 //         */
 //        [[RCIMClient sharedRCIMClient] recordRemoteNotificationEvent:userInfo];
 //    } else {
+//        NSLog(@"该远程推送不包含来自融云的推送服务");
 //        [self receivedPushNotification:userInfo];
-//        // iOS7
 //        [APService handleRemoteNotification:userInfo];
 //    }
-//    completionHandler(UIBackgroundFetchResultNewData);
 //}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+{
+    if (userInfo[@"rc"] != nil) // 消息来自融云
+    {
+        [[RCIMClient sharedRCIMClient] recordRemoteNotificationEvent:userInfo];
+        [YTCenter postNotificationName:YTSelectedMessageVc object:nil];
+    } else {    // 消息来自极光
+        [self receivedPushNotification:userInfo];
+        [APService handleRemoteNotification:userInfo];
+    }
+    completionHandler(UIBackgroundFetchResultNewData);
+}
 
 /**
  *  检测是否有推送消息
@@ -258,19 +176,13 @@
  */
 - (void)checkNotification:(NSDictionary *)launchOptions
 {
-    /**
-     * 获取融云推送服务扩展字段1
-     */
-    NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromLaunchOptions:launchOptions];
-    if (pushServiceData) {
-        NSLog(@"该启动事件包含来自融云的推送服务");
-        for (id key in [pushServiceData allKeys]) {
-            NSLog(@"%@", pushServiceData[key]);
-        }
-    } else {
-        NSLog(@"该启动事件不包含来自融云的推送服务");
-        NSDictionary* remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
-        if(remoteNotification)
+    
+    NSDictionary* remoteNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
+    if (remoteNotification) {
+        if (remoteNotification[@"rc"]) {    // 来自融云
+            YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:remoteNotification[@"rc"]];
+            [YTJpushTool saveJpush:jpush];
+        } else  // 来自极光
         {
             YTJpushModel *jpush = [YTJpushModel objectWithKeyValues:remoteNotification];
             [YTJpushTool saveJpush:jpush];
@@ -303,55 +215,7 @@
     }
 }
 
-/**
- *  获取当前正在显示的控制器
- *
- */
-- (void)keyViewController:(YTJpushModel *)jpush
-{
-    // 获取根控制器
-    UIWindow *keyWindow = nil;
-    for (UIWindow *window in [UIApplication sharedApplication].windows) {
-        if (window.windowLevel == 0) {
-            keyWindow = window;
-            break;
-        }
-    }
-    // 如果获取不到直接返回
-    if (keyWindow == nil) return;
-    
-    UIViewController *appRootVC = keyWindow.rootViewController;
-    // 欢迎/登录/注册  不弹出推送弹出框
-    if ([appRootVC isKindOfClass:[YTNavigationController class]])
-    {
-        UIViewController *rootVc = ((YTNavigationController *)appRootVC).topViewController;
-        if ([rootVc isKindOfClass:[YTWelcomeViewController class]]|| [rootVc isKindOfClass:[YTLoginViewController class]] || [rootVc isKindOfClass:[YTRegisterViewController class]] || [rootVc isKindOfClass:[YTResultPasswordViewController class]])
-        {
-            self.keyVc = nil;
-            [YTJpushTool saveJpush:jpush];
-            return;
-        }
-    } else if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
-        UIViewController *keyVc = ((UITabBarController *)appRootVC).selectedViewController;
-        if (keyVc != nil) {
-            self.keyVc = (YTNavigationController *)keyVc;
-        }
-    }
-}
 
-
-/**
- *  接受到内存警告
- *
- */
-- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
-{
-    // 1.取消下载图片
-    [[SDWebImageManager sharedManager] cancelAll];
-
-    // 2.清除图片缓存(内存缓存)
-    [[SDWebImageManager sharedManager].imageCache clearMemory];
-}
 
 #pragma mark - 推送通知处理
 /**
@@ -468,5 +332,166 @@
         }
     }];
 }
+
+/**
+ *  获取当前正在显示的控制器
+ *
+ */
+- (void)keyViewController:(YTJpushModel *)jpush
+{
+    // 获取根控制器
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    // 如果获取不到直接返回
+    if (keyWindow == nil) return;
+    
+    UIViewController *appRootVC = keyWindow.rootViewController;
+    // 欢迎/登录/注册  不弹出推送弹出框
+    if ([appRootVC isKindOfClass:[YTNavigationController class]])
+    {
+        UIViewController *rootVc = ((YTNavigationController *)appRootVC).topViewController;
+        if ([rootVc isKindOfClass:[YTWelcomeViewController class]]|| [rootVc isKindOfClass:[YTLoginViewController class]] || [rootVc isKindOfClass:[YTRegisterViewController class]] || [rootVc isKindOfClass:[YTResultPasswordViewController class]])
+        {
+            self.keyVc = nil;
+            [YTJpushTool saveJpush:jpush];
+            return;
+        }
+    } else if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        UIViewController *keyVc = ((UITabBarController *)appRootVC).selectedViewController;
+        if (keyVc != nil) {
+            self.keyVc = (YTNavigationController *)keyVc;
+        }
+    }
+}
+
+/**
+ *  本地通知
+ *
+ */
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    // 统计推送打开率
+    [[RCIMClient sharedRCIMClient] recordLocalNotificationEvent:notification];
+    // 振动及声音提示
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    AudioServicesPlaySystemSound(1007);
+}
+
+
+
+#pragma mark - 友盟社会化组件
+/**
+ *  初始化友盟推送-微信登录
+ *
+ */
+- (void)setupUmeng
+{
+    // 设置友盟社会化组件appkey
+    [UMSocialData setAppKey:UmengAppKey];
+    // 设置微信AppId，设置分享url，默认使用友盟的网址
+    [UMSocialWechatHandler setWXAppId:WXAppID appSecret:WXAppSecret url:@"http://www.umeng.com/social"];
+    
+    // 友盟统计
+    [MobClick startWithAppkey:UmengAppKey reportPolicy:BATCH  channelId:nil];
+    // 获取版本号
+    NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    [MobClick setAppVersion:version];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return  [UMSocialSnsService handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return  [UMSocialSnsService handleOpenURL:url];
+}
+
+
+#pragma mark - 前后台处理
+
+/**
+ *  进入后台
+ *
+ */
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    // 断开与融云的连接
+    [[RCIM sharedRCIM] disconnect];
+    if([YTResourcesTool isVersionFlag] == YES){
+        _timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(logAction) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
+        UIApplication*   app = [UIApplication sharedApplication];
+        __block    UIBackgroundTaskIdentifier bgTask;
+        bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (bgTask != UIBackgroundTaskInvalid){
+                    bgTask = UIBackgroundTaskInvalid;
+                }
+            });
+        }];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (bgTask != UIBackgroundTaskInvalid){
+                    bgTask = UIBackgroundTaskInvalid;
+                }
+            });
+        });
+    }
+}
+-(void)logAction
+{
+    NSLog(@"常驻后台打印------------------------");
+}
+
+/**
+ *  回到前台
+ *
+ */
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+    [_timer invalidate];
+    _timer = nil;
+    
+    // 登录融云
+    [self loginRongCloud];
+}
+
+/**
+ *  登录融云
+ */
+- (void)loginRongCloud
+{
+    [[RCIM sharedRCIM] connectWithToken:[YTUserInfoTool userInfo].rcToken success:^(NSString *userId) {
+        NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
+        [[RCIM sharedRCIM] setUserInfoDataSource:self];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [YTCenter postNotificationName:YTUpdateUnreadCount object:nil];
+        });
+    } error:^(RCConnectErrorCode status) {
+        NSLog(@"登陆的错误码为:%zd", status);
+    } tokenIncorrect:^{
+#warning 重新获取token
+        NSLog(@"token错误");
+    }];
+}
+
+/**
+ *  接受到内存警告
+ *
+ */
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
+    // 1.取消下载图片
+    [[SDWebImageManager sharedManager] cancelAll];
+    
+    // 2.清除图片缓存(内存缓存)
+    [[SDWebImageManager sharedManager].imageCache clearMemory];
+}
+
 
 @end

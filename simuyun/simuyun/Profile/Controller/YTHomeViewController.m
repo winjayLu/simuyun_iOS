@@ -891,16 +891,15 @@
 #pragma mark - 推送跳转
 - (void)pushNotificationWithJump
 {
-    // 检测是否有推送消息
     YTJpushModel *jpush = [YTJpushTool jpush];
-    if (jpush != nil && jpush.jumpUrl != nil && jpush.jumpUrl.length > 0) {
+    if(jpush != nil &&jpush.jumpUrl.length > 0)  // 极光推送
+    {
         if (jpush.type == 4) // 产品发行
         {
             [self jumpToProduct:jpush];
         } else {
             [self jumpToNormalWeb:jpush];
         }
-        
     }
 }
 /**
@@ -940,7 +939,16 @@
         NSLog(@"登陆成功。当前登录的用户ID：%@", userId);
         [[RCIM sharedRCIM] setUserInfoDataSource:self];
         dispatch_sync(dispatch_get_main_queue(), ^{
+            // 更新未读消息数量
             [YTCenter postNotificationName:YTUpdateUnreadCount object:nil];
+            // 跳转消息控制器
+            // 检测是否有推送消息
+            YTJpushModel *jpush = [YTJpushTool jpush];
+            if (jpush != nil && jpush.cType.length > 0) { // 消息推送
+                
+                [YTCenter postNotificationName:YTSelectedMessageVc object:nil];
+                [YTJpushTool saveJpush:nil];
+            }
         });
     } error:^(RCConnectErrorCode status) {
         NSLog(@"登陆的错误码为:%zd", status);
