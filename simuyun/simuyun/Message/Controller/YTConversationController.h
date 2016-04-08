@@ -15,4 +15,9 @@
  */
 @property (nonatomic, copy) NSString *userId;
 
+/**
+ *  是否需要拨打电话
+ */
+@property (nonatomic, assign) BOOL isMobile;
+
 @end

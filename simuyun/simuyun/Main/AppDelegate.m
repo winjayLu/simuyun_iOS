@@ -473,11 +473,8 @@
         [[RCIM sharedRCIM] setUserInfoDataSource:self];
         dispatch_sync(dispatch_get_main_queue(), ^{
             [YTCenter postNotificationName:YTUpdateUnreadCount object:nil];
-#warning 从后台进入前台列表出错
-//            [YTCenter postNotificationName:YTMessageListUpdate object:nil];
         });
     } error:^(RCConnectErrorCode status) {
-        NSLog(@"登陆的错误码为:%zd", status);
     } tokenIncorrect:^{
         [self loadToken];
     }];

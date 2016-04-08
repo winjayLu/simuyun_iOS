@@ -70,11 +70,6 @@
  */
 @property (nonatomic, weak) UITableView *tableView;
 
-/**
- *  是否正在加载分类
- */
-@property (nonatomic, assign) BOOL isLoadCategory;
-
 
 @end
 
@@ -400,7 +395,8 @@ static UIWindow *_window;
     } else if ([type isEqualToString:@"全部"]){
         self.series = 0;
     }
-    [self loadProductWithCategory];
+    [self loadProduct];
+    [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
 }
 
 - (void)loadProduct
@@ -413,44 +409,6 @@ static UIWindow *_window;
         param[@"series"] = @(self.series);
     }
     [YTHttpTool get:YTProductList params:param
-    success:^(NSDictionary *responseObject) {
-        [SVProgressHUD dismiss];
-        [self.tableView.footer resetNoMoreData];
-        // 结束刷新状态
-        [self.tableView.header endRefreshing];
-        if (!self.isLoadCategory) {
-            
-            self.products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
-            if([ self.products count] < 8)
-            {
-                [self.tableView.footer noticeNoMoreData];
-            }
-            // 存储获取到的数据
-            if (self.series == 0)
-            {
-                NSString *oldProducts = [responseObject JsonToString];
-                [CoreArchive setStr:oldProducts key:@"oldProducts"];
-            }
-            // 刷新表格
-            [self.tableView reloadData];
-            self.isLoadCategory = NO;
-        }
-    } failure:^(NSError *error) {
-        // 结束刷新状态
-        [self.tableView.header endRefreshing];
-    }];
-}
-
-- (void)loadProductWithCategory
-{
-    self.isLoadCategory = YES;
-    [SVProgressHUD showWithStatus:@"正在加载"];
-    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"uid"] = [YTAccountTool account].userId;
-    param[@"offset"] = @"0";
-    param[@"limit"] = @"8";
-    param[@"series"] = @(self.series);
-    [YTHttpTool get:YTProductList params:param
             success:^(NSDictionary *responseObject) {
                 [SVProgressHUD dismiss];
                 [self.tableView.footer resetNoMoreData];
@@ -458,6 +416,12 @@ static UIWindow *_window;
                 if([ self.products count] < 8)
                 {
                     [self.tableView.footer noticeNoMoreData];
+                }
+                // 存储获取到的数据
+                if (self.series == 0)
+                {
+                    NSString *oldProducts = [responseObject JsonToString];
+                    [CoreArchive setStr:oldProducts key:@"oldProducts"];
                 }
                 // 刷新表格
                 [self.tableView reloadData];

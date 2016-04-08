@@ -126,6 +126,9 @@
 #define YTReferee @"referee"
 // 获取融云token
 #define YTToken @"rc/gettoken"
-
+// 获取融云聊天用户信息
+#define YTRcUserInfo @"rc/userinfo"
+// 获取机构经理发送消息
+#define YTRcManagerInfo @"rc/managerinfo"
 
 #endif /* YTServerConfig_h */

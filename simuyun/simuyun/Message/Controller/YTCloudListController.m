@@ -15,6 +15,7 @@
 #import "YTConversationController.h"
 #import "YTAccountTool.h"
 #import "SVProgressHUD.h"
+#import "CoreArchive.h"
 
 
 @interface YTCloudListController ()
@@ -46,7 +47,13 @@
     // 去掉下划线
     self.conversationListTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [[RCIM sharedRCIM] setGlobalConversationAvatarStyle:RC_USER_AVATAR_CYCLE];
-//    [YTCenter addObserver:self selector:@selector(updateList) name:YTMessageListUpdate object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // 更新未读消息数量
+    [YTCenter postNotificationName:YTUpdateUnreadCount object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -65,19 +72,47 @@
 
 - (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource
 {
+    // 去除全部会话对象
     [self.todos removeAllObjects];
+    
+    // 机构经理id
+    NSString *managerUid = [CoreArchive strForKey:@"managerUid"];
+    
+    // 临时数组
+    NSMutableArray *temps = [[NSMutableArray alloc] init];
     for (RCConversationModel *model in dataSource) {
-        if ([model.conversationTitle hasPrefix:@"平台客服"]) {
-            model.isTop = YES;
-            [self.todos insertObject:model atIndex:0];
-        } else if([model.conversationTitle hasPrefix:@"机构经理"]){
-            [self.todos insertObject:model atIndex:1];
-            model.isTop = YES;
+        if ([model.targetId isEqualToString:@"dd0cc61140504258ab474b8f0a38bb56"]) {
+            [temps insertObject:model atIndex:0];
+        } else if([model.targetId isEqualToString:managerUid]){
+            [temps addObject:model];
         } else {
             [self.todos addObject:model];
         }
-        
     }
+    
+    // 组合数据列表
+    NSRange range = NSMakeRange(0, [temps count]);
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+    [self.todos insertObjects:temps atIndexes:indexSet];
+    // 判断是否有机构经理
+    if (managerUid == nil) {
+        NSMutableDictionary *param = [NSMutableDictionary dictionary];
+        param[@"uid"] = [YTAccountTool account].userId;
+        [YTHttpTool get:YTRcManagerInfo params:param success:^(id responseObject) {
+            // 机构经理id
+            NSString *managerUid = responseObject[@"managerUid"];
+            if (managerUid.length > 0) {
+                [CoreArchive setStr:responseObject[@"managerUid"] key:@"managerUid"];
+            }
+            // 机构经理phone
+            NSString *managerMobile = responseObject[@"managerMobile"];
+            if (managerMobile.length > 0) {
+                [CoreArchive setStr:responseObject[@"managerMobile"] key:@"managerMobile"];
+            }
+        } failure:^(NSError *error) {
+        }];
+    }
+    
     dispatch_sync(dispatch_get_main_queue(), ^{
         [self.conversationListTableView reloadData];
     });
@@ -207,6 +242,10 @@
     // 隐藏tabBar
     chat.hidesBottomBarWhenPushed = YES;
     chat.userId = [YTAccountTool account].userId;
+    
+    if ([model.targetId isEqualToString:@"dd0cc61140504258ab474b8f0a38bb56"] || [model.targetId isEqualToString:[CoreArchive strForKey:@"managerUid"]]) {
+        chat.isMobile = YES;
+    }
     //显示聊天会话界面
     [self.navigationController pushViewController:chat animated:YES];
 }

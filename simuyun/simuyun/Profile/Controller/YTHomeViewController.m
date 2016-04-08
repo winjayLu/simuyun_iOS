@@ -968,13 +968,16 @@
  */
 - (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion
 {
-    if ([userId isEqualToString:[YTAccountTool account].userId]) {
-        RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:userId name:@"逯文杰" portrait:@"http://www.simuyun.com/peyunupload//userHeadImage/c9a7b3925b2f43fe8b818b76af3b489a_1458700733228.jpg"];
-#warning 测试
-//        YTUserInfo *info = [YTUserInfoTool userInfo];
+
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"uid"] = userId;
+    [YTHttpTool get:YTRcUserInfo params:param success:^(id responseObject) {
+        RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:userId name:responseObject[@"name"] portrait:responseObject[@"portraitUri"]];
         return completion(userInfo);
-    }
-    return completion(nil);
+    } failure:^(NSError *error) {
+        
+        return completion(nil);
+    }];
 }
 
 - (void)loadToken{

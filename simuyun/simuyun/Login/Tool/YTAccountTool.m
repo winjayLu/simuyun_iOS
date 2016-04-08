@@ -108,14 +108,6 @@
       }];
 }
 
-- (void)loadToken
-{
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//    params[@"tokenExpired"] = @"1";
-
-    
-}
-
 
 
 @end

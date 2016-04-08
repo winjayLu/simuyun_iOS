@@ -191,11 +191,15 @@
     [YTUserInfoTool clearUserInfo];
     // 清除数字提醒
     [YTMessageNumTool save:nil];
-    // 清楚本地用户信息
+    // 清除本地用户信息
     [YTUserInfoTool localsave:nil];
     
-    // 清楚待办事项
+    // 清除待办事项
     [CoreArchive setStr:nil key:@"oldHomeTodo"];
+    
+    // 清除机构经理id 和 机构经理电话
+    [CoreArchive setStr:nil key:@"managerUid"];
+    [CoreArchive setStr:nil key:@"managerMobile"];
 
 }
 /**

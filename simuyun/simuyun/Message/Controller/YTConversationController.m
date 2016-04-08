@@ -7,6 +7,8 @@
 //
 
 #import "YTConversationController.h"
+#import "UIBarButtonItem+Extension.h"
+#import "CoreArchive.h"
 
 
 @interface YTConversationController ()
@@ -21,6 +23,27 @@
     self.conversationMessageCollectionView.backgroundColor = YTGrayBackground;
     
     [self.pluginBoardView removeItemAtIndex:2];
+    
+    // 拨打电话按钮
+    if (self.isMobile)
+    {
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithBg:@"mobelPhone" highBg:nil target:self action:@selector(mobileClick)];
+    }
+}
+
+// 拨打电话
+- (void)mobileClick
+{
+    NSString *phoneNumber = nil;
+    if ([self.targetId isEqualToString:@"dd0cc61140504258ab474b8f0a38bb56"]) {
+       phoneNumber = @"tel://400-188-8848";
+    } else {
+        phoneNumber = [NSString stringWithFormat:@"tel://%@", [CoreArchive strForKey:@"managerMobile"]];
+    }
+    UIWebView *callWebview =[[UIWebView alloc] init];
+    NSURL *telURL =[NSURL URLWithString:phoneNumber];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:telURL]];
+    [self.view addSubview:callWebview];
 }
 
 
