@@ -97,9 +97,15 @@ static UIWindow *_window;
     imageV.layer.masksToBounds = YES;
     imageV.layer.cornerRadius = 22.5;
     imageV.clipsToBounds = YES;
-    [imageV imageWithUrlStr:userInfo.headImgUrl phImage:[UIImage imageNamed:@"avatar_default_big"]];
+    // 设置头像
+    if (userInfo.iconImage != nil){
+        imageV.image = [YTUserInfoTool userInfo].iconImage;
+    } else {
+        [imageV imageWithUrlStr:userInfo.headImgUrl phImage:[UIImage imageNamed:@"avatar_default_big"]];
+    }
     [self addSubview:imageV];
     self.imageV = imageV;
+    
     
     // 昵称
     CGFloat nickLableX = CGRectGetMaxX(imageV.frame) + 10;

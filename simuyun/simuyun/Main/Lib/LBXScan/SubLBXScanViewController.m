@@ -18,6 +18,7 @@
 #import "YTHttpTool.h"
 #import "YTUserInfoTool.h"
 #import "YTAccountTool.h"
+#import "HHAlertView.h"
 
 @interface SubLBXScanViewController ()
 
@@ -200,12 +201,6 @@
         return;
     }
     
-    //经测试，可以同时识别2个二维码，不能同时识别二维码和条形码
-    for (LBXScanResult *result in array) {
-        
-        NSLog(@"scanResult:%@",result.strScanned);
-    }
-    
     LBXScanResult *scanResult = array[0];
     
     NSString*strResult = scanResult.strScanned;
@@ -272,16 +267,20 @@
             param[@"fatherId"] = dict[@"uid"];
             param[@"authenticationType"] = @"1";
             [YTHttpTool post:YTAuthAdviser params:param success:^(id responseObject) {
-                [SVProgressHUD showSuccessWithStatus: [NSString stringWithFormat:@"成功认证到%@，邀请人%@", dict[@"party_name"],dict[@"nickName"]]];
-                // 改变状态
+                [SVProgressHUD dismiss];
+                // 改变用户信息状态
                 [self updateUserInfo];
-                // 关闭控制器
-                [self dismissViewControllerAnimated:YES completion:^{
-                    // 调用代理方法
-                    if ([self.delegate respondsToSelector:@selector(closePage)]) {
-                        [self.delegate closePage];
-                    }
+                HHAlertView *alert = [HHAlertView shared];
+                [alert showAlertWidtTitle:@"认证成功" detail:[NSString stringWithFormat:@"您已成功认证到%@，推荐人%@", dict[@"party_name"],dict[@"nickName"]] Okbutton:@"知道了" block:^(HHAlertButton buttonindex) {
+                    // 关闭控制器
+                    [self dismissViewControllerAnimated:YES completion:^{
+                        // 调用代理方法
+                        if ([self.delegate respondsToSelector:@selector(closePage)]) {
+                            [self.delegate closePage];
+                        }
+                    }];
                 }];
+                
             } failure:^(NSError *error) {
                 [self reStartDevice];
             }];
