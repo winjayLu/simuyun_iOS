@@ -82,6 +82,24 @@ static ShareManage *shareManage;
     [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession].snsClickHandler(viewC,[UMSocialControllerService defaultControllerService],YES);
 }
 
+/** 微信分享文件**/
+- (void)wxShareWithFile:(NSData *)fileData 
+{
+    [UMSocialData defaultData].shareImage = fileData;
+    [UMSocialData defaultData].extConfig.wechatSessionData.wxMessageType = UMSocialWXMessageTypeImage;
+    [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession].snsClickHandler(nil,[UMSocialControllerService defaultControllerService],YES);
+}
+
+/** 微信朋友圈分享文件**/
+- (void)wxpyqShareWithFile:(NSData *)fileData
+{
+    
+    [UMSocialData defaultData].shareImage = fileData;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.wxMessageType = UMSocialWXMessageTypeImage;
+    [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatTimeline].snsClickHandler(nil,[UMSocialControllerService defaultControllerService],YES);
+
+}
+
 - (void)hiddenFloatMenu
 {
     // 隐藏悬浮按钮

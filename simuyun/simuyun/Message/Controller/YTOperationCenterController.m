@@ -189,7 +189,7 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YTMessageModel *message = self.messages[indexPath.section];
-    YTMessageDetailController *detail = [YTMessageDetailController webWithTitle:[NSString titleWithCategoryCode:message.category2Code] url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
+    YTMessageDetailController *detail = [YTMessageDetailController webWithTitle:message.category2Text url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
     detail.isDate = YES;
     detail.shareImageName = @"shareYunyinGonggao";
     detail.message = message;

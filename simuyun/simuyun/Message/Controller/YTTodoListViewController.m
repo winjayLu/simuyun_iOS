@@ -187,7 +187,7 @@
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YTMessageModel *message = self.messages[indexPath.section];
-    YTNormalWebController *normal = [YTNormalWebController webWithTitle:[NSString titleWithCategoryCode:message.category2Code] url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
+    YTNormalWebController *normal = [YTNormalWebController webWithTitle:message.category2Text url:[NSString stringWithFormat:@"%@/notice%@&id=%@",YTH5Server, [NSDate stringDate], message.messageId]];
     normal.isDate = YES;
     normal.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:normal animated:YES];

@@ -14,5 +14,9 @@
  *  选择根控制器
  */
 - (void)chooseRootviewController;
+/**
+ *  部分区域截图
+ */
+- (UIImage *)screenshotWithRect:(CGRect)rect;
 
 @end

@@ -9,7 +9,6 @@
 
 #import "YTTodoViewCell.h"
 #import "UIImageView+SD.h"
-#import "NSString+Extend.h"
 
 // 左右间距
 #define maginWidth 7
@@ -63,7 +62,7 @@
     self.titleLable.text = _message.title;
     self.detailLable.text = _message.summary;
     self.dateLable.text = [_message.createDate substringFromIndex:5];
-    self.categoryLable.text = [NSString titleWithCategoryCode:_message.category2Code];
+    self.categoryLable.text = _message.category2Text;
 }
 
 - (void)awakeFromNib {

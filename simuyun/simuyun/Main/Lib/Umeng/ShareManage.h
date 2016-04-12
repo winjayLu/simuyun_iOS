@@ -59,4 +59,10 @@
 /** 邮件分享**/
 - (void)displayEmailComposerSheet:(UIViewController *)vc;
 
+/** 微信分享文件**/
+- (void)wxShareWithFile:(NSData *)fileData;
+
+/** 微信朋友圈分享文件**/
+- (void)wxpyqShareWithFile:(NSData *)fileData;
+
 @end

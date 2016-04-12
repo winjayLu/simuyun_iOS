@@ -13,10 +13,12 @@
 #import "NSString+Password.h"
 #import "NSDate+Extension.h"
 #import "YTAccountTool.h"
+#import "UIWindow+Extension.h"
+#import "ShareManage.h"
 
 
 #define scanWidth  285
-#define scanHeight  350
+#define scanHeight  475
 
 @interface YTScanView()
 
@@ -85,7 +87,7 @@ static UIWindow *_window;
     [_window addSubview:self];
     
     // 过期日期
-    [self setupDate];
+//    [self setupDate];
     [self show];
 }
 
@@ -135,7 +137,7 @@ static UIWindow *_window;
     // 二维码
     UIImageView *photo = [[UIImageView alloc] init];
     CGFloat photoWH = 187;
-    photo.frame = CGRectMake((scanWidth - photoWH) * 0.5, CGRectGetMaxY(imageV.frame) + 20, photoWH, photoWH);
+    photo.frame = CGRectMake((scanWidth - photoWH) * 0.5, CGRectGetMaxY(imageV.frame) + 10, photoWH, photoWH);
     [self addSubview:photo];
     self.photo = photo;
     
@@ -157,6 +159,17 @@ static UIWindow *_window;
     [self addSubview:logo];
     self.logo = logo;
     
+    // 日期
+    UILabel *labele = [[UILabel alloc] init];
+    labele.textColor = YTColor(51, 51, 51);
+    labele.font = [UIFont systemFontOfSize:10];
+    labele.text = [NSString stringWithFormat:@"该二维码7天内（%@前）有效", [nextDate stringWithFormater:@"MM月dd日"]];
+    [labele sizeToFit];
+    labele.x = (scanWidth - labele.width) * 0.5;
+    labele.y = CGRectGetMaxY(photo.frame) + 10;
+    [self addSubview:labele];
+    self.endDate = labele;
+    
     // 提示语
     UILabel *tishi = [[UILabel alloc] init];
     tishi.width = scanWidth - 60;
@@ -168,11 +181,128 @@ static UIWindow *_window;
     tishi.textAlignment = NSTextAlignmentCenter;
     [tishi sizeToFit];
     tishi.x = (scanWidth - tishi.width) * 0.5;
-    tishi.y = CGRectGetMaxY(photo.frame) + 20;
+    tishi.y = CGRectGetMaxY(labele.frame) + 10;
     [self addSubview:tishi];
     self.tishi = tishi;
-
     
+    // 分割线
+    UIView *line = [[UIView alloc] init];
+    line.backgroundColor = YTColor(208, 208, 208);
+    line.frame = CGRectMake(0, CGRectGetMaxY(tishi.frame) + 15, scanWidth, 1);
+    [self addSubview:line];
+    
+    // 分享标题
+    UILabel *title = [[UILabel alloc] init];
+    title.text = @"分享";
+    title.font = [UIFont systemFontOfSize:14];
+    title.textColor = YTColor(51, 51, 51);
+    [title sizeToFit];
+    title.x = (scanWidth - title.width) * 0.5;
+    title.y = CGRectGetMaxY(line.frame) + 15;
+    [self addSubview:title];
+    
+    // 微信分享按钮
+    UIButton *weChat = [UIButton buttonWithType:UIButtonTypeCustom];
+    [weChat setImage:[UIImage imageNamed:@"ScanWexin"] forState:UIControlStateNormal];
+    [weChat addTarget:self action:@selector(weChatClick) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:weChat];
+    //  设置文字
+    UILabel *weChatTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 12)];
+    weChatTitle.font = [UIFont systemFontOfSize:10];
+    weChatTitle.textAlignment = NSTextAlignmentCenter;
+    weChatTitle.textColor = YTColor(51, 51, 51);
+    weChatTitle.text = @"微信";
+    [self addSubview:weChatTitle];
+    [weChatTitle sizeToFit];
+    weChat.frame = CGRectMake((scanWidth * 0.5) -  76, CGRectGetMaxY(title.frame) + 15, 50, 50);
+    weChatTitle.center = CGPointMake(weChat.center.x, weChat.center.y + 35);
+    
+    
+    // 朋友圈分享按钮
+    UIButton *weChatQuan = [UIButton buttonWithType:UIButtonTypeCustom];
+    [weChatQuan setImage:[UIImage imageNamed:@"ScanPengyouquan"] forState:UIControlStateNormal];
+    [weChatQuan addTarget:self action:@selector(weChatQuanClick) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:weChatQuan];
+    //  设置文字
+    UILabel *weChatQuanTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 12)];
+    weChatQuanTitle.font = [UIFont systemFontOfSize:10];
+    weChatQuanTitle.textAlignment = NSTextAlignmentCenter;
+    weChatQuanTitle.textColor = YTColor(51, 51, 51);
+    weChatQuanTitle.text = @"朋友圈";
+    [self addSubview:weChatQuanTitle];
+    [weChatQuanTitle sizeToFit];
+    weChatQuan.frame = CGRectMake(CGRectGetMaxX(weChat.frame) + 52, CGRectGetMaxY(title.frame) + 15, 50, 50);
+    weChatQuanTitle.center = CGPointMake(weChatQuan.center.x, weChatQuan.center.y + 35);
+}
+/**
+ *  分享到微信
+ */
+- (void)weChatClick
+{
+    // 截屏效果
+    UIImageView *continer = [[UIImageView alloc] init];
+    continer.image = [UIImage imageNamed:@"ScanJiepin"];
+    continer.size = CGSizeMake(scanWidth + 10, 352);
+    continer.alpha = 0.0;
+    continer.center = self.center;
+    continer.y = self.y - 5;
+    [_window addSubview:continer];
+    
+    // 截屏区域
+    CGRect clipFrame = continer.frame;
+    clipFrame.origin.x += 5;
+    clipFrame.origin.y = self.y;
+    clipFrame.size.width = scanWidth;
+    clipFrame.size.height = 346;
+    // 截图
+    UIImage *screenImage = [_window screenshotWithRect:clipFrame];
+    
+    // 动画
+    [UIView animateWithDuration:0.5 animations:^{
+        continer.alpha = 1.0;
+    } completion:^(BOOL finished) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            ShareManage *share = [ShareManage shareManage];
+            [share shareConfig];
+            [share wxShareWithFile:UIImagePNGRepresentation(screenImage)];
+            continer.alpha = 0.0;
+        });
+    }];
+}
+/**
+ *  分享到朋友圈
+ */
+- (void)weChatQuanClick
+{
+    // 截屏效果
+    UIImageView *continer = [[UIImageView alloc] init];
+    continer.image = [UIImage imageNamed:@"ScanJiepin"];
+    continer.size = CGSizeMake(scanWidth + 10, 352);
+    continer.alpha = 0.0;
+    continer.center = self.center;
+    continer.y = self.y - 5;
+    [_window addSubview:continer];
+    
+    // 截屏区域
+    CGRect clipFrame = continer.frame;
+    clipFrame.origin.x += 5;
+    clipFrame.origin.y = self.y;
+    clipFrame.size.width = scanWidth;
+    clipFrame.size.height = 346;
+    // 截图
+    UIImage *screenImage = [_window screenshotWithRect:clipFrame];
+    
+    // 动画
+    [UIView animateWithDuration:0.5 animations:^{
+        continer.alpha = 1.0;
+    } completion:^(BOOL finished) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            ShareManage *share = [ShareManage shareManage];
+            [share shareConfig];
+            [share wxpyqShareWithFile:UIImagePNGRepresentation(screenImage)];
+            continer.alpha = 0.0;
+        });
+    }];
 }
 
 - (NSMutableAttributedString *)attributedStringWithStr:(NSString *)str
@@ -189,26 +319,6 @@ static UIWindow *_window;
     return attStr;
 }
 
-- (void)setupDate
-{
-    UILabel *labele = [[UILabel alloc] init];
-    labele.textColor = [UIColor whiteColor];
-    labele.font = [UIFont systemFontOfSize:11];
-    
-    // 当前日期加7天
-//    NSDateFormatter *inputFormatter = [[NSDateFormatter alloc] init];
-//    [inputFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-//    [inputFormatter setDateFormat:@"yyyy年MM月dd日"];
-    NSDate *inputDate = [NSDate date];
-    NSDate *nextDate = [NSDate dateWithTimeInterval:24*60*60*7 sinceDate:inputDate];
-
-    labele.text = [NSString stringWithFormat:@"该二维码7天内（%@前）有效", [nextDate stringWithFormater:@"MM月dd日"]];
-    [labele sizeToFit];
-    labele.x = (DeviceWidth - labele.width) * 0.5;
-    labele.y = CGRectGetMaxY(self.frame) + 20;
-    [_window addSubview:labele];
-    self.endDate = labele;
-}
 
 - (void)show
 {
@@ -221,10 +331,6 @@ static UIWindow *_window;
     }
     [UIView animateWithDuration:0.5 animations:^{
         self.alpha=1;
-        self.layer.cornerRadius = 10;
-        self.layer.shadowOffset = CGSizeMake(0, 5);
-        self.layer.shadowOpacity = 0.3f;
-        self.layer.shadowRadius = 20.0f;
     } completion:^(BOOL finished) {
         
     }];
@@ -235,10 +341,6 @@ static UIWindow *_window;
 {
     
     self.alpha=0;
-    self.layer.cornerRadius = 5;
-    self.layer.shadowOffset = CGSizeMake(0, 5);
-    self.layer.shadowOpacity = 0.3f;
-    self.layer.shadowRadius = 20.0f;
     [self.imageV removeFromSuperview];
     self.imageV = nil;
     [self.nickNameLable removeFromSuperview];
@@ -251,9 +353,9 @@ static UIWindow *_window;
     self.logo = nil;
     [self.tishi removeFromSuperview];
     self.tishi = nil;
-    
-    [self removeFromSuperview];
     [self.endDate removeFromSuperview];
+    self.endDate = nil;
+    [self removeFromSuperview];
     _window.hidden = YES;
     _window = nil;
 }
