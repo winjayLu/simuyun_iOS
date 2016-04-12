@@ -203,7 +203,7 @@ static UIWindow *_window;
     
     // 微信分享按钮
     UIButton *weChat = [UIButton buttonWithType:UIButtonTypeCustom];
-    [weChat setImage:[UIImage imageNamed:@"ScanWexin"] forState:UIControlStateNormal];
+    [weChat setImage:[UIImage imageNamed:@"Share_ScanWexin"] forState:UIControlStateNormal];
     [weChat addTarget:self action:@selector(weChatClick) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:weChat];
     //  设置文字
@@ -220,7 +220,7 @@ static UIWindow *_window;
     
     // 朋友圈分享按钮
     UIButton *weChatQuan = [UIButton buttonWithType:UIButtonTypeCustom];
-    [weChatQuan setImage:[UIImage imageNamed:@"ScanPengyouquan"] forState:UIControlStateNormal];
+    [weChatQuan setImage:[UIImage imageNamed:@"Share_ScanPengyouquan"] forState:UIControlStateNormal];
     [weChatQuan addTarget:self action:@selector(weChatQuanClick) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:weChatQuan];
     //  设置文字

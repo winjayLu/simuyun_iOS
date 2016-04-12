@@ -39,4 +39,6 @@
 + (BOOL)validateIdentityCard: (NSString *)identityCard;
 
 
+#pragma mark 计算字符串大小
+- (CGSize)sizeWithFont:(UIFont *)font maxSize:(CGSize)maxSize;
 @end

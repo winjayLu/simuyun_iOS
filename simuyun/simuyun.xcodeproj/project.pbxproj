@@ -279,6 +279,8 @@
 		977132D81CA13C19001D0746 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 977132D71CA13C19001D0746 /* OpenGLES.framework */; };
 		977132DA1CA13C1F001D0746 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 977132D91CA13C1F001D0746 /* QuartzCore.framework */; };
 		97973D0A1BC3E84900B7B4CB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97973D091BC3E84900B7B4CB /* AVFoundation.framework */; };
+		979D7E291CBC94CB007C7A1B /* YTSnsShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D7E281CBC94CB007C7A1B /* YTSnsShareViewController.m */; };
+		979D7E2C1CBC9B3E007C7A1B /* DSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D7E2B1CBC9B3E007C7A1B /* DSTextView.m */; };
 		979D87211C96A829004DD25C /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D871D1C96A829004DD25C /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		979D87221C96A829004DD25C /* NSString+Password.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D87201C96A829004DD25C /* NSString+Password.m */; };
 		97A4DDD01C97A4C200079AFC /* CodeScan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97A4DDBC1C97A4C200079AFC /* CodeScan.bundle */; };
@@ -844,6 +846,10 @@
 		977132D71CA13C19001D0746 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		977132D91CA13C1F001D0746 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		97973D091BC3E84900B7B4CB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		979D7E271CBC94CB007C7A1B /* YTSnsShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSnsShareViewController.h; sourceTree = "<group>"; };
+		979D7E281CBC94CB007C7A1B /* YTSnsShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSnsShareViewController.m; sourceTree = "<group>"; };
+		979D7E2A1CBC9B3E007C7A1B /* DSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSTextView.h; sourceTree = "<group>"; };
+		979D7E2B1CBC9B3E007C7A1B /* DSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSTextView.m; sourceTree = "<group>"; };
 		979D871C1C96A829004DD25C /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		979D871D1C96A829004DD25C /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		979D871E1C96A829004DD25C /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -1296,6 +1302,8 @@
 				97270C791C7BF47E00C92888 /* YTSearchViewController.m */,
 				97270C7A1C7BF47E00C92888 /* YTViewPdfViewController.h */,
 				97270C7B1C7BF47E00C92888 /* YTViewPdfViewController.m */,
+				979D7E271CBC94CB007C7A1B /* YTSnsShareViewController.h */,
+				979D7E281CBC94CB007C7A1B /* YTSnsShareViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1318,6 +1326,8 @@
 		97270C851C7BF47E00C92888 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				979D7E2A1CBC9B3E007C7A1B /* DSTextView.h */,
+				979D7E2B1CBC9B3E007C7A1B /* DSTextView.m */,
 				97270C861C7BF47E00C92888 /* DXPopover.h */,
 				97270C871C7BF47E00C92888 /* DXPopover.m */,
 				97270C881C7BF47E00C92888 /* ImagePicker */,
@@ -2738,6 +2748,7 @@
 				97270EE31C7BF4D500C92888 /* YUBottomPopSelctModel.m in Sources */,
 				97270EDC1C7BF4D500C92888 /* NSString+FontAwesome.m in Sources */,
 				97270F0F1C7BF50600C92888 /* YTInformation.m in Sources */,
+				979D7E2C1CBC9B3E007C7A1B /* DSTextView.m in Sources */,
 				97270C441C7BF47400C92888 /* YTAuthenticationViewController.m in Sources */,
 				97270E941C7BF4D500C92888 /* UIBarButtonItem+Extension.m in Sources */,
 				97270E9A1C7BF4D500C92888 /* UINavigationBar+BackgroundColor.m in Sources */,
@@ -2802,6 +2813,7 @@
 				97270C5A1C7BF47400C92888 /* YTContentView.m in Sources */,
 				97270E971C7BF4D500C92888 /* UIImage+Cut.m in Sources */,
 				97270D231C7BF49500C92888 /* YTOperationCenterController.m in Sources */,
+				979D7E291CBC94CB007C7A1B /* YTSnsShareViewController.m in Sources */,
 				97270CEC1C7BF47E00C92888 /* YTProductCell.m in Sources */,
 				97270EA61C7BF4D500C92888 /* AFURLConnectionOperation.m in Sources */,
 				97270BD11C7BF43C00C92888 /* YTPlayerViewController.m in Sources */,

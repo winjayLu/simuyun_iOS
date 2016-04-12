@@ -30,6 +30,7 @@
 #import "YTPlayerViewController.h"
 #import "YTAccountTool.h"
 #import "YTBindingPhoneController.h"
+#import "YTSnsShareViewController.h"
 
 
 
@@ -376,13 +377,15 @@
 - (UIView *)innerView
 {
     if (!_innerView) {
+        CGFloat oneHeight = 42;
+        
         UIView *view = [[UIView alloc] init];
-        view.size = CGSizeMake(137, 84);
+        view.size = CGSizeMake(137, oneHeight * 3);
         // 间距
         CGFloat magin = 1;
         // 分享
         UIButton *share = [[UIButton alloc] init];
-        share.frame = CGRectMake(magin, magin, view.width - 2 * magin, view.height * 0.5 - 2 * magin);
+        share.frame = CGRectMake(magin, magin, view.width - 2 * magin, oneHeight - 2 * magin);
         [share setBackgroundImage:[UIImage imageNamed:@"fenxianghongkuang"] forState:UIControlStateHighlighted];
         [share setImage:[UIImage imageNamed:@"fenxiangzc"] forState:UIControlStateNormal];
         [share setImage:[UIImage imageNamed:@"fenxianganxia"] forState:UIControlStateHighlighted];
@@ -398,14 +401,14 @@
         [view addSubview:share];
         
         // 分割线
-        UIView *line = [[UIView alloc] init];
-        line.frame = CGRectMake(0, view.height * 0.5, view.width, 1);
-        line.backgroundColor = YTColor(203, 203, 203);
-        [view addSubview:line];
+        UIView *line1 = [[UIView alloc] init];
+        line1.frame = CGRectMake(0, oneHeight, view.width, 1);
+        line1.backgroundColor = YTColor(203, 203, 203);
+        [view addSubview:line1];
         
         // 获取详细资料
         UIButton *getDetail = [[UIButton alloc] init];
-        getDetail.frame = CGRectMake(magin, CGRectGetMaxY(line.frame) + magin, share.width, share.height - magin);
+        getDetail.frame = CGRectMake(magin, CGRectGetMaxY(line1.frame) + magin, share.width, share.height - magin);
         [getDetail setBackgroundImage:[UIImage imageNamed:@"fenxianghongkuang"] forState:UIControlStateHighlighted];
         [getDetail setImage:[UIImage imageNamed:@"xiazai"] forState:UIControlStateNormal];
         [getDetail setImage:[UIImage imageNamed:@"xiazaianxia"] forState:UIControlStateHighlighted];
@@ -418,6 +421,30 @@
         getDetail.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
         [getDetail addTarget:self action:@selector(DetailClick) forControlEvents:UIControlEventTouchUpInside];
         [view addSubview:getDetail];
+        
+        // 分割线
+        UIView *line2 = [[UIView alloc] init];
+        line2.frame = CGRectMake(0, CGRectGetMaxY(getDetail.frame), view.width, 1);
+        line2.backgroundColor = YTColor(203, 203, 203);
+        [view addSubview:line2];
+        
+        // 短信简版
+        UIButton *sns = [[UIButton alloc] init];
+        sns.frame = CGRectMake(magin, CGRectGetMaxY(line2.frame) + magin, share.width, share.height - magin);
+        [sns setBackgroundImage:[UIImage imageNamed:@"fenxianghongkuang"] forState:UIControlStateHighlighted];
+        [sns setImage:[UIImage imageNamed:@"Share_message_no"] forState:UIControlStateNormal];
+        [sns setImage:[UIImage imageNamed:@"Share_message_down"] forState:UIControlStateHighlighted];
+        [sns setTitle:@"短信简版" forState:UIControlStateNormal];
+        [sns setTitleColor:YTColor(51, 51, 51) forState:UIControlStateNormal];
+        [sns setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+        sns.titleLabel.font = [UIFont systemFontOfSize:14];
+        sns.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        sns.contentEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+        sns.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+        [sns addTarget:self action:@selector(snsClick) forControlEvents:UIControlEventTouchUpInside];
+        [view addSubview:sns];
+        
+        
         
         _innerView = view;
     }
@@ -534,6 +561,19 @@
     }];
     [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"获取详细资料", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
+#warning 测试
+- (void)snsClick
+{
+    [self.popover dismiss];
+    self.popover = nil;
+    YTSnsShareViewController *snsVc = [[YTSnsShareViewController alloc] init];
+    snsVc.shareText = @"圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教";
+    snsVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:snsVc animated:YES];
+
+
+}
+
 
 - (YHWebViewProgress *)progressProxy
 {

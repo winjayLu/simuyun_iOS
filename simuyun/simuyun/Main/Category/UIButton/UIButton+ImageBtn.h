@@ -22,5 +22,8 @@
  */
 +(UIButton *)buttonWithImageName:(NSString *)imageName highlightedImage:(NSString *)highlightedImage;
 
+// 按钮垂直排布
+- (void)centerImageAndTitle:(float)space;
+- (void)centerImageAndTitle;
 
 @end
