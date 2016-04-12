@@ -434,7 +434,7 @@
         [sns setBackgroundImage:[UIImage imageNamed:@"fenxianghongkuang"] forState:UIControlStateHighlighted];
         [sns setImage:[UIImage imageNamed:@"Share_message_no"] forState:UIControlStateNormal];
         [sns setImage:[UIImage imageNamed:@"Share_message_down"] forState:UIControlStateHighlighted];
-        [sns setTitle:@"短信简版" forState:UIControlStateNormal];
+        [sns setTitle:@"营销短信" forState:UIControlStateNormal];
         [sns setTitleColor:YTColor(51, 51, 51) forState:UIControlStateNormal];
         [sns setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
         sns.titleLabel.font = [UIFont systemFontOfSize:14];

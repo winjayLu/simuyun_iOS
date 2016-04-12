@@ -281,6 +281,8 @@
 		97973D0A1BC3E84900B7B4CB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97973D091BC3E84900B7B4CB /* AVFoundation.framework */; };
 		979D7E291CBC94CB007C7A1B /* YTSnsShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D7E281CBC94CB007C7A1B /* YTSnsShareViewController.m */; };
 		979D7E2C1CBC9B3E007C7A1B /* DSTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D7E2B1CBC9B3E007C7A1B /* DSTextView.m */; };
+		979D7E2F1CBD1189007C7A1B /* YTRedeemptionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D7E2E1CBD1189007C7A1B /* YTRedeemptionController.m */; };
+		979D7E321CBD47BC007C7A1B /* TZTestCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D7E311CBD47BC007C7A1B /* TZTestCell.m */; };
 		979D87211C96A829004DD25C /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D871D1C96A829004DD25C /* GTMBase64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		979D87221C96A829004DD25C /* NSString+Password.m in Sources */ = {isa = PBXBuildFile; fileRef = 979D87201C96A829004DD25C /* NSString+Password.m */; };
 		97A4DDD01C97A4C200079AFC /* CodeScan.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97A4DDBC1C97A4C200079AFC /* CodeScan.bundle */; };
@@ -850,6 +852,10 @@
 		979D7E281CBC94CB007C7A1B /* YTSnsShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSnsShareViewController.m; sourceTree = "<group>"; };
 		979D7E2A1CBC9B3E007C7A1B /* DSTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSTextView.h; sourceTree = "<group>"; };
 		979D7E2B1CBC9B3E007C7A1B /* DSTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSTextView.m; sourceTree = "<group>"; };
+		979D7E2D1CBD1189007C7A1B /* YTRedeemptionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTRedeemptionController.h; sourceTree = "<group>"; };
+		979D7E2E1CBD1189007C7A1B /* YTRedeemptionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTRedeemptionController.m; sourceTree = "<group>"; };
+		979D7E301CBD47BC007C7A1B /* TZTestCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TZTestCell.h; sourceTree = "<group>"; };
+		979D7E311CBD47BC007C7A1B /* TZTestCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TZTestCell.m; sourceTree = "<group>"; };
 		979D871C1C96A829004DD25C /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
 		979D871D1C96A829004DD25C /* GTMBase64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTMBase64.m; sourceTree = "<group>"; };
 		979D871E1C96A829004DD25C /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
@@ -1181,6 +1187,10 @@
 				97270C091C7BF47400C92888 /* YTOrderCenterController.m */,
 				97270C0A1C7BF47400C92888 /* YTOrderdetailController.h */,
 				97270C0B1C7BF47400C92888 /* YTOrderdetailController.m */,
+				979D7E2D1CBD1189007C7A1B /* YTRedeemptionController.h */,
+				979D7E2E1CBD1189007C7A1B /* YTRedeemptionController.m */,
+				979D7E301CBD47BC007C7A1B /* TZTestCell.h */,
+				979D7E311CBD47BC007C7A1B /* TZTestCell.m */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -2693,6 +2703,7 @@
 				97270F101C7BF50600C92888 /* YTInformationTableViewCell.m in Sources */,
 				97270EDE1C7BF4D500C92888 /* YUDIVView.m in Sources */,
 				97270BD61C7BF43C00C92888 /* YTSchoolHeaderView.m in Sources */,
+				979D7E2F1CBD1189007C7A1B /* YTRedeemptionController.m in Sources */,
 				97270CD51C7BF47E00C92888 /* JKAssets.m in Sources */,
 				97A4DDDA1C97A4C200079AFC /* SubLBXScanViewController.m in Sources */,
 				97270C541C7BF47400C92888 /* TimerLoopView.m in Sources */,
@@ -2712,6 +2723,7 @@
 				97270C521C7BF47400C92888 /* AutocompletionTableView.m in Sources */,
 				97270EC21C7BF4D500C92888 /* CoreTFKeyBoardToolBarView.m in Sources */,
 				97270CCE1C7BF47E00C92888 /* YTViewPdfViewController.m in Sources */,
+				979D7E321CBD47BC007C7A1B /* TZTestCell.m in Sources */,
 				97270F0E1C7BF50600C92888 /* YTOpinionController.m in Sources */,
 				97270ED91C7BF4D500C92888 /* YHWebViewProgress.m in Sources */,
 				97270BF11C7BF46800C92888 /* YTDiscoverViewController.m in Sources */,
