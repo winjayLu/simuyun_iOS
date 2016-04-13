@@ -197,6 +197,9 @@
     // 清除待办事项
     [CoreArchive setStr:nil key:@"oldHomeTodo"];
     
+    // 清除融云token
+    [CoreArchive setStr:nil key:@"rcToken"];
+    
     // 清除机构经理id 和 机构经理电话
     [CoreArchive setStr:nil key:@"managerUid"];
     [CoreArchive setStr:nil key:@"managerMobile"];

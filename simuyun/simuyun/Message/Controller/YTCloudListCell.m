@@ -32,7 +32,7 @@
         self.messageContentLabel.textColor = YTColor(102, 102, 102);
         // 发送时间Lable
         self.messageCreatedTimeLabel.textColor = YTColor(102, 102, 102);
-//
+        self.headerImageViewBackgroundView.userInteractionEnabled = NO;
     }
     return self;
 }

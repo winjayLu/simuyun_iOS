@@ -52,12 +52,14 @@
 #import "YTProductdetailController.h"
 #import "YTScanView.h"
 #import <RongIMKit/RongIMKit.h>
+#import "YTLoginViewController.h"
+#import "YTNavigationController.h"
 
 
 
 #define magin 3
 
-@interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate, UIScrollViewDelegate, shareCustomDelegate, UIWebViewDelegate, loopViewDelegate, RCIMUserInfoDataSource>
+@interface YTHomeViewController () <TopViewDelegate, ContentViewDelegate, BottomViewDelegate, UIScrollViewDelegate, shareCustomDelegate, UIWebViewDelegate, loopViewDelegate, RCIMUserInfoDataSource, RCIMConnectionStatusDelegate>
 
 /**
  *  顶部视图
@@ -949,6 +951,7 @@
                 [YTCenter postNotificationName:YTSelectedMessageVc object:nil];
                 [YTJpushTool saveJpush:nil];
             }
+            [RCIM sharedRCIM].connectionStatusDelegate = self;
         });
     } error:^(RCConnectErrorCode status) {
         NSLog(@"登陆的错误码为:%zd", status);
@@ -956,6 +959,22 @@
         [self loadToken];
     }];
 }
+
+/*!
+ IMKit连接状态的的监听器
+ 
+ @param status  SDK与融云服务器的连接状态
+ 
+ @discussion 如果您设置了IMKit消息监听之后，当SDK与融云服务器的连接状态发生变化时，会回调此方法。
+ */
+- (void)onRCIMConnectionStatusChanged:(RCConnectionStatus)status
+{
+    if (status == ConnectionStatus_KICKED_OFFLINE_BY_OTHER_CLIENT) {
+        [self logOut];
+    }
+}
+
+
 
 /*!
  获取用户信息
@@ -990,6 +1009,33 @@
         [self loginRongCloud];
     } failure:^(NSError *error) {
         
+    }];
+}
+
+/**
+ *  异地登录,强制下线
+ */
+- (void)logOut
+{
+    [YTCenter postNotificationName:YTStopRequest object:nil];
+    HHAlertView *alert = [HHAlertView shared];
+    [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:YTTokenError detail:YTTokenErrorContent cancelButton:nil Okbutton:@"知道了" block:^(HHAlertButton buttonindex) {
+        // 清除用户信息
+        [YTUserInfoTool clearUserInfo];
+        // 获取程序主窗口
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            // 获取根控制器
+            UIWindow *keyWindow = nil;
+            for (UIWindow *window in [UIApplication sharedApplication].windows) {
+                if (window.windowLevel == 0) {
+                    keyWindow = window;
+                    break;
+                }
+            }
+            // 如果获取不到直接返回
+            if (keyWindow == nil) return;
+            keyWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
+        });
     }];
 }
 

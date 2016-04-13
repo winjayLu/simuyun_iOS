@@ -62,11 +62,11 @@
     [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
 #warning 测试 
-//          // 获取融云Token
-//          NSMutableDictionary *param = [NSMutableDictionary dictionary];
-//          param[@"uid"] = responseObject[@"userId"];
-//          [YTHttpTool get:YTToken params:param success:^(id response) {
-//              [CoreArchive setStr:response[@"rcToken"] key:@"rcToken"];
+          // 获取融云Token
+          NSMutableDictionary *param = [NSMutableDictionary dictionary];
+          param[@"uid"] = responseObject[@"userId"];
+          [YTHttpTool get:YTToken params:param success:^(id response) {
+              [CoreArchive setStr:response[@"rcToken"] key:@"rcToken"];
               // 保存账户信息
               account.password = params[@"password"];
               account.userId = responseObject[@"userId"];
@@ -87,9 +87,9 @@
                       }
                   }];
               }
-//          } failure:^(NSError *error) {
-//              result(NO);
-//          }];
+          } failure:^(NSError *error) {
+              result(NO);
+          }];
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           if(operation.responseObject[@"message"] != nil)
           {
