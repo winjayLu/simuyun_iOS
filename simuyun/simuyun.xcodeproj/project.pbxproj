@@ -11,6 +11,7 @@
 		971034A21BFD65CA00EE22A4 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971034A11BFD65CA00EE22A4 /* CoreFoundation.framework */; };
 		971034A41BFD65F600EE22A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971034A31BFD65F600EE22A4 /* Foundation.framework */; };
 		971034A61BFD65FF00EE22A4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971034A51BFD65FF00EE22A4 /* UIKit.framework */; };
+		9714C91D1CBE1260005A25EA /* YTRedeemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714C91C1CBE1260005A25EA /* YTRedeemModel.m */; };
 		971A44641C55FCB4007469F4 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971A44631C55FCB4007469F4 /* CoreMedia.framework */; };
 		97238CA11C45E88E00F68EEA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97238CA01C45E88E00F68EEA /* LaunchScreen.xib */; };
 		9725A17B1CAB731900283054 /* YTConversationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9725A17A1CAB731900283054 /* YTConversationController.m */; };
@@ -347,6 +348,8 @@
 		971034A11BFD65CA00EE22A4 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		971034A31BFD65F600EE22A4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		971034A51BFD65FF00EE22A4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		9714C91B1CBE1260005A25EA /* YTRedeemModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTRedeemModel.h; sourceTree = "<group>"; };
+		9714C91C1CBE1260005A25EA /* YTRedeemModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTRedeemModel.m; sourceTree = "<group>"; };
 		971A44631C55FCB4007469F4 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		97238CA01C45E88E00F68EEA /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		9725A1791CAB731900283054 /* YTConversationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTConversationController.h; sourceTree = "<group>"; };
@@ -1218,6 +1221,8 @@
 				97270C1C1C7BF47400C92888 /* YTOrgnazationModel.m */,
 				97A4DE071C982D2B00079AFC /* YTFatherModel.h */,
 				97A4DE081C982D2B00079AFC /* YTFatherModel.m */,
+				9714C91B1CBE1260005A25EA /* YTRedeemModel.h */,
+				9714C91C1CBE1260005A25EA /* YTRedeemModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2868,6 +2873,7 @@
 				97270EA31C7BF4D500C92888 /* AFHTTPSessionManager.m in Sources */,
 				97A4DDF11C97A53500079AFC /* LBXScanLineAnimation.m in Sources */,
 				97270EF41C7BF4D500C92888 /* YTTokenView.m in Sources */,
+				9714C91D1CBE1260005A25EA /* YTRedeemModel.m in Sources */,
 				97270C481C7BF47400C92888 /* YTOrderCenterController.m in Sources */,
 				97270EDA1C7BF4D500C92888 /* YHWebViewProgressView.m in Sources */,
 				97545A4D1CAA1C8C00F4E6C7 /* YTCloudListController.m in Sources */,

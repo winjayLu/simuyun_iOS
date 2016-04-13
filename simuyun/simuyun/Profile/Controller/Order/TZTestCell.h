@@ -12,5 +12,10 @@
 
 @property (nonatomic, strong) UIImageView *imageView;
 
+/**
+ *  删除图片
+ */
+@property (nonatomic, weak) UIImageView *delete;
+
 @end
 

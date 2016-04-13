@@ -287,7 +287,7 @@ static UIWindow *_window;
     CGRect clipFrame = continer.frame;
     clipFrame.origin.x += 5;
     clipFrame.origin.y = self.y;
-    clipFrame.size.width = scanWidth;
+    clipFrame.size.width = scanWidth - 1;
     clipFrame.size.height = 346;
     // 截图
     UIImage *screenImage = [_window screenshotWithRect:clipFrame];

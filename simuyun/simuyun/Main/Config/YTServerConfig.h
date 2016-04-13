@@ -130,5 +130,8 @@
 #define YTRcUserInfo @"rc/userinfo"
 // 获取机构经理发送消息
 #define YTRcManagerInfo @"rc/managerinfo"
+// 提交赎回申请
+#define YTRedemption @"redemption"
+
 
 #endif /* YTServerConfig_h */

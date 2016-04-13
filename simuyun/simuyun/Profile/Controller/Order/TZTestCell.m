@@ -8,6 +8,12 @@
 
 #import "TZTestCell.h"
 
+@interface TZTestCell()
+
+
+
+@end
+
 @implementation TZTestCell
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -19,6 +25,11 @@
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview:_imageView];
         self.clipsToBounds = YES;
+        UIImageView *delete = [[UIImageView alloc] init];
+        delete.image = [UIImage imageNamed:@"redeemPhotoDelete"];
+        //        delete.hidden = YES;
+        [self addSubview:delete];
+        self.delete = delete;
     }
     return self;
 }
@@ -26,6 +37,10 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     _imageView.frame = self.bounds;
+    CGSize deleteSize = self.delete.image.size;;
+    self.delete.frame = CGRectMake(self.width - deleteSize.width - 5, 5, deleteSize.width, deleteSize.height);
+    
 }
+
 
 @end
