@@ -137,47 +137,47 @@
  }
  */
 
-- (void)loginWeChat
-{
-    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-    dict[@"address"] = @"CN, Henan, Kaifeng";
-    dict[@"headimgurl"] = @"http://wx.qlogo.cn/mmopen/Q3auHgzwzM7BML59YK2aCHbP5KCsjfH5s67uIUpaJ8QaE0dYJDUk4HRDYIr6FacItLgIDicSJJKLSFJFOJWiwuoquwruqwo2sdjaskjf2JLSJSLK/0";
-    dict[@"nickname"] = @"胡海涛";
-    dict[@"openid"] = @"oGyGZsxsRnTJxf10yV-Wbm0-79Ms";
-    dict[@"unionid"] = @"oA1i0uH3GeVkkciSLGn5_Looqwc1";
-    [self sendWeChatLogin:dict];
-}
-///**
-// *  微信登录
-// */
 //- (void)loginWeChat
 //{
-//    NSMutableDictionary *param = [NSMutableDictionary dictionary];
-//    
-//    //  友盟微信登录
-//    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
-//    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-//        
-//        if (response.responseCode == UMSResponseCodeSuccess) {
-//            UMSocialAccountEntity *account = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
-//            param[@"nickname"] = account.userName;
-//            param[@"unionid"] = account.unionId;
-//            param[@"openid"] = account.openId;
-//            param[@"headimgurl"] = account.iconURL;
-//
-//            // 查询unid是否存在
-//            [self selectWeChatUnid:param];
-//        } else {
-//            [SVProgressHUD showErrorWithStatus:@"授权失败"];
-//        }
-//    });
-//    
-//    [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToWechatSession  completion:^(UMSocialResponseEntity *response){
-//        // 进入到微信
-//        param[@"sex"] = response.data[@"gender"];
-//        param[@"address"] = response.data[@"location"];
-//    }];
+//    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+//    dict[@"address"] = @"CN, BeiJing";
+//    dict[@"headimgurl"] = @"http://wx.qlogo.cn/mmopen/Q3auHgzwzM7BML59YK2aCHbP5KCsjfH5s623uIUpaJ8QaE0dYJDUk4HRDYIr6FacItLgIDicSJJKLSFJFOJWiwuoquwruqwo2sdjaskjf2214JLSJSLK/0";
+//    dict[@"nickname"] = @"刘洋";
+//    dict[@"openid"] = @"oGyGZsxsRnTJxf10yV-Wbm0-79Ms";
+//    dict[@"unionid"] = @"oA0i0uH7GeVkkciSLGn3_Looqwc9";
+//    [self sendWeChatLogin:dict];
 //}
+/**
+ *  微信登录
+ */
+- (void)loginWeChat
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    
+    //  友盟微信登录
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        
+        if (response.responseCode == UMSResponseCodeSuccess) {
+            UMSocialAccountEntity *account = [[UMSocialAccountManager socialAccountDictionary]valueForKey:UMShareToWechatSession];
+            param[@"nickname"] = account.userName;
+            param[@"unionid"] = account.unionId;
+            param[@"openid"] = account.openId;
+            param[@"headimgurl"] = account.iconURL;
+
+            // 查询unid是否存在
+            [self selectWeChatUnid:param];
+        } else {
+            [SVProgressHUD showErrorWithStatus:@"授权失败"];
+        }
+    });
+    
+    [[UMSocialDataService defaultDataService] requestSnsInformation:UMShareToWechatSession  completion:^(UMSocialResponseEntity *response){
+        // 进入到微信
+        param[@"sex"] = response.data[@"gender"];
+        param[@"address"] = response.data[@"location"];
+    }];
+}
 
 /**
  *  查询unid是否存在

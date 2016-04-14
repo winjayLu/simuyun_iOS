@@ -168,31 +168,16 @@
 - (void)loadRedeem
 {
     [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [SVProgressHUD dismiss];
-        
-        self.redeem = [[YTRedeemModel alloc] init];
-        self.redeem.orderId = @"sadjllll";
-        self.redeem.redeemEndTime = @"2016-04-15 22:00:30";
-        self.redeem.custName = @"钢铁侠";
-        self.redeem.redeemBankAccount = @"622848001867572";
-        self.redeem.bankName = @"招商银行北京分行";
-        self.redeem.productType = 1;
-        self.redeem.redeemAmt = 200;
-        self.redeem.redeemDescription = @"赎回说明：1.打印《赎回申请表》填写相关信息并由客户签字\n2.拍照上传";
-        NSMutableDictionary *dict1 = [NSMutableDictionary dictionary];
-        dict1[@"fileName"] = @"衡山六号赎回说明";
-        dict1[@"fileUrl"] = @"http://www.simuyun.com";
-        NSMutableDictionary *dict2 = [NSMutableDictionary dictionary];
-        dict2[@"fileName"] = @"泰山六号赎回说明SJ氨分解萨菲隆静安寺萨达";
-        dict2[@"fileUrl"] = @"http://www.simuyun.com";
-        NSMutableDictionary *dict3 = [NSMutableDictionary dictionary];
-        dict3[@"fileName"] = @"嵩山六号赎回说明撒发2S方法是发送发萨芬反反复复方法发链接挖墙脚";
-        dict3[@"fileUrl"] = @"http://www.simuyun.com";
-        NSArray *array = @[dict1,dict2,dict3];
-        self.redeem.files = array;
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"orderId"] = self.orderId;
+    param[@"advisers_id"] = [YTAccountTool account].userId;
+    [YTHttpTool get:YTRedeemDetail params:param success:^(id responseObject) {
+        self.redeem = [YTRedeemModel objectWithKeyValues:responseObject];
         [self setData];
-    });
+        [SVProgressHUD dismiss];
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 /**

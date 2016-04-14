@@ -13,6 +13,7 @@
 #import "YTUserInfoTool.h"
 #import "YTProductdetailController.h"
 #import "YTAccountTool.h"
+#import "YTRedeemptionController.h"
 
 
 @interface YTOrderdetailController () <UIWebViewDelegate, UIAlertViewDelegate>
@@ -92,6 +93,11 @@
             {
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"撤销赎回" message:@"您确定要撤销此次提交的赎回申请么？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
                 [alert show];
+            }  else if ([command isEqualToString:@"commitRedeem"])  // 提交赎回申请
+            {
+                YTRedeemptionController *Vc = [[YTRedeemptionController alloc] init];
+                Vc.orderId = self.order.order_id;
+                [self.navigationController pushViewController:Vc animated:YES];
             }
             
         }

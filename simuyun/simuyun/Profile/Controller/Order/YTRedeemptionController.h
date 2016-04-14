@@ -12,4 +12,9 @@
 
 @interface YTRedeemptionController : UIViewController
 
+/**
+ *  订单id
+ */
+@property (nonatomic, copy) NSString *orderId;
+
 @end
