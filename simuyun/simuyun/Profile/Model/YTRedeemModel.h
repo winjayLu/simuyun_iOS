@@ -56,10 +56,6 @@
  */
 @property (nonatomic, strong) NSArray *files;
 
-/**
- *  1可赎回
- */
-@property (nonatomic, assign) int isRedeem;
 
 
 @end

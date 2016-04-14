@@ -119,6 +119,9 @@
 // 热门产品营销话术
 @property (nonatomic, copy) NSString *hotName;
 
+// 营销短信
+@property (nonatomic, copy) NSString *smsContent;
+
 #pragma mark - 订单字段
 /**
  *  客户名称

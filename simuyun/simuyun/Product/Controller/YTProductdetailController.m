@@ -581,17 +581,15 @@
     }];
     [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"获取详细资料", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
-#warning 测试
+#warning 待调试
 - (void)snsClick
 {
     [self.popover dismiss];
     self.popover = nil;
     YTSnsShareViewController *snsVc = [[YTSnsShareViewController alloc] init];
-    snsVc.shareText = @"圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教圣诞节啊睡懒觉发神经林凤娇熬时间佛教";
+    snsVc.shareText = self.product.smsContent;
     snsVc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:snsVc animated:YES];
-
-
 }
 
 

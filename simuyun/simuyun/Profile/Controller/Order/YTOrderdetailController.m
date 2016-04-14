@@ -15,7 +15,7 @@
 #import "YTAccountTool.h"
 
 
-@interface YTOrderdetailController () <UIWebViewDelegate>
+@interface YTOrderdetailController () <UIWebViewDelegate, UIAlertViewDelegate>
 @property (nonatomic, weak) UIWebView *webView;
 
 @end
@@ -88,12 +88,27 @@
                 web.proId = urlComps[3];
                 web.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:web animated:YES];
+            } else if ([command isEqualToString:@"withdrawAlert"])  // 撤回赎回申请
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"撤销赎回" message:@"您确定要撤销此次提交的赎回申请么？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+                [alert show];
             }
+            
         }
         return NO;
     }
     return YES;
 }
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // 撤回赎回申请
+    if (buttonIndex == 1) {
+        NSString *js = @"withdraw()";
+        [self.webView stringByEvaluatingJavaScriptFromString:js];
+    }
+}
+
 
 
 #pragma mark - lazy

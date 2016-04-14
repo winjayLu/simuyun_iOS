@@ -26,5 +26,11 @@
  */
 @property (nonatomic, assign) BOOL isOrder;
 
+/**
+ *  从我的客户过来
+ *  客户id
+ */
+@property (nonatomic, copy) NSString *custId;
+
 
 @end

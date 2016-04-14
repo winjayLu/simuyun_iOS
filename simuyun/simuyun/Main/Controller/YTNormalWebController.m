@@ -18,6 +18,7 @@
 #import "YHWebViewProgressView.h"
 #import "YTOrderdetailController.h"
 #import "YTProductdetailController.h"
+#import "YTOrderCenterController.h"
 
 
 @interface YTNormalWebController () <UIWebViewDelegate>
@@ -173,6 +174,12 @@
                 web.proId = urlComps[3];
                 web.hidesBottomBarWhenPushed = YES;
                 [self.navigationController pushViewController:web animated:YES];
+            } else if ([command isEqualToString:@"custbyorder"])
+            {
+                YTOrderCenterController *order = [[YTOrderCenterController alloc] init];
+                order.custId = urlComps[2];
+                order.hidesBottomBarWhenPushed = YES;
+                [self.navigationController pushViewController:order animated:YES];
             }
 
         }

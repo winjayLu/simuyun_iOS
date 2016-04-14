@@ -80,7 +80,9 @@
     [self setupTableView];
     
     // 初始化顶部菜单
-    [self setupTopMenu];
+    if (self.custId.length == 0) {
+        [self setupTopMenu];
+    }
     
     // 初始化提醒视图
     [self setupHintView];
@@ -188,7 +190,11 @@
 {
     self.title = @"订单中心";
     UITableView *tableView = [[UITableView alloc] init];
-    tableView.frame = CGRectMake(0, topMenuHeight, self.view.width, self.view.height - topMenuHeight - 64);
+    if (self.custId.length == 0) {
+        tableView.frame = CGRectMake(0, topMenuHeight, self.view.width, self.view.height - topMenuHeight - 64);
+    } else {
+        tableView.frame = CGRectMake(0, 0, self.view.width, self.view.height - 64);
+    }
     tableView.dataSource = self;
     tableView.delegate = self;
     // 设置颜色
@@ -212,19 +218,25 @@
  */
 - (void)setupItem
 {
-    UIButton *rightBtn = [[UIButton alloc] init];
-    [rightBtn setImage:[UIImage imageNamed:@"saixuan"] forState:UIControlStateNormal];
-    [rightBtn setImage:[UIImage imageNamed:@"saixuananxia"] forState:UIControlStateSelected];
-    [rightBtn addTarget:self action:@selector(rightClick:) forControlEvents:UIControlEventTouchUpInside];
-    rightBtn.size = rightBtn.currentImage.size;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+    if (self.custId.length == 0) {
+        UIButton *rightBtn = [[UIButton alloc] init];
+        [rightBtn setImage:[UIImage imageNamed:@"saixuan"] forState:UIControlStateNormal];
+        [rightBtn setImage:[UIImage imageNamed:@"saixuananxia"] forState:UIControlStateSelected];
+        [rightBtn addTarget:self action:@selector(rightClick:) forControlEvents:UIControlEventTouchUpInside];
+        rightBtn.size = rightBtn.currentImage.size;
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+    }
     // 初始化左侧返回按钮
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithBg:@"fanhui" target:self action:@selector(blackClick)];
 }
 
 - (void)blackClick
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if (self.custId.length == 0) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 
@@ -306,6 +318,9 @@
     } else {
         dict[@"status"] = self.status;
     }
+    if (self.custId.length > 0) {
+        dict[@"cust_id"] = self.custId;
+    }
     dict[@"pagesize"] = @10;
     self.pageno = 1;
     dict[@"pageno"] = @(self.pageno);
@@ -337,6 +352,9 @@
         dict[@"status"] = @"[20, 50, 40, 60, 80, 90]";
     } else {
         dict[@"status"] = self.status;
+    }
+    if (self.custId.length > 0) {
+        dict[@"cust_id"] = self.custId;
     }
     dict[@"pagesize"] = @10;
     dict[@"pageno"] = @(++self.pageno);
@@ -544,24 +562,24 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (self.selectedCell.isShow) {
-//        [self.selectedCell hideUtilityButtonsAnimated:YES];
-//        self.selectedCell.isShow = NO;
-//        return;
-//    }
-//    self.selectedCell = nil;
-//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    YTOrderCenterModel *order = self.orders[indexPath.section];
-//    YTOrderdetailController *detail = [[YTOrderdetailController alloc] init];
-//    detail.url = [NSString stringWithFormat:@"%@/order%@&id=%@", YTH5Server, [NSDate stringDate], order.order_id];
-//    detail.order = self.orders[indexPath.section];
-//    detail.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:detail animated:YES];
-//    [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"查看订单详情", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+    if (self.selectedCell.isShow) {
+        [self.selectedCell hideUtilityButtonsAnimated:YES];
+        self.selectedCell.isShow = NO;
+        return;
+    }
+    self.selectedCell = nil;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    YTOrderCenterModel *order = self.orders[indexPath.section];
+    YTOrderdetailController *detail = [[YTOrderdetailController alloc] init];
+    detail.url = [NSString stringWithFormat:@"%@/order%@&id=%@", YTH5Server, [NSDate stringDate], order.order_id];
+    detail.order = self.orders[indexPath.section];
+    detail.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detail animated:YES];
+    [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"查看订单详情", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     
 #warning 测试
-    YTRedeemptionController *VC = [[YTRedeemptionController alloc] init];
-    [self.navigationController pushViewController:VC animated:YES];
+//    YTRedeemptionController *VC = [[YTRedeemptionController alloc] init];
+//    [self.navigationController pushViewController:VC animated:YES];
 }
 
 // 发送请求删除订单
