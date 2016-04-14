@@ -23,6 +23,7 @@
         _imageView = [[UIImageView alloc] init];
         _imageView.backgroundColor = [UIColor colorWithWhite:1.000 alpha:0.500];
         _imageView.contentMode = UIViewContentModeScaleAspectFill;
+        _imageView.clipsToBounds = YES;
         [self addSubview:_imageView];
         self.clipsToBounds = YES;
         UIImageView *delete = [[UIImageView alloc] init];
@@ -36,9 +37,10 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    _imageView.frame = self.bounds;
     CGSize deleteSize = self.delete.image.size;;
-    self.delete.frame = CGRectMake(self.width - deleteSize.width - 5, 5, deleteSize.width, deleteSize.height);
+    CGFloat magin = deleteSize.height * 0.5;
+    _imageView.frame = CGRectMake(0, magin, self.width - magin, self.height - magin);
+    self.delete.frame = CGRectMake(self.width - deleteSize.height, 0, deleteSize.width, deleteSize.height);
     
 }
 

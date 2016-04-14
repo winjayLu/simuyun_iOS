@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -185,6 +185,7 @@
                 <outlet property="danWeiLable" destination="n8t-wA-awx" id="qAj-f6-rok"/>
                 <outlet property="fbContent" destination="JXU-H7-sUn" id="WRA-K2-FmP"/>
                 <outlet property="fbTitle" destination="wiZ-pL-D0a" id="RSv-SD-a2u"/>
+                <outlet property="iconImageView" destination="wta-bM-Hyu" id="Zw0-UO-Mzx"/>
                 <outlet property="jzContent" destination="ch2-wK-0sd" id="Fe1-3b-hYk"/>
                 <outlet property="jzTitle" destination="iZX-sd-opk" id="FND-Nt-dCz"/>
                 <outlet property="titleLable" destination="9tv-IY-3H1" id="gwe-6a-iGy"/>

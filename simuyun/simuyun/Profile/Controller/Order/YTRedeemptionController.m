@@ -15,10 +15,12 @@
 #import "YTSlipModel.h"
 #import "YTAccountTool.h"
 #import "YTViewPdfViewController.h"
+#import "UIImage+Extend.h"
+#import "YTSenMailView.h"
 
 // 赎回申请
 
-@interface YTRedeemptionController () <UICollectionViewDelegate, UICollectionViewDataSource, JKImagePickerControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate>
+@interface YTRedeemptionController () <UICollectionViewDelegate, UICollectionViewDataSource, JKImagePickerControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, UIAlertViewDelegate, senMailViewDelegate>
 
 /**
  *  滚动视图
@@ -124,6 +126,9 @@
  */
 @property (nonatomic, strong) YTRedeemModel *redeem;
 
+// 发送邮件视图
+@property (nonatomic, weak) YTSenMailView *sendMailView;
+
 @end
 
 @implementation YTRedeemptionController
@@ -196,6 +201,7 @@
  */
 - (void)uploadPhoto
 {
+    [SVProgressHUD showWithStatus:@"正在提交" maskType:SVProgressHUDMaskTypeClear];
     NSMutableArray *files = [NSMutableArray array];
     for (UIImage *image in self.selectedPhoto) {
         YTHttpFile *file = [[YTHttpFile alloc] init];
@@ -253,7 +259,7 @@
     params[@"redemptionMaterial"] = annex;
     params[@"applyAdviserId"] = [YTAccountTool account].userId;
     params[@"orderId"] = self.redeem.orderId;
-    [YTHttpTool post:YTRedemption params:params success:^(id responseObject) {
+    [YTHttpTool post:YTRedeemption params:params success:^(id responseObject) {
         [SVProgressHUD showSuccessWithStatus:@"提交成功" ];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self.navigationController popViewControllerAnimated:YES];
@@ -264,14 +270,46 @@
 
 
 #pragma mark Control
+
+
+
 /**
  *  获取详细资料
  */
 - (void)getEmailClick
 {
+    if (self.sendMailView != nil) return;
     
+    YTSenMailView *sendMail = [[YTSenMailView alloc] initWithViewController:self];
+    sendMail.frame = self.view.bounds;
+    
+    //  设置代理
+    sendMail.sendDelegate = self;
+    [self.view addSubview:sendMail];
+    self.sendMailView = sendMail;
 }
-
+#warning 缺少接口
+/**
+ *  发送请求
+ *
+ */
+- (void)sendMail:(NSString *)mail
+{
+//    // 发送请求
+//    [SVProgressHUD showWithStatus:@"正在发送" maskType:SVProgressHUDMaskTypeClear];
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    params[@"email"] = mail;
+//    params[@"proId"] = self.product.pro_id;
+//    [YTHttpTool get:YTEmailsharing params:params success:^(id responseObject) {
+//        YTLog(@"%@", responseObject);
+//        [SVProgressHUD showSuccessWithStatus:@"发送成功"];
+//        // 保存发送成功的Email
+//        [CoreArchive setStr:mail key:@"mail"];
+//        [self.sendMailView sendSuccess:YES];
+//        self.sendMailView = nil;
+//    } failure:^(NSError *error) {
+//    }];
+}
 /**
  *  提交赎回
  */
@@ -284,14 +322,17 @@
             return;
         }
     }
-    if(self.assetsArray.count == 0)
-    {
-        [SVProgressHUD showErrorWithStatus:@"请上传赎回资料"];
-        return;
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提交赎回" message:@"确认已经获得客户赎回授权，并正确填写赎回材料?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+    [alert show];
+
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // 删除订单
+    if (buttonIndex == 1) {
+        // 上传图片
+        [self uploadPhoto];
     }
-    
-    // 上传图片
-    [self uploadPhoto];
 }
 
 /**
@@ -496,15 +537,16 @@
 - (void)setupPhotoView
 {
     CGFloat margin = 20;
+    CGFloat padding = 10;
+    CGFloat itemWh = (self.view.width - 2 * (margin + padding)) / 3;
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    CGFloat itemWh = (self.view.width - 2 * margin - 4) / 3 - margin;
     layout.itemSize = CGSizeMake(itemWh, itemWh);
-    layout.minimumInteritemSpacing = margin;
-    layout.minimumLineSpacing = margin;
-    UICollectionView *photoView = [[UICollectionView alloc] initWithFrame:CGRectMake(margin, CGRectGetMaxY(self.RedeemView.frame), self.view.width - 2 * margin, itemWh + margin * 2) collectionViewLayout:layout];
+    layout.minimumInteritemSpacing = padding;
+    layout.minimumLineSpacing = padding;
+    UICollectionView *photoView = [[UICollectionView alloc] initWithFrame:CGRectMake(margin, CGRectGetMaxY(self.RedeemView.frame), self.view.width - margin * 2, itemWh + padding) collectionViewLayout:layout];
     photoView.backgroundColor = [UIColor whiteColor];
-    photoView.contentInset = UIEdgeInsetsMake(4, 0, 0, 2);
-    photoView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, -2);
+//    photoView.contentInset = UIEdgeInsetsMake(4, 0, 0, 2);
+//    photoView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, -2);
     photoView.dataSource = self;
     photoView.delegate = self;
     [self.mainView addSubview:photoView];
@@ -538,7 +580,8 @@
     
     // 邮件获取赎回材料按钮
     UIButton *getEmail = [[UIButton alloc] init];
-    getEmail.backgroundColor = YTColor(91, 168, 243);
+    [getEmail setBackgroundImage:[UIImage imageWithColor:YTColor(91, 168, 243)] forState:UIControlStateNormal];
+    [getEmail setBackgroundImage:[UIImage imageWithColor:YTColor(65, 133, 197)] forState:UIControlStateHighlighted];
     [getEmail setTitle:@"邮件获取赎回材料" forState:UIControlStateNormal];
     [getEmail.titleLabel setFont:[UIFont systemFontOfSize:20]];
     [getEmail setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -551,7 +594,9 @@
     
     // 提交赎回按钮
     UIButton *redeemBtn = [[UIButton alloc] init];
-    redeemBtn.backgroundColor = YTNavBackground;
+    [redeemBtn setBackgroundImage:[UIImage imageWithColor:YTNavBackground] forState:UIControlStateNormal];
+    [redeemBtn setBackgroundImage:[UIImage imageWithColor:YTColor(210, 36, 20)] forState:UIControlStateHighlighted];
+    [redeemBtn setBackgroundImage:[UIImage imageWithColor:YTColor(208, 208, 208)] forState:UIControlStateDisabled];
     [redeemBtn setTitle:@"提交赎回" forState:UIControlStateNormal];
     [redeemBtn.titleLabel setFont:[UIFont systemFontOfSize:20]];
     [redeemBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -559,6 +604,7 @@
     redeemBtn.layer.masksToBounds = YES;
     redeemBtn.frame = CGRectMake(10, CGRectGetMaxY(getEmail.frame) + 10, self.view.width - 20, 44);
     [redeemBtn addTarget:self action:@selector(redeemBtnClick) forControlEvents:UIControlEventTouchUpInside];
+    redeemBtn.enabled = NO;
     [container addSubview:redeemBtn];
     self.redeemBtn = redeemBtn;
     
@@ -739,6 +785,8 @@
     } else {
         [self.assetsArray removeObjectAtIndex:indexPath.row];
         [self.photoView deleteItemsAtIndexPaths:@[indexPath]];
+        [self upadtaFrame];
+        self.redeemBtn.enabled = self.assetsArray.count;
     }
     
 }
@@ -767,12 +815,30 @@
 - (void)imagePickerController:(JKImagePickerController *)imagePicker didSelectAssets:(NSArray *)assets isSource:(BOOL)source
 {
     self.assetsArray = [NSMutableArray arrayWithArray:assets];
+    self.redeemBtn.enabled = self.assetsArray.count;
     [imagePicker dismissViewControllerAnimated:YES completion:^{
         [self.selectedPhoto  removeAllObjects];
         [self.photoView reloadData];
-        NSIndexPath *path = [NSIndexPath indexPathForRow:self.assetsArray.count inSection:0];
-        [self.photoView scrollToItemAtIndexPath:path atScrollPosition:UICollectionViewScrollPositionTop animated:YES];
+        [self upadtaFrame];
     }];
+}
+
+/**
+ *  更新底部视图Frame
+ */
+- (void)upadtaFrame
+{
+    NSInteger count = self.assetsArray.count + 1;
+    NSInteger line = count / 3;
+    if (count % 3 != 0) {
+        line += 1;
+    }
+    CGFloat margin = 20;
+    CGFloat padding = 10;
+    CGFloat itemWh = (self.view.width - 2 * (margin + padding)) / 3;
+    self.photoView.height = line * (itemWh + padding);
+    self.bottomView.y = CGRectGetMaxY(self.photoView.frame) + 10;
+    self.mainView.contentSize = CGSizeMake(self.view.width, CGRectGetMaxY(self.bottomView.frame));
 }
 
 - (void)imagePickerControllerDidCancel:(JKImagePickerController *)imagePicker
@@ -789,6 +855,7 @@
 {
     [self.view endEditing:YES];
 }
+
 
 #pragma mark - TextFieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

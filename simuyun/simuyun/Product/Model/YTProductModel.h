@@ -15,6 +15,7 @@
  *  10 正常
  *  20 停止
  *  30 清算
+ *  50 募集结束
  */
 @property (nonatomic, assign) int state;
 

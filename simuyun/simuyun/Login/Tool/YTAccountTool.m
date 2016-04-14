@@ -61,7 +61,6 @@
     NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTSession];
     [mgr POST:newUrl parameters:[NSDictionary httpWithDictionary:params]
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
-#warning 测试 
           // 获取融云Token
           NSMutableDictionary *param = [NSMutableDictionary dictionary];
           param[@"uid"] = responseObject[@"userId"];

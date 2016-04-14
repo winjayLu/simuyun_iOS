@@ -59,7 +59,10 @@
  */
 @property (weak, nonatomic) IBOutlet UILabel *danWeiLable;
 
-
+/**
+ *  右上角Icon
+ */
+@property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 
 @end
 
@@ -117,6 +120,11 @@
     } else {
         self.danWeiLable.text = @"万";
         self.yimujiLable.text = [NSString stringWithFormat:@"%.0f",_product.totalAmt];
+    }
+    if (_product.state == 50) {
+        self.iconImageView.image = [UIImage imageNamed:@"mujijieshu"];
+    } else {
+        self.iconImageView.image = [UIImage imageNamed:@"liquidation"];
     }
 }
 

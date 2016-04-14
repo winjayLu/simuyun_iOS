@@ -74,5 +74,10 @@
  */
 @property (nonatomic, copy) NSString *buy_shares;
 
+/**
+ *  是否可赎回
+ */
+@property (nonatomic, assign) int isRedeem;
+
 
 @end

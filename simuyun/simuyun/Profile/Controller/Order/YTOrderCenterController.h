@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BFNavigationBarDrawer.h"
 
-@interface YTOrderCenterController : UITableViewController
+@interface YTOrderCenterController : UIViewController
 
 
 /**

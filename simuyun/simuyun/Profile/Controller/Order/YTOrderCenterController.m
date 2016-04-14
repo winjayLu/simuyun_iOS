@@ -20,8 +20,10 @@
 #import "SVProgressHUD.h"
 #import "YTRedeemptionController.h"
 
+#define topMenuHeight 48
 
-@interface YTOrderCenterController () <UITableViewDataSource, UITableViewDelegate, BarDrawerDelegate, SWTableViewCellDelegate, UIAlertViewDelegate>
+
+@interface YTOrderCenterController () <UITableViewDataSource, UITableViewDelegate, SWTableViewCellDelegate, UIAlertViewDelegate>
 
 /**
  *  记录当前页码
@@ -32,11 +34,6 @@
  *  订单数据
  */
 @property (nonatomic, strong) NSMutableArray *orders;
-
-/**
- *  下拉菜单
- */
-@property (nonatomic, strong) BFNavigationBarDrawer *drawerMenu;
 
 
 /**
@@ -55,17 +52,38 @@
  */
 @property (nonatomic, weak) SWTableViewCell *selectedCell;
 
+/**
+ *  tableView
+ */
+@property (nonatomic, weak) UITableView *tableView;
+
+/**
+ *  选中的分类按钮
+ */
+@property (nonatomic, weak)  UIButton *selectBtn;
+
+/**
+ *  顶部菜单
+ */
+@property (nonatomic, weak)  UIView *topMenu;
+
 @end
 
 @implementation YTOrderCenterController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // 初始化提醒视图
-    [self setupHintView];
+    
+    self.view.backgroundColor = YTGrayBackground;
     
     // 初始化tableView
     [self setupTableView];
+    
+    // 初始化顶部菜单
+    [self setupTopMenu];
+    
+    // 初始化提醒视图
+    [self setupHintView];
     
     // 初始化Item
     [self setupItem];
@@ -98,24 +116,95 @@
     [MobClick event:@"orderList_click" attributes:@{@"按钮" : @"订单列表", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
+
+/**
+ *  初始化顶部菜单
+ */
+- (void)setupTopMenu
+{
+    // 菜单栏
+    UIView *topMenu = [[UIView alloc] init];
+    topMenu.backgroundColor = YTNavBackground;
+    topMenu.frame = CGRectMake(0, 0, self.view.width, topMenuHeight);
+    [self.view addSubview:topMenu];
+    self.topMenu = topMenu;
+    
+    CGFloat maginX = 15;
+    CGFloat paddingX = 10;
+    CGFloat btnH = 25;
+    CGFloat btnW = (DeviceWidth - maginX * 2 - paddingX * 5) / 6;
+    CGFloat maginY = (topMenuHeight - btnH) * 0.5;
+    // 分类按钮
+    for (int i = 0; i < 6; i++) {
+        UIButton *btn = [[UIButton alloc] init];
+        [btn setBackgroundImage:[UIImage imageNamed:@"xuankuang"] forState:UIControlStateSelected];
+        [btn.titleLabel setFont:[UIFont systemFontOfSize:15]];
+        btn.tag = i;
+        NSString *title = @"";
+        switch (i) {
+            case 0:
+                title = @"全部";
+                btn.selected = YES;
+                self.selectBtn = btn;
+                break;
+            case 1:
+                title = @"待报备";
+                break;
+            case 2:
+                title = @"确认中";
+                break;
+            case 3:
+                title = @"已确认";
+                if (self.isYiQueRen) {
+                    [self typeClick:btn];
+                }
+                break;
+            case 4:
+                title = @"已失效";
+                break;
+            case 5:
+                title = @"可赎回";
+                break;
+        }
+        [btn setTitle:title forState:UIControlStateNormal];
+        btn.frame = CGRectMake(maginX + (paddingX + btnW) * i, maginY , btnW, btnH);
+        [btn addTarget:self action:@selector(typeClick:) forControlEvents:UIControlEventTouchUpInside];
+        [topMenu addSubview:btn];
+    }
+}
+
+- (void)typeClick:(UIButton *)button
+{
+    self.selectBtn.selected = NO;
+    button.selected = YES;
+    self.selectBtn = button;
+    [self selectedBtnWithType:button.tag];
+}
+
 /**
  *  初始化tableView
  */
 - (void)setupTableView
 {
     self.title = @"订单中心";
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    
+    UITableView *tableView = [[UITableView alloc] init];
+    tableView.frame = CGRectMake(0, topMenuHeight, self.view.width, self.view.height - topMenuHeight - 64);
+    tableView.dataSource = self;
+    tableView.delegate = self;
     // 设置颜色
-    self.tableView.backgroundColor = YTGrayBackground;
+    tableView.backgroundColor = YTGrayBackground;
     // 去掉下划线
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:tableView];
+    self.tableView = tableView;
+    
     // 设置下拉刷新
-    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewOrder)];
-    // 马上进入刷新状态
-    [self.tableView.header beginRefreshing];
-    self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreOrder)];
+    tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewOrder)];
+    tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreOrder)];
+    if (!self.isYiQueRen) {
+        // 马上进入刷新状态
+        [tableView.header beginRefreshing];
+    }
 }
 
 /**
@@ -123,11 +212,12 @@
  */
 - (void)setupItem
 {
-    BFNavigationBarDrawer *drawerMenu = [[BFNavigationBarDrawer alloc] initWithisYiQueRen:self.isYiQueRen];
-    drawerMenu.scrollView = self.tableView;
-    drawerMenu.delegate = self;
-    self.drawerMenu = drawerMenu;
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithBg:@"saixuan" target:self action:@selector(rightClick)];
+    UIButton *rightBtn = [[UIButton alloc] init];
+    [rightBtn setImage:[UIImage imageNamed:@"saixuan"] forState:UIControlStateNormal];
+    [rightBtn setImage:[UIImage imageNamed:@"saixuananxia"] forState:UIControlStateSelected];
+    [rightBtn addTarget:self action:@selector(rightClick:) forControlEvents:UIControlEventTouchUpInside];
+    rightBtn.size = rightBtn.currentImage.size;
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     // 初始化左侧返回按钮
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithBg:@"fanhui" target:self action:@selector(blackClick)];
 }
@@ -141,41 +231,60 @@
 /**
  *  右侧菜单
  */
-- (void)rightClick
+- (void)rightClick:(UIButton *)btn
 {
-    self.tableView.header.hidden = YES;
-    
-    [self.drawerMenu showFromNavigationBar:self.navigationController.navigationBar animated:YES];
+    if (self.topMenu.height == 0) {
+        btn.selected = NO;
+        [UIView animateWithDuration:0.25 animations:^{
+            self.topMenu.height = topMenuHeight;
+            self.tableView.y = topMenuHeight;
+            self.tableView.height = self.view.height - topMenuHeight;
+            self.topMenu.alpha = 1.0;
+        } ];
+    } else {
+        btn.selected = YES;
+        [UIView animateWithDuration:0.25 animations:^{
+            self.topMenu.height -= topMenuHeight;
+            self.tableView.y = 0;
+            self.tableView.height = self.view.height ;
+            self.topMenu.alpha = 0.0;
+        } ];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    [self.drawerMenu hideAnimated:NO];
 }
 /**
  *  选中的按钮
  *
  */
-- (void)selectedBtnWithType:(btnType)btnType
+- (void)selectedBtnWithType:(NSInteger)type
 {
-
-    self.tableView.header.hidden = NO;
-    switch (btnType) {
-        case btnTypeQuanBu:
+    self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewOrder)];
+    self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreOrder)];
+    switch (type) {
+        case 0:
             self.status = nil;
             break;
-        case btnTypeDaiBaoBei:
+        case 1:
             self.status = @"[20, 50]";
             break;
-        case btnTypeQueRenZhong:
+        case 2:
             self.status = @"[40]";
             break;
-        case btnTypeYiQueRen:
+        case 3:
             self.status = @"[80]";
             break;
-        case btnTypeYiShiXiao:
+        case 4:
             self.status = @"[60, 90]";
+            break;
+        case 5:
+            self.status = @"[60, 90]";
+            // 改变刷新方法
+            self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadRedeem)];
+            self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreRedeem)];
             break;
     }
     [self.tableView.header beginRefreshing];
@@ -232,6 +341,58 @@
     dict[@"pagesize"] = @10;
     dict[@"pageno"] = @(++self.pageno);
     [YTHttpTool get:YTOrders params:dict success:^(id responseObject) {
+        [self.tableView.footer endRefreshing];
+        if([(NSArray *)responseObject count] == 0)
+        {
+            [self.tableView.footer noticeNoMoreData];
+        }
+        [self.orders addObjectsFromArray:[YTOrderCenterModel objectArrayWithKeyValuesArray:responseObject]];
+        [self.tableView reloadData];
+    } failure:^(NSError *error) {
+        [self.tableView.footer endRefreshing];
+    }];
+}
+
+/**
+ *  加载可赎回订单
+ */
+- (void)loadRedeem
+{
+    [self.orders removeAllObjects];
+    [self.tableView reloadData];
+    [self.hintView switchContentTypeWIthType:contentTypeLoading];
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"advisers_id"] = [YTAccountTool account].userId;
+    dict[@"pagesize"] = @10;
+    self.pageno = 1;
+    dict[@"pageno"] = @(self.pageno);
+    [YTHttpTool get:YTRedeemList params:dict success:^(id responseObject) {
+        [self.tableView.footer resetNoMoreData];
+        self.orders = [YTOrderCenterModel objectArrayWithKeyValuesArray:responseObject];
+        if([ self.orders count] < 10)
+        {
+            [self.tableView.footer noticeNoMoreData];
+        }
+        [self.tableView reloadData];
+        [self.tableView.header endRefreshing];
+        [self.hintView changeContentTypeWith:self.orders];
+    } failure:^(NSError *error) {
+        [self.tableView reloadData];
+        [self.tableView.header endRefreshing];
+        [self.hintView ContentFailure];
+    }];
+}
+
+/**
+ *  加载更多可赎回订单
+ */
+- (void)loadMoreRedeem
+{
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"advisers_id"] = [YTAccountTool account].userId;
+    dict[@"pagesize"] = @10;
+    dict[@"pageno"] = @(++self.pageno);
+    [YTHttpTool get:YTRedeemList params:dict success:^(id responseObject) {
         [self.tableView.footer endRefreshing];
         if([(NSArray *)responseObject count] == 0)
         {

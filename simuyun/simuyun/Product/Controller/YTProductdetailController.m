@@ -31,6 +31,7 @@
 #import "YTAccountTool.h"
 #import "YTBindingPhoneController.h"
 #import "YTSnsShareViewController.h"
+#import "YTConversationController.h"
 
 
 
@@ -339,38 +340,57 @@
     {
         [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"无法认购" detail:[NSString stringWithFormat:@"%@目前已经募集结束，您可以看看其它产品或联系平台客服。", self.product.pro_name] cancelButton:@"再看看" Okbutton:@"联系客服" block:^(HHAlertButton buttonindex) {
             if (buttonindex == HHAlertButtonOk) {
-                YTNormalWebController *normal = [YTNormalWebController webWithTitle:@"平台客服" url:[NSString stringWithFormat:@"%@/livehelp%@",YTH5Server, [NSDate stringDate]]];
-                normal.isDate = YES;
-                normal.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:normal animated:YES];
+                [self openCustomerService];
             }
         }];
     } else if (self.product.state == 30)    // 已经清算
     {
         [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"无法认购" detail:[NSString stringWithFormat:@"%@目前已经结算，您可以看看其它产品或联系平台客服。", self.product.pro_name] cancelButton:@"再看看" Okbutton:@"联系客服" block:^(HHAlertButton buttonindex) {
             if (buttonindex == HHAlertButtonOk) {
-                YTNormalWebController *normal = [YTNormalWebController webWithTitle:@"平台客服" url:[NSString stringWithFormat:@"%@/livehelp%@",YTH5Server, [NSDate stringDate]]];
-                normal.isDate = YES;
-                normal.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:normal animated:YES];
+                [self openCustomerService];
+            }
+        }];
+    } else if (self.product.state == 30)    // 已募集结束
+    {
+        [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"无法认购" detail:[NSString stringWithFormat:@"%@目前已经募集结束，您可以看看其它产品或联系平台客服。", self.product.pro_name] cancelButton:@"再看看" Okbutton:@"联系客服" block:^(HHAlertButton buttonindex) {
+            if (buttonindex == HHAlertButtonOk) {
+                [self openCustomerService];
             }
         }];
     } else {    // 未发行
         [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"无法认购" detail:@"您所在的机构未同意发行该产品，您可以看看其它产品或联系平台客服。" cancelButton:@"再看看" Okbutton:@"联系客服" block:^(HHAlertButton buttonindex) {
             if (buttonindex == HHAlertButtonOk) {
-                YTNormalWebController *normal = [YTNormalWebController webWithTitle:@"平台客服" url:[NSString stringWithFormat:@"%@/livehelp%@",YTH5Server, [NSDate stringDate]]];
-                normal.isDate = YES;
-                normal.hidesBottomBarWhenPushed = YES;
-                [self.navigationController pushViewController:normal animated:YES];
+                [self openCustomerService];
             }
         }];
     }
     [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"认购", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
-
-
-
+/**
+ *  进入平台客服
+ */
+- (void)openCustomerService
+{
+    //新建一个聊天会话View Controller对象
+    YTConversationController *chat = [[YTConversationController alloc]init];
+    //设置会话的类型，如单聊、讨论组、群聊、聊天室、客服、公众服务会话等
+    chat.conversationType = ConversationType_PRIVATE;
+    //设置会话的目标会话ID。（单聊、客服、公众服务会话为对方的ID，讨论组、群聊、聊天室为会话的ID）
+    chat.targetId = @"dd0cc61140504258ab474b8f0a38bb56";
+    //    chat.targetId = @"e3ffcc0a37c0463e9636bf997e606a70";
+    //设置聊天会话界面要显示的标题
+    chat.title = @"平台客服";
+    // 显示发送方的名字
+    chat.displayUserNameInCell = NO;
+    // 头像形状
+    [chat setMessageAvatarStyle:RC_USER_AVATAR_CYCLE];
+    [chat setMessagePortraitSize:CGSizeMake(37, 37)];
+    chat.userId = [YTAccountTool account].userId;
+    chat.isMobile = YES;
+    //显示聊天会话界面
+    [self.navigationController pushViewController:chat animated:YES];
+}
 
 
 // 菜单内容

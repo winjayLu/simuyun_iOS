@@ -69,8 +69,6 @@
 		97270C601C7BF47400C92888 /* YTLeftMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97270C391C7BF47400C92888 /* YTLeftMenu.xib */; };
 		97270C611C7BF47400C92888 /* YTOrderCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270C3B1C7BF47400C92888 /* YTOrderCenterCell.m */; };
 		97270C621C7BF47400C92888 /* YTOrderCenterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97270C3C1C7BF47400C92888 /* YTOrderCenterCell.xib */; };
-		97270C631C7BF47400C92888 /* YTOrderNetValueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270C3E1C7BF47400C92888 /* YTOrderNetValueCell.m */; };
-		97270C641C7BF47400C92888 /* YTOrderNetValueCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97270C3F1C7BF47400C92888 /* YTOrderNetValueCell.xib */; };
 		97270CC31C7BF47E00C92888 /* YTBuyProductController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270C681C7BF47E00C92888 /* YTBuyProductController.m */; };
 		97270CC41C7BF47E00C92888 /* YTBuyProductController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97270C691C7BF47E00C92888 /* YTBuyProductController.xib */; };
 		97270CC51C7BF47E00C92888 /* YTBuySuccessController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270C6B1C7BF47E00C92888 /* YTBuySuccessController.m */; };
@@ -449,9 +447,6 @@
 		97270C3A1C7BF47400C92888 /* YTOrderCenterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTOrderCenterCell.h; sourceTree = "<group>"; };
 		97270C3B1C7BF47400C92888 /* YTOrderCenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTOrderCenterCell.m; sourceTree = "<group>"; };
 		97270C3C1C7BF47400C92888 /* YTOrderCenterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTOrderCenterCell.xib; sourceTree = "<group>"; };
-		97270C3D1C7BF47400C92888 /* YTOrderNetValueCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTOrderNetValueCell.h; sourceTree = "<group>"; };
-		97270C3E1C7BF47400C92888 /* YTOrderNetValueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTOrderNetValueCell.m; sourceTree = "<group>"; };
-		97270C3F1C7BF47400C92888 /* YTOrderNetValueCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTOrderNetValueCell.xib; sourceTree = "<group>"; };
 		97270C671C7BF47E00C92888 /* YTBuyProductController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTBuyProductController.h; sourceTree = "<group>"; };
 		97270C681C7BF47E00C92888 /* YTBuyProductController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTBuyProductController.m; sourceTree = "<group>"; };
 		97270C691C7BF47E00C92888 /* YTBuyProductController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTBuyProductController.xib; sourceTree = "<group>"; };
@@ -1253,9 +1248,6 @@
 				97270C3A1C7BF47400C92888 /* YTOrderCenterCell.h */,
 				97270C3B1C7BF47400C92888 /* YTOrderCenterCell.m */,
 				97270C3C1C7BF47400C92888 /* YTOrderCenterCell.xib */,
-				97270C3D1C7BF47400C92888 /* YTOrderNetValueCell.h */,
-				97270C3E1C7BF47400C92888 /* YTOrderNetValueCell.m */,
-				97270C3F1C7BF47400C92888 /* YTOrderNetValueCell.xib */,
 				97A4DE041C97E5B000079AFC /* YTScanView.h */,
 				97A4DE051C97E5B000079AFC /* YTScanView.m */,
 			);
@@ -2585,7 +2577,6 @@
 				97270C621C7BF47400C92888 /* YTOrderCenterCell.xib in Resources */,
 				97270EBA1C7BF4D500C92888 /* CorePPTVC.xib in Resources */,
 				97270C5E1C7BF47400C92888 /* YTProfileTopView.xib in Resources */,
-				97270C641C7BF47400C92888 /* YTOrderNetValueCell.xib in Resources */,
 				97270CED1C7BF47E00C92888 /* YTProductCell.xib in Resources */,
 				97270C451C7BF47400C92888 /* YTAuthenticationViewController.xib in Resources */,
 				97270CD41C7BF47E00C92888 /* ImagesPicker.xcassets in Resources */,
@@ -2713,7 +2704,6 @@
 				97A4DDDA1C97A4C200079AFC /* SubLBXScanViewController.m in Sources */,
 				97270C541C7BF47400C92888 /* TimerLoopView.m in Sources */,
 				97270C511C7BF47400C92888 /* YTOrgnazationModel.m in Sources */,
-				97270C631C7BF47400C92888 /* YTOrderNetValueCell.m in Sources */,
 				97270E931C7BF4D500C92888 /* NSString+JsonCategory.m in Sources */,
 				97270C531C7BF47400C92888 /* BFNavigationBarDrawer.m in Sources */,
 				97270ECD1C7BF4D500C92888 /* UIImageView+SD.m in Sources */,

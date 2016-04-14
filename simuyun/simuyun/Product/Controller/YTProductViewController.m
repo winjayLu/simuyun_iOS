@@ -293,7 +293,7 @@ static UIWindow *_window;
         }
         ((YTHotProductCell *)cell).product = product;
     } else {
-        if (product.state == 30)
+        if (product.state == 30 || product.state == 50)
         {
             static NSString *identifier = @"liquidation";
             cell = [tableView dequeueReusableCellWithIdentifier:identifier];
