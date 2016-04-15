@@ -115,7 +115,7 @@
     // 初始化顶部视图
     [self setupTopView];
     // 加载本地用户信息
-    self.topView.userInfo = [YTUserInfoTool localUserInfo];
+    self.topView.userInfo = [YTUserInfoTool userInfo];
     
     // 初始化底部ScrollView
     [self setupScrollView];
@@ -692,6 +692,7 @@
 - (void)updateUserInfo
 {
      self.topView.userInfo = [YTUserInfoTool userInfo];
+    [self viewWillAppear:NO];
 }
 /**
  *  签到

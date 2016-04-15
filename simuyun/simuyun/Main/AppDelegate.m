@@ -433,7 +433,7 @@
         NSRange subRange = NSMakeRange(range.location + range.length, 8);
         NSString *code = [pasteBoard substringWithRange:subRange];
         // 存储认证编码
-        [CoreArchive setStr:pasteBoard key:@"authenCode"];
+        [CoreArchive setStr:code key:@"authenCode"];
         // 发送通知
         [YTCenter postNotificationName:YTPasteBoardAuthen object:nil];
     }

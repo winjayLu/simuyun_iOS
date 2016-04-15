@@ -70,6 +70,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 加载本地用户信息
+    [YTUserInfoTool localUserInfo];
+    
     // 添加子控制器
     [self setupChildVc];
 
@@ -170,6 +173,7 @@
  */
 - (void)commitAuthenCode
 {
+    [SVProgressHUD showWithStatus:@"正在认证" maskType:SVProgressHUDMaskTypeClear];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"inviteCode"] = [CoreArchive strForKey:@"authenCode"];
     param[@"adviserId"] = [YTAccountTool account].userId;
@@ -181,6 +185,7 @@
         YTUserInfo *userInfo =[YTUserInfoTool userInfo];
         userInfo.adviserStatus = 0;
         [YTUserInfoTool saveUserInfo:userInfo];
+        [SVProgressHUD showSuccessWithStatus:@"认证成功"];
     } failure:^(NSError *error) {
     }];
 }
