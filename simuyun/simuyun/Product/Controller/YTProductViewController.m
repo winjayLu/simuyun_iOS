@@ -408,6 +408,7 @@ static UIWindow *_window;
     if (self.series != 0) {
         param[@"series"] = @(self.series);
     }
+    param[@"version"] = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [YTHttpTool get:YTProductList params:param
             success:^(NSDictionary *responseObject) {
                 [SVProgressHUD dismiss];
@@ -445,6 +446,7 @@ static UIWindow *_window;
     if (self.series != 0) {
         param[@"series"] = @(self.series);
     }
+    param[@"version"] = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [YTHttpTool get:YTProductList params:param success:^(id responseObject) {
         [self.tableView.footer endRefreshing];
         if([(NSArray *)responseObject count] == 0)

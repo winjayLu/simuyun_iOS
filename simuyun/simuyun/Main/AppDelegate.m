@@ -40,9 +40,7 @@
 #warning 本地通知
 
 @interface AppDelegate ()
-{
-    NSTimer* _timer;
-}
+
 /**
  *  当前显示的控制器
  */
@@ -424,31 +422,8 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // 断开与融云的连接
     [[RCIM sharedRCIM] disconnect];
-    if([YTResourcesTool isVersionFlag] == YES){
-        _timer =  [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(logAction) userInfo:nil repeats:YES];
-        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
-        UIApplication*   app = [UIApplication sharedApplication];
-        __block    UIBackgroundTaskIdentifier bgTask;
-        bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (bgTask != UIBackgroundTaskInvalid){
-                    bgTask = UIBackgroundTaskInvalid;
-                }
-            });
-        }];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (bgTask != UIBackgroundTaskInvalid){
-                    bgTask = UIBackgroundTaskInvalid;
-                }
-            });
-        });
-    }
 }
--(void)logAction
-{
-    NSLog(@"常驻后台打印------------------------");
-}
+
 
 /**
  *  回到前台
@@ -456,8 +431,6 @@
  */
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    [_timer invalidate];
-    _timer = nil;
     
     // 登录融云
     [self loginRongCloud];

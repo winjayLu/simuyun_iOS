@@ -165,6 +165,7 @@
     param[@"proName"] = productName;
     param[@"offset"] = @"0";
     param[@"limit"] = @"8";
+    param[@"version"] = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [YTHttpTool get:YTProductList params:param
             success:^(NSDictionary *responseObject) {
                 NSArray *products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
@@ -207,6 +208,7 @@
     } else {
         param[@"proName"] = self.search.text;
     }
+    param[@"version"] = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [YTHttpTool get:YTProductList params:param success:^(id responseObject) {
         [self.tableView.footer endRefreshing];
         if([(NSArray *)responseObject count] == 0)
@@ -363,6 +365,7 @@
     self.series = btn.tag;
     param[@"offset"] = @"0";
     param[@"limit"] = @"8";
+    param[@"version"] = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [YTHttpTool get:YTProductList params:param
             success:^(NSDictionary *responseObject) {
                 [SVProgressHUD dismiss];
@@ -420,7 +423,7 @@
     }
     
     // 搜索出来的产品
-    if (product.state == 30)
+    if (product.state == 30 || product.state == 50)
     {
         static NSString *identifier = @"liquidation";
         cell = [tableView dequeueReusableCellWithIdentifier:identifier];

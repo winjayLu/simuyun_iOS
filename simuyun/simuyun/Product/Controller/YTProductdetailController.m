@@ -104,6 +104,7 @@
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
     param[@"proId"] = self.proId;
+    param[@"version"] = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [YTHttpTool get:YTProductList params:param success:^(id responseObject) {
         NSArray *products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
         if (products.count > 0) {
@@ -350,7 +351,7 @@
                 [self openCustomerService];
             }
         }];
-    } else if (self.product.state == 30)    // 已募集结束
+    } else if (self.product.state == 50)    // 已募集结束
     {
         [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:@"无法认购" detail:[NSString stringWithFormat:@"%@目前已经募集结束，您可以看看其它产品或联系平台客服。", self.product.pro_name] cancelButton:@"再看看" Okbutton:@"联系客服" block:^(HHAlertButton buttonindex) {
             if (buttonindex == HHAlertButtonOk) {
