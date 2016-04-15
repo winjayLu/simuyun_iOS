@@ -20,6 +20,7 @@
  */
 @property (copy, nonatomic) NSString *content;
 
-- (void)showScan;
+- (void)showScanWithVc:(UIViewController *)vc;
+
 
 @end

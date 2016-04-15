@@ -232,6 +232,7 @@
 {
     if (!_shareManage) {
         ShareManage *share = [ShareManage shareManage];
+        [share shareTextConfig];
         share.share_title = nil;
         share.share_image = nil;
         share.share_url = nil;

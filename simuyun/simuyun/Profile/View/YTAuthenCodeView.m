@@ -19,6 +19,11 @@
  */
 @property (nonatomic, strong) ShareManage *shareManage;
 
+/**
+ *  控制器
+ */
+@property (nonatomic, weak) UIViewController *vc;
+
 @end
 
 // 认证口令
@@ -46,9 +51,10 @@
 
 
 static UIWindow *_window;
-- (void)showScan
+- (void)showScanWithVc:(UIViewController *)vc
 {
     [self destroy];
+    self.vc = vc;
     _window = [[UIWindow alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
     _window.backgroundColor = YTRGBA(0, 0, 0, 0.4);
     _window.alpha = 1;
@@ -119,6 +125,23 @@ static UIWindow *_window;
     [self addSubview:content];
     
     
+    // 短信分享
+    UIButton *smsBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [smsBtn setImage:[UIImage imageNamed:@"authenSms"] forState:UIControlStateNormal];
+    [smsBtn addTarget:self action:@selector(smsClick) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:smsBtn];
+    //  设置文字
+    UILabel *smsTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 12)];
+    smsTitle.font = [UIFont systemFontOfSize:10];
+    smsTitle.textAlignment = NSTextAlignmentCenter;
+    smsTitle.textColor = YTColor(51, 51, 51);
+    smsTitle.text = @"短信";
+    [self addSubview:smsTitle];
+    [smsTitle sizeToFit];
+    smsBtn.frame = CGRectMake((authenWH * 0.5) -  25, CGRectGetMaxY(line.frame) + 20, 50, 50);
+    smsTitle.center = CGPointMake(smsBtn.center.x, smsBtn.center.y + 35);
+    
+    
     // 微信分享按钮
     UIButton *weChat = [UIButton buttonWithType:UIButtonTypeCustom];
     [weChat setImage:[UIImage imageNamed:@"Share_ScanWexin"] forState:UIControlStateNormal];
@@ -132,7 +155,7 @@ static UIWindow *_window;
     weChatTitle.text = @"微信";
     [self addSubview:weChatTitle];
     [weChatTitle sizeToFit];
-    weChat.frame = CGRectMake((authenWH * 0.5) -  80, CGRectGetMaxY(line.frame) + 20, 50, 50);
+    weChat.frame = CGRectMake(smsBtn.x - 80, CGRectGetMaxY(line.frame) + 20, 50, 50);
     weChatTitle.center = CGPointMake(weChat.center.x, weChat.center.y + 35);
     
     
@@ -149,7 +172,7 @@ static UIWindow *_window;
     weChatQuanTitle.text = @"复制";
     [self addSubview:weChatQuanTitle];
     [weChatQuanTitle sizeToFit];
-    weChatQuan.frame = CGRectMake(CGRectGetMaxX(weChat.frame) + 60, CGRectGetMaxY(line.frame) + 20, 50, 50);
+    weChatQuan.frame = CGRectMake(CGRectGetMaxX(smsBtn.frame) + 30, CGRectGetMaxY(line.frame) + 20, 50, 50);
     weChatQuanTitle.center = CGPointMake(weChatQuan.center.x, weChatQuan.center.y + 35);
 }
 /**
@@ -158,7 +181,15 @@ static UIWindow *_window;
 - (void)weChatClick
 {
     self.shareManage.share_content = self.content;
-    [self.shareManage wxShareWithViewControll:nil];
+    [self.shareManage wxShareWithViewControll:self.vc];
+    [self destroy];
+}
+
+- (void)smsClick
+{
+    self.shareManage.bankNumber = self.content;
+    [self.shareManage smsShareWithViewControll:self.vc];
+    [self destroy];
 }
 /**
  *  复制到剪贴板
@@ -168,6 +199,7 @@ static UIWindow *_window;
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = self.content;
     [SVProgressHUD showSuccessWithStatus:@"复制成功"];
+    [self destroy];
 }
 
 - (NSMutableAttributedString *)attributedStringWithStr:(NSString *)str
@@ -209,6 +241,9 @@ static UIWindow *_window;
 - (void)destroy
 {
     self.alpha=0;
+    for (UIView *view in self.subviews) {
+        [view removeFromSuperview];
+    }
     [self removeFromSuperview];
     self.shareManage = nil;
     _window.hidden = YES;
@@ -219,6 +254,7 @@ static UIWindow *_window;
 {
     if (!_shareManage) {
         ShareManage *share = [ShareManage shareManage];
+        [share shareTextConfig];
         share.share_title = nil;
         share.share_image = nil;
         share.share_url = nil;
@@ -226,5 +262,4 @@ static UIWindow *_window;
     }
     return _shareManage;
 }
-
 @end

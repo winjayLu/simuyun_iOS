@@ -423,19 +423,20 @@
  */
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-        // 获取剪贴板内容
-        NSString *pasteBoard = [UIPasteboard generalPasteboard].string;
-        // 判断口令是否符合规则
-        if ([self countOfString:pasteBoard] == 2) {
-            
-            NSRange range = [pasteBoard rangeOfString:@"￥"];
-            NSRange subRange = NSMakeRange(range.location + range.length, 8);
-            NSString *code = [pasteBoard substringWithRange:subRange];
-            // 存储认证编码
-            [CoreArchive setStr:pasteBoard key:@"authenCode"];
-            // 发送通知
-            [YTCenter postNotificationName:YTPasteBoardAuthen object:nil];            
-        }
+    // 获取剪贴板内容
+    NSString *pasteBoard = [UIPasteboard generalPasteboard].string;
+    // 判断口令是否符合规则
+    if ([self countOfString:pasteBoard] == 2) {
+        
+        NSRange range = [pasteBoard rangeOfString:@"￥"];
+        if (range.location + range.length + 8 > pasteBoard.length) return;
+        NSRange subRange = NSMakeRange(range.location + range.length, 8);
+        NSString *code = [pasteBoard substringWithRange:subRange];
+        // 存储认证编码
+        [CoreArchive setStr:pasteBoard key:@"authenCode"];
+        // 发送通知
+        [YTCenter postNotificationName:YTPasteBoardAuthen object:nil];
+    }
     
 }
 /**

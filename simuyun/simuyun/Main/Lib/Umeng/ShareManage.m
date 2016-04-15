@@ -45,13 +45,13 @@ static ShareManage *shareManage;
 
 + (ShareManage *)shareManage
 {
-    @synchronized(self)
-    {
-        if (shareManage == nil) {
+//    @synchronized(self)
+//    {
+//        if (shareManage == nil) {
             shareManage = [[self alloc] init];
-        }
+//        }
         return shareManage;
-    }
+//    }
 }
 
 #pragma mark 注册友盟分享微信
@@ -66,6 +66,23 @@ static ShareManage *shareManage;
     [WXApi registerApp:WXAppID];
     //设置图文分享
     [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeWeb;
+    [UMSocialData defaultData].extConfig.wechatSessionData.wxMessageType = UMSocialWXMessageTypeWeb;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.wxMessageType = UMSocialWXMessageTypeWeb;
+}
+
+- (void)shareTextConfig
+{
+    //设置友盟社会化组件appkey
+    [UMSocialData setAppKey:UmengAppKey];
+    [UMSocialData openLog:NO];
+    // 关闭分享提示
+    [UMSocialConfig setFinishToastIsHidden:YES  position:UMSocialiToastPositionCenter];
+    //注册微信
+    [WXApi registerApp:WXAppID];
+    //设置图文分享
+    [UMSocialData defaultData].extConfig.wxMessageType = UMSocialWXMessageTypeText;
+    [UMSocialData defaultData].extConfig.wechatSessionData.wxMessageType = UMSocialWXMessageTypeText;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.wxMessageType = UMSocialWXMessageTypeText;
 }
 
 #pragma mark 微信分享
@@ -73,14 +90,35 @@ static ShareManage *shareManage;
 {
     _viewC = viewC;
     //  设置内容和图片
-    [[UMSocialControllerService defaultControllerService] setShareText:self.share_content shareImage:self.share_image socialUIDelegate:self];
+    if (self.share_content != nil) {
+        [[UMSocialControllerService defaultControllerService] setShareText:self.share_content shareImage:self.share_image socialUIDelegate:self];
+    }
     //  设置标题
     [UMSocialData defaultData].extConfig.wechatSessionData.title = self.share_title;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.title = self.share_title;
     //  设置url
-    [UMSocialWechatHandler setWXAppId:WXAppID appSecret:WXAppSecret url:self.share_url];
+    if (self.share_url != nil) {
+        [UMSocialWechatHandler setWXAppId:WXAppID appSecret:WXAppSecret url:self.share_url];
+    }
     [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatSession].snsClickHandler(viewC,[UMSocialControllerService defaultControllerService],YES);
 }
+
+#pragma mark 微信朋友圈分享
+- (void)wxpyqShareWithViewControll:(UIViewController *)viewC
+{
+    _viewC = viewC;
+    //  设置内容和图片
+    if (self.share_image != nil) {
+        [[UMSocialControllerService defaultControllerService] setShareText:self.share_content shareImage:self.share_image socialUIDelegate:self];
+    }
+    //  设置标题
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = self.share_title;
+    //  设置url
+    if (self.share_url != nil) {
+        [UMSocialWechatHandler setWXAppId:WXAppID appSecret:WXAppSecret url:self.share_url];
+    }
+    [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatTimeline].snsClickHandler(viewC,[UMSocialControllerService defaultControllerService],YES);
+}
+
 
 /** 微信分享文件**/
 - (void)wxShareWithFile:(NSData *)fileData 
@@ -133,22 +171,6 @@ static ShareManage *shareManage;
     }
 }
 
-#pragma mark 微信朋友圈分享
-- (void)wxpyqShareWithViewControll:(UIViewController *)viewC
-{
-    _viewC = viewC;
-    //  设置内容和图片
-    if (self.share_image != nil) {
-        [[UMSocialControllerService defaultControllerService] setShareText:self.share_content shareImage:self.share_image socialUIDelegate:self];
-    }
-    //  设置标题
-    [UMSocialData defaultData].extConfig.wechatTimelineData.title = self.share_title;
-    //  设置url
-    if (self.share_url != nil) {
-        [UMSocialWechatHandler setWXAppId:WXAppID appSecret:WXAppSecret url:self.share_url];
-    }
-    [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToWechatTimeline].snsClickHandler(viewC,[UMSocialControllerService defaultControllerService],YES);
-}
 
 
 #pragma mark 邮件分享

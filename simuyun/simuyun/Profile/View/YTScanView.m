@@ -268,6 +268,7 @@ static UIWindow *_window;
             continer.alpha = 0.0;
         });
     }];
+    [self destroy];
 }
 /**
  *  分享到朋友圈
@@ -303,6 +304,7 @@ static UIWindow *_window;
             continer.alpha = 0.0;
         });
     }];
+    [self destroy];
 }
 
 - (NSMutableAttributedString *)attributedStringWithStr:(NSString *)str

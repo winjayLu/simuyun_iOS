@@ -112,6 +112,8 @@
  *  微信发送
  */
 - (IBAction)weiChatClick:(UIButton *)sender {
+    NSString *bankContent = [NSString stringWithFormat:@"打款信息\n客户姓名：%@\n认购:%d万%@\n开户名：%@\n募集银行：%@\n募集帐号：%@\n打款备注：%@认购%@", self.prouctModel.customerName, self.prouctModel.buyMoney, self.prouctModel.pro_name, self.accountNameLable.text, self.accountBankLable.text, self.accountLable.text, self.prouctModel.customerName, self.prouctModel.pro_name];
+    self.shareManage.share_content = bankContent;
     [self.shareManage wxShareWithViewControll:self];
     [MobClick event:@"buySuccess_click" attributes:@{@"按钮" : @"微信发送打款帐号", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
@@ -137,6 +139,7 @@
 {
     if (!_shareManage) {
         ShareManage *share = [ShareManage shareManage];
+        [share shareTextConfig];
         share.share_title = @"打款信息";
         
         NSString *bankContent = [NSString stringWithFormat:@"客户姓名：%@\n认购:%d万%@\n开户名：%@\n募集银行：%@\n募集帐号：%@\n打款备注：%@认购%@", self.prouctModel.customerName, self.prouctModel.buyMoney, self.prouctModel.pro_name, self.accountNameLable.text, self.accountBankLable.text, self.accountLable.text, self.prouctModel.customerName, self.prouctModel.pro_name];

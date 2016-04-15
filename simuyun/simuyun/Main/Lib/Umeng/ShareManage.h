@@ -19,6 +19,11 @@
 - (void)shareConfig;
 
 /**
+ *  配置文字分享
+ */
+- (void)shareTextConfig;
+
+/**
  *  分享标题
  */
 @property (nonatomic, copy) NSString *share_title;

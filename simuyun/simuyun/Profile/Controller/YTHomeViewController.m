@@ -752,7 +752,7 @@
 {
     YTAuthenCodeView *anthenCodeView = [YTAuthenCodeView shared];
     anthenCodeView.content = [YTUserInfoTool userInfo].inviteCode;
-    [anthenCodeView showScan];
+    [anthenCodeView showScanWithVc:self];
 }
 
 
