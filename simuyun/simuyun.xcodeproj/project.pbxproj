@@ -264,6 +264,7 @@
 		97545A4D1CAA1C8C00F4E6C7 /* YTCloudListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97545A4C1CAA1C8C00F4E6C7 /* YTCloudListController.m */; };
 		97545A501CAA685E00F4E6C7 /* YTCloudListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97545A4F1CAA685E00F4E6C7 /* YTCloudListCell.m */; };
 		975F78041BCFCD3D00589D22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 975F78031BCFCD3D00589D22 /* Assets.xcassets */; };
+		976CD9721CC0E6280099C33D /* YTAuthenCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 976CD9711CC0E6280099C33D /* YTAuthenCodeView.m */; };
 		977132C41CA13B61001D0746 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 977132C31CA13B61001D0746 /* AssetsLibrary.framework */; };
 		977132C61CA13B68001D0746 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 977132C51CA13B68001D0746 /* AudioToolbox.framework */; };
 		977132C81CA13B80001D0746 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 977132C71CA13B80001D0746 /* CoreAudio.framework */; };
@@ -830,6 +831,8 @@
 		97545A4E1CAA685E00F4E6C7 /* YTCloudListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTCloudListCell.h; sourceTree = "<group>"; };
 		97545A4F1CAA685E00F4E6C7 /* YTCloudListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTCloudListCell.m; sourceTree = "<group>"; };
 		975F78031BCFCD3D00589D22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		976CD9701CC0E6280099C33D /* YTAuthenCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAuthenCodeView.h; sourceTree = "<group>"; };
+		976CD9711CC0E6280099C33D /* YTAuthenCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAuthenCodeView.m; sourceTree = "<group>"; };
 		977132C31CA13B61001D0746 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		977132C51CA13B68001D0746 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		977132C71CA13B80001D0746 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
@@ -1247,6 +1250,8 @@
 				97270C3C1C7BF47400C92888 /* YTOrderCenterCell.xib */,
 				97A4DE041C97E5B000079AFC /* YTScanView.h */,
 				97A4DE051C97E5B000079AFC /* YTScanView.m */,
+				976CD9701CC0E6280099C33D /* YTAuthenCodeView.h */,
+				976CD9711CC0E6280099C33D /* YTAuthenCodeView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2854,6 +2859,7 @@
 				97270CC91C7BF47E00C92888 /* YTProductViewController.m in Sources */,
 				97270C611C7BF47400C92888 /* YTOrderCenterCell.m in Sources */,
 				97270CDC1C7BF47E00C92888 /* JKPhotoBrowser.m in Sources */,
+				976CD9721CC0E6280099C33D /* YTAuthenCodeView.m in Sources */,
 				97A4DDF21C97A53500079AFC /* LBXScanNative.m in Sources */,
 				97270EA31C7BF4D500C92888 /* AFHTTPSessionManager.m in Sources */,
 				97A4DDF11C97A53500079AFC /* LBXScanLineAnimation.m in Sources */,

@@ -73,6 +73,9 @@
 // 是否有二维码
 @property (nonatomic, assign) BOOL isExtension;
 
+// 邀请口令
+@property (nonatomic, copy) NSString *inviteCode;
+
 
 
 @end

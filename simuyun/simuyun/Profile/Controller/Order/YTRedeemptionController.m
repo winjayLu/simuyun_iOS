@@ -17,6 +17,7 @@
 #import "YTViewPdfViewController.h"
 #import "UIImage+Extend.h"
 #import "YTSenMailView.h"
+#import "CoreArchive.h"
 
 // 赎回申请
 
@@ -220,7 +221,6 @@
         YTSlipModel *slip = photos[i];
         if (i == 0) {
             [annex appendString:@"[{"];
-#warning 赎回用3
             [annex appendString:@"\"annex_type\":\"3\""];
             [annex appendString:[NSString stringWithFormat:@",\"annex_path\":\"%@\"",slip.url]];
             [annex appendString:[NSString stringWithFormat:@",\"file_type\":\"%@\"",slip.type]];
@@ -271,27 +271,25 @@
     [self.view addSubview:sendMail];
     self.sendMailView = sendMail;
 }
-#warning 缺少接口
 /**
  *  发送请求
  *
  */
 - (void)sendMail:(NSString *)mail
 {
-//    // 发送请求
-//    [SVProgressHUD showWithStatus:@"正在发送" maskType:SVProgressHUDMaskTypeClear];
-//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//    params[@"email"] = mail;
-//    params[@"proId"] = self.product.pro_id;
-//    [YTHttpTool get:YTEmailsharing params:params success:^(id responseObject) {
-//        YTLog(@"%@", responseObject);
-//        [SVProgressHUD showSuccessWithStatus:@"发送成功"];
-//        // 保存发送成功的Email
-//        [CoreArchive setStr:mail key:@"mail"];
-//        [self.sendMailView sendSuccess:YES];
-//        self.sendMailView = nil;
-//    } failure:^(NSError *error) {
-//    }];
+    // 发送请求
+    [SVProgressHUD showWithStatus:@"正在发送" maskType:SVProgressHUDMaskTypeClear];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"email"] = mail;
+    params[@"order_id"] = self.orderId;
+    [YTHttpTool get:YTGetRedeemMeans params:params success:^(id responseObject) {
+        [SVProgressHUD showSuccessWithStatus:@"发送成功"];
+        // 保存发送成功的Email
+        [CoreArchive setStr:mail key:@"mail"];
+        [self.sendMailView sendSuccess:YES];
+        self.sendMailView = nil;
+    } failure:^(NSError *error) {
+    }];
 }
 /**
  *  提交赎回

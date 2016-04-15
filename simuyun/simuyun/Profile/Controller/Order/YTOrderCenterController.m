@@ -577,9 +577,6 @@
     [self.navigationController pushViewController:detail animated:YES];
     [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"查看订单详情", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     
-#warning 测试
-//    YTRedeemptionController *VC = [[YTRedeemptionController alloc] init];
-//    [self.navigationController pushViewController:VC animated:YES];
 }
 
 // 发送请求删除订单

@@ -137,10 +137,9 @@
  */
 - (void)checkAuthenCode
 {
-#warning 测试
+    if ([YTUserInfoTool userInfo].adviserStatus == 0) return;
     NSString *code = [CoreArchive strForKey:@"authenCode"];
     if (code == nil || code.length == 0) return;
-    if ([YTUserInfoTool userInfo].adviserStatus == 0) return;
     // 检查邀请码是否有效
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"inviteCode"] = code;

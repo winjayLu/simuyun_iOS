@@ -20,7 +20,8 @@ typedef enum {
     TopButtonTypeDindan,    //  完成订单
     TopButtonTypeYeji,       //  我的业绩
     TopButtonTypeMenu,       // 菜单
-    TopButtonTypeMyScan        // 我的二维码
+    TopButtonTypeMyScan,        // 我的二维码
+    TopButtonTypeAuthen     // 认证口令
     
 } TopButtonType;
 

@@ -138,6 +138,8 @@
 // 检查邀请码
 #define YTCheckInviteCode @"checkInviteCode"
 // 应用邀请码
-#define YTCommitInviteCode @"commitInviteCode"
+#define YTCommitInviteCode @"applyInviteCode"
+// 邮件获取赎回资料
+#define YTGetRedeemMeans @"getRedeemMeans"
 
 #endif /* YTServerConfig_h */

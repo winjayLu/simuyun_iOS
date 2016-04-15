@@ -54,6 +54,7 @@
 #import <RongIMKit/RongIMKit.h>
 #import "YTLoginViewController.h"
 #import "YTNavigationController.h"
+#import "YTAuthenCodeView.h"
 
 
 
@@ -677,6 +678,9 @@
         case TopButtonTypeMyScan:
             [self showScanView];
             break;
+        case TopButtonTypeAuthen:
+            [self showAuthenCodeView];
+            break;
     }
     // 跳转对应控制器
     if (pushVc != nil) {
@@ -739,6 +743,16 @@
 {
     YTScanView *scanView = [YTScanView shared];
     [scanView showScan];
+}
+
+/**
+ *  展示认证口令
+ */
+- (void)showAuthenCodeView
+{
+    YTAuthenCodeView *anthenCodeView = [YTAuthenCodeView shared];
+    anthenCodeView.content = [YTUserInfoTool userInfo].inviteCode;
+    [anthenCodeView showScan];
 }
 
 

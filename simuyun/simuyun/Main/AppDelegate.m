@@ -423,26 +423,27 @@
  */
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    // 1.判断理财师是否认证
-    // 2.发送通知到TabBar
-    // 3.发送请求获取认证信息
-    // 4.弹出提醒框
-    // 5.确认认证理财师
-#warning 测试
-    if ([YTUserInfoTool userInfo].adviserStatus != 0) {
         // 获取剪贴板内容
         NSString *pasteBoard = [UIPasteboard generalPasteboard].string;
         // 判断口令是否符合规则
-        if ([pasteBoard hasPrefix:@""]) {
+        if ([self countOfString:pasteBoard] == 2) {
             
+            NSRange range = [pasteBoard rangeOfString:@"￥"];
+            NSRange subRange = NSMakeRange(range.location + range.length, 8);
+            NSString *code = [pasteBoard substringWithRange:subRange];
+            // 存储认证编码
+            [CoreArchive setStr:pasteBoard key:@"authenCode"];
+            // 发送通知
+            [YTCenter postNotificationName:YTPasteBoardAuthen object:nil];            
         }
-        // 存储认证编码
-        [CoreArchive setStr:pasteBoard key:@"authenCode"];
-        // 发送通知
-        [YTCenter postNotificationName:YTPasteBoardAuthen object:nil];
-    }
     
-    
+}
+/**
+ *  查照￥出现的次数
+ */
+- (NSInteger)countOfString:(NSString*)str {
+    NSInteger strCount = [str length] - [[str stringByReplacingOccurrencesOfString:@"￥" withString:@""] length];
+    return strCount / 1;
 }
 
 /**

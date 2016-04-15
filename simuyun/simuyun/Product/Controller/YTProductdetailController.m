@@ -582,7 +582,7 @@
     }];
     [MobClick event:@"proDetail_click" attributes:@{@"产品" : self.product.pro_name, @"按钮" : @"获取详细资料", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
-#warning 待调试
+
 - (void)snsClick
 {
     [self.popover dismiss];

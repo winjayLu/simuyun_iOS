@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -186,6 +186,17 @@
                         <action selector="myScanClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="YC4-Hb-wnO"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4gl-v4-GBZ" userLabel="authenShar">
+                    <rect key="frame" x="10" y="112" width="37" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="J6q-Mv-1Tb"/>
+                        <constraint firstAttribute="width" constant="37" id="cjs-eY-rR4"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="authenShar"/>
+                    <connections>
+                        <action selector="authenClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="PV7-yf-Tqy"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -195,6 +206,7 @@
                 <constraint firstItem="98T-Fi-cUv" firstAttribute="leading" secondItem="xO5-bn-mkv" secondAttribute="leading" id="26A-ah-SzE"/>
                 <constraint firstItem="psv-5Z-FRq" firstAttribute="top" secondItem="Ege-Bt-fN2" secondAttribute="bottom" constant="15" id="2hc-bp-9vg"/>
                 <constraint firstItem="ZK9-mr-7Kc" firstAttribute="leading" secondItem="PXL-kS-EuD" secondAttribute="leading" id="2qU-da-Mbq"/>
+                <constraint firstItem="Ege-Bt-fN2" firstAttribute="top" secondItem="4gl-v4-GBZ" secondAttribute="bottom" constant="15" id="3Sw-xp-Qku"/>
                 <constraint firstItem="PXL-kS-EuD" firstAttribute="leading" secondItem="0EK-Rx-hhm" secondAttribute="trailing" constant="5" id="5AX-cd-nUA"/>
                 <constraint firstItem="71c-4s-gBb" firstAttribute="top" secondItem="0EK-Rx-hhm" secondAttribute="bottom" constant="14" id="6gd-om-VSw"/>
                 <constraint firstItem="F28-CY-hce" firstAttribute="height" secondItem="xO5-bn-mkv" secondAttribute="height" id="7Xa-22-Ifm"/>
@@ -228,6 +240,7 @@
                 <constraint firstItem="BX1-C4-cxp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="68" id="cYW-6c-ttR"/>
                 <constraint firstItem="TR6-ku-oa3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ctf-em-eZL"/>
                 <constraint firstAttribute="trailing" secondItem="BX1-C4-cxp" secondAttribute="trailing" constant="10" id="dC3-gh-GRU"/>
+                <constraint firstItem="Ege-Bt-fN2" firstAttribute="leading" secondItem="4gl-v4-GBZ" secondAttribute="leading" id="dgW-Ij-e2G"/>
                 <constraint firstItem="98T-Fi-cUv" firstAttribute="width" secondItem="xO5-bn-mkv" secondAttribute="width" id="dpZ-bO-Yq8"/>
                 <constraint firstItem="Oad-Pf-04j" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="32" id="e7J-Dw-foq"/>
                 <constraint firstItem="0EK-Rx-hhm" firstAttribute="centerX" secondItem="27e-HL-mxV" secondAttribute="centerX" id="ebu-eT-tZy"/>
@@ -272,6 +285,7 @@
                 </mask>
             </variation>
             <connections>
+                <outlet property="authenBtn" destination="4gl-v4-GBZ" id="Qb6-Q0-Pir"/>
                 <outlet property="homeImageView" destination="TR6-ku-oa3" id="lyf-UT-ozB"/>
                 <outlet property="huangGuanImage" destination="Z40-Md-MMW" id="gls-gG-hgf"/>
                 <outlet property="iconImage" destination="27e-HL-mxV" id="Oac-y8-Xky"/>
@@ -294,6 +308,7 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
+        <image name="authenShar" width="37" height="37"/>
         <image name="backgroundpicture" width="375" height="310"/>
         <image name="chouti" width="44" height="49"/>
         <image name="dikuang" width="87" height="53"/>

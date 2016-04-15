@@ -120,6 +120,13 @@
 // 二维码底部约束
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scanBottomConstraint;
 
+// 认证口令按钮
+@property (weak, nonatomic) IBOutlet UIButton *authenBtn;
+
+// 认证口令点击
+- (IBAction)authenClick:(UIButton *)sender;
+
+
 @end
 
 @implementation YTProfileTopView
@@ -345,9 +352,22 @@
     }
 }
 
+/**
+ *  二维码点击
+ *
+ */
 - (IBAction)myScanClick:(id)sender {
     [self sendDelegate:TopButtonTypeMyScan];
     [MobClick event:@"main_click" attributes:@{@"按钮" : @"我的二维码", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+}
+
+/**
+ *  认证口令点击
+ *
+ */
+- (IBAction)authenClick:(UIButton *)sender {
+    [self sendDelegate:TopButtonTypeAuthen];
+    [MobClick event:@"main_click" attributes:@{@"按钮" : @"我的私募云口令", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
 
@@ -432,8 +452,10 @@
     // 是否显示二维码
     if (userInfo.isExtension) {
         self.myScanBtn.hidden = NO;
+        self.authenBtn.hidden = NO;
     } else {
         self.myScanBtn.hidden = YES;
+        self.authenBtn.hidden = YES;
     }
 
 }
