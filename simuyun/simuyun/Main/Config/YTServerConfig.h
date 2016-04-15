@@ -17,7 +17,7 @@
 //#define YTH5Server @"http://www.simuyun.com"
 //#define UmengAppKey @"5514ed3cfd98c5bca4000872"
 //#define TXAppKey @"1251892263"
-//#define RongCloudKey @"tdrvipksrbgn5"
+//#define RongCloudKey @"8luwapkvuz04l"
 //#endif
 
 // 开发环境213

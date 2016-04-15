@@ -116,8 +116,7 @@ static UIWindow *_window;
 
     // 展示内容
     UILabel *content = [[UILabel alloc] init];
-    content.text = self.content;
-    content.font = [UIFont systemFontOfSize:14];
+    content.attributedText = [self attributedStringWithStr:self.content];
     content.numberOfLines = 0;
     content.textColor = YTColor(51, 51, 51);
     CGFloat contentY = CGRectGetMaxY(title.frame) + 20;
@@ -210,6 +209,8 @@ static UIWindow *_window;
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc]init];
     //设置行距
     [style setLineSpacing:4.0f];
+    
+    [attStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:14] range:NSMakeRange(0, attStr.length)];
     
     //根据给定长度与style设置attStr式样]
     [attStr addAttribute:NSParagraphStyleAttributeName value:style range:NSMakeRange(0, str.length)];
