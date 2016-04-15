@@ -25,3 +25,6 @@ extern NSString *const YTUpdateUnreadCount;
 
 // 选中消息控制器
 extern NSString *const YTSelectedMessageVc;
+
+// 获取到剪贴板认证口令
+extern NSString *const YTPasteBoardAuthen;

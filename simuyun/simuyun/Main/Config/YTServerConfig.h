@@ -135,5 +135,9 @@
 #define YTRedeemList @"redemptionOrderList"
 // 赎回订单详情
 #define YTRedeemDetail @"redeemDetail"
+// 检查邀请码
+#define YTCheckInviteCode @"checkInviteCode"
+// 应用邀请码
+#define YTCommitInviteCode @"commitInviteCode"
 
 #endif /* YTServerConfig_h */

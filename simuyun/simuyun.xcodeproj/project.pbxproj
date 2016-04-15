@@ -247,7 +247,6 @@
 		97270EED1C7BF4D500C92888 /* FloatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270E771C7BF4D500C92888 /* FloatView.m */; };
 		97270EEE1C7BF4D500C92888 /* YTHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270E791C7BF4D500C92888 /* YTHttpTool.m */; };
 		97270EEF1C7BF4D500C92888 /* YTNotificationConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270E7B1C7BF4D500C92888 /* YTNotificationConst.m */; };
-		97270EF01C7BF4D500C92888 /* YTProductTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270E7D1C7BF4D500C92888 /* YTProductTool.m */; };
 		97270EF11C7BF4D500C92888 /* YTResourcesTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270E7F1C7BF4D500C92888 /* YTResourcesTool.m */; };
 		97270EF21C7BF4D500C92888 /* YTDataHintView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270E821C7BF4D500C92888 /* YTDataHintView.m */; };
 		97270EF31C7BF4D500C92888 /* YTLogoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 97270E841C7BF4D500C92888 /* YTLogoView.m */; };
@@ -799,8 +798,6 @@
 		97270E791C7BF4D500C92888 /* YTHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTHttpTool.m; sourceTree = "<group>"; };
 		97270E7A1C7BF4D500C92888 /* YTNotificationConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTNotificationConst.h; sourceTree = "<group>"; };
 		97270E7B1C7BF4D500C92888 /* YTNotificationConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTNotificationConst.m; sourceTree = "<group>"; };
-		97270E7C1C7BF4D500C92888 /* YTProductTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTProductTool.h; sourceTree = "<group>"; };
-		97270E7D1C7BF4D500C92888 /* YTProductTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTProductTool.m; sourceTree = "<group>"; };
 		97270E7E1C7BF4D500C92888 /* YTResourcesTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTResourcesTool.h; sourceTree = "<group>"; };
 		97270E7F1C7BF4D500C92888 /* YTResourcesTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTResourcesTool.m; sourceTree = "<group>"; };
 		97270E811C7BF4D500C92888 /* YTDataHintView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTDataHintView.h; sourceTree = "<group>"; };
@@ -2238,8 +2235,6 @@
 				97270E791C7BF4D500C92888 /* YTHttpTool.m */,
 				97270E7A1C7BF4D500C92888 /* YTNotificationConst.h */,
 				97270E7B1C7BF4D500C92888 /* YTNotificationConst.m */,
-				97270E7C1C7BF4D500C92888 /* YTProductTool.h */,
-				97270E7D1C7BF4D500C92888 /* YTProductTool.m */,
 				97270E7E1C7BF4D500C92888 /* YTResourcesTool.h */,
 				97270E7F1C7BF4D500C92888 /* YTResourcesTool.m */,
 				97270E731C7BF4D500C92888 /* YTJpushTool.h */,
@@ -2893,7 +2888,6 @@
 				97270C5B1C7BF47400C92888 /* YTGroupCell.m in Sources */,
 				97270C4C1C7BF47400C92888 /* YTHomeViewController.m in Sources */,
 				97270EBF1C7BF4D500C92888 /* PPTCell.m in Sources */,
-				97270EF01C7BF4D500C92888 /* YTProductTool.m in Sources */,
 				97270E8C1C7BF4D500C92888 /* NSArray+Extend.m in Sources */,
 				97270BF21C7BF46800C92888 /* YTNewest.m in Sources */,
 				97B08A8A1BC2472B007EBD24 /* main.m in Sources */,

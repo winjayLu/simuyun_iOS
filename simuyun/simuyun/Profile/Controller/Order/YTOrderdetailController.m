@@ -14,9 +14,10 @@
 #import "YTProductdetailController.h"
 #import "YTAccountTool.h"
 #import "YTRedeemptionController.h"
+#import "SVProgressHUD.h"
 
 
-@interface YTOrderdetailController () <UIWebViewDelegate, UIAlertViewDelegate>
+@interface YTOrderdetailController () <UIWebViewDelegate, UIAlertViewDelegate, RedeemViewDelegate>
 @property (nonatomic, weak) UIWebView *webView;
 
 @end
@@ -97,6 +98,7 @@
             {
                 YTRedeemptionController *Vc = [[YTRedeemptionController alloc] init];
                 Vc.orderId = self.order.order_id;
+                Vc.delegate = self;
                 [self.navigationController pushViewController:Vc animated:YES];
             }
             
@@ -106,6 +108,10 @@
     return YES;
 }
 
+/**
+ *  撤销赎回申请
+ *
+ */
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     // 撤回赎回申请
@@ -113,6 +119,15 @@
         NSString *js = @"withdraw()";
         [self.webView stringByEvaluatingJavaScriptFromString:js];
     }
+}
+
+/**
+ *  提交赎回申请成功
+ */
+- (void)redeemSuccess
+{
+    [SVProgressHUD showSuccessWithStatus:@"提交赎回申请成功"];
+    [self.webView stringByEvaluatingJavaScriptFromString:@"window.location.reload()"];
 }
 
 

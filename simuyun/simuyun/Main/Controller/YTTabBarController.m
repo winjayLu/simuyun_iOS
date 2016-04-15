@@ -26,6 +26,7 @@
 #import "NSString+Extend.h"
 #import "TCCloudPlayerSDK.h"
 #import <RongIMKit/RongIMKit.h>
+#import "YTUserInfoTool.h"
 
 
 @interface YTTabBarController () <YTLogoViewDelegate, RCIMReceiveMessageDelegate>
@@ -94,6 +95,9 @@
     
     // 消息推送点击
     [YTCenter addObserver:self selector:@selector(selectedMessageVc) name:YTSelectedMessageVc object:nil];
+    
+    // 获取到剪贴板认证口令
+    [YTCenter addObserver:self selector:@selector(checkAuthenCode) name:YTPasteBoardAuthen object:nil];
 }
 
 - (void)onRCIMReceiveMessage:(RCMessage *)message
@@ -126,6 +130,60 @@
 - (void)selectedMessageVc
 {
     [self setSelectedIndex:0];
+}
+
+/**
+ *  校验口令是否有效
+ */
+- (void)checkAuthenCode
+{
+#warning 测试
+    NSString *code = [CoreArchive strForKey:@"authenCode"];
+    if (code == nil || code.length == 0) return;
+    if ([YTUserInfoTool userInfo].adviserStatus == 0) return;
+    // 检查邀请码是否有效
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"inviteCode"] = code;
+    [YTHttpTool get:YTCheckInviteCode params:param success:^(id responseObject) {
+        // 弹出框提醒
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:responseObject[@"text"] delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确认", nil];
+        [alert show];
+    } failure:^(NSError *error) {
+        // 清除code
+        [CoreArchive setStr:nil key:@"authenCode"];
+    }];
+}
+
+/**
+ *  撤销赎回申请
+ *
+ */
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    // 提交口令进行认证
+    if (buttonIndex == 1) {
+        [self commitAuthenCode];
+    }
+}
+
+/**
+ *  提交口令进行认证
+ */
+- (void)commitAuthenCode
+{
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"inviteCode"] = [CoreArchive strForKey:@"authenCode"];
+    param[@"adviserId"] = [YTAccountTool account].userId;
+    // 清除code
+    [CoreArchive setStr:nil key:@"authenCode"];
+    [YTHttpTool post:YTCommitInviteCode params:param success:^(id responseObject) {
+        // 修改用户认证状态
+        [YTCenter postNotificationName:YTUpdateUserInfo object:nil];
+        YTUserInfo *userInfo =[YTUserInfoTool userInfo];
+        userInfo.adviserStatus = 0;
+        [YTUserInfoTool saveUserInfo:userInfo];
+    } failure:^(NSError *error) {
+    }];
 }
 
 
@@ -347,6 +405,9 @@
     }
     // 执行动画
     [self.logo showAnimation];
+    
+    // 检测是否有推荐认证码
+    [self checkAuthenCode];
 }
 
 - (void)setupLogoView

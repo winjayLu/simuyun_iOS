@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol RedeemViewDelegate <NSObject>
+
+@optional
+
+/**
+ *  提交赎回成功
+ */
+-(void)redeemSuccess;
+
+
+@end
+
+
 // 赎回申请
 
 @interface YTRedeemptionController : UIViewController
@@ -17,4 +30,9 @@
  */
 @property (nonatomic, copy) NSString *orderId;
 
+
+/**
+ *  代理
+ */
+@property (nonatomic, weak) id<RedeemViewDelegate> delegate;
 @end

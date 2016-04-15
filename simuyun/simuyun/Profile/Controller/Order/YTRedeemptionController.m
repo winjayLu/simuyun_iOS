@@ -169,7 +169,7 @@
 {
     [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"orderId"] = self.orderId;
+    param[@"order_id"] = self.orderId;
     param[@"advisers_id"] = [YTAccountTool account].userId;
     [YTHttpTool get:YTRedeemDetail params:param success:^(id responseObject) {
         self.redeem = [YTRedeemModel objectWithKeyValues:responseObject];
@@ -245,10 +245,8 @@
     params[@"applyAdviserId"] = [YTAccountTool account].userId;
     params[@"orderId"] = self.redeem.orderId;
     [YTHttpTool post:YTRedeemption params:params success:^(id responseObject) {
-        [SVProgressHUD showSuccessWithStatus:@"提交成功" ];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [self.navigationController popViewControllerAnimated:YES];
-        });
+        [self.navigationController popViewControllerAnimated:YES];
+        [self.delegate redeemSuccess];
     } failure:^(NSError *error) {
     }];
 }

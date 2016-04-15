@@ -21,3 +21,5 @@ NSString *const YTPlayerScreenChange = @"YTPlayerScreenChange";
 NSString *const YTUpdateUnreadCount = @"YTUpdateUnreadCount";
 // 选中消息控制器
 NSString *const YTSelectedMessageVc = @"YTSelectedMessageVc";
+// 获取到剪贴板认证口令
+NSString *const YTPasteBoardAuthen = @"YTPasteBoardAuthen";

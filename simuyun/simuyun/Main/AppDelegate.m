@@ -137,25 +137,6 @@
     [[RCIMClient sharedRCIMClient] setDeviceToken:token];
 }
 
-//- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-//{
-//    NSDictionary *pushServiceData = [[RCIMClient sharedRCIMClient] getPushExtraFromRemoteNotification:userInfo];
-//    if (pushServiceData) {
-//        NSLog(@"该远程推送包含来自融云的推送服务");
-//        for (id key in [pushServiceData allKeys]) {
-//            NSLog(@"key = %@, value = %@", key, pushServiceData[key]);
-//        }
-//
-//        /**
-//         * 统计推送打开率2
-//         */
-//        [[RCIMClient sharedRCIMClient] recordRemoteNotificationEvent:userInfo];
-//    } else {
-//        NSLog(@"该远程推送不包含来自融云的推送服务");
-//        [self receivedPushNotification:userInfo];
-//        [APService handleRemoteNotification:userInfo];
-//    }
-//}
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
@@ -434,6 +415,34 @@
     
     // 登录融云
     [self loginRongCloud];
+}
+
+/**
+ *  App处于激活状态
+ *
+ */
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    // 1.判断理财师是否认证
+    // 2.发送通知到TabBar
+    // 3.发送请求获取认证信息
+    // 4.弹出提醒框
+    // 5.确认认证理财师
+#warning 测试
+    if ([YTUserInfoTool userInfo].adviserStatus != 0) {
+        // 获取剪贴板内容
+        NSString *pasteBoard = [UIPasteboard generalPasteboard].string;
+        // 判断口令是否符合规则
+        if ([pasteBoard hasPrefix:@""]) {
+            
+        }
+        // 存储认证编码
+        [CoreArchive setStr:pasteBoard key:@"authenCode"];
+        // 发送通知
+        [YTCenter postNotificationName:YTPasteBoardAuthen object:nil];
+    }
+    
+    
 }
 
 /**
