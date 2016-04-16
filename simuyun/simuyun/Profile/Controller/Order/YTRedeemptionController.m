@@ -170,8 +170,8 @@
 {
     [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
-    param[@"order_id"] = self.orderId;
-    param[@"advisers_id"] = [YTAccountTool account].userId;
+    param[@"orderId"] = self.orderId;
+    param[@"adviserId"] = [YTAccountTool account].userId;
     [YTHttpTool get:YTRedeemDetail params:param success:^(id responseObject) {
         self.redeem = [YTRedeemModel objectWithKeyValues:responseObject];
         [self setData];
@@ -263,7 +263,7 @@
 {
     if (self.sendMailView != nil) return;
     
-    YTSenMailView *sendMail = [[YTSenMailView alloc] initWithViewController:self];
+    YTSenMailView *sendMail = [[YTSenMailView alloc] initWithViewController:self tiele:@"赎回材料：本基金在赎回过程办理时需要投资人阅读并签署的说明文件" btnTitle:@"获取赎回材料"];
     sendMail.frame = self.view.bounds;
     
     //  设置代理

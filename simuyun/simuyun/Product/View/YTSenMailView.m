@@ -34,12 +34,12 @@
 @implementation YTSenMailView
 
 
-- (instancetype)initWithViewController:(UIViewController *)vc
+- (instancetype)initWithViewController:(UIViewController *)vc tiele:(NSString *)title btnTitle:(NSString *)btnTitle
 {
     self = [self init];
     if (self) {
         //  创建子控件
-        [self creatMainShareView:vc];
+        [self creatMainShareView:vc title:title btnTitle:btnTitle];
         //增加监听，当键盘出现或改变时收出消息
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(keyboardWillShow:)
@@ -80,7 +80,7 @@
     }];
 }
 
-- (void)creatMainShareView:(UIViewController *)vc
+- (void)creatMainShareView:(UIViewController *)vc title:(NSString *)title btnTitle:(NSString *)btnTitle
 {
     mainGrayBg = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, DeviceWidth, DeviceHight)];
     [mainGrayBg setImage:[UIImage imageWithColor:[UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.2]]];
@@ -99,14 +99,14 @@
     [_whiteBg  setUserInteractionEnabled:YES];
     _whiteBg.backgroundColor = YTColor(246, 246, 246);
     [shareMenuView addSubview:_whiteBg];
-    [self creatSubview:vc];
+    [self creatSubview:vc title:title btnTitle:btnTitle];
 }
 
-- (void)creatSubview:(UIViewController *)vc
+- (void)creatSubview:(UIViewController *)vc title:(NSString *)title btnTitle:(NSString *)btnTitle
 {
     // 提示
     UILabel *lable = [[UILabel alloc] init];
-    lable.text = @"详细资料包括：电子合同、电子版产品说明书、产品简版、产品背景资料、签约指引、预热短信。";
+    lable.text = title;
     lable.numberOfLines = 0;
     lable.textColor = YTColor(102, 102, 102);
     lable.font = [UIFont systemFontOfSize:13];
@@ -146,7 +146,7 @@
     // 按钮
     UIButton *button = [[UIButton alloc] init];
     [button setBackgroundImage:[UIImage imageNamed:@"hongseanniu"] forState:UIControlStateNormal];
-    [button setTitle:@"获取详细资料" forState:UIControlStateNormal];
+    [button setTitle:btnTitle forState:UIControlStateNormal];
     button.adjustsImageWhenHighlighted = NO;
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     button.frame = CGRectMake(10, CGRectGetMaxY(view.frame) + 15, DeviceWidth - 20, 44);

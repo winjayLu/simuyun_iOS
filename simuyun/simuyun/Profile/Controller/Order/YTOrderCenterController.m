@@ -562,21 +562,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.selectedCell.isShow) {
-        [self.selectedCell hideUtilityButtonsAnimated:YES];
-        self.selectedCell.isShow = NO;
-        return;
-    }
-    self.selectedCell = nil;
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    YTOrderCenterModel *order = self.orders[indexPath.section];
-    YTOrderdetailController *detail = [[YTOrderdetailController alloc] init];
-    detail.url = [NSString stringWithFormat:@"%@/order%@&id=%@", YTH5Server, [NSDate stringDate], order.order_id];
-    detail.order = self.orders[indexPath.section];
-    detail.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detail animated:YES];
-    [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"查看订单详情", @"机构" : [YTUserInfoTool userInfo].organizationName}];
-    
+//    if (self.selectedCell.isShow) {
+//        [self.selectedCell hideUtilityButtonsAnimated:YES];
+//        self.selectedCell.isShow = NO;
+//        return;
+//    }
+//    self.selectedCell = nil;
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    YTOrderCenterModel *order = self.orders[indexPath.section];
+//    YTOrderdetailController *detail = [[YTOrderdetailController alloc] init];
+//    detail.url = [NSString stringWithFormat:@"%@/order%@&id=%@", YTH5Server, [NSDate stringDate], order.order_id];
+//    detail.order = self.orders[indexPath.section];
+//    detail.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:detail animated:YES];
+//    [MobClick event:@"orderDetail_click" attributes:@{ @"按钮" : @"查看订单详情", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+#warning 测试
+    YTRedeemptionController *VC = [[YTRedeemptionController alloc] init];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 
 // 发送请求删除订单

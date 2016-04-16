@@ -23,9 +23,10 @@
  */
 @property(nonatomic,retain)id <senMailViewDelegate> sendDelegate;
 
-- (instancetype)initWithViewController:(UIViewController *)vc;
+- (instancetype)initWithViewController:(UIViewController *)vc tiele:(NSString *)title btnTitle:(NSString *)btnTitle;
 
 - (void)sendSuccess:(BOOL)success;
+
 
 
 @end

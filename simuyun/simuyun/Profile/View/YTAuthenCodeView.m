@@ -116,7 +116,9 @@ static UIWindow *_window;
 
     // 展示内容
     UILabel *content = [[UILabel alloc] init];
-    content.attributedText = [self attributedStringWithStr:self.content];
+    if (self.content.length > 0) {
+        content.attributedText = [self attributedStringWithStr:self.content];
+    }
     content.numberOfLines = 0;
     content.textColor = YTColor(51, 51, 51);
     CGFloat contentY = CGRectGetMaxY(title.frame) + 20;

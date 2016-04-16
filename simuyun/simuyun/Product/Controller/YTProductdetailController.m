@@ -555,7 +555,8 @@
     
     if (self.sendMailView != nil) return;
     
-    YTSenMailView *sendMail = [[YTSenMailView alloc] initWithViewController:self];
+    YTSenMailView *sendMail = [[YTSenMailView alloc] initWithViewController:self tiele:@"详细资料包括：电子合同、电子版产品说明书、产品简版、产品背景资料、签约指引、预热短信。" btnTitle:@"获取详细资料"];
+    
     sendMail.frame = self.view.bounds;
     
     //  设置代理
