@@ -11,6 +11,7 @@
 #import "UIButton+ImageBtn.h"
 #import "ShareManage.h"
 #import "SVProgressHUD.h"
+#import "YTResourcesTool.h"
 
 
 // 营销短信
@@ -45,6 +46,11 @@
     self.view.backgroundColor = [UIColor whiteColor];
     // 初始化工具条
     [self setupToolbar];
+    
+    // 审核隐藏工具条
+    if ([YTResourcesTool isVersionFlag] == NO) {
+        self.toolbar.hidden = YES;
+    }
     
     // 初始化编辑框
     [self setupTextView];

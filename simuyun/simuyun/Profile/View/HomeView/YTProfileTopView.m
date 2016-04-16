@@ -16,6 +16,7 @@
 #import "SVProgressHUD.h"
 #import "YTTabBarController.h"
 #import "CoreArchive.h"
+#import "YTResourcesTool.h"
 
 @interface YTProfileTopView() <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -454,6 +455,12 @@
         self.myScanBtn.hidden = NO;
         self.authenBtn.hidden = NO;
     } else {
+        self.myScanBtn.hidden = YES;
+        self.authenBtn.hidden = YES;
+    }
+    
+    // 审核隐藏二维码和认证口令
+    if ([YTResourcesTool isVersionFlag] == NO) {
         self.myScanBtn.hidden = YES;
         self.authenBtn.hidden = YES;
     }
