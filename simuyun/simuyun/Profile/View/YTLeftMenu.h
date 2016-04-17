@@ -18,5 +18,10 @@
  */
 @property (nonatomic, strong) YTUserInfo *userInfo;
 
+/**
+ *  退出登录
+ *
+ */
+- (IBAction)tuiChuClick:(UIButton *)btn;
 
 @end

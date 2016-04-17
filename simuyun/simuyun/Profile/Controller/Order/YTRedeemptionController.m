@@ -18,6 +18,7 @@
 #import "UIImage+Extend.h"
 #import "YTSenMailView.h"
 #import "CoreArchive.h"
+#import "AFNetworking.h"
 
 // 赎回申请
 
@@ -177,7 +178,6 @@
         [self setData];
         [SVProgressHUD dismiss];
     } failure:^(NSError *error) {
-        
     }];
 }
 
@@ -234,23 +234,38 @@
     }
     [annex appendString:@"]"];
     
-    // 发送请求
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    // 赎回金额、份额
+    NSString *redemptionShare = nil;
     if (self.redeem.productType == 2) {
-        params[@"redemptionShare"] = @(self.redeem.redeemAmt);
+        redemptionShare = self.redeem.redeemAmt;
     } else {
-        params[@"redemptionShare"] = @([self.fenNum.text doubleValue]);
+        redemptionShare = self.fenNum.text;
     }
-    params[@"redemptionMaterial"] = annex;
-    params[@"applyAdviserId"] = [YTAccountTool account].userId;
-    params[@"orderId"] = self.redeem.orderId;
-    [YTHttpTool post:YTRedeemption params:params success:^(id responseObject) {
-        [self.navigationController popViewControllerAnimated:YES];
-        [self.delegate redeemSuccess];
-    } failure:^(NSError *error) {
-    }];
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    dict[@"param"] = [NSString stringWithFormat:@"{\"orderId\" : \"%@\",\"applyAdviserId\" : \"%@\", \"redemptionShare\" : \"%@\", \"redemptionMaterial\" : %@}",self.redeem.orderId ,[YTAccountTool account].userId, redemptionShare, annex];
+    // 1.创建一个请求管理者
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    
+    // 2.发送一个POST请求
+    NSString *newUrl = [NSString stringWithFormat:@"%@%@",YTServer, YTRedeemption];
+    [mgr POST:newUrl parameters:dict
+      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+          [self.navigationController popViewControllerAnimated:YES];
+          [self.delegate redeemSuccess];
+      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+          
+          if(operation.responseObject[@"message"] != nil)
+          {
+              [SVProgressHUD showErrorWithStatus:operation.responseObject[@"message"]];
+          } else if(error.userInfo[@"NSLocalizedDescription"] != nil)
+          {
+              [SVProgressHUD showInfoWithStatus:@"网络链接失败\n请稍候再试"];
+          } else {
+              [SVProgressHUD showErrorWithStatus:@"提交失败"];
+          }
+      }];
 }
-
 
 #pragma mark Control
 
@@ -334,8 +349,8 @@
 - (void)pdfClick:(UIButton *)btn
 {
     YTViewPdfViewController *viewPdf = [[YTViewPdfViewController alloc] init];
-    viewPdf.url = self.redeem.files[btn.tag][@"fileUrl"];
-    viewPdf.shareTitle = self.redeem.files[btn.tag][@"fileName"];;
+    viewPdf.url = self.redeem.fileUrl[btn.tag][@"name"];
+    viewPdf.shareTitle = self.redeem.fileUrl[btn.tag][@"url"];;
     [self.navigationController pushViewController:viewPdf animated:YES];
 }
 
@@ -624,7 +639,7 @@
     // 赎回金额/份额
     if (self.redeem.productType == 2) {
         // 固收
-        self.redeemAmtLable.text = [NSString stringWithFormat:@"赎回金额：%d万（全额赎回）", self.redeem.redeemAmt];
+        self.redeemAmtLable.text = [NSString stringWithFormat:@"赎回金额：%@万（全额赎回）", self.redeem.redeemAmt];
         [self.redeemAmtLable sizeToFit];
     } else {
         // 浮收
@@ -654,7 +669,7 @@
     
     
     // 相关文件视图
-    if (self.redeem.files.count > 0) {
+    if (self.redeem.fileUrl.count > 0) {
         UILabel *redeemDescription = [self createDarkGrayLable];
         redeemDescription.text = @"相关文件：";
         [redeemDescription sizeToFit];
@@ -662,10 +677,10 @@
         [self.fileView addSubview:redeemDescription];
         
         // 文件列表
-        for (int i = 0; i < self.redeem.files.count; i++) {
+        for (int i = 0; i < self.redeem.fileUrl.count; i++) {
             UIButton *button = [[UIButton alloc] init];
-            [button setImage:[UIImage imageNamed:@"redeemPDF"] forState:UIControlStateNormal];
-            [button setTitle:self.redeem.files[i][@"fileName"] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:@"name"] forState:UIControlStateNormal];
+            [button setTitle:self.redeem.fileUrl[i][@"url"] forState:UIControlStateNormal];
             button.tag = i;
             [button addTarget:self action:@selector(pdfClick:) forControlEvents:UIControlEventTouchUpInside];
             button.frame = CGRectMake(CGRectGetMaxX(redeemDescription.frame), redeemDescription.height * i, self.fileView.width - redeemDescription.width, redeemDescription.height);
@@ -680,7 +695,7 @@
                 button.y = (redeemDescription.height + 10) * i;
             }
         }
-        self.fileView.height = self.redeem.files.count * (redeemDescription.height + 10);
+        self.fileView.height = self.redeem.fileUrl.count * (redeemDescription.height + 10);
         self.descriptionView.y = CGRectGetMaxY(self.fileView.frame);
     } else {
         self.fileView.height = 0;

@@ -101,6 +101,19 @@
     // 订单状态
     if (order.isRedeem == 1) {
         self.iconImage.image = [UIImage imageNamed:@"redeemIcon"];
+        switch (order.apply_status) {
+            case 0:
+            case 4:
+                self.iconImage.image = [UIImage imageNamed:@"redeemDaishuhui"];
+                break;
+            case 1:
+            case 2:
+                self.iconImage.image = [UIImage imageNamed:@"redeemBanlizhong"];
+                break;
+            case 3:
+                self.iconImage.image = [UIImage imageNamed:@"redeemYibohui"];
+                break;
+        }
     } else {
         switch (order.status) {
             case 50:
@@ -110,11 +123,11 @@
                 self.iconImage.image = [UIImage imageNamed:@"orderstatus60"];
                 break;
             default:
-                
                 self.iconImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"orderstatus%d",order.status]];
                 break;
         }
     }
+    
     // 认购时间
     self.renGouDateLable.text = [NSString stringWithFormat:@"认购时间：%@", order.create_time];
     

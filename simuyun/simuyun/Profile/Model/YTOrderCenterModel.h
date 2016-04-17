@@ -79,5 +79,10 @@
  */
 @property (nonatomic, assign) int isRedeem;
 
+/**
+ *  可赎回订单状态
+ */
+@property (nonatomic, assign) int apply_status;
+
 
 @end

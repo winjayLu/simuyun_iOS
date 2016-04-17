@@ -88,7 +88,7 @@
     // 获取是否有新消息
     [self loadMessageCount];
 
-    [YTCenter addObserver:self selector:@selector(timerOff) name:YTStopRequest object:nil];
+    [YTCenter addObserver:self selector:@selector(timerOff) name:YTLogOut object:nil];
     
     //注册视频播放的监听
     [YTCenter addObserver:self selector:@selector(changeFloatMenu:) name:TCCloudPlayStateChangeNotification object:nil];

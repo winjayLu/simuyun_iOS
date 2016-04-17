@@ -75,11 +75,6 @@
 - (IBAction)guanYuClick:(UIButton *)sender;
 
 /**
- *  退出单击事件
- *
- */
-- (IBAction)tuiChuClick:(UIButton *)sender;
-/**
  *  拨打电话
  *
  */
@@ -159,8 +154,7 @@
  *  退出单击事件
  *
  */
-- (IBAction)tuiChuClick:(UIButton *)sender {
-    [self senderNotification:sender];
+- (IBAction)tuiChuClick:(UIButton *)btn {
     [MobClick event:@"drawer_click" attributes:@{@"按钮" : @"退出", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     // 获取程序主窗口
     UIWindow *keyWindow = nil;

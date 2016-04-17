@@ -130,11 +130,11 @@
 // 获取机构经理发送消息
 #define YTRcManagerInfo @"rc/managerinfo"
 // 提交赎回申请
-#define YTRedeemption @"redemption"
+#define YTRedeemption @"redemptionApply"
 // 可赎回订单列表
 #define YTRedeemList @"redemptionOrderList"
 // 赎回订单详情
-#define YTRedeemDetail @"redeemDetail"
+#define YTRedeemDetail @"redemptionOrderDetail"
 // 检查邀请码
 #define YTCheckInviteCode @"checkInviteCode"
 // 应用邀请码

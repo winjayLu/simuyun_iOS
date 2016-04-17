@@ -44,7 +44,7 @@
 /**
  *  赎回金额
  */
-@property (nonatomic, assign) int redeemAmt;
+@property (nonatomic, copy) NSString *redeemAmt;
 
 /**
  *  赎回说明
@@ -54,7 +54,7 @@
 /**
  *  相关文件
  */
-@property (nonatomic, strong) NSArray *files;
+@property (nonatomic, strong) NSArray *fileUrl;
 
 
 

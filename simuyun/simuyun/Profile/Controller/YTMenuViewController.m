@@ -48,6 +48,8 @@
     self.leftMenu.userInfo = [YTUserInfoTool userInfo];
     // 监听通知
     [YTCenter addObserver:self selector:@selector(leftUpdate) name:YTUpdateIconImage object:nil];
+    [YTCenter addObserver:self selector:@selector(logOut) name:YTLogOut object:nil];
+    
 }
 
 
@@ -57,6 +59,11 @@
 - (void)leftUpdate
 {
     self.leftMenu.userInfo = [YTUserInfoTool userInfo];
+}
+
+- (void)logOut
+{
+    [self.leftMenu tuiChuClick:nil];
 }
 
 - (void)didReceiveMemoryWarning {
