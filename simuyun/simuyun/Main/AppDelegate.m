@@ -378,6 +378,7 @@
     
     // 友盟统计
     [MobClick startWithAppkey:UmengAppKey reportPolicy:BATCH  channelId:nil];
+    [MobClick updateOnlineConfig];
     // 获取版本号
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];

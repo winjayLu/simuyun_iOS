@@ -35,6 +35,11 @@
 
 @property (weak, nonatomic) UIImageView *logo;
 @property (weak, nonatomic) UILabel *tishi;
+
+/**
+ *  分享
+ */
+@property (nonatomic, strong) ShareManage *shareManage;
 @end
 
 
@@ -262,13 +267,11 @@ static UIWindow *_window;
         continer.alpha = 1.0;
     } completion:^(BOOL finished) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            ShareManage *share = [ShareManage shareManage];
-            [share shareConfig];
-            [share wxShareWithFile:UIImagePNGRepresentation(screenImage)];
+            [self destroy];
+            [self.shareManage wxShareWithFile:UIImagePNGRepresentation(screenImage)];
             continer.alpha = 0.0;
         });
     }];
-    [self destroy];
 }
 /**
  *  分享到朋友圈
@@ -298,13 +301,11 @@ static UIWindow *_window;
         continer.alpha = 1.0;
     } completion:^(BOOL finished) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            ShareManage *share = [ShareManage shareManage];
-            [share shareConfig];
-            [share wxpyqShareWithFile:UIImagePNGRepresentation(screenImage)];
+            [self destroy];
+            [self.shareManage wxpyqShareWithFile:UIImagePNGRepresentation(screenImage)];
             continer.alpha = 0.0;
         });
     }];
-    [self destroy];
 }
 
 - (NSMutableAttributedString *)attributedStringWithStr:(NSString *)str
@@ -357,8 +358,24 @@ static UIWindow *_window;
     self.tishi = nil;
     [self.endDate removeFromSuperview];
     self.endDate = nil;
+    self.shareManage = nil;
     [self removeFromSuperview];
     _window.hidden = YES;
     _window = nil;
+}
+
+- (ShareManage *)shareManage
+{
+    if (!_shareManage) {
+        ShareManage *share = [ShareManage shareManage];
+        [share shareConfig];
+        share.share_title = nil;
+        share.share_image = nil;
+        share.share_url = nil;
+        share.share_content = nil;
+        share.bankNumber = nil;
+        _shareManage = share;
+    }
+    return _shareManage;
 }
 @end

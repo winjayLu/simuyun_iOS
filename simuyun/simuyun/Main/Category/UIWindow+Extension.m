@@ -10,7 +10,7 @@
 #import "YTWelcomeViewController.h"
 #import "YTTabBarController.h"
 #import "YTLoginViewController.h"
-#import "XZMCoreNewFeatureVC.h"
+#import "CoreNewFeatureVC.h"
 #import "CALayer+Transition.h"
 #import "UIImage+Extend.h"
 #import "CoreArchive.h"
@@ -27,10 +27,9 @@
  */
 - (void)chooseRootviewController
 {
-    BOOL canShow = [XZMCoreNewFeatureVC canShowNewFeature];
-    // 判断显示新特性还是欢迎界面
-    if (canShow)
-    {
+    //判断是否需要显示：（内部已经考虑版本及本地版本缓存）
+    BOOL canShow = [CoreNewFeatureVC canShowNewFeature];
+    if(canShow){
         // 重新打开AppStore开关
         [CoreArchive setStr:nil key:@"versionFlag"];
         
@@ -41,10 +40,11 @@
         {
             imageName = @"newFeatureiphone5";
         }
+        NewFeatureModel *m1 = [NewFeatureModel model:[UIImage imageNamed:[NSString stringWithFormat:@"%@1", imageName]]];
+        NewFeatureModel *m2 = [NewFeatureModel model:[UIImage imageNamed:[NSString stringWithFormat:@"%@2", imageName]]];
+        NewFeatureModel *m3 = [NewFeatureModel model:[UIImage imageNamed:[NSString stringWithFormat:@"%@3", imageName]]];
         
-        
-        self.rootViewController = [XZMCoreNewFeatureVC newFeatureVCWithImageNames:@[[NSString stringWithFormat:@"%@1",imageName],[NSString stringWithFormat:@"%@2",imageName],[NSString stringWithFormat:@"%@3",imageName]]
-        enterBlock:^{
+        self.rootViewController = [CoreNewFeatureVC newFeatureVCWithModels:@[m1,m2,m3] enterBlock:^{
             // 判断是否有登录过的账户
             if ([YTAccountTool account]) {
                 // 发起登录
@@ -62,21 +62,12 @@
                     }];
                 }
             } else {
-                
                 // 登录控制器
                 self.rootViewController = [[UINavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
                 [self.layer transitionWithAnimType:TransitionAnimTypeReveal subType:TransitionSubtypesFromRight curve:TransitionCurveEaseIn duration:0.5f];
             }
-            
-        } configuration:^(UIButton *enterButton,UIImageView *image) { // 配置进入按钮
-        
-            enterButton.bounds = CGRectMake(0, 0, 138, 104);
-            enterButton.center = CGPointMake(KScreenW * 0.5, KScreenH* 0.85);
-            enterButton.y = DeviceHight - 104;
-            image.frame = enterButton.frame;
         }];
-
-    } else {
+    }else{
         // 欢迎控制器
         self.rootViewController = [[YTWelcomeViewController alloc] init];
     }
