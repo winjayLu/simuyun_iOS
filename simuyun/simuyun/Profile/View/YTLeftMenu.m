@@ -17,6 +17,7 @@
 #import "YTTabBarController.h"
 #import "FloatView.h"
 #import "CoreArchive.h"
+#import <RongIMKit/RongIMKit.h>
 
 @interface YTLeftMenu()
 
@@ -79,6 +80,12 @@
  *
  */
 - (IBAction)phoneClick:(UIButton *)sender;
+
+/**
+ *  退出登录
+ *
+ */
+- (IBAction)tuiChuClick:(UIButton *)btn;
 
 // 皇冠
 @property (weak, nonatomic) IBOutlet UIImageView *huangGuanImage;
@@ -157,6 +164,11 @@
 - (IBAction)tuiChuClick:(UIButton *)btn {
     [MobClick event:@"drawer_click" attributes:@{@"按钮" : @"退出", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     [self senderNotification:btn];
+    [self logOut];
+}
+
+- (void)logOut
+{
     // 获取程序主窗口
     UIWindow *keyWindow = nil;
     for (UIWindow *window in [UIApplication sharedApplication].windows) {
@@ -177,8 +189,8 @@
             tabBar.floatView = nil;
         }
     }
-
-
+    
+    
     keyWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
     // 清除保存的账户信息
     [YTAccountTool save:nil];
@@ -195,10 +207,19 @@
     // 清除融云token
     [CoreArchive setStr:nil key:@"rcToken"];
     
-    // 清除机构经理id 和 机构经理电话
-    [CoreArchive setStr:nil key:@"managerUid"];
-    [CoreArchive setStr:nil key:@"managerMobile"];
-
+    // 删除融云聊天记录
+    [[RCIMClient sharedRCIMClient] removeConversation:ConversationType_PRIVATE targetId:CustomerService];
+    NSString *managerUid = [CoreArchive strForKey:@"managerUid"];
+    if (managerUid != nil) {
+        NSRange range = [managerUid rangeOfString:@":"];
+        NSString *uid = [managerUid substringToIndex:range.location];
+        if ([uid isEqualToString:[YTAccountTool account].userId]) {
+            [[RCIMClient sharedRCIMClient] removeConversation:ConversationType_PRIVATE targetId:uid];
+        }
+    }
+    
+    // 退出融云
+    [[RCIM sharedRCIM] logout];
 }
 /**
  *  拨打电话
@@ -213,7 +234,10 @@
  */
 - (void)senderNotification:(UIButton *)btn
 {
-    NSDictionary *userInfo = @{YTLeftMenuSelectBtn : btn.titleLabel.text};
+    NSDictionary *userInfo = nil;
+    if (btn != nil) {
+        userInfo = @{YTLeftMenuSelectBtn : btn.titleLabel.text};
+    }
     [YTCenter postNotificationName:YTLeftMenuNotification object:nil userInfo:userInfo];
 }
 

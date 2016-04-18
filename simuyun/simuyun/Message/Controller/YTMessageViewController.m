@@ -8,7 +8,6 @@
 
 #import "YTMessageViewController.h"
 #import "CorePagesView.h"
-//#import "YTCloudObserveController.h"
 #import "YTHttpTool.h"
 #import "CorePagesBarBtn.h"
 #import "YTProductNewsController.h"
@@ -42,20 +41,6 @@ static UIWindow *_window;
     // 监听客服消息数字变化
     [YTCenter addObserver:self selector:@selector(loadNewStatus) name:YTUpdateChatContent object:nil];
     [MobClick event:@"nav_click" attributes:@{@"按钮" : @"消息"}];
-    
-    // 新手指引
-    if ([CoreArchive strForKey:@"firstMessage"] == nil && [CoreArchive strForKey:@"firstMessage"].length == 0) {
-        _window = [[UIWindow alloc] initWithFrame:DeviceBounds];
-        _window.backgroundColor = [UIColor clearColor];
-        [_window makeKeyAndVisible];
-        
-        [CoreArchive setStr:@"firstMessage" key:@"firstMessage"];
-        UIButton *newGuidelines = [[UIButton alloc] initWithFrame:_window.bounds];
-        newGuidelines.backgroundColor = [UIColor clearColor];
-        [newGuidelines setBackgroundImage:[UIImage imageNamed:@"xiaoxizhiyin"] forState:UIControlStateNormal];
-        [newGuidelines addTarget:self action:@selector(newGuidelinesClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_window addSubview:newGuidelines];
-    }
     
 }
 /**

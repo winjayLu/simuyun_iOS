@@ -110,7 +110,7 @@
     if (left == 0) {
         int oldCount = [self.message.tabBarItem.badgeValue intValue];
         dispatch_sync(dispatch_get_main_queue(), ^{
-            self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%zd", oldCount + count + 1];
+            self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", oldCount + count + 1];
         });
         count = 0;
     } else {
@@ -121,10 +121,10 @@
 - (void)updateUnreadCount
 {
     int count = [[RCIMClient sharedRCIMClient] getTotalUnreadCount];
-    if (count == 0) {
+    if (count == 0 || count < 0) {
         self.message.tabBarItem.badgeValue = nil;
     } else {
-        self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%zd", [[RCIMClient sharedRCIMClient] getTotalUnreadCount]];
+        self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d", count];
     }
 }
 
@@ -165,6 +165,9 @@
     // 提交口令进行认证
     if (buttonIndex == 1) {
         [self commitAuthenCode];
+    } else {
+        // 清除code
+        [CoreArchive setStr:nil key:@"authenCode"];
     }
 }
 

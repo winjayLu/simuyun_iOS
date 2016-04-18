@@ -469,7 +469,7 @@
     // 获取融云Token
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
-    param[@"tokenExpired"] = @(1);
+    param[@"tokenExpired"] = @"1";
     [YTHttpTool get:YTToken params:param success:^(id responseObject) {
         [CoreArchive setStr:responseObject[@"rcToken"] key:@"rcToken"];
         [self loginRongCloud];

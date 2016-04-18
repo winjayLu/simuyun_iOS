@@ -526,7 +526,10 @@
     // 调用代理方法
     [self.delegate leftMenuClicked];
     
-    NSString *btnTitle = note.userInfo[YTLeftMenuSelectBtn];
+    NSString *btnTitle = nil;
+    if (note != nil) {
+        btnTitle = note.userInfo[YTLeftMenuSelectBtn];
+    }
     UIViewController *vc = nil;
     
     
@@ -1018,7 +1021,7 @@
     // 获取融云Token
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
-    param[@"tokenExpired"] = @(1);
+    param[@"tokenExpired"] = @"1";
     [YTHttpTool get:YTToken params:param success:^(id responseObject) {
         [CoreArchive setStr:responseObject[@"rcToken"] key:@"rcToken"];
         [self loginRongCloud];

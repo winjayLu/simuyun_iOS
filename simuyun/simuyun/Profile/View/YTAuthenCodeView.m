@@ -139,25 +139,25 @@ static UIWindow *_window;
     smsTitle.text = @"短信";
     [self addSubview:smsTitle];
     [smsTitle sizeToFit];
-    smsBtn.frame = CGRectMake((authenWH * 0.5) -  75, CGRectGetMaxY(line.frame) + 20, 50, 50);
+    smsBtn.frame = CGRectMake((authenWH * 0.5) -  25, CGRectGetMaxY(line.frame) + 20, 50, 50);
     smsTitle.center = CGPointMake(smsBtn.center.x, smsBtn.center.y + 35);
     
     
     // 微信分享按钮
-//    UIButton *weChat = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [weChat setImage:[UIImage imageNamed:@"Share_ScanWexin"] forState:UIControlStateNormal];
-//    [weChat addTarget:self action:@selector(weChatClick) forControlEvents:UIControlEventTouchUpInside];
-//    [self addSubview:weChat];
-//    //  设置文字
-//    UILabel *weChatTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 12)];
-//    weChatTitle.font = [UIFont systemFontOfSize:10];
-//    weChatTitle.textAlignment = NSTextAlignmentCenter;
-//    weChatTitle.textColor = YTColor(51, 51, 51);
-//    weChatTitle.text = @"微信";
-//    [self addSubview:weChatTitle];
-//    [weChatTitle sizeToFit];
-//    weChat.frame = CGRectMake(smsBtn.x - 80, CGRectGetMaxY(line.frame) + 20, 50, 50);
-//    weChatTitle.center = CGPointMake(weChat.center.x, weChat.center.y + 35);
+    UIButton *weChat = [UIButton buttonWithType:UIButtonTypeCustom];
+    [weChat setImage:[UIImage imageNamed:@"Share_ScanWexin"] forState:UIControlStateNormal];
+    [weChat addTarget:self action:@selector(weChatClick) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:weChat];
+    //  设置文字
+    UILabel *weChatTitle = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 12)];
+    weChatTitle.font = [UIFont systemFontOfSize:10];
+    weChatTitle.textAlignment = NSTextAlignmentCenter;
+    weChatTitle.textColor = YTColor(51, 51, 51);
+    weChatTitle.text = @"微信";
+    [self addSubview:weChatTitle];
+    [weChatTitle sizeToFit];
+    weChat.frame = CGRectMake(smsBtn.x - 80, CGRectGetMaxY(line.frame) + 20, 50, 50);
+    weChatTitle.center = CGPointMake(weChat.center.x, weChat.center.y + 35);
     
     
     // 复制按钮
@@ -173,19 +173,21 @@ static UIWindow *_window;
     weChatQuanTitle.text = @"复制";
     [self addSubview:weChatQuanTitle];
     [weChatQuanTitle sizeToFit];
-    weChatQuan.frame = CGRectMake(CGRectGetMaxX(smsBtn.frame) + 50, CGRectGetMaxY(line.frame) + 20, 50, 50);
+    weChatQuan.frame = CGRectMake(CGRectGetMaxX(smsBtn.frame) + 30, CGRectGetMaxY(line.frame) + 20, 50, 50);
     weChatQuanTitle.center = CGPointMake(weChatQuan.center.x, weChatQuan.center.y + 35);
 }
-#warning 去除微信分享  测试
+
 /**
  *  分享到微信
  */
-//- (void)weChatClick
-//{
-//    self.shareManage.share_content = self.content;
-//    [self.shareManage wxShareWithViewControll:self.vc];
-//    [self destroy];
-//}
+- (void)weChatClick
+{
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = self.content;
+    NSURL *url = [NSURL URLWithString:@"weixin://dl/chat"];
+    [[UIApplication sharedApplication] openURL:url];
+    [self destroy];
+}
 
 - (void)smsClick
 {
@@ -200,8 +202,10 @@ static UIWindow *_window;
 {
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
     pasteboard.string = self.content;
-    [SVProgressHUD showSuccessWithStatus:@"复制成功"];
     [self destroy];
+    [SVProgressHUD showSuccessWithStatus:@"召集令复制成功\n粘贴给你的小伙伴吧"];
+    [SVProgressHUD dismissWithDelay:5.0];
+    
 }
 
 - (NSMutableAttributedString *)attributedStringWithStr:(NSString *)str

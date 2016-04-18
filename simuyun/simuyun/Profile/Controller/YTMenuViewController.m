@@ -63,7 +63,7 @@
 
 - (void)logOut
 {
-    [self.leftMenu tuiChuClick:nil];
+    [self.leftMenu logOut];
 }
 
 - (void)didReceiveMemoryWarning {

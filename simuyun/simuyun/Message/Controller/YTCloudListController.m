@@ -65,11 +65,6 @@
     }
 }
 
-//- (void)updateList
-//{
-//    [self refreshConversationTableViewIfNeeded];
-////    [self.conversationListTableView reloadData];
-//}
 
 - (NSMutableArray *)willReloadTableData:(NSMutableArray *)dataSource
 {
@@ -77,7 +72,18 @@
     [self.todos removeAllObjects];
     
     // 机构经理id
+    
     NSString *managerUid = [CoreArchive strForKey:@"managerUid"];
+    if (managerUid != nil) {
+        NSRange uidRange = [managerUid rangeOfString:@":"];
+        NSString *uid = [managerUid substringToIndex:uidRange.location];
+        if ([uid isEqualToString:[YTAccountTool account].userId]) {
+            NSString *temp = [managerUid substringFromIndex:uidRange.location + 1];
+            managerUid = temp;
+        } else {
+            managerUid = nil;
+        }
+    }
     
     // 平台客服id
     NSString *customerId = nil;
@@ -100,32 +106,44 @@
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
     [self.todos insertObjects:temps atIndexes:indexSet];
     
-    // 判断是否有平台客服
-    if (customerId == nil) {
-        NSMutableDictionary *param = [NSMutableDictionary dictionary];
-        param[@"uid"] = [YTAccountTool account].userId;
-        [YTHttpTool get:YTGreetingmessage params:param success:^(id responseObject) {
-        } failure:^(NSError *error) {
-        }];
+    // 判断当前连接状态
+    if ([[RCIM sharedRCIM] getConnectionStatus] == ConnectionStatus_Connected) {
+        // 判断是否有平台客服
+        static dispatch_once_t onceCustomer;
+        dispatch_once(&onceCustomer, ^{
+            if (customerId == nil) {
+                NSMutableDictionary *param = [NSMutableDictionary dictionary];
+                param[@"uid"] = [YTAccountTool account].userId;
+                [YTHttpTool get:YTGreetingmessage params:param success:^(id responseObject) {
+                    NSLog(@"%@", responseObject);
+                } failure:^(NSError *error) {
+                    NSLog(@"%@", error);
+                }];
+            }
+        });        
     }
+    
     
     // 判断是否有机构经理
     if (managerUid == nil && [YTUserInfoTool userInfo].adviserStatus == 0) {
-        NSMutableDictionary *param = [NSMutableDictionary dictionary];
-        param[@"uid"] = [YTAccountTool account].userId;
-        [YTHttpTool get:YTRcManagerInfo params:param success:^(id responseObject) {
-            // 机构经理id
-            NSString *managerUid = responseObject[@"managerUid"];
-            if (managerUid.length > 0) {
-                [CoreArchive setStr:responseObject[@"managerUid"] key:@"managerUid"];
-            }
-            // 机构经理phone
-            NSString *managerMobile = responseObject[@"managerMobile"];
-            if (managerMobile.length > 0) {
-                [CoreArchive setStr:responseObject[@"managerMobile"] key:@"managerMobile"];
-            }
-        } failure:^(NSError *error) {
-        }];
+        static dispatch_once_t onceManager;
+        dispatch_once(&onceManager, ^{            
+            NSMutableDictionary *param = [NSMutableDictionary dictionary];
+            param[@"uid"] = [YTAccountTool account].userId;
+            [YTHttpTool get:YTRcManagerInfo params:param success:^(id responseObject) {
+                // 机构经理id
+                NSString *managerUid = responseObject[@"managerUid"];
+                if (managerUid.length > 0) {
+                    [CoreArchive setStr:[NSString stringWithFormat:@"%@:%@", [YTAccountTool account].userId, responseObject[@"managerUid"]] key:@"managerUid"];
+                }
+                // 机构经理phone
+                NSString *managerMobile = responseObject[@"managerMobile"];
+                if (managerMobile.length > 0) {
+                    [CoreArchive setStr:responseObject[@"managerMobile"] key:@"managerMobile"];
+                }
+            } failure:^(NSError *error) {
+            }];
+        });
     }
     
     dispatch_sync(dispatch_get_main_queue(), ^{
@@ -184,6 +202,7 @@
     [self.todos insertObject:newReceivedConversationModel_ atIndex:0];
     dispatch_sync(dispatch_get_main_queue(), ^{
         [self.conversationListTableView reloadData];
+        [self refreshConversationTableViewIfNeeded];
     });
 }
 
@@ -258,7 +277,15 @@
     chat.hidesBottomBarWhenPushed = YES;
     chat.userId = [YTAccountTool account].userId;
     
-    if ([model.targetId isEqualToString:CustomerService] || [model.targetId isEqualToString:[CoreArchive strForKey:@"managerUid"]]) {
+    // 获取机构经理id
+    NSString *managerUid = [CoreArchive strForKey:@"managerUid"];
+    if (managerUid != nil && [managerUid hasPrefix:[YTAccountTool account].userId]) {
+        NSRange range = [managerUid rangeOfString:@":"];
+        NSString *temp = [managerUid substringFromIndex:range.location + 1];
+        managerUid = temp;
+    }
+    
+    if ([model.targetId isEqualToString:CustomerService] || [model.targetId isEqualToString:managerUid]) {
         chat.isMobile = YES;
     }
     //显示聊天会话界面
