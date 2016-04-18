@@ -349,8 +349,8 @@
 - (void)pdfClick:(UIButton *)btn
 {
     YTViewPdfViewController *viewPdf = [[YTViewPdfViewController alloc] init];
-    viewPdf.url = self.redeem.fileUrl[btn.tag][@"name"];
-    viewPdf.shareTitle = self.redeem.fileUrl[btn.tag][@"url"];;
+    viewPdf.url = self.redeem.fileUrl[btn.tag][@"url"];
+    viewPdf.shareTitle = self.redeem.fileUrl[btn.tag][@"name"];;
     [self.navigationController pushViewController:viewPdf animated:YES];
 }
 
@@ -679,8 +679,8 @@
         // 文件列表
         for (int i = 0; i < self.redeem.fileUrl.count; i++) {
             UIButton *button = [[UIButton alloc] init];
-            [button setImage:[UIImage imageNamed:@"name"] forState:UIControlStateNormal];
-            [button setTitle:self.redeem.fileUrl[i][@"url"] forState:UIControlStateNormal];
+            [button setImage:[UIImage imageNamed:@"redeemIcon"] forState:UIControlStateNormal];
+            [button setTitle:self.redeem.fileUrl[i][@"name"] forState:UIControlStateNormal];
             button.tag = i;
             [button addTarget:self action:@selector(pdfClick:) forControlEvents:UIControlEventTouchUpInside];
             button.frame = CGRectMake(CGRectGetMaxX(redeemDescription.frame), redeemDescription.height * i, self.fileView.width - redeemDescription.width, redeemDescription.height);
@@ -706,14 +706,24 @@
     if (self.redeem.redeemDescription.length == 0) {
         self.descriptionView.height = 0;
     } else {
+        // 赎回说明
+        UILabel *titleLable = [[UILabel alloc] init];
+        titleLable.text = @"赎回说明：";
+        titleLable.font = [UIFont systemFontOfSize:12];
+        titleLable.textColor = YTColor(102, 102, 102);
+        [titleLable sizeToFit];
+        titleLable.frame = CGRectMake(10, 10, titleLable.width, titleLable.height);
+        [self.descriptionView addSubview:titleLable];
+        
+        // 赎回说明内容
         UILabel *textLable = [[UILabel alloc] init];
         textLable.text = self.redeem.redeemDescription;
         textLable.font = [UIFont systemFontOfSize:12];
         textLable.numberOfLines = 0;
         textLable.textColor = YTColor(102, 102, 102);
-        textLable.width = self.descriptionView.width - 20;
+        textLable.width = self.descriptionView.width - CGRectGetMaxX(titleLable.frame) - 10;
         [textLable sizeToFit];
-        textLable.frame = CGRectMake(10, 10, textLable.width, textLable.height);
+        textLable.frame = CGRectMake(CGRectGetMaxX(titleLable.frame), 10, textLable.width, textLable.height);
         [self.descriptionView addSubview:textLable];
         self.descriptionView.height = textLable.height + 20;
         

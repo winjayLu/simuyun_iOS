@@ -35,7 +35,7 @@
 - (void)mobileClick
 {
     NSString *phoneNumber = nil;
-    if ([self.targetId isEqualToString:@"dd0cc61140504258ab474b8f0a38bb56"]) {
+    if ([self.targetId isEqualToString:CustomerService]) {
        phoneNumber = @"tel://400-188-8848";
     } else {
         phoneNumber = [NSString stringWithFormat:@"tel://%@", [CoreArchive strForKey:@"managerMobile"]];
@@ -57,14 +57,14 @@
         if ([model.senderUserId isEqualToString:self.userId]) {
             textCell.textLabel.textColor=[UIColor whiteColor];
             textCell.textLabel.attributeDictionary=@{
-                                                     @(NSTextCheckingTypeLink) : @{NSForegroundColorAttributeName : YTNavBackground},
-                                                     @(NSTextCheckingTypePhoneNumber) : @{NSForegroundColorAttributeName : YTNavBackground}
+                                                     @(NSTextCheckingTypeLink) : @{NSForegroundColorAttributeName : YTColor(255, 240, 1)},
+                                                     @(NSTextCheckingTypePhoneNumber) : @{NSForegroundColorAttributeName : YTColor(255, 240, 1)}
                                                      };
         } else {
             textCell.textLabel.textColor=YTColor(51, 51, 51);
             textCell.textLabel.attributeDictionary=@{
-                                                     @(NSTextCheckingTypeLink) : @{NSForegroundColorAttributeName : YTColor(255, 240, 1)},
-                                                     @(NSTextCheckingTypePhoneNumber) : @{NSForegroundColorAttributeName : YTColor(255, 240, 1)}
+                                                     @(NSTextCheckingTypeLink) : @{NSForegroundColorAttributeName : YTNavBackground},
+                                                     @(NSTextCheckingTypePhoneNumber) : @{NSForegroundColorAttributeName : YTNavBackground}
                                                      };
         }
     }

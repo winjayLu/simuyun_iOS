@@ -85,7 +85,7 @@ static UIWindow *_window;
 {
     // 标题
     UILabel *title = [[UILabel alloc] init];
-    title.text = @"理财师召集令";
+    title.text = @"财富召集令";
     title.font = [UIFont fontWithName:@"TrebuchetMS-Bold" size:20];
     title.textColor = YTColor(51, 51, 51);
     [title sizeToFit];

@@ -156,6 +156,7 @@
  */
 - (IBAction)tuiChuClick:(UIButton *)btn {
     [MobClick event:@"drawer_click" attributes:@{@"按钮" : @"退出", @"机构" : [YTUserInfoTool userInfo].organizationName}];
+    [self senderNotification:btn];
     // 获取程序主窗口
     UIWindow *keyWindow = nil;
     for (UIWindow *window in [UIApplication sharedApplication].windows) {

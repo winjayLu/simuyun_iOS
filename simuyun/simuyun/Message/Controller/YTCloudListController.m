@@ -16,6 +16,7 @@
 #import "YTAccountTool.h"
 #import "SVProgressHUD.h"
 #import "CoreArchive.h"
+#import "YTUserInfoTool.h"
 
 
 @interface YTCloudListController ()
@@ -78,11 +79,15 @@
     // 机构经理id
     NSString *managerUid = [CoreArchive strForKey:@"managerUid"];
     
+    // 平台客服id
+    NSString *customerId = nil;
+    
     // 临时数组
     NSMutableArray *temps = [[NSMutableArray alloc] init];
     for (RCConversationModel *model in dataSource) {
-        if ([model.targetId isEqualToString:@"dd0cc61140504258ab474b8f0a38bb56"]) {
+        if ([model.targetId isEqualToString:CustomerService]) {
             [temps insertObject:model atIndex:0];
+            customerId = model.targetId;
         } else if([model.targetId isEqualToString:managerUid]){
             [temps addObject:model];
         } else {
@@ -94,8 +99,18 @@
     NSRange range = NSMakeRange(0, [temps count]);
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
     [self.todos insertObjects:temps atIndexes:indexSet];
+    
+    // 判断是否有平台客服
+    if (customerId == nil) {
+        NSMutableDictionary *param = [NSMutableDictionary dictionary];
+        param[@"uid"] = [YTAccountTool account].userId;
+        [YTHttpTool get:YTGreetingmessage params:param success:^(id responseObject) {
+        } failure:^(NSError *error) {
+        }];
+    }
+    
     // 判断是否有机构经理
-    if (managerUid == nil) {
+    if (managerUid == nil && [YTUserInfoTool userInfo].adviserStatus == 0) {
         NSMutableDictionary *param = [NSMutableDictionary dictionary];
         param[@"uid"] = [YTAccountTool account].userId;
         [YTHttpTool get:YTRcManagerInfo params:param success:^(id responseObject) {
@@ -243,7 +258,7 @@
     chat.hidesBottomBarWhenPushed = YES;
     chat.userId = [YTAccountTool account].userId;
     
-    if ([model.targetId isEqualToString:@"dd0cc61140504258ab474b8f0a38bb56"] || [model.targetId isEqualToString:[CoreArchive strForKey:@"managerUid"]]) {
+    if ([model.targetId isEqualToString:CustomerService] || [model.targetId isEqualToString:[CoreArchive strForKey:@"managerUid"]]) {
         chat.isMobile = YES;
     }
     //显示聊天会话界面

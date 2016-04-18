@@ -13,11 +13,12 @@
 //#ifdef DEBUG
 //#else
 // 生产环境
-//#define YTServer @"https://intime.simuyun.com/api/app/"
-//#define YTH5Server @"http://www.simuyun.com"
-//#define UmengAppKey @"5514ed3cfd98c5bca4000872"
-//#define TXAppKey @"1251892263"
-//#define RongCloudKey @"8luwapkvuz04l"
+#define YTServer @"https://intime.simuyun.com/api/app/"
+#define YTH5Server @"http://www.simuyun.com"
+#define UmengAppKey @"5514ed3cfd98c5bca4000872"
+#define TXAppKey @"1251892263"
+#define RongCloudKey @"8luwapkvuz04l"
+#define CustomerService @"dd0cc61140504258ab474b8f0a38bb56"
 //#endif
 
 // 开发环境213
@@ -28,11 +29,11 @@
 //#define RongCloudKey @"tdrvipksrbgn5"
 
 // 测试环境212
-#define YTServer @"http://192.168.17.212:6060/api/app/"
-#define YTH5Server @"http://192.168.17.212"
-#define UmengAppKey @"545867defd98c5f23a0021"
-#define TXAppKey @"125189226"
-#define RongCloudKey @"tdrvipksrbgn5"
+//#define YTServer @"http://192.168.17.212:6060/api/app/"
+//#define YTH5Server @"http://192.168.17.212"
+//#define UmengAppKey @"545867defd98c5f23a0021"
+//#define TXAppKey @"125189226"
+//#define RongCloudKey @"tdrvipksrbgn5"
 
 // 开发环境外网地址
 //212端口号18080
@@ -141,5 +142,7 @@
 #define YTCommitInviteCode @"applyInviteCode"
 // 邮件获取赎回资料
 #define YTGetRedeemMeans @"getRedeemMeans"
+// 获取平台客服消息
+#define YTGreetingmessage @"rc/greetingmessage"
 
 #endif /* YTServerConfig_h */

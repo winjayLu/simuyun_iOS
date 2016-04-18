@@ -76,7 +76,7 @@
     textV.placeholderColor = YTColor(102, 102, 102);
     
     // 设置字体
-    textV.font = [UIFont systemFontOfSize:13];
+    textV.font = [UIFont systemFontOfSize:15];
     
     // 监听键盘
     // 键盘的frame(位置)即将改变, 就会发出UIKeyboardWillChangeFrameNotification
