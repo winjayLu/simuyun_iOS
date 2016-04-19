@@ -412,8 +412,16 @@ static UIWindow *_window;
     [YTHttpTool get:YTProductList params:param
             success:^(NSDictionary *responseObject) {
                 [SVProgressHUD dismiss];
+                NSArray *products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
+                if (products.count > 0 && self.series != 0) {
+                    for (YTProductModel *proModel in products) {
+                        if (proModel.series != self.series) {
+                            return;
+                        }
+                    }
+                }
                 [self.tableView.footer resetNoMoreData];
-                self.products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
+                self.products = [NSMutableArray arrayWithArray:products];
                 if([ self.products count] < 8)
                 {
                     [self.tableView.footer noticeNoMoreData];

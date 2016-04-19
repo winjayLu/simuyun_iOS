@@ -177,6 +177,7 @@
 
 - (void)typeClick:(UIButton *)button
 {
+    if (self.selectBtn == button) return;
     self.selectBtn.selected = NO;
     button.selected = YES;
     self.selectBtn = button;
@@ -274,6 +275,7 @@
  */
 - (void)selectedBtnWithType:(NSInteger)type
 {
+    [self.tableView.header endRefreshing];
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewOrder)];
     self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreOrder)];
     switch (type) {

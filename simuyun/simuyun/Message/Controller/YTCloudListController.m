@@ -121,30 +121,30 @@
                 }];
             }
         });        
+        // 判断是否有机构经理
+        if (managerUid == nil && [YTUserInfoTool userInfo].adviserStatus == 0) {
+            static dispatch_once_t onceManager;
+            dispatch_once(&onceManager, ^{
+                NSMutableDictionary *param = [NSMutableDictionary dictionary];
+                param[@"uid"] = [YTAccountTool account].userId;
+                [YTHttpTool get:YTRcManagerInfo params:param success:^(id responseObject) {
+                    // 机构经理id
+                    NSString *managerUid = responseObject[@"managerUid"];
+                    if (managerUid.length > 0) {
+                        [CoreArchive setStr:[NSString stringWithFormat:@"%@:%@", [YTAccountTool account].userId, responseObject[@"managerUid"]] key:@"managerUid"];
+                    }
+                    // 机构经理phone
+                    NSString *managerMobile = responseObject[@"managerMobile"];
+                    if (managerMobile.length > 0) {
+                        [CoreArchive setStr:responseObject[@"managerMobile"] key:@"managerMobile"];
+                    }
+                } failure:^(NSError *error) {
+                }];
+            });
+        }
     }
     
     
-    // 判断是否有机构经理
-    if (managerUid == nil && [YTUserInfoTool userInfo].adviserStatus == 0) {
-        static dispatch_once_t onceManager;
-        dispatch_once(&onceManager, ^{            
-            NSMutableDictionary *param = [NSMutableDictionary dictionary];
-            param[@"uid"] = [YTAccountTool account].userId;
-            [YTHttpTool get:YTRcManagerInfo params:param success:^(id responseObject) {
-                // 机构经理id
-                NSString *managerUid = responseObject[@"managerUid"];
-                if (managerUid.length > 0) {
-                    [CoreArchive setStr:[NSString stringWithFormat:@"%@:%@", [YTAccountTool account].userId, responseObject[@"managerUid"]] key:@"managerUid"];
-                }
-                // 机构经理phone
-                NSString *managerMobile = responseObject[@"managerMobile"];
-                if (managerMobile.length > 0) {
-                    [CoreArchive setStr:responseObject[@"managerMobile"] key:@"managerMobile"];
-                }
-            } failure:^(NSError *error) {
-            }];
-        });
-    }
     
     dispatch_sync(dispatch_get_main_queue(), ^{
         [self.conversationListTableView reloadData];
