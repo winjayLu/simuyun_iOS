@@ -140,7 +140,11 @@
     for (int i = 0; i < 6; i++) {
         UIButton *btn = [[UIButton alloc] init];
         [btn setBackgroundImage:[UIImage imageNamed:@"xuankuang"] forState:UIControlStateSelected];
-        [btn.titleLabel setFont:[UIFont systemFontOfSize:15]];
+        if (DeviceWidth < 375) {
+            [btn.titleLabel setFont:[UIFont systemFontOfSize:13]];
+        } else {
+            [btn.titleLabel setFont:[UIFont systemFontOfSize:15]];
+        }
         btn.tag = i;
         NSString *title = @"";
         switch (i) {

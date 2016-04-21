@@ -39,7 +39,7 @@
 
 #warning 本地通知
 
-@interface AppDelegate ()
+@interface AppDelegate () <RCIMUserInfoDataSource, RCIMConnectionStatusDelegate>
 
 /**
  *  当前显示的控制器
@@ -402,8 +402,10 @@
  *
  */
 - (void)applicationDidEnterBackground:(UIApplication *)application {
+    // 清除提醒数字
+    [YTJpushTool makeBadge];
     // 断开与融云的连接
-    [[RCIM sharedRCIM] disconnect];
+    [[RCIM sharedRCIM] disconnect];    
 }
 
 
@@ -426,6 +428,7 @@
 {
     // 获取剪贴板内容
     NSString *pasteBoard = [UIPasteboard generalPasteboard].string;
+    if (pasteBoard.length == 0) return;
     // 判断口令是否符合规则
     if ([self countOfString:pasteBoard] == 2) {
         
@@ -438,7 +441,6 @@
         // 发送通知
         [YTCenter postNotificationName:YTPasteBoardAuthen object:nil];
     }
-    
 }
 /**
  *  查照￥出现的次数
@@ -476,6 +478,30 @@
     } failure:^(NSError *error) {
     }];
 }
+
+/*!
+ 获取用户信息
+ 
+ @param userId      用户ID
+ @param completion  获取用户信息完成之后需要执行的Block [userInfo:该用户ID对应的用户信息]
+ 
+ @discussion SDK通过此方法获取用户信息并显示，请在completion中返回该用户ID对应的用户信息。
+ 在您设置了用户信息提供者之后，SDK在需要显示用户信息的时候，会调用此方法，向您请求用户信息用于显示。
+ */
+- (void)getUserInfoWithUserId:(NSString *)userId completion:(void (^)(RCUserInfo *))completion
+{
+    
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    param[@"uid"] = userId;
+    [YTHttpTool get:YTRcUserInfo params:param success:^(id responseObject) {
+        RCUserInfo *userInfo = [[RCUserInfo alloc] initWithUserId:userId name:responseObject[@"name"] portrait:responseObject[@"portraitUri"]];
+        return completion(userInfo);
+    } failure:^(NSError *error) {
+        
+        return completion(nil);
+    }];
+}
+
 
 /**
  *  接受到内存警告

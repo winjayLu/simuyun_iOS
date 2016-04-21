@@ -639,13 +639,9 @@
     // 赎回金额/份额
     if (self.redeem.productType == 2) {
         // 固收
-        self.redeemAmtLable.text = [NSString stringWithFormat:@"赎回金额：%@万（全额赎回）", self.redeem.redeemAmt];
+        self.redeemAmtLable.text = [NSString stringWithFormat:@"赎回金额：%@万份（全额赎回）", self.redeem.redeemAmt];
         [self.redeemAmtLable sizeToFit];
     } else {
-        // 浮收
-        self.redeemAmtLable.text = @"赎回份额：";
-        [self.redeemAmtLable sizeToFit];
-        
         // 输入框
         UITextField *fenNum = [[UITextField alloc] init];
         fenNum.font = [UIFont systemFontOfSize:14];
@@ -661,7 +657,7 @@
         
         // 右侧文字
         UILabel *textLable = [self createDarkGrayLable];
-        textLable.text = @"份";
+        textLable.text = @"万份";
         [textLable sizeToFit];
         textLable.frame = CGRectMake(CGRectGetMaxX(fenNum.frame) + 5, fenNum.y, textLable.width, textLable.height);
         [self.RedeemView addSubview:textLable];

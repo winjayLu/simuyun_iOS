@@ -171,6 +171,7 @@
         self.shareManage.bankNumber = self.textV.text;
         [self.shareManage smsShareWithViewControll:self];
     } else {
+        if(self.textV.text.length == 0) return;
         UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
         pasteboard.string = self.textV.text;
         [SVProgressHUD showSuccessWithStatus:@"复制成功"];
