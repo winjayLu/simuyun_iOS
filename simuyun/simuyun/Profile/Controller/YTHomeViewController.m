@@ -972,6 +972,7 @@
                 [YTJpushTool saveJpush:nil];
             }
             [RCIM sharedRCIM].connectionStatusDelegate = self;
+            [self checkConversation];
         });
     } error:^(RCConnectErrorCode status) {
         NSLog(@"登陆的错误码为:%zd", status);
@@ -1043,6 +1044,41 @@
         // 发送通知
         [YTCenter postNotificationName:YTLogOut object:nil];
     }];
+}
+
+/**
+ *  检测本地是否有消息记录
+ */
+- (void)checkConversation
+{
+    RCIMClient *client = [RCIMClient sharedRCIMClient];
+    NSArray *array = [client getConversationList:@[@(ConversationType_PRIVATE)]];
+    // 发送平台客服消息
+    if (array.count == 0) {
+        NSMutableDictionary *param = [NSMutableDictionary dictionary];
+        param[@"uid"] = [YTAccountTool account].userId;
+        [YTHttpTool get:YTGreetingmessage params:param success:^(id responseObject) {
+        } failure:^(NSError *error) {
+        }];
+    }
+    if (array.count < 2 && [YTUserInfoTool userInfo].adviserStatus == 0) {
+        // 发送机构经理消息
+        NSMutableDictionary *param2 = [NSMutableDictionary dictionary];
+        param2[@"uid"] = [YTAccountTool account].userId;
+        [YTHttpTool get:YTRcManagerInfo params:param2 success:^(id responseObject) {
+            // 机构经理id
+            NSString *managerUid = responseObject[@"managerUid"];
+            if (managerUid.length > 0) {
+                [CoreArchive setStr:[NSString stringWithFormat:@"%@:%@", [YTAccountTool account].userId, responseObject[@"managerUid"]] key:@"managerUid"];
+            }
+            // 机构经理phone
+            NSString *managerMobile = responseObject[@"managerMobile"];
+            if (managerMobile.length > 0) {
+                [CoreArchive setStr:responseObject[@"managerMobile"] key:@"managerMobile"];
+            }
+        } failure:^(NSError *error) {
+        }];
+    }
 }
 
 

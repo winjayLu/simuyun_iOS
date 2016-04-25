@@ -106,43 +106,6 @@
     NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
     [self.todos insertObjects:temps atIndexes:indexSet];
     
-    // 判断当前连接状态
-    if ([[RCIM sharedRCIM] getConnectionStatus] == ConnectionStatus_Connected) {
-        // 判断是否有平台客服
-        static dispatch_once_t onceCustomer;
-        dispatch_once(&onceCustomer, ^{
-            if (customerId == nil) {
-                NSMutableDictionary *param = [NSMutableDictionary dictionary];
-                param[@"uid"] = [YTAccountTool account].userId;
-                [YTHttpTool get:YTGreetingmessage params:param success:^(id responseObject) {
-                    NSLog(@"%@", responseObject);
-                } failure:^(NSError *error) {
-                    NSLog(@"%@", error);
-                }];
-            }
-        });        
-        // 判断是否有机构经理
-        if (managerUid == nil && [YTUserInfoTool userInfo].adviserStatus == 0) {
-            static dispatch_once_t onceManager;
-            dispatch_once(&onceManager, ^{
-                NSMutableDictionary *param = [NSMutableDictionary dictionary];
-                param[@"uid"] = [YTAccountTool account].userId;
-                [YTHttpTool get:YTRcManagerInfo params:param success:^(id responseObject) {
-                    // 机构经理id
-                    NSString *managerUid = responseObject[@"managerUid"];
-                    if (managerUid.length > 0) {
-                        [CoreArchive setStr:[NSString stringWithFormat:@"%@:%@", [YTAccountTool account].userId, responseObject[@"managerUid"]] key:@"managerUid"];
-                    }
-                    // 机构经理phone
-                    NSString *managerMobile = responseObject[@"managerMobile"];
-                    if (managerMobile.length > 0) {
-                        [CoreArchive setStr:responseObject[@"managerMobile"] key:@"managerMobile"];
-                    }
-                } failure:^(NSError *error) {
-                }];
-            });
-        }
-    }
     
     
     

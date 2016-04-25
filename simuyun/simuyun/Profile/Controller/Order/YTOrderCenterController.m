@@ -118,6 +118,15 @@
     [MobClick event:@"orderList_click" attributes:@{@"按钮" : @"订单列表", @"机构" : [YTUserInfoTool userInfo].organizationName}];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (!self.isYiQueRen) {
+        // 马上进入刷新状态
+        [self.tableView.header beginRefreshing];
+    }
+}
+
 
 /**
  *  初始化顶部菜单
@@ -212,10 +221,6 @@
     // 设置下拉刷新
     tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewOrder)];
     tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreOrder)];
-    if (!self.isYiQueRen) {
-        // 马上进入刷新状态
-        [tableView.header beginRefreshing];
-    }
 }
 
 /**
