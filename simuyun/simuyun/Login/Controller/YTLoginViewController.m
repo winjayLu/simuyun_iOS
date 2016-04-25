@@ -124,28 +124,21 @@
     // 发起登录
     [self loginWeChat];
 }
-#warning 测试
 
-/*
- {
- address = "CN, Beijing, Chaoyang";
- headimgurl = "http://wx.qlogo.cn/mmopen/Q3auHgzwzM7BML59YK2aCHbP5KCsjfH5s67uIUpaJ8QaE0dYJDUk4HRDYIr6FacItLgIDicEmYk8RdJOnwWSw3dX0JYHzPAibSYW2D8Pj1kGI/0";
- nickname = Winjay;
- openid = "oGyGZsxsRnTJxf25yV-Wbm0-79Ms";
- sex = 1;
- unionid = "oA2i4uH4GeVkkciSTGn1_Lowqwc4";
- }
- */
 
 //- (void)loginWeChat
 //{
 //    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-//    dict[@"address"] = @"CN, BeiJing";
-//    dict[@"headimgurl"] = @"http://wx.qlogo.cn/mmopen/Q3auHgzwzM7BML59YK2aCHbP5KCsjfH5s623uIUpaJ8QaE0dYJDUk4HRDYIr6FacItLgIDicSJJKLSFJFOJWiwuoquwruqwo2sdjaskjf2214JLSJSLK/0";
-//    dict[@"nickname"] = @"刘洋";
-//    dict[@"openid"] = @"oGyGZsxsRnTJxf10yV-Wbm0-79Ms";
-//    dict[@"unionid"] = @"oA0i0uH7GeVkkciSLGn3_Looqwc9";
+////    dict[@"address"] = @"CN, BeiJing";
+////    dict[@"headimgurl"] = @"http://wx.qlogo.cn/mmopen/Q3auHgzwzM7BML59YK2aCHbP5KCsjfH5s620uIUpaJ8QaE0dYJDUk4HRDYIr2FacItLgIDicSJJKLSFJFOJWiwuoquwruqwo2sdjaskjf2214JLBJSLK/0";
+////    dict[@"nickname"] = @" 淡然。";
+//    dict[@"openid"] = @"oGyGZsxsRnOPxf10yX-Wbm0-56Ms";
+//    dict[@"unionid"] = @"oA1i0uH1GeSkkciSTXn2_Lowqwc3";
+//    dict[@"nickname"] = @"大小姐";
+//    dict[@"headimgurl"] = @"http://wx2.qq.com/cgi-bin/mmwebwx-bin/webwxgeticon?seq=643042572&username=@397faf1359ff6076ae9323337e45e6a447166cceb6779eefd0bef99b815ddb61&skey=@crypt_9b53c2ed_6d337cba061826efac71c91937e6343e&type=big";
+//    // 查询unid是否存在
 //    [self sendWeChatLogin:dict];
+//    
 //}
 /**
  *  微信登录

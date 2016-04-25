@@ -425,7 +425,11 @@
     } else {
         // 设置昵称
         if (userInfo.nickName) {
-            self.nameLable.text = [NSString stringWithFormat:@"%@ | %@",userInfo.organizationName, userInfo.nickName];
+            if ([userInfo.organizationName isEqualToString:@"路人甲"]) {
+                self.nameLable.text = userInfo.nickName;
+            } else {
+                self.nameLable.text = [NSString stringWithFormat:@"%@ | %@",userInfo.organizationName, userInfo.nickName];
+            }
         } else {
             self.nameLable.text = userInfo.organizationName;
         }

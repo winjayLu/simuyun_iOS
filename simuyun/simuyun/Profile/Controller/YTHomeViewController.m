@@ -503,6 +503,8 @@
     if([YTResourcesTool isVersionFlag] == YES && [YTUserInfoTool userInfo].teamNum > 0)
     {
         self.bottom.height = 126;
+    } else if([YTResourcesTool isVersionFlag] == YES && [YTUserInfoTool userInfo].teamNum == 0){
+        self.bottom.height = 84;
     }
     
     // 设置滚动范围
@@ -695,7 +697,7 @@
 - (void)updateUserInfo
 {
      self.topView.userInfo = [YTUserInfoTool userInfo];
-    [self viewWillAppear:NO];
+    [self viewWillAppear:YES];
 }
 /**
  *  签到

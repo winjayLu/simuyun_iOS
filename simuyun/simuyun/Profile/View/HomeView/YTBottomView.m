@@ -40,6 +40,8 @@
     YTUserInfo *userInfo = [YTUserInfoTool userInfo];
     if (userInfo.teamNum > 0 && self.titles.count == 2) {
         [self.titles insertObject:@"我的团队" atIndex:0];
+    } else if(userInfo.teamNum == 0 && self.titles.count == 3){
+        [self.titles removeObjectAtIndex:0];
     }
     return self.titles.count;
 }
