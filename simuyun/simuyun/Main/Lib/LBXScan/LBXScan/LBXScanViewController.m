@@ -168,11 +168,12 @@
 {
     [picker dismissViewControllerAnimated:YES completion:nil];    
     
-    __block UIImage* image = [info objectForKey:UIImagePickerControllerEditedImage];
+//    __block UIImage* image = [info objectForKey:UIImagePickerControllerEditedImage];
+    __block UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-    if (!image){
-        image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    }
+//    if (!image){
+//        image = [info objectForKey:UIImagePickerControllerOriginalImage];
+//    }
     
     __weak __typeof(self) weakSelf = self;
     [LBXScanWrapper recognizeImage:image success:^(NSArray<LBXScanResult *> *array) {

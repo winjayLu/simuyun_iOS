@@ -256,18 +256,17 @@
         [SVProgressHUD showErrorWithStatus:@"请输入8-14位密码"];
         return YES;
     }
-#warning 测试
-//    if(zhuCe) {
-//        if (self.registerNumber.text.length == 0) {
-//            [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
-//            return YES;
-//        }
-//        if(![self.registerNumber.text isEqualToString:self.captcha])
-//        {
-//            [SVProgressHUD showErrorWithStatus:@"验证码不正确"];
-//            return YES;
-//        }
-//    }
+    if(zhuCe) {
+        if (self.registerNumber.text.length == 0) {
+            [SVProgressHUD showErrorWithStatus:@"请输入验证码"];
+            return YES;
+        }
+        if(![self.registerNumber.text isEqualToString:self.captcha])
+        {
+            [SVProgressHUD showErrorWithStatus:@"验证码不正确"];
+            return YES;
+        }
+    }
     return NO;
 }
 

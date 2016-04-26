@@ -1053,16 +1053,24 @@
 {
     RCIMClient *client = [RCIMClient sharedRCIMClient];
     NSArray *array = [client getConversationList:@[@(ConversationType_PRIVATE)]];
+    
+    BOOL isCustomer = YES;
+    for (RCConversation *conversation in array) {
+        if ([conversation.targetId isEqualToString:YTCustomerService]) {
+            isCustomer = NO;
+            break;
+        }
+    }
     // 发送平台客服消息
-    if (array.count == 0) {
+    if (isCustomer) {
         NSMutableDictionary *param = [NSMutableDictionary dictionary];
         param[@"uid"] = [YTAccountTool account].userId;
         [YTHttpTool get:YTGreetingmessage params:param success:^(id responseObject) {
         } failure:^(NSError *error) {
         }];
     }
+    // 发送机构经理消息
     if (array.count < 2 && [YTUserInfoTool userInfo].adviserStatus == 0) {
-        // 发送机构经理消息
         NSMutableDictionary *param2 = [NSMutableDictionary dictionary];
         param2[@"uid"] = [YTAccountTool account].userId;
         [YTHttpTool get:YTRcManagerInfo params:param2 success:^(id responseObject) {
