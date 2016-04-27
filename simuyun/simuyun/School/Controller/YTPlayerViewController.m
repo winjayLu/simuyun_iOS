@@ -65,6 +65,8 @@
         // 加载视频信息
         [self loadVideoData];
     }
+    
+    [YTCenter addObserver:self selector:@selector(closeClick) name:YTLogOut object:nil];
 }
 /**
  *  加载视频信息

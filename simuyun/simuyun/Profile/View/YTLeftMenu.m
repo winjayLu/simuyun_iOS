@@ -169,29 +169,6 @@
 
 - (void)logOut
 {
-    // 获取程序主窗口
-    UIWindow *keyWindow = nil;
-    for (UIWindow *window in [UIApplication sharedApplication].windows) {
-        if (window.windowLevel == 0) {
-            keyWindow = window;
-            break;
-        }
-    }
-    // 干掉悬浮按钮，及正在播放的视频
-    UIViewController *appRootVC = keyWindow.rootViewController;
-    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
-        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
-        FloatView *floatView = tabBar.floatView;
-        UIViewController *keyVc = ((UITabBarController *)appRootVC).selectedViewController;
-        if (keyVc != nil) {
-            [floatView removeFloatView];
-            tabBar.playerVc = nil;
-            tabBar.floatView = nil;
-        }
-    }
-    
-    
-    keyWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
     // 清除保存的账户信息
     [YTAccountTool save:nil];
     // 清除用户信息
@@ -220,6 +197,29 @@
     
     // 退出融云
     [[RCIM sharedRCIM] logout];
+    
+    
+    // 获取程序主窗口
+    UIWindow *keyWindow = nil;
+    for (UIWindow *window in [UIApplication sharedApplication].windows) {
+        if (window.windowLevel == 0) {
+            keyWindow = window;
+            break;
+        }
+    }
+    // 干掉悬浮按钮，及正在播放的视频
+    UIViewController *appRootVC = keyWindow.rootViewController;
+    if ([appRootVC isKindOfClass:[YTTabBarController class]]) {
+        YTTabBarController *tabBar = ((YTTabBarController *)appRootVC);
+        FloatView *floatView = tabBar.floatView;
+        UIViewController *keyVc = ((UITabBarController *)appRootVC).selectedViewController;
+        if (keyVc != nil) {
+            [floatView removeFloatView];
+            tabBar.playerVc = nil;
+            tabBar.floatView = nil;
+        }
+    }
+    keyWindow.rootViewController = [[YTNavigationController alloc] initWithRootViewController:[[YTLoginViewController alloc] init]];
 }
 /**
  *  拨打电话
