@@ -1056,7 +1056,7 @@
     
     BOOL isCustomer = YES;
     for (RCConversation *conversation in array) {
-        if ([conversation.targetId isEqualToString:YTCustomerService]) {
+        if ([conversation.targetId isEqualToString:CustomerService]) {
             isCustomer = NO;
             break;
         }
