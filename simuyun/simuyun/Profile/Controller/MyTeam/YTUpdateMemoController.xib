@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YTUpdateMemoController">
+            <connections>
+                <outlet property="clearClick" destination="PJi-PJ-ikw" id="xkI-wa-4qO"/>
+                <outlet property="memoField" destination="nGg-oH-9Hr" id="YxX-Jq-s00"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bXP-6k-zhQ">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PJi-PJ-ikw">
+                            <rect key="frame" x="335" y="16" width="20" height="22"/>
+                            <state key="normal" image="shanchu"/>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rj8-kC-Axu">
+                            <rect key="frame" x="0.0" y="54" width="375" height="1"/>
+                            <color key="backgroundColor" red="0.7725490196" green="0.7725490196" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="agO-MU-EC6"/>
+                            </constraints>
+                        </view>
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入备注" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nGg-oH-9Hr">
+                            <rect key="frame" x="20" y="0.0" width="295" height="54"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="PJi-PJ-ikw" secondAttribute="trailing" constant="20" id="1wg-xo-233"/>
+                        <constraint firstItem="rj8-kC-Axu" firstAttribute="top" secondItem="nGg-oH-9Hr" secondAttribute="bottom" id="44X-69-5mN"/>
+                        <constraint firstAttribute="trailing" secondItem="nGg-oH-9Hr" secondAttribute="trailing" constant="60" id="8db-lO-HqJ"/>
+                        <constraint firstItem="rj8-kC-Axu" firstAttribute="leading" secondItem="bXP-6k-zhQ" secondAttribute="leading" id="CYp-pf-xzu"/>
+                        <constraint firstAttribute="trailing" secondItem="nGg-oH-9Hr" secondAttribute="trailing" constant="60" id="Ftq-1u-XX2"/>
+                        <constraint firstAttribute="bottom" secondItem="rj8-kC-Axu" secondAttribute="bottom" id="Z2X-oa-gKJ"/>
+                        <constraint firstItem="PJi-PJ-ikw" firstAttribute="leading" secondItem="nGg-oH-9Hr" secondAttribute="trailing" constant="20" id="Zcw-Ff-9AM"/>
+                        <constraint firstItem="PJi-PJ-ikw" firstAttribute="centerY" secondItem="bXP-6k-zhQ" secondAttribute="centerY" id="emP-vM-6Jt"/>
+                        <constraint firstItem="nGg-oH-9Hr" firstAttribute="top" secondItem="bXP-6k-zhQ" secondAttribute="top" id="fgK-Pa-TTX"/>
+                        <constraint firstAttribute="height" constant="55" id="kC5-AI-h5s"/>
+                        <constraint firstAttribute="trailing" secondItem="rj8-kC-Axu" secondAttribute="trailing" id="to5-iF-PtN"/>
+                        <constraint firstItem="PJi-PJ-ikw" firstAttribute="leading" secondItem="nGg-oH-9Hr" secondAttribute="trailing" constant="20" id="wES-by-h7V"/>
+                        <constraint firstItem="nGg-oH-9Hr" firstAttribute="leading" secondItem="bXP-6k-zhQ" secondAttribute="leading" constant="20" id="yeJ-Bb-Izz"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="8db-lO-HqJ"/>
+                            <exclude reference="Zcw-Ff-9AM"/>
+                            <exclude reference="wES-by-h7V"/>
+                        </mask>
+                    </variation>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10个字以内，备注信息会团队成员列表里显示" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FbC-98-12N">
+                    <rect key="frame" x="20" y="75" width="335" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.14901960780000001" green="0.14901960780000001" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="bXP-6k-zhQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="HXq-dx-raW"/>
+                <constraint firstItem="FbC-98-12N" firstAttribute="top" secondItem="bXP-6k-zhQ" secondAttribute="bottom" constant="20" id="S3j-e3-oPM"/>
+                <constraint firstAttribute="trailing" secondItem="FbC-98-12N" secondAttribute="trailing" constant="20" id="axw-Ut-sG8"/>
+                <constraint firstAttribute="trailing" secondItem="bXP-6k-zhQ" secondAttribute="trailing" id="pHf-Rq-Shk"/>
+                <constraint firstItem="FbC-98-12N" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="sBG-GF-2iO"/>
+                <constraint firstItem="bXP-6k-zhQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="y6R-f4-7yG"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+            <point key="canvasLocation" x="189.5" y="417.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="shanchu" width="20" height="20"/>
+    </resources>
+</document>

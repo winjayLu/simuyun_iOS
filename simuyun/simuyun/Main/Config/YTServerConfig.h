@@ -146,5 +146,11 @@
 #define YTGetRedeemMeans @"emailRedemMatirial"
 // 获取平台客服消息
 #define YTGreetingmessage @"rc/greetingmessage"
+// 获取团队成员列表
+#define YTGetAllMembers @"getAllMembers"
+// 获取团队组列表
+#define YTGetAllGroups @"getAllGroups"
+
+
 
 #endif /* YTServerConfig_h */

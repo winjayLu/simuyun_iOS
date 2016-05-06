@@ -263,6 +263,7 @@
 		97545A4D1CAA1C8C00F4E6C7 /* YTCloudListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 97545A4C1CAA1C8C00F4E6C7 /* YTCloudListController.m */; };
 		97545A501CAA685E00F4E6C7 /* YTCloudListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97545A4F1CAA685E00F4E6C7 /* YTCloudListCell.m */; };
 		975F78041BCFCD3D00589D22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 975F78031BCFCD3D00589D22 /* Assets.xcassets */; };
+		9762E98F1CDB231600A8286A /* YTTeamListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9762E98E1CDB231600A8286A /* YTTeamListController.m */; };
 		976CD9721CC0E6280099C33D /* YTAuthenCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 976CD9711CC0E6280099C33D /* YTAuthenCodeView.m */; };
 		977132C41CA13B61001D0746 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 977132C31CA13B61001D0746 /* AssetsLibrary.framework */; };
 		977132C61CA13B68001D0746 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 977132C51CA13B68001D0746 /* AudioToolbox.framework */; };
@@ -276,6 +277,10 @@
 		977132D61CA13C13001D0746 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 977132D51CA13C13001D0746 /* MapKit.framework */; };
 		977132D81CA13C19001D0746 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 977132D71CA13C19001D0746 /* OpenGLES.framework */; };
 		977132DA1CA13C1F001D0746 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 977132D91CA13C1F001D0746 /* QuartzCore.framework */; };
+		977A8B811CDC780900E2EDAD /* YTMemberDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 977A8B7F1CDC780900E2EDAD /* YTMemberDetailController.m */; };
+		977A8B821CDC780900E2EDAD /* YTMemberDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 977A8B801CDC780900E2EDAD /* YTMemberDetailController.xib */; };
+		977A8B861CDC8A7A00E2EDAD /* YTUpdateMemoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 977A8B841CDC8A7A00E2EDAD /* YTUpdateMemoController.m */; };
+		977A8B871CDC8A7A00E2EDAD /* YTUpdateMemoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 977A8B851CDC8A7A00E2EDAD /* YTUpdateMemoController.xib */; };
 		97870A0E1CC376F0004A38BB /* UIApplication+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 97870A011CC376F0004A38BB /* UIApplication+Extend.m */; };
 		97870A0F1CC376F0004A38BB /* UIView+NFLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 97870A031CC376F0004A38BB /* UIView+NFLayout.m */; };
 		97870A101CC376F0004A38BB /* CoreNewFeatureVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 97870A051CC376F0004A38BB /* CoreNewFeatureVC.m */; };
@@ -320,10 +325,16 @@
 		97C718FC1C80323A00BC43D7 /* YTTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C718FA1C80323A00BC43D7 /* YTTableViewCell.xib */; };
 		97C719011C80411400BC43D7 /* YTHotProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97C718FF1C80411400BC43D7 /* YTHotProductCell.m */; };
 		97C719021C80411400BC43D7 /* YTHotProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97C719001C80411400BC43D7 /* YTHotProductCell.xib */; };
+		97D52B1C1CDC4187009012F0 /* YTGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97D52B1B1CDC4187009012F0 /* YTGroupModel.m */; };
 		97DD72C11BC421D90082C69F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C01BC421D90082C69F /* libsqlite3.dylib */; };
 		97DD72C31BC421E60082C69F /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C21BC421E60082C69F /* libz.dylib */; };
 		97DD72C51BC421F40082C69F /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C41BC421F40082C69F /* libstdc++.dylib */; };
 		97DD72C71BC421FE0082C69F /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 97DD72C61BC421FE0082C69F /* libiconv.dylib */; };
+		97F8D3D01CDC39BD00C771C6 /* YTTeamGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F8D3CE1CDC39BD00C771C6 /* YTTeamGroupCell.m */; };
+		97F8D3D11CDC39BD00C771C6 /* YTTeamGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F8D3CF1CDC39BD00C771C6 /* YTTeamGroupCell.xib */; };
+		97F8D3D51CDC39D400C771C6 /* YTTeamMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F8D3D31CDC39D400C771C6 /* YTTeamMemberCell.m */; };
+		97F8D3D61CDC39D400C771C6 /* YTTeamMemberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97F8D3D41CDC39D400C771C6 /* YTTeamMemberCell.xib */; };
+		97F8D3DA1CDC3E8700C771C6 /* YTMemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 97F8D3D91CDC3E8700C771C6 /* YTMemberModel.m */; };
 		C7C7A3BFF6245A07C6961ED3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1695905209A227AB6ABE80C8 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -834,6 +845,8 @@
 		97545A4E1CAA685E00F4E6C7 /* YTCloudListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTCloudListCell.h; sourceTree = "<group>"; };
 		97545A4F1CAA685E00F4E6C7 /* YTCloudListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTCloudListCell.m; sourceTree = "<group>"; };
 		975F78031BCFCD3D00589D22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9762E98D1CDB231600A8286A /* YTTeamListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTTeamListController.h; sourceTree = "<group>"; };
+		9762E98E1CDB231600A8286A /* YTTeamListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTTeamListController.m; sourceTree = "<group>"; };
 		976CD9701CC0E6280099C33D /* YTAuthenCodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAuthenCodeView.h; sourceTree = "<group>"; };
 		976CD9711CC0E6280099C33D /* YTAuthenCodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAuthenCodeView.m; sourceTree = "<group>"; };
 		977132C31CA13B61001D0746 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -848,6 +861,13 @@
 		977132D51CA13C13001D0746 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		977132D71CA13C19001D0746 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		977132D91CA13C1F001D0746 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		977A8B7D1CDC731700E2EDAD /* 1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 1.h; sourceTree = "<group>"; };
+		977A8B7E1CDC780900E2EDAD /* YTMemberDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTMemberDetailController.h; sourceTree = "<group>"; };
+		977A8B7F1CDC780900E2EDAD /* YTMemberDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMemberDetailController.m; sourceTree = "<group>"; };
+		977A8B801CDC780900E2EDAD /* YTMemberDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTMemberDetailController.xib; sourceTree = "<group>"; };
+		977A8B831CDC8A7A00E2EDAD /* YTUpdateMemoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTUpdateMemoController.h; sourceTree = "<group>"; };
+		977A8B841CDC8A7A00E2EDAD /* YTUpdateMemoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTUpdateMemoController.m; sourceTree = "<group>"; };
+		977A8B851CDC8A7A00E2EDAD /* YTUpdateMemoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTUpdateMemoController.xib; sourceTree = "<group>"; };
 		97870A001CC376F0004A38BB /* UIApplication+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+Extend.h"; sourceTree = "<group>"; };
 		97870A011CC376F0004A38BB /* UIApplication+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+Extend.m"; sourceTree = "<group>"; };
 		97870A021CC376F0004A38BB /* UIView+NFLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NFLayout.h"; sourceTree = "<group>"; };
@@ -930,10 +950,20 @@
 		97C718FE1C80411400BC43D7 /* YTHotProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTHotProductCell.h; sourceTree = "<group>"; };
 		97C718FF1C80411400BC43D7 /* YTHotProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTHotProductCell.m; sourceTree = "<group>"; };
 		97C719001C80411400BC43D7 /* YTHotProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTHotProductCell.xib; sourceTree = "<group>"; };
+		97D52B1A1CDC4187009012F0 /* YTGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTGroupModel.h; sourceTree = "<group>"; };
+		97D52B1B1CDC4187009012F0 /* YTGroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTGroupModel.m; sourceTree = "<group>"; };
 		97DD72C01BC421D90082C69F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		97DD72C21BC421E60082C69F /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		97DD72C41BC421F40082C69F /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		97DD72C61BC421FE0082C69F /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		97F8D3CD1CDC39BD00C771C6 /* YTTeamGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTTeamGroupCell.h; sourceTree = "<group>"; };
+		97F8D3CE1CDC39BD00C771C6 /* YTTeamGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTTeamGroupCell.m; sourceTree = "<group>"; };
+		97F8D3CF1CDC39BD00C771C6 /* YTTeamGroupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTTeamGroupCell.xib; sourceTree = "<group>"; };
+		97F8D3D21CDC39D400C771C6 /* YTTeamMemberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTTeamMemberCell.h; sourceTree = "<group>"; };
+		97F8D3D31CDC39D400C771C6 /* YTTeamMemberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTTeamMemberCell.m; sourceTree = "<group>"; };
+		97F8D3D41CDC39D400C771C6 /* YTTeamMemberCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = YTTeamMemberCell.xib; sourceTree = "<group>"; };
+		97F8D3D81CDC3E8700C771C6 /* YTMemberModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTMemberModel.h; sourceTree = "<group>"; };
+		97F8D3D91CDC3E8700C771C6 /* YTMemberModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMemberModel.m; sourceTree = "<group>"; };
 		EE4C2D6D5E8167BC60D82A90 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1161,6 +1191,7 @@
 		97270BF91C7BF47400C92888 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9762E98C1CDB22DC00A8286A /* MyTeam */,
 				97270BFA1C7BF47400C92888 /* Authentication */,
 				97270C071C7BF47400C92888 /* Order */,
 				97270C0C1C7BF47400C92888 /* Other */,
@@ -2344,6 +2375,17 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		9762E98C1CDB22DC00A8286A /* MyTeam */ = {
+			isa = PBXGroup;
+			children = (
+				97F8D3D71CDC3E7300C771C6 /* Model */,
+				97F8D3C91CDC396100C771C6 /* View */,
+				97F8D3C81CDC395000C771C6 /* Controller */,
+				977A8B7D1CDC731700E2EDAD /* 1.h */,
+			);
+			path = MyTeam;
+			sourceTree = "<group>";
+		};
 		978709FD1CC376F0004A38BB /* CoreNewFeatureVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -2505,6 +2547,45 @@
 			path = simuyunUITests;
 			sourceTree = "<group>";
 		};
+		97F8D3C81CDC395000C771C6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9762E98D1CDB231600A8286A /* YTTeamListController.h */,
+				9762E98E1CDB231600A8286A /* YTTeamListController.m */,
+				977A8B7E1CDC780900E2EDAD /* YTMemberDetailController.h */,
+				977A8B7F1CDC780900E2EDAD /* YTMemberDetailController.m */,
+				977A8B801CDC780900E2EDAD /* YTMemberDetailController.xib */,
+				977A8B831CDC8A7A00E2EDAD /* YTUpdateMemoController.h */,
+				977A8B841CDC8A7A00E2EDAD /* YTUpdateMemoController.m */,
+				977A8B851CDC8A7A00E2EDAD /* YTUpdateMemoController.xib */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		97F8D3C91CDC396100C771C6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				97F8D3CD1CDC39BD00C771C6 /* YTTeamGroupCell.h */,
+				97F8D3CE1CDC39BD00C771C6 /* YTTeamGroupCell.m */,
+				97F8D3CF1CDC39BD00C771C6 /* YTTeamGroupCell.xib */,
+				97F8D3D21CDC39D400C771C6 /* YTTeamMemberCell.h */,
+				97F8D3D31CDC39D400C771C6 /* YTTeamMemberCell.m */,
+				97F8D3D41CDC39D400C771C6 /* YTTeamMemberCell.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		97F8D3D71CDC3E7300C771C6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				97F8D3D81CDC3E8700C771C6 /* YTMemberModel.h */,
+				97F8D3D91CDC3E8700C771C6 /* YTMemberModel.m */,
+				97D52B1A1CDC4187009012F0 /* YTGroupModel.h */,
+				97D52B1B1CDC4187009012F0 /* YTGroupModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2632,8 +2713,10 @@
 				97270CC41C7BF47E00C92888 /* YTBuyProductController.xib in Resources */,
 				97270EAA1C7BF4D500C92888 /* LICENSE in Resources */,
 				97270C621C7BF47400C92888 /* YTOrderCenterCell.xib in Resources */,
+				97F8D3D61CDC39D400C771C6 /* YTTeamMemberCell.xib in Resources */,
 				97270EBA1C7BF4D500C92888 /* CorePPTVC.xib in Resources */,
 				97270C5E1C7BF47400C92888 /* YTProfileTopView.xib in Resources */,
+				97F8D3D11CDC39BD00C771C6 /* YTTeamGroupCell.xib in Resources */,
 				97270CED1C7BF47E00C92888 /* YTProductCell.xib in Resources */,
 				97270C451C7BF47400C92888 /* YTAuthenticationViewController.xib in Resources */,
 				97270CD41C7BF47E00C92888 /* ImagesPicker.xcassets in Resources */,
@@ -2647,8 +2730,10 @@
 				97270ECB1C7BF4D500C92888 /* CoreSDWebImage.bundle in Resources */,
 				97270BD81C7BF43C00C92888 /* YTSchoolTableViewCell.xib in Resources */,
 				97270EC61C7BF4D500C92888 /* PushConfig.plist in Resources */,
+				977A8B821CDC780900E2EDAD /* YTMemberDetailController.xib in Resources */,
 				97270C4B1C7BF47400C92888 /* YTAboutViewController.xib in Resources */,
 				97238CA11C45E88E00F68EEA /* LaunchScreen.xib in Resources */,
+				977A8B871CDC8A7A00E2EDAD /* YTUpdateMemoController.xib in Resources */,
 				97270D521C7BF4AF00C92888 /* YTLoginAuthenticationController.xib in Resources */,
 				97270CE91C7BF47E00C92888 /* YTCustomerView.xib in Resources */,
 				97270ED51C7BF4D500C92888 /* UMSocialLocalizable.strings in Resources */,
@@ -2756,6 +2841,7 @@
 				97270F101C7BF50600C92888 /* YTInformationTableViewCell.m in Sources */,
 				97270EDE1C7BF4D500C92888 /* YUDIVView.m in Sources */,
 				97270BD61C7BF43C00C92888 /* YTSchoolHeaderView.m in Sources */,
+				977A8B811CDC780900E2EDAD /* YTMemberDetailController.m in Sources */,
 				979D7E2F1CBD1189007C7A1B /* YTRedeemptionController.m in Sources */,
 				97270CD51C7BF47E00C92888 /* JKAssets.m in Sources */,
 				97A4DDDA1C97A4C200079AFC /* SubLBXScanViewController.m in Sources */,
@@ -2793,6 +2879,7 @@
 				97270D2A1C7BF49500C92888 /* CorePagesViewConfig.m in Sources */,
 				97270EA71C7BF4D500C92888 /* AFURLRequestSerialization.m in Sources */,
 				97870A0E1CC376F0004A38BB /* UIApplication+Extend.m in Sources */,
+				9762E98F1CDB231600A8286A /* YTTeamListController.m in Sources */,
 				97270CCD1C7BF47E00C92888 /* YTSearchViewController.m in Sources */,
 				97270D271C7BF49500C92888 /* YTMessageModel.m in Sources */,
 				97270EDD1C7BF4D500C92888 /* UIButton+Bootstrap.m in Sources */,
@@ -2835,6 +2922,7 @@
 				97270BD41C7BF43C00C92888 /* YTGroomVedioView.m in Sources */,
 				97A4DDF81C97A53500079AFC /* LBXScanWrapper.m in Sources */,
 				97270EB21C7BF4D500C92888 /* UIRefreshControl+AFNetworking.m in Sources */,
+				977A8B861CDC8A7A00E2EDAD /* YTUpdateMemoController.m in Sources */,
 				9725A17E1CABBDAC00283054 /* YTPageScrollView.m in Sources */,
 				97270D5C1C7BF4AF00C92888 /* YTUserInfo.m in Sources */,
 				97270CE51C7BF47E00C92888 /* QKInfoCard.m in Sources */,
@@ -2850,6 +2938,7 @@
 				97270D291C7BF49500C92888 /* CAAnimation+PagesViewBarShake.m in Sources */,
 				97270BF51C7BF46800C92888 /* YTStockItem.m in Sources */,
 				97270D261C7BF49500C92888 /* YTTodoListViewController.m in Sources */,
+				97F8D3D51CDC39D400C771C6 /* YTTeamMemberCell.m in Sources */,
 				97270ECC1C7BF4D500C92888 /* UIButton+SD.m in Sources */,
 				97270D5F1C7BF4AF00C92888 /* YTUserInfoTool.m in Sources */,
 				97270BF41C7BF46800C92888 /* YTConsultView.m in Sources */,
@@ -2862,6 +2951,7 @@
 				97270D221C7BF49500C92888 /* YTMessageViewController.m in Sources */,
 				97270EE41C7BF4D500C92888 /* YUBottomPopSelctView.m in Sources */,
 				97270D511C7BF4AF00C92888 /* YTLoginAuthenticationController.m in Sources */,
+				97D52B1C1CDC4187009012F0 /* YTGroupModel.m in Sources */,
 				97270C4F1C7BF47400C92888 /* YTAuthenticationModel.m in Sources */,
 				97270EBD1C7BF4D500C92888 /* PPTModel.m in Sources */,
 				97270E871C7BF4D500C92888 /* AppDelegate.m in Sources */,
@@ -2957,6 +3047,7 @@
 				97270C4C1C7BF47400C92888 /* YTHomeViewController.m in Sources */,
 				97270EBF1C7BF4D500C92888 /* PPTCell.m in Sources */,
 				97270E8C1C7BF4D500C92888 /* NSArray+Extend.m in Sources */,
+				97F8D3DA1CDC3E8700C771C6 /* YTMemberModel.m in Sources */,
 				97270BF21C7BF46800C92888 /* YTNewest.m in Sources */,
 				97B08A8A1BC2472B007EBD24 /* main.m in Sources */,
 				97270CD81C7BF47E00C92888 /* JKAssetsGroupsView.m in Sources */,
@@ -2965,6 +3056,7 @@
 				97270CF21C7BF47E00C92888 /* YTSenMailView.m in Sources */,
 				97A4DDF61C97A53500079AFC /* LBXScanViewController.m in Sources */,
 				97270CD11C7BF47E00C92888 /* YTProductModel.m in Sources */,
+				97F8D3D01CDC39BD00C771C6 /* YTTeamGroupCell.m in Sources */,
 				97270C5D1C7BF47400C92888 /* YTProfileTopView.m in Sources */,
 				97270E9C1C7BF4D500C92888 /* UIWindow+Extension.m in Sources */,
 				97270CCA1C7BF47E00C92888 /* YTReportContentController.m in Sources */,

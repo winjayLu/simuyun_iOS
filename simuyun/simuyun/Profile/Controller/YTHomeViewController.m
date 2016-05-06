@@ -55,6 +55,7 @@
 #import "YTLoginViewController.h"
 #import "YTNavigationController.h"
 #import "YTAuthenCodeView.h"
+#import "YTTeamListController.h"
 
 
 
@@ -613,7 +614,8 @@
 {
     UIViewController *vc = nil;
     if ([name isEqualToString:@"我的团队"]) {
-        vc = [YTNormalWebController webWithTitle:@"我的团队" url:[NSString stringWithFormat:@"%@/my/team%@", YTH5Server,[NSDate stringDate]]];
+        vc = [[YTTeamListController alloc] init];
+//        vc = [YTNormalWebController webWithTitle:@"我的团队" url:[NSString stringWithFormat:@"%@/my/team%@", YTH5Server,[NSDate stringDate]]];
         [MobClick event:@"main_click" attributes:@{@"按钮" : @"我的团队", @"机构" : [YTUserInfoTool userInfo].organizationName}];
     } else if([name isEqualToString:@"全部订单"])
     {
