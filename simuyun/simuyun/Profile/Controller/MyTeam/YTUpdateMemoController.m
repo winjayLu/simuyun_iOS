@@ -8,6 +8,7 @@
 
 #import "YTUpdateMemoController.h"
 #import "UIBarButtonItem+Extension.h"
+#import "YTMemberModel.h"
 
 @interface YTUpdateMemoController ()
 @property (weak, nonatomic) IBOutlet UITextField *memoField;
@@ -19,8 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"备注";
-    self.memoField.text = self.memo;
+    self.title = @"设置备注";
+    self.memoField.text = self.member.memo;
     
     // 初始化左侧返回按钮
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithBg:@"fanhui" target:self action:@selector(blackClick)];
@@ -34,10 +35,13 @@
 
 - (void)blackClick
 {
-    if ([self.memo isEqualToString:self.memoField.text]) {
+    if ([self.member.memo isEqualToString:self.memoField.text]) {
         [self.navigationController popViewControllerAnimated:YES];
     } else {
 #warning 发送请求修改
+        self.member.memo = self.memoField.text;
+        [self.updateDelegate updateMemoSuccess];
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 #warning 修改详情和列表的数据

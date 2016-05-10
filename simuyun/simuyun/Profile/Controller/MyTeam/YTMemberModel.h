@@ -26,4 +26,6 @@
 
 @property (nonatomic, copy) NSString *nickName;
 
+@property (nonatomic, assign) NSInteger isSelected;
+
 @end

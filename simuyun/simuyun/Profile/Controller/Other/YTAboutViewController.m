@@ -35,7 +35,7 @@
 
 - (IBAction)pushUrl:(UIButton *)sender {
     
-    YTNormalWebController *webVc = [YTNormalWebController webWithTitle:@"私募云" url:@"http://www.simuyun.com"];
+    YTNormalWebController *webVc = [YTNormalWebController webWithTitle:@"盈泰财富云" url:@"http://www.caifuyun.cn"];
     [self.navigationController pushViewController:webVc animated:YES];
 }
 

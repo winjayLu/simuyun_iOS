@@ -8,10 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class YTMemberModel;
+
+@protocol updateMemoDelegate <NSObject>
+
+- (void)updateMemoSuccess;
+
+@end
+
 @interface YTUpdateMemoController : UIViewController
 
-@property (nonatomic, copy) NSString *memo;
+@property (nonatomic, strong) YTMemberModel *member;
 
-@property (nonatomic, copy) NSString *adviserId;
 
+@property (nonatomic, weak) id<updateMemoDelegate> updateDelegate;
 @end

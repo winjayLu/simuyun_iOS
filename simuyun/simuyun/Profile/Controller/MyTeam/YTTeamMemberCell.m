@@ -55,8 +55,6 @@
     
     self.headImageV.layer.cornerRadius = self.headImageV.width * 0.5;
     self.headImageV.layer.masksToBounds = YES;
-    
-    
 }
 
 

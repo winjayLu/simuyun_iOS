@@ -14,7 +14,7 @@
 #import "YTAccountTool.h"
 #import "YTUpdateMemoController.h"
 
-@interface YTMemberDetailController ()
+@interface YTMemberDetailController () <updateMemoDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLable;
 
@@ -120,9 +120,20 @@
  */
 - (IBAction)memoClick:(UIButton *)sender {
     YTUpdateMemoController *update = [[YTUpdateMemoController alloc] init];
-    update.memo = self.member.memo;
-    update.adviserId = self.member.adviserId;
+    update.member = self.member;
+    update.updateDelegate = self;
     [self.navigationController pushViewController:update animated:YES];
+}
+
+/**
+ *  备注修改成功
+ */
+- (void)updateMemoSuccess
+{
+    [self.memoBtn setTitle:self.member.memo forState:UIControlStateNormal];
+    
+#warning 发送通知刷新列表
+    
 }
 
 @end

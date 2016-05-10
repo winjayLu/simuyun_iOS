@@ -18,6 +18,8 @@
 #import "YTTeamMemberCell.h"
 #import "YTTeamGroupCell.h"
 #import "YTMemberDetailController.h"
+#import "YTAddGroupController.h"
+#import "YTGroupDetailController.h"
 
 
 @interface YTTeamListController ()
@@ -69,7 +71,7 @@
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
                                                            forKey:NSFontAttributeName];
     [segmented setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    [segmented addTarget:self.tableView.header action:@selector(beginRefreshing) forControlEvents:UIControlEventValueChanged];
+    [segmented addTarget:self action:@selector(titleClick) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = segmented;
     self.segmented = segmented;
 
@@ -82,12 +84,22 @@
     
 }
 
+/**
+ *  标题点击
+ */
+- (void)titleClick
+{
+    [self.popover dismiss];
+    [self loadData];
+}
+
 
 /**
  *  加载数据
  */
 - (void)loadData
 {
+    
     if (self.segmented.selectedSegmentIndex == 0) {
         if (self.members.count > 0) {
             [self.tableView reloadData];
@@ -189,7 +201,14 @@
  */
 - (void)creatGroup
 {
-    
+    for (YTMemberModel *member in self.members) {
+        member.isSelected = NO;
+    }
+    [self.popover dismiss];
+    self.popover = nil;
+    YTAddGroupController *addVc = [[YTAddGroupController alloc] init];
+    addVc.members = [self.members copy];
+    [self.navigationController pushViewController:addVc animated:YES];
 }
 
 
@@ -212,16 +231,16 @@
         YTMemberModel *member = self.members[indexPath.row];
         if (cell==nil) {
             cell = [YTTeamMemberCell memberCell];
-            ((YTTeamMemberCell *)cell).member = member;
         }
+        ((YTTeamMemberCell *)cell).member = member;
     } else {
         static NSString *groupCell = @"teamGroup";
         cell = [tableView dequeueReusableCellWithIdentifier:groupCell];
         YTGroupModel *group = self.groups[indexPath.row];
         if (cell==nil) {
             cell =[YTTeamGroupCell groupCell];
-            ((YTTeamGroupCell *)cell).group = group;
         }
+        ((YTTeamGroupCell *)cell).group = group;
     }
     return cell;
 }
@@ -238,7 +257,10 @@
         detail.member = self.members[indexPath.row];
         [self.navigationController pushViewController:detail animated:YES];
     } else {    // 组点击
-        
+        YTGroupDetailController *detail = [[YTGroupDetailController alloc] init];
+        detail.group = self.groups[indexPath.row];
+        detail.title = detail.group.groupName;
+        [self.navigationController pushViewController:detail animated:YES];
     }
 }
 
@@ -260,10 +282,12 @@
     view.frame = button.frame;
     view.y = view.y - 33;
     [popover showAtView:view withContentView:self.innerView inView:self.view];
+    self.tableView.scrollEnabled = NO;
     popover.didDismissHandler = ^{
         [button setBackgroundImage:[UIImage imageNamed:@"jiahao"] forState:UIControlStateNormal];
         self.innerView.layer.cornerRadius = 0.0;
         self.popover = nil;
+        self.tableView.scrollEnabled = YES;
     };
 }
 
