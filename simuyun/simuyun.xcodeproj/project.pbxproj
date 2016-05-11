@@ -14,6 +14,7 @@
 		9714C91D1CBE1260005A25EA /* YTRedeemModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9714C91C1CBE1260005A25EA /* YTRedeemModel.m */; };
 		971A44641C55FCB4007469F4 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 971A44631C55FCB4007469F4 /* CoreMedia.framework */; };
 		972114081CE2C49100676971 /* YTSendAllController.m in Sources */ = {isa = PBXBuildFile; fileRef = 972114071CE2C49100676971 /* YTSendAllController.m */; };
+		9721140B1CE306B300676971 /* YTProductTypeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9721140A1CE306B300676971 /* YTProductTypeModel.m */; };
 		97238CA11C45E88E00F68EEA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97238CA01C45E88E00F68EEA /* LaunchScreen.xib */; };
 		9725A17B1CAB731900283054 /* YTConversationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9725A17A1CAB731900283054 /* YTConversationController.m */; };
 		9725A17E1CABBDAC00283054 /* YTPageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9725A17D1CABBDAC00283054 /* YTPageScrollView.m */; };
@@ -376,6 +377,8 @@
 		971A44631C55FCB4007469F4 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		972114061CE2C49100676971 /* YTSendAllController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSendAllController.h; sourceTree = "<group>"; };
 		972114071CE2C49100676971 /* YTSendAllController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSendAllController.m; sourceTree = "<group>"; };
+		972114091CE306B300676971 /* YTProductTypeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTProductTypeModel.h; sourceTree = "<group>"; };
+		9721140A1CE306B300676971 /* YTProductTypeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTProductTypeModel.m; sourceTree = "<group>"; };
 		97238CA01C45E88E00F68EEA /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		9725A1791CAB731900283054 /* YTConversationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTConversationController.h; sourceTree = "<group>"; };
 		9725A17A1CAB731900283054 /* YTConversationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTConversationController.m; sourceTree = "<group>"; };
@@ -1398,6 +1401,8 @@
 				97270C821C7BF47E00C92888 /* YTProductModel.m */,
 				97270C831C7BF47E00C92888 /* YTSlipModel.h */,
 				97270C841C7BF47E00C92888 /* YTSlipModel.m */,
+				972114091CE306B300676971 /* YTProductTypeModel.h */,
+				9721140A1CE306B300676971 /* YTProductTypeModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2964,6 +2969,7 @@
 				97270BD01C7BF43C00C92888 /* SimpleViewController.m in Sources */,
 				97270EC41C7BF4D500C92888 /* TFModel.m in Sources */,
 				97270EE61C7BF4D500C92888 /* YTJpushModel.m in Sources */,
+				9721140B1CE306B300676971 /* YTProductTypeModel.m in Sources */,
 				97270BD41C7BF43C00C92888 /* YTGroomVedioView.m in Sources */,
 				97A4DDF81C97A53500079AFC /* LBXScanWrapper.m in Sources */,
 				97270EB21C7BF4D500C92888 /* UIRefreshControl+AFNetworking.m in Sources */,

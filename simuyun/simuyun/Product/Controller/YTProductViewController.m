@@ -32,6 +32,15 @@
 #import "CAAnimation+PagesViewBarShake.h"
 #import "YTHotProductCell.h"
 #import "SVProgressHUD.h"
+#import "YTProductTypeModel.h"
+
+@interface YTProductTypeButton : UIButton
+/**
+ *  产品类型
+ */
+@property (nonatomic, strong) YTProductTypeModel *proType;
+
+@end
 
 
 @interface YTProductViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -157,7 +166,8 @@ static UIWindow *_window;
     // 产品分类按钮
     CGFloat btnW = 51;
     for (int i = 0; i < self.proTypes.count; i++) {
-        UIButton *button = [[UIButton alloc] init];
+        YTProductTypeModel *typeModel = self.proTypes[i];
+        YTProductTypeButton *button = [[YTProductTypeButton alloc] init];
         button.tag = i;
         button.backgroundColor = [UIColor clearColor];
         [button.titleLabel setFont:[UIFont systemFontOfSize:13]];
@@ -165,7 +175,8 @@ static UIWindow *_window;
         [button setTitleColor:YTNavBackground forState:UIControlStateSelected];
         button.frame = CGRectMake(btnW * i, 0, btnW, topH);
         [button addTarget:self action:@selector(typeClick:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:self.proTypes[i] forState:UIControlStateNormal];
+        [button setTitle:typeModel.name forState:UIControlStateNormal];
+        button.proType = typeModel;
         if (i == 0) {
             button.selected = YES;
             self.selectedButton = button;
@@ -196,7 +207,7 @@ static UIWindow *_window;
     [topView addSubview:button];
 }
 
-- (void)typeClick:(UIButton *)button
+- (void)typeClick:(YTProductTypeButton *)button
 {
     if (self.selectedButton == button) return;
     // 改变按钮状态
@@ -208,8 +219,9 @@ static UIWindow *_window;
     // 调整按钮位置
     [self scrollViewFitContentOffsetWithBtnSelected:button];
     
-    // 获取新数据
-    [self loadNewDataWithType:button.titleLabel.text];
+    self.series = button.proType.type;
+    [self loadProduct];
+    [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
 }
 
 /**
@@ -248,12 +260,12 @@ static UIWindow *_window;
     
     // 2.发送一个GET请求
     
-    [mgr GET:@"http://www.simuyun.com/peyunupload/label/productTypes.json" parameters:nil
+    [mgr GET:@"http://www.simuyun.com/peyunupload/label/productTypesNew.json" parameters:nil
      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-         self.proTypes = [NSString objectArrayWithKeyValuesArray:responseObject];
+         self.proTypes = [YTProductTypeModel objectArrayWithKeyValuesArray:responseObject];
          // 存储获取到的数据
          NSString *oldSearchProduct = [responseObject JsonToString];
-         [CoreArchive setStr:oldSearchProduct key:@"proTypes"];
+         [CoreArchive setStr:oldSearchProduct key:@"newProTypes"];
      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
      }];
 }
@@ -374,30 +386,6 @@ static UIWindow *_window;
 
 
 #pragma mark - 获取数据
-- (void)loadNewDataWithType:(NSString *)type
-{
-    if ([type isEqualToString:@"泰山"]) {
-        self.series = 1;
-    } else if ([type isEqualToString:@"恒山"]){
-        self.series = 3;
-    } else if ([type isEqualToString:@"嵩山"]){
-        self.series = 4;
-    } else if ([type isEqualToString:@"昆仑山"]){
-        self.series = 9;
-    } else if ([type isEqualToString:@"黄河"]){
-        self.series = 6;
-    } else if ([type isEqualToString:@"长江"]){
-        self.series = 5;
-    } else if ([type isEqualToString:@"澜沧江"]){
-        self.series = 7;
-    } else if ([type isEqualToString:@"亚马逊"]){
-        self.series = 8;
-    } else if ([type isEqualToString:@"全部"]){
-        self.series = 0;
-    }
-    [self loadProduct];
-    [SVProgressHUD showWithStatus:@"正在加载" maskType:SVProgressHUDMaskTypeClear];
-}
 
 - (void)loadProduct
 {
@@ -489,11 +477,21 @@ static UIWindow *_window;
 {
     if (!_proTypes) {
         // 获取历史数据
-        NSString *oldProducts = [CoreArchive strForKey:@"proTypes"];
+        NSString *oldProducts = [CoreArchive strForKey:@"newProTypes"];
         if (oldProducts != nil) {
-            _proTypes = [NSString objectArrayWithKeyValuesArray:[oldProducts JsonToValue]];
+            _proTypes = [YTProductTypeModel objectArrayWithKeyValuesArray:[oldProducts JsonToValue]];
         } else {
-            _proTypes = [NSArray arrayWithObjects:@"全部", @"黄河", @"嵩山", @"泰山", @"恒山", @"长江", @"亚马逊", @"昆仑山", @"澜沧江", nil];
+            YTProductTypeModel *type1 = [[YTProductTypeModel alloc] initWithName:@"全部" type:0];
+            YTProductTypeModel *type2 = [[YTProductTypeModel alloc] initWithName:@"黄河" type:6];
+            YTProductTypeModel *type3 = [[YTProductTypeModel alloc] initWithName:@"嵩山" type:4];
+            YTProductTypeModel *type4 = [[YTProductTypeModel alloc] initWithName:@"泰山" type:1];
+            YTProductTypeModel *type5 = [[YTProductTypeModel alloc] initWithName:@"恒山" type:3];
+            YTProductTypeModel *type6 = [[YTProductTypeModel alloc] initWithName:@"长江" type:5];
+            YTProductTypeModel *type7 = [[YTProductTypeModel alloc] initWithName:@"亚马逊" type:8];
+            YTProductTypeModel *type8 = [[YTProductTypeModel alloc] initWithName:@"昆仑山" type:9];
+            YTProductTypeModel *type9 = [[YTProductTypeModel alloc] initWithName:@"澜沧江" type:7];
+            YTProductTypeModel *type10 = [[YTProductTypeModel alloc] initWithName:@"黄山" type:2];
+            _proTypes = [NSArray arrayWithObjects:type1, type2, type3, type4, type5, type6, type7, type8, type9, type10, nil];
         }
     }
     return _proTypes;
@@ -506,5 +504,9 @@ static UIWindow *_window;
     // Dispose of any resources that can be recreated.
 }
 
+
+@end
+
+@implementation YTProductTypeButton
 
 @end
