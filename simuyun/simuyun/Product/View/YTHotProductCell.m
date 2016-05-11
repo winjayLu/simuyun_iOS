@@ -117,8 +117,10 @@
         [self.jiejiTimeLable setTitle:[NSString stringWithFormat:@"截止打款%zd小时", _product.componentsDate.hour] forState:UIControlStateNormal];
     } else if (_product.componentsDate.minute > 0) {
         [self.jiejiTimeLable setTitle:[NSString stringWithFormat:@"截止打款%zd分钟", _product.componentsDate.minute] forState:UIControlStateNormal];
-    } else {
+    } else if(_product.componentsDate.second > 0){
         [self.jiejiTimeLable setTitle:[NSString stringWithFormat:@"截止打款%zd秒", _product.componentsDate.second] forState:UIControlStateNormal];
+    } else {
+        [self.jiejiTimeLable setTitle:@"已截止" forState:UIControlStateNormal];
     }
 }
 

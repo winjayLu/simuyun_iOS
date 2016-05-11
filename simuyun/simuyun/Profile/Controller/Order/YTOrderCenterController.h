@@ -22,6 +22,11 @@
 @property (nonatomic, assign) BOOL isYiQueRen;
 
 /**
+ *  是否显示可赎回订单
+ */
+@property (nonatomic, assign) BOOL isRedeem;
+
+/**
  *  是否从订单跳转过来
  */
 @property (nonatomic, assign) BOOL isOrder;

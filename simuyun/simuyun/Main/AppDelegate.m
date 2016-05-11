@@ -36,6 +36,7 @@
 #import "YTUserInfoTool.h"
 #import "CoreArchive.h"
 #import "YTAccountTool.h"
+#import "YTOrderCenterController.h"
 
 #warning 本地通知
 
@@ -191,6 +192,9 @@
     } else if (jpush.type == 4) // 产品发行
     {
         [self newProduct:jpush];
+    } else if (jpush.type == 14) // 产品发行
+    {
+        [self redeemOrder:jpush];
     }  else {    // h5页面跳转
         [self jumpToHtml:jpush];
     }
@@ -290,6 +294,31 @@
         }
     }];
 }
+
+/**
+ *  新的可赎回订单
+ */
+- (void)redeemOrder:(YTJpushModel *)jpush
+{
+    // 获取正在显示的控制器
+    [self keyViewController:jpush];
+    if (self.keyVc == nil) return;
+    HHAlertView *alert = [HHAlertView shared];
+    [alert showAlertWithStyle:HHAlertStyleJpush imageName:@"pushIconDock" Title:jpush.title detail:jpush.detail cancelButton:@"返回" Okbutton:@"点击查看" block:^(HHAlertButton buttonindex) {
+        if(buttonindex == HHAlertButtonOk)
+        {
+            YTOrderCenterController *pushVc = [[YTOrderCenterController alloc] init];
+            pushVc.isRedeem = YES;
+            pushVc.hidesBottomBarWhenPushed = YES;
+            [self.keyVc pushViewController:pushVc animated:YES];
+            [YTJpushTool saveJpush:nil];
+        } else {
+            [YTJpushTool saveJpush:nil];
+        }
+    }];
+}
+
+
 /**
  *  h5页面跳转
  */

@@ -922,6 +922,9 @@
         if (jpush.type == 4) // 产品发行
         {
             [self jumpToProduct:jpush];
+        } else if (jpush.type == 14) // 新的可赎回订单
+        {
+            [self jumpToRedeemOrder:jpush];
         } else {
             [self jumpToNormalWeb:jpush];
         }
@@ -952,6 +955,19 @@
     web.proId = [jpush.jumpUrl substringFromIndex:range.location + range.length];
     web.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:web animated:NO];
+    [YTJpushTool saveJpush:nil];
+}
+
+/**
+ *  跳转可赎回订单列表
+ *
+ */
+- (void)jumpToRedeemOrder:(YTJpushModel *)jpush
+{
+    YTOrderCenterController *pushVc = [[YTOrderCenterController alloc] init];
+    pushVc.isRedeem = YES;
+    pushVc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:pushVc animated:YES];
     [YTJpushTool saveJpush:nil];
 }
 

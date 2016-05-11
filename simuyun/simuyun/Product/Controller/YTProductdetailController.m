@@ -32,7 +32,7 @@
 #import "YTBindingPhoneController.h"
 #import "YTSnsShareViewController.h"
 #import "YTConversationController.h"
-
+#import "MJRefresh.h"
 
 
 @interface YTProductdetailController () <shareCustomDelegate, senMailViewDelegate, UIWebViewDelegate>
@@ -93,6 +93,8 @@
     if (self.proId != nil && self.proId.length > 0) {
         [self loadProductWithId];
     }
+    self.webView.scrollView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadProductWithId)];
+
 }
 
 
@@ -103,14 +105,20 @@
 {
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     param[@"uid"] = [YTAccountTool account].userId;
-    param[@"proId"] = self.proId;
+    if (self.proId.length == 0) {
+        param[@"proId"] = self.self.product.pro_id;
+    } else {
+        param[@"proId"] = self.proId;
+    }
     param[@"version"] = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [YTHttpTool get:YTProductList params:param success:^(id responseObject) {
         NSArray *products = [YTProductModel objectArrayWithKeyValuesArray:responseObject];
         if (products.count > 0) {
             self.product = products[0];
         }
+        [self.webView.scrollView.header endRefreshing];
     } failure:^(NSError *error) {
+        [self.webView.scrollView.header endRefreshing];
     }];
     self.proId = nil;
 }

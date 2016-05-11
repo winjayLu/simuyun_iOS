@@ -121,7 +121,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (!self.isYiQueRen) {
+    if (!self.isYiQueRen && !self.isRedeem) {
         // 马上进入刷新状态
         [self.tableView.header beginRefreshing];
     }
@@ -172,6 +172,7 @@
                 title = @"已确认";
                 if (self.isYiQueRen) {
                     [self typeClick:btn];
+                    self.isYiQueRen = NO;
                 }
                 break;
             case 4:
@@ -179,6 +180,10 @@
                 break;
             case 5:
                 title = @"可赎回";
+                if (self.isRedeem) {
+                    [self typeClick:btn];
+                    self.isRedeem = NO;
+                }
                 break;
         }
         [btn setTitle:title forState:UIControlStateNormal];
