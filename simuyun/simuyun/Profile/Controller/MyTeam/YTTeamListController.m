@@ -60,6 +60,8 @@
     
     // 2.获取数据
     [self.tableView.header beginRefreshing];
+    
+    [YTCenter addObserver:self selector:@selector(loadNewData) name:YTUpdateTeamList object:nil];
 }
 
 
@@ -112,6 +114,15 @@
         } else {
             [self loadGroups];
         }
+    }
+}
+
+- (void)loadNewData
+{
+    if (self.segmented.selectedSegmentIndex == 0) {
+        [self loadMembers];
+    } else {
+        [self loadGroups];
     }
 }
 
@@ -185,7 +196,7 @@
             member.adviserId = [NSString stringWithFormat:@"testUserid%d", i];
             [temp addObject:member];
         }
-        group.members = [NSArray arrayWithArray:temp];
+        group.members = [NSMutableArray arrayWithArray:temp];
         [self.groups addObject:group];
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -200,9 +211,10 @@
  */
 - (void)creatGroup
 {
-    for (YTMemberModel *member in self.members) {
-        member.isSelected = NO;
-    }
+#warning 不判断是否选中
+//    for (YTMemberModel *member in self.members) {
+//        member.isSelected = NO;
+//    }
     [self.popover dismiss];
     self.popover = nil;
     YTAddGroupController *addVc = [[YTAddGroupController alloc] init];

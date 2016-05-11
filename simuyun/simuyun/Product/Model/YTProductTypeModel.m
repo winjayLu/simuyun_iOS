@@ -10,7 +10,7 @@
 
 @implementation YTProductTypeModel
 
-- (instancetype)initWithName:(NSString *)name type:(NSString *)type
+- (instancetype)initWithName:(NSString *)name type:(int)type
 {
     self = [super init];
     if (self) {

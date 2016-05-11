@@ -15,7 +15,7 @@
 #import "YTSendAllController.h"
 
 
-@interface YTGroupDetailController ()
+@interface YTGroupDetailController () <memberDetailDelegate>
 
 // 弹出菜单
 @property (nonatomic, strong) DXPopover *popover;
@@ -38,6 +38,8 @@
     [button addTarget:self action:@selector(rightClick:) forControlEvents:UIControlEventTouchUpInside];
     [button setBackgroundImage:[UIImage imageNamed:@"jiahao"] forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    
+    [YTCenter addObserver:self.tableView selector:@selector(reloadData) name:YTUpdateTeamList object:nil];
 }
 
 /**
@@ -45,6 +47,10 @@
  */
 - (void)editClick
 {
+#warning 不判断是否选中
+//    for (YTMemberModel *member in self.members) {
+//        member.isSelected = NO;
+//    }
     [self.popover dismiss];
     YTAddGroupController *editGroup = [[YTAddGroupController alloc] init];
     editGroup.groupModel = self.group;
@@ -64,6 +70,16 @@
     sendAll.group = self.group;
     [self.navigationController pushViewController:sendAll animated:YES];
     
+}
+
+/**
+ *  从组中移除
+ * 
+ */
+- (void)removeMember:(YTMemberModel *)member
+{
+    [self.group.members removeObject:member];
+    [self.tableView reloadData];
 }
 
 #pragma mark - Table view data source
@@ -94,6 +110,7 @@
 {
     YTMemberDetailController *detail = [[YTMemberDetailController alloc] init];
     detail.member = self.group.members[indexPath.row];
+    detail.delegate = self;
     [self.navigationController pushViewController:detail animated:YES];
 
 }
@@ -189,6 +206,9 @@
     return _members;
 }
 
-
+- (void)dealloc
+{
+    [YTCenter removeObserver:self];
+}
 
 @end

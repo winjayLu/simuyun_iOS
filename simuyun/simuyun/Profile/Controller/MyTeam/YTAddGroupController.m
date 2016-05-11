@@ -12,6 +12,7 @@
 #import "YTMemberModel.h"
 #import "UIImage+Extend.h"
 #import "YTGroupModel.h"
+#import "YTTeamListController.h"
 
 
 @interface YTAddGroupController ()<UITableViewDelegate, UITableViewDataSource, addMemberDelegate>
@@ -28,7 +29,18 @@
 // 选中的成员列表
 @property (nonatomic, weak) UITableView *tableView;
 
+
+// 团队数量Lable
+@property (weak, nonatomic) IBOutlet UILabel *teamCountLable;
+
 - (IBAction)addMemberClick:(UIButton *)sender;
+
+// 新增的成员
+@property (nonatomic, strong) NSMutableArray *addMembers;
+
+// 删除的成员
+@property (nonatomic, strong) NSMutableArray *deleteMembers;
+
 @end
 
 @implementation YTAddGroupController
@@ -39,6 +51,7 @@
     // 设置标题
     if (self.isEdit) {
         self.title = @"编辑分组";
+        self.teamNumLable.text = [NSString stringWithFormat:@"小组成员(%zd)", self.groupModel.members.count];
     } else {
         self.title = @"新建分组";
     }
@@ -65,7 +78,15 @@
  */
 - (void)deleteGroup
 {
-
+#warning 发送请求
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[YTTeamListController class]]) {
+            // 发送通知刷新列表
+            [YTCenter postNotificationName:YTUpdateTeamList object:nil];
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
 }
 
 
@@ -74,7 +95,6 @@
  *
  */
 - (IBAction)addMemberClick:(UIButton *)sender {
-#warning 修改小组成员标题
     NSPredicate * filterPredicate = [NSPredicate predicateWithFormat:@"NOT (SELF IN %@)",self.selectedMembers];
     NSArray * filter = [self.members filteredArrayUsingPredicate:filterPredicate];
 
@@ -87,7 +107,15 @@
 
 - (void)didSelectedMembers:(NSArray *)members
 {
-    [self.selectedMembers addObjectsFromArray:members];
+    // 添加到增量数组
+    [self.addMembers addObjectsFromArray:members];
+    
+#pragma mark - 添加到最前面
+    // 添加到已选中数组
+    NSRange range = NSMakeRange(0, members.count);
+    NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:range];
+    [self.selectedMembers insertObjects:members atIndexes:set];
+    self.teamNumLable.text = [NSString stringWithFormat:@"小组成员(%zd)", self.groupModel.members.count];
     [self.tableView reloadData];
 }
 
@@ -176,12 +204,30 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ((YTMemberModel *)self.selectedMembers[indexPath.row]).isSelected = NO;
+    
+    YTMemberModel *member = self.selectedMembers[indexPath.row];
+    // 判断是否在增量数据中
+    BOOL isAdd = NO;
+    for (YTMemberModel *addMember in self.addMembers) {
+        if ([member isEqual:addMember]) {
+            isAdd = YES;
+            break;
+        }
+    }
+    // 在增量中
+    if (isAdd == YES) {
+        [self.addMembers removeObject:member];
+    } else {  // 服务端已存在，保存后发请求删除
+        [self.deleteMembers addObject:member];
+    }
+    
+    member.isSelected = NO;
     [self.selectedMembers removeObjectAtIndex:indexPath.row];
-#warning 编辑分组特殊处理
     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    self.teamNumLable.text = [NSString stringWithFormat:@"小组成员(%zd)", self.groupModel.members.count];
 }
 
+#pragma mark - lazy
 
 - (NSMutableArray *)selectedMembers
 {
@@ -190,6 +236,23 @@
     }
     return _selectedMembers;
 }
+
+- (NSMutableArray *)deleteMembers
+{
+    if (!_deleteMembers) {
+        _deleteMembers = [[NSMutableArray alloc] init];
+    }
+    return _deleteMembers;
+}
+
+- (NSMutableArray *)addMembers
+{
+    if (!_addMembers) {
+        _addMembers = [[NSMutableArray alloc] init];
+    }
+    return _addMembers;
+}
+
 
 
 

@@ -39,9 +39,11 @@
 {
     _member = member;
     [self.selectedBtn setBackgroundColor:[UIColor clearColor]];
-    [self.headImageV imageWithUrlStr:member.headImgUrl phImage:[UIImage imageNamed:@""]];
-    
-    self.selectedBtn.selected = member.isSelected;
+    [self.headImageV imageWithUrlStr:member.headImgUrl phImage:[UIImage imageNamed:@"avatar_default_big"]];
+    if (member.isSelected) {
+        member.isSelected = NO;
+        self.selectedBtn.selected = NO;
+    }
     if (member.memo.length > 0) {
         self.nameLable.text = member.memo;
     } else {

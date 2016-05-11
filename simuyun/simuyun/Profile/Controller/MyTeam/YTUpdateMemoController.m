@@ -41,10 +41,11 @@
 #warning 发送请求修改
         self.member.memo = self.memoField.text;
         [self.updateDelegate updateMemoSuccess];
+        // 发送通知刷新列表
+        [YTCenter postNotificationName:YTUpdateTeamList object:nil];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
-#warning 修改详情和列表的数据
 
 
 @end

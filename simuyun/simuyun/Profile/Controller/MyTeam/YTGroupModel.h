@@ -15,7 +15,7 @@
 
 @property (nonatomic, copy) NSString *groupName;
 
-@property (nonatomic, strong) NSArray<YTMemberModel *> *members;
+@property (nonatomic, strong) NSMutableArray<YTMemberModel *> *members;
 
 @end
 

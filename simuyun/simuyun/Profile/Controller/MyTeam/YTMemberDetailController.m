@@ -58,8 +58,7 @@
     self.headImageV.layer.masksToBounds = YES;
     
     // 设置数据
-#warning 缺少占位图片
-    [self.headImageV imageWithUrlStr:self.member.headImgUrl phImage:[UIImage imageNamed:@""]];
+    [self.headImageV imageWithUrlStr:self.member.headImgUrl phImage:[UIImage imageNamed:@"avatar_default_big"]];
     self.nameLable.text = self.member.nickName;
     [self.phoneBtn setTitle:self.member.phoneNum forState:UIControlStateNormal];
     [self.memoBtn setTitle:self.member.memo forState:UIControlStateNormal];
@@ -102,6 +101,14 @@
  */
 - (IBAction)moveTeamClick:(UIButton *)sender {
 #warning 待调用接口
+#warning 更新组列表、成员列表
+    
+    // 通过代理、删除组中的成员
+    if ([self.delegate respondsToSelector:@selector(removeMember:)]) {
+        [self.delegate removeMember:self.member];
+    }
+    // 发送通知刷新成员列表
+    [YTCenter postNotificationName:YTUpdateTeamList object:nil];
 }
 
 /**
@@ -131,9 +138,6 @@
 - (void)updateMemoSuccess
 {
     [self.memoBtn setTitle:self.member.memo forState:UIControlStateNormal];
-    
-#warning 发送通知刷新列表
-    
 }
 
 @end

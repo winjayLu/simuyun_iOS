@@ -10,8 +10,18 @@
 
 @class YTMemberModel;
 
+@protocol memberDetailDelegate <NSObject>
+
+- (void)removeMember:(YTMemberModel *)member;
+
+@end
+
+
+
 @interface YTMemberDetailController : UIViewController
 
 @property (nonatomic, strong) YTMemberModel *member;
+
+@property (nonatomic, weak) id<memberDetailDelegate> delegate;
 
 @end

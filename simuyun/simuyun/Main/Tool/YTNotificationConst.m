@@ -23,3 +23,5 @@ NSString *const YTUpdateUnreadCount = @"YTUpdateUnreadCount";
 NSString *const YTSelectedMessageVc = @"YTSelectedMessageVc";
 // 获取到剪贴板认证口令
 NSString *const YTPasteBoardAuthen = @"YTPasteBoardAuthen";
+// 更新我的团队列表
+NSString *const YTUpdateTeamList = @"YTUpdateTeamList";

@@ -21,8 +21,8 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PJi-PJ-ikw">
-                            <rect key="frame" x="335" y="16" width="20" height="22"/>
-                            <state key="normal" image="shanchu"/>
+                            <rect key="frame" x="343" y="16" width="12" height="22"/>
+                            <state key="normal" image="meMoshanchu"/>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rj8-kC-Axu">
                             <rect key="frame" x="0.0" y="54" width="375" height="1"/>
@@ -83,6 +83,6 @@
         </view>
     </objects>
     <resources>
-        <image name="shanchu" width="20" height="20"/>
+        <image name="meMoshanchu" width="12" height="11"/>
     </resources>
 </document>

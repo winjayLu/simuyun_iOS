@@ -28,3 +28,6 @@ extern NSString *const YTSelectedMessageVc;
 
 // 获取到剪贴板认证口令
 extern NSString *const YTPasteBoardAuthen;
+
+// 更新我的团队列表
+extern NSString *const YTUpdateTeamList;

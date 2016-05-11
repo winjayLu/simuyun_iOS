@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="addView" destination="nTZ-p6-jmu" id="Pcp-2R-i1C"/>
                 <outlet property="groupName" destination="7Wk-n2-U3R" id="JYg-c0-T0A"/>
+                <outlet property="teamCountLable" destination="A7n-Rx-sjm" id="czH-ji-zZL"/>
                 <outlet property="teamNumLable" destination="A7n-Rx-sjm" id="Xew-jo-SEi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

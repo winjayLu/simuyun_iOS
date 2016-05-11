@@ -37,8 +37,7 @@
 - (void)setMember:(YTMemberModel *)member
 {
     _member = member;
-#warning 占位图片
-    [self.headImageV imageWithUrlStr:member.headImgUrl phImage:[UIImage imageNamed:@""]];
+    [self.headImageV imageWithUrlStr:member.headImgUrl phImage:[UIImage imageNamed:@"avatar_default_big"]];
     if (member.memo.length > 0) {
         self.titleLable.text = member.memo;
     } else {
