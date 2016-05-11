@@ -162,11 +162,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+#warning 测试待办事项侧滑删除
     if (self.selectedCell.isShow) {
         [self.selectedCell hideUtilityButtonsAnimated:YES];
         self.selectedCell.isShow = NO;
         return;
     }
+    self.selectedCell = nil;
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if ([self.daili respondsToSelector:@selector(selectedTodo:)]) {

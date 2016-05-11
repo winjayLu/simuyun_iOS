@@ -190,6 +190,7 @@
 
 - (void)typeClick:(UIButton *)button
 {
+    self.tableView.footer = nil;
     if (self.selectBtn == button) return;
     self.selectBtn.selected = NO;
     button.selected = YES;
@@ -220,7 +221,7 @@
     
     // 设置下拉刷新
     tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewOrder)];
-    tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreOrder)];
+//    tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreOrder)];
 }
 
 /**
@@ -286,7 +287,6 @@
 {
     [self.tableView.header endRefreshing];
     self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewOrder)];
-    self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreOrder)];
     switch (type) {
         case 0:
             self.status = nil;
@@ -307,7 +307,6 @@
             self.status = @"[60, 90]";
             // 改变刷新方法
             self.tableView.header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadRedeem)];
-            self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreRedeem)];
             break;
     }
     [self.tableView.header beginRefreshing];
@@ -336,15 +335,17 @@
     self.pageno = 1;
     dict[@"pageno"] = @(self.pageno);
     [YTHttpTool get:YTOrders params:dict success:^(id responseObject) {
-        [self.tableView.footer resetNoMoreData];
         self.orders = [YTOrderCenterModel objectArrayWithKeyValuesArray:responseObject];
-        if([ self.orders count] < 10)
-        {
-            [self.tableView.footer noticeNoMoreData];
-        }
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
         [self.hintView changeContentTypeWith:self.orders];
+        if (self.orders.count > 0) {
+            self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreOrder)];
+            if([ self.orders count] < 10)
+            {
+                [self.tableView.footer noticeNoMoreData];
+            }
+        }
     } failure:^(NSError *error) {
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
@@ -396,15 +397,17 @@
     self.pageno = 1;
     dict[@"pageno"] = @(self.pageno);
     [YTHttpTool get:YTRedeemList params:dict success:^(id responseObject) {
-        [self.tableView.footer resetNoMoreData];
         self.orders = [YTOrderCenterModel objectArrayWithKeyValuesArray:responseObject];
-        if([ self.orders count] < 10)
-        {
-            [self.tableView.footer noticeNoMoreData];
-        }
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
         [self.hintView changeContentTypeWith:self.orders];
+        if (self.orders.count > 0) {
+            self.tableView.footer = [MJRefreshAutoStateFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreRedeem)];
+            if([ self.orders count] < 10)
+            {
+                [self.tableView.footer noticeNoMoreData];
+            }
+        }
     } failure:^(NSError *error) {
         [self.tableView reloadData];
         [self.tableView.header endRefreshing];
@@ -579,7 +582,7 @@
         return;
     }
     self.selectedCell = nil;
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     YTOrderCenterModel *order = self.orders[indexPath.section];
     YTOrderdetailController *detail = [[YTOrderdetailController alloc] init];
     detail.url = [NSString stringWithFormat:@"%@/order%@&id=%@", YTH5Server, [NSDate stringDate], order.order_id];

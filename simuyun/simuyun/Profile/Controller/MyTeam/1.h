@@ -123,7 +123,7 @@ deleteGroupMembers
 updateMemos
 修改 <memo> 的值。
 参数：
-[{"adviserId": "0003fce75cd145ceaf1ac2d721a5f78d", "memo": "修改备注"}, ...]
+[{"adviserId": "0003fce75cd145ceaf1ac2d721a5f78d", "modifyAdviserId""memo": "0003fce75cd145ceaf1ac2d721a5f78d", "修改备注"}, ...]
 返回值：
 <200> 正常
 <400> {errorMessage: "修改备注失败"}

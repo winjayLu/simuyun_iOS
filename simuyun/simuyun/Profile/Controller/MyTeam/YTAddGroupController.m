@@ -11,6 +11,7 @@
 #import "YTNomalMemberCell.h"
 #import "YTMemberModel.h"
 #import "UIImage+Extend.h"
+#import "YTGroupModel.h"
 
 
 @interface YTAddGroupController ()<UITableViewDelegate, UITableViewDataSource, addMemberDelegate>
@@ -73,17 +74,14 @@
  *
  */
 - (IBAction)addMemberClick:(UIButton *)sender {
-    
-    NSMutableArray *array = [NSMutableArray array];
-    for (YTMemberModel *member in self.members) {
-        if (member.isSelected != YES) {
-            [array addObject:member];
-        }
-    }
+#warning 修改小组成员标题
+    NSPredicate * filterPredicate = [NSPredicate predicateWithFormat:@"NOT (SELF IN %@)",self.selectedMembers];
+    NSArray * filter = [self.members filteredArrayUsingPredicate:filterPredicate];
+
     [self.groupName endEditing:YES];
     YTAddMemberController *add = [[YTAddMemberController alloc] init];
     add.addDelegate = self;
-    add.members = array;
+    add.members = [NSMutableArray arrayWithArray:filter];
     [self.navigationController pushViewController:add animated:YES];
 }
 

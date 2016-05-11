@@ -1,8 +1,8 @@
 //
-//  YTGroupDetailController.h
+//  YTSendAllController.h
 //  simuyun
 //
-//  Created by Luwinjay on 16/5/10.
+//  Created by Luwinjay on 16/5/11.
 //  Copyright © 2016年 YTWealth. All rights reserved.
 //
 
@@ -10,12 +10,9 @@
 
 @class YTGroupModel;
 
-@interface YTGroupDetailController : UITableViewController
+@interface YTSendAllController : UIViewController
 
 // 团队成员数组
 @property (nonatomic, strong) YTGroupModel *group;
-
-// 团队所有成员数组
-@property (nonatomic, strong) NSArray *members;
 
 @end

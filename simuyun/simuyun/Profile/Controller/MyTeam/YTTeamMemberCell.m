@@ -50,8 +50,8 @@
         self.fatherIconV.hidden = NO;
     }
     
-    self.joinTimeLable.text = member.joinTeamTime;
-    self.lastTimeLable.text = member.lastLoginTime;
+    self.joinTimeLable.text = [NSString stringWithFormat:@"加入时间:%@", member.joinTeamTime];
+    self.lastTimeLable.text = [NSString stringWithFormat:@"最近登录:%@", member.lastLoginTime];
     
     self.headImageV.layer.cornerRadius = self.headImageV.width * 0.5;
     self.headImageV.layer.masksToBounds = YES;

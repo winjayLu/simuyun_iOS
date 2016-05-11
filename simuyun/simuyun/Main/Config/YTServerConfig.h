@@ -15,7 +15,8 @@
 // 生产环境
 #define YTServer @"https://intime.simuyun.com/api/app/"
 #define YTH5Server @"http://www.simuyun.com"
-#define UmengAppKey @"5514ed3cfd98c5bca4000872"
+//#define UmengAppKey @"5514ed3cfd98c5bca4000872"
+#define UmengAppKey @"5514ed3cfd98c5bca4000872ss"
 #define TXAppKey @"1251892263"
 #define RongCloudKey @"8luwapkvuz04l"
 #define CustomerService @"dd0cc61140504258ab474b8f0a38bb56"

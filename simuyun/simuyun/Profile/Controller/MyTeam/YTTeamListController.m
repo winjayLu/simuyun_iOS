@@ -20,9 +20,10 @@
 #import "YTMemberDetailController.h"
 #import "YTAddGroupController.h"
 #import "YTGroupDetailController.h"
+#import "YTConversationController.h"
 
 
-@interface YTTeamListController ()
+@interface YTTeamListController () <SWTableViewCellDelegate>
 
 // 弹出菜单
 @property (nonatomic, strong) DXPopover *popover;
@@ -38,6 +39,11 @@
 
 // 选择控件
 @property (nonatomic, weak) UISegmentedControl *segmented;
+
+/**
+ *  保存上次侧滑的Cell
+ */
+@property (nonatomic, weak) SWTableViewCell *selectedCell;
 
 @end
 
@@ -71,7 +77,7 @@
     NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
                                                            forKey:NSFontAttributeName];
     [segmented setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    [segmented addTarget:self action:@selector(titleClick) forControlEvents:UIControlEventValueChanged];
+    [segmented addTarget:self action:@selector(loadData) forControlEvents:UIControlEventValueChanged];
     self.navigationItem.titleView = segmented;
     self.segmented = segmented;
 
@@ -84,14 +90,6 @@
     
 }
 
-/**
- *  标题点击
- */
-- (void)titleClick
-{
-    [self.popover dismiss];
-    [self loadData];
-}
 
 
 /**
@@ -165,6 +163,7 @@
 //    } failure:^(NSError *error) {
 //    }];
 #warning Test
+
     for (int i = 0; i < 5; i++) {
         YTGroupModel *group = [[YTGroupModel alloc] init];
         group.groupId = [NSString stringWithFormat:@"000%d", i];
@@ -233,6 +232,8 @@
             cell = [YTTeamMemberCell memberCell];
         }
         ((YTTeamMemberCell *)cell).member = member;
+        ((YTTeamMemberCell *)cell).rightUtilityButtons = [self detailButton];
+        ((YTTeamMemberCell *)cell).delegate = self;
     } else {
         static NSString *groupCell = @"teamGroup";
         cell = [tableView dequeueReusableCellWithIdentifier:groupCell];
@@ -252,6 +253,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    if (self.selectedCell.isShow) {
+        [self.selectedCell hideUtilityButtonsAnimated:YES];
+        self.selectedCell.isShow = NO;
+        return;
+    }
+    self.selectedCell = nil;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (self.segmented.selectedSegmentIndex == 0) { // 成员点击
         YTMemberDetailController *detail = [[YTMemberDetailController alloc] init];
         detail.member = self.members[indexPath.row];
@@ -259,9 +268,69 @@
     } else {    // 组点击
         YTGroupDetailController *detail = [[YTGroupDetailController alloc] init];
         detail.group = self.groups[indexPath.row];
+        detail.members = self.members;
         detail.title = detail.group.groupName;
         [self.navigationController pushViewController:detail animated:YES];
     }
+}
+
+/**
+ *  删除按钮
+ */
+- (NSArray *)detailButton
+{
+    NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:YTColor(208, 208, 208) icon:nil title:@"对话"];
+    [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor blueColor] icon:nil title:@"拨打电话"];
+    return rightUtilityButtons;
+}
+
+
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index
+{
+    // 选中的行
+    NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
+    // 获订单模型
+    YTMemberModel *member = self.members[cellIndexPath.row];
+    [self.selectedCell hideUtilityButtonsAnimated:YES];
+    self.selectedCell.isShow = NO;
+    if (index == 0) {
+        //新建一个聊天会话View Controller对象
+        YTConversationController *chat = [[YTConversationController alloc]init];
+        chat.conversationType = ConversationType_PRIVATE;
+        chat.targetId = member.adviserId;
+        if (member.memo.length > 0) {
+            chat.title = member.memo;
+        } else {
+            chat.title = member.nickName;
+        }
+        chat.displayUserNameInCell = NO;
+        [chat setMessageAvatarStyle:RC_USER_AVATAR_CYCLE];
+        [chat setMessagePortraitSize:CGSizeMake(37, 37)];
+        chat.userId = [YTAccountTool account].userId;
+        //显示聊天会话界面
+        [self.navigationController pushViewController:chat animated:YES];
+    } else {
+        UIWebView *callWebview =[[UIWebView alloc] init];
+        NSURL *telURL =[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", member.phoneNum]];
+        [callWebview loadRequest:[NSURLRequest requestWithURL:telURL]];
+        [self.view addSubview:callWebview];
+    }
+
+}
+- (BOOL)swipeableTableViewCellShouldHideUtilityButtonsOnSwipe:(SWTableViewCell *)cell
+{
+    
+    return YES;
+}
+
+- (BOOL)swipeableTableViewCell:(SWTableViewCell *)cell canSwipeToState:(SWCellState)state
+{
+    if (!self.selectedCell.isShow && self.selectedCell != cell) {
+        self.selectedCell = cell;
+        self.selectedCell.isShow = YES;
+    }
+    return YES;
 }
 
 
@@ -280,8 +349,8 @@
     // 修正位置
     UIView *view = [[UIView alloc] init];
     view.frame = button.frame;
-    view.y = view.y - 33;
-    [popover showAtView:view withContentView:self.innerView inView:self.view];
+    view.y = view.y + 30;
+    [popover showAtView:view withContentView:self.innerView inView:self.tabBarController.view];
     self.tableView.scrollEnabled = NO;
     popover.didDismissHandler = ^{
         [button setBackgroundImage:[UIImage imageNamed:@"jiahao"] forState:UIControlStateNormal];

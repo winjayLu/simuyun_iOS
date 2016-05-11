@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SWTableViewCell.h"
 
 @class YTMemberModel;
 
-@interface YTTeamMemberCell : UITableViewCell
+@interface YTTeamMemberCell : SWTableViewCell
 
 + (instancetype)memberCell;
 

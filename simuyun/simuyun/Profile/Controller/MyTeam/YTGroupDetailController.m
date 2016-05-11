@@ -11,6 +11,9 @@
 #import "YTTeamMemberCell.h"
 #import "YTMemberDetailController.h"
 #import "DXPopover.h"
+#import "YTAddGroupController.h"
+#import "YTSendAllController.h"
+
 
 @interface YTGroupDetailController ()
 
@@ -43,6 +46,12 @@
 - (void)editClick
 {
     [self.popover dismiss];
+    YTAddGroupController *editGroup = [[YTAddGroupController alloc] init];
+    editGroup.groupModel = self.group;
+    editGroup.isEdit = YES;
+    editGroup.selectedMembers = [NSMutableArray arrayWithArray:self.group.members];
+    editGroup.members = [NSMutableArray arrayWithArray:self.members];
+    [self.navigationController pushViewController:editGroup animated:YES];
 }
 
 /**
@@ -51,6 +60,10 @@
 - (void)sendAllClick
 {
     [self.popover dismiss];
+    YTSendAllController *sendAll = [[YTSendAllController alloc] init];
+    sendAll.group = self.group;
+    [self.navigationController pushViewController:sendAll animated:YES];
+    
 }
 
 #pragma mark - Table view data source
@@ -101,8 +114,8 @@
     // 修正位置
     UIView *view = [[UIView alloc] init];
     view.frame = button.frame;
-    view.y = view.y - 33;
-    [popover showAtView:view withContentView:self.innerView inView:self.view];
+    view.y = view.y + 30;
+    [popover showAtView:view withContentView:self.innerView inView:self.tabBarController.view];
     self.tableView.scrollEnabled = NO;
     popover.didDismissHandler = ^{
         [button setBackgroundImage:[UIImage imageNamed:@"jiahao"] forState:UIControlStateNormal];
@@ -166,6 +179,14 @@
         _innerView = view;
     }
     return _innerView;
+}
+
+- (NSArray *)members
+{
+    if (!_members) {
+        _members = [[NSArray alloc] init];
+    }
+    return _members;
 }
 
 

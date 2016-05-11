@@ -110,7 +110,7 @@
  */
 - (IBAction)phonClick:(UIButton *)sender {
     UIWebView *callWebview =[[UIWebView alloc] init];
-    NSURL *telURL =[NSURL URLWithString:self.member.phoneNum];
+    NSURL *telURL =[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", self.member.phoneNum]];
     [callWebview loadRequest:[NSURLRequest requestWithURL:telURL]];
     [self.view addSubview:callWebview];
 }
