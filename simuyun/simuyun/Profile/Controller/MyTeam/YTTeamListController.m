@@ -21,6 +21,7 @@
 #import "YTAddGroupController.h"
 #import "YTGroupDetailController.h"
 #import "YTConversationController.h"
+#import "YTUserInfoTool.h"
 
 
 @interface YTTeamListController () <SWTableViewCellDelegate>
@@ -70,26 +71,29 @@
  */
 - (void)setupNavgationBar
 {
-    // 标题切换
-    UISegmentedControl *segmented = [[UISegmentedControl alloc] initWithItems:@[@"个人", @"小组"]];
-    segmented.size = CGSizeMake(140, 30);
-    segmented.tintColor = [UIColor whiteColor];
-    segmented.selectedSegmentIndex = 0;
-    UIFont *font = [UIFont boldSystemFontOfSize:17];
-    NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
-                                                           forKey:NSFontAttributeName];
-    [segmented setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    [segmented addTarget:self action:@selector(loadData) forControlEvents:UIControlEventValueChanged];
-    self.navigationItem.titleView = segmented;
-    self.segmented = segmented;
-
-    // 右上角加号
-    UIButton *button = [[UIButton alloc] init];
-    button.frame = CGRectMake(0, 0, 22, 22);
-    [button addTarget:self action:@selector(rightClick:) forControlEvents:UIControlEventTouchUpInside];
-    [button setBackgroundImage:[UIImage imageNamed:@"jiahao"] forState:UIControlStateNormal];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
-    
+    if ([YTUserInfoTool userInfo].isExtension) {    // 自有理财师
+        // 标题切换
+        UISegmentedControl *segmented = [[UISegmentedControl alloc] initWithItems:@[@"个人", @"小组"]];
+        segmented.size = CGSizeMake(140, 30);
+        segmented.tintColor = [UIColor whiteColor];
+        segmented.selectedSegmentIndex = 0;
+        UIFont *font = [UIFont boldSystemFontOfSize:17];
+        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
+                                                               forKey:NSFontAttributeName];
+        [segmented setTitleTextAttributes:attributes forState:UIControlStateNormal];
+        [segmented addTarget:self action:@selector(loadData) forControlEvents:UIControlEventValueChanged];
+        self.navigationItem.titleView = segmented;
+        self.segmented = segmented;
+        
+        // 右上角加号
+        UIButton *button = [[UIButton alloc] init];
+        button.frame = CGRectMake(0, 0, 22, 22);
+        [button addTarget:self action:@selector(rightClick:) forControlEvents:UIControlEventTouchUpInside];
+        [button setBackgroundImage:[UIImage imageNamed:@"jiahao"] forState:UIControlStateNormal];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+    } else {
+        self.title = @"我的团队";
+    }
 }
 
 

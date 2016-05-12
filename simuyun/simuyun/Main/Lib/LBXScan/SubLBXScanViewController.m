@@ -115,7 +115,7 @@
     [view addSubview:title];
     
     UIButton *backBtn = [[UIButton alloc] init];
-    [backBtn setImage:[UIImage imageNamed:@"fanhui"] forState:UIControlStateNormal];
+    [backBtn setImage:[UIImage imageNamed:@"schoolFanhui"] forState:UIControlStateNormal];
     backBtn.frame = CGRectMake(0, 20, 44, 44);
     [backBtn addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:backBtn];

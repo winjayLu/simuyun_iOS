@@ -13,21 +13,21 @@
 //#ifdef DEBUG
 //#else
 // 生产环境
-#define YTServer @"https://intime.simuyun.com/api/app/"
-#define YTH5Server @"http://www.simuyun.com"
+//#define YTServer @"https://intime.simuyun.com/api/app/"
+//#define YTH5Server @"http://www.simuyun.com"
 //#define UmengAppKey @"5514ed3cfd98c5bca4000872"
-#define TXAppKey @"1251892263"
-#define jpushKey @"c2882b8380ed3637d6c60ed2"
-#define jpushProduction YES
-#define RongCloudKey @"8luwapkvuz04l"
+//#define TXAppKey @"1251892263"
+//#define jpushKey @"c2882b8380ed3637d6c60ed2"
+//#define jpushProduction YES
+//#define RongCloudKey @"8luwapkvuz04l"
 //#endif
 
 // 开发环境
 #define UmengAppKey @"545867defd98c5f23a0021"
-//#define TXAppKey @"125189226"
-//#define jpushKey @"7ad519d9e10dac9dd4ea3d57"
-//#define jpushProduction NO
-//#define RongCloudKey @"tdrvipksrbgn5"
+#define TXAppKey @"125189226"
+#define jpushKey @"7ad519d9e10dac9dd4ea3d57"
+#define jpushProduction NO
+#define RongCloudKey @"tdrvipksrbgn5"
 
 
 // 213
@@ -35,8 +35,8 @@
 //#define YTH5Server @"http://192.168.17.213"
 
 // 212
-//#define YTServer @"http://192.168.17.212:6060/api/app/"
-//#define YTH5Server @"http://192.168.17.212"
+#define YTServer @"http://192.168.17.212:6060/api/app/"
+#define YTH5Server @"http://192.168.17.212"
 
 // 开发外网映射
 // 212端口号18080

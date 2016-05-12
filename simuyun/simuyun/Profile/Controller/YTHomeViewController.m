@@ -155,21 +155,21 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    // 加载待办事项
-    [self loadTodos];
-
-    [YTCenter postNotificationName:YTUpdateIconImage object:nil];
-    
+#warning 测试头像
+    //    [YTCenter postNotificationName:YTUpdateIconImage object:nil];
     // 从服务器获取用户信息
     [YTUserInfoTool loadNewUserInfo:^(BOOL finally) {
         if (finally) {
-            self.topView.userInfo = [YTUserInfoTool userInfo];
+            // 更新头像
             [YTCenter postNotificationName:YTUpdateIconImage object:nil];
-            [self updateAuthentication];
-            // 更换待报备订单数量
+            // 更新顶部视图
+            self.topView.userInfo = [YTUserInfoTool userInfo];
             [self.bottom reloadData];
         }
     }];
+    
+    // 加载待办事项
+    [self loadTodos];
 }
 
 
@@ -368,8 +368,9 @@
             self.groupCell.y = 8;
             break;
     }
+    [self.mainView layoutIfNeeded];
     [self updateTodos];
-
+    
 }
 
 
@@ -447,7 +448,7 @@
     [YTCenter addObserver:self selector:@selector(leftMenuClick:) name:YTLeftMenuNotification object:nil];
     
     // 监听通知
-    [YTCenter addObserver:self selector:@selector(updateUserInfo) name:YTUpdateUserInfo object:nil];
+    [YTCenter addObserver:self selector:@selector(changeUserInfo) name:YTUpdateUserInfo object:nil];
 }
 
 
@@ -695,8 +696,8 @@
         [self.navigationController pushViewController:pushVc animated:YES];
     }
 }
-// 修改用户信息
-- (void)updateUserInfo
+// 用户信息发生改变
+- (void)changeUserInfo
 {
      self.topView.userInfo = [YTUserInfoTool userInfo];
     [self viewWillAppear:YES];

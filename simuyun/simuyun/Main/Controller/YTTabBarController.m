@@ -87,6 +87,9 @@
     
     // 获取是否有新消息
     [self loadMessageCount];
+    
+    // 检测是否有推荐认证码
+    [self checkAuthenCode];
 
     [YTCenter addObserver:self selector:@selector(timerOff) name:YTLogOut object:nil];
     
@@ -413,8 +416,6 @@
     // 执行动画
     [self.logo showAnimation];
     
-    // 检测是否有推荐认证码
-    [self checkAuthenCode];
 }
 
 - (void)setupLogoView
