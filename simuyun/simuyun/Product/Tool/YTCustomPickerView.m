@@ -131,7 +131,9 @@
 
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    self.selectedType = self.types[row];
+    if (row <= self.types.count) {
+        self.selectedType = self.types[row];
+    }
 }
 
 

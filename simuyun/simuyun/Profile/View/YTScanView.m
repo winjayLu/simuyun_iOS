@@ -300,6 +300,10 @@ static UIWindow *_window;
     }
                      completion:^(BOOL finished) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            if (screenImage == nil) {
+                [SVProgressHUD showInfoWithStatus:@"截屏失败"];
+                return ;
+            }
             [self destroy];
             [self.shareManage
              wxShareWithFile:UIImagePNGRepresentation(screenImage)];

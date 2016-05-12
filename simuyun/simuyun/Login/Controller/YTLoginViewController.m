@@ -19,7 +19,7 @@
 #import "YTAccountTool.h"
 #import "AFNetworking.h"
 #import "YTResourcesTool.h"
-#import "APService.h"
+#import "JPUSHService.h"
 #import "NSString+Password.h"
 #import "YTUserInfoTool.h"
 #import "CoreArchive.h"
@@ -238,7 +238,7 @@
                       [self transitionTabBarVC];
                   }
               }];
-              [APService setAlias:responseObject[@"userId"] callbackSelector:nil object:nil];
+              [JPUSHService setAlias:responseObject[@"userId"] callbackSelector:nil object:nil];
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               if(operation.responseObject[@"message"] != nil)
               {

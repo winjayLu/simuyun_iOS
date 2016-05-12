@@ -178,7 +178,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier = @"hotProductCell";
+    static NSString *identifier = @"cloudListCell";
     YTCloudListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell==nil) {
         cell =[[YTCloudListCell alloc] init];

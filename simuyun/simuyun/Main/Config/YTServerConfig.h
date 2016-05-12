@@ -16,35 +16,35 @@
 #define YTServer @"https://intime.simuyun.com/api/app/"
 #define YTH5Server @"http://www.simuyun.com"
 //#define UmengAppKey @"5514ed3cfd98c5bca4000872"
-#define UmengAppKey @"5514ed3cfd98c5bca4000872ss"
 #define TXAppKey @"1251892263"
+#define jpushKey @"c2882b8380ed3637d6c60ed2"
+#define jpushProduction YES
 #define RongCloudKey @"8luwapkvuz04l"
-#define CustomerService @"dd0cc61140504258ab474b8f0a38bb56"
 //#endif
 
-// 开发环境213
+// 开发环境
+#define UmengAppKey @"545867defd98c5f23a0021"
+//#define TXAppKey @"125189226"
+//#define jpushKey @"7ad519d9e10dac9dd4ea3d57"
+//#define jpushProduction NO
+//#define RongCloudKey @"tdrvipksrbgn5"
+
+
+// 213
 //#define YTServer @"http://192.168.17.213:8080/api/app/"
 //#define YTH5Server @"http://192.168.17.213"
-//#define UmengAppKey @"545867defd98c5f23a0021"
-//#define TXAppKey @"125189226"
-//#define RongCloudKey @"tdrvipksrbgn5"
-//#define CustomerService @"dd0cc61140504258ab474b8f0a38bb56"
 
-// 测试环境212
+// 212
 //#define YTServer @"http://192.168.17.212:6060/api/app/"
 //#define YTH5Server @"http://192.168.17.212"
-//#define UmengAppKey @"545867defd98c5f23a0021"
-//#define TXAppKey @"125189226"
-//#define RongCloudKey @"tdrvipksrbgn5"
-//#define CustomerService @"dd0cc61140504258ab474b8f0a38bb56"
 
-// 开发环境外网地址
-//212端口号18080
+// 开发外网映射
+// 212端口号18080
 //#define YTServer @"http://218.241.181.229:8080/api/app/"
 //#define YTH5Server @"http://218.241.181.229:8080"
-//#define UmengAppKey @"545867defd98c5f23a0021"
-//#define TXAppKey @"125189226"
-//#define RongCloudKey @"tdrvipksrbgn5"
+
+// 客服ID
+#define CustomerService @"dd0cc61140504258ab474b8f0a38bb56"
 
 //  微信
 #define WXAppID @"wx7259d65d4382e566"

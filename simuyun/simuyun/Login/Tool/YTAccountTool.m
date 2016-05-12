@@ -12,7 +12,7 @@
 #import "NSDictionary+Extension.h"
 #import "NSString+Password.h"
 #import "SVProgressHUD.h"
-#import "APService.h"
+#import "JPUSHService.h"
 #import "YTLoginViewController.h"
 #import "CALayer+Anim.h"
 #import "CALayer+Transition.h"
@@ -71,7 +71,7 @@
               account.userId = responseObject[@"userId"];
               account.token = responseObject[@"token"];
               [self save:account];
-              [APService setAlias:account.userId callbackSelector:nil object:nil];
+              [JPUSHService setAlias:account.userId callbackSelector:nil object:nil];
               
               // 判断本地是否有用户信息
               YTUserInfo *userInfo = [YTUserInfoTool localUserInfo];

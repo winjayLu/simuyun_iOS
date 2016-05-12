@@ -13,7 +13,7 @@
 #import "YTLoginViewController.h"
 #import "SDWebImageManager.h"
 #import "MobClick.h"
-#import "APService.h"
+#import "JPUSHService.h"
 #import "YTWelcomeViewController.h"
 #import "UIWindow+Extension.h"
 #import "YTResourcesTool.h"
@@ -101,20 +101,21 @@
 {
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0) {
         //可以添加自定义categories
-        [APService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
+        [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
                                                        UIUserNotificationTypeSound |
                                                        UIUserNotificationTypeAlert)
                                            categories:nil];
     } else {
         //categories 必须为nil
-        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+        [JPUSHService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                                        UIRemoteNotificationTypeSound |
                                                        UIRemoteNotificationTypeAlert)
                                            categories:nil];
     }
     
-    [APService setupWithOption:launchOptions];
-    [APService setLogOFF];
+#warning 测试能否收到推送
+    [JPUSHService setupWithOption:launchOptions appKey:jpushKey channel:@"app-store" apsForProduction:jpushProduction];
+    [JPUSHService setLogOFF];
 }
 
 /**
@@ -131,7 +132,7 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     // 设置极光Token
-    [APService registerDeviceToken:deviceToken];
+    [JPUSHService registerDeviceToken:deviceToken];
     
     // 设置融云Token
     NSString *token = [[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<" withString:@""] stringByReplacingOccurrencesOfString:@">" withString:@""] stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -147,7 +148,7 @@
         [YTCenter postNotificationName:YTSelectedMessageVc object:nil];
     } else {    // 消息来自极光
         [self receivedPushNotification:userInfo];
-        [APService handleRemoteNotification:userInfo];
+        [JPUSHService handleRemoteNotification:userInfo];
     }
     completionHandler(UIBackgroundFetchResultNewData);
 }
